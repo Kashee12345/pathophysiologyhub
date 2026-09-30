@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f7f2ea">
+<title>GERD &amp; the Esophagus</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{ --card:#fffdf8; --ink:#2a2420; --muted:#7a6f63; --line:#e3d8c6;
+    --sans:'Inter',system-ui,sans-serif; --disp:'Cinzel Decorative',serif; --accent:#c0623a; }
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  body{background:linear-gradient(160deg,#fbf3ec,#efe7de);color:var(--ink);font-family:var(--sans);min-height:100vh;padding:18px 16px 44px;}
+  header{max-width:1120px;margin:0 auto 16px;text-align:center;}
+  h1{font-family:var(--disp);font-weight:900;font-size:clamp(22px,4.2vw,36px);color:#b0532a;line-height:1.05;}
+  header .sub{color:var(--muted);font-size:15px;margin-top:4px;}
+  header .intro{max-width:860px;margin:10px auto 0;font-size:14.5px;line-height:1.5;color:#5c5248;}
+  header .intro b{color:#b0532a;}
+  .wrap{max-width:1120px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;box-shadow:0 6px 22px rgba(120,70,40,.07);}
+  .card h2{font-family:var(--disp);font-weight:700;font-size:16px;color:#b0532a;margin-bottom:6px;}
+  .card h2 + .desc{font-size:13px;color:var(--muted);margin-bottom:10px;line-height:1.4;}
+  svg{display:block;width:100%;height:auto;max-height:380px;}
+  #liveCap{margin-top:8px;background:#f7eae2;border:1px solid #ecccb6;border-radius:10px;padding:10px 13px;font-size:14px;line-height:1.5;color:#7a4224;text-align:center;} #liveCap b{color:#8a3a18;}
+
+  @keyframes rise{0%{transform:translateY(0);opacity:0}20%{opacity:1}100%{transform:translateY(-70px);opacity:0}}
+  .acid{animation:rise 2s ease-in infinite;}
+  @keyframes burn{0%,100%{opacity:.4}50%{opacity:.9}}
+  .burn{animation:burn 1.4s ease-in-out infinite;}
+  @keyframes churn{0%,100%{transform:rotate(0)}50%{transform:rotate(3deg)}}
+  .churn{animation:churn 2.4s ease-in-out infinite;transform-origin:center bottom;}
+
+  #stage{border-radius:12px;padding:11px 14px;margin-bottom:12px;color:#fff;font-weight:700;font-size:16px;text-align:center;background:#c0763a;}
+  #stage small{display:block;font-weight:500;font-size:13px;opacity:.93;margin-top:2px;}
+  .lbl{font-size:11.5px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;margin:2px 0 6px;}
+  .seg{display:flex;border:1px solid var(--line);border-radius:11px;overflow:hidden;margin-bottom:12px;}
+  .seg button{flex:1;border:none;background:#fff;color:var(--ink);font-family:var(--sans);font-weight:700;font-size:13px;padding:10px 5px;cursor:pointer;transition:.12s;line-height:1.15;}
+  .seg button small{display:block;font-weight:500;font-size:10px;color:var(--muted);margin-top:2px;}
+  .seg button.on{color:#fff;} .seg button.on small{color:rgba(255,255,255,.9);}
+  .seg.mech button.on{background:#c0763a;}
+  .seg.dmg{flex-wrap:wrap;}
+  .seg.dmg button{flex:1 0 30%;font-size:12px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .seg.dmg button.on{background:#a5392e;}
+
+  #info{border:1px solid var(--line);border-left:5px solid var(--accent);background:#f8f0ea;border-radius:10px;padding:12px 13px;}
+  #info .n{font-family:var(--disp);font-weight:700;font-size:17px;color:#b0532a;}
+  #info .plain{font-size:14.5px;line-height:1.5;color:#2a2420;margin-top:8px;font-weight:600;}
+  #info .story{font-size:13px;line-height:1.5;color:#3a3630;margin-top:8px;background:#fff;border-radius:8px;padding:9px 11px;border:1px solid #ecd6c8;}
+  #info .ss{margin-top:8px;font-size:12.5px;color:#5c5248;} #info .ss b{color:#8a3a18;}
+  .pearl{background:#eef4fb;border:1px solid #cbdcf0;border-radius:10px;padding:10px 12px;margin-top:12px;font-size:12.5px;line-height:1.5;color:#274d7a;} .pearl b{color:#173b5a;}
+  @media (max-width:880px){ .wrap{grid-template-columns:1fr;} }
+</style>
+</head>
+<body>
+<header>
+  <h1>GERD &amp; the Esophagus</h1>
+  <div class="sub">Acid where it shouldn't be · Week 13</div>
+  <div class="intro">A ring of muscle — the <b>lower esophageal sphincter (LES)</b> — is supposed to snap shut and keep stomach acid down where it belongs. When it stays loose, acid <b>refluxes up</b> into the esophagus (<b>GERD</b>). Do that for years and the lining changes, step by step, all the way to cancer. Explore both.</div>
+</header>
+
+<div class="wrap">
+  <div>
+    <div class="card">
+      <h2>Esophagus, valve &amp; stomach</h2>
+      <div class="desc">The stomach is acidic (low pH). Watch whether the LES holds the acid down — or lets it splash up and burn the esophagus.</div>
+      <svg id="gi" viewBox="0 0 300 360" aria-label="esophagus and stomach"></svg>
+      <div id="liveCap">Pick a scenario to see the reflux.</div>
+    </div>
+  </div>
+  <div>
+    <div id="stage">Pick a scenario<small>the valve &amp; the long-term damage</small></div>
+    <div class="card">
+      <div class="lbl">① At the valve (LES)</div>
+      <div class="seg mech" id="mechSeg">
+        <button data-d="normal" class="on">Normal<small>LES closed</small></button>
+        <button data-d="gerd">GERD<small>LES weak → reflux</small></button>
+        <button data-d="hiatal">Hiatal Hernia<small>stomach slips up</small></button>
+      </div>
+      <div class="lbl">② Chronic acid damage (years of GERD)</div>
+      <div class="seg dmg" id="dmgSeg">
+        <button data-d="none" class="on">None<small>healthy</small></button>
+        <button data-d="esophagitis">Esophagitis<small>inflamed</small></button>
+        <button data-d="stricture">Stricture<small>scarred/narrow</small></button>
+        <button data-d="ulcer">Ulceration<small>bleeds</small></button>
+        <button data-d="barretts">Barrett's<small>pre-cancer</small></button>
+        <button data-d="cancer">Cancer<small>malignant</small></button>
+      </div>
+    </div>
+    <div class="card" style="margin-top:16px;"><h2>What's happening</h2><div id="info"></div>
+      <div class="pearl"><b>The GERD staircase:</b> acid → <b>esophagitis</b> (inflamed) → <b>stricture</b> (scar narrows it, trouble swallowing) and <b>ulcers</b> (bright-red bleeding) → <b>Barrett's</b> (the lining turns pre-cancerous) → <b>esophageal cancer</b>. Risk stackers: chronic GERD, alcohol, and smoking.</div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const $=id=>document.getElementById(id);
+  let mech='normal', dmg='none', last='normal';
+  const MECH={
+    normal:{name:'Normal LES',color:'#3fa66a',
+      plain:'The valve stays shut between swallows, so acid stays in the stomach.',
+      story:'The <b>lower esophageal sphincter</b> closes tightly after food passes, keeping the very acidic stomach contents <b>down below</b> the diaphragm. The esophagus stays acid-free and happy.',
+      ss:'No reflux, no heartburn.'},
+    gerd:{name:'GERD',color:'#c0763a',
+      plain:'The valve is weak or relaxed, so acid splashes back up and burns the esophagus.',
+      story:'When the LES <b>stays loose</b>, stomach acid <b>refluxes up</b> into the esophagus, which has no protective coating for acid. That\'s the burning. Triggers = anything that raises abdominal pressure or relaxes the LES: <b>obesity, pregnancy, big meals near bedtime, fatty foods, caffeine, alcohol</b>, and some meds (sedatives, oral contraceptives).',
+      ss:'Heartburn (dyspepsia), epigastric pain, chronic cough, sore throat, bitter taste in the morning.'},
+    hiatal:{name:'Hiatal Hernia',color:'#a5652a',
+      plain:'Part of the stomach slides up through the diaphragm into the chest, wrecking the valve.',
+      story:'A portion of the stomach <b>herniates upward above the diaphragm</b> into the chest. That pushes the LES out of position and <b>impairs its function</b>, so it can\'t seal — putting the patient at <b>high risk for GERD</b>.',
+      ss:'Often the underlying reason a patient has bad reflux.'}
+  };
+  const DMG={
+    none:{name:'Healthy lining',color:'#3fa66a',
+      plain:'Smooth, intact esophageal lining — no acid damage.',
+      story:'Before chronic acid exposure, the lower esophagus lining is smooth and normal.',ss:'Baseline.'},
+    esophagitis:{name:'Esophagitis',color:'#d0663a',
+      plain:'The lower esophagus is inflamed and raw from ongoing acid.',
+      story:'Constant acid <b>inflames the lower esophagus</b>. It becomes red and irritated, and swallowing may hurt. Over time this sets up ulcers and scarring.',
+      ss:'Dysphagia (painful/difficult swallowing).'},
+    stricture:{name:'Stricture',color:'#b0532a',
+      plain:'Repeated damage scars the esophagus, narrowing it like a kinked hose.',
+      story:'Chronic irritation heals with <b>scar tissue</b>, which <b>narrows</b> the lower esophagus. Food starts to get stuck — progressive trouble swallowing.',
+      ss:'Worsening dysphagia, food sticking.'},
+    ulcer:{name:'Ulceration',color:'#a5392e',
+      plain:'The acid eats through the lining, creating an ulcer that can bleed bright red.',
+      story:'Ongoing acid <b>erodes an open sore</b> in the esophageal lining. Because it\'s the esophagus (before digestion), any bleeding shows up as <b>bright red blood</b>.',
+      ss:'Bright red bleeding, pain.'},
+    barretts:{name:"Barrett's Esophagus",color:'#8a3a6a',
+      plain:'The lining changes into a pre-cancerous type to survive the acid.',
+      story:'To protect itself, the esophageal lining <b>transforms</b> into a different, more acid-tolerant cell type — but these are <b>pre-cancerous</b> cells. Barrett\'s is the warning sign before cancer. Risk factors: chronic GERD, alcohol, smoking.',
+      ss:'Usually silent — found on scope; needs monitoring.'},
+    cancer:{name:'Esophageal Cancer',color:'#5a2a6a',
+      plain:'Malignant cells grow in the esophagus — aggressive and hard to treat.',
+      story:'The pre-cancerous cells become <b>malignant</b>. Esophageal cancer is <b>very aggressive</b>. Everything that irritates the esophagus stacks the risk: <b>chronic GERD, Barrett\'s, alcohol, smoking</b>.',
+      ss:'Progressive dysphagia, weight loss.'}
+  };
+
+  function draw(){
+    let s='';
+    const reflux = mech!=='normal';
+    const hern = mech==='hiatal';
+    // diaphragm line
+    s+='<line x1="20" y1="205" x2="280" y2="205" stroke="#c9a06a" stroke-width="4" stroke-dasharray="2 4"/>';
+    s+='<text x="24" y="200" font-size="10" font-weight="700" fill="#a5772a">diaphragm</text>';
+    // esophagus tube (top)
+    const dmgColor = {none:'#f0d9c8',esophagitis:'#e88a5a',stricture:'#d9a060',ulcer:'#c85a4a',barretts:'#b06a9a',cancer:'#8a5a9a'}[dmg];
+    // upper esophagus normal
+    s+='<path d="M150 20 L150 150" fill="none" stroke="#e6cbb0" stroke-width="26" stroke-linecap="round"/>';
+    s+='<path d="M150 20 L150 150" fill="none" stroke="#f6ede2" stroke-width="14" stroke-linecap="round"/>';
+    // lower esophagus (damage zone) 150-195
+    let lw=26, lumen=14;
+    if(dmg==='stricture'){ lw=26; lumen=5; }
+    s+='<path d="M150 150 L150 196" fill="none" stroke="'+dmgColor+'" stroke-width="'+lw+'" stroke-linecap="butt"/>';
+    if(dmg!=='stricture') s+='<path d="M150 150 L150 196" fill="none" stroke="#f6ede2" stroke-width="'+lumen+'" stroke-linecap="butt"/>';
+    else s+='<path d="M150 150 L150 196" fill="none" stroke="#f6ede2" stroke-width="5" stroke-linecap="butt"/>';
+    if(dmg==='esophagitis'||dmg==='ulcer') s+='<path class="burn" d="M150 150 L150 196" fill="none" stroke="#ff7a4a" stroke-width="'+ (lw+4) +'" stroke-linecap="round" opacity="0.4"/>';
+    if(dmg==='ulcer') s+='<circle cx="163" cy="172" r="6" fill="#7a0d14"/>';
+    if(dmg==='barretts'||dmg==='cancer'){ for(let i=0;i<5;i++) s+='<circle cx="'+(140+ (i%2)*20)+'" cy="'+(156+i*8)+'" r="4" fill="'+(dmg==='cancer'?'#4a1a5a':'#8a3a7a')+'"/>'; }
+    if(dmg!=='none'){ s+='<text x="200" y="176" font-size="11" font-weight="700" fill="'+DMG[dmg].color+'">'+DMG[dmg].name+'</text>'; s+='<line x1="150" y1="173" x2="196" y2="173" stroke="'+DMG[dmg].color+'" stroke-width="1.5" stroke-dasharray="2 2"/>'; }
+    // LES + stomach
+    // if hiatal, part of stomach is above diaphragm
+    if(hern){
+      s+='<path d="M132 176 q18 -14 36 0 q4 14 -4 22 l-28 0 q-8 -8 -4 -22 Z" fill="#f0b8a0" stroke="#c98a6a" stroke-width="2"/>';
+      s+='<text x="176" y="192" font-size="9.5" font-weight="700" fill="#a5652a">stomach ↑ in chest</text>';
+    }
+    // LES ring
+    const lesOpen = reflux;
+    s+='<g class="'+(mech==='hiatal'?'':'')+'">';
+    s+='<ellipse cx="150" cy="200" rx="'+(lesOpen?9:16)+'" ry="7" fill="none" stroke="'+(lesOpen?'#c0392b':'#3fa66a')+'" stroke-width="6"/>';
+    s+='</g>';
+    s+='<text x="150" y="222" text-anchor="middle" font-size="10" font-weight="700" fill="'+(lesOpen?'#c0392b':'#3fa66a')+'">LES '+(lesOpen?'✗ open/weak':'✓ closed')+'</text>';
+    // stomach body (below diaphragm)
+    s+='<g class="churn"><path d="M118 214 C95 225 92 275 120 300 C150 322 205 315 210 270 C213 240 195 222 172 216 Z" fill="#f2c4a8" stroke="#c98a6a" stroke-width="2.5"/></g>';
+    // acid pool
+    s+='<path d="M112 285 Q160 300 208 282 L206 300 Q160 316 118 300 Z" fill="#d5e04a" opacity="0.7"/>';
+    s+='<text x="160" y="298" text-anchor="middle" font-size="10" font-weight="700" fill="#7a7a1a">acid (low pH)</text>';
+    // reflux droplets going up
+    if(reflux){ for(let i=0;i<4;i++) s+='<circle class="acid" style="animation-delay:'+(i*0.5)+'s" cx="'+(150+((i%2)*8-4))+'" cy="200" r="5" fill="#c8d43a"/>'; s+='<text x="205" y="150" font-size="10.5" font-weight="800" fill="#a5772a">acid refluxes ↑</text>'; }
+    $('gi').innerHTML=s;
+  }
+  function render(){
+    draw();
+    document.querySelectorAll('#mechSeg button').forEach(b=>b.classList.toggle('on',b.dataset.d===mech));
+    document.querySelectorAll('#dmgSeg button').forEach(b=>b.classList.toggle('on',b.dataset.d===dmg));
+    const src = (lastKind==='dmg')? DMG[dmg] : MECH[mech];
+    $('stage').style.background=src.color;
+    $('stage').innerHTML=src.name+'<small>'+(lastKind==='dmg'?'chronic acid damage':'at the valve')+'</small>';
+    $('info').innerHTML='<div class="n">'+src.name+'</div><div class="plain">'+src.plain+'</div><div class="story">'+src.story+'</div><div class="ss"><b>Clue:</b> '+src.ss+'</div>';
+    const caps={normal:'The LES is <b>shut</b> → acid stays down. No reflux.',
+      gerd:'The LES is <b>weak</b> → acid <b>refluxes up</b> and burns the esophagus.',
+      hiatal:'The stomach <b>slid above the diaphragm</b> → the LES can\'t seal → reflux.'};
+    if(lastKind==='dmg' && dmg!=='none') $('liveCap').innerHTML='Years of acid → <b>'+DMG[dmg].name+'</b>. '+DMG[dmg].plain;
+    else $('liveCap').innerHTML=caps[mech];
+  }
+  let lastKind='mech';
+  document.querySelectorAll('#mechSeg button').forEach(b=>b.addEventListener('click',()=>{ mech=b.dataset.d; lastKind='mech'; render(); }));
+  document.querySelectorAll('#dmgSeg button').forEach(b=>b.addEventListener('click',()=>{ dmg=b.dataset.d; lastKind='dmg'; if(mech==='normal'&&dmg!=='none'){mech='gerd';} render(); }));
+  render();
+})();
+</script>
+</body>
+</html>

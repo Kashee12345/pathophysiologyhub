@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0c3a44">
+<title>Foundations: The Cell, ABGs &amp; Genetics &mdash; Pathophysiology &middot; Dr. Akash Garg</title>
+<meta name="description" content="A student-friendly, exact pathophysiology chapter on the endocrine system — feedback loops, adrenal, thyroid, diabetes, growth hormone, and ADH — with the concept explained plainly and an interactive to play with in every section.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#22312f; --soft:#4a5a58; --muted:#7c8a88; --faint:#9aa8a6; --line:#e6e2d6;
+    --paper:#faf8f2; --card:#fffdf7; --accent:#0c7283; --accent-dk:#0c3a44; --gold:#b8862f;
+    --serif:"Source Serif 4",Georgia,"Times New Roman",serif; --disp:"Fraunces",Georgia,serif; --ui:"Inter",system-ui,sans-serif;
+    --shadow:0 1px 3px rgba(20,40,46,.06);
+  }
+  *{box-sizing:border-box;} html{scroll-behavior:smooth;}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--serif);font-size:18px;line-height:1.7;-webkit-font-smoothing:antialiased;}
+  a{color:var(--accent);text-decoration:none;} a:hover{text-decoration:underline;}
+
+  /* top bar + progress */
+  .topbar{position:sticky;top:0;z-index:50;background:rgba(250,248,242,.92);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid var(--line);}
+  .topbar .row{max-width:1120px;margin:0 auto;padding:11px 20px;display:flex;align-items:center;gap:14px;font-family:var(--ui);}
+  .topbar a.home{font-size:13.5px;font-weight:600;color:var(--soft);white-space:nowrap;}
+  .topbar a.home:hover{color:var(--accent);text-decoration:none;}
+  .topbar .ct{font-size:13px;color:var(--faint);font-weight:600;margin-left:auto;white-space:nowrap;}
+  .progress{height:3px;background:transparent;} .progress .bar{height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--gold));transition:width .1s;}
+
+  .layout{max-width:1120px;margin:0 auto;padding:0 20px;display:grid;grid-template-columns:230px 1fr;gap:30px;}
+  /* sidebar TOC */
+  aside{font-family:var(--ui);padding-top:34px;}
+  aside .toc{position:sticky;top:74px;}
+  aside .toc h4{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--faint);margin:0 0 12px;font-weight:700;}
+  aside .toc a{display:block;font-size:13.5px;color:var(--soft);padding:6px 10px;border-left:2px solid var(--line);line-height:1.35;}
+  aside .toc a:hover{color:var(--accent);text-decoration:none;border-left-color:var(--accent);}
+  aside .toc a.on{color:var(--accent-dk);font-weight:700;border-left-color:var(--gold);background:#f3efe3;border-radius:0 8px 8px 0;}
+
+  .reading{max-width:1040px;padding:30px 0 70px;min-width:0;}
+  .reading .col{max-width:718px;}
+  /* opener */
+  .kicker{font-family:var(--ui);font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);font-weight:700;}
+  h1{font-family:var(--disp);font-weight:600;font-size:clamp(32px,5.2vw,46px);line-height:1.08;letter-spacing:-.5px;color:var(--accent-dk);margin:10px 0 6px;max-width:718px;}
+  .lede{font-size:20px;line-height:1.6;color:var(--soft);max-width:718px;margin:14px 0 0;}
+  h2{font-family:var(--disp);font-weight:600;font-size:27px;letter-spacing:-.3px;color:var(--accent-dk);margin:52px 0 4px;scroll-margin-top:70px;max-width:718px;}
+  h2 .num{font-family:var(--ui);font-size:13px;font-weight:700;color:var(--gold);letter-spacing:1px;display:block;margin-bottom:4px;text-transform:uppercase;}
+  h3{font-family:var(--disp);font-weight:600;font-size:20px;color:var(--accent-dk);margin:26px 0 2px;max-width:718px;}
+  p{margin:14px 0;max-width:718px;} p b,li b{color:var(--accent-dk);font-weight:600;}
+  .reading ul,.reading ol{max-width:718px;padding-left:24px;} .reading li{margin:7px 0;}
+
+  .objectives{max-width:718px;background:#f2efe4;border:1px solid #e4ddc8;border-radius:14px;padding:18px 22px;margin:24px 0;font-family:var(--ui);}
+  .objectives h4{margin:0 0 8px;font-size:12px;letter-spacing:1px;text-transform:uppercase;color:var(--gold);font-weight:700;}
+  .objectives ul{margin:0;padding-left:20px;} .objectives li{font-size:14.5px;line-height:1.5;color:var(--soft);margin:6px 0;font-family:var(--serif);}
+
+  .kp{max-width:718px;background:#eef5f6;border:1px solid #d3e5e7;border-left:5px solid var(--accent);border-radius:0 12px 12px 0;padding:14px 20px;margin:22px 0;font-family:var(--ui);}
+  .kp .t{font-size:11.5px;letter-spacing:1px;text-transform:uppercase;color:var(--accent-dk);font-weight:700;margin-bottom:6px;}
+  .kp ul{margin:0;padding-left:18px;} .kp li{font-size:14.5px;line-height:1.55;color:var(--ink);margin:5px 0;font-family:var(--serif);}
+  .pearl{max-width:718px;background:#fbf3e2;border:1px solid #ecd9ac;border-left:5px solid var(--gold);border-radius:0 12px 12px 0;padding:13px 20px;margin:22px 0;font-family:var(--serif);font-size:15px;line-height:1.6;color:#6a5320;}
+  .pearl b{color:#5a4212;}
+
+  /* interactive embed (breaks out wider than prose) */
+  .embed{max-width:1040px;margin:26px 0 30px;}
+  .embed .cap{font-family:var(--ui);font-size:12.5px;font-weight:600;color:var(--muted);margin:0 0 8px;display:flex;align-items:center;gap:8px;}
+  .embed .cap .tag{background:var(--accent);color:#fff;font-size:10.5px;letter-spacing:.5px;text-transform:uppercase;font-weight:700;padding:3px 9px;border-radius:20px;}
+  .embed .frame{border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:0 8px 26px rgba(20,40,46,.09);background:#fff;}
+  .embed iframe{display:block;width:100%;height:640px;border:0;}
+  .embed .cap a{font-family:var(--ui);margin-left:auto;font-size:12.5px;font-weight:600;}
+
+  /* summary + quiz */
+  .summary{max-width:718px;background:var(--accent-dk);color:#eaf3f4;border-radius:16px;padding:24px 26px;margin:50px 0 30px;font-family:var(--serif);}
+  .summary h2{color:#fff;margin:0 0 6px;font-size:24px;}
+  .summary ul{margin:10px 0 0;padding-left:20px;} .summary li{margin:8px 0;font-size:15.5px;line-height:1.55;color:#dcebec;}
+  .summary li b{color:#fff;}
+  .quiz{max-width:718px;margin:36px 0;}
+  .quiz h2{margin-top:0;}
+  .q{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 20px;margin:12px 0;box-shadow:var(--shadow);}
+  .q .qq{font-weight:600;color:var(--accent-dk);font-family:var(--serif);}
+  .q button{margin-top:10px;font-family:var(--ui);font-size:13px;font-weight:700;color:var(--accent);background:#eef5f6;border:1px solid #d3e5e7;border-radius:20px;padding:7px 15px;cursor:pointer;}
+  .q button:hover{background:#e2eff0;}
+  .q .ans{display:none;margin-top:12px;padding-top:12px;border-top:1px dashed var(--line);font-size:15.5px;color:var(--soft);}
+  .q .ans .a{font-weight:700;color:var(--accent-dk);}
+  .q.show .ans{display:block;} .q.show button{display:none;}
+
+  .chapnav{max-width:718px;display:flex;justify-content:space-between;gap:12px;margin:44px 0 0;font-family:var(--ui);}
+  .chapnav a,.chapnav span{flex:1;border:1px solid var(--line);border-radius:12px;padding:14px 16px;font-size:13.5px;background:var(--card);}
+  .chapnav a{color:var(--accent-dk);font-weight:600;} .chapnav a:hover{border-color:var(--accent);text-decoration:none;}
+  .chapnav .k{display:block;font-size:11px;color:var(--faint);text-transform:uppercase;letter-spacing:.5px;margin-bottom:2px;}
+  .chapnav .next{text-align:right;} .chapnav .disabled{color:var(--faint);}
+
+  footer{font-family:var(--ui);text-align:center;color:var(--faint);font-size:12.5px;border-top:1px solid var(--line);padding:26px 20px 50px;margin-top:30px;}
+  footer b{color:var(--soft);}
+
+  @media(max-width:860px){
+    .layout{grid-template-columns:1fr;gap:0;}
+    aside{padding-top:16px;} aside .toc{position:static;}
+    aside .toc{border:1px solid var(--line);border-radius:12px;padding:12px 14px;background:var(--card);}
+    aside .toc a{border-left:none;padding:6px 4px;}
+    aside .toc a.on{background:none;}
+    .reading{padding-top:16px;}
+    .embed iframe{height:660px;}
+  }
+
+  /* comparison tables */
+  .ctwrap{max-width:718px;overflow-x:auto;margin:22px 0;-webkit-overflow-scrolling:touch;}
+  table.ctable{border-collapse:collapse;width:100%;min-width:520px;font-family:var(--ui);font-size:14px;background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden;}
+  table.ctable th,table.ctable td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);vertical-align:top;line-height:1.45;}
+  table.ctable thead th{background:#eef5f6;color:var(--accent-dk);font-weight:700;font-size:12.5px;letter-spacing:.3px;}
+  table.ctable tbody tr:last-child td{border-bottom:none;}
+  table.ctable td:first-child,table.ctable th:first-child{font-weight:600;color:var(--soft);white-space:nowrap;}
+  table.ctable td b{color:var(--accent-dk);font-weight:600;}
+  /* glossary */
+  dl.terms{max-width:718px;margin:18px 0;}
+  dl.terms dt{font-family:var(--ui);font-weight:700;color:var(--accent-dk);font-size:15px;margin-top:15px;}
+  dl.terms dd{margin:3px 0 0;color:var(--soft);}
+  /* flashcard drill widget */
+  .fc{max-width:718px;margin:20px 0;}
+  .fc-card{perspective:1600px;height:236px;cursor:pointer;margin-bottom:14px;}
+  .fc-inner{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform .55s cubic-bezier(.4,.2,.2,1);}
+  .fc-card.flip .fc-inner{transform:rotateY(180deg);}
+  .fc-face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border:1px solid var(--line);border-radius:16px;padding:26px 30px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:12px;box-shadow:0 8px 26px rgba(20,40,46,.09);overflow:auto;}
+  .fc-front{background:linear-gradient(180deg,#fffdf7,#eef5f6);}
+  .fc-back{background:linear-gradient(180deg,#fbf3e2,#f3e6c9);transform:rotateY(180deg);border-color:#e6d3a6;}
+  .fc-side{position:absolute;top:12px;left:16px;font-family:var(--ui);font-size:10px;font-weight:800;letter-spacing:1.3px;text-transform:uppercase;color:var(--faint);}
+  .fc-back .fc-side{color:var(--gold);}
+  .fc-q{font-family:var(--disp);font-weight:600;font-size:19px;line-height:1.35;color:var(--accent-dk);}
+  .fc-a{font-family:var(--serif);font-weight:600;font-size:17px;line-height:1.45;color:var(--ink);}
+  .fc-hint{position:absolute;bottom:11px;left:0;right:0;font-family:var(--ui);font-size:11.5px;color:var(--faint);}
+  .fc-nav{display:flex;gap:9px;align-items:center;}
+  .fc-count{flex:1;text-align:center;font-family:var(--ui);font-size:13px;color:var(--muted);font-weight:600;}
+  .fc-btn{font-family:var(--ui);font-size:13px;font-weight:700;color:var(--accent);background:#eef5f6;border:1px solid #d3e5e7;border-radius:20px;padding:8px 13px;cursor:pointer;}
+  .fc-btn:hover{background:#e2eff0;}
+  .fc-full{display:block;margin-top:14px;text-align:center;font-family:var(--ui);font-size:13.5px;font-weight:700;background:var(--accent-dk);color:#eaf3f4;border-radius:12px;padding:12px;}
+  .fc-full:hover{text-decoration:none;filter:brightness(1.12);}
+</style>
+</head>
+<body>
+
+
+  <div class="topbar">
+    <div class="row">
+      <a class="home" href="index.html">📖 Contents</a>
+      
+      <span class="ct">Week 1 · Foundations</span>
+    </div>
+    <div class="progress"><div class="bar" id="bar"></div></div>
+  </div>
+
+  <div class="layout">
+    <aside>
+      <nav class="toc">
+        <h4>In this chapter</h4>
+        <a href="#w1_cell" class="on">1 · Cells &amp; injury</a>
+        <a href="#w1_fluids">2 · Fluids &amp; edema</a>
+        <a href="#w1_electrolytes">3 · Electrolytes</a>
+        <a href="#w1_acidbase">4 · Acid-base &amp; ABG</a>
+        <a href="#w1_genetics">5 · Genes &amp; inheritance</a>
+        <a href="#w1_chromo">6 · Chromosomal disorders</a>
+        <a href="#summary">The chapter in one breath</a>
+        <a href="#glossary">Words worth knowing</a>
+        <a href="#cards">Flashcards</a>
+        <a href="#quiz">Check yourself</a>
+      </nav>
+    </aside>
+
+    <main class="reading">
+      <div class="kicker">Pathophysiology · Week 1</div>
+      <h1>Foundations: The Cell, ABGs &amp; Genetics</h1>
+      <p class="lede">Before any organ can fail, something goes wrong at the level of the <b>cell</b>, the <b>fluids</b> around it, or the <b>genes</b> that built it. This opening chapter lays the foundation the rest of the book stands on &mdash; how cells cope and die, how water and electrolytes stay in balance, how the body defends its pH, and how traits and disorders pass down through families.</p>
+      <div class="objectives">
+        <h4>By the end of this chapter you can</h4>
+        <ul>
+          <li>Tell <b>reversible</b> from <b>irreversible</b> cell injury, and name the five cellular adaptations.</li>
+          <li>Contrast <b>apoptosis</b> with <b>necrosis</b>, and recognize the main necrosis types.</li>
+          <li>Explain how fluid moves between compartments and the <b>four ways edema forms</b>.</li>
+          <li>Predict the effects of <b>sodium, potassium, and calcium</b> imbalances.</li>
+          <li>Interpret a basic <b>ABG</b> &mdash; is it respiratory or metabolic, and is it compensating?</li>
+          <li>Use inheritance patterns and a <b>Punnett square</b> to predict risk, and recognize trisomy 21 and the sex-chromosome disorders.</li>
+        </ul>
+      </div>
+
+      <h2 id="w1_cell"><span class="num">Section 1</span>Cells: injury, adaptation &amp; death</h2>
+<figure class="bref" data-sec="1" style="max-width:1040px;margin:10px 0 24px;padding:0;"><div style="border:1px solid #e6e2d6;border-radius:16px;overflow:hidden;background:#fffdf7;box-shadow:0 8px 26px rgba(20,40,46,.09);"><img src="img/foundations_s1.jpg" alt="Cellular adaptation & injury reference figure" loading="lazy" style="display:block;width:100%;height:auto;background:#fff;" onerror="this.closest('figure').style.display='none'"></div><figcaption style="font-family:Inter,system-ui,sans-serif;font-size:12.5px;color:#7c8a88;margin-top:8px;line-height:1.5;"><b style="color:#0c3a44;">Reference.</b> Cellular adaptation & injury</figcaption></figure>
+
+
+      <p>Every cell in your body is a tiny, hard-working machine, and like any machine it needs fuel and it needs to get rid of waste. Two supplies matter most: <b>oxygen</b> and <b>glucose</b>. Cells burn glucose with oxygen in the mitochondria to make <b>ATP</b>, the energy currency that runs every pump, every repair, and every heartbeat's worth of work. Take away the oxygen and the whole factory starts to fail. That is why the single most common cause of cell injury is a lack of oxygen.</p>
+
+<h3>When the fuel runs out: hypoxia and ischemia</h3>
+<p><b>Hypoxia</b> means low oxygen reaching the tissue. <b>Ischemia</b> is a specific, more dangerous flavor of it: blood flow itself is blocked, so the cell loses not only oxygen but also glucose <em>and</em> its ability to wash away waste. Without ATP, the sodium-potassium pump quits, sodium and water rush in, and the cell swells (<b>cellular edema</b>, the earliest visible change). If oxygen returns quickly, the cell recovers. This is <b>reversible injury</b>. But if the insult drags on, mitochondria rupture, calcium floods in, enzymes start digesting the cell from the inside, and the damage becomes <b>irreversible</b>.</p>
+
+<h3>Free radicals and oxidative damage</h3>
+<p>Injury also comes from unstable molecules called <b>free radicals</b> (reactive oxygen species) that carry an unpaired electron and grab electrons from anything nearby, damaging membranes, proteins, and DNA. This <b>oxidative stress</b> underlies radiation injury, reperfusion damage, and aging. The body defends itself with antioxidants and enzymes, but when radicals outrun the defenses, the cell is harmed.</p>
+
+<h3>Five ways cells adapt</h3>
+<p>Before cells give up, they try to adjust to chronic stress. There are five classic <b>adaptations</b>:</p>
+<ul>
+<li><b>Atrophy</b> - shrinking. A leg in a cast for weeks loses muscle bulk from disuse.</li>
+<li><b>Hypertrophy</b> - cells get bigger. The heart wall thickens against high blood pressure; a weightlifter's muscles enlarge.</li>
+<li><b>Hyperplasia</b> - more cells. The uterus grows a thicker lining each cycle under hormones; the liver regenerates.</li>
+<li><b>Metaplasia</b> - one mature cell type is swapped for a tougher one. In a smoker's airway, delicate ciliated cells become flat squamous cells; in the reflux-damaged lower esophagus the change runs the other way, as the squamous lining is replaced by columnar cells (Barrett esophagus).</li>
+<li><b>Dysplasia</b> - disordered, abnormal-looking cells. This is <em>not</em> a normal adaptation; it signals trouble and can be a precancerous change, as on an abnormal Pap smear.</li>
+</ul>
+
+<div class="pearl"><b>Metaplasia trades comfort for survival.</b> The swapped-in cells resist the irritant but lose their original job (those squamous airway cells cannot sweep mucus), and repeated stress can push metaplasia toward dysplasia and cancer.</div>
+
+<h3>Two ways cells die</h3>
+<p>When adaptation fails, cells die by one of two very different routes. <b>Apoptosis</b> is <em>programmed, tidy</em> cell death - the cell shrinks, packages itself into neat fragments, and is quietly cleared without spilling its contents. It is normal and useful (it sculpts fingers in the womb and removes worn-out cells). <b>Necrosis</b> is <em>messy, unplanned</em> death from injury - the cell bursts, spills its enzymes, and <b>provokes inflammation</b> in the surrounding tissue.</p>
+
+<div class="ctwrap"><table class="ctable"><thead><tr><th>Feature</th><th>Apoptosis</th><th>Necrosis</th></tr></thead><tbody>
+<tr><td>Trigger</td><td>Programmed, physiologic</td><td>Injury (usually ischemia, toxin)</td></tr>
+<tr><td>Energy</td><td>Requires ATP</td><td>ATP depleted</td></tr>
+<tr><td>Membrane</td><td>Stays intact</td><td>Ruptures, spills contents</td></tr>
+<tr><td>Inflammation</td><td>None</td><td>Yes, often marked</td></tr>
+</tbody></table></div>
+
+<p>Necrosis comes in patterns worth knowing:</p>
+<ul>
+<li><b>Coagulative</b> - firm, preserved outline; the classic look after an ischemic infarct (heart, kidney).</li>
+<li><b>Liquefactive</b> - tissue melts into liquid; typical of the brain after a stroke and of bacterial abscesses.</li>
+<li><b>Caseous</b> - a crumbly, cheese-like center; the hallmark of <em>tuberculosis</em>.</li>
+</ul>
+
+<h3>Signs of chronic stress inside the cell</h3>
+<p>Cells under long-term strain often show <b>accumulations</b> - substances that pile up because the cell cannot process or export them, such as fat in liver cells (steatosis) or brown lipofuscin, the "wear-and-tear" pigment of aging. Cells and dead tissue may also undergo <b>calcification</b>, laying down calcium salts. When it happens in already-damaged or dead tissue while the blood calcium is normal, it is <em>dystrophic</em> calcification; when a high blood calcium drives deposits into otherwise-normal tissue, it is <em>metastatic</em>. Both are quiet fingerprints of injury the body has been fighting for a long time.</p>
+
+<div class="pearl"><b>Reversible versus irreversible is the whole game.</b> The nurse's job is speed - restoring oxygen and perfusion <em>before</em> mitochondrial rupture and calcium influx turn a salvageable cell into a dead one.</div>
+
+<p>The five adaptations can be hard to keep straight in words - explore the interactive figure below to see atrophy, hypertrophy, hyperplasia, metaplasia, and dysplasia side by side.</p>
+
+      <div class="embed">
+        <div class="cap"><span class="tag">Interactive</span> See how cells adapt &mdash; atrophy, hypertrophy, hyperplasia, metaplasia, and dysplasia. <a href="../patho/CellularAdaptation.html" target="_blank" rel="noopener">Open full &uarr;</a></div>
+        <div class="frame"><iframe src="../patho/CellularAdaptation.html" loading="lazy" title="Cellular adaptation interactive"></iframe></div>
+      </div>
+      <div class="kp"><div class="t">Key points</div><ul><li>Cells need a steady supply of oxygen and glucose to make ATP; <b>hypoxia</b> and <b>ischemia</b> are the most common causes of injury, and ischemia is more dangerous because it also cuts off glucose and waste removal.</li><li>Injury is <b>reversible</b> (cell swelling from failed pumps) until mitochondria rupture and calcium floods in, at which point it becomes <b>irreversible</b>; free radicals add oxidative damage.</li><li>The five adaptations are <b>atrophy</b> (shrink), <b>hypertrophy</b> (bigger cells), <b>hyperplasia</b> (more cells), <b>metaplasia</b> (swapped cell type), and <b>dysplasia</b> (disordered, often precancerous).</li><li><b>Apoptosis</b> is tidy, programmed, and non-inflammatory; <b>necrosis</b> is messy and provokes inflammation, with coagulative (infarct), liquefactive (brain/abscess), and caseous (TB) patterns.</li><li>Chronic cell stress leaves footprints - abnormal <b>accumulations</b> (fat, lipofuscin) and <b>calcification</b>.</li></ul></div>
+
+      <h2 id="w1_fluids"><span class="num">Section 2</span>Fluid balance &amp; edema</h2>
+<figure class="bref" data-sec="2" style="max-width:1040px;margin:10px 0 24px;padding:0;"><div style="border:1px solid #e6e2d6;border-radius:16px;overflow:hidden;background:#fffdf7;box-shadow:0 8px 26px rgba(20,40,46,.09);"><img src="img/foundations_s2.jpg" alt="Edema formation reference figure" loading="lazy" style="display:block;width:100%;height:auto;background:#fff;" onerror="this.closest('figure').style.display='none'"></div><figcaption style="font-family:Inter,system-ui,sans-serif;font-size:12.5px;color:#7c8a88;margin-top:8px;line-height:1.5;"><b style="color:#0c3a44;">Reference.</b> Edema formation <span style="color:#9aa8a6;">&mdash; OpenStax College, CC BY 3.0 (via Wikimedia Commons)</span></figcaption></figure>
+
+
+      <p>Your body is mostly water, and where that water sits matters just as much as how much you have. In a healthy adult, water makes up roughly <b>60%</b> of body weight. A handy memory trick is the <b>60-40-20 rule</b>: about 60% of body weight is total water, about 40% sits <em>inside</em> cells, and about 20% sits <em>outside</em> them.</p>
+
+<h3>The fluid compartments</h3>
+<p>Think of two big rooms. The <b>intracellular fluid (ICF)</b> compartment is all the water inside your cells, and it holds the majority, roughly two-thirds of body water. The <b>extracellular fluid (ECF)</b> compartment is everything outside the cells, the remaining one-third. The ECF splits again into two parts: the <b>interstitial fluid</b> that bathes the spaces between cells, and the <b>intravascular fluid</b>, which is the plasma inside your blood vessels. Fluid is always shifting between these spaces, and keeping it balanced is what keeps cells alive and blood pressure steady.</p>
+
+<h3>Osmosis and tonicity</h3>
+<p>Water follows solute. <b>Osmosis</b> is the movement of water across a semipermeable membrane from an area of lower solute concentration to higher, chasing the particles it cannot easily follow. <b>Tonicity</b> describes how a solution affects cell volume, and it is one of the highest-yield concepts you will use at the bedside when hanging IV fluids.</p>
+<div class="ctwrap"><table class="ctable"><thead><tr><th>Solution</th><th>What it does to the cell</th><th>Why</th></tr></thead><tbody><tr><td><b>Isotonic</b> (e.g., 0.9% normal saline)</td><td>No net change, cell stays the same</td><td>Solute concentration matches the cell, so water does not shift</td></tr><tr><td><b>Hypotonic</b> (e.g., 0.45% saline)</td><td>Cell <em>swells</em>, may burst (lyse)</td><td>Outside is more dilute, so water rushes into the cell</td></tr><tr><td><b>Hypertonic</b> (e.g., 3% saline)</td><td>Cell <em>shrinks</em> (crenates)</td><td>Outside is more concentrated, so water is pulled out of the cell</td></tr></tbody></table></div>
+
+<h3>Starling forces: the tug-of-war at the capillary</h3>
+<p>At every capillary, two opposing pressures decide whether fluid leaks out or gets pulled back in. This push-pull is described by the <b>Starling forces</b>. <b>Hydrostatic pressure</b> is the outward push of fluid against the vessel wall, essentially the pressure of blood being pumped, and it drives fluid <em>out</em> into the tissues. <b>Oncotic pressure</b> (also called colloid osmotic pressure) is the inward pull created mostly by <b>albumin</b>, the large protein that stays in the bloodstream and draws water <em>back</em> in. Normally, fluid pushes out at the arterial end and gets reabsorbed at the venous end, with the lymphatic system mopping up the small leftover. When this balance tips, fluid piles up in the tissues, and that is <b>edema</b>.</p>
+
+<div class="pearl"><b>Albumin is the sponge.</b> Because albumin is the main driver of oncotic pull, a low serum albumin (from liver disease, malnutrition, or protein-losing kidneys) is one of the most common reasons fluid escapes into tissues.</div>
+
+<h3>The four mechanisms of edema</h3>
+<p>Edema is not one problem, it is any disruption of that Starling balance or the drainage system. Four mechanisms cause it:</p>
+<ul>
+<li><b>Increased hydrostatic pressure.</b> Too much outward push forces fluid into tissues. This is classic in <em>heart failure</em> (blood backs up) and <em>venous obstruction</em> like a DVT, causing dependent swelling in the ankles and feet.</li>
+<li><b>Decreased plasma oncotic pressure.</b> Low albumin means a weak inward pull, so fluid stays out. Seen in cirrhosis, nephrotic syndrome, and severe malnutrition.</li>
+<li><b>Lymphatic obstruction.</b> If the lymph channels that normally drain leftover fluid are blocked, protein-rich fluid backs up as <b>lymphedema</b>, often after lymph node removal or radiation in cancer treatment.</li>
+<li><b>Sodium and water retention.</b> Where sodium goes, water follows. When the kidneys hold onto sodium (often driven by aldosterone or renal failure), the extra volume raises hydrostatic pressure and expands the ECF, causing generalized swelling.</li>
+</ul>
+
+<h3>Third spacing</h3>
+<p><b>Third spacing</b> is fluid that shifts out of the vessels and interstitium and gets trapped in a space where it does no useful work, such as the abdomen (<em>ascites</em>), the pleural cavity, or the bowel wall after surgery or in sepsis. This matters clinically because that fluid is <em>lost to circulation</em>: the patient can look puffy and swollen while actually being <b>intravascularly dry</b>, with a low blood pressure, rising heart rate, and poor urine output. You may be giving fluids to someone who appears fluid-overloaded, which is why assessing perfusion, not just appearance, is essential. Explore the compartments and these shifts in the interactive figure below.</p>
+
+<div class="pearl"><b>Puffy but dry.</b> In third spacing, edema and dehydration coexist. Trust the vital signs and urine output over how swollen the patient looks.</div>
+
+      <div class="embed">
+        <div class="cap"><span class="tag">Interactive</span> Move fluid between the compartments and watch edema form. <a href="../patho/FluidCompartments.html" target="_blank" rel="noopener">Open full &uarr;</a></div>
+        <div class="frame"><iframe src="../patho/FluidCompartments.html" loading="lazy" title="Fluid compartments interactive"></iframe></div>
+      </div>
+      <div class="kp"><div class="t">Key points</div><ul><li>Total body water is roughly 60% of weight, split about 40% intracellular and 20% extracellular (interstitial + intravascular), the 60-40-20 rule.</li><li>Tonicity predicts cell volume: hypotonic swells cells, hypertonic shrinks them, isotonic leaves them unchanged.</li><li>Starling forces balance outward hydrostatic push against inward oncotic (albumin) pull; tipping that balance causes edema.</li><li>Edema arises from four mechanisms: high hydrostatic pressure, low oncotic pressure (low albumin), lymphatic obstruction, or sodium/water retention.</li><li>Third spacing traps fluid where it cannot circulate, so a patient can look edematous yet be intravascularly depleted, judge by perfusion and vitals.</li></ul></div>
+
+      <h2 id="w1_electrolytes"><span class="num">Section 3</span>The electrolytes that matter most</h2>
+<figure class="bref" data-sec="3" style="max-width:1040px;margin:10px 0 24px;padding:0;"><div style="border:1px solid #e6e2d6;border-radius:16px;overflow:hidden;background:#fffdf7;box-shadow:0 8px 26px rgba(20,40,46,.09);"><img src="img/foundations_s3.jpg" alt="Electrolyte balance reference figure" loading="lazy" style="display:block;width:100%;height:auto;background:#fff;" onerror="this.closest('figure').style.display='none'"></div><figcaption style="font-family:Inter,system-ui,sans-serif;font-size:12.5px;color:#7c8a88;margin-top:8px;line-height:1.5;"><b style="color:#0c3a44;">Reference.</b> Electrolyte balance <span style="color:#9aa8a6;">&mdash; Jer5150, CC BY-SA 3.0 (via Wikimedia Commons)</span></figcaption></figure>
+
+
+      <p>Think of electrolytes as the tiny charged particles dissolved in your body's water that make nerves fire, muscles squeeze, and the heart beat on rhythm. Because they carry an electrical charge, even small shifts in their concentration change how excitable your cells are. The body works hard to keep them in a narrow range, and when it can't, the nervous system and the heart are usually the first to complain. Let's walk through the big three, plus a quiet helper.</p>
+
+<h3>Sodium: the master of water balance</h3>
+<p><b>Sodium</b> (normal roughly <b>135 to 145 mEq/L</b>) is the main electrolyte outside your cells, and where sodium goes, water follows. That single rule explains almost every symptom. Because sodium controls where water sits, sodium problems are really <em>water</em> problems, and the brain feels them most because it is packed inside a rigid skull.</p>
+<p>In <b>hyponatremia</b> (low sodium), the blood outside cells becomes dilute, so water moves <em>into</em> cells by osmosis and they swell. In brain cells this means <b>cerebral edema</b>, which is why patients get headache, confusion, lethargy, and in severe or rapid cases, seizures. In <b>hypernatremia</b> (high sodium), the outside is too salty, so water is pulled <em>out</em> of cells and they shrink. The brain literally dehydrates, causing thirst, restlessness, irritability, and altered mental status. Notice the pattern: sodium imbalances are <em>neurologic</em> because they move water in and out of neurons.</p>
+
+<div class="pearl"><b>Correct sodium slowly.</b> Fixing hyponatremia too fast can trigger osmotic demyelination (central pontine myelinolysis); correcting hypernatremia too fast can cause rebound cerebral edema. The brain hates rapid swings in either direction.</div>
+
+<h3>Potassium: the heart's electrolyte</h3>
+<p><b>Potassium</b> (normal about <b>3.5 to 5.0 mEq/L</b>) is the major electrolyte <em>inside</em> cells, and it sets the electrical resting membrane potential that lets heart muscle depolarize and repolarize on cue. This is why potassium is often called the most dangerous electrolyte: both too little and too much can stop the heart, and the danger shows up on the <b>ECG</b>.</p>
+<p>In <b>hypokalemia</b>, cardiac cells become sluggish to repolarize, producing <b>flattened T waves, ST depression, and U waves</b>, along with muscle weakness and risk of lethal arrhythmias. In <b>hyperkalemia</b>, cells depolarize too easily at first, giving the classic <b>peaked (tall, tented) T waves</b>, then a widening QRS, and finally a sine-wave pattern that can slide into ventricular fibrillation or asystole. Because both extremes are arrhythmogenic, potassium sits at the top of the emergency list.</p>
+
+<div class="ctwrap"><table class="ctable"><thead><tr><th>Feature</th><th>Hypokalemia</th><th>Hyperkalemia</th></tr></thead><tbody><tr><td>Level</td><td>&lt; 3.5 mEq/L</td><td>&gt; 5.0 mEq/L</td></tr><tr><td>ECG</td><td>Flat T waves, U waves, ST depression</td><td>Peaked T waves, wide QRS</td></tr><tr><td>Muscle</td><td>Weakness, cramps, ileus</td><td>Weakness, later paralysis</td></tr><tr><td>Main danger</td><td>Fatal arrhythmia</td><td>Fatal arrhythmia / arrest</td></tr></tbody></table></div>
+
+<h3>Calcium: nerves, muscles, and PTH</h3>
+<p><b>Calcium</b> (total normal roughly <b>8.5 to 10.5 mg/dL</b>) stabilizes nerve and muscle membranes and is guarded by <b>parathyroid hormone (PTH)</b>, which raises calcium by pulling it from bone, saving it in the kidney, and activating vitamin D. Here the rule flips: <em>low</em> calcium makes cells <em>more</em> excitable.</p>
+<p>In <b>hypocalcemia</b>, membranes become twitchy and fire too easily, causing <b>tetany</b>, muscle cramps, tingling, and the two bedside signs: <b>Trousseau sign</b> (carpal spasm when a blood-pressure cuff is inflated) and <b>Chvostek sign</b> (facial twitch when you tap the cheek over the facial nerve). In <b>hypercalcemia</b>, often from too much PTH or from cancer, membranes are over-stabilized, so things slow down: <em>"stones, bones, groans, and psychiatric moans"</em> means kidney stones, bone pain, constipation and abdominal pain, and lethargy or confusion.</p>
+
+<h3>Magnesium: the quiet partner</h3>
+<p><b>Magnesium</b> (normal about <b>1.5 to 2.5 mg/dL</b>) tends to travel with potassium and calcium. Low magnesium makes potassium hard to replace and worsens low calcium, so you often cannot fix a stubborn hypokalemia until you correct the magnesium first. Think of it as the electrolyte that keeps the other two honest.</p>
+
+<div class="pearl"><b>Check the magnesium.</b> If potassium won't come up despite replacement, a low magnesium is frequently the hidden reason.</div>
+
+<p>Which imbalances are true emergencies? The ones that threaten the <b>heart or brain fastest</b>: severe <b>hyperkalemia and hypokalemia</b> (lethal arrhythmias within minutes), symptomatic <b>hyponatremia</b> with seizures (brain swelling), and severe <b>hypocalcemia</b> that can cause laryngospasm. Explore the interactive figure below to see how each imbalance shifts.</p>
+
+      <div class="embed">
+        <div class="cap"><span class="tag">Interactive</span> Push sodium, potassium, and calcium up and down and see the effects. <a href="../patho/Electrolytes.html" target="_blank" rel="noopener">Open full &uarr;</a></div>
+        <div class="frame"><iframe src="../patho/Electrolytes.html" loading="lazy" title="Electrolytes interactive"></iframe></div>
+      </div>
+      <div class="kp"><div class="t">Key points</div><ul><li><b>Sodium</b> controls water, so its imbalances are neurologic: low sodium swells brain cells (edema, seizures), high sodium shrinks them (thirst, confusion) - and both must be corrected slowly.</li><li><b>Potassium</b> is the most dangerous electrolyte because both hypo- and hyperkalemia cause lethal arrhythmias; watch the ECG for flat T/U waves (low) versus peaked T waves and wide QRS (high).</li><li><b>Calcium</b> reverses the rule - <em>low</em> calcium raises excitability, causing tetany with positive Trousseau and Chvostek signs; PTH is the main regulator.</li><li><b>Magnesium</b> tracks with potassium and calcium; a low magnesium often blocks successful potassium replacement.</li><li>True emergencies are the ones hitting the heart or brain fastest: severe hyper/hypokalemia and symptomatic hyponatremia.</li></ul></div>
+
+      <h2 id="w1_acidbase"><span class="num">Section 4</span>Acid-base balance &amp; the ABG</h2>
+<figure class="bref" data-sec="4" style="max-width:1040px;margin:10px 0 24px;padding:0;"><div style="border:1px solid #e6e2d6;border-radius:16px;overflow:hidden;background:#fffdf7;box-shadow:0 8px 26px rgba(20,40,46,.09);"><img src="img/foundations_s4.jpg" alt="Acid–base balance reference figure" loading="lazy" style="display:block;width:100%;height:auto;background:#fff;" onerror="this.closest('figure').style.display='none'"></div><figcaption style="font-family:Inter,system-ui,sans-serif;font-size:12.5px;color:#7c8a88;margin-top:8px;line-height:1.5;"><b style="color:#0c3a44;">Reference.</b> Acid–base balance <span style="color:#9aa8a6;">&mdash; OpenStax College, CC BY 3.0 (via Wikimedia Commons)</span></figcaption></figure>
+
+
+      <p>Your blood is fussy about one thing above almost all others: its <b>pH</b>. Every enzyme, every heartbeat, every nerve signal depends on the blood staying in a narrow window of <b>7.35 to 7.45</b>. That is only barely on the alkaline (basic) side of neutral, and your body guards it obsessively. Slip below 7.35 and we call it <b>acidosis</b>; drift above 7.45 and it is <b>alkalosis</b>. Push much past 6.8 or 7.8 in either direction and cells simply stop working. So the body runs two teams whose whole job is defending that pH.</p>
+
+<h3>Two defenders: the lungs (fast) and the kidneys (slow)</h3>
+<p>Think of pH as a seesaw between an acid and a base. The acid side is <b>carbon dioxide</b> (<b>CO2</b>), a waste gas that dissolves into carbonic acid. The base side is <b>bicarbonate</b> (<b>HCO3</b>), the buffer that soaks up extra acid. The <b>lungs</b> control the CO2 side and they are <em>fast</em> - breathe harder and you blow off CO2 (less acid) within minutes; breathe slower and CO2 builds up. The <b>kidneys</b> control the bicarbonate side and they are <em>slow</em>, taking hours to days to hold onto or dump HCO3. Fast lungs, slow kidneys - remember that and half of ABGs make sense.</p>
+
+<h3>The four primary disorders</h3>
+<p>Every simple acid-base problem is a story about one of those two chemicals going wrong. If the trouble starts with <b>CO2</b> (a breathing problem), it is <em>respiratory</em>. If it starts with <b>HCO3</b> (a metabolic or kidney problem), it is <em>metabolic</em>.</p>
+<div class="ctwrap"><table class="ctable"><thead><tr><th>Disorder</th><th>Primary change</th><th>Classic cause</th></tr></thead><tbody>
+<tr><td><b>Respiratory acidosis</b></td><td>CO2 high (retained acid)</td><td>COPD, hypoventilation, opioid overdose</td></tr>
+<tr><td><b>Respiratory alkalosis</b></td><td>CO2 low (blown off)</td><td>Hyperventilation, anxiety, early sepsis</td></tr>
+<tr><td><b>Metabolic acidosis</b></td><td>HCO3 low (acid excess)</td><td>DKA, shock/lactic acid, diarrhea</td></tr>
+<tr><td><b>Metabolic alkalosis</b></td><td>HCO3 high</td><td>Vomiting, NG suction, diuretics</td></tr>
+</tbody></table></div>
+
+<h3>Reading an ABG in three steps</h3>
+<p>You do not need to memorize a chart - just walk down three numbers in order. Standard normals are <b>pH 7.35-7.45</b>, <b>PaCO2 35-45 mmHg</b>, and <b>HCO3 22-26 mEq/L</b>.</p>
+<ol>
+<li><b>Look at the pH first.</b> Below 7.35 = acidosis. Above 7.45 = alkalosis. This tells you which direction the body is actually in.</li>
+<li><b>Look at the CO2.</b> Above 45 is acidic; below 35 is alkalotic (because CO2 is an acid). If the CO2 matches the pH direction, the lungs are the culprit - it is <em>respiratory</em>.</li>
+<li><b>Look at the HCO3.</b> Below 22 is acidic; above 26 is alkalotic. If the HCO3 matches the pH direction, the kidneys/metabolism are the culprit - it is <em>metabolic</em>.</li>
+</ol>
+<p>Whichever value moves the <em>same</em> way as the pH is your primary problem. Example: pH 7.28 (acidosis) with CO2 60 (acidic) - the CO2 explains it, so this is respiratory acidosis, often from a COPD patient who is retaining CO2.</p>
+
+<h3>Compensation: the other team pitches in</h3>
+<p>Here is the elegant part. When one system fails, the <em>other</em> one tries to drag the pH back toward normal. If the lungs cause an acidosis, the kidneys slowly retain bicarbonate to buffer it. If the kidneys (metabolic) cause an acidosis, the lungs speed up to blow off CO2 - those deep, sighing <b>Kussmaul respirations</b> in DKA are exactly this rescue in action. The compensating system pushes its own number in the <em>same</em> direction as the primary problem. So in a compensated respiratory acidosis you will see high CO2 (the problem) <em>and</em> high HCO3 (the kidney rescue).</p>
+<p>Watch the pH to judge how far compensation has gone. If pH is back inside 7.35-7.45, it is <b>fully compensated</b>. If pH is still abnormal but the second value has clearly shifted to help, it is <b>partially compensated</b>. If only the primary system is off and the other has not budged, it is <b>uncompensated</b>. Remember: compensation nudges pH toward normal but rarely overshoots it - the body does not overcorrect past neutral.</p>
+
+<div class="pearl"><b>The lungs never fully fix a metabolic problem, and vice versa.</b> Compensation buys time; it does not cure. A DKA patient breathing hard still needs insulin and fluids - the real fix is upstream.</div>
+
+<div class="pearl"><b>Match the pH to find the driver.</b> The value (CO2 or HCO3) that shifts the same direction as the pH is the primary problem; the one shifting to help is compensation.</div>
+
+<p>Tie it to real patients and it sticks: the vomiting patient loses stomach acid and swings alkalotic (metabolic alkalosis); the panicking, hyperventilating patient blows off CO2 (respiratory alkalosis); the septic or hemorrhaging patient in <b>shock</b> pours out lactic acid (metabolic acidosis); the sedated post-op patient who is barely breathing retains CO2 (respiratory acidosis). Explore the step-by-step ABG interpreter below to practice walking those three numbers yourself.</p>
+
+      <div class="embed">
+        <div class="cap"><span class="tag">Interactive</span> Enter a blood gas and interpret it step by step. <a href="../patho/ABGInterpreter.html" target="_blank" rel="noopener">Open full &uarr;</a></div>
+        <div class="frame"><iframe src="../patho/ABGInterpreter.html" loading="lazy" title="ABG interpreter"></iframe></div>
+      </div>
+      <div class="kp"><div class="t">Key points</div><ul>
+<li>Normal blood pH is <b>7.35-7.45</b>; below is acidosis, above is alkalosis. The lungs defend it fast via CO2, the kidneys slowly via bicarbonate.</li>
+<li><b>CO2 problems are respiratory; HCO3 problems are metabolic.</b> High CO2 or low HCO3 = acidosis; low CO2 or high HCO3 = alkalosis.</li>
+<li>Read an ABG in order: <b>pH, then CO2, then HCO3</b>. Whichever value moves the same direction as the pH is the primary problem.</li>
+<li><b>Compensation</b> is the opposite system shifting to pull pH back toward normal (kidneys retain HCO3 for a respiratory acidosis; lungs blow off CO2 in DKA). It rarely fully overshoots normal.</li>
+<li>Classic causes: DKA and shock (metabolic acidosis), COPD/hypoventilation (respiratory acidosis), vomiting (metabolic alkalosis), hyperventilation (respiratory alkalosis).</li>
+</ul></div>
+
+      <h2 id="w1_genetics"><span class="num">Section 5</span>Genes &amp; inheritance</h2>
+<figure class="bref" data-sec="5" style="max-width:1040px;margin:10px 0 24px;padding:0;"><div style="border:1px solid #e6e2d6;border-radius:16px;overflow:hidden;background:#fffdf7;box-shadow:0 8px 26px rgba(20,40,46,.09);"><img src="img/foundations_s5.jpg" alt="Patterns of inheritance reference figure" loading="lazy" style="display:block;width:100%;height:auto;background:#fff;" onerror="this.closest('figure').style.display='none'"></div><figcaption style="font-family:Inter,system-ui,sans-serif;font-size:12.5px;color:#7c8a88;margin-top:8px;line-height:1.5;"><b style="color:#0c3a44;">Reference.</b> Patterns of inheritance <span style="color:#9aa8a6;">&mdash; Sofgenetics, CC0 (via Wikimedia Commons)</span></figcaption></figure>
+
+
+      <p>Every cell in your body carries a full instruction manual written in <b>DNA</b>. Think of DNA as a long string of just four chemical letters (A, T, C, G). A <b>gene</b> is one meaningful sentence in that manual, and each gene tells the cell how to build one <b>protein</b>. Proteins do almost everything: they form structures, carry oxygen, speed up reactions as enzymes, and open and close channels. The flow is simple to remember: <em>DNA is copied (transcribed) into mRNA, and mRNA is read (translated) into a protein.</em> When the recipe is spelled correctly, the protein works.</p>
+
+<h3>What a mutation actually does</h3>
+<p>A <b>mutation</b> is a spelling change in a gene. Sometimes it is harmless. Other times it swaps one letter and changes one amino acid, so the protein folds wrong or stops working. In <b>sickle cell disease</b>, a single letter change turns normal hemoglobin into a sticky version that warps red cells into a sickle shape. So the whole chain matters: a tiny DNA typo can cascade into a missing or broken protein, and a broken protein shows up as disease. This is <em>why</em> genetic conditions are so consistent within a family - everyone inherits the same misspelled recipe.</p>
+
+<h3>Autosomal dominant vs autosomal recessive</h3>
+<p>You inherit two copies of most genes - one from each parent (these live on the <b>autosomes</b>, chromosomes 1 through 22). Whether a condition appears depends on how many broken copies it takes.</p>
+<p>In <b>autosomal dominant</b> inheritance, <em>one</em> faulty copy is enough to show the trait, so it typically appears in <em>every generation</em> and affects males and females equally. <b>Huntington disease</b> is the classic example. In <b>autosomal recessive</b> inheritance, you need <em>two</em> faulty copies to be affected. People with just one copy are healthy <b>carriers</b> - they carry the gene silently and can pass it on. <b>Cystic fibrosis</b> and <b>sickle cell disease</b> follow this pattern, which is why they often seem to skip generations and appear when two carriers have a child.</p>
+
+<div class="ctwrap"><table class="ctable"><thead><tr><th>Feature</th><th>Autosomal dominant</th><th>Autosomal recessive</th></tr></thead><tbody><tr><td>Copies needed to show</td><td>One</td><td>Two</td></tr><tr><td>Family pattern</td><td>Usually every generation</td><td>Often skips generations</td></tr><tr><td>Carriers</td><td>Rare concept - one copy shows</td><td>Yes - one copy is a silent carrier</td></tr><tr><td>Examples</td><td>Huntington disease</td><td>Cystic fibrosis, sickle cell</td></tr></tbody></table></div>
+
+<h3>X-linked recessive: why males are hit harder</h3>
+<p>Some genes sit on the <b>X chromosome</b>. Females are XX and males are XY. In <b>X-linked recessive</b> conditions like <b>hemophilia</b>, the faulty gene is on the X. A female has a backup X, so one healthy copy usually covers for the broken one - she is typically a carrier. A male has only one X and no second copy to compensate, so a single faulty gene <em>shows</em>. That is <em>why</em> X-linked recessive disorders affect males far more often. A carrier mother has a 50 percent chance of passing the affected X to each son.</p>
+
+<h3>Predicting the odds with a Punnett square</h3>
+<p>A <b>Punnett square</b> is a simple grid that lays out each parent's possible gene copies and shows the chance of each combination in their children. Use capital letters for dominant and lowercase for recessive. For two carriers of a recessive condition (both <em>Aa</em>), the grid gives four boxes: <em>AA</em>, <em>Aa</em>, <em>Aa</em>, <em>aa</em>. That means about a 25 percent chance of an affected child (<em>aa</em>), a 50 percent chance of a carrier, and a 25 percent chance of neither. Each pregnancy is an independent roll - the odds reset every time. You can explore the patterns and squares in the interactive figure below.</p>
+
+<h3>Penetrance and expressivity</h3>
+<p><b>Penetrance</b> is <em>whether</em> a gene shows at all - the percentage of people with the gene who actually develop the trait. <b>Expressivity</b> is <em>how strongly</em> it shows - how mild or severe the same gene looks from person to person.</p>
+
+<div class="pearl"><b>Carriers are not sick.</b> A cystic fibrosis or sickle cell carrier has one healthy copy doing the work, so they usually have no symptoms - but two carriers together have a 1-in-4 chance of an affected child each pregnancy.</div>
+
+<div class="pearl"><b>Same gene, different story.</b> Reduced penetrance and variable expressivity explain why one relative with a mutation looks severely affected while another with the identical gene seems barely touched.</div>
+
+      <div class="embed">
+        <div class="cap"><span class="tag">Interactive</span> Build a Punnett square and trace a trait through a family. <a href="../patho/InheritancePatterns.html" target="_blank" rel="noopener">Open full &uarr;</a></div>
+        <div class="frame"><iframe src="../patho/InheritancePatterns.html" loading="lazy" title="Inheritance patterns interactive"></iframe></div>
+      </div>
+      <div class="kp"><div class="t">Key points</div><ul><li>DNA holds the recipe; a gene builds a protein; a <b>mutation</b> is a spelling change that can break that protein and cause disease.</li><li><b>Autosomal dominant</b> needs one copy and appears every generation (Huntington); <b>autosomal recessive</b> needs two copies, with healthy carriers (cystic fibrosis, sickle cell).</li><li><b>X-linked recessive</b> conditions (hemophilia) mostly affect males because they have only one X and no backup copy.</li><li>A <b>Punnett square</b> predicts offspring odds; two recessive carriers have about a 25 percent chance of an affected child each pregnancy.</li><li><b>Penetrance</b> is whether the gene shows; <b>expressivity</b> is how strongly it shows.</li></ul></div>
+
+      <h2 id="w1_chromo"><span class="num">Section 6</span>Chromosomal &amp; congenital disorders</h2>
+<figure class="bref" data-sec="6" style="max-width:1040px;margin:10px 0 24px;padding:0;"><div style="border:1px solid #e6e2d6;border-radius:16px;overflow:hidden;background:#fffdf7;box-shadow:0 8px 26px rgba(20,40,46,.09);"><img src="img/foundations_s6.jpg" alt="Chromosomal disorders reference figure" loading="lazy" style="display:block;width:100%;height:auto;background:#fff;" onerror="this.closest('figure').style.display='none'"></div><figcaption style="font-family:Inter,system-ui,sans-serif;font-size:12.5px;color:#7c8a88;margin-top:8px;line-height:1.5;"><b style="color:#0c3a44;">Reference.</b> Chromosomal disorders <span style="color:#9aa8a6;">&mdash; U.S. Department of Energy Human Genome Program., Public domain (via Wikimedia Commons)</span></figcaption></figure>
+
+
+      <p>Every cell in your body normally carries <b>46 chromosomes</b> arranged in 23 pairs: 22 pairs of <em>autosomes</em> plus one pair of <em>sex chromosomes</em> (XX in females, XY in males). You inherit exactly half from each parent. This tidy sorting happens during <b>meiosis</b>, the special cell division that makes eggs and sperm. When meiosis works, each gamete ends up with exactly 23 chromosomes, and fertilization restores the full set of 46. Chromosomal disorders happen when that sorting goes wrong, or when an outside exposure damages a developing embryo. Explore the interactive figure below to see how an extra chromosome reshapes the picture.</p>
+
+<h3>Nondisjunction: chromosomes that refuse to separate</h3>
+<p>The most common mistake is <b>nondisjunction</b> - a pair of chromosomes fails to pull apart during meiosis. One gamete ends up with an extra copy, and the other is left short. If that gamete joins in fertilization, the embryo carries the wrong count, a state called <b>aneuploidy</b>. Getting three copies of a chromosome instead of two is a <b>trisomy</b>; having only one copy is a <b>monosomy</b>. Because chromosomes are packed with genes, even one extra or missing chromosome throws off the dose of hundreds of proteins - which is why these disorders affect so many body systems at once. Nondisjunction becomes <em>more likely with advancing maternal age</em>, which is why the risk of trisomies climbs after about age 35.</p>
+
+<h3>Trisomy 21 and its cousins</h3>
+<p><b>Trisomy 21 (Down syndrome)</b> is the most common surviving autosomal trisomy - three copies of chromosome 21. Classic features usually include intellectual disability, a flat facial profile with upslanting palpebral fissures, a single palmar (simian) crease, and <b>hypotonia</b> (low muscle tone). Because that extra genetic material affects many systems, congenital heart defects (often an <em>atrioventricular septal defect</em>) are common, along with a higher risk of leukemia and early Alzheimer-type changes. Two rarer, far more severe trisomies are worth knowing: <b>trisomy 18 (Edwards syndrome)</b> and <b>trisomy 13 (Patau syndrome)</b>. Both usually cause profound impairment and multiple organ malformations, and most affected infants do not survive past infancy.</p>
+
+<h3>When the sex chromosomes are off</h3>
+<p>Nondisjunction can also hit the sex chromosomes. <b>Turner syndrome (45,X)</b> is a monosomy - a female with only one X. It usually presents with short stature, a webbed neck, <em>ovarian dysgenesis</em> (nonfunctioning ovaries causing infertility and absent puberty without hormone therapy), and often coarctation of the aorta. <b>Klinefelter syndrome (47,XXY)</b> is a male with an extra X. It often shows up around puberty with tall stature, small firm testes, gynecomastia, and <em>reduced testosterone</em> leading to infertility. Notice the pattern: an extra sex chromosome tends to be better tolerated than an extra autosome, largely because the body naturally silences extra X chromosomes.</p>
+
+<div class="ctwrap"><table class="ctable"><thead><tr><th>Feature</th><th>Turner (45,X)</th><th>Klinefelter (47,XXY)</th></tr></thead><tbody><tr><td>Karyotype</td><td>One X, missing a sex chromosome</td><td>Two X plus one Y</td></tr><tr><td>Phenotype</td><td>Female</td><td>Male</td></tr><tr><td>Stature</td><td>Short</td><td>Tall</td></tr><tr><td>Classic clue</td><td>Webbed neck, coarctation</td><td>Small testes, gynecomastia</td></tr><tr><td>Fertility</td><td>Usually infertile (ovarian dysgenesis)</td><td>Usually infertile (low testosterone)</td></tr></tbody></table></div>
+
+<h3>Teratogens: when the environment is the culprit</h3>
+<p>Not every congenital disorder is genetic. A <b>teratogen</b> is any agent that disrupts normal fetal development - a drug, infection, chemical, or radiation. <em>Timing matters enormously.</em> The <b>embryonic period</b> (roughly weeks 3 to 8), when organs are first forming, is the window of greatest vulnerability; an exposure then can cause major structural defects, while later exposure tends to affect growth and function. A key cluster to memorize is the <b>TORCH infections</b>: <em>Toxoplasmosis, Other (including syphilis), Rubella, Cytomegalovirus, and Herpes simplex</em>. These maternal infections can cross the placenta and cause malformations, growth restriction, hearing loss, and neurologic damage. <b>Alcohol</b> is one of the most preventable teratogens; prenatal exposure can produce <b>fetal alcohol spectrum disorder</b>, with characteristic facial features, growth deficits, and lifelong cognitive impairment. There is no known safe amount.</p>
+
+<h3>Multifactorial disorders</h3>
+<p>Finally, many common conditions - neural tube defects, cleft lip and palate, congenital heart disease - are <b>multifactorial</b>, arising from a combination of several genes plus environmental influences rather than a single cause.</p>
+
+<div class="pearl"><b>Age changes the odds.</b> Advancing maternal age raises the risk of nondisjunction and trisomies, which is why prenatal screening is routinely offered - especially after about age 35.</div>
+
+<div class="pearl"><b>Teach prevention early.</b> Because the embryonic period is over before many people know they are pregnant, folic acid and alcohol counseling belong in preconception care, not just prenatal visits.</div>
+
+      <div class="embed">
+        <div class="cap"><span class="tag">Interactive</span> Explore trisomies and other chromosomal disorders. <a href="../patho/ChromosomalDisorders.html" target="_blank" rel="noopener">Open full &uarr;</a></div>
+        <div class="frame"><iframe src="../patho/ChromosomalDisorders.html" loading="lazy" title="Chromosomal disorders interactive"></iframe></div>
+      </div>
+      <div class="kp"><div class="t">Key points</div><ul><li><b>Nondisjunction</b> - chromosomes failing to separate in meiosis - causes trisomies (extra copy) and monosomies (missing copy).</li><li><b>Trisomy 21 (Down syndrome)</b> is the most common autosomal trisomy; trisomy 18 (Edwards) and 13 (Patau) are rarer and usually fatal in infancy.</li><li>Sex-chromosome disorders include <b>Turner (45,X)</b>, a short-statured infertile female, and <b>Klinefelter (47,XXY)</b>, a tall infertile male.</li><li><b>Teratogens</b> - including the <b>TORCH</b> infections and alcohol - do the most structural harm during the embryonic period (weeks 3 to 8).</li><li><b>Multifactorial</b> disorders arise from combined genetic and environmental causes.</li></ul></div>
+
+      <div class="summary">
+        <h2 id="summary">The chapter in one breath</h2>
+        <ul><li><b>Cellular adaptation</b> is the cell's survival plan under stress, running through five modes: <b>atrophy</b> (shrink), <b>hypertrophy</b> (enlarge), <b>hyperplasia</b> (multiply), <b>metaplasia</b> (swap to a tougher cell type), and <b>dysplasia</b> (disordered growth that can precede cancer).</li><li>When stress outpaces adaptation you get <b>reversible injury</b> (cell swelling from failing Na+/K+ pumps), and if <b>hypoxia</b> and ATP loss persist it tips into irreversible injury and cell death.</li><li><b>Apoptosis</b> is tidy, programmed, energy-using single-cell suicide with no inflammation, while <b>necrosis</b> is messy, accidental death where cells rupture, spill their contents, and trigger <b>inflammation</b>.</li><li>Body water splits into <b>intracellular</b> (about two-thirds) and <b>extracellular</b> compartments, and <b>edema</b> happens when fluid leaks into tissues from high hydrostatic pressure, low <b>albumin</b> (oncotic pull), leaky capillaries, or blocked lymphatics.</li><li>The must-know electrolytes are <b>sodium</b> (water balance and nerve firing), <b>potassium</b> (the cardiac rhythm ion, dangerous high or low), <b>calcium</b> (bones, clotting, muscle contraction), and <b>magnesium</b> (the quiet cofactor that stabilizes nerves and heart).</li><li>Acid-base balance is a tug-of-war between the <b>lungs</b> (fast, blowing off CO2) and <b>kidneys</b> (slow, adjusting HCO3-), keeping arterial <b>pH</b> in the tight 7.35-7.45 window.</li><li>Read an <b>ABG</b> by checking pH first (acid vs alkaline), then CO2 for a respiratory cause and HCO3- for a metabolic cause, then decide if the other system is <b>compensating</b> to nudge pH back toward normal.</li><li><b>Inheritance patterns</b> follow the pedigree: <b>autosomal dominant</b> (one copy shows, every generation), <b>autosomal recessive</b> (needs two copies, carriers hidden), and <b>X-linked recessive</b> (hits males hardest, like hemophilia).</li><li><b>Chromosomal disorders</b> come from wrong chromosome numbers, classically <b>trisomy 21</b> (Down syndrome) from <b>nondisjunction</b>, while many <b>congenital</b> defects like neural tube defects arise from gene-environment hits (for example, low folate) during development.</li></ul>
+      </div>
+
+      <h2 id="glossary"><span class="num">Reference</span>Words worth knowing</h2>
+      <p>A quick reference for the terms in this chapter &mdash; skim it now, or circle back whenever a word trips you up.</p>
+      <dl class="terms"><dt>Apoptosis</dt><dd><b>Apoptosis</b> is orderly, programmed cell death in which a cell shrinks and neatly packages itself for removal without spilling its contents, so <em>no inflammation</em> results.</dd><dt>Atrophy</dt><dd><b>Atrophy</b> is a decrease in the size of cells (and therefore the whole tissue or organ) in response to disuse, denervation, aging, or reduced blood supply, as when a casted limb shrinks.</dd><dt>Autosomal recessive</dt><dd><b>Autosomal recessive</b> describes an inheritance pattern in which a person must receive <em>two</em> copies of a mutated gene (one from each parent) on a non-sex chromosome to show the disease, so unaffected carriers can silently pass it on.</dd><dt>Compensation (acid-base)</dt><dd><b>Compensation</b> is the body's attempt to restore normal blood pH by using the system that is not primarily broken, so the lungs adjust CO&#8322; for a metabolic problem and the kidneys adjust bicarbonate for a respiratory problem.</dd><dt>Dysplasia</dt><dd><b>Dysplasia</b> is disordered growth in which cells vary in size, shape, and organization; it is <em>not</em> cancer but is often a warning change that can precede it.</dd><dt>Edema</dt><dd><b>Edema</b> is the buildup of excess fluid in the interstitial space (the tissue between cells), producing visible swelling and sometimes pitting when pressed.</dd><dt>Hyperplasia</dt><dd><b>Hyperplasia</b> is an increase in the <em>number</em> of cells in a tissue due to increased cell division, such as the endometrium thickening under hormonal stimulation.</dd><dt>Hypertrophy</dt><dd><b>Hypertrophy</b> is an increase in the <em>size</em> of individual cells (without adding new cells), enlarging the organ, as when heart muscle thickens against high blood pressure.</dd><dt>Hyponatremia</dt><dd><b>Hyponatremia</b> is a lower-than-normal blood sodium level (usually below about 135 mEq/L) that often reflects too much water relative to sodium and can cause confusion or seizures.</dd><dt>Hypoxia</dt><dd><b>Hypoxia</b> is an inadequate supply of oxygen reaching the tissues, which starves cells of the fuel they need to make energy.</dd><dt>Ischemia</dt><dd><b>Ischemia</b> is reduced blood flow to a tissue that limits delivery of both oxygen and nutrients while also letting wastes build up, and it is a common cause of hypoxia.</dd><dt>Metaplasia</dt><dd><b>Metaplasia</b> is the reversible replacement of one mature cell type by another, tougher one under stress (such as airway cells changing under chronic cigarette smoke); the swap withstands the stress but loses the original tissue's specialized function and can precede dysplasia.</dd><dt>Necrosis</dt><dd><b>Necrosis</b> is disorderly, unplanned cell death from injury in which cells swell and burst, spilling their contents and <em>triggering inflammation</em>.</dd><dt>Nondisjunction</dt><dd><b>Nondisjunction</b> is the failure of chromosomes to separate properly during cell division, leaving a cell with an extra or missing chromosome, as in trisomy 21 (Down syndrome).</dd><dt>Oncotic pressure</dt><dd><b>Oncotic pressure</b> is the inward pull that plasma proteins (mainly albumin) exert to keep fluid inside blood vessels; when it drops, fluid leaks out and edema forms.</dd><dt>Tonicity</dt><dd><b>Tonicity</b> is how a solution's solute concentration affects a cell's water movement, causing the cell to swell in a hypotonic solution, shrink in a hypertonic one, or stay unchanged in an isotonic one.</dd></dl>
+
+      <h2 id="cards"><span class="num">Drill</span>Flashcards for this unit</h2>
+      <p>These are the <b>Week 1</b> cards &mdash; the same deck as the hub, pulled in here so you can review the moment you finish reading. Tap the card to flip it; hit <em>Shuffle</em> to mix them up. To grade yourself and track mastery across the whole deck, open the <a href="../flashcards.html">full flashcards page</a>.</p>
+      <div class="fc" id="fc">
+        <div class="fc-card" id="fcCard" onclick="fcFlip()">
+          <div class="fc-inner">
+            <div class="fc-face fc-front"><span class="fc-side">Question</span><div class="fc-q" id="fcQ"></div><div class="fc-hint">Tap to reveal the answer</div></div>
+            <div class="fc-face fc-back"><span class="fc-side">Answer</span><div class="fc-a" id="fcA"></div><div class="fc-hint">Tap to flip back</div></div>
+          </div>
+        </div>
+        <div class="fc-nav">
+          <button class="fc-btn" type="button" onclick="fcPrev(event)">&larr; Prev</button>
+          <span class="fc-count" id="fcCount">&mdash;</span>
+          <button class="fc-btn" type="button" onclick="fcNext(event)">Next &rarr;</button>
+          <button class="fc-btn" type="button" onclick="fcShuffle(event)">&#128256; Shuffle</button>
+        </div>
+        <a class="fc-full" href="../flashcards.html">Open the full Week 1 deck &mdash; grade yourself &amp; track mastery &uarr;</a>
+      </div>
+
+      <div class="quiz">
+        <h2 id="quiz">Check yourself</h2>
+        <div class="q"><div class="qq">1. A nurse is reviewing cell adaptations. Which change describes an increase in the SIZE of individual cells, causing an organ to enlarge, as seen in the left ventricle with chronic hypertension?</div>
+<button onclick="this.parentNode.classList.add('show')">Reveal answer</button>
+<div class="ans"><span class="a">Hypertrophy.</span> In <b>hypertrophy</b>, cells grow larger (more protein and organelles) rather than more numerous, because these cells cannot divide well; the pressure-overloaded heart bulks up each muscle fiber to push against high afterload. Contrast with <em>hyperplasia</em> (more cells) and <em>atrophy</em> (shrinkage).</div></div>
+<div class="q"><div class="qq">2. Chronic acid reflux causes the normal squamous lining of the lower esophagus to be replaced by columnar (stomach-like) epithelium. What reversible adaptation does this describe, and why does it matter?</div>
+<button onclick="this.parentNode.classList.add('show')">Reveal answer</button>
+<div class="ans"><span class="a">Metaplasia (Barrett esophagus).</span> <b>Metaplasia</b> is the swap of one mature cell type for another that better tolerates a stressor. It is reversible, but the abnormal setting can progress to <em>dysplasia</em> and raise cancer risk, so it warrants monitoring.</div></div>
+<div class="q"><div class="qq">3. A patient's cells swell, rupture, and spill their contents, triggering inflammation and a rise in serum troponin after a myocardial infarction. Is this apoptosis or necrosis, and what distinguishes the two?</div>
+<button onclick="this.parentNode.classList.add('show')">Reveal answer</button>
+<div class="ans"><span class="a">Necrosis.</span> <b>Necrosis</b> is uncontrolled, pathologic cell death from ischemia or injury: cells swell, membranes fail, enzymes leak out, and inflammation follows. <b>Apoptosis</b> is programmed, energy-requiring, orderly self-destruction that packages the cell neatly and does <em>not</em> incite inflammation.</div></div>
+<div class="q"><div class="qq">4. A patient receives 3% hypertonic saline. What happens to red blood cells and why?</div>
+<button onclick="this.parentNode.classList.add('show')">Reveal answer</button>
+<div class="ans"><span class="a">Cells shrink (crenate).</span> A <b>hypertonic</b> solution has a higher solute concentration than the cell interior, so water moves <em>out</em> of the cell by osmosis (water follows solute) and the cell shrivels. A <em>hypotonic</em> fluid would drive water in and swell or lyse the cell.</div></div>
+<div class="q"><div class="qq">5. A nurse must identify the largest fluid compartment in the body. Which compartment holds roughly two-thirds of total body water?</div>
+<button onclick="this.parentNode.classList.add('show')">Reveal answer</button>
+<div class="ans"><span class="a">Intracellular fluid (ICF).</span> Of total body water, about <b>two-thirds is intracellular</b> and one-third is <b>extracellular</b> (ECF). The ECF then splits into <em>interstitial</em> fluid (about three-quarters of ECF) and <em>intravascular</em> plasma (about one-quarter).</div></div>
+<div class="q"><div class="qq">6. A patient with cirrhosis and low serum albumin develops peripheral edema and ascites. Which edema mechanism is primarily responsible?</div>
+<button onclick="this.parentNode.classList.add('show')">Reveal answer</button>
+<div class="ans"><span class="a">Decreased plasma oncotic pressure.</span> <b>Albumin</b> normally holds water in the vessels by pulling it back (<em>oncotic/colloid osmotic pressure</em>). When the liver cannot make enough albumin, that pull weakens and fluid leaks into the interstitium. Other edema causes include increased <b>hydrostatic</b> pressure, capillary leak, and blocked <b>lymphatic</b> drainage.</div></div>
+<div class="q"><div class="qq">7. A patient's serum sodium is 118 mEq/L. Which finding is the nurse's priority concern, and why?</div>
+<button onclick="this.parentNode.classList.add('show')">Reveal answer</button>
+<div class="ans"><span class="a">Neurologic changes (confusion, seizures).</span> In <b>hyponatremia</b> (normal usually 135&ndash;145 mEq/L), the blood is relatively hypotonic, so water shifts <em>into</em> brain cells and causes <b>cerebral edema</b>. Correct sodium slowly, as overly rapid correction risks <em>osmotic demyelination</em>.</div></div>
+<div class="q"><div class="qq">8. The nurse sees a serum potassium of 6.8 mEq/L. What life-threatening problem should be anticipated, and what ECG change is classic?</div>
+<button onclick="this.parentNode.classList.add('show')">Reveal answer</button>
+<div class="ans"><span class="a">Cardiac dysrhythmias, with peaked T waves.</span> <b>Hyperkalemia</b> (normal usually 3.5&ndash;5.0 mEq/L) alters the resting membrane potential of cardiac cells, producing <em>peaked T waves</em>, widened QRS, and risk of fatal arrhythmia. It is an emergency because the heart's electrical stability depends on the potassium gradient.</div></div>
+<div class="q"><div class="qq">9. Interpret this ABG: pH 7.30, PaCO2 55 mmHg, HCO3 24 mEq/L. What is the acid-base disturbance?</div>
+<button onclick="this.parentNode.classList.add('show')">Reveal answer</button>
+<div class="ans"><span class="a">Uncompensated respiratory acidosis.</span> The <b>pH is low</b> (acidic; normal 7.35&ndash;7.45) and the <b>PaCO2 is high</b> (normal 35&ndash;45 mmHg), and they move in opposite directions, pointing to a respiratory cause. The <b>HCO3 is normal</b> (22&ndash;26 mEq/L), so the kidneys have not yet compensated. Think <em>hypoventilation</em>, as in COPD or opioid overdose.</div></div>
+<div class="q"><div class="qq">10. Two parents who each carry one copy of the cystic fibrosis gene (both unaffected carriers) have a child. Using a Punnett square, what is the chance the child is AFFECTED, and what inheritance pattern is this?</div>
+<button onclick="this.parentNode.classList.add('show')">Reveal answer</button>
+<div class="ans"><span class="a">25% affected; autosomal recessive.</span> With two <b>carriers</b> (Cc x Cc), the Punnett square gives 1 CC : 2 Cc : 1 cc, so <b>1 in 4 (25%)</b> is affected, 2 in 4 are carriers, and 1 in 4 is unaffected. In <em>autosomal recessive</em> disease, a person needs <b>two</b> mutated copies to show the trait.</div></div>
+<div class="q"><div class="qq">11. A mother is a carrier for hemophilia A (an X-linked recessive disorder) and the father is unaffected. What is the probability that a SON will be affected, and why do sons differ from daughters here?</div>
+<button onclick="this.parentNode.classList.add('show')">Reveal answer</button>
+<div class="ans"><span class="a">50% of sons affected.</span> A son gets his single <b>X</b> from mom; if he inherits her mutated X (a 50% chance), he is affected because he has <em>no second X</em> to compensate (he is <b>hemizygous</b>). Daughters would need an affected father plus a carrier mother to be affected, so with an unaffected father none of the daughters are affected (though half are carriers).</div></div>
+<div class="q"><div class="qq">12. A pregnant patient asks why her provider stresses avoiding alcohol and certain medications, especially in the first trimester. Which concept explains this, and give one example diagnosis.</div>
+<button onclick="this.parentNode.classList.add('show')">Reveal answer</button>
+<div class="ans"><span class="a">Teratogen exposure during organogenesis.</span> A <b>teratogen</b> is an agent (alcohol, certain drugs, radiation, some infections) that disrupts fetal development. The <em>first trimester</em> is highest-risk because organs are forming (<b>organogenesis</b>). Alcohol, for example, causes <b>fetal alcohol syndrome</b> with characteristic facial features and neurodevelopmental deficits.</div></div>
+      </div>
+
+      <div class="chapnav">
+        <a href="index.html"><span class="k">Book</span>&larr; All chapters</a>
+        <a class="next" href="appendix.html"><span class="k">Appendix</span>The Arcade &amp; Lab &rarr;</a>
+      </div>
+    </main>
+  </div>
+
+  <footer>
+    A student-friendly pathophysiology guide · by <b>Dr. Akash Garg</b> <br>
+    The interactive figures open in place; tap “Open full ↗” for a full-screen version.
+  </footer>
+
+<script>
+  // reading progress bar
+  var bar=document.getElementById('bar');
+  function prog(){var h=document.documentElement, max=h.scrollHeight-h.clientHeight; bar.style.width=(max>0?(h.scrollTop/max*100):0)+'%';}
+  addEventListener('scroll',prog,{passive:true}); prog();
+  // scroll-spy TOC
+  var links=[].slice.call(document.querySelectorAll('.toc a'));
+  var ids=links.map(function(a){return a.getAttribute('href').slice(1);});
+  var secs=ids.map(function(id){return document.getElementById(id);});
+  function spy(){var y=scrollY+90,cur=0;
+    for(var i=0;i<secs.length;i++){ if(secs[i] && secs[i].offsetTop<=y) cur=i; }
+    links.forEach(function(a,i){a.classList.toggle('on',i===cur);});}
+  addEventListener('scroll',spy,{passive:true}); spy();
+</script>
+
+
+<script src="../flashcards/w1.js"></script>
+<script>
+(function(){
+  var WK="1";
+  var cards=(window.PATHO_CARDS&&window.PATHO_CARDS[WK])||[];
+  var fc=document.getElementById("fc"); if(!fc) return;
+  if(!cards.length){ fc.style.display="none"; return; }
+  var order=cards.map(function(_,i){return i;}), pos=0;
+  function dec(s){return String(s).replace(/&amp;/g,"&").replace(/&lt;/g,"<").replace(/&gt;/g,">").replace(/&nbsp;/g," ");}
+  var card=document.getElementById("fcCard"), q=document.getElementById("fcQ"), a=document.getElementById("fcA"), cnt=document.getElementById("fcCount");
+  function show(){ card.classList.remove("flip"); var c=cards[order[pos]]; q.textContent=dec(c.q); a.textContent=dec(c.a)+(c.exp?"  \u2014  "+dec(c.exp):""); cnt.textContent=(pos+1)+" / "+cards.length; }
+  window.fcFlip=function(){ card.classList.toggle("flip"); };
+  window.fcNext=function(e){ if(e&&e.stopPropagation)e.stopPropagation(); pos=(pos+1)%cards.length; show(); };
+  window.fcPrev=function(e){ if(e&&e.stopPropagation)e.stopPropagation(); pos=(pos-1+cards.length)%cards.length; show(); };
+  window.fcShuffle=function(e){ if(e&&e.stopPropagation)e.stopPropagation(); for(var i=order.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=order[i];order[i]=order[j];order[j]=t;} pos=0; show(); };
+  show();
+})();
+</script>
+<style id="pdfprint">
+.pdf-btn{position:fixed;right:16px;bottom:16px;z-index:400;font-family:'Inter',system-ui,sans-serif;font-weight:700;font-size:13.5px;color:#fff;background:#0c7283;border:none;border-radius:24px;padding:11px 17px;box-shadow:0 6px 20px rgba(12,58,68,.30);cursor:pointer;display:inline-flex;align-items:center;gap:7px;}
+.pdf-btn:hover{background:#0c3a44;}
+@media print{
+ @page{margin:14mm;}
+ html,body{background:#fff !important;}
+ .topbar,.progress,aside,.chapnav,.pdf-btn{display:none !important;}
+ #pbgate{display:none !important;}
+ .layout{display:block !important;max-width:100% !important;padding:0 !important;grid-template-columns:1fr !important;gap:0 !important;}
+ .reading,.reading .col{max-width:100% !important;padding:0 !important;}
+ .embed iframe,.embed .frame{display:none !important;}
+ .embed{margin:14px 0 !important;}
+ .embed .cap{color:#555 !important;font-style:italic;}
+ .embed .cap .tag{background:#0c7283 !important;color:#fff !important;}
+ .embed .cap a{display:none !important;}
+ .bref,.bref .fr{break-inside:avoid;page-break-inside:avoid;box-shadow:none !important;}
+ .bref img{max-height:150mm;width:auto !important;margin:0 auto;}
+ .ctwrap,table.ctable,.pearl,.kp,.q,.objectives,.summary,dl.terms,figure{break-inside:avoid;page-break-inside:avoid;}
+ h1,h2,h3{break-after:avoid;page-break-after:avoid;}
+ .quiz .ans{display:block !important;}
+ .quiz .q button{display:none !important;}
+ a{color:inherit !important;text-decoration:none !important;}
+ *{-webkit-print-color-adjust:exact !important;print-color-adjust:exact !important;}
+ footer{border-top:1px solid #ccc !important;}
+}
+</style>
+<button class="pdf-btn" onclick="window.print()" title="Save this chapter as a PDF">🖨 Save as PDF</button>
+</body>
+</html>

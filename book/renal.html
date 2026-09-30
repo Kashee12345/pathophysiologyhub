@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0c3a44">
+<title>Renal &amp; Urinary &mdash; Pathophysiology &middot; Dr. Akash Garg</title>
+<meta name="description" content="A student-friendly, exact pathophysiology chapter on the endocrine system — feedback loops, adrenal, thyroid, diabetes, growth hormone, and ADH — with the concept explained plainly and an interactive to play with in every section.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#22312f; --soft:#4a5a58; --muted:#7c8a88; --faint:#9aa8a6; --line:#e6e2d6;
+    --paper:#faf8f2; --card:#fffdf7; --accent:#0c7283; --accent-dk:#0c3a44; --gold:#b8862f;
+    --serif:"Source Serif 4",Georgia,"Times New Roman",serif; --disp:"Fraunces",Georgia,serif; --ui:"Inter",system-ui,sans-serif;
+    --shadow:0 1px 3px rgba(20,40,46,.06);
+  }
+  *{box-sizing:border-box;} html{scroll-behavior:smooth;}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--serif);font-size:18px;line-height:1.7;-webkit-font-smoothing:antialiased;}
+  a{color:var(--accent);text-decoration:none;} a:hover{text-decoration:underline;}
+
+  /* top bar + progress */
+  .topbar{position:sticky;top:0;z-index:50;background:rgba(250,248,242,.92);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid var(--line);}
+  .topbar .row{max-width:1120px;margin:0 auto;padding:11px 20px;display:flex;align-items:center;gap:14px;font-family:var(--ui);}
+  .topbar a.home{font-size:13.5px;font-weight:600;color:var(--soft);white-space:nowrap;}
+  .topbar a.home:hover{color:var(--accent);text-decoration:none;}
+  .topbar .ct{font-size:13px;color:var(--faint);font-weight:600;margin-left:auto;white-space:nowrap;}
+  .progress{height:3px;background:transparent;} .progress .bar{height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--gold));transition:width .1s;}
+
+  .layout{max-width:1120px;margin:0 auto;padding:0 20px;display:grid;grid-template-columns:230px 1fr;gap:30px;}
+  /* sidebar TOC */
+  aside{font-family:var(--ui);padding-top:34px;}
+  aside .toc{position:sticky;top:74px;}
+  aside .toc h4{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--faint);margin:0 0 12px;font-weight:700;}
+  aside .toc a{display:block;font-size:13.5px;color:var(--soft);padding:6px 10px;border-left:2px solid var(--line);line-height:1.35;}
+  aside .toc a:hover{color:var(--accent);text-decoration:none;border-left-color:var(--accent);}
+  aside .toc a.on{color:var(--accent-dk);font-weight:700;border-left-color:var(--gold);background:#f3efe3;border-radius:0 8px 8px 0;}
+
+  .reading{max-width:1040px;padding:30px 0 70px;min-width:0;}
+  .reading .col{max-width:718px;}
+  /* opener */
+  .kicker{font-family:var(--ui);font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);font-weight:700;}
+  h1{font-family:var(--disp);font-weight:600;font-size:clamp(32px,5.2vw,46px);line-height:1.08;letter-spacing:-.5px;color:var(--accent-dk);margin:10px 0 6px;max-width:718px;}
+  .lede{font-size:20px;line-height:1.6;color:var(--soft);max-width:718px;margin:14px 0 0;}
+  h2{font-family:var(--disp);font-weight:600;font-size:27px;letter-spacing:-.3px;color:var(--accent-dk);margin:52px 0 4px;scroll-margin-top:70px;max-width:718px;}
+  h2 .num{font-family:var(--ui);font-size:13px;font-weight:700;color:var(--gold);letter-spacing:1px;display:block;margin-bottom:4px;text-transform:uppercase;}
+  h3{font-family:var(--disp);font-weight:600;font-size:20px;color:var(--accent-dk);margin:26px 0 2px;max-width:718px;}
+  p{margin:14px 0;max-width:718px;} p b,li b{color:var(--accent-dk);font-weight:600;}
+  .reading ul,.reading ol{max-width:718px;padding-left:24px;} .reading li{margin:7px 0;}
+
+  .objectives{max-width:718px;background:#f2efe4;border:1px solid #e4ddc8;border-radius:14px;padding:18px 22px;margin:24px 0;font-family:var(--ui);}
+  .objectives h4{margin:0 0 8px;font-size:12px;letter-spacing:1px;text-transform:uppercase;color:var(--gold);font-weight:700;}
+  .objectives ul{margin:0;padding-left:20px;} .objectives li{font-size:14.5px;line-height:1.5;color:var(--soft);margin:6px 0;font-family:var(--serif);}
+
+  .kp{max-width:718px;background:#eef5f6;border:1px solid #d3e5e7;border-left:5px solid var(--accent);border-radius:0 12px 12px 0;padding:14px 20px;margin:22px 0;font-family:var(--ui);}
+  .kp .t{font-size:11.5px;letter-spacing:1px;text-transform:uppercase;color:var(--accent-dk);font-weight:700;margin-bottom:6px;}
+  .kp ul{margin:0;padding-left:18px;} .kp li{font-size:14.5px;line-height:1.55;color:var(--ink);margin:5px 0;font-family:var(--serif);}
+  .pearl{max-width:718px;background:#fbf3e2;border:1px solid #ecd9ac;border-left:5px solid var(--gold);border-radius:0 12px 12px 0;padding:13px 20px;margin:22px 0;font-family:var(--serif);font-size:15px;line-height:1.6;color:#6a5320;}
+  .pearl b{color:#5a4212;}
+
+  /* interactive embed (breaks out wider than prose) */
+  .embed{max-width:1040px;margin:26px 0 30px;}
+  .embed .cap{font-family:var(--ui);font-size:12.5px;font-weight:600;color:var(--muted);margin:0 0 8px;display:flex;align-items:center;gap:8px;}
+  .embed .cap .tag{background:var(--accent);color:#fff;font-size:10.5px;letter-spacing:.5px;text-transform:uppercase;font-weight:700;padding:3px 9px;border-radius:20px;}
+  .embed .frame{border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:0 8px 26px rgba(20,40,46,.09);background:#fff;}
+  .embed iframe{display:block;width:100%;height:640px;border:0;}
+  .embed .cap a{font-family:var(--ui);margin-left:auto;font-size:12.5px;font-weight:600;}
+
+  /* summary + quiz */
+  .summary{max-width:718px;background:var(--accent-dk);color:#eaf3f4;border-radius:16px;padding:24px 26px;margin:50px 0 30px;font-family:var(--serif);}
+  .summary h2{color:#fff;margin:0 0 6px;font-size:24px;}
+  .summary ul{margin:10px 0 0;padding-left:20px;} .summary li{margin:8px 0;font-size:15.5px;line-height:1.55;color:#dcebec;}
+  .summary li b{color:#fff;}
+  .quiz{max-width:718px;margin:36px 0;}
+  .quiz h2{margin-top:0;}
+  .q{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 20px;margin:12px 0;box-shadow:var(--shadow);}
+  .q .qq{font-weight:600;color:var(--accent-dk);font-family:var(--serif);}
+  .q button{margin-top:10px;font-family:var(--ui);font-size:13px;font-weight:700;color:var(--accent);background:#eef5f6;border:1px solid #d3e5e7;border-radius:20px;padding:7px 15px;cursor:pointer;}
+  .q button:hover{background:#e2eff0;}
+  .q .ans{display:none;margin-top:12px;padding-top:12px;border-top:1px dashed var(--line);font-size:15.5px;color:var(--soft);}
+  .q .ans .a{font-weight:700;color:var(--accent-dk);}
+  .q.show .ans{display:block;} .q.show button{display:none;}
+
+  .chapnav{max-width:718px;display:flex;justify-content:space-between;gap:12px;margin:44px 0 0;font-family:var(--ui);}
+  .chapnav a,.chapnav span{flex:1;border:1px solid var(--line);border-radius:12px;padding:14px 16px;font-size:13.5px;background:var(--card);}
+  .chapnav a{color:var(--accent-dk);font-weight:600;} .chapnav a:hover{border-color:var(--accent);text-decoration:none;}
+  .chapnav .k{display:block;font-size:11px;color:var(--faint);text-transform:uppercase;letter-spacing:.5px;margin-bottom:2px;}
+  .chapnav .next{text-align:right;} .chapnav .disabled{color:var(--faint);}
+
+  footer{font-family:var(--ui);text-align:center;color:var(--faint);font-size:12.5px;border-top:1px solid var(--line);padding:26px 20px 50px;margin-top:30px;}
+  footer b{color:var(--soft);}
+
+  @media(max-width:860px){
+    .layout{grid-template-columns:1fr;gap:0;}
+    aside{padding-top:16px;} aside .toc{position:static;}
+    aside .toc{border:1px solid var(--line);border-radius:12px;padding:12px 14px;background:var(--card);}
+    aside .toc a{border-left:none;padding:6px 4px;}
+    aside .toc a.on{background:none;}
+    .reading{padding-top:16px;}
+    .embed iframe{height:660px;}
+  }
+
+  /* comparison tables */
+  .ctwrap{max-width:718px;overflow-x:auto;margin:22px 0;-webkit-overflow-scrolling:touch;}
+  table.ctable{border-collapse:collapse;width:100%;min-width:520px;font-family:var(--ui);font-size:14px;background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden;}
+  table.ctable th,table.ctable td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);vertical-align:top;line-height:1.45;}
+  table.ctable thead th{background:#eef5f6;color:var(--accent-dk);font-weight:700;font-size:12.5px;letter-spacing:.3px;}
+  table.ctable tbody tr:last-child td{border-bottom:none;}
+  table.ctable td:first-child,table.ctable th:first-child{font-weight:600;color:var(--soft);white-space:nowrap;}
+  table.ctable td b{color:var(--accent-dk);font-weight:600;}
+  /* glossary */
+  dl.terms{max-width:718px;margin:18px 0;}
+  dl.terms dt{font-family:var(--ui);font-weight:700;color:var(--accent-dk);font-size:15px;margin-top:15px;}
+  dl.terms dd{margin:3px 0 0;color:var(--soft);}
+  /* flashcard drill widget */
+  .fc{max-width:718px;margin:20px 0;}
+  .fc-card{perspective:1600px;height:236px;cursor:pointer;margin-bottom:14px;}
+  .fc-inner{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform .55s cubic-bezier(.4,.2,.2,1);}
+  .fc-card.flip .fc-inner{transform:rotateY(180deg);}
+  .fc-face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border:1px solid var(--line);border-radius:16px;padding:26px 30px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:12px;box-shadow:0 8px 26px rgba(20,40,46,.09);overflow:auto;}
+  .fc-front{background:linear-gradient(180deg,#fffdf7,#eef5f6);}
+  .fc-back{background:linear-gradient(180deg,#fbf3e2,#f3e6c9);transform:rotateY(180deg);border-color:#e6d3a6;}
+  .fc-side{position:absolute;top:12px;left:16px;font-family:var(--ui);font-size:10px;font-weight:800;letter-spacing:1.3px;text-transform:uppercase;color:var(--faint);}
+  .fc-back .fc-side{color:var(--gold);}
+  .fc-q{font-family:var(--disp);font-weight:600;font-size:19px;line-height:1.35;color:var(--accent-dk);}
+  .fc-a{font-family:var(--serif);font-weight:600;font-size:17px;line-height:1.45;color:var(--ink);}
+  .fc-hint{position:absolute;bottom:11px;left:0;right:0;font-family:var(--ui);font-size:11.5px;color:var(--faint);}
+  .fc-nav{display:flex;gap:9px;align-items:center;}
+  .fc-count{flex:1;text-align:center;font-family:var(--ui);font-size:13px;color:var(--muted);font-weight:600;}
+  .fc-btn{font-family:var(--ui);font-size:13px;font-weight:700;color:var(--accent);background:#eef5f6;border:1px solid #d3e5e7;border-radius:20px;padding:8px 13px;cursor:pointer;}
+  .fc-btn:hover{background:#e2eff0;}
+  .fc-full{display:block;margin-top:14px;text-align:center;font-family:var(--ui);font-size:13.5px;font-weight:700;background:var(--accent-dk);color:#eaf3f4;border-radius:12px;padding:12px;}
+  .fc-full:hover{text-decoration:none;filter:brightness(1.12);}
+</style>
+</head>
+<body>
+
+
+  <div class="topbar">
+    <div class="row">
+      <a class="home" href="index.html">📖 Contents</a>
+      
+      <span class="ct">Week 11 · Renal</span>
+    </div>
+    <div class="progress"><div class="bar" id="bar"></div></div>
+  </div>
+
+  <div class="layout">
+    <aside>
+      <nav class="toc">
+        <h4>In this chapter</h4>
+        <a href="#w11_nephron" class="on">1 · The nephron</a>
+        <a href="#w11_aki">2 · Acute kidney injury</a>
+        <a href="#w11_ckd">3 · Chronic kidney disease</a>
+        <a href="#w11_glom">4 · Nephrotic vs nephritic</a>
+        <a href="#w11_stones">5 · Kidney stones</a>
+        <a href="#w11_uti">6 · UTIs &amp; incontinence</a>
+        <a href="#summary">The chapter in one breath</a>
+        <a href="#glossary">Words worth knowing</a>
+        <a href="#cards">Flashcards</a>
+        <a href="#quiz">Check yourself</a>
+      </nav>
+    </aside>
+
+    <main class="reading">
+      <div class="kicker">Pathophysiology · Week 11</div>
+      <h1>Renal &amp; Urinary</h1>
+      <p class="lede">The kidneys are the body&rsquo;s quiet housekeepers &mdash; filtering waste, balancing water and electrolytes, steadying blood pressure, and even making blood. This chapter starts at the <b>nephron</b> and works outward through the ways kidneys fail suddenly or slowly, the stones and infections of the urinary tract, and what the labs are telling you.</p>
+      <div class="objectives">
+        <h4>By the end of this chapter you can</h4>
+        <ul>
+          <li>Describe the nephron and what <b>GFR</b>, creatinine, and BUN mean.</li>
+          <li>Classify acute kidney injury as <b>prerenal, intrarenal, or postrenal</b>.</li>
+          <li>Explain <b>chronic kidney disease</b>, uremia, and its complications.</li>
+          <li>Distinguish <b>nephrotic</b> from <b>nephritic</b> syndrome.</li>
+          <li>Tell cystitis from pyelonephritis and recognize renal colic.</li>
+        </ul>
+      </div>
+
+      <h2 id="w11_nephron"><span class="num">Section 1</span>The nephron: how the kidney cleans blood</h2>
+<figure class="bref" data-sec="1" style="max-width:1040px;margin:10px 0 24px;padding:0;"><div style="border:1px solid #e6e2d6;border-radius:16px;overflow:hidden;background:#fffdf7;box-shadow:0 8px 26px rgba(20,40,46,.09);"><img src="img/renal_s1.jpg" alt="The nephron reference figure" loading="lazy" style="display:block;width:100%;height:auto;background:#fff;" onerror="this.closest('figure').style.display='none'"></div><figcaption style="font-family:Inter,system-ui,sans-serif;font-size:12.5px;color:#7c8a88;margin-top:8px;line-height:1.5;"><b style="color:#0c3a44;">Reference.</b> The nephron <span style="color:#9aa8a6;">&mdash; Laboratoires Servier, CC BY-SA 3.0 (via Wikimedia Commons)</span></figcaption></figure>
+
+
+      <p>Every minute, more than a liter of blood pours into your kidneys, and by the time it leaves it has been cleaned, balanced, and fine-tuned. The kidney pulls off this trick using millions of tiny units called <b>nephrons</b> - roughly one million per kidney. The nephron is the kidney's <b>functional unit</b>, meaning it is the smallest structure that can do the whole job of making urine. When we talk about kidney disease, we are really talking about nephrons being damaged, overworked, or dying.</p>
+
+<h3>The nephron in three steps: filter, reabsorb, secrete</h3>
+<p>Think of the nephron as a factory with three stations. First comes <b>filtration</b>. Blood enters a tuft of leaky capillaries called the <b>glomerulus</b>, which sits inside a cup called <b>Bowman's capsule</b>. Blood pressure pushes water and small molecules - sodium, glucose, urea, potassium - through the filter into the tubule. This early fluid is called <em>filtrate</em>. Big things like blood cells and proteins are too large to pass, so normally they stay in the blood. That is why finding protein or blood in the urine is a red flag: it usually means the filter is leaking.</p>
+<p>Next comes <b>reabsorption</b> along the tubule (the proximal tubule, loop of Henle, and distal tubule). The body cannot afford to dump everything it just filtered, so about 99% of the water and nearly all the glucose and needed sodium are pulled <em>back</em> into the blood. Finally comes <b>secretion</b>, where the tubule actively adds unwanted substances - certain drugs, extra hydrogen ions, extra potassium - <em>into</em> the filtrate to be peed out. What is left after all three steps is urine.</p>
+
+<div class="pearl"><b>Filter, then fine-tune.</b> Filtration is fast and unfussy; reabsorption and secretion are where the kidney does its precise, life-sustaining accounting. A drug like furosemide works by blocking reabsorption in the loop, so more sodium and water leave as urine.</div>
+
+<h3>GFR: the number that tells you how well the kidney works</h3>
+<p>The single best measure of kidney function is the <b>glomerular filtration rate (GFR)</b> - how many milliliters of filtrate all the glomeruli produce per minute. A normal GFR is usually around <b>90-120 mL/min</b>. When GFR falls, the kidney is filtering less, and wastes start backing up in the blood. GFR is the basis for staging <b>chronic kidney disease (CKD)</b>; a GFR under 60 for three or more months defines CKD, and under 15 signals kidney failure. We usually estimate it (eGFR) from a blood test rather than measuring it directly.</p>
+
+<h3>The kidney's other jobs (it is not just a filter)</h3>
+<p>Losing kidney function causes trouble far beyond waste buildup, because the kidney moonlights in several roles:</p>
+<ul>
+<li><b>Blood pressure</b> - through the <b>renin-angiotensin-aldosterone system (RAAS)</b>. When blood flow or pressure drops, the kidney releases <em>renin</em>, which sets off a cascade that constricts vessels and retains sodium and water to raise pressure.</li>
+<li><b>Red blood cells</b> - the kidney makes <b>erythropoietin (EPO)</b>, the hormone that tells bone marrow to build red cells. This is why patients with failing kidneys often develop <em>anemia</em>.</li>
+<li><b>Activating vitamin D</b> - the kidney converts vitamin D to its active form, which lets the gut absorb calcium. Kidney disease therefore weakens bones and disturbs calcium balance.</li>
+<li><b>Acid-base balance</b> - the kidney excretes hydrogen ions and reclaims bicarbonate, keeping blood pH steady. Failing kidneys tend toward <em>metabolic acidosis</em>.</li>
+</ul>
+
+<div class="pearl"><b>Why kidney patients feel awful all over.</b> Fatigue (anemia from low EPO), high blood pressure (RAAS), and bone pain (inactive vitamin D) are not separate diseases - they are one failing organ showing up in many systems.</div>
+
+<h3>Reading the labs: creatinine and BUN</h3>
+<p>Two blood tests reveal how the nephrons are doing. <b>Creatinine</b> is a waste product from normal muscle breakdown. The body makes it at a steady rate and the kidney clears it, so when creatinine <em>rises</em>, it usually means filtration is falling - it is our everyday marker of GFR. <b>BUN (blood urea nitrogen)</b> measures urea, a waste from protein breakdown. BUN also rises when the kidney struggles, but it is more easily thrown off by dehydration, bleeding, and high-protein intake, so nurses read it alongside creatinine rather than alone. Explore the nephron below to see filtration in action.</p>
+
+<div class="ctwrap"><table class="ctable"><thead><tr><th>Feature</th><th>Creatinine</th><th>BUN</th></tr></thead><tbody>
+<tr><td>Comes from</td><td>Muscle breakdown</td><td>Protein breakdown (urea)</td></tr>
+<tr><td>Usual range</td><td>~0.6-1.2 mg/dL</td><td>~7-20 mg/dL</td></tr>
+<tr><td>Best for</td><td>Estimating GFR / true kidney function</td><td>Hydration and overall status</td></tr>
+<tr><td>Thrown off by</td><td>Muscle mass, less so by diet</td><td>Dehydration, bleeding, high protein</td></tr>
+</tbody></table></div>
+
+      <div class="embed">
+        <div class="cap"><span class="tag">Interactive</span> Walk the nephron from filtration to final urine. <a href="../patho/NephronExplorer.html" target="_blank" rel="noopener">Open full &uarr;</a></div>
+        <div class="frame"><iframe src="../patho/NephronExplorer.html" loading="lazy" title="Nephron explorer"></iframe></div>
+      </div>
+      <div class="kp"><div class="t">Key points</div><ul>
+<li>The <b>nephron</b> is the kidney's functional unit; it cleans blood in three steps - <b>filtration</b> at the glomerulus, then <b>reabsorption</b> and <b>secretion</b> along the tubule.</li>
+<li><b>GFR</b> (usually ~90-120 mL/min) is the key measure of kidney function; a falling GFR defines and stages chronic kidney disease.</li>
+<li>The kidney also controls blood pressure (<b>RAAS</b>), makes <b>erythropoietin</b> for red cells, <b>activates vitamin D</b> for calcium and bone, and manages <b>acid-base balance</b>.</li>
+<li><b>Creatinine</b> is the everyday marker of filtration; a rising level usually means falling GFR.</li>
+<li><b>BUN</b> tracks kidney function too but is easily skewed by dehydration, bleeding, and diet, so it is read alongside creatinine.</li>
+</ul></div>
+
+      <h2 id="w11_aki"><span class="num">Section 2</span>Acute kidney injury</h2>
+<figure class="bref" data-sec="2" style="max-width:1040px;margin:10px 0 24px;padding:0;"><div style="border:1px solid #e6e2d6;border-radius:16px;overflow:hidden;background:#fffdf7;box-shadow:0 8px 26px rgba(20,40,46,.09);"><img src="img/renal_s2.jpg" alt="Acute kidney injury reference figure" loading="lazy" style="display:block;width:100%;height:auto;background:#fff;" onerror="this.closest('figure').style.display='none'"></div><figcaption style="font-family:Inter,system-ui,sans-serif;font-size:12.5px;color:#7c8a88;margin-top:8px;line-height:1.5;"><b style="color:#0c3a44;">Reference.</b> Acute kidney injury <span style="color:#9aa8a6;">&mdash; Haymanj, Public domain (via Wikimedia Commons)</span></figcaption></figure>
+
+
+      <p>Your kidneys are the body's quiet, constant filters. Every minute, about a fifth of the blood your heart pumps flows through them. Inside each kidney sit roughly a million tiny filtering units called <b>nephrons</b>, and each nephron starts with a knot of capillaries called the <b>glomerulus</b>. Blood pressure pushes fluid and waste across that filter to form urine, while the tubules that follow reclaim the water, sodium, and other things your body wants to keep. Working normally, the kidneys clear metabolic garbage, balance fluid and electrolytes, and help control blood pressure and red blood cell production. When they suddenly stumble, waste backs up fast.</p>
+
+<p><b>Acute kidney injury (AKI)</b> is a <em>sudden</em> drop in kidney function, unfolding over hours to days. The key word is <em>sudden</em> (unlike chronic kidney disease, which creeps along for months to years). The good news: because it is abrupt, AKI is <em>often reversible</em> if the underlying cause is caught and fixed before the nephrons are permanently damaged.</p>
+
+<h3>How we know the kidneys are failing</h3>
+<p>Two blood tests tell the story. <b>Creatinine</b> is a waste product from muscle that the kidneys normally clear at a steady rate; when filtering drops, creatinine rises. <b>BUN (blood urea nitrogen)</b> is a nitrogen waste from protein breakdown, and it climbs too. A rising creatinine means the <b>glomerular filtration rate (GFR)</b>, the amount of blood filtered per minute, is falling. At the same time, the kidneys usually make less urine. <b>Oliguria</b> means putting out less than about 400 mL of urine in 24 hours (often described as under roughly 0.5 mL/kg/hr). Put simply: labs go up, urine goes down.</p>
+
+<h3>The three categories: where the problem lives</h3>
+<p>AKI is sorted by <em>where</em> the trouble sits relative to the kidney itself. This matters because the fix is completely different for each.</p>
+
+<div class="ctwrap"><table class="ctable"><thead><tr><th>Feature</th><th>Prerenal</th><th>Intrarenal</th><th>Postrenal</th></tr></thead><tbody><tr><td>Core problem</td><td>Poor blood flow <em>to</em> the kidney</td><td>Direct damage <em>inside</em> the kidney</td><td>Obstruction of outflow <em>after</em> the kidney</td></tr><tr><td>Typical causes</td><td>Dehydration, hemorrhage, heart failure, shock</td><td>Acute tubular necrosis, nephrotoxins, prolonged ischemia</td><td>Kidney stones, enlarged prostate, tumors, blocked catheter</td></tr><tr><td>Is tissue damaged yet?</td><td>Not yet, usually reversible if flow is restored fast</td><td>Yes, tubule cells are injured</td><td>Not at first, but backed-up pressure damages tissue over time</td></tr></tbody></table></div>
+
+<p><b>Prerenal</b> AKI is the most common. Anything that drops blood flow (low volume from vomiting or bleeding, a weak heart, or widespread vasodilation in sepsis) starves the glomerulus of the pressure it needs to filter. The kidney tissue is still healthy, so if you restore perfusion quickly (fluids, treat the heart, stop the bleeding), function bounces back. Ignored, though, prolonged low flow becomes <em>ischemic</em> damage and tips into the intrarenal category.</p>
+
+<p><b>Intrarenal (intrinsic)</b> AKI means the nephron itself is injured. The classic form is <b>acute tubular necrosis (ATN)</b>, where the delicate tubule cells die, either from prolonged ischemia or from toxins like certain antibiotics (aminoglycosides), IV contrast dye, or myoglobin released in rhabdomyolysis. Dead tubule cells slough off, clog the tubules, and can't reabsorb properly.</p>
+
+<p><b>Postrenal</b> AKI is a plumbing problem downstream: urine can't get out. A stone, an enlarged prostate, a tumor, or even a kinked catheter blocks flow. Pressure backs up into the kidney and stops filtration. This type is often the most quickly reversible, relieve the obstruction and urine pours out, but only if caught before back-pressure scars the tissue.</p>
+
+<div class="pearl"><b>Find the category, fix the cause.</b> Prerenal needs perfusion, intrarenal needs the toxin or insult removed and time to heal, and postrenal needs the blockage relieved. Treating the wrong one wastes the reversible window.</div>
+
+<h3>The phases of recovery</h3>
+<p>When AKI does progress, recovery classically moves through phases. During the <b>oliguric phase</b> (often lasting days to a couple of weeks), urine output is low, and waste, potassium, and fluid pile up. This is the dangerous stretch, watch closely for <b>hyperkalemia</b> (high potassium, which can trigger deadly heart arrhythmias), fluid overload, and metabolic acidosis.</p>
+
+<p>As the tubules heal, the kidney enters the <b>diuretic phase</b>. The nephrons can filter again but haven't regained their concentrating ability, so urine output surges, sometimes several liters a day. Now the risk flips: patients can become <em>dehydrated</em> and lose too much sodium and potassium. Careful fluid and electrolyte replacement is essential. A slower <b>recovery phase</b> follows as function normalizes, though some patients never fully return to baseline.</p>
+
+<div class="pearl"><b>The pendulum swings.</b> Oliguric phase, worry about too much (potassium, fluid). Diuretic phase, worry about too little (volume, electrolytes). The same patient needs opposite monitoring a week apart.</div>
+
+<p>Curious how the different causes stack up? Explore them in the figure below.</p>
+
+      <div class="embed">
+        <div class="cap"><span class="tag">Interactive</span> Localize a kidney injury: prerenal, intrarenal, or postrenal. <a href="../patho/AKILocalizer.html" target="_blank" rel="noopener">Open full &uarr;</a></div>
+        <div class="frame"><iframe src="../patho/AKILocalizer.html" loading="lazy" title="AKI localizer"></iframe></div>
+      </div>
+      <div class="kp"><div class="t">Key points</div><ul><li>AKI is a sudden, often reversible drop in kidney function, marked by rising creatinine and BUN with falling GFR and urine output (oliguria).</li><li>Prerenal AKI is poor blood flow to the kidney, intrarenal is direct damage (classically acute tubular necrosis), and postrenal is obstruction of urine outflow.</li><li>Prerenal causes are the most common and are reversible if perfusion is restored before ischemia damages tissue.</li><li>Recovery moves through an oliguric phase (watch for hyperkalemia and fluid overload) then a diuretic phase (watch for dehydration and electrolyte loss).</li><li>Finding the correct category is critical because each is treated differently: restore flow, remove the insult, or relieve the blockage.</li></ul></div>
+
+      <h2 id="w11_ckd"><span class="num">Section 3</span>Chronic kidney disease</h2>
+<figure class="bref" data-sec="3" style="max-width:1040px;margin:10px 0 24px;padding:0;"><div style="border:1px solid #e6e2d6;border-radius:16px;overflow:hidden;background:#fffdf7;box-shadow:0 8px 26px rgba(20,40,46,.09);"><img src="img/renal_s3.jpg" alt="Chronic kidney disease reference figure" loading="lazy" style="display:block;width:100%;height:auto;background:#fff;" onerror="this.closest('figure').style.display='none'"></div><figcaption style="font-family:Inter,system-ui,sans-serif;font-size:12.5px;color:#7c8a88;margin-top:8px;line-height:1.5;"><b style="color:#0c3a44;">Reference.</b> Chronic kidney disease <span style="color:#9aa8a6;">&mdash; https://www.scientificanimations.com/, CC BY-SA 4.0 (via Wikimedia Commons)</span></figcaption></figure>
+
+
+      <p>Your kidneys are quiet workhorses. Every day, about a million tiny filtering units called <b>nephrons</b> in each kidney strain your blood, pulling out waste and extra fluid to make urine while keeping the good stuff (protein, blood cells, most electrolytes) in circulation. They also do jobs that have nothing to do with peeing: they make <b>erythropoietin (EPO)</b> to tell your bone marrow to build red blood cells, activate <b>vitamin D</b> so your intestines can absorb calcium (which then strengthens bone), and balance the blood's acid level. In <b>chronic kidney disease (CKD)</b>, nephrons are slowly and permanently destroyed, so all of those jobs start to fail at once.</p>
+
+<h3>What CKD is and how we stage it</h3>
+<p>CKD is a <em>gradual, irreversible</em> loss of nephrons over months to years. Because kidneys have huge reserve, a person can lose a lot of function before feeling sick, so we measure the damage with the <b>glomerular filtration rate (GFR)</b> - roughly, how many milliliters of blood the kidneys clean per minute. A normal GFR is usually around 90-120 mL/min. CKD is defined as kidney damage or a GFR below 60 for at least <b>3 months</b>, and it is staged from 1 (mild) to 5 (kidney failure).</p>
+
+<div class="ctwrap"><table class="ctable"><thead><tr><th>Stage</th><th>GFR (mL/min)</th><th>What it means</th></tr></thead><tbody><tr><td>1-2</td><td>&ge;60 (with damage)</td><td>Often silent; caught on labs or urine protein</td></tr><tr><td>3</td><td>30-59</td><td>Complications begin (anemia, bone changes)</td></tr><tr><td>4</td><td>15-29</td><td>Severe; prepare for dialysis or transplant</td></tr><tr><td>5</td><td>&lt;15</td><td>Kidney failure; dialysis usually needed</td></tr></tbody></table></div>
+
+<h3>Why it happens: diabetes and hypertension</h3>
+<p>The two leading causes are the same two conditions nurses see everywhere. In <b>diabetes</b>, chronically high blood glucose damages the delicate glomerular capillaries (diabetic nephropathy), and one of the earliest warning signs is small amounts of protein leaking into the urine (<b>albuminuria</b>). In <b>hypertension</b>, the constant high pressure batters those same tiny vessels, thickening and scarring them. Cruelly, failing kidneys also <em>raise</em> blood pressure by retaining salt and water and firing the renin-angiotensin system - so hypertension both causes CKD and gets worse because of it, a vicious cycle.</p>
+
+<h3>Uremia: when wastes build up</h3>
+<p>As filtering fails, nitrogen wastes like <b>urea</b> and <b>creatinine</b> climb in the blood. This toxic buildup is called <b>uremia</b>, and because the blood reaches every organ, the symptoms are <em>body-wide</em>. Patients often feel exhausted, nauseated, and itchy (<b>pruritus</b> from waste deposited in skin); they may lose appetite, taste metal, and think slowly. In severe uremia, wastes irritate the heart lining (<b>pericarditis</b>) and the brain (uremic encephalopathy, causing confusion and even seizures). Uremia is why "the kidneys" become a whole-body problem.</p>
+
+<h3>The complications and why each one happens</h3>
+<p>Understanding CKD means tracing each problem back to a lost kidney job:</p>
+<ul>
+<li><b>Anemia</b> - fewer working cells make less <b>EPO</b>, so the marrow builds fewer red cells. Patients are pale, tired, and short of breath.</li>
+<li><b>Bone disease (renal osteodystrophy)</b> - kidneys can no longer activate vitamin D or excrete phosphate. Low calcium and high phosphate drive the parathyroids to pump out <b>PTH</b>, which pulls calcium out of bones, leaving them weak.</li>
+<li><b>Hyperkalemia</b> - the kidneys normally dump excess potassium. When they can't, potassium rises, threatening dangerous cardiac arrhythmias. This is often the most urgent lab.</li>
+<li><b>Fluid overload</b> - unexcreted salt and water back up, causing edema, hypertension, and pulmonary congestion.</li>
+<li><b>Metabolic acidosis</b> - kidneys normally excrete acid and regenerate bicarbonate. As that fails, acid accumulates, contributing to fatigue, bone loss, and rapid breathing.</li>
+</ul>
+
+<div class="pearl"><b>Watch the potassium.</b> In late CKD, hyperkalemia can be silent until it triggers a lethal arrhythmia. Peaked T waves on the ECG are a red-flag clue to act fast.</div>
+
+<h3>When the kidneys fail</h3>
+<p>At stage 5, often called <b>end-stage renal disease (ESRD)</b>, the kidneys can no longer keep the body's chemistry safe. The two options are <b>dialysis</b> - a machine (hemodialysis) or the abdominal lining (peritoneal dialysis) that filters the blood artificially - or a <b>kidney transplant</b>. Dialysis manages the disease but does not cure it; it replaces only a fraction of true kidney function, which is why prevention and slowing progression matter so much. Explore the stages in the interactive figure below.</p>
+
+<div class="pearl"><b>Slow the slide.</b> Tight glucose and blood-pressure control, plus medications like ACE inhibitors or ARBs that reduce protein leakage, can meaningfully delay a patient's march toward dialysis.</div>
+
+      <div class="embed">
+        <div class="cap"><span class="tag">Interactive</span> Watch kidney function decline through the stages of CKD. <a href="../patho/CKD.html" target="_blank" rel="noopener">Open full &uarr;</a></div>
+        <div class="frame"><iframe src="../patho/CKD.html" loading="lazy" title="Chronic kidney disease interactive"></iframe></div>
+      </div>
+      <div class="kp"><div class="t">Key points</div><ul><li>CKD is a slow, irreversible loss of nephrons, staged 1-5 by GFR; a GFR below 60 for over 3 months defines it.</li><li>Diabetes and hypertension are the top two causes and often worsen each other.</li><li>Uremia is the buildup of urea and other wastes, producing whole-body symptoms like fatigue, nausea, itching, and confusion.</li><li>Key complications trace to lost kidney jobs: anemia (low EPO), bone disease (low active vitamin D, high PTH), hyperkalemia, fluid overload, and metabolic acidosis.</li><li>At stage 5 (ESRD), dialysis or transplant replaces failing kidney function; dialysis manages but does not cure.</li></ul></div>
+
+      <h2 id="w11_glom"><span class="num">Section 4</span>Glomerular disease: nephrotic vs nephritic</h2>
+<figure class="bref" data-sec="4" style="max-width:1040px;margin:10px 0 24px;padding:0;"><div style="border:1px solid #e6e2d6;border-radius:16px;overflow:hidden;background:#fffdf7;box-shadow:0 8px 26px rgba(20,40,46,.09);"><img src="img/renal_s4.jpg" alt="Glomerular disease reference figure" loading="lazy" style="display:block;width:100%;height:auto;background:#fff;" onerror="this.closest('figure').style.display='none'"></div><figcaption style="font-family:Inter,system-ui,sans-serif;font-size:12.5px;color:#7c8a88;margin-top:8px;line-height:1.5;"><b style="color:#0c3a44;">Reference.</b> Glomerular disease <span style="color:#9aa8a6;">&mdash; Frățilă VG, Lupușoru G, Sorohan BM, Obrișcă B, Mocanu V, Lupușoru M, Ismail G., CC BY 4.0 (via Wikimedia Commons)</span></figcaption></figure>
+
+
+      <p>Every minute, your kidneys pull a huge amount of blood through roughly a million tiny filters called <b>glomeruli</b>. Picture each glomerulus as a wadded-up tuft of capillaries wrapped in a cup. Its filtering wall has three layers: the capillary lining (endothelium), a middle mesh called the <b>glomerular basement membrane (GBM)</b>, and specialized cells with interlocking foot processes called <b>podocytes</b>. This wall is a smart sieve. It lets water, salts, and small wastes pass into the urine, but it holds back big things the body wants to keep, especially <b>albumin</b> (the main blood protein) and red blood cells. Two features make that possible: the pores are size-selective, and the wall carries a negative charge that repels negatively charged albumin. When this filter breaks, it tends to fail in one of two patterns, and telling them apart is one of the most testable ideas in renal nursing.</p>
+
+<h3>Nephrotic syndrome: a very leaky filter</h3>
+<p>In <b>nephrotic syndrome</b>, the filter becomes <em>too permeable</em> without much inflammation. The podocytes and the charge barrier are damaged, so albumin pours out. The hallmark is <b>massive proteinuria</b>, usually defined as more than 3.5 grams of protein in the urine per day. Losing that much protein drops the blood albumin, producing <b>hypoalbuminemia</b>. Because albumin normally holds fluid inside vessels by oncotic (pulling) pressure, losing it lets fluid leak into tissues, causing the heavy, generalized <b>edema</b> classic for this syndrome, often puffy eyes in the morning and swollen legs and belly by evening. The liver, sensing low protein, ramps up production of many proteins including lipoproteins, so cholesterol and triglycerides climb (<b>hyperlipidemia</b>), and fatty casts can appear in urine. Patients also lose clotting-regulator proteins and immunoglobulins, raising risks of <b>thrombosis</b> and infection. A classic cause in children is <b>minimal change disease</b>; in adults, membranous nephropathy and diabetic or lupus-related disease are common.</p>
+
+<h3>Nephritic syndrome: an inflamed filter</h3>
+<p>In <b>nephritic syndrome</b>, the problem is <em>inflammation</em>, usually immune complexes lodging in the glomerulus and triggering an immune attack. That inflammation physically breaks the capillary wall, so red blood cells escape into the urine. The hallmark is <b>hematuria</b>, often tea- or cola-colored, sometimes with <b>red blood cell casts</b> (tiny cell-molds shaped in the tubules) that are essentially diagnostic of glomerular bleeding. Protein leaks too, but usually in smaller amounts (typically less than 3.5 g/day). Inflammation also swells and clogs the filter, so filtration drops; the kidney retains salt and water, driving <b>hypertension</b> and a milder, often facial <b>edema</b>, plus a rising creatinine (azotemia) and reduced urine output. The teaching classic is <b>post-streptococcal glomerulonephritis (PSGN)</b>: a child develops cola-colored urine, puffy eyes, and high blood pressure roughly 1 to 3 weeks after a strep throat or skin infection, as immune complexes deposit in the glomeruli.</p>
+
+<div class="pearl"><b>Color tells the story.</b> Frothy, foamy urine hints at heavy protein (nephrotic), while cola- or tea-colored urine points to blood (nephritic). It is a quick bedside clue, not a diagnosis.</div>
+
+<h3>How to keep the two straight</h3>
+<p>A simple anchor: <b>nephrOtic = prOtein</b> (huge protein loss), <b>nephrItic = Inflammation and hematurIa</b> (blood). Nephrotic is a quiet, leaky sieve; nephritic is an angry, bleeding, high-pressure one. Real patients can overlap, but the dominant pattern usually declares itself.</p>
+
+<div class="ctwrap"><table class="ctable"><thead><tr><th>Feature</th><th>Nephrotic</th><th>Nephritic</th></tr></thead><tbody>
+<tr><td>Core problem</td><td>Very leaky filter (podocyte/charge injury)</td><td>Inflamed filter (immune-mediated)</td></tr>
+<tr><td>Proteinuria</td><td>Massive (usually &gt;3.5 g/day)</td><td>Mild to moderate (usually &lt;3.5 g/day)</td></tr>
+<tr><td>Hematuria</td><td>Absent or minimal</td><td>Present; often RBC casts</td></tr>
+<tr><td>Albumin &amp; lipids</td><td>Low albumin, high lipids</td><td>Usually near normal</td></tr>
+<tr><td>Edema</td><td>Heavy, generalized (oncotic)</td><td>Mild, often facial/periorbital</td></tr>
+<tr><td>Blood pressure</td><td>Often normal</td><td>Elevated (salt/water retention)</td></tr>
+<tr><td>Classic example</td><td>Minimal change disease</td><td>Post-streptococcal GN</td></tr>
+</tbody></table></div>
+
+<div class="pearl"><b>Watch the whole patient.</b> A nephrotic patient with sudden leg pain or shortness of breath may have a clot from lost anticoagulant proteins; a nephritic patient needs close blood-pressure and daily-weight monitoring for fluid overload.</div>
+
+<p>Explore the interactive figure below to compare the leaky nephrotic filter with the inflamed nephritic one side by side.</p>
+
+      <div class="embed">
+        <div class="cap"><span class="tag">Interactive</span> Compare the leaky (nephrotic) and inflamed (nephritic) filter. <a href="../patho/NephroticNephritic.html" target="_blank" rel="noopener">Open full &uarr;</a></div>
+        <div class="frame"><iframe src="../patho/NephroticNephritic.html" loading="lazy" title="Glomerular disease interactive"></iframe></div>
+      </div>
+      <div class="kp"><div class="t">Key points</div><ul>
+<li><b>Nephrotic = protein.</b> A leaky filter causes massive proteinuria (usually &gt;3.5 g/day), low albumin, heavy generalized edema, and high lipids.</li>
+<li><b>Nephritic = inflammation and blood.</b> An inflamed filter causes hematuria (often with RBC casts), milder proteinuria, hypertension, and mild edema.</li>
+<li><b>Mechanism drives the signs:</b> lost albumin lowers oncotic pressure (nephrotic edema); inflammation clogs filtration and retains salt/water (nephritic hypertension).</li>
+<li><b>Classic examples:</b> minimal change disease (nephrotic) and post-streptococcal glomerulonephritis, appearing 1 to 3 weeks after strep (nephritic).</li>
+<li><b>Memory hook:</b> nephrOtic = prOtein, nephrItic = Inflammation/hematurIa.</li>
+</ul></div>
+
+      <h2 id="w11_stones"><span class="num">Section 5</span>Kidney stones</h2>
+<figure class="bref" data-sec="5" style="max-width:1040px;margin:10px 0 24px;padding:0;"><div style="border:1px solid #e6e2d6;border-radius:16px;overflow:hidden;background:#fffdf7;box-shadow:0 8px 26px rgba(20,40,46,.09);"><img src="img/renal_s5.jpg" alt="Kidney stones reference figure" loading="lazy" style="display:block;width:100%;height:auto;background:#fff;" onerror="this.closest('figure').style.display='none'"></div><figcaption style="font-family:Inter,system-ui,sans-serif;font-size:12.5px;color:#7c8a88;margin-top:8px;line-height:1.5;"><b style="color:#0c3a44;">Reference.</b> Kidney stones <span style="color:#9aa8a6;">&mdash; Jacek Proszyk, CC0 (via Wikimedia Commons)</span></figcaption></figure>
+
+
+      <p>Your kidneys are constantly filtering your blood and dissolving the leftover minerals and salts into your urine. Think of urine as a river carrying dissolved cargo. As long as there is enough water flowing, the minerals stay dissolved and wash out harmlessly. <b>Kidney stones (nephrolithiasis)</b> form when that balance tips: the urine becomes <b>supersaturated</b>, meaning it holds more mineral than it can keep dissolved. The excess starts to crystallize, and those tiny crystals clump together into a hard stone. It is the same physics as making rock candy, except it happens inside the collecting system of the kidney, and nobody wants it.</p>
+
+<h3>Why the urine becomes supersaturated</h3>
+<p>Two things push urine past its saturation point. First, <b>too little water</b> (dehydration) concentrates the minerals, so the same amount of solute is packed into less fluid. Second, <b>too much mineral</b>, from diet, genetics, or metabolic conditions, overloads the urine. When calcium, oxalate, uric acid, or other salts climb high enough, crystals precipitate out. Sluggish, concentrated, standing urine is the perfect environment for a stone to grow, which is why <em>chronic low fluid intake</em> is the single biggest modifiable risk factor.</p>
+
+<h3>The pain: renal colic</h3>
+<p>A stone sitting quietly in the kidney may cause nothing at all. The trouble starts when it drops into the <b>ureter</b>, the narrow tube draining urine to the bladder. The stone lodges and blocks flow, urine backs up, and the ureter stretches and spasms trying to squeeze the stone along. That produces <b>renal colic</b>: sudden, excruciating, wave-like <b>flank pain</b> that classically <em>radiates to the groin</em> as the stone travels downward. Patients are famously restless, unable to find any position that helps, which contrasts with the still, guarded posture of peritonitis. The stone also scrapes the ureteral lining, so you often see <b>hematuria</b> (blood in the urine, sometimes visible, sometimes only on dipstick). Nausea, vomiting, and urinary urgency are common companions because the kidney and gut share nerve pathways.</p>
+
+<div class="pearl"><b>Restless, not still.</b> A patient writhing and pacing with severe flank pain that shoots to the groin is the picture of renal colic. Someone who lies rigidly still is more worried about their abdomen.</div>
+
+<h3>Types of stones</h3>
+<p><b>Calcium stones</b>, usually calcium oxalate, are by far the most common, making up roughly 75 to 80 percent of cases. Knowing the type matters because prevention differs.</p>
+
+<div class="ctwrap"><table class="ctable"><thead><tr><th>Feature</th><th>Calcium stones</th><th>Uric acid stones</th></tr></thead><tbody><tr><td>Frequency</td><td>Most common (~75-80%)</td><td>Less common</td></tr><tr><td>Urine condition</td><td>Often normal to alkaline</td><td>Favored by acidic urine</td></tr><tr><td>Key contributors</td><td>High calcium/oxalate, dehydration</td><td>High purine intake, gout</td></tr><tr><td>X-ray visibility</td><td>Usually radiopaque (show up)</td><td>Often radiolucent (hard to see)</td></tr></tbody></table></div>
+
+<p>A common point of confusion: cutting dietary calcium usually <em>backfires</em>. Normal calcium intake binds oxalate in the gut so it leaves in the stool instead of the urine, which actually lowers calcium-oxalate stone risk. The real fix is fluid.</p>
+
+<h3>Nursing priorities</h3>
+<p>Management rests on three pillars while the stone passes or is treated:</p>
+<ul>
+<li><b>Pain control.</b> Renal colic is genuinely one of the worst pains people report. NSAIDs like ketorolac are often first-line because they reduce ureteral spasm and inflammation; opioids may be added. Treat pain aggressively and early.</li>
+<li><b>Hydration.</b> Encourage generous oral or IV fluids to keep urine dilute and flowing, which helps flush the stone along and prevents new crystals from forming. This is prevention and treatment in one.</li>
+<li><b>Strain all urine.</b> Have the patient void through a fine mesh strainer to catch the stone. This confirms passage and, crucially, lets the lab analyze the stone's composition so prevention can be targeted.</li>
+</ul>
+
+<p>Watch for warning signs that need escalation: <b>fever</b> (a blocked, infected kidney is an emergency), signs of complete obstruction, or intractable pain and vomiting. Larger stones that will not pass may need <b>lithotripsy</b> (shock waves that fragment the stone) or surgical removal. The interactive figure below lets you explore how a stone lodges in the ureter and produces colic; explore it once you have the mechanism in mind.</p>
+
+      <div class="embed">
+        <div class="cap"><span class="tag">Interactive</span> Watch a stone form and travel down the tract. <a href="../patho/KidneyStones.html" target="_blank" rel="noopener">Open full &uarr;</a></div>
+        <div class="frame"><iframe src="../patho/KidneyStones.html" loading="lazy" title="Kidney stones interactive"></iframe></div>
+      </div>
+      <div class="kp"><div class="t">Key points</div><ul><li>Stones form when urine becomes <b>supersaturated</b> with minerals, driven most often by <b>dehydration</b> or excess mineral load.</li><li><b>Renal colic</b> is sudden, severe, wave-like flank pain that radiates to the groin, typically with <b>hematuria</b> and a restless patient.</li><li><b>Calcium (oxalate) stones</b> are the most common type; normal dietary calcium is usually protective, not harmful.</li><li>The three priorities are <b>pain control</b>, aggressive <b>hydration</b>, and <b>straining the urine</b> to catch and analyze the stone.</li><li>Escalate immediately for <b>fever</b>, complete obstruction, or uncontrolled pain and vomiting.</li></ul></div>
+
+      <h2 id="w11_uti"><span class="num">Section 6</span>UTIs &amp; incontinence</h2>
+<figure class="bref" data-sec="6" style="max-width:1040px;margin:10px 0 24px;padding:0;"><div style="border:1px solid #e6e2d6;border-radius:16px;overflow:hidden;background:#fffdf7;box-shadow:0 8px 26px rgba(20,40,46,.09);"><img src="img/renal_s6.jpg" alt="UTIs reference figure" loading="lazy" style="display:block;width:100%;height:auto;background:#fff;" onerror="this.closest('figure').style.display='none'"></div><figcaption style="font-family:Inter,system-ui,sans-serif;font-size:12.5px;color:#7c8a88;margin-top:8px;line-height:1.5;"><b style="color:#0c3a44;">Reference.</b> UTIs <span style="color:#9aa8a6;">&mdash; Goleisureintl, CC BY 4.0 (via Wikimedia Commons)</span></figcaption></figure>
+
+
+      <p>Your urinary tract is basically a plumbing system with a one-way flow and a built-in cleaning stream. The <b>kidneys</b> make urine, the <b>ureters</b> carry it down, the <b>bladder</b> stores it, and the <b>urethra</b> lets it out. Normally that flow is <em>sterile</em> from the bladder up, and every time you empty your bladder you flush out any stray bacteria trying to swim upstream. The lining also fights back with a slightly acidic pH and mucus that makes it hard for microbes to stick. A urinary tract infection (UTI) happens when bacteria, most commonly <b>Escherichia coli</b> from the bowel, colonize the urethra and climb upward faster than the body can rinse them away.</p>
+
+<h3>Lower UTI (cystitis) vs upper UTI (pyelonephritis)</h3>
+<p>Where the bacteria land decides how sick the patient looks. In a <b>lower UTI (cystitis)</b>, the infection stays in the bladder and urethra. The inflamed bladder wall becomes irritated and hypersensitive, so patients feel <b>dysuria</b> (burning with urination), <b>frequency</b>, and <b>urgency</b>, often with cloudy or foul-smelling urine and low suprapubic discomfort. Because the infection is localized, patients usually stay <em>afebrile</em> and don't feel systemically ill.</p>
+<p>An <b>upper UTI (pyelonephritis)</b> means bacteria have ascended the ureters into one or both kidneys. Now the infection reaches the bloodstream-rich renal tissue, so the body mounts a full systemic response: <b>fever</b>, chills, nausea, and the classic <b>flank pain</b> with <b>costovertebral angle (CVA) tenderness</b> when you percuss over the kidney. Pyelonephritis is the more dangerous picture because it can progress to <b>urosepsis</b> and can scar the kidney over time.</p>
+
+<div class="ctwrap"><table class="ctable"><thead><tr><th>Feature</th><th>Cystitis (lower)</th><th>Pyelonephritis (upper)</th></tr></thead><tbody><tr><td>Location</td><td>Bladder / urethra</td><td>Kidney(s)</td></tr><tr><td>Hallmark symptoms</td><td>Dysuria, frequency, urgency</td><td>Fever, chills, flank pain</td></tr><tr><td>Exam finding</td><td>Suprapubic tenderness</td><td>CVA tenderness</td></tr><tr><td>Systemic illness</td><td>Usually none</td><td>Often, can lead to sepsis</td></tr></tbody></table></div>
+
+<h3>Why women get more UTIs, and the catheter problem</h3>
+<p>Anatomy is the main reason women get far more UTIs than men. The <em>female urethra is much shorter</em> (roughly 4 cm versus about 20 cm in men), so bacteria have a shorter climb to the bladder. The urethral opening also sits close to the vagina and anus, giving perineal <b>E. coli</b> an easy route. Sexual activity mechanically pushes bacteria toward the urethra, and after menopause, lower estrogen thins the tissue and shifts the protective vaginal flora, raising risk again.</p>
+<p>An <b>indwelling (Foley) catheter</b> is a major risk because it bypasses every one of those natural defenses at once. The tube is a direct highway into the bladder, bacteria form a <em>biofilm</em> along its surface where antibiotics and immune cells can't reach, and continuous drainage removes the flushing effect of a normal void. This is why <b>catheter-associated UTIs (CAUTIs)</b> are among the most common hospital-acquired infections, and why the single best prevention is removing the catheter as early as possible.</p>
+
+<div class="pearl"><b>Culture, don't assume.</b> Bacteria in the urine without symptoms (asymptomatic bacteriuria) usually is NOT treated except in pregnancy or before urologic surgery. Treating it needlessly breeds resistance.</div>
+
+<h3>The older adult who just gets confused</h3>
+<p>Older adults often skip the textbook burning-and-fever story entirely. Instead, a UTI may show up as <b>new-onset confusion, delirium, or a sudden functional decline</b> such as new incontinence, falls, or refusing to eat. This happens partly because a blunted immune response mutes fever and partly because an aging brain is very sensitive to the systemic inflammation and dehydration that infection brings. The teaching point for nurses: <em>an acute change in mental status in an elder always deserves a workup that includes a urinalysis.</em></p>
+
+<div class="pearl"><b>Delirium is a vital sign.</b> In frail older adults, new confusion can be the first and only clue to infection. Trust the change in baseline even when the temperature looks normal.</div>
+
+<h3>Urinary incontinence at a glance</h3>
+<p>Incontinence is the involuntary leakage of urine, and it is a symptom, not a normal part of aging. The main types:</p>
+<ul>
+<li><b>Stress incontinence</b> — leakage with coughing, laughing, or lifting because weak pelvic floor support lets pressure overcome the sphincter.</li>
+<li><b>Urge incontinence</b> — a sudden, uncontrollable need to void from an overactive detrusor muscle contracting on its own.</li>
+<li><b>Overflow incontinence</b> — constant dribbling from a bladder that never fully empties, often from obstruction (enlarged prostate) or a weak, underactive detrusor.</li>
+<li><b>Functional incontinence</b> — a normal urinary tract, but a physical or cognitive barrier (mobility, dementia) keeps the person from reaching the toilet in time.</li>
+</ul>
+<p>You can explore the layered urinary tract in the interactive figure below to see exactly where cystitis and pyelonephritis take hold.</p>
+
+      <div class="embed">
+        <div class="cap"><span class="tag">Interactive</span> Trace an infection from the bladder up toward the kidney. <a href="../patho/UTI.html" target="_blank" rel="noopener">Open full &uarr;</a></div>
+        <div class="frame"><iframe src="../patho/UTI.html" loading="lazy" title="UTI interactive"></iframe></div>
+      </div>
+      <div class="kp"><div class="t">Key points</div><ul><li>Cystitis (lower UTI) causes dysuria, frequency, and urgency without fever; pyelonephritis (upper UTI) adds fever, chills, and CVA/flank tenderness and can progress to sepsis.</li><li>Women get more UTIs because of a short urethra near the perineum; E. coli is the usual culprit.</li><li>Indwelling catheters bypass natural defenses and cause CAUTIs, so remove them as early as possible.</li><li>In older adults, new confusion or delirium may be the only sign of a UTI, even without fever.</li><li>Incontinence types: stress (leak with pressure), urge (overactive detrusor), overflow (incomplete emptying), and functional (a barrier to reaching the toilet).</li></ul></div>
+
+      <div class="summary">
+        <h2 id="summary">The chapter in one breath</h2>
+        <ul>
+<li>The <b>nephron</b> filters ~180 L/day at the glomerulus; <b>GFR</b> (usually ~90-120 mL/min) is the single best marker of kidney function, and it falls before symptoms appear.</li>
+<li><b>Acute kidney injury (AKI)</b> is a rapid, often reversible rise in creatinine and drop in urine output, sorted as <b>prerenal</b> (low perfusion, e.g. dehydration/shock), <b>intrarenal</b> (tubule damage like ATN), or <b>postrenal</b> (obstruction).</li>
+<li><b>Chronic kidney disease (CKD)</b> is irreversible nephron loss over months to years (GFR &lt;60 for 3+ months), driving anemia (low <b>erythropoietin</b>), bone disease (low active vitamin D), and metabolic acidosis.</li>
+<li>In CKD the kidney stops excreting potassium and phosphate, so watch for <b>hyperkalemia</b> (peaked T waves, lethal arrhythmias) as the most urgent electrolyte threat.</li>
+<li><b>Nephrotic syndrome</b> is a leaky filter: massive <b>proteinuria</b> (&gt;3.5 g/day), low albumin, generalized edema, and high cholesterol - think holes letting protein out.</li>
+<li><b>Nephritic syndrome</b> is an inflamed filter: <b>hematuria</b> (often tea-colored urine with RBC casts), hypertension, and mild-to-moderate proteinuria - think inflammation letting blood out.</li>
+<li><b>Kidney stones (nephrolithiasis)</b>, most often <b>calcium oxalate</b>, cause sudden severe flank pain radiating to the groin (<b>renal colic</b>) with hematuria; the patient writhes and cannot get comfortable.</li>
+<li><b>UTIs</b> usually start as cystitis (dysuria, frequency, urgency, suprapubic pain) and can ascend to <b>pyelonephritis</b> (flank pain, fever, CVA tenderness); confusion may be the only sign in older adults.</li>
+<li><b>Urinary incontinence</b> has distinct types - <b>stress</b> (leak with cough/sneeze from weak pelvic floor) versus <b>urge</b> (sudden strong need from an overactive detrusor) - and each is managed differently.</li>
+</ul>
+      </div>
+
+      <h2 id="glossary"><span class="num">Reference</span>Words worth knowing</h2>
+      <p>A quick reference for the terms in this chapter &mdash; skim it now, or circle back whenever a word trips you up.</p>
+      <dl class="terms"><dt>Acute kidney injury (AKI)</dt><dd>A sudden, often reversible drop in kidney function (over hours to days) that lets waste products like creatinine and BUN build up in the blood, usually with reduced urine output.</dd><dt>Acute tubular necrosis (ATN)</dt><dd>The most common <em>intrarenal</em> cause of AKI, in which the tubule cells are injured and die, most often from prolonged ischemia (low blood flow) or nephrotoxins such as certain antibiotics or contrast dye.</dd><dt>BUN (blood urea nitrogen)</dt><dd>A blood test measuring urea, a nitrogen waste from protein breakdown that the kidneys normally clear, so a rising BUN often signals reduced kidney function or dehydration.</dd><dt>Chronic kidney disease (CKD)</dt><dd>A gradual, permanent loss of kidney function lasting three months or longer, staged by the GFR and usually caused over time by diabetes or hypertension.</dd><dt>Creatinine</dt><dd>A waste product from normal muscle metabolism that the kidneys filter and excrete steadily, so a rising serum creatinine is one of the most reliable markers that kidney function is declining.</dd><dt>Dialysis</dt><dd>A treatment that artificially filters wastes, excess fluid, and electrolytes from the blood (by hemodialysis or peritoneal dialysis) when the kidneys can no longer do the job adequately.</dd><dt>Erythropoietin (EPO)</dt><dd>A hormone made mostly by the kidneys that tells the bone marrow to produce red blood cells, which is why failing kidneys often cause anemia.</dd><dt>GFR (glomerular filtration rate)</dt><dd>The volume of blood the glomeruli filter each minute (normally about 90&ndash;120 mL/min), used as the best overall measure of how well the kidneys are working.</dd><dt>Glomerulus</dt><dd>The tiny tuft of capillaries at the start of each nephron where blood is first filtered, allowing water and small wastes through while normally holding back blood cells and large proteins.</dd><dt>Nephron</dt><dd>The functional filtering unit of the kidney (about one million per kidney) that filters blood and fine-tunes the urine through its glomerulus and connected tubules.</dd><dt>Nephritic syndrome</dt><dd>A pattern of glomerular <em>inflammation</em> marked by blood in the urine (hematuria), mild-to-moderate protein loss, hypertension, and often reduced GFR.</dd><dt>Nephrotic syndrome</dt><dd>A pattern of glomerular damage marked by heavy protein loss in the urine (usually more than 3.5 g/day), low blood albumin, widespread edema, and high blood lipids.</dd><dt>Oliguria</dt><dd>Abnormally low urine output, usually defined as less than about 400 mL in 24 hours, which is a key warning sign of acute kidney injury.</dd><dt>Pyelonephritis</dt><dd>A bacterial infection of the kidney and its collecting system (often from a bladder infection that ascended upward), typically causing fever, chills, and flank pain.</dd><dt>Renal colic</dt><dd>Severe, cramping, wave-like flank pain that radiates toward the groin, classically caused by a kidney stone obstructing and stretching the ureter.</dd><dt>Uremia</dt><dd>The toxic clinical syndrome of advanced kidney failure in which retained nitrogen wastes cause symptoms such as nausea, fatigue, itching, and confusion.</dd></dl>
+
+      <h2 id="cards"><span class="num">Drill</span>Flashcards for this unit</h2>
+      <p>These are the <b>Week 11</b> cards &mdash; the same deck as the hub, pulled in here so you can review the moment you finish reading. Tap the card to flip it; hit <em>Shuffle</em> to mix them up. To grade yourself and track mastery across the whole deck, open the <a href="../flashcards.html">full flashcards page</a>.</p>
+      <div class="fc" id="fc">
+        <div class="fc-card" id="fcCard" onclick="fcFlip()">
+          <div class="fc-inner">
+            <div class="fc-face fc-front"><span class="fc-side">Question</span><div class="fc-q" id="fcQ"></div><div class="fc-hint">Tap to reveal the answer</div></div>
+            <div class="fc-face fc-back"><span class="fc-side">Answer</span><div class="fc-a" id="fcA"></div><div class="fc-hint">Tap to flip back</div></div>
+          </div>
+        </div>
+        <div class="fc-nav">
+          <button class="fc-btn" type="button" onclick="fcPrev(event)">&larr; Prev</button>
+          <span class="fc-count" id="fcCount">&mdash;</span>
+          <button class="fc-btn" type="button" onclick="fcNext(event)">Next &rarr;</button>
+          <button class="fc-btn" type="button" onclick="fcShuffle(event)">&#128256; Shuffle</button>
+        </div>
+        <a class="fc-full" href="../flashcards.html">Open the full Week 11 deck &mdash; grade yourself &amp; track mastery &uarr;</a>
+      </div>
+
+      <div class="quiz">
+        <h2 id="quiz">Check yourself</h2>
+        <div class="q"><div class="qq">1. A nursing instructor asks students to describe the basic filtering unit of the kidney. Which structure should the students identify, and what drives filtration there?</div>
+<button onclick="this.parentNode.classList.add('show')">Reveal answer</button>
+<div class="ans"><span class="a">The nephron, driven by hydrostatic pressure in the glomerulus.</span> Each kidney holds roughly a million <b>nephrons</b>. Blood enters the <b>glomerulus</b> under pressure, and that hydrostatic push forces water and small solutes across the filtration membrane into Bowman capsule, forming the <b>glomerular filtrate</b>. The <b>GFR</b> (glomerular filtration rate, normally about 90-120 mL/min) is the amount filtered per minute and is the single best index of overall kidney function.</div></div>
+<div class="q"><div class="qq">2. A patient with chronic kidney disease is fatigued, short of breath, and has a hemoglobin of 8.5 g/dL. The patient asks why kidney disease is making them anemic. What is the nurse's best explanation of the underlying mechanism?</div>
+<button onclick="this.parentNode.classList.add('show')">Reveal answer</button>
+<div class="ans"><span class="a">Diseased kidneys make too little erythropoietin (EPO), so the bone marrow makes fewer red blood cells.</span> Beyond filtering, the kidney is an endocrine organ. Specialized cells sense oxygen and release <b>erythropoietin</b>, the hormone that tells bone marrow to produce red cells. When kidney tissue is damaged, EPO output falls and the patient develops a <b>normocytic, normochromic anemia</b> of CKD. This is why many CKD patients need synthetic EPO (epoetin) rather than just iron.</div></div>
+<div class="q"><div class="qq">3. Which laboratory value is generally the more reliable indicator of GFR and kidney function, and why can the other value be misleading?</div>
+<button onclick="this.parentNode.classList.add('show')">Reveal answer</button>
+<div class="ans"><span class="a">Creatinine is usually more reliable than BUN.</span> <b>Creatinine</b> (normal about 0.6-1.2 mg/dL) is a steady waste product of muscle metabolism that the kidney filters at a fairly constant rate, so a rising level fairly directly reflects a falling GFR. <b>BUN</b> (blood urea nitrogen, normal about 10-20 mg/dL) is swayed by many non-kidney factors, dehydration, high-protein intake, GI bleeding, and steroids can all raise it, so it is a softer, less specific marker.</div></div>
+<div class="q"><div class="qq">4. A patient becomes severely dehydrated after a bout of vomiting and diarrhea. Labs show a BUN:creatinine ratio of about 25:1 and a rising creatinine. Which category of acute kidney injury does this pattern most suggest?</div>
+<button onclick="this.parentNode.classList.add('show')">Reveal answer</button>
+<div class="ans"><span class="a">Prerenal AKI from decreased kidney perfusion.</span> In <b>prerenal AKI</b> the kidney tissue itself is healthy, but blood flow to it drops (from volume loss, hemorrhage, heart failure, or shock). The nephrons respond by avidly reabsorbing sodium and water, dragging urea back with it, which pushes the <b>BUN:creatinine ratio above 20:1</b>. Restoring perfusion (usually IV fluids here) often reverses it before tubular damage sets in.</div></div>
+<div class="q"><div class="qq">5. Match each AKI category to its typical cause: prerenal, intrarenal (intrinsic), and postrenal.</div>
+<button onclick="this.parentNode.classList.add('show')">Reveal answer</button>
+<div class="ans"><span class="a">Prerenal = poor perfusion; intrarenal = direct kidney tissue damage; postrenal = obstruction to outflow.</span>
+<div class="ctwrap"><table class="ctable"><thead><tr><th>Feature</th><th>Prerenal</th><th>Intrarenal</th></tr></thead><tbody><tr><td>Problem site</td><td>Before the kidney (blood flow in)</td><td>Inside kidney tissue (nephron)</td></tr><tr><td>Classic cause</td><td>Hypovolemia, shock, heart failure</td><td>Acute tubular necrosis, nephrotoxins, contrast, glomerulonephritis</td></tr><tr><td>Reversible?</td><td>Yes, if perfusion restored quickly</td><td>Slower; depends on tissue recovery</td></tr></tbody></table></div>
+<b>Postrenal</b> AKI comes from blockage of urine outflow, kidney stones, an enlarged prostate (BPH), or tumors, causing back-pressure that eventually harms the nephrons.</div></div>
+<div class="q"><div class="qq">6. A patient with end-stage CKD is confused, nauseated, itchy, and has a uremic frost. The nurse recognizes uremia. In plain terms, what is uremia and why does it cause these symptoms?</div>
+<button onclick="this.parentNode.classList.add('show')">Reveal answer</button>
+<div class="ans"><span class="a">Uremia is the buildup of nitrogenous wastes (like urea) in the blood when kidneys can no longer clear them.</span> As GFR falls in <b>chronic kidney disease</b>, waste products the kidney normally excretes accumulate systemically. These toxins irritate nearly every organ, producing <em>encephalopathy</em> (confusion), <em>nausea</em> and anorexia, <em>pruritus</em> (itching), and pericarditis. <b>Uremic frost</b>, white urea crystals on the skin, is a late, ominous sign. Uremia is a key indication that dialysis is needed.</div></div>
+<div class="q"><div class="qq">7. A CKD patient's potassium returns at 6.8 mEq/L. What is the greatest immediate danger, and why do failing kidneys cause this?</div>
+<button onclick="this.parentNode.classList.add('show')">Reveal answer</button>
+<div class="ans"><span class="a">Life-threatening cardiac dysrhythmias, because the kidneys can no longer excrete potassium.</span> The kidney is the main route for removing <b>potassium</b>, so as function declines, potassium climbs (<b>hyperkalemia</b>, normal 3.5-5.0 mEq/L). High extracellular potassium destabilizes cardiac cell membranes, producing <b>peaked T waves</b>, widened QRS, and risk of ventricular fibrillation or asystole. This is a medical emergency, expect calcium gluconate to protect the heart plus insulin/dextrose to shift potassium into cells.</div></div>
+<div class="q"><div class="qq">8. Two patients have glomerular disease. One has massive proteinuria and edema; the other has hematuria, hypertension, and only mild proteinuria. Which has nephrotic syndrome and which has nephritic syndrome?</div>
+<button onclick="this.parentNode.classList.add('show')">Reveal answer</button>
+<div class="ans"><span class="a">Massive proteinuria + edema = nephrotic; hematuria + hypertension = nephritic.</span>
+<div class="ctwrap"><table class="ctable"><thead><tr><th>Feature</th><th>Nephrotic</th><th>Nephritic</th></tr></thead><tbody><tr><td>Core problem</td><td>Leaky filter loses protein</td><td>Inflamed, bleeding glomerulus</td></tr><tr><td>Proteinuria</td><td>Massive (usually &gt;3.5 g/day)</td><td>Mild to moderate</td></tr><tr><td>Urine/blood</td><td>Foamy urine, low albumin, edema, high lipids</td><td>Hematuria (tea-colored), RBC casts, hypertension</td></tr></tbody></table></div>
+<div class="pearl"><b>Memory hook.</b> Nephr-<b>O</b>tic = big pr-<b>O</b>tein loss; nephr-<b>I</b>tic = <b>I</b>nflammation with blood in the urine.</div></div></div>
+<div class="q"><div class="qq">9. A patient arrives in the ED writhing, unable to sit still, with sudden severe flank pain radiating to the groin and gross hematuria. What condition is most likely, and what causes the pain pattern?</div>
+<button onclick="this.parentNode.classList.add('show')">Reveal answer</button>
+<div class="ans"><span class="a">Renal colic from a kidney stone (urolithiasis).</span> A stone lodged in the ureter causes <b>renal colic</b>, classically excruciating, colicky (waves) flank pain that radiates toward the groin as the stone moves. The pain comes from <em>ureteral spasm and obstruction with back-pressure</em>. Unlike peritonitis, these patients cannot find a comfortable position and are restless. <b>Hematuria</b> occurs as the stone abrades the ureteral lining. Care focuses on pain control, hydration, and straining urine to catch the stone.</div></div>
+<div class="q"><div class="qq">10. Compare cystitis and pyelonephritis. Which findings tell the nurse the infection has ascended from the bladder to the kidney?</div>
+<button onclick="this.parentNode.classList.add('show')">Reveal answer</button>
+<div class="ans"><span class="a">Fever, flank/CVA tenderness, and systemic illness signal pyelonephritis rather than simple cystitis.</span>
+<div class="ctwrap"><table class="ctable"><thead><tr><th>Feature</th><th>Cystitis (bladder)</th><th>Pyelonephritis (kidney)</th></tr></thead><tbody><tr><td>Location</td><td>Lower urinary tract</td><td>Upper tract, kidney</td></tr><tr><td>Symptoms</td><td>Dysuria, frequency, urgency, suprapubic pain</td><td>All of those PLUS high fever, chills, flank/CVA tenderness, nausea</td></tr><tr><td>Severity</td><td>Usually localized, low-grade</td><td>Systemic; can lead to sepsis</td></tr></tbody></table></div>
+<b>Costovertebral angle (CVA) tenderness</b> is a hallmark that the infection has reached the kidney.</div></div>
+<div class="q"><div class="qq">11. Besides erythropoietin, the kidney performs several non-filtering jobs. List the kidney's roles in vitamin D, blood pressure, and acid-base balance.</div>
+<button onclick="this.parentNode.classList.add('show')">Reveal answer</button>
+<div class="ans"><span class="a">The kidney activates vitamin D, helps regulate blood pressure via renin, and maintains acid-base balance by handling bicarbonate and hydrogen ions.</span>
+<ul><li><b>Vitamin D:</b> the kidney performs the final activation step, converting vitamin D to its active form (calcitriol) so the gut can absorb calcium, this is why CKD causes bone disease.</li><li><b>Blood pressure:</b> the kidney releases <b>renin</b>, triggering the renin-angiotensin-aldosterone system (RAAS) to retain sodium and water and raise BP.</li><li><b>Acid-base:</b> the kidney excretes hydrogen ions and reabsorbs/regenerates <b>bicarbonate</b>, so kidney failure often causes a <em>metabolic acidosis</em>.</li></ul></div></div>
+<div class="q"><div class="qq">12. An 84-year-old nursing home resident becomes suddenly confused and falls, but denies burning with urination. The nurse suspects a UTI. Why does a UTI often look so different in older adults?</div>
+<button onclick="this.parentNode.classList.add('show')">Reveal answer</button>
+<div class="ans"><span class="a">Older adults frequently present with new confusion or functional decline instead of classic dysuria.</span> In elderly patients a UTI may show up as <b>acute confusion (delirium)</b>, agitation, new incontinence, falls, or decreased appetite rather than the textbook burning and urgency. Blunted immune and inflammatory responses mean fever may be low or absent, and cognitive changes can mask symptom reporting. <div class="pearl"><b>Assessment pearl.</b> In any older adult with sudden mental status change, always consider infection, especially a UTI, on the differential.</div></div></div>
+      </div>
+
+      <div class="chapnav">
+        <a href="index.html"><span class="k">Book</span>&larr; All chapters</a>
+        <a class="next" href="appendix.html"><span class="k">Appendix</span>The Arcade &amp; Lab &rarr;</a>
+      </div>
+    </main>
+  </div>
+
+  <footer>
+    A student-friendly pathophysiology guide · by <b>Dr. Akash Garg</b> <br>
+    The interactive figures open in place; tap “Open full ↗” for a full-screen version.
+  </footer>
+
+<script>
+  // reading progress bar
+  var bar=document.getElementById('bar');
+  function prog(){var h=document.documentElement, max=h.scrollHeight-h.clientHeight; bar.style.width=(max>0?(h.scrollTop/max*100):0)+'%';}
+  addEventListener('scroll',prog,{passive:true}); prog();
+  // scroll-spy TOC
+  var links=[].slice.call(document.querySelectorAll('.toc a'));
+  var ids=links.map(function(a){return a.getAttribute('href').slice(1);});
+  var secs=ids.map(function(id){return document.getElementById(id);});
+  function spy(){var y=scrollY+90,cur=0;
+    for(var i=0;i<secs.length;i++){ if(secs[i] && secs[i].offsetTop<=y) cur=i; }
+    links.forEach(function(a,i){a.classList.toggle('on',i===cur);});}
+  addEventListener('scroll',spy,{passive:true}); spy();
+</script>
+
+
+<script src="../flashcards/w11.js"></script>
+<script>
+(function(){
+  var WK="11";
+  var cards=(window.PATHO_CARDS&&window.PATHO_CARDS[WK])||[];
+  var fc=document.getElementById("fc"); if(!fc) return;
+  if(!cards.length){ fc.style.display="none"; return; }
+  var order=cards.map(function(_,i){return i;}), pos=0;
+  function dec(s){return String(s).replace(/&amp;/g,"&").replace(/&lt;/g,"<").replace(/&gt;/g,">").replace(/&nbsp;/g," ");}
+  var card=document.getElementById("fcCard"), q=document.getElementById("fcQ"), a=document.getElementById("fcA"), cnt=document.getElementById("fcCount");
+  function show(){ card.classList.remove("flip"); var c=cards[order[pos]]; q.textContent=dec(c.q); a.textContent=dec(c.a)+(c.exp?"  \u2014  "+dec(c.exp):""); cnt.textContent=(pos+1)+" / "+cards.length; }
+  window.fcFlip=function(){ card.classList.toggle("flip"); };
+  window.fcNext=function(e){ if(e&&e.stopPropagation)e.stopPropagation(); pos=(pos+1)%cards.length; show(); };
+  window.fcPrev=function(e){ if(e&&e.stopPropagation)e.stopPropagation(); pos=(pos-1+cards.length)%cards.length; show(); };
+  window.fcShuffle=function(e){ if(e&&e.stopPropagation)e.stopPropagation(); for(var i=order.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=order[i];order[i]=order[j];order[j]=t;} pos=0; show(); };
+  show();
+})();
+</script>
+<style id="pdfprint">
+.pdf-btn{position:fixed;right:16px;bottom:16px;z-index:400;font-family:'Inter',system-ui,sans-serif;font-weight:700;font-size:13.5px;color:#fff;background:#0c7283;border:none;border-radius:24px;padding:11px 17px;box-shadow:0 6px 20px rgba(12,58,68,.30);cursor:pointer;display:inline-flex;align-items:center;gap:7px;}
+.pdf-btn:hover{background:#0c3a44;}
+@media print{
+ @page{margin:14mm;}
+ html,body{background:#fff !important;}
+ .topbar,.progress,aside,.chapnav,.pdf-btn{display:none !important;}
+ #pbgate{display:none !important;}
+ .layout{display:block !important;max-width:100% !important;padding:0 !important;grid-template-columns:1fr !important;gap:0 !important;}
+ .reading,.reading .col{max-width:100% !important;padding:0 !important;}
+ .embed iframe,.embed .frame{display:none !important;}
+ .embed{margin:14px 0 !important;}
+ .embed .cap{color:#555 !important;font-style:italic;}
+ .embed .cap .tag{background:#0c7283 !important;color:#fff !important;}
+ .embed .cap a{display:none !important;}
+ .bref,.bref .fr{break-inside:avoid;page-break-inside:avoid;box-shadow:none !important;}
+ .bref img{max-height:150mm;width:auto !important;margin:0 auto;}
+ .ctwrap,table.ctable,.pearl,.kp,.q,.objectives,.summary,dl.terms,figure{break-inside:avoid;page-break-inside:avoid;}
+ h1,h2,h3{break-after:avoid;page-break-after:avoid;}
+ .quiz .ans{display:block !important;}
+ .quiz .q button{display:none !important;}
+ a{color:inherit !important;text-decoration:none !important;}
+ *{-webkit-print-color-adjust:exact !important;print-color-adjust:exact !important;}
+ footer{border-top:1px solid #ccc !important;}
+}
+</style>
+<button class="pdf-btn" onclick="window.print()" title="Save this chapter as a PDF">🖨 Save as PDF</button>
+</body>
+</html>

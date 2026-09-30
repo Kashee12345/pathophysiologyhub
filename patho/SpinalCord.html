@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f7f2ea">
+<title>Spinal Cord Injury</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{ --card:#fffdf8; --ink:#2a2420; --muted:#7a6f63; --line:#e3d8c6;
+    --sans:'Inter',system-ui,sans-serif; --disp:'Cinzel Decorative',serif; --accent:#3a6a8a; }
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  body{background:linear-gradient(160deg,#eef4f8,#e6eaee);color:var(--ink);font-family:var(--sans);min-height:100vh;padding:18px 16px 44px;}
+  header{max-width:1120px;margin:0 auto 16px;text-align:center;}
+  h1{font-family:var(--disp);font-weight:900;font-size:clamp(21px,4vw,34px);color:#2f5a76;line-height:1.05;}
+  header .sub{color:var(--muted);font-size:15px;margin-top:4px;}
+  header .intro{max-width:870px;margin:10px auto 0;font-size:14.5px;line-height:1.5;color:#5c5248;}
+  header .intro b{color:#2f5a76;}
+  .wrap{max-width:1120px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;box-shadow:0 6px 22px rgba(40,90,120,.07);}
+  .card h2{font-family:var(--disp);font-weight:700;font-size:16px;color:#2f5a76;margin-bottom:6px;}
+  .card h2 + .desc{font-size:13px;color:var(--muted);margin-bottom:10px;line-height:1.4;}
+  svg{display:block;width:100%;height:auto;max-height:320px;}
+  #liveCap{margin-top:8px;background:#e7eff5;border:1px solid #c6d8e4;border-radius:10px;padding:10px 13px;font-size:14px;line-height:1.5;color:#254e66;text-align:center;} #liveCap b{color:#1a3c52;}
+  @keyframes pulse{0%,100%{opacity:.4}50%{opacity:.85}}
+  .pulse{animation:pulse 1.3s ease-in-out infinite;}
+  #stage{border-radius:12px;padding:11px 14px;margin-bottom:12px;color:#fff;font-weight:700;font-size:16px;text-align:center;background:#4a7a98;}
+  #stage small{display:block;font-weight:500;font-size:13px;opacity:.93;margin-top:2px;}
+  .seg{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--line);border-radius:11px;overflow:hidden;gap:1px;background:var(--line);}
+  .seg button{border:none;background:#fff;color:var(--ink);font-family:var(--sans);font-weight:700;font-size:12.5px;padding:10px 6px;cursor:pointer;transition:.12s;line-height:1.15;}
+  .seg button small{display:block;font-weight:500;font-size:9.5px;color:var(--muted);margin-top:1px;}
+  .seg button.on{color:#fff;background:#3a6a8a;} .seg button.on small{color:rgba(255,255,255,.9);}
+  #info{border:1px solid var(--line);border-left:5px solid var(--accent);background:#eef4f8;border-radius:10px;padding:12px 13px;margin-top:16px;}
+  #info .n{font-family:var(--disp);font-weight:700;font-size:16px;color:#2f5a76;} #info .plain{font-size:14px;line-height:1.5;color:#2a2420;margin-top:8px;font-weight:600;}
+  #info .story{font-size:12.8px;line-height:1.5;color:#3a3630;margin-top:8px;background:#fff;border-radius:8px;padding:9px 11px;border:1px solid #cfdce6;}
+  #info .ss{margin-top:8px;font-size:12.3px;color:#5c5248;} #info .ss b{color:#1a3c52;}
+  @media (max-width:880px){ .wrap{grid-template-columns:1fr;} }
+</style>
+</head>
+<body>
+<header>
+  <h1>Spinal Cord Injury</h1>
+  <div class="sub">Level decides everything · Week 5</div>
+  <div class="intro">A spinal cord injury interrupts the motor, sensory, and autonomic signals traveling through it — and <b>how high the injury is</b> determines how much of the body is affected. Explore the levels, then the shock states that follow.</div>
+</header>
+<div class="wrap">
+  <div>
+    <div class="card">
+      <h2>The spinal cord</h2>
+      <div class="desc">Cervical (neck), thoracic (chest), lumbar (low back). The higher the injury, the more is lost.</div>
+      <svg id="art" viewBox="0 0 300 320" aria-label="spine"></svg>
+      <div id="liveCap">Pick a topic.</div>
+    </div>
+  </div>
+  <div>
+    <div id="stage">Pick a topic<small>levels &amp; shock states</small></div>
+    <div class="card">
+      <div class="seg" id="seg">
+        <button data-d="levels" class="on">Injury Levels<small>quad vs para</small></button>
+        <button data-d="neuro">Neurogenic Shock<small>above T6</small></button>
+        <button data-d="spinal">Spinal Shock<small>temporary</small></button>
+        <button data-d="ad">Autonomic Dysreflexia<small>T6 &amp; up</small></button>
+      </div>
+    </div>
+    <div class="card" style="margin-top:16px;"><h2>What's happening</h2><div id="info"></div></div>
+  </div>
+</div>
+<script>
+(function(){
+  const $=id=>document.getElementById(id); let cur='levels';
+  const INFO={
+    levels:{name:'Injury Levels',color:'#3a6a8a',hl:'both',
+      plain:'A higher injury paralyzes more of the body — the neck controls the arms AND the diaphragm.',
+      story:'Injury at <b>C8 and above → quadriplegia</b> (arms and legs). Remember <b>"C5 keeps the diaphragm alive"</b> — injuries above C5 threaten breathing. Injury at <b>T1 and below → paraplegia</b> (legs). The cervical spine is the <b>most commonly injured</b> region.',
+      ss:'C8+ = quadriplegia · T1 below = paraplegia · C5 = diaphragm.'},
+    neuro:{name:'Neurogenic Shock',color:'#a5442a',hl:'high',
+      plain:'A high injury knocks out the sympathetic "gas pedal," so BP and heart rate crash.',
+      story:'With an injury <b>above T6</b>, the <b>sympathetic outflow is interrupted</b>, leaving <b>unopposed parasympathetic tone</b>. Vessels dilate and the heart slows → <b>hypotension + bradycardia</b>. It usually <b>resolves within 24–48 hours</b> once the patient is stabilized.',
+      ss:'Hypotension + bradycardia; injury above T6; resolves 24–48 h.'},
+    spinal:{name:'Spinal Shock',color:'#7a5aa0',hl:'high',
+      plain:'A temporary total shutdown below the injury — reflexes vanish and muscles go flaccid.',
+      story:'Right after injury, everything below it goes quiet: <b>temporary absence of reflexes and flaccidity</b>. Because of this, you <b>can\'t know the true extent of the injury for 4–6 weeks</b> until spinal shock resolves.',
+      ss:'Absent reflexes + flaccidity; true extent unknown for 4–6 weeks.'},
+    ad:{name:'Autonomic Dysreflexia',color:'#c0392b',hl:'high',
+      plain:'A late complication where an irritant below the injury triggers a dangerous BP spike.',
+      story:'A complication of injuries <b>at T6 or higher</b>. An <b>irritant below the injury</b> (a full bladder, constipation, a pressure sore) causes a <b>sympathetic overdrive</b>: <b>vasoconstriction below</b> → <b>severe hypertension</b>, while the brain tries to compensate with <b>vasodilation above</b> (flushing, sweating, pounding headache) and <b>bradycardia</b>. A medical emergency — find and remove the trigger.',
+      ss:'Severe HTN + bradycardia + pounding headache; find/remove the irritant.'}
+  };
+  function draw(){ const st=cur,hl=INFO[st].hl; let s='';
+    // head
+    s+='<circle cx="150" cy="30" r="18" fill="#f2ddc8" stroke="#d8b898" stroke-width="2"/>';
+    // spine segments
+    const regions=[ {n:'C',y0:52,y1:110,c:'#c0392b'}, {n:'T',y0:110,y1:210,c:'#3a86b0'}, {n:'L',y0:210,y1:275,c:'#3a8a6a'} ];
+    regions.forEach(r=>{ s+='<rect x="140" y="'+r.y0+'" width="20" height="'+(r.y1-r.y0)+'" rx="6" fill="#e8dcc8" stroke="#c9b498" stroke-width="1.5"/>';
+      s+='<text x="128" y="'+((r.y0+r.y1)/2+4)+'" text-anchor="end" font-size="11" font-weight="700" fill="'+r.c+'">'+r.n+'</text>'; });
+    // injury marker + affected shading
+    if(st==='levels'){
+      // show C5 line and T1 line
+      s+='<line x1="120" y1="82" x2="180" y2="82" stroke="#c0392b" stroke-width="2" stroke-dasharray="4 3"/><text x="184" y="86" font-size="9" font-weight="700" fill="#c0392b">C5 diaphragm</text>';
+      s+='<line x1="120" y1="112" x2="180" y2="112" stroke="#3a86b0" stroke-width="2" stroke-dasharray="4 3"/><text x="184" y="116" font-size="9" font-weight="700" fill="#3a86b0">T1</text>';
+      s+='<text x="46" y="95" font-size="9" font-weight="700" fill="#c0392b">quad</text>';
+      s+='<text x="46" y="150" font-size="9" font-weight="700" fill="#3a86b0">para</text>';
+    } else {
+      // high injury at T6ish
+      const y=hl==='high'?150:150;
+      s+='<g class="pulse"><line x1="118" y1="'+y+'" x2="182" y2="'+y+'" stroke="#c0392b" stroke-width="4"/><circle cx="150" cy="'+y+'" r="7" fill="#c0392b"/></g>';
+      s+='<text x="186" y="'+(y+4)+'" font-size="9" font-weight="700" fill="#c0392b">~T6 injury</text>';
+      // shade below
+      s+='<rect x="138" y="'+y+'" width="24" height="'+(275-y)+'" fill="'+INFO[st].color+'" opacity="0.15"/>';
+      if(st==='ad'){ s+='<text x="90" y="130" text-anchor="middle" font-size="8.5" font-weight="700" fill="#c0392b">flush/sweat ABOVE</text>'; s+='<text x="90" y="230" text-anchor="middle" font-size="8.5" font-weight="700" fill="#3a6a8a">vasoconstrict BELOW</text>'; }
+    }
+    // arms
+    s+='<path d="M142 60 L110 110 M158 60 L190 110" stroke="#f2ddc8" stroke-width="10" stroke-linecap="round"/>';
+    // legs
+    s+='<path d="M146 275 L134 310 M154 275 L166 310" stroke="#f2ddc8" stroke-width="12" stroke-linecap="round"/>';
+    $('art').innerHTML=s;
+  }
+  function render(){ const inf=INFO[cur]; draw();
+    document.querySelectorAll('#seg button').forEach(b=>b.classList.toggle('on',b.dataset.d===cur));
+    $('stage').style.background=inf.color; $('stage').innerHTML=inf.name+'<small>'+(cur==='levels'?'higher = more lost':'complication of high SCI')+'</small>';
+    $('info').innerHTML='<div class="n">'+inf.name+'</div><div class="plain">'+inf.plain+'</div><div class="story">'+inf.story+'</div><div class="ss"><b>Key:</b> '+inf.ss+'</div>';
+    $('liveCap').innerHTML='<b>'+inf.name+'</b> — '+inf.plain;
+  }
+  document.querySelectorAll('#seg button').forEach(b=>b.addEventListener('click',()=>{ cur=b.dataset.d; render(); }));
+  render();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f7f2ea">
+<title>Chest Trauma — Pneumothorax &amp; Flail Chest</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{ --card:#fffdf8; --ink:#2a2420; --muted:#7a6f63; --line:#e3d8c6;
+    --sans:'Inter',system-ui,sans-serif; --disp:'Cinzel Decorative',serif; --accent:#b34a4a; }
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  body{background:linear-gradient(160deg,#fbf3f0,#eee6e2);color:var(--ink);font-family:var(--sans);min-height:100vh;padding:18px 16px 44px;}
+  header{max-width:1120px;margin:0 auto 16px;text-align:center;}
+  h1{font-family:var(--disp);font-weight:900;font-size:clamp(22px,4.2vw,36px);color:#a5392e;line-height:1.05;}
+  header .sub{color:var(--muted);font-size:15px;margin-top:4px;}
+  header .intro{max-width:870px;margin:10px auto 0;font-size:14.5px;line-height:1.5;color:#5c5248;}
+  header .intro b{color:#a5392e;}
+  .wrap{max-width:1120px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;box-shadow:0 6px 22px rgba(120,50,40,.07);}
+  .card h2{font-family:var(--disp);font-weight:700;font-size:17px;color:#a5392e;margin-bottom:6px;}
+  .card h2 + .desc{font-size:13px;color:var(--muted);margin-bottom:10px;line-height:1.4;}
+  svg{display:block;width:100%;height:auto;max-height:360px;}
+  #liveCap{margin-top:8px;background:#f7e9e5;border:1px solid #ecc9c0;border-radius:10px;padding:10px 13px;font-size:14px;line-height:1.5;color:#7a2f24;text-align:center;} #liveCap b{color:#8a2418;}
+
+  @keyframes breathe{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
+  .breathe{animation:breathe 2.6s ease-in-out infinite;transform-origin:center;}
+  @keyframes paradox{0%,100%{transform:translateX(0)}50%{transform:translateX(10px)}}
+  .paradox{animation:paradox 2.6s ease-in-out infinite;}
+  @keyframes shiftpush{0%,100%{transform:translateX(0)}50%{transform:translateX(16px)}}
+  .shift{animation:shiftpush 3s ease-in-out infinite;}
+  @keyframes riseb{0%{transform:translateY(0);opacity:0}25%{opacity:1}100%{transform:translateY(-30px);opacity:0}}
+  .bubble{animation:riseb 2s ease-in infinite;}
+
+  #stage{border-radius:12px;padding:11px 14px;margin-bottom:12px;color:#fff;font-weight:700;font-size:17px;text-align:center;background:#b06a55;}
+  #stage small{display:block;font-weight:500;font-size:13px;opacity:.93;margin-top:2px;}
+  .seg{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--line);border-radius:11px;overflow:hidden;gap:1px;background:var(--line);}
+  .seg button{border:none;background:#fff;color:var(--ink);font-family:var(--sans);font-weight:700;font-size:13px;padding:11px 6px;cursor:pointer;transition:.12s;line-height:1.15;}
+  .seg button small{display:block;font-weight:500;font-size:10px;color:var(--muted);margin-top:2px;}
+  .seg button.on{color:#fff;} .seg button.on small{color:rgba(255,255,255,.9);}
+  .seg button.normal.on{background:#3fa66a;} .seg button.pneumo.on{background:#3a86b0;} .seg button.tension.on{background:#c0392b;} .seg button.hemo.on{background:#8a2a2a;} .seg button.flail.on{background:#b5793a;}
+
+  #info{border:1px solid var(--line);border-left:5px solid var(--accent);background:#f8efec;border-radius:10px;padding:12px 13px;}
+  #info .n{font-family:var(--disp);font-weight:700;font-size:18px;color:#a5392e;}
+  #info .plain{font-size:15px;line-height:1.5;color:#2a2420;margin-top:8px;font-weight:600;}
+  #info .story{font-size:13.5px;line-height:1.5;color:#3a3630;margin-top:9px;background:#fff;border-radius:8px;padding:9px 11px;border:1px solid #ecd3cd;}
+  #info .clin{margin-top:9px;border-top:1px dashed #ecd0ca;padding-top:4px;} #info .clin .row{font-size:12.5px;color:#5c5248;line-height:1.4;margin-top:5px;} #info .clin b{color:#8a2418;}
+  .emerg{display:none;background:#fdece9;border:1.5px solid #e88;border-radius:10px;padding:10px 12px;margin-top:12px;font-size:12.8px;line-height:1.5;color:#9a2a1c;}
+  .emerg.on{display:block;} .emerg b{color:#7a1a10;}
+  @media (max-width:880px){ .wrap{grid-template-columns:1fr;} }
+</style>
+</head>
+<body>
+<header>
+  <h1>Chest Trauma</h1>
+  <div class="sub">When the chest wall or pleura is breached · Week 12</div>
+  <div class="intro">The lungs stay inflated because they're sealed inside the <b>pleural space</b> — two smooth layers with a vacuum between them. Break that seal (air, blood, or crushed ribs) and the lung <b>collapses</b>. One version — <b>tension pneumothorax</b> — is a true emergency. Click each injury.</div>
+</header>
+
+<div class="wrap">
+  <div>
+    <div class="card">
+      <h2>The chest, front view</h2>
+      <div class="desc">Two lungs inside the rib cage, the heart &amp; trachea in the middle. Watch what collapses and which way things shift.</div>
+      <svg id="chest" viewBox="0 0 360 320" aria-label="chest front view"></svg>
+      <div id="liveCap">Pick an injury to see the chest.</div>
+    </div>
+  </div>
+  <div>
+    <div id="stage">Pick an injury<small>Normal · Pneumo · Tension · Hemo · Flail</small></div>
+    <div class="card">
+      <h2>👆 Pick the injury</h2>
+      <div class="seg" id="defSeg">
+        <button data-d="normal" class="normal on">Normal<small>sealed pleura</small></button>
+        <button data-d="pneumo" class="pneumo">Pneumothorax<small>air in space</small></button>
+        <button data-d="tension" class="tension">Tension<small>EMERGENCY</small></button>
+        <button data-d="hemo" class="hemo">Hemothorax<small>blood in space</small></button>
+        <button data-d="flail" class="flail">Flail chest<small>broken ribs</small></button>
+      </div>
+    </div>
+    <div class="card" style="margin-top:16px;"><h2>What's happening</h2><div id="info"></div>
+      <div class="emerg" id="emerg"><b>⚠ MEDICAL EMERGENCY.</b> Air keeps entering the pleural space with each breath but can't escape. Pressure builds, crushing the heart and great veins so <b>blood can't return</b>. Signs: <b>hypotension, tachycardia, tracheal deviation toward the good side, JVD, absent breath sounds on one side.</b> Needs immediate needle decompression.</div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const $=id=>document.getElementById(id);
+  let cur='normal';
+  const INFO={
+    normal:{name:'Normal chest',color:'#3fa66a',
+      plain:'Both lungs are sealed to the chest wall by the pleura, so they stay fully inflated.',
+      story:'The <b>visceral pleura</b> (on the lung) and <b>parietal pleura</b> (on the chest wall) are stuck together by a thin vacuum. That suction keeps both lungs open, and the trachea sits <b>midline</b>.',
+      cl:'Sealed pleural space = fully inflated lungs.'},
+    pneumo:{name:'Pneumothorax',color:'#3a86b0',
+      plain:'Air leaks into the space around the lung, breaking the vacuum, so the lung collapses.',
+      story:'The seal breaks and <b>air enters the pleural space</b>. Without the vacuum holding it open, the lung <b>collapses away</b> from the chest wall. Breath sounds are absent over that lung, but the heart and trachea stay midline.',
+      cl:'Air in the pleural space → lung collapse (separation of visceral &amp; parietal pleura).'},
+    tension:{name:'Tension Pneumothorax',color:'#c0392b',
+      plain:'A one-way air leak keeps building pressure — it shoves the heart and windpipe to the other side.',
+      story:'This is a pneumothorax with a <b>one-way valve</b>: air gets in with every breath but can\'t get out. Pressure <b>keeps rising</b>, collapsing the lung completely and <b>pushing the heart, trachea, and great vessels toward the opposite side</b>. That compression stops blood returning to the heart → the patient crashes.',
+      cl:'Rising pressure → mediastinal shift AWAY from the injury → obstructed venous return → shock.'},
+    hemo:{name:'Hemothorax',color:'#8a2a2a',
+      plain:'Instead of air, blood pools in the space around the lung and presses it closed.',
+      story:'Bleeding from torn vessels fills the pleural space with <b>blood</b>. The blood pools at the bottom (gravity) and <b>compresses the lung</b> from below. On top of the collapse, the patient is also <b>losing blood volume</b>.',
+      cl:'Blood in the pleural space → lung compression + blood loss.'},
+    flail:{name:'Flail Chest',color:'#b5793a',
+      plain:'Several ribs break in two places each, so a chunk of chest wall floats loose and moves backwards.',
+      story:'When ribs are broken in <b>multiple places</b>, a segment of the chest wall detaches. It moves <b>paradoxically</b> — sucking <b>inward</b> when the patient breathes in (opposite of the rest of the chest). That floating segment doesn\'t help pull air in, so <b>ventilation drops</b>.',
+      cl:'Ribs broken at multiple sites → paradoxical (inward-on-inspiration) motion → decreased ventilation.'}
+  };
+
+  function bodyOutline(){
+    return '<rect x="30" y="30" width="300" height="260" rx="30" fill="#f7efe6" stroke="#d8c3a8" stroke-width="2"/>'+
+      // ribs hint
+      '';
+  }
+  function draw(){
+    let s=bodyOutline();
+    const state=cur;
+    // trachea position (shift for tension)
+    const trachX = state==='tension'? 205 : 180;
+    // right lung (patient's right = left on screen) — this is the injured side for pneumo/tension/hemo
+    // left lung (screen right) stays normal
+    // draw good lung (screen-right)
+    s+='<g class="'+(state==='normal'||state==='pneumo'||state==='hemo'||state==='flail'?'breathe':'')+'"><path d="M195 70 C245 70 275 110 275 170 C275 220 250 250 210 250 C198 250 195 230 195 200 Z" fill="#f2b0b0" stroke="#c98a8a" stroke-width="2"/></g>';
+    // injured lung (screen-left)
+    if(state==='normal'||state==='flail'){
+      s+='<g class="'+(state==='flail'?'':'breathe')+'"><path d="M165 70 C115 70 85 110 85 170 C85 220 110 250 150 250 C162 250 165 230 165 200 Z" fill="#f2b0b0" stroke="#c98a8a" stroke-width="2"/></g>';
+    } else if(state==='pneumo'){
+      // collapsed lung (shrunk toward center) + air
+      s+='<path d="M150 90 C120 95 105 130 105 165 C105 200 120 225 148 228 C158 228 160 210 160 185 Z" fill="#e59a9a" stroke="#b87a7a" stroke-width="2"/>';
+      // air pocket
+      s+='<text x="105" y="70" font-size="11" font-weight="700" fill="#3a86b0">air</text>';
+      for(let i=0;i<3;i++) s+='<circle class="bubble" style="animation-delay:'+(i*0.5)+'s" cx="'+(95+i*10)+'" cy="150" r="4" fill="#cfe6f2"/>';
+    } else if(state==='tension'){
+      // fully collapsed tiny lung shoved toward center; whole mediastinum shifts
+      s+='<g class="shift">';
+      s+='<path d="M160 110 C140 115 132 140 132 165 C132 195 145 210 162 210 C168 210 168 195 168 175 Z" fill="#d98a8a" stroke="#b06a6a" stroke-width="2"/>';
+      s+='</g>';
+      s+='<text x="100" y="80" font-size="11" font-weight="700" fill="#c0392b">air trapped ↑ pressure</text>';
+      for(let i=0;i<4;i++) s+='<circle class="bubble" style="animation-delay:'+(i*0.4)+'s" cx="'+(90+i*9)+'" cy="160" r="5" fill="#f2c9c0"/>';
+    } else if(state==='hemo'){
+      // lung pushed up, blood pooled at bottom
+      s+='<path d="M160 75 C120 78 92 108 92 150 C92 165 100 178 120 182 C150 186 160 170 160 150 Z" fill="#e59a9a" stroke="#b87a7a" stroke-width="2"/>';
+      s+='<path d="M85 185 Q125 200 165 185 L165 250 Q125 258 85 250 Z" fill="#8a1e1e" opacity="0.85"/>';
+      s+='<text x="125" y="230" text-anchor="middle" font-size="11" font-weight="700" fill="#fff">blood pooling</text>';
+    }
+    // flail segment (paradoxical)
+    if(state==='flail'){
+      s+='<g class="paradox"><rect x="95" y="120" width="46" height="60" rx="8" fill="#e8c896" stroke="#b5793a" stroke-width="2" opacity="0.9"/><path d="M100 135 h36 M100 150 h36 M100 165 h36" stroke="#b5793a" stroke-width="2"/></g>';
+      s+='<text x="118" y="112" text-anchor="middle" font-size="10.5" font-weight="700" fill="#b5793a">flail segment</text>';
+      s+='<text x="118" y="200" text-anchor="middle" font-size="10" font-weight="700" fill="#a5652a">sucks IN on inhale</text>';
+    }
+    // trachea + heart in middle
+    const shiftG = state==='tension'?'shift':'';
+    s+='<g class="'+shiftG+'">';
+    s+='<rect x="'+(trachX-6)+'" y="45" width="12" height="45" rx="5" fill="#d8b48a" stroke="#b89a6a" stroke-width="1.5"/>';
+    s+='<path d="M180 150 c-14 -14 -34 2 -20 20 l20 22 20 -22 c14 -18 -6 -34 -20 -20 Z" fill="#c0392b" transform="translate('+(state==='tension'?12:0)+',0)"/>';
+    s+='</g>';
+    s+='<text x="'+trachX+'" y="40" text-anchor="middle" font-size="10" font-weight="700" fill="'+(state==='tension'?'#c0392b':'#8a7a5a')+'">trachea'+(state==='tension'?' ↝ deviates':'')+'</text>';
+    $('chest').innerHTML=s;
+  }
+  function render(){
+    const inf=INFO[cur]; draw();
+    document.querySelectorAll('#defSeg button').forEach(b=>b.classList.toggle('on',b.dataset.d===cur));
+    const caps={ normal:'Pleura sealed → <b>both lungs stay inflated</b>, trachea midline.',
+      pneumo:'<b>Air</b> breaks the vacuum → the lung <b>collapses</b>; heart &amp; trachea stay put.',
+      tension:'One-way air leak → pressure <b>shoves the heart &amp; trachea to the good side</b> → blood can\'t return.',
+      hemo:'<b>Blood</b> pools around the lung → compresses it AND drops blood volume.',
+      flail:'A loose chest-wall segment <b>sucks inward on inhale</b> → less air pulled in.' };
+    $('liveCap').innerHTML=caps[cur];
+    $('stage').style.background=inf.color;
+    $('stage').innerHTML=inf.name+'<small>'+(cur==='tension'?'⚠ hemodynamic emergency':cur==='normal'?'reference chest':'lung mechanics disrupted')+'</small>';
+    $('info').innerHTML='<div class="n">'+inf.name+'</div><div class="plain">'+inf.plain+'</div><div class="story">'+inf.story+'</div><div class="clin"><div class="row"><b>Key point:</b> '+inf.cl+'</div></div>';
+    $('emerg').classList.toggle('on',cur==='tension');
+  }
+  document.querySelectorAll('#defSeg button').forEach(b=>b.addEventListener('click',()=>{ cur=b.dataset.d; render(); }));
+  render();
+})();
+</script>
+</body>
+</html>

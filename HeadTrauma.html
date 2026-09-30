@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f7f2ea">
+<title>Head Trauma &amp; Brain Bleeds</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{ --card:#fffdf8; --ink:#2a2420; --muted:#7a6f63; --line:#e3d8c6;
+    --sans:'Inter',system-ui,sans-serif; --disp:'Cinzel Decorative',serif; --accent:#8a3a4a; }
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  body{background:linear-gradient(160deg,#faf1f2,#ece5e6);color:var(--ink);font-family:var(--sans);min-height:100vh;padding:18px 16px 44px;}
+  header{max-width:1120px;margin:0 auto 16px;text-align:center;}
+  h1{font-family:var(--disp);font-weight:900;font-size:clamp(20px,3.8vw,32px);color:#7a3040;line-height:1.05;}
+  header .sub{color:var(--muted);font-size:15px;margin-top:4px;}
+  header .intro{max-width:870px;margin:10px auto 0;font-size:14.5px;line-height:1.5;color:#5c5248;}
+  header .intro b{color:#7a3040;}
+  .wrap{max-width:1120px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;box-shadow:0 6px 22px rgba(130,50,70,.07);}
+  .card h2{font-family:var(--disp);font-weight:700;font-size:16px;color:#7a3040;margin-bottom:6px;}
+  .card h2 + .desc{font-size:13px;color:var(--muted);margin-bottom:10px;line-height:1.4;}
+  svg{display:block;width:100%;height:auto;max-height:300px;}
+  #liveCap{margin-top:8px;background:#f6e8ea;border:1px solid #e8c6ce;border-radius:10px;padding:10px 13px;font-size:14px;line-height:1.5;color:#6a2838;text-align:center;} #liveCap b{color:#5a1a2a;}
+  @keyframes pulse{0%,100%{opacity:.45}50%{opacity:.9}}
+  .pulse{animation:pulse 1.3s ease-in-out infinite;}
+  #stage{border-radius:12px;padding:11px 14px;margin-bottom:12px;color:#fff;font-weight:700;font-size:16px;text-align:center;background:#9a4658;}
+  #stage small{display:block;font-weight:500;font-size:13px;opacity:.93;margin-top:2px;}
+  .lbl{font-size:11.5px;font-weight:700;text-transform:uppercase;color:var(--muted);letter-spacing:.03em;margin:2px 0 6px;}
+  .seg{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--line);border-radius:11px;overflow:hidden;gap:1px;background:var(--line);margin-bottom:12px;}
+  .seg button{border:none;background:#fff;color:var(--ink);font-family:var(--sans);font-weight:700;font-size:12px;padding:9px 5px;cursor:pointer;transition:.12s;line-height:1.15;}
+  .seg button small{display:block;font-weight:500;font-size:9.5px;color:var(--muted);margin-top:1px;}
+  .seg button.on{color:#fff;background:#8a3a4a;} .seg button.on small{color:rgba(255,255,255,.9);}
+  #info{border:1px solid var(--line);border-left:5px solid var(--accent);background:#f7eef0;border-radius:10px;padding:12px 13px;}
+  #info .n{font-family:var(--disp);font-weight:700;font-size:16px;color:#7a3040;} #info .plain{font-size:14px;line-height:1.5;color:#2a2420;margin-top:8px;font-weight:600;}
+  #info .story{font-size:12.8px;line-height:1.5;color:#3a3630;margin-top:8px;background:#fff;border-radius:8px;padding:9px 11px;border:1px solid #ecccd2;}
+  .pearl{background:#eef4fb;border:1px solid #cbdcf0;border-radius:10px;padding:10px 12px;margin-top:12px;font-size:12.3px;line-height:1.5;color:#274d7a;} .pearl b{color:#173b5a;}
+  @media (max-width:880px){ .wrap{grid-template-columns:1fr;} }
+</style>
+</head>
+<body>
+<header>
+  <h1>Head Trauma &amp; Brain Bleeds</h1>
+  <div class="sub">Where the blood collects · Week 5</div>
+  <div class="intro">The brain is wrapped in three <b>meninges</b> — dura, arachnoid, pia. A head injury can bruise the brain itself or bleed into a specific layer, and <b>where</b> the blood collects names the bleed. Explore the bleeds, then the injury types.</div>
+</header>
+<div class="wrap">
+  <div>
+    <div class="card">
+      <h2>Layers of the head</h2>
+      <div class="desc">Skull → dura → arachnoid → brain. Watch which space fills with blood.</div>
+      <svg id="art" viewBox="0 0 300 260" aria-label="head trauma"></svg>
+      <div id="liveCap">Pick a bleed or injury.</div>
+    </div>
+  </div>
+  <div>
+    <div id="stage">Pick a finding<small>brain bleeds &amp; injuries</small></div>
+    <div class="card">
+      <div class="lbl">Brain bleeds — location names them</div>
+      <div class="seg" id="bleedSeg">
+        <button data-d="epidural" class="on">Epidural<small>arterial, above dura</small></button>
+        <button data-d="subdural">Subdural<small>venous, below dura</small></button>
+        <button data-d="subarach">Subarachnoid<small>below arachnoid</small></button>
+        <button data-d="intracerebral">Intracerebral<small>within the brain</small></button>
+      </div>
+      <div class="lbl">Traumatic brain injury (TBI) types</div>
+      <div class="seg" id="tbiSeg" style="grid-template-columns:1fr 1fr;">
+        <button data-d="concussion">Concussion<small>mild TBI</small></button>
+        <button data-d="contusion">Contusion<small>coup-countercoup</small></button>
+        <button data-d="dai">Diffuse Axonal<small>sheared axons</small></button>
+        <button data-d="penetrating">Penetrating<small>object enters</small></button>
+      </div>
+    </div>
+    <div class="card" style="margin-top:16px;"><h2>What it is</h2><div id="info"></div>
+      <div class="pearl"><b>Bleed cheat-sheet:</b> <b>Epi</b>dural = <b>artery</b>, above the dura, fast — think a "lucid interval" then rapid decline. <b>Sub</b>dural = <b>vein</b>, below the dura, slower. <b>Sub</b>arachnoid = thunderclap headache. <b>Intra</b>cerebral = a hemorrhagic stroke within the tissue.</div>
+    </div>
+  </div>
+</div>
+<script>
+(function(){
+  const $=id=>document.getElementById(id); let cur='epidural';
+  const INFO={
+    epidural:{name:'Epidural Hematoma',color:'#a5392e',kind:'bleed',
+      plain:'An arterial bleed between the skull and the dura — fast and dangerous.',
+      story:'"Above the dura mater." An <b>arterial</b> bleed collects <b>between the skull and the dura</b>. Because it\'s under arterial pressure, it expands <b>fast</b> — classically a brief "lucid interval" followed by rapid deterioration.'},
+    subdural:{name:'Subdural Hematoma',color:'#8a3a5a',kind:'bleed',
+      plain:'A venous bleed between the dura and arachnoid — slower to develop.',
+      story:'"Below the dura mater." A <b>venous</b> bleed <b>between the dura and arachnoid</b>. Lower pressure means it develops <b>more slowly</b>, sometimes over days (common in the elderly and after falls).'},
+    subarach:{name:'Subarachnoid Hemorrhage',color:'#b0562a',kind:'bleed',
+      plain:'Bleeding into the subarachnoid space — the "worst headache of my life."',
+      story:'"Below the arachnoid mater." A bleed into the <b>subarachnoid space</b> (where CSF flows), classically from a <b>ruptured aneurysm</b>. Presents with a <b>sudden thunderclap headache</b>.'},
+    intracerebral:{name:'Intracerebral Hemorrhage',color:'#7a2a2a',kind:'bleed',
+      plain:'Bleeding within the brain tissue itself — a type of hemorrhagic stroke.',
+      story:'"Within the brain." Bleeding <b>into the brain tissue</b> — this is actually a form of <b>hemorrhagic stroke</b>, most often driven by <b>hypertension</b>.'},
+    concussion:{name:'Concussion (mild TBI)',color:'#6a5a8a',kind:'tbi',
+      plain:'A mild injury from impact or whiplash — temporary, no structural bleed.',
+      story:'A <b>mild TBI</b> from a blow to the head or <b>whiplash</b>. Diffuse, temporary dysfunction: <b>nausea, vomiting, confusion, impaired coordination</b>. Usually no bleed on imaging.'},
+    contusion:{name:'Contusion (brain bruise)',color:'#7a4a6a',kind:'tbi',
+      plain:'An actual bruise of the brain — often on both sides (coup-countercoup).',
+      story:'A <b>bruise of the brain tissue</b>. In <b>coup-countercoup</b>, the brain is injured at the <b>impact site (coup)</b> and again on the <b>opposite side (countercoup)</b> as it rebounds inside the skull.'},
+    dai:{name:'Diffuse Axonal Injury',color:'#5a4a7a',kind:'tbi',
+      plain:'Violent motion shears the brain\'s axons — often causing prolonged unconsciousness.',
+      story:'A <b>moderate-to-severe</b> injury: <b>violent rotation of the brain</b> in the skull <b>shears the axons</b>. Frequently causes <b>prolonged unconsciousness or a persistent vegetative state</b>.'},
+    penetrating:{name:'Penetrating Injury',color:'#8a3a3a',kind:'tbi',
+      plain:'An object breaches the skull and enters the brain.',
+      story:'An <b>object enters the skull</b> and directly damages brain tissue (gunshot, sharp object). Damage depends on the path and structures hit.'}
+  };
+  function draw(){ const st=cur,inf=INFO[st],C=inf.color; let s='';
+    // layered head cross-section
+    s+='<path d="M150 30 C95 30 60 75 60 130 C60 175 90 200 100 205 L100 235 L200 235 L200 205 C210 200 240 175 240 130 C240 75 205 30 150 30 Z" fill="#e8d0b8" stroke="#c9a888" stroke-width="4"/>'; // skull
+    s+='<path d="M150 44 C102 44 72 84 72 128 C72 168 98 192 106 197 L106 225 L194 225 L194 197 C202 192 228 168 228 128 C228 84 198 44 150 44 Z" fill="#f0e0d0"/>'; // dura
+    s+='<path d="M150 56 C110 56 82 92 82 128 C82 165 104 186 112 190 L112 218 L188 218 L188 190 C196 186 218 165 218 128 C218 92 190 56 150 56 Z" fill="#e0eae0"/>'; // arachnoid/CSF
+    s+='<path d="M150 66 C114 66 90 98 90 128 C90 160 110 180 118 184 L118 210 L182 210 L182 184 C190 180 210 160 210 128 C210 98 186 66 150 66 Z" fill="#f0c8bc" stroke="#c9a090" stroke-width="1.5"/>'; // brain
+    if(inf.kind==='bleed'){
+      if(st==='epidural') s+='<path class="pulse" d="M100 90 Q150 78 200 90 L195 108 Q150 98 105 108 Z" fill="'+C+'"/>';
+      else if(st==='subdural') s+='<path class="pulse" d="M108 100 Q150 92 192 100 L186 118 Q150 110 114 118 Z" fill="'+C+'"/>';
+      else if(st==='subarach') s+='<path class="pulse" d="M112 112 Q150 106 188 112 L184 126 Q150 120 116 126 Z" fill="'+C+'" opacity="0.85"/>';
+      else s+='<g class="pulse"><ellipse cx="150" cy="135" rx="26" ry="20" fill="'+C+'"/></g>';
+      s+='<text x="150" y="252" text-anchor="middle" font-size="10" font-weight="700" fill="'+C+'">'+inf.name+'</text>';
+    } else {
+      if(st==='concussion') s+='<g class="pulse"><circle cx="150" cy="130" r="30" fill="'+C+'" opacity="0.3"/></g>', s+='<text x="150" y="135" text-anchor="middle" font-size="9" font-weight="700" fill="#5a3a6a">shaken</text>';
+      else if(st==='contusion'){ s+='<circle class="pulse" cx="150" cy="72" r="10" fill="'+C+'"/><circle class="pulse" cx="150" cy="200" r="10" fill="'+C+'"/>'; s+='<text x="150" y="55" text-anchor="middle" font-size="8" font-weight="700" fill="'+C+'">coup</text><text x="150" y="228" text-anchor="middle" font-size="8" font-weight="700" fill="'+C+'">countercoup</text>'; }
+      else if(st==='dai'){ for(let i=0;i<6;i++)s+='<path class="pulse" style="animation-delay:'+(i*0.15)+'s" d="M'+(120+i*10)+' 110 l6 30" stroke="'+C+'" stroke-width="2.5"/>'; s+='<text x="150" y="252" text-anchor="middle" font-size="10" font-weight="700" fill="'+C+'">axons sheared</text>'; }
+      else { s+='<path class="pulse" d="M150 30 L150 140" stroke="'+C+'" stroke-width="4" stroke-dasharray="6 4"/><polygon points="150,20 145,32 155,32" fill="'+C+'"/>'; s+='<text x="150" y="252" text-anchor="middle" font-size="10" font-weight="700" fill="'+C+'">object enters</text>'; }
+    }
+    $('art').innerHTML=s;
+  }
+  function render(){ const inf=INFO[cur]; draw();
+    document.querySelectorAll('#bleedSeg button, #tbiSeg button').forEach(b=>b.classList.toggle('on',b.dataset.d===cur));
+    $('stage').style.background=inf.color; $('stage').innerHTML=inf.name+'<small>'+(inf.kind==='bleed'?'brain bleed':'traumatic brain injury')+'</small>';
+    $('info').innerHTML='<div class="n">'+inf.name+'</div><div class="plain">'+inf.plain+'</div><div class="story">'+inf.story+'</div>';
+    $('liveCap').innerHTML='<b>'+inf.name+'</b> — '+inf.plain;
+  }
+  document.querySelectorAll('#bleedSeg button, #tbiSeg button').forEach(b=>b.addEventListener('click',()=>{ cur=b.dataset.d; render(); }));
+  render();
+})();
+</script>
+</body>
+</html>

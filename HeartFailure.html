@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f7f2ea">
+<title>Heart Failure — Left vs Right, Systolic vs Diastolic</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=VT323&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f6f1e8; --card:#fffdf8; --ink:#2a2420; --muted:#7a6f63; --line:#e3d8c6;
+    --gold:#c99a2e; --good:#3fa66a; --warn:#d99321; --bad:#d6443f; --blue:#3f6fd6; --red:#d0524a;
+    --disp:'Cinzel Decorative',serif; --mono:'VT323',monospace; --sans:'Inter',system-ui,sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  body{background:linear-gradient(160deg,#faf6ee,#efe7d8);color:var(--ink);font-family:var(--sans);
+    min-height:100vh;padding:18px 16px 44px;}
+  header{max-width:1120px;margin:0 auto 16px;text-align:center;}
+  h1{font-family:var(--disp);font-weight:900;font-size:clamp(23px,4.4vw,38px);color:#2f5480;line-height:1.05;}
+  header .sub{color:var(--muted);font-size:15px;margin-top:4px;}
+  header .intro{max-width:800px;margin:10px auto 0;font-size:14.5px;line-height:1.5;color:#5c5248;}
+  header .intro b{color:#2f5480;}
+  .wrap{max-width:1120px;margin:0 auto;display:grid;grid-template-columns:1.05fr 1fr;gap:16px;}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;
+    box-shadow:0 6px 22px rgba(70,90,120,.07);}
+  .card h2{font-family:var(--disp);font-weight:700;font-size:17px;color:#2f5480;margin-bottom:6px;}
+  .card h2 + .desc{font-size:13px;color:var(--muted);margin-bottom:10px;line-height:1.4;}
+
+  #stage{border-radius:12px;padding:11px 14px;margin-bottom:12px;color:#fff;font-weight:700;
+    font-size:16.5px;text-align:center;transition:.3s;background:#4a7bb0;}
+  #stage small{display:block;font-weight:500;font-size:13px;opacity:.93;margin-top:2px;}
+
+  svg{display:block;width:100%;height:auto;}
+  .lab{font:700 12px var(--sans);fill:#3a3630;} .lab.w{fill:#fff;} .lab.sm{font-size:10.5px;font-weight:600;fill:#5c5248;}
+
+  #patho{border:1px solid var(--line);border-left:5px solid var(--blue);background:#f4f7fc;
+    border-radius:10px;padding:11px 13px;margin-bottom:14px;}
+  #patho .h{font-family:var(--disp);font-size:14px;color:#2f5480;margin-bottom:4px;}
+  #pathoText{font-size:14px;line-height:1.5;color:#3a3630;}
+
+  .row{display:flex;gap:8px;margin:2px 0 6px;}
+  .seg{display:flex;border:1px solid var(--line);border-radius:10px;overflow:hidden;flex:1;}
+  .seg button{flex:1;border:none;background:#fff;color:var(--ink);font-family:var(--sans);font-weight:600;
+    font-size:13.5px;padding:9px 6px;cursor:pointer;transition:.12s;}
+  .seg button.on{background:#3f6fd6;color:#fff;}
+  .seg.type button.on{background:#8a54c0;}
+  .lbl{display:flex;justify-content:space-between;font-size:14px;font-weight:600;margin:12px 0 5px;}
+  .lbl .val{font-family:var(--mono);font-size:20px;color:#2f5480;}
+  input[type=range]{width:100%;height:28px;accent-color:#3f6fd6;cursor:pointer;}
+  .chk{display:flex;align-items:center;gap:9px;margin-top:10px;font-size:13.5px;font-weight:600;cursor:pointer;}
+  .chk input{width:18px;height:18px;accent-color:#8a54c0;}
+  .trig{margin-top:12px;}
+  .trig .t{font-size:13px;font-weight:700;color:#8a3b36;margin-bottom:6px;}
+  .tgrid{display:grid;grid-template-columns:1fr 1fr;gap:7px;}
+  .tgrid button{border:1px solid #e6c9a5;background:#fff7ee;color:#8a5a2a;font-family:var(--sans);
+    font-weight:600;font-size:12.5px;padding:8px 7px;border-radius:9px;cursor:pointer;text-align:left;transition:.12s;line-height:1.15;}
+  .tgrid button:hover{background:#fdeed8;}
+  .btn{width:100%;border:none;border-radius:10px;padding:10px;font-family:var(--sans);font-weight:700;font-size:14px;
+    cursor:pointer;color:#fff;background:#8a7f70;margin-top:12px;}
+
+  /* hemodynamics */
+  .hemo{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;}
+  .hemo .h{background:#12100e;border-radius:9px;padding:8px 9px;}
+  .hemo .h .k{font-size:10.5px;letter-spacing:.4px;color:#8a8073;text-transform:uppercase;}
+  .hemo .h .v{font-family:var(--mono);font-size:24px;line-height:1;margin-top:2px;}
+  .hemo .h .u{font-size:10.5px;color:#8a8073;}
+
+  /* symptoms two columns */
+  .sxcols{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+  .sxcol h3{font-size:13px;font-weight:700;margin-bottom:6px;}
+  .sxcol.left h3{color:#b04037;} .sxcol.right h3{color:#2f5480;}
+  .sx{display:flex;align-items:flex-start;gap:8px;padding:6px 8px;border-radius:8px;border:1px solid var(--line);
+    background:#fff;margin-bottom:6px;transition:.2s;opacity:.5;}
+  .sx.on{opacity:1;}
+  .sx.on.leftsx{background:#fbeeec;border-color:#e6b3ad;}
+  .sx.on.rightsx{background:#eef3fb;border-color:#aec4e6;}
+  .sx .d{width:9px;height:9px;border-radius:50%;background:#cfc3b0;flex:none;margin-top:4px;transition:.2s;}
+  .sx.on.leftsx .d{background:#d0524a;} .sx.on.rightsx .d{background:#3f6fd6;}
+  .sx b{font-size:12.5px;} .sx span{font-size:11px;color:var(--muted);display:block;line-height:1.25;}
+
+  .pearl{background:#f3eefa;border:1px solid #d9c9ee;border-radius:10px;padding:10px 12px;margin-top:12px;
+    font-size:12.8px;line-height:1.45;color:#4a327a;}
+  .pearl b{color:#3a2263;}
+  .legend{display:flex;flex-wrap:wrap;gap:8px 16px;margin-top:8px;font-size:12px;color:#5c5248;}
+  .legend span{display:flex;align-items:center;gap:6px;}
+  .sw{width:13px;height:13px;border-radius:4px;flex:none;}
+
+  @media (max-width:880px){ .wrap{grid-template-columns:1fr;} .hemo{grid-template-columns:1fr 1fr;} .sxcols{grid-template-columns:1fr;} }
+</style>
+</head>
+<body>
+<header>
+  <h1>Heart Failure</h1>
+  <div class="sub">Left vs Right · Systolic vs Diastolic  · Cardiovascular Part 2</div>
+  <div class="intro">Heart failure means the heart can't pump enough blood forward to meet the body's needs. Blood <b>backs up behind the failing side</b> — the <b>left</b> heart backs up into the <b>lungs</b>, the <b>right</b> heart backs up into the <b>body</b>. Pick a pattern below and watch where the congestion goes.</div>
+</header>
+
+<div class="wrap">
+  <!-- LEFT: circulation diagram + LV inset -->
+  <div>
+    <div class="card">
+      <h2>Where does the blood back up?</h2>
+      <div class="desc"><b>👆 Click a scenario below</b> (Left / Right / Both · Systolic / Diastolic) and watch the blood dam back into the chambers behind the failing pump.</div>
+      <svg id="heartDia" viewBox="0 0 440 486" aria-label="four-chamber heart with backup">
+        <text id="bkLeftTag" x="220" y="15" text-anchor="middle" class="lab sm" fill="#b04037" opacity="0">▲ blood backs up → PULMONARY EDEMA</text>
+        <!-- LUNGS -->
+        <g id="cLungs">
+          <path id="lungL" d="M152 34 C122 34 112 82 122 122 C128 144 158 142 168 120 C174 102 170 50 152 34 Z" fill="#f0b9c0" stroke="#c98089" stroke-width="2"/>
+          <path id="lungR" d="M288 34 C318 34 328 82 318 122 C312 144 282 142 272 120 C266 102 270 50 288 34 Z" fill="#f0b9c0" stroke="#c98089" stroke-width="2"/>
+          <text x="220" y="86" text-anchor="middle" class="lab">LUNGS</text>
+        </g>
+        <!-- great vessels -->
+        <path id="vVena" d="M180 414 C92 410 66 300 96 206" fill="none" stroke="#5f86d8" stroke-width="13" stroke-linecap="round"/>
+        <path id="vAO"   d="M306 250 C392 250 384 384 262 414" fill="none" stroke="#d0524a" stroke-width="13" stroke-linecap="round"/>
+        <path id="vPA"   d="M182 224 C170 162 170 122 178 102" fill="none" stroke="#5f86d8" stroke-width="12" stroke-linecap="round"/>
+        <path id="vPV"   d="M264 102 C274 124 270 140 258 154" fill="none" stroke="#d0524a" stroke-width="12" stroke-linecap="round"/>
+        <!-- BODY -->
+        <g id="cBody">
+          <rect id="cBodyRect" x="150" y="412" width="140" height="56" rx="12" fill="#e7eadf" stroke="#a9b39a" stroke-width="2"/>
+          <text x="220" y="446" text-anchor="middle" class="lab">BODY</text>
+        </g>
+        <text id="bkRightTag" x="220" y="482" text-anchor="middle" class="lab sm" fill="#2f5480" opacity="0">▼ JVD · peripheral edema · ascites · big liver</text>
+
+        <!-- 4 CHAMBERS -->
+        <rect id="cRA" x="128" y="150" width="86" height="66" rx="12" fill="#5079cf"/>
+        <text x="171" y="189" text-anchor="middle" class="lab w">RA</text>
+        <rect id="cLA" x="226" y="150" width="86" height="66" rx="12" fill="#d0524a"/>
+        <text x="269" y="189" text-anchor="middle" class="lab w">LA</text>
+        <path id="cRV" d="M128 224 h86 v66 C214 320 190 338 165 338 C142 338 128 320 128 300 Z" fill="#4f79cf"/>
+        <text x="168" y="286" text-anchor="middle" class="lab w">RV</text>
+        <path id="cLV" d="M226 224 h86 v72 C312 332 286 356 258 356 C234 356 226 330 226 300 Z" fill="#d0524a"/>
+        <text x="270" y="280" text-anchor="middle" class="lab w">LV</text>
+        <text id="efBadge" x="270" y="300" text-anchor="middle" style="font:700 12px Inter,sans-serif;fill:#fff">EF 60%</text>
+
+        <!-- backward-flow arrows into the atria -->
+        <defs><marker id="ah" markerWidth="9" markerHeight="9" refX="4" refY="4.5" orient="auto"><path d="M0 0 L9 4.5 L0 9 Z" fill="#6a4a1a"/></marker></defs>
+        <path id="bkLeftArr"  d="M262 246 C302 232 302 208 284 194" fill="none" stroke="#7d1810" stroke-width="3" marker-end="url(#ah)" opacity="0"/>
+        <path id="bkRightArr" d="M178 246 C138 232 138 208 156 194" fill="none" stroke="#16337a" stroke-width="3" marker-end="url(#ah)" opacity="0"/>
+      </svg>
+      <div class="legend">
+        <span><span class="sw" style="background:#4f79cf"></span>Right heart / deoxygenated</span>
+        <span><span class="sw" style="background:#d0524a"></span>Left heart / oxygenated</span>
+        <span><span class="sw" style="background:#7d1810"></span>Backed-up / congested</span>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:16px;">
+      <h2>Systolic vs Diastolic — the left ventricle</h2>
+      <div class="desc">Same symptoms, opposite mechanics. It comes down to <b>ejection fraction (EF)</b> — how much of the filled blood is pumped out each beat (normal ≈ 55–70%).</div>
+      <div style="display:flex;gap:14px;align-items:center;">
+        <svg id="lv" viewBox="0 0 200 180" style="max-width:200px;"></svg>
+        <div style="flex:1;">
+          <div style="font-family:var(--mono);font-size:44px;line-height:1;color:#2f5480" id="efBig">60<span style="font-size:22px">%</span></div>
+          <div id="efLabel" style="font-weight:700;font-size:15px;color:#2f5480;margin-top:2px;">Normal EF</div>
+          <div id="efNote" style="font-size:12.5px;color:var(--muted);margin-top:6px;line-height:1.4;">Ejection fraction is normal — the ventricle fills and empties well.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RIGHT: controls + hemodynamics + symptoms -->
+  <div>
+    <div id="stage">Normal heart<small>Adequate forward output, no congestion</small></div>
+
+    <div id="patho">
+      <div class="h">What's happening now</div>
+      <div id="pathoText">Choose a failing side and a type below to begin.</div>
+    </div>
+
+    <div class="card">
+      <h2>Controls</h2>
+      <div style="font-size:13px;font-weight:600;margin-bottom:4px;">Which side is failing?</div>
+      <div class="seg" id="sideSeg">
+        <button data-side="left" class="on">Left</button>
+        <button data-side="right">Right</button>
+        <button data-side="both">Both</button>
+      </div>
+      <div style="font-size:13px;font-weight:600;margin:12px 0 4px;">Type (left ventricle)</div>
+      <div class="seg type" id="typeSeg">
+        <button data-type="systolic" class="on">Systolic (HFrEF)</button>
+        <button data-type="diastolic">Diastolic (HFpEF)</button>
+      </div>
+      <div class="lbl"><span>Severity</span><span class="val"><span id="sevV">50</span>%</span></div>
+      <input type="range" id="sev" min="0" max="100" value="50">
+      <label class="chk"><input type="checkbox" id="comp"> Neurohormonal compensation (RAAS · sympathetic · ADH)</label>
+      <div class="trig">
+        <div class="t">Decompensation triggers — push a stable patient into acute failure:</div>
+        <div class="tgrid">
+          <button data-trig="salt">🧂 Salt / fluid overload</button>
+          <button data-trig="meds">💊 Stopped meds</button>
+          <button data-trig="afib">💓 New-onset AFib</button>
+          <button data-trig="htn">📈 Uncontrolled HTN</button>
+          <button data-trig="mi">🫀 New MI</button>
+          <button data-trig="infxn">🦠 Infection / illness</button>
+        </div>
+      </div>
+      <button class="btn" id="reset">Reset patient</button>
+    </div>
+
+    <div class="card" style="margin-top:16px;">
+      <h2>Hemodynamics</h2>
+      <div class="hemo">
+        <div class="h"><div class="k">Ejection Fraction</div><div class="v" id="mEF" style="color:#66d17f">60</div><div class="u">%</div></div>
+        <div class="h"><div class="k">Cardiac Output</div><div class="v" id="mCO" style="color:#66d17f">5.2</div><div class="u">L/min</div></div>
+        <div class="h"><div class="k">Blood Pressure</div><div class="v" id="mBP" style="color:#66d17f">118</div><div class="u">mmHg sys</div></div>
+        <div class="h"><div class="k">Pulm. wedge P</div><div class="v" id="mPCWP" style="color:#66d17f">8</div><div class="u">mmHg</div></div>
+        <div class="h"><div class="k">Venous P / JVP</div><div class="v" id="mCVP" style="color:#66d17f">4</div><div class="u">mmHg</div></div>
+        <div class="h"><div class="k">Heart Rate</div><div class="v" id="mHR" style="color:#66d17f">74</div><div class="u">bpm</div></div>
+      </div>
+      <div class="pearl" id="compNote" style="display:none;"><b>Compensation is a double-edged sword:</b> RAAS + sympathetic drive prop up blood pressure and output <i>short-term</i>, but chronically they retain salt & water (more congestion), raise afterload, and drive myocardial hypertrophy — <b>accelerating</b> the failure.</div>
+    </div>
+
+    <div class="card" style="margin-top:16px;">
+      <h2>Signs &amp; symptoms</h2>
+      <div class="desc">Which appear depends on which side is congested.</div>
+      <div class="sxcols">
+        <div class="sxcol left">
+          <h3>◀ Left-sided (into the lungs)</h3>
+          <div class="sx leftsx" id="sx_dyspnea"><div class="d"></div><div><b>Dyspnea / SOB</b><span>fluid in alveoli impairs gas exchange</span></div></div>
+          <div class="sx leftsx" id="sx_ortho"><div class="d"></div><div><b>Orthopnea / PND</b><span>worse lying flat / waking breathless</span></div></div>
+          <div class="sx leftsx" id="sx_crackles"><div class="d"></div><div><b>Crackles / rales</b><span>heard over congested lung bases</span></div></div>
+          <div class="sx leftsx" id="sx_froth"><div class="d"></div><div><b>Frothy, blood-tinged sputum</b><span>flash pulmonary edema</span></div></div>
+          <div class="sx leftsx" id="sx_cool"><div class="d"></div><div><b>Cool, pale extremities</b><span>low forward output</span></div></div>
+        </div>
+        <div class="sxcol right">
+          <h3>Right-sided (into the body) ▶</h3>
+          <div class="sx rightsx" id="sx_edema"><div class="d"></div><div><b>Peripheral edema</b><span>swollen ankles / legs</span></div></div>
+          <div class="sx rightsx" id="sx_jvd"><div class="d"></div><div><b>Jugular venous distention</b><span>backed-up systemic veins</span></div></div>
+          <div class="sx rightsx" id="sx_hepato"><div class="d"></div><div><b>Hepatomegaly</b><span>congested, enlarged liver</span></div></div>
+          <div class="sx rightsx" id="sx_ascites"><div class="d"></div><div><b>Ascites</b><span>fluid in the abdomen</span></div></div>
+          <div class="sx rightsx" id="sx_weight"><div class="d"></div><div><b>Weight gain / fatigue</b><span>fluid retention, low output</span></div></div>
+        </div>
+      </div>
+      <div class="pearl"><b>Key link:</b> the #1 cause of <b>right</b> heart failure is <b>left</b> heart failure — chronic lung congestion raises pulmonary pressures until the right ventricle fails too. Crank left-sided severity up and watch the right side start to congest.</div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const $=id=>document.getElementById(id);
+  const state={ side:'left', type:'systolic', severity:50, comp:false, trigMsg:'' };
+
+  function model(){
+    const sev=state.severity/100;
+    const leftInv=state.side!=='right', rightInv=state.side!=='left';
+    let leftSev=leftInv?sev:0, rightSev=rightInv?sev:0;
+    if(leftSev>0.5) rightSev=Math.max(rightSev,(leftSev-0.5)*0.85);   // left HF → right HF
+    let EF = (leftInv && state.type==='systolic') ? Math.round(62-leftSev*46) : Math.round(60-leftSev*8);
+    let CO = 5.2*(1-Math.max(leftSev,rightSev)*0.55);
+    let PCWP = 8+leftSev*34;
+    let CVP  = 4+rightSev*15;
+    let BP   = 118-Math.max(leftSev,rightSev)*30;
+    let HR   = 74+Math.max(leftSev,rightSev)*22;
+    if(state.comp){ CO*=1.16; BP+=14; HR+=24; PCWP+=4; CVP+=2; }
+    return {sev,leftInv,rightInv,leftSev,rightSev,EF,CO:Math.max(1.2,CO),
+            PCWP,CVP,BP:Math.max(60,Math.round(BP)),HR:Math.round(HR)};
+  }
+  function efClass(EF){ return EF<=40?['HFrEF · reduced EF','#d6443f']:EF<50?['HFmrEF · mildly reduced','#d99321']:['HFpEF · preserved EF','#3fa66a']; }
+  function vcolor(ok,warn){ return ok?'#66d17f':warn?'#e6c15a':'#ff6a5f'; }
+
+  function narrate(m){
+    if(state.trigMsg) return state.trigMsg;
+    if(m.leftSev<0.05 && m.rightSev<0.05) return 'The heart pumps enough blood forward and nothing backs up. Choose a failing side and dial up the severity.';
+    let s='';
+    const sideTxt = state.side==='both'?'Both ventricles are':state.side==='left'?'The LEFT ventricle is':'The RIGHT ventricle is';
+    if(state.side!=='right'){
+      s += sideTxt+' failing to move blood forward. ';
+      s += state.type==='systolic'
+        ? 'It is a SYSTOLIC problem — the muscle is weak and dilated, so it can\'t contract hard enough; ejection fraction falls (HFrEF). '
+        : 'It is a DIASTOLIC problem — the muscle is stiff and hypertrophied, so it can\'t relax and fill; ejection fraction is preserved (HFpEF) but little blood gets in to pump out. ';
+      s += 'Blood dams back into the LUNGS → rising wedge pressure → pulmonary congestion (dyspnea, crackles, orthopnea). ';
+    }
+    if(state.side==='right') s += sideTxt+' failing, so blood dams back into the SYSTEMIC veins → the BODY congests (JVD, peripheral edema, ascites, an enlarged liver). ';
+    else if(m.rightSev>0.05 && state.side==='left') s += 'As the lung congestion worsens it is now straining the RIGHT heart too, so systemic congestion is beginning.';
+    else if(state.side==='both') s += 'And the failing RIGHT side is congesting the BODY as well.';
+    return s;
+  }
+
+  let beat=1;
+  function render(){
+    const m=model(), efc=efClass(m.EF);
+    // stage
+    const sev=Math.max(m.leftSev,m.rightSev);
+    const sb=$('stage');
+    let st,ss,sc;
+    if(sev<0.05){ st='Normal heart'; ss='Adequate forward output, no congestion'; sc='#4a7bb0'; }
+    else{
+      const sideN = state.side==='both'?'Biventricular':state.side==='left'?'Left-sided':'Right-sided';
+      const typeN = state.side==='right'?'':(state.type==='systolic'?' systolic (HFrEF)':' diastolic (HFpEF)');
+      st = sideN+typeN+' heart failure';
+      if(state.trigMsg){ ss='ACUTE DECOMPENSATION'; sc='#d6443f'; }
+      else if(sev<0.4){ ss='Compensated — mild congestion'; sc='#d99321'; }
+      else if(sev<0.75){ ss='Symptomatic congestion'; sc='#e0741f'; }
+      else{ ss='Severe — low output + marked congestion'; sc='#d6443f'; }
+    }
+    sb.style.background=sc; sb.innerHTML=st+'<small>'+ss+'</small>';
+    $('pathoText').textContent=narrate(m);
+
+    // hemodynamics
+    const setV=(el,v,c)=>{el.textContent=v;el.style.color=c;};
+    setV($('mEF'), m.EF, vcolor(m.EF>=50,m.EF>=40));
+    setV($('mCO'), m.CO.toFixed(1), vcolor(m.CO>=4,m.CO>=2.8));
+    setV($('mBP'), m.BP, vcolor(m.BP>=100,m.BP>=85));
+    setV($('mPCWP'), Math.round(m.PCWP), vcolor(m.PCWP<15,m.PCWP<22));
+    setV($('mCVP'), Math.round(m.CVP), vcolor(m.CVP<9,m.CVP<13));
+    setV($('mHR'), m.HR, vcolor(m.HR<95,m.HR<115));
+    $('compNote').style.display=state.comp?'block':'none';
+
+    // EF panel + LV inset
+    $('efBig').innerHTML=m.EF+'<span style="font-size:22px">%</span>';
+    $('efLabel').textContent=efc[0]; $('efLabel').style.color=efc[1];
+    $('efBig').style.color=efc[1];
+    $('efNote').textContent = state.side==='right'
+      ? 'Right-sided failure alone doesn\'t change the LV\'s ejection fraction.'
+      : (state.type==='systolic'
+        ? 'The dilated, weak ventricle empties poorly — a low EF (HFrEF). Big chamber, thin wall.'
+        : 'The stiff, hypertrophied ventricle squeezes normally (EF preserved) but can barely fill — small chamber, thick wall (HFpEF).');
+    drawLV(m);
+
+    // chamber-level backup: LEFT fails → LA + pulm veins + lungs congest;
+    //                        RIGHT fails → RA + vena cava + body congest
+    const leftCong=Math.min(1,Math.max(0,(m.PCWP-12)/30));
+    const rightCong=Math.min(1,Math.max(0,(m.CVP-7)/14));
+    $('cLA').setAttribute('fill', mixHex('#d0524a','#7d1810',leftCong));
+    $('lungL').setAttribute('fill', mixHex('#f0b9c0','#c23a34',leftCong));
+    $('lungR').setAttribute('fill', mixHex('#f0b9c0','#c23a34',leftCong));
+    $('vPV').setAttribute('stroke', mixHex('#d0524a','#7d1810',leftCong));
+    $('cLungs').setAttribute('transform', sAround(220,80,1+leftCong*0.13));
+    $('cLA').setAttribute('transform', sAround(269,183,1+leftCong*0.13));
+    $('bkLeftTag').setAttribute('opacity', leftCong>0.12?'1':'0');
+    $('bkLeftArr').setAttribute('opacity', leftCong>0.12?'0.9':'0');
+    $('cRA').setAttribute('fill', mixHex('#5079cf','#16337a',rightCong));
+    $('cBodyRect').setAttribute('fill', mixHex('#e7eadf','#3f6fd6',rightCong));
+    $('vVena').setAttribute('stroke', mixHex('#5f86d8','#16337a',rightCong));
+    $('cBody').setAttribute('transform', sAround(220,440,1+rightCong*0.12));
+    $('cRA').setAttribute('transform', sAround(171,183,1+rightCong*0.13));
+    $('bkRightTag').setAttribute('opacity', rightCong>0.12?'1':'0');
+    $('bkRightArr').setAttribute('opacity', rightCong>0.12?'0.9':'0');
+    // outline the failing ventricle
+    const lvFail=state.side!=='right' && m.leftSev>0.05, rvFail=state.side!=='left' && m.rightSev>0.05;
+    $('cLV').setAttribute('stroke', lvFail?'#7d1810':'none'); $('cLV').setAttribute('stroke-width', lvFail?'3.5':'0');
+    $('cRV').setAttribute('stroke', rvFail?'#16337a':'none'); $('cRV').setAttribute('stroke-width', rvFail?'3.5':'0');
+    $('efBadge').textContent='EF '+m.EF+'%';
+
+    // symptoms
+    const on=(id,v)=>$(id).classList.toggle('on',v);
+    on('sx_dyspnea', m.PCWP>15); on('sx_ortho', m.PCWP>19); on('sx_crackles', m.PCWP>20);
+    on('sx_froth', m.PCWP>28); on('sx_cool', m.CO<3.6);
+    on('sx_edema', m.CVP>9); on('sx_jvd', m.CVP>9.5); on('sx_hepato', m.CVP>12);
+    on('sx_ascites', m.CVP>14); on('sx_weight', m.CVP>9);
+
+    // forward-flow animation speed per vessel (downstream of failing pump is reduced)
+    fwdL = 1-m.leftSev*0.7;  fwdR = 1-m.rightSev*0.7;
+  }
+
+  // ---- LV cross-section (systolic dilated vs diastolic hypertrophied) ----
+  function drawLV(m){
+    const svg=$('lv'); const cx=100,cy=90;
+    let outer,wall;
+    if(state.side==='right'){ outer=52; wall=13; }
+    else if(state.type==='systolic'){ outer=64; wall=8+ (1-m.leftSev)*3; }   // dilated, thin
+    else { outer=48; wall=14+m.leftSev*12; }                                 // hypertrophied, thick
+    const cavity=Math.max(6, outer-wall);
+    const ef=m.EF/100;
+    const sysCavity=cavity*Math.sqrt(1-ef);   // end-systolic radius from EF (area proxy)
+    const r = cavity - (cavity-sysCavity)*(0.5+0.5*Math.sin(lvPhase));
+    let s='';
+    s+='<circle cx="'+cx+'" cy="'+cy+'" r="'+outer+'" fill="#c96b60" stroke="#9c4139" stroke-width="2"/>';
+    s+='<circle cx="'+cx+'" cy="'+cy+'" r="'+r.toFixed(1)+'" fill="#d0524a"/>';
+    s+='<text x="'+cx+'" y="'+(cy+outer+16)+'" text-anchor="middle" class="lab sm">'+
+       (state.side==='right'?'LV (normal)':state.type==='systolic'?'Dilated · thin wall':'Hypertrophied · thick wall')+'</text>';
+    svg.innerHTML=s;
+  }
+
+  // ---- colour + transform helpers ----
+  function mixHex(a,b,t){ t=Math.min(1,Math.max(0,t));
+    const pa=parseInt(a.slice(1),16),pb=parseInt(b.slice(1),16);
+    const r=Math.round((pa>>16)+(((pb>>16)-(pa>>16))*t));
+    const g=Math.round(((pa>>8)&255)+((((pb>>8)&255)-((pa>>8)&255))*t));
+    const bl=Math.round((pa&255)+(((pb&255)-(pa&255))*t));
+    return '#'+((1<<24)+(r<<16)+(g<<8)+bl).toString(16).slice(1); }
+  function sAround(cx,cy,s){ return 'translate('+cx+' '+cy+') scale('+s.toFixed(3)+') translate('+(-cx)+' '+(-cy)+')'; }
+
+  // ---- flow animation ----
+  let fwdL=1,fwdR=1,lvPhase=0,dash=0;
+  function animateFlow(dt){
+    dash-=dt*40;
+    const set=(id,speed)=>{const el=$(id);if(!el)return;el.setAttribute('stroke-dasharray','14 10');
+      el.setAttribute('stroke-dashoffset',(dash*speed).toFixed(1));};
+    set('vVena',1);        // body → RA
+    set('vPA',fwdR);      // RV → lungs (reduced if right fails)
+    set('vPV',1);          // lungs → LA
+    set('vAO',fwdL);      // LV → body (reduced if left fails)
+  }
+
+  let last=performance.now();
+  function loop(now){
+    requestAnimationFrame(loop);
+    const dt=Math.min(0.05,(now-last)/1000); last=now;
+    const m=model();
+    lvPhase += dt*(m.HR/60)*2*Math.PI;
+    drawLV(m);
+    animateFlow(dt);
+  }
+
+  // ---- controls ----
+  document.querySelectorAll('#sideSeg button').forEach(b=>b.addEventListener('click',()=>{
+    state.side=b.dataset.side; state.trigMsg='';
+    document.querySelectorAll('#sideSeg button').forEach(x=>x.classList.toggle('on',x===b));
+    $('typeSeg').style.opacity = state.side==='right'?'0.45':'1';
+    render();
+  }));
+  document.querySelectorAll('#typeSeg button').forEach(b=>b.addEventListener('click',()=>{
+    state.type=b.dataset.type; state.trigMsg='';
+    document.querySelectorAll('#typeSeg button').forEach(x=>x.classList.toggle('on',x===b));
+    render();
+  }));
+  $('sev').addEventListener('input',()=>{ state.severity=+$('sev').value; $('sevV').textContent=$('sev').value; state.trigMsg=''; render(); });
+  $('comp').addEventListener('change',()=>{ state.comp=$('comp').checked; render(); });
+
+  const TRIG={
+    salt:{s:90,m:'🧂 Dietary salt & fluid overload: the extra volume the failing heart can\'t handle floods the lungs → acute decompensated heart failure with flash pulmonary edema.'},
+    meds:{s:88,m:'💊 Stopping diuretics / afterload meds: fluid re-accumulates and afterload climbs, tipping a compensated patient into acute failure.'},
+    afib:{s:82,af:true,m:'💓 New atrial fibrillation: the fast, irregular rate + loss of the atrial kick slashes filling — especially devastating in DIASTOLIC HF, which depends on that atrial contribution.'},
+    htn:{s:85,m:'📈 Uncontrolled hypertension: the ventricle must pump against a much higher afterload; forward output drops and pressures back up.'},
+    mi:{s:92,mi:true,m:'🫀 A new myocardial infarction kills contractile muscle — a sudden drop in systolic function → acute pump failure.'},
+    infxn:{s:80,m:'🦠 Superimposed infection / illness (or surgery, AKI): raises metabolic demand and fluid shifts, overwhelming the limited cardiac reserve.'}
+  };
+  document.querySelectorAll('.tgrid button').forEach(b=>b.addEventListener('click',()=>{
+    const t=TRIG[b.dataset.trig];
+    if(t.mi) state.type='systolic';
+    if(t.af && state.side==='right'){} // afib still applies
+    state.severity=t.s; $('sev').value=t.s; $('sevV').textContent=t.s;
+    if(t.mi){ if(state.side==='right') state.side='left';
+      document.querySelectorAll('#sideSeg button').forEach(x=>x.classList.toggle('on',x.dataset.side===state.side));
+      document.querySelectorAll('#typeSeg button').forEach(x=>x.classList.toggle('on',x.dataset.type==='systolic')); }
+    state.trigMsg=t.m; render();
+  }));
+  $('reset').addEventListener('click',()=>{
+    state.side='left'; state.type='systolic'; state.severity=50; state.comp=false; state.trigMsg='';
+    $('sev').value=50; $('sevV').textContent='50'; $('comp').checked=false;
+    document.querySelectorAll('#sideSeg button').forEach(x=>x.classList.toggle('on',x.dataset.side==='left'));
+    document.querySelectorAll('#typeSeg button').forEach(x=>x.classList.toggle('on',x.dataset.type==='systolic'));
+    $('typeSeg').style.opacity='1'; render();
+  });
+
+  render();
+  requestAnimationFrame(loop);
+})();
+</script>
+</body>
+</html>

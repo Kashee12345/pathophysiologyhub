@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f7f2ea">
+<title>Bilirubin &amp; the Signs of Liver Disease</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{ --card:#fffdf8; --ink:#2a2420; --muted:#7a6f63; --line:#e3d8c6;
+    --sans:'Inter',system-ui,sans-serif; --disp:'Cinzel Decorative',serif; --accent:#c99a1e; }
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  body{background:linear-gradient(160deg,#fbf6e6,#eee7d6);color:var(--ink);font-family:var(--sans);min-height:100vh;padding:18px 16px 44px;}
+  header{max-width:1120px;margin:0 auto 16px;text-align:center;}
+  h1{font-family:var(--disp);font-weight:900;font-size:clamp(20px,3.8vw,32px);color:#a5801a;line-height:1.05;}
+  header .sub{color:var(--muted);font-size:15px;margin-top:4px;}
+  header .intro{max-width:870px;margin:10px auto 0;font-size:14.5px;line-height:1.5;color:#5c5248;}
+  header .intro b{color:#a5801a;}
+  .wrap{max-width:1120px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;box-shadow:0 6px 22px rgba(150,120,30,.07);}
+  .card h2{font-family:var(--disp);font-weight:700;font-size:16px;color:#a5801a;margin-bottom:6px;}
+  .card h2 + .desc{font-size:13px;color:var(--muted);margin-bottom:10px;line-height:1.4;}
+  svg{display:block;width:100%;height:auto;max-height:400px;}
+  #liveCap{margin-top:8px;background:#f7efd6;border:1px solid #e8d59e;border-radius:10px;padding:10px 13px;font-size:14px;line-height:1.5;color:#6a5210;text-align:center;} #liveCap b{color:#7a5a08;}
+
+  @keyframes pulseHot{0%,100%{opacity:.45}50%{opacity:.9}}
+  .hot{animation:pulseHot 1.4s ease-in-out infinite;}
+  @keyframes drip{0%{transform:translateY(0);opacity:0}25%{opacity:1}100%{transform:translateY(16px);opacity:0}}
+  .drip{animation:drip 1.7s ease-in infinite;}
+
+  #stage{border-radius:12px;padding:11px 14px;margin-bottom:12px;color:#fff;font-weight:700;font-size:16px;text-align:center;background:#c9a52e;}
+  #stage small{display:block;font-weight:500;font-size:13px;opacity:.93;margin-top:2px;}
+  .grouplbl{font-size:11.5px;font-weight:700;text-transform:uppercase;color:var(--muted);letter-spacing:.03em;margin:2px 0 6px;}
+  .btns{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-bottom:12px;}
+  .sb{border:1px solid var(--line);background:#fff;border-radius:10px;padding:9px 10px;cursor:pointer;text-align:left;font-weight:700;font-size:12.5px;color:#4a4038;transition:.12s;line-height:1.2;}
+  .sb:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(150,120,30,.12);}
+  .sb small{display:block;font-weight:500;font-size:10px;color:var(--muted);margin-top:2px;}
+  .sb.on{background:#c9a52e;color:#fff;border-color:transparent;} .sb.on small{color:rgba(255,255,255,.9);}
+  .sb.portal.on{background:#a5502a;}
+
+  #info{border:1px solid var(--line);border-left:5px solid var(--accent);background:#f9f3e2;border-radius:10px;padding:12px 13px;}
+  #info .n{font-family:var(--disp);font-weight:700;font-size:17px;color:#a5801a;}
+  #info .plain{font-size:14.5px;line-height:1.5;color:#2a2420;margin-top:8px;font-weight:600;}
+  #info .story{font-size:13px;line-height:1.5;color:#3a3630;margin-top:8px;background:#fff;border-radius:8px;padding:9px 11px;border:1px solid #e8ddc0;}
+  .pearl{background:#eef4fb;border:1px solid #cbdcf0;border-radius:10px;padding:10px 12px;margin-top:12px;font-size:12.5px;line-height:1.5;color:#274d7a;} .pearl b{color:#173b5a;}
+  @media (max-width:880px){ .wrap{grid-template-columns:1fr;} }
+</style>
+</head>
+<body>
+<header>
+  <h1>Bilirubin &amp; the Signs of Liver Disease</h1>
+  <div class="sub">Follow the bile · Week 14</div>
+  <div class="intro">Normally the liver packages <b>bilirubin</b> into <b>bile</b>, sends it to the gut, and it leaves as brown stool. When the liver fails or the bile can't get out, bilirubin and bile salts <b>back up into the blood</b> — and that one backup explains almost every sign. Click each sign to see where it comes from.</div>
+</header>
+
+<div class="wrap">
+  <div>
+    <div class="card">
+      <h2>Where the sign shows up</h2>
+      <div class="desc">The highlighted spot is where bilirubin or backed-up pressure is causing trouble.</div>
+      <svg id="body" viewBox="0 0 260 380" aria-label="body signs of liver disease"></svg>
+      <div id="liveCap">Pick a sign to trace it back.</div>
+    </div>
+  </div>
+  <div>
+    <div id="stage">Pick a sign<small>bilirubin &amp; the portal backup</small></div>
+    <div class="card">
+      <div class="grouplbl">① All about bile &amp; bilirubin</div>
+      <div class="btns" id="bileBtns">
+        <button class="sb on" data-d="jaundice">Jaundice<small>yellow skin/eyes</small></button>
+        <button class="sb" data-d="pruritus">Pruritus<small>itching, no rash</small></button>
+        <button class="sb" data-d="darkurine">Dark urine<small>bilirubin in pee</small></button>
+        <button class="sb" data-d="claystool">Clay stools<small>no bile = no color</small></button>
+      </div>
+      <div class="grouplbl">② Portal circulation backs up</div>
+      <div class="btns" id="portalBtns">
+        <button class="sb portal" data-d="hepatomegaly">Hepatomegaly<small>enlarged liver</small></button>
+        <button class="sb portal" data-d="ascites">Ascites / edema<small>fluid in belly</small></button>
+        <button class="sb portal" data-d="varices">Esophageal varices<small>swollen veins</small></button>
+      </div>
+    </div>
+    <div class="card" style="margin-top:16px;"><h2>Why it happens</h2><div id="info"></div>
+      <div class="pearl"><b>One idea explains it all:</b> bilirubin/bile that should leave through the gut instead <b>backs up into the blood</b> → yellow skin &amp; eyes (jaundice), itchy skin (bile salts), dark urine (kidneys dump it), and <b>pale clay stools</b> (none reaching the gut). Separately, a scarred liver dams the <b>portal vein</b> → big liver, belly fluid, and bulging esophageal veins.</div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const $=id=>document.getElementById(id);
+  let cur='jaundice';
+  const INFO={
+    jaundice:{name:'Jaundice',color:'#e0b820',part:'skin',
+      plain:'Bilirubin builds up in the blood and stains the skin, whites of the eyes, and mucous membranes yellow-orange.',
+      story:'When the liver can\'t clear <b>bilirubin</b>, it accumulates in the blood and deposits in tissues → a <b>yellow-orange</b> tint to the <b>skin, conjunctiva (whites of the eyes), and mucous membranes</b>. It\'s often seen first in the sclera.'},
+    pruritus:{name:'Pruritus (itching)',color:'#d0a828',part:'skin',
+      plain:'Bile salts deposit in the skin and irritate nerves — intense itching, usually with no rash.',
+      story:'<b>Bile salts</b> that can\'t exit through the bile build up and deposit in the skin, where they <b>irritate peripheral nerves</b> → itching <b>all over the body</b>. Classically there\'s <b>no rash</b> — just relentless itch.'},
+    darkurine:{name:'Dark Urine',color:'#8a5a1a',part:'bladder',
+      plain:'The kidneys dump the excess bilirubin into the urine, turning it dark (tea/cola colored).',
+      story:'With bilirubin backed up in the blood, the <b>kidneys filter it out into the urine</b> → the urine turns <b>dark</b>. This is the body\'s alternate exit when the normal (gut) route is blocked.'},
+    claystool:{name:'Clay-Colored Stools',color:'#c9b89a',part:'gut',
+      plain:'Bile gives stool its brown color — if no bile reaches the gut, stool turns pale/clay-colored.',
+      story:'Stool is brown because of <b>bile pigment</b>. If bile can\'t get to the gut (liver failure or a blocked duct), the stool loses its color → <b>pale, clay-colored</b>. Simple rule: <b>no bile, no color</b>.'},
+    hepatomegaly:{name:'Hepatomegaly',color:'#a5502a',part:'liver',
+      plain:'Blood backs up in the portal system and engorges the liver, making it enlarged.',
+      story:'A diseased liver obstructs the <b>portal circulation</b> flowing through it. Blood dams up behind the liver and <b>engorges it</b> → the liver becomes <b>enlarged (hepatomegaly)</b> and often tender.'},
+    ascites:{name:'Ascites / Peripheral Edema',color:'#5a8aa0',part:'belly',
+      plain:'Portal pressure and low albumin push fluid out of the vessels into the belly and legs.',
+      story:'High <b>portal pressure</b> (plus a failing liver making less <b>albumin</b>) forces fluid out of the blood vessels → it collects in the <b>abdomen (ascites)</b> and the <b>legs (peripheral edema)</b>. The belly becomes distended.'},
+    varices:{name:'Esophageal Varices',color:'#a53a5a',part:'esophagus',
+      plain:'Blood detours around the blocked liver through esophageal veins, which swell and can rupture.',
+      story:'When blood can\'t get through the scarred liver, it <b>reroutes through smaller veins</b> — including those in the <b>esophagus</b>. These aren\'t built for the load, so they <b>swell into varices</b> that can <b>rupture and bleed massively</b> (a cause of bright-red hematemesis).'}
+  };
+
+  function draw(){
+    const part=INFO[cur].part; const C=INFO[cur].color; let s='';
+    const jaundiced = (cur==='jaundice'||cur==='pruritus');
+    const skinColor = jaundiced? '#f2e07a':'#f2d3b8';
+    // head
+    s+='<circle cx="130" cy="46" r="30" fill="'+skinColor+'" stroke="#d8b48a" stroke-width="2"/>';
+    // eyes (sclera) — yellow for jaundice
+    s+='<ellipse cx="120" cy="44" rx="6" ry="4" fill="'+(jaundiced?'#f0d84a':'#fff')+'" stroke="#c9a888" stroke-width="1"/>';
+    s+='<ellipse cx="140" cy="44" rx="6" ry="4" fill="'+(jaundiced?'#f0d84a':'#fff')+'" stroke="#c9a888" stroke-width="1"/>';
+    s+='<circle cx="120" cy="44" r="2" fill="#4a3a2a"/><circle cx="140" cy="44" r="2" fill="#4a3a2a"/>';
+    // itch marks
+    if(cur==='pruritus'){ for(let i=0;i<3;i++) s+='<text class="hot" x="'+(70+i*60)+'" y="'+(120+i*40)+'" font-size="16" fill="#c99a2e">✦</text>'; s+='<text x="200" y="140" font-size="10" font-weight="700" fill="#a5801a">itch all over</text>'; }
+    // torso
+    s+='<path d="M100 78 L160 78 C175 80 180 95 178 120 L182 220 C182 240 168 250 130 250 C92 250 78 240 78 220 L82 120 C80 95 85 80 100 78 Z" fill="'+skinColor+'" stroke="#d8b48a" stroke-width="2"/>';
+    // arms
+    s+='<path d="M84 100 L58 170 L64 175 L92 115" fill="'+skinColor+'" stroke="#d8b48a" stroke-width="1.5"/>';
+    s+='<path d="M176 100 L202 170 L196 175 L168 115" fill="'+skinColor+'" stroke="#d8b48a" stroke-width="1.5"/>';
+    // legs
+    s+='<path d="M112 250 L104 350 L116 350 L126 255 Z" fill="'+skinColor+'" stroke="#d8b48a" stroke-width="1.5"/>';
+    s+='<path d="M148 250 L156 350 L144 350 L134 255 Z" fill="'+skinColor+'" stroke="#d8b48a" stroke-width="1.5"/>';
+    // liver
+    const liverBig = cur==='hepatomegaly';
+    s+='<path d="M92 132 C92 122 150 120 '+(liverBig?175:165)+' 126 C'+(liverBig?188:180)+' 130 '+(liverBig?186:176)+' '+(liverBig?165:150)+' '+(liverBig?150:150)+' '+(liverBig?162:150)+' C120 '+(liverBig?170:158)+' 92 152 92 132 Z" fill="'+(part==='liver'?'#a5502a':'#b0603a')+'" stroke="#7a3a2a" stroke-width="1.5" opacity="'+(part==='liver'?1:0.8)+'"/>';
+    if(part==='liver'){ s+='<path class="hot" d="M92 132 C92 122 150 120 178 126 C190 130 186 165 150 162 C120 170 92 152 92 132 Z" fill="#c96a3a" opacity="0.4"/>'; s+='<text x="130" y="112" text-anchor="middle" font-size="10" font-weight="700" fill="#a5502a">liver ↑ enlarged</text>'; }
+    // esophagus (varices) — a tube up through chest
+    if(part==='esophagus'){ s+='<path d="M130 78 L130 130" stroke="#a53a5a" stroke-width="9" stroke-linecap="round"/>'; for(let i=0;i<3;i++) s+='<circle class="hot" cx="'+(126+ (i%2)*8)+'" cy="'+(95+i*12)+'" r="5" fill="#8a1e3a"/>'; s+='<text x="150" y="100" font-size="10" font-weight="700" fill="#a53a5a">bulging veins</text>'; }
+    // belly ascites
+    if(part==='belly'){ s+='<ellipse class="hot" cx="130" cy="200" rx="46" ry="34" fill="#6aa0b8" opacity="0.5"/>'; s+='<path d="M130 195 q30 6 0 0" fill="none"/>'; s+='<text x="130" y="205" text-anchor="middle" font-size="10" font-weight="700" fill="#2f6a80">fluid (ascites)</text>';
+      // leg edema
+      s+='<ellipse cx="110" cy="330" rx="9" ry="16" fill="#6aa0b8" opacity="0.4"/><ellipse cx="150" cy="330" rx="9" ry="16" fill="#6aa0b8" opacity="0.4"/>'; }
+    // bladder (dark urine)
+    if(part==='bladder'){ s+='<ellipse class="hot" cx="130" cy="232" rx="16" ry="13" fill="#8a5a1a"/>'; for(let i=0;i<3;i++) s+='<circle class="drip" style="animation-delay:'+(i*0.5)+'s" cx="130" cy="248" r="4" fill="#6a4210"/>'; s+='<text x="130" y="278" text-anchor="middle" font-size="10" font-weight="700" fill="#8a5a1a">dark urine</text>'; }
+    // gut / stool (clay)
+    if(part==='gut'){ s+='<path class="hot" d="M108 210 q22 -8 44 0 q6 14 -4 22 q-18 6 -36 0 q-10 -8 -4 -22 Z" fill="#c9b89a" stroke="#a89870" stroke-width="1.5"/>'; s+='<text x="130" y="205" text-anchor="middle" font-size="10" font-weight="700" fill="#8a7a5a">pale stool</text>'; }
+    // skin highlight for jaundice
+    if(cur==='jaundice'){ s+='<text x="200" y="120" font-size="10" font-weight="700" fill="#b09010">yellow skin</text>'; }
+    $('body').innerHTML=s;
+  }
+  function render(){
+    const inf=INFO[cur]; draw();
+    document.querySelectorAll('.sb').forEach(b=>b.classList.toggle('on',b.dataset.d===cur));
+    $('stage').style.background=inf.color;
+    const grp = ['hepatomegaly','ascites','varices'].includes(cur)?'portal backup':'bilirubin / bile';
+    $('stage').innerHTML=inf.name+'<small>'+grp+'</small>';
+    $('info').innerHTML='<div class="n">'+inf.name+'</div><div class="plain">'+inf.plain+'</div><div class="story">'+inf.story+'</div>';
+    const caps={jaundice:'Bilirubin backs up in blood → <b>yellow skin &amp; eyes</b>.',
+      pruritus:'Bile salts in the skin irritate nerves → <b>itching, no rash</b>.',
+      darkurine:'Kidneys dump bilirubin → <b>dark urine</b>.',
+      claystool:'No bile reaches the gut → <b>pale clay stool</b>.',
+      hepatomegaly:'Portal blood dams up → <b>enlarged liver</b>.',
+      ascites:'Portal pressure + low albumin → <b>fluid in the belly &amp; legs</b>.',
+      varices:'Blood detours through esophageal veins → they <b>swell &amp; can burst</b>.'};
+    $('liveCap').innerHTML=caps[cur];
+  }
+  document.querySelectorAll('.sb').forEach(b=>b.addEventListener('click',()=>{ cur=b.dataset.d; render(); }));
+  render();
+})();
+</script>
+</body>
+</html>

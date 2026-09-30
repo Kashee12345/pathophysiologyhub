@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ABG Trainer · Pathophysiology</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="suite.css">
+<style>
+  .gas{display:grid;grid-template-columns:repeat(auto-fit,minmax(104px,1fr));gap:10px;margin:14px 0 6px;}
+  .g{background:var(--card);border:1.5px solid var(--line);border-radius:11px;padding:11px 8px;text-align:center;}
+  .g .gn{font-size:11px;color:var(--muted);font-weight:700;letter-spacing:.4px;text-transform:uppercase;}
+  .g .gv{font-family:"Fraunces",Georgia,serif;font-size:24px;font-weight:600;line-height:1.25;}
+  .g .gr{font-size:10.5px;color:var(--faint);}
+  .g.hi{border-color:#d98b84;background:#fdf3f2;} .g.hi .gv{color:var(--bad);}
+  .g.lo{border-color:#7fa8c9;background:#f1f7fb;} .g.lo .gv{color:#1f5f8b;}
+  .g.ok{border-color:#8ec5ac;background:var(--ok-lt);} .g.ok .gv{color:var(--ok);}
+  .vign{background:var(--gold-lt);border-left:4px solid var(--gold);border-radius:0 10px 10px 0;padding:11px 15px;font-size:14px;margin:4px 0 2px;}
+  .step{font-size:13.8px;padding:6px 0;border-bottom:1px dashed var(--line);}
+  .step:last-child{border-bottom:none;}
+  .step b{color:var(--accent-dk);}
+  .qlab{font-size:13px;font-weight:700;color:var(--faint);text-transform:uppercase;letter-spacing:.6px;margin:16px 0 8px;}
+</style>
+</head>
+<body>
+<div id="bar"></div>
+<div class="wrap">
+
+  <div class="hero">
+    <div class="eyebrow"><span data-label>Final Exam</span> Suite</div>
+    <h1>ABG Trainer</h1>
+    <p>Read the gas, name the disorder, then judge the compensation. Values are generated fresh every time, so you can drill until the four-step method is automatic.</p>
+  </div>
+
+  <div class="tiles">
+    <div class="tile"><b id="tScore">0</b><span>Correct</span></div>
+    <div class="tile"><b id="tSeen">0</b><span>Attempted</span></div>
+    <div class="tile"><b id="tPct">—</b><span>Accuracy</span></div>
+    <div class="tile"><b id="tStreak">0</b><span>Streak</span></div>
+  </div>
+
+  <div class="card">
+    <div class="vign" id="vign"></div>
+    <div class="gas" id="gas"></div>
+    <div id="stage1">
+      <div class="qlab">Step 1 &mdash; what is the primary disorder?</div>
+      <div class="opts" id="o1"></div>
+    </div>
+    <div id="stage2" class="hide">
+      <div class="qlab">Step 2 &mdash; what is the compensation state?</div>
+      <div class="opts" id="o2"></div>
+    </div>
+    <div id="expl" class="hide">
+      <div class="why" id="why"></div>
+      <div class="row" style="margin-top:14px;">
+        <button class="btn" id="nextBtn">Next gas &rsaquo;</button>
+        <a class="btn ghost sm" href="#" data-hq="1">Back to HQ</a>
+      </div>
+    </div>
+  </div>
+
+  <details class="card">
+    <summary style="cursor:pointer;font-weight:700;font-size:14.5px;">The four-step method &amp; normal ranges</summary>
+    <div style="margin-top:12px;">
+      <div class="step"><b>1. Look at pH.</b> Below 7.35 = acidosis. Above 7.45 = alkalosis. In range with abnormal values = fully compensated (use which side of 7.40 it sits on).</div>
+      <div class="step"><b>2. Look at PaCO<sub>2</sub>.</b> If it moves opposite to pH, the problem is respiratory.</div>
+      <div class="step"><b>3. Look at HCO<sub>3</sub>.</b> If it moves the same direction as pH, the problem is metabolic.</div>
+      <div class="step"><b>4. Assess compensation.</b> Other value normal = uncompensated. Other value abnormal but pH still off = partially compensated. pH back in range with both abnormal = fully compensated.</div>
+      <div class="step" style="margin-top:8px;"><b>ROME</b> &mdash; <b>R</b>espiratory <b>O</b>pposite, <b>M</b>etabolic <b>E</b>qual.</div>
+      <div class="step"><b>Normals:</b> pH 7.35&ndash;7.45 · PaCO<sub>2</sub> 35&ndash;45 mmHg · HCO<sub>3</sub> 22&ndash;26 mEq/L · PaO<sub>2</sub> 80&ndash;100 mmHg</div>
+    </div>
+  </details>
+
+</div>
+
+<script src="suite.js"></script>
+<script>
+window.FinalSuite.loadData(function(){
+  var S=window.FinalSuite, P=S.Progress;
+  document.getElementById('bar').innerHTML=S.topbar('ABG Trainer','<span id="tbS"></span>');
+
+  var DIS=[
+    {k:'ra', label:'Respiratory acidosis',
+     vign:["A patient with advanced COPD is increasingly drowsy.",
+           "An opioid overdose patient has a respiratory rate of 6.",
+           "A patient with myasthenic crisis has weakening respiratory muscles.",
+           "A postoperative patient is splinting and breathing shallowly."]},
+    {k:'rl', label:'Respiratory alkalosis',
+     vign:["A patient is hyperventilating during a panic attack.",
+           "A patient reports sudden pleuritic pain and is breathing rapidly.",
+           "A febrile, anxious patient is tachypnoeic in triage.",
+           "A climber arrives at high altitude and is breathing fast."]},
+    {k:'ma', label:'Metabolic acidosis',
+     vign:["A patient in diabetic ketoacidosis has deep, rapid respirations.",
+           "A septic patient has a rising lactate and cool extremities.",
+           "A patient with end-stage kidney disease missed dialysis.",
+           "A child has had profuse watery diarrhoea for two days."]},
+    {k:'ml', label:'Metabolic alkalosis',
+     vign:["A patient has been vomiting repeatedly for three days.",
+           "A patient on continuous nasogastric suction is being reassessed.",
+           "A patient on high-dose loop diuretics is reviewed.",
+           "An infant with pyloric stenosis has projectile vomiting."]}
+  ];
+  var COMP=[{k:'un',label:'Uncompensated'},{k:'pt',label:'Partially compensated'},{k:'fu',label:'Fully compensated'}];
+
+  function r(a,b,dec){ var v=a+Math.random()*(b-a); return dec?Math.round(v*100)/100:Math.round(v); }
+  function pick(a){ return a[Math.floor(Math.random()*a.length)]; }
+
+  var cur=null, stats={c:0,n:0,streak:0};
+
+  function gen(){
+    var d=pick(DIS), c=pick(COMP), pH, co2, hco3, o2=r(78,99);
+    if(d.k==='ra'){
+      co2=r(48,68);
+      if(c.k==='un'){ hco3=r(22,26); pH=r(7.20,7.32,1); }
+      else if(c.k==='pt'){ hco3=r(28,34); pH=r(7.26,7.33,1); }
+      else { hco3=r(30,38); pH=r(7.35,7.39,1); }
+      o2=r(52,78);
+    } else if(d.k==='rl'){
+      co2=r(20,32);
+      if(c.k==='un'){ hco3=r(22,26); pH=r(7.48,7.58,1); }
+      else if(c.k==='pt'){ hco3=r(16,21); pH=r(7.46,7.52,1); }
+      else { hco3=r(15,20); pH=r(7.41,7.45,1); }
+    } else if(d.k==='ma'){
+      hco3=r(10,19);
+      if(c.k==='un'){ co2=r(36,44); pH=r(7.18,7.31,1); }
+      else if(c.k==='pt'){ co2=r(24,33); pH=r(7.24,7.33,1); }
+      else { co2=r(22,30); pH=r(7.35,7.39,1); }
+    } else {
+      hco3=r(29,40);
+      if(c.k==='un'){ co2=r(36,44); pH=r(7.48,7.60,1); }
+      else if(c.k==='pt'){ co2=r(47,55); pH=r(7.46,7.53,1); }
+      else { co2=r(46,54); pH=r(7.41,7.45,1); }
+    }
+    pH=Math.round(pH*100)/100;
+    return {d:d,c:c,pH:pH,co2:co2,hco3:hco3,o2:o2,vign:pick(d.vign)};
+  }
+
+  function cls(v,lo,hi){ return v<lo?'lo':v>hi?'hi':'ok'; }
+
+  function draw(){
+    cur=gen();
+    document.getElementById('vign').textContent=cur.vign;
+    document.getElementById('gas').innerHTML=
+      '<div class="g '+cls(cur.pH,7.35,7.45)+'"><div class="gn">pH</div><div class="gv">'+cur.pH.toFixed(2)+'</div><div class="gr">7.35–7.45</div></div>'+
+      '<div class="g '+cls(cur.co2,35,45)+'"><div class="gn">PaCO₂</div><div class="gv">'+cur.co2+'</div><div class="gr">35–45 mmHg</div></div>'+
+      '<div class="g '+cls(cur.hco3,22,26)+'"><div class="gn">HCO₃</div><div class="gv">'+cur.hco3+'</div><div class="gr">22–26 mEq/L</div></div>'+
+      '<div class="g '+cls(cur.o2,80,100)+'"><div class="gn">PaO₂</div><div class="gv">'+cur.o2+'</div><div class="gr">80–100 mmHg</div></div>';
+    document.getElementById('o1').innerHTML=S.shuffle(DIS).map(function(d){
+      return '<button class="opt" data-k="'+d.k+'"><span class="k">•</span><span>'+d.label+'</span></button>';
+    }).join('');
+    document.getElementById('o2').innerHTML=COMP.map(function(c){
+      return '<button class="opt" data-c="'+c.k+'"><span class="k">•</span><span>'+c.label+'</span></button>';
+    }).join('');
+    document.getElementById('stage1').classList.remove('hide');
+    document.getElementById('stage2').classList.add('hide');
+    document.getElementById('expl').classList.add('hide');
+    cur.got1=null;
+  }
+
+  document.getElementById('o1').addEventListener('click',function(e){
+    var b=e.target.closest('[data-k]'); if(!b||cur.got1!==null)return;
+    cur.got1=b.dataset.k;
+    Array.prototype.forEach.call(this.querySelectorAll('.opt'),function(el){
+      el.disabled=true;
+      if(el.dataset.k===cur.d.k) el.classList.add('correct');
+      else if(el===b) el.classList.add('wrong');
+      else el.classList.add('muted');
+    });
+    document.getElementById('stage2').classList.remove('hide');
+  });
+
+  document.getElementById('o2').addEventListener('click',function(e){
+    var b=e.target.closest('[data-c]'); if(!b||cur.done)return;
+    cur.done=true;
+    Array.prototype.forEach.call(this.querySelectorAll('.opt'),function(el){
+      el.disabled=true;
+      if(el.dataset.c===cur.c.k) el.classList.add('correct');
+      else if(el===b) el.classList.add('wrong');
+      else el.classList.add('muted');
+    });
+    var ok=(cur.got1===cur.d.k)&&(b.dataset.c===cur.c.k);
+    stats.n++; if(ok){stats.c++;stats.streak++;} else stats.streak=0;
+    P.hit('abg', S.EXAM.abgWeek, ok);   /* ABGs sit in Wk 1 for the midterm, Wk 10 for the final */
+    explain(ok);
+    stat();
+  });
+
+  function explain(ok){
+    var c=cur, acid=c.pH<7.40;
+    var primary=(c.d.k==='ra'||c.d.k==='rl')?'respiratory':'metabolic';
+    var html='<span class="vd">'+(ok?'Correct':'Not quite')+' — '+c.d.label+', '+c.c.label.toLowerCase()+'</span>'+
+      '<div class="step"><b>Step 1.</b> pH '+c.pH.toFixed(2)+' → '+
+        (c.pH<7.35?'acidosis':c.pH>7.45?'alkalosis':'within range, so compensation is complete; it sits on the '+(acid?'acidic':'alkalotic')+' side of 7.40')+'.</div>'+
+      '<div class="step"><b>Step 2.</b> PaCO₂ '+c.co2+' — '+(c.co2<35?'low':c.co2>45?'high':'normal')+'.</div>'+
+      '<div class="step"><b>Step 3.</b> HCO₃ '+c.hco3+' — '+(c.hco3<22?'low':c.hco3>26?'high':'normal')+'.</div>'+
+      '<div class="step"><b>Which is the problem?</b> The '+primary+' value moves '+
+        (primary==='respiratory'?'opposite to':'with')+' the pH, so this is a <b>'+primary+'</b> disorder (ROME).</div>'+
+      '<div class="step"><b>Step 4.</b> '+
+        (c.c.k==='un'?'The other value is still normal — the body has not started compensating, so this is <b>acute</b>.':
+         c.c.k==='pt'?'The other value has shifted to help but the pH is still abnormal — <b>partially compensated</b>.':
+         'The pH is back within range with both values abnormal — <b>fully compensated</b>, which implies a <b>chronic</b> process.')+'</div>'+
+      (c.o2<80?'<div class="step"><b>Oxygenation.</b> PaO₂ '+c.o2+' is low — read oxygenation separately from acid–base.</div>':'');
+    var el=document.getElementById('why');
+    el.className='why'+(ok?'':' miss');
+    el.innerHTML=html;
+    document.getElementById('expl').classList.remove('hide');
+  }
+
+  function stat(){
+    document.getElementById('tScore').textContent=stats.c;
+    document.getElementById('tSeen').textContent=stats.n;
+    document.getElementById('tPct').textContent=stats.n?Math.round(stats.c/stats.n*100)+'%':'—';
+    document.getElementById('tStreak').textContent=stats.streak;
+    var tb=document.getElementById('tbS');
+    if(tb) tb.textContent=stats.n?stats.c+'/'+stats.n:'';
+    if(stats.n && stats.n%10===0) P.run('abg', Math.round(stats.c/stats.n*100));
+  }
+
+  document.getElementById('nextBtn').addEventListener('click',draw);
+  draw(); stat();
+});
+</script>
+</body>
+</html>

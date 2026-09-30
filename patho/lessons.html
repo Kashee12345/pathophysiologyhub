@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f7f2ea">
+<title>Lesson Library — The Interactive Body </title>
+<meta name="description" content="Free, interactive pathophysiology lessons covering a full nursing course: fluids/acid-base, immunity, genetics (Punnett squares), endocrine (diabetes, thyroid, adrenal), brain & nerves, MSK, skin, burns, and every body system — ABG & Punnett calculators and more.">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f6f1e8; --card:#fffdf8; --ink:#241f1b; --muted:#7a6f63; --line:#e6dccb;
+    --gold:#c99a2e; --disp:'Cinzel Decorative',serif; --sans:'Inter',system-ui,sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  body{background:radial-gradient(1200px 600px at 50% -100px,#fff6ea,#efe6d6);color:var(--ink);
+    font-family:var(--sans);min-height:100vh;}
+  a{text-decoration:none;color:inherit;}
+
+  /* hero */
+  .hero{max-width:1000px;margin:0 auto;padding:46px 20px 8px;text-align:center;}
+  .kicker{font-size:13px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);font-weight:700;}
+  .hero h1{font-family:var(--disp);font-weight:900;font-size:clamp(32px,7vw,64px);line-height:1.02;margin-top:8px;
+    background:linear-gradient(180deg,#8a2f36,#c0453f 55%,#8a2f36);-webkit-background-clip:text;background-clip:text;color:transparent;}
+  .hero .beat{display:inline-block;animation:beat 1.3s ease-in-out infinite;}
+  @keyframes beat{0%,100%{transform:scale(1)}15%{transform:scale(1.14)}30%{transform:scale(1)}45%{transform:scale(1.08)}}
+  .hero p{max-width:640px;margin:14px auto 0;font-size:16px;line-height:1.55;color:#544a40;}
+  .hero .free{display:inline-block;margin-top:16px;background:#e9f4ec;color:#2f7d50;border:1px solid #bfe0c9;
+    border-radius:30px;padding:7px 16px;font-size:13.5px;font-weight:700;}
+
+  /* grid */
+  .grid{max-width:1080px;margin:28px auto 0;padding:0 18px;display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:18px;}
+  .tool{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px;
+    display:flex;flex-direction:column;box-shadow:0 8px 26px rgba(90,60,30,.06);
+    transition:transform .16s,box-shadow .16s,border-color .16s;border-top:4px solid var(--accent);position:relative;overflow:hidden;}
+  .tool:hover{transform:translateY(-4px);box-shadow:0 16px 38px rgba(90,60,30,.14);border-color:var(--accent);}
+  .tool .top{display:flex;align-items:center;gap:13px;}
+  .tool .icon{width:52px;height:52px;flex:none;border-radius:14px;display:flex;align-items:center;justify-content:center;
+    background:color-mix(in srgb,var(--accent) 15%,#fff);}
+  .tool .icon svg{width:30px;height:30px;}
+  .tool h3{font-size:18px;font-weight:800;line-height:1.15;color:#2a231e;}
+  .tool .sub{font-size:12.5px;color:var(--accent);font-weight:700;margin-top:2px;}
+  .tool p{font-size:14px;line-height:1.5;color:#544a40;margin-top:12px;flex:1;}
+  .tool .tags{margin-top:12px;display:flex;flex-wrap:wrap;gap:6px;}
+  .tool .tags span{font-size:11px;font-weight:600;color:#6a5f52;background:#f4ecdd;border-radius:20px;padding:3px 9px;}
+  .tool .go{margin-top:16px;align-self:flex-start;background:var(--accent);color:#fff;font-weight:700;font-size:13.5px;
+    border-radius:10px;padding:9px 16px;transition:filter .12s;}
+  .tool:hover .go{filter:brightness(1.08);}
+
+  .sectitle{max-width:1080px;margin:30px auto 2px;padding:0 20px;font-family:var(--disp);font-weight:700;
+    font-size:22px;color:#5a4a3a;display:flex;align-items:center;gap:10px;}
+  .sectitle:first-of-type{margin-top:14px;}
+  .sectitle .rule{flex:1;height:1px;background:var(--line);}
+  /* about + footer */
+  .about{max-width:820px;margin:36px auto 0;padding:0 20px;text-align:center;color:#544a40;font-size:14.5px;line-height:1.6;}
+  .about h2{font-family:var(--disp);font-size:22px;color:#8a2f36;margin-bottom:8px;}
+  .about .note{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin-top:14px;font-size:13.5px;color:#5c5248;}
+  footer{max-width:1080px;margin:40px auto 0;padding:22px 20px 46px;border-top:1px solid var(--line);text-align:center;color:var(--muted);font-size:13px;}
+  footer b{color:#8a2f36;font-family:var(--disp);letter-spacing:.5px;}
+  /* shared top nav */
+  .topnav{position:sticky;top:0;z-index:60;background:rgba(255,250,240,.93);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:11px 22px;gap:12px;flex-wrap:wrap;}
+  .topnav .brand{font-family:var(--disp);font-weight:900;font-size:18px;color:#8a2f36;display:flex;align-items:center;gap:8px;}
+  .topnav nav{display:flex;gap:4px;flex-wrap:wrap;}
+  .topnav nav a{font-size:14px;font-weight:600;color:#5c5248;padding:7px 13px;border-radius:9px;transition:.12s;}
+  .topnav nav a:hover{background:#f4ecdd;color:#8a2f36;}
+  .topnav nav a.active{background:#8a2f36;color:#fff;}
+  .dd{position:relative;}
+  .ddbtn{font-family:'Inter',system-ui,sans-serif;font-size:14px;font-weight:600;color:#5c5248;padding:7px 13px;border-radius:9px;background:none;border:none;cursor:pointer;transition:.12s;}
+  .ddbtn:hover{background:#f4ecdd;color:#8a2f36;}
+  .ddbtn.active,.dd.open .ddbtn{background:#8a2f36;color:#fff;}
+  .ddpanel{position:absolute;top:calc(100% + 8px);right:0;width:252px;max-height:72vh;overflow-y:auto;background:#fff;border:1px solid #e6dccb;border-radius:12px;box-shadow:0 14px 34px rgba(90,60,30,.20);padding:6px;display:none;z-index:70;}
+  .dd.open .ddpanel{display:block;}
+  .ddpanel a{display:block;font-size:13px;font-weight:600;color:#4a4038;padding:8px 11px;border-radius:8px;}
+  .ddpanel a:hover{background:#f4ecdd;color:#8a2f36;}
+  .ddpanel a.ddhead{font-weight:800;color:#8a2f36;border-bottom:1px solid #e6dccb;margin-bottom:4px;}
+</style>
+</head>
+<body>
+  <header class="topnav">
+    <a class="brand" href="index.html">🫀 The Interactive Body</a>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="lessons.html" class="active">Lessons</a>
+      <div class="dd">
+        <button class="ddbtn" aria-haspopup="true" aria-expanded="false">By Week ▾</button>
+        <div class="ddpanel">
+          <a class="ddhead" href="weeks.html">📅 All 14 weeks →</a>
+          <a href="weeks.html#wk1">Week 1 · Fluids &amp; ABGs</a>
+          <a href="weeks.html#wk2">Week 2 · Pathogens &amp; Immunity</a>
+          <a href="weeks.html#wk3">Week 3 · Cell Injury &amp; Cancer</a>
+          <a href="weeks.html#wk4">Week 4 · Sepsis, Pain &amp; Neuro</a>
+          <a href="weeks.html#wk5">Week 5 · Mental Health &amp; Neuro</a>
+          <a href="weeks.html#wk6">Week 6 · MSK, Skin &amp; Burns</a>
+          <a href="weeks.html#wk7">Week 7 · Genetics</a>
+          <a href="weeks.html#wk8">Week 8 · Endocrine</a>
+          <a href="weeks.html#wk9">Week 9 · Blood &amp; Cardiovascular I</a>
+          <a href="weeks.html#wk10">Week 10 · Cardiovascular II</a>
+          <a href="weeks.html#wk11">Week 11 · Renal &amp; Urinary</a>
+          <a href="weeks.html#wk12">Week 12 · Respiratory</a>
+          <a href="weeks.html#wk13">Week 13 · Gastrointestinal</a>
+          <a href="weeks.html#wk14">Week 14 · Liver &amp; Reproductive</a>
+        </div>
+      </div>
+      <a href="about.html">About</a>
+    </nav>
+  </header>
+  <section class="hero">
+    <div class="kicker">All 86 lessons · by body system</div>
+    <h1>The Lesson <span class="beat">🫀</span> Library</h1>
+    <p>Human pathophysiology you can actually <b>play with</b> — the whole course, from fluids &amp; acid-base to immunity, genetics, hormones, and every body system. Each lesson is a hands-on, animated simulation — interpret an ABG, solve a Punnett square, raise the intracranial pressure, stage a burn, build a plaque, read an EKG, trace the bile — with plain-English explanations at every step. Great on a phone, tablet, or projector.</p>
+    <span class="free">100% free for students &amp; educators</span>
+  </section>
+
+  <main id="grid"></main>
+
+  <section class="about">
+    <h2>How to use it</h2>
+    <p>Click any lesson below to open it. Nothing to install and no account needed — just tap, drag, and explore. Every tool starts simple (everyday analogies) and layers in the clinical detail, so it works whether you're seeing the topic for the first time or reviewing for an exam.</p>
+    <div class="note">💡 <b>Tip for instructors:</b> open a lesson full-screen and drive it live in class — change one thing at a time and ask the students to predict what happens next.</div>
+  </section>
+
+  <footer>
+    Built for nursing &amp; health-science students by <b>Dr. Akash Garg</b>.<br>
+    Free to use and share. · The Interactive Body · Pathophysiology, playable
+  </footer>
+
+<script>
+  const ICONS={
+    heart:'<path d="M15 26C7 20 3 14 6 9c2-3 6-2 9 2 3-4 7-5 9-2 3 5-1 11-9 17z" fill="none" stroke="var(--accent)" stroke-width="2.2" stroke-linejoin="round"/>',
+    artery:'<path d="M8 4v9c0 5 3 6 7 6s7 1 7 7" fill="none" stroke="var(--accent)" stroke-width="3.2" stroke-linecap="round"/><circle cx="15" cy="16" r="2.4" fill="var(--accent)"/>',
+    lungs:'<path d="M15 4v9M15 13c0 6-3 8-6 8-2 0-3-2-3-5 0-4 3-8 5-8M15 13c0 6 3 8 6 8 2 0 3-2 3-5 0-4-3-8-5-8" fill="none" stroke="var(--accent)" stroke-width="2.2" stroke-linecap="round"/>',
+    valve:'<circle cx="15" cy="15" r="11" fill="none" stroke="var(--accent)" stroke-width="2.2"/><path d="M15 15l7-4M15 15l-7-4M15 15v9" stroke="var(--accent)" stroke-width="2.2" stroke-linecap="round"/>',
+    baby:'<circle cx="15" cy="12" r="8" fill="none" stroke="var(--accent)" stroke-width="2.2"/><circle cx="12" cy="11" r="1.4" fill="var(--accent)"/><circle cx="18" cy="11" r="1.4" fill="var(--accent)"/><path d="M12 15q3 2 6 0" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round"/>',
+    drop:'<path d="M15 4c5 7 8 10 8 14a8 8 0 0 1-16 0c0-4 3-7 8-14z" fill="none" stroke="var(--accent)" stroke-width="2.2" stroke-linejoin="round"/>',
+    germ:'<circle cx="15" cy="15" r="8" fill="none" stroke="var(--accent)" stroke-width="2.2"/><path d="M15 4v-2M15 28v-2M4 15H2M28 15h-2M7 7l-1.5-1.5M23 23l1.5 1.5M23 7l1.5-1.5M7 23l-1.5 1.5" stroke="var(--accent)" stroke-width="2" stroke-linecap="round"/>',
+    cell:'<circle cx="15" cy="15" r="10" fill="none" stroke="var(--accent)" stroke-width="2.2"/><circle cx="15" cy="15" r="4.5" fill="none" stroke="var(--accent)" stroke-width="1.6"/>',
+    wave:'<path d="M2 16h6l2-10 3 20 3-15 2 5h7" fill="none" stroke="var(--accent)" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/>',
+    bleed:'<path d="M15 4c5 7 8 10 8 14a8 8 0 0 1-16 0c0-4 3-7 8-14z" fill="none" stroke="var(--accent)" stroke-width="2.2" stroke-linejoin="round"/><path d="M12 17h6M15 14v6" stroke="var(--accent)" stroke-width="1.6" stroke-linecap="round"/>',
+    abo:'<circle cx="11" cy="13" r="6" fill="none" stroke="var(--accent)" stroke-width="2"/><circle cx="20" cy="18" r="6" fill="none" stroke="var(--accent)" stroke-width="2"/>',
+    leg:'<path d="M13 3v10c0 5 1 6 1 10l-2 4M13 13c0 5 3 5 3 9l4 2" fill="none" stroke="var(--accent)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>',
+    gauge:'<path d="M4 22a11 11 0 0 1 22 0" fill="none" stroke="var(--accent)" stroke-width="2.2" stroke-linecap="round"/><line x1="15" y1="22" x2="21" y2="13" stroke="var(--accent)" stroke-width="2.2" stroke-linecap="round"/><circle cx="15" cy="22" r="2" fill="var(--accent)"/>',
+    kidney:'<path d="M17 4C10 4 6 9 6 15s4 11 11 11c-3-3-4-6-4-11s1-8 4-11z" fill="none" stroke="var(--accent)" stroke-width="2.2" stroke-linejoin="round"/>',
+    filter:'<path d="M5 7h20l-8 9v7l-4 2v-9z" fill="none" stroke="var(--accent)" stroke-width="2.2" stroke-linejoin="round"/>',
+    nephron:'<circle cx="8" cy="9" r="4" fill="none" stroke="var(--accent)" stroke-width="2"/><path d="M12 9h4c5 0 5 7 0 7s-5 7 0 7h6" fill="none" stroke="var(--accent)" stroke-width="2.2" stroke-linecap="round"/>',
+    stone:'<circle cx="12" cy="15" r="6.5" fill="none" stroke="var(--accent)" stroke-width="2"/><circle cx="21" cy="10" r="4" fill="none" stroke="var(--accent)" stroke-width="2"/>',
+    airway:'<path d="M15 3v8M15 11c-2 3-6 4-8 10M15 11c2 3 6 4 8 10" fill="none" stroke="var(--accent)" stroke-width="2.4" stroke-linecap="round"/><circle cx="6.5" cy="22" r="2" fill="var(--accent)"/><circle cx="23.5" cy="22" r="2" fill="var(--accent)"/>',
+    wind:'<path d="M4 10h13a3 3 0 1 1 3 3M4 16h9a3 3 0 1 0 3 3M4 13h6" fill="none" stroke="var(--accent)" stroke-width="2.2" stroke-linecap="round"/>',
+    ribs:'<path d="M15 4v21M9 8c-3 1.5-4 4-4 8M21 8c3 1.5 4 4 4 8M10.5 13c-2.5 1-3.5 3-3.5 6M19.5 13c2.5 1 3.5 3 3.5 6" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round"/>',
+    clot:'<circle cx="9" cy="9" r="4" fill="none" stroke="var(--accent)" stroke-width="2"/><path d="M12 12c3 1.5 6 4 6 9" fill="none" stroke="var(--accent)" stroke-width="2.4" stroke-linecap="round"/><circle cx="18" cy="21" r="4.2" fill="var(--accent)" opacity="0.75"/>',
+    sound:'<circle cx="9" cy="15" r="4" fill="none" stroke="var(--accent)" stroke-width="2"/><path d="M15 9a9 9 0 0 1 0 12M19 6a14 14 0 0 1 0 18" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round"/>',
+    alveoli:'<circle cx="10" cy="11" r="4.5" fill="none" stroke="var(--accent)" stroke-width="2"/><circle cx="19" cy="12" r="4" fill="none" stroke="var(--accent)" stroke-width="2"/><circle cx="13" cy="19.5" r="4.5" fill="none" stroke="var(--accent)" stroke-width="2"/><circle cx="21.5" cy="20" r="3.5" fill="none" stroke="var(--accent)" stroke-width="2"/>',
+    sinus:'<path d="M15 6v7M15 13c-3 0-5 2-5.5 5M15 13c3 0 5 2 5.5 5" fill="none" stroke="var(--accent)" stroke-width="2.2" stroke-linecap="round"/><circle cx="9" cy="9.5" r="2.6" fill="none" stroke="var(--accent)" stroke-width="1.8"/><circle cx="21" cy="9.5" r="2.6" fill="none" stroke="var(--accent)" stroke-width="1.8"/><path d="M10 22h10" stroke="var(--accent)" stroke-width="2" stroke-linecap="round"/>',
+    rheart:'<path d="M15 24C8 19 4 14 6.5 9.5c1.8-3 5.5-2 8.5 1.5 3-3.5 6.7-4.5 8.5-1.5C28 14 22 19 15 24z" fill="none" stroke="var(--accent)" stroke-width="2.2" stroke-linejoin="round"/><path d="M15 20v-8m0 0 2.6 3M15 12l-2.6 3" fill="none" stroke="var(--accent)" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>',
+    flame:'<path d="M16 4c1 5 5 6 5 11a6 6 0 0 1-12 0c0-3 1.2-4.2 2.3-6 .5 1.6 1.6 1.6 2.2.4.6-2 0-4 .5-5.8z" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linejoin="round"/>',
+    stomach:'<path d="M13 5c-1 4-3 4-3 9 0 6 6 9 10 6 3-2 3-6 0-8-2-1.3-4-1-5 1" fill="none" stroke="var(--accent)" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/>',
+    gidrop:'<path d="M15 4c5 7 8 10 8 14a8 8 0 0 1-16 0c0-4 3-7 8-14z" fill="none" stroke="var(--accent)" stroke-width="2.2" stroke-linejoin="round"/><path d="M11 17q4 3 8 0" fill="none" stroke="var(--accent)" stroke-width="1.6" stroke-linecap="round"/>',
+    intestine:'<path d="M7 8c3 0 3 4 6 4s3-4 6-4M7 15c3 0 3 4 6 4s3-4 6-4M7 22h12" fill="none" stroke="var(--accent)" stroke-width="2.2" stroke-linecap="round"/>',
+    knot:'<path d="M6 15c4 0 5-6 9-6s4 6 9 6M6 15c4 0 5 6 9 6" fill="none" stroke="var(--accent)" stroke-width="2.4" stroke-linecap="round"/><circle cx="15" cy="15" r="3.2" fill="var(--accent)"/>',
+    abdomen:'<rect x="6" y="6" width="18" height="18" rx="5" fill="none" stroke="var(--accent)" stroke-width="2.2"/><path d="M15 7v16M7 15h16" stroke="var(--accent)" stroke-width="1.6"/>',
+    villi:'<path d="M6 20V13M11 20V10M16 20V10M21 20V11M25 20V14M5 20h21" fill="none" stroke="var(--accent)" stroke-width="2.2" stroke-linecap="round"/>',
+    liver:'<path d="M4 9c0-3 13-4 21-1.6 2.6.8 2.4 6-1.4 7-5 1.4-11 1-15 3-3 1.5-4.6-5.4-4.6-8.4z" fill="none" stroke="var(--accent)" stroke-width="2.2" stroke-linejoin="round"/>',
+    bili:'<path d="M15 4c5 7 8 10 8 14a8 8 0 0 1-16 0c0-4 3-7 8-14z" fill="none" stroke="var(--accent)" stroke-width="2.2" stroke-linejoin="round"/><circle cx="15" cy="17" r="3" fill="var(--accent)"/>',
+    gallbladder:'<path d="M15 5c6.5 0 8.5 8 5.5 14-2 4-9 4-11 0-3-6-1-14 5.5-14z" fill="none" stroke="var(--accent)" stroke-width="2.2"/><circle cx="13" cy="15" r="2" fill="var(--accent)"/><circle cx="17.5" cy="18" r="1.6" fill="var(--accent)"/>',
+    pancreas:'<path d="M4 13c5-2 15-2 21 .2 2 .8 1.4 3.2-1.2 3-6-.4-12 .2-16 2.2-2.4 1.2-5-4.4-3.8-7.4z" fill="none" stroke="var(--accent)" stroke-width="2.2" stroke-linejoin="round"/><circle cx="20" cy="14.5" r="1.7" fill="var(--accent)"/>',
+    male:'<circle cx="12" cy="18" r="6.6" fill="none" stroke="var(--accent)" stroke-width="2.2"/><path d="M16.7 13.3 23 7m0 0h-5.2M23 7v5.2" fill="none" stroke="var(--accent)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>',
+    female:'<circle cx="15" cy="11" r="6.6" fill="none" stroke="var(--accent)" stroke-width="2.2"/><path d="M15 17.6V26m-4-4.2h8" fill="none" stroke="var(--accent)" stroke-width="2.2" stroke-linecap="round"/>',
+    compartments:'<rect x="5" y="8" width="20" height="15" rx="2.5" fill="none" stroke="var(--accent)" stroke-width="2.2"/><line x1="15" y1="8" x2="15" y2="23" stroke="var(--accent)" stroke-width="2"/><line x1="20" y1="12" x2="20" y2="19" stroke="var(--accent)" stroke-width="1.6"/>',
+    edema:'<path d="M15 6c4.5 6 7 8.5 7 12a7 7 0 0 1-14 0c0-3.5 2.5-6 7-12z" fill="none" stroke="var(--accent)" stroke-width="2.2" stroke-linejoin="round"/><path d="M11 17q4 3 8 0" fill="none" stroke="var(--accent)" stroke-width="1.6" stroke-linecap="round"/>',
+    hormone:'<circle cx="8" cy="15" r="3.6" fill="none" stroke="var(--accent)" stroke-width="2"/><path d="M11.6 15h6.8" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-dasharray="2.2 2.2"/><circle cx="22" cy="15" r="3" fill="var(--accent)"/>',
+    salt:'<circle cx="10.5" cy="12" r="4.2" fill="none" stroke="var(--accent)" stroke-width="2"/><circle cx="19.5" cy="18" r="4.2" fill="none" stroke="var(--accent)" stroke-width="2"/><path d="M10.5 10.3v3.4M8.8 12h3.4M17.8 18h3.4" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round"/>',
+    buffer:'<path d="M15 5v18M8 23h14" stroke="var(--accent)" stroke-width="2.2" stroke-linecap="round"/><path d="M15 9l-7 3a3.5 3.5 0 0 0 7 0z" fill="none" stroke="var(--accent)" stroke-width="1.8" stroke-linejoin="round"/><path d="M15 9l7 3a3.5 3.5 0 0 1-7 0z" fill="none" stroke="var(--accent)" stroke-width="1.8" stroke-linejoin="round"/>',
+    abg:'<path d="M11 4h8M12.5 4v12.5a2.5 2.5 0 0 0 5 0V4" fill="none" stroke="var(--accent)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="15" cy="13" r="1.6" fill="var(--accent)"/><circle cx="15" cy="18" r="1.2" fill="var(--accent)"/>',
+    microbe:'<ellipse cx="15" cy="16" rx="10" ry="6.5" fill="none" stroke="var(--accent)" stroke-width="2.2"/><circle cx="11" cy="16" r="1.6" fill="var(--accent)"/><circle cx="18" cy="16" r="1.6" fill="var(--accent)"/><path d="M6.5 11.5q-3-2-2-5M23.5 11.5q3-2 2-5" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round"/>',
+    virus:'<circle cx="15" cy="15" r="7" fill="none" stroke="var(--accent)" stroke-width="2.2"/><path d="M15 8V4M15 26v-4M8 15H4M26 15h-4M9.7 9.7 6.9 6.9M23.1 23.1l-2.8-2.8M20.3 9.7l2.8-2.8M9.7 20.3l-2.8 2.8" stroke="var(--accent)" stroke-width="1.9" stroke-linecap="round"/>',
+    shield:'<path d="M15 4l9 4v6c0 6-4 10-9 12-5-2-9-6-9-12V8z" fill="none" stroke="var(--accent)" stroke-width="2.2" stroke-linejoin="round"/><path d="M11 14.5l3 3 5-6" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>',
+    antibody:'<path d="M15 25v-8M15 17l-6-7M15 17l6-7" fill="none" stroke="var(--accent)" stroke-width="2.4" stroke-linecap="round"/><circle cx="8.5" cy="8.5" r="2.2" fill="var(--accent)"/><circle cx="21.5" cy="8.5" r="2.2" fill="var(--accent)"/>',
+    allergy:'<circle cx="13" cy="17" r="6" fill="none" stroke="var(--accent)" stroke-width="2"/><circle cx="23" cy="8" r="1.9" fill="var(--accent)"/><circle cx="26" cy="15" r="1.6" fill="var(--accent)"/><circle cx="20" cy="5" r="1.4" fill="var(--accent)"/>',
+    nodes:'<circle cx="9" cy="9" r="3.2" fill="none" stroke="var(--accent)" stroke-width="2"/><circle cx="17" cy="15" r="3.2" fill="none" stroke="var(--accent)" stroke-width="2"/><circle cx="23" cy="22" r="3.2" fill="none" stroke="var(--accent)" stroke-width="2"/><path d="M11.5 11l3 2.5M19.5 17l2 2.5" stroke="var(--accent)" stroke-width="1.6"/>',
+    cells:'<circle cx="10" cy="11" r="4.5" fill="none" stroke="var(--accent)" stroke-width="2"/><circle cx="10" cy="11" r="1.6" fill="var(--accent)"/><circle cx="20" cy="19" r="5.5" fill="none" stroke="var(--accent)" stroke-width="2"/><circle cx="20" cy="19" r="2" fill="var(--accent)"/>',
+    tumor:'<path d="M12 8c4-3 9-1 9 4 2 2 1 6-2 6 0 4-6 5-8 2-4 1-7-3-5-6-2-3 1-7 6-6z" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linejoin="round"/>',
+    inflame:'<path d="M15 4l2.4 6 6.4-1-4 5 4 5-6.4-1L15 26l-2.4-6-6.4 1 4-5-4-5 6.4 1z" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linejoin="round"/>',
+    alert:'<path d="M15 5l10 19H5z" fill="none" stroke="var(--accent)" stroke-width="2.2" stroke-linejoin="round"/><path d="M15 12v5M15 20.5v.4" stroke="var(--accent)" stroke-width="2.4" stroke-linecap="round"/>',
+    bandage:'<g transform="rotate(-32 15 15)"><rect x="5" y="11" width="20" height="8" rx="4" fill="none" stroke="var(--accent)" stroke-width="2.2"/><circle cx="12" cy="13" r="1" fill="var(--accent)"/><circle cx="15" cy="15" r="1.4" fill="var(--accent)"/><circle cx="18" cy="17" r="1" fill="var(--accent)"/></g>',
+    bolt:'<path d="M16 4l-8 13h6l-3 9 9-14h-6z" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linejoin="round"/>',
+    joint:'<path d="M8 6c3 3 3 6 0 9M22 24c-3-3-3-6 0-9" fill="none" stroke="var(--accent)" stroke-width="2.4" stroke-linecap="round"/><circle cx="15" cy="15" r="4" fill="none" stroke="var(--accent)" stroke-width="2"/>',
+    brain:'<path d="M13.5 5c-3 0-5 2-5 4-2 0-3.5 2-3.5 4 0 1.6 1 3 2 3.6-.3 2.4 1.6 4.4 4 4.4h2.5z" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linejoin="round"/><path d="M16.5 5c3 0 5 2 5 4 2 0 3.5 2 3.5 4 0 1.6-1 3-2 3.6.3 2.4-1.6 4.4-4 4.4h-2.5z" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linejoin="round"/><line x1="15" y1="5" x2="15" y2="25" stroke="var(--accent)" stroke-width="1.5"/>',
+    synapse:'<circle cx="8" cy="9" r="4" fill="none" stroke="var(--accent)" stroke-width="2"/><path d="M11 11.5l5 5" stroke="var(--accent)" stroke-width="2" stroke-linecap="round"/><rect x="16" y="17" width="10" height="7" rx="2" fill="none" stroke="var(--accent)" stroke-width="2"/><circle cx="13" cy="13.5" r="1" fill="var(--accent)"/><circle cx="15.5" cy="16" r="1" fill="var(--accent)"/>',
+    mind:'<circle cx="14" cy="16" r="8.5" fill="none" stroke="var(--accent)" stroke-width="2.2"/><path d="M10.5 16q3.5 -4 7 0" fill="none" stroke="var(--accent)" stroke-width="1.8" stroke-linecap="round"/><circle cx="24" cy="8" r="2.4" fill="none" stroke="var(--accent)" stroke-width="1.8"/><circle cx="27" cy="4.5" r="1.1" fill="var(--accent)"/>',
+    skull:'<path d="M15 5c-6 0 -9 4 -9 9 0 4 2 6 3 7v3h12v-3c1 -1 3 -3 3 -7 0 -5 -3 -9 -9 -9z" fill="none" stroke="var(--accent)" stroke-width="2.2" stroke-linejoin="round"/><circle cx="11.5" cy="14" r="2" fill="var(--accent)"/><circle cx="18.5" cy="14" r="2" fill="var(--accent)"/><path d="M13 20.5v3M15 20.5v3M17 20.5v3" stroke="var(--accent)" stroke-width="1.4"/>',
+    strokeicon:'<path d="M15 5c-5 0 -8 4 -8 8 0 5 4 8 8 9 4 -1 8 -4 8 -9 0 -4 -3 -8 -8 -8z" fill="none" stroke="var(--accent)" stroke-width="2.2" stroke-linejoin="round"/><circle cx="17" cy="14" r="3" fill="var(--accent)"/>',
+    headinjury:'<circle cx="15" cy="15" r="10" fill="none" stroke="var(--accent)" stroke-width="2.2"/><path d="M15 5l-3 7h5l-3 6" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>',
+    spine:'<path d="M15 4v22" stroke="var(--accent)" stroke-width="2" stroke-linecap="round"/><rect x="11" y="6" width="8" height="3.4" rx="1.2" fill="none" stroke="var(--accent)" stroke-width="1.6"/><rect x="11" y="11" width="8" height="3.4" rx="1.2" fill="none" stroke="var(--accent)" stroke-width="1.6"/><rect x="11" y="16" width="8" height="3.4" rx="1.2" fill="none" stroke="var(--accent)" stroke-width="1.6"/><rect x="11" y="21" width="8" height="3.4" rx="1.2" fill="none" stroke="var(--accent)" stroke-width="1.6"/>',
+    meninges:'<circle cx="15" cy="15" r="10" fill="none" stroke="var(--accent)" stroke-width="2.2"/><circle cx="15" cy="15" r="6" fill="none" stroke="var(--accent)" stroke-width="1.6"/><circle cx="15" cy="15" r="2.2" fill="var(--accent)"/>',
+    bone:'<path d="M10 20l10-10" stroke="var(--accent)" stroke-width="2.4" stroke-linecap="round"/><circle cx="8.5" cy="19" r="2.6" fill="none" stroke="var(--accent)" stroke-width="1.8"/><circle cx="11" cy="21.5" r="2.6" fill="none" stroke="var(--accent)" stroke-width="1.8"/><circle cx="21.5" cy="11" r="2.6" fill="none" stroke="var(--accent)" stroke-width="1.8"/><circle cx="19" cy="8.5" r="2.6" fill="none" stroke="var(--accent)" stroke-width="1.8"/>',
+    bonecrack:'<path d="M10 20l3.5-3.5M16.5 13.5l3.5-3.5" stroke="var(--accent)" stroke-width="2.4" stroke-linecap="round"/><path d="M13.5 16.5l2.5-1.5-1.5-1.5 2.5-1.5" fill="none" stroke="var(--accent)" stroke-width="1.5"/><circle cx="8.5" cy="19" r="2.4" fill="none" stroke="var(--accent)" stroke-width="1.7"/><circle cx="11" cy="21.5" r="2.4" fill="none" stroke="var(--accent)" stroke-width="1.7"/><circle cx="21.5" cy="11" r="2.4" fill="none" stroke="var(--accent)" stroke-width="1.7"/><circle cx="19" cy="8.5" r="2.4" fill="none" stroke="var(--accent)" stroke-width="1.7"/>',
+    skinlayers:'<rect x="6" y="8" width="18" height="14" rx="3" fill="none" stroke="var(--accent)" stroke-width="2.2"/><path d="M6 13h18M6 17.5h18" stroke="var(--accent)" stroke-width="1.4"/>',
+    rash:'<rect x="6" y="7" width="18" height="16" rx="4" fill="none" stroke="var(--accent)" stroke-width="2.2"/><circle cx="11" cy="12" r="1.6" fill="var(--accent)"/><circle cx="18" cy="11" r="1.4" fill="var(--accent)"/><circle cx="14" cy="17" r="1.8" fill="var(--accent)"/><circle cx="19.5" cy="18" r="1.4" fill="var(--accent)"/>',
+    dna:'<path d="M10 4c10 6-10 10 0 16 10 6-10 10 0 16" fill="none" stroke="var(--accent)" stroke-width="2"/><path d="M20 4c-10 6 10 10 0 16-10 6 10 10 0 16" fill="none" stroke="var(--accent)" stroke-width="2"/><path d="M11.5 9h7M11.5 15h7M11.5 21h7M11.5 27h7" stroke="var(--accent)" stroke-width="1.3"/>',
+    celldiv:'<circle cx="10" cy="15" r="6" fill="none" stroke="var(--accent)" stroke-width="2"/><circle cx="20" cy="15" r="6" fill="none" stroke="var(--accent)" stroke-width="2"/><circle cx="10" cy="15" r="1.6" fill="var(--accent)"/><circle cx="20" cy="15" r="1.6" fill="var(--accent)"/>',
+    karyotype:'<path d="M9 6l2.5 9L9 24M14 6l-2.5 9L14 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round"/><path d="M19 6l2.5 9L19 24M24 6l-2.5 9L24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round"/>',
+    pedigree:'<rect x="6" y="6" width="6" height="6" fill="none" stroke="var(--accent)" stroke-width="2"/><circle cx="21" cy="9" r="3.4" fill="none" stroke="var(--accent)" stroke-width="2"/><path d="M12 9h5.5M15 12v4h4v-4M15 16v3M19 16v3" stroke="var(--accent)" stroke-width="1.6"/>',
+    grid:'<rect x="7" y="7" width="16" height="16" rx="2" fill="none" stroke="var(--accent)" stroke-width="2.2"/><path d="M15 7v16M7 15h16" stroke="var(--accent)" stroke-width="1.8"/>',
+    fetus:'<path d="M18 6c-6 0-10 4-10 10 0 5 4 8 8 8 1.4 0 2-1.4 1-2.4-2-2-1-5 1.2-6 2.8-1.2 3.6-4.2 2.4-7-.8-1.8-2.2-2.6-4.6-2.6z" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linejoin="round"/>',
+    gland:'<circle cx="15" cy="9" r="4.5" fill="none" stroke="var(--accent)" stroke-width="2"/><path d="M15 13.5v4" stroke="var(--accent)" stroke-width="2"/><circle cx="12.5" cy="22" r="3.5" fill="none" stroke="var(--accent)" stroke-width="2"/><circle cx="18.5" cy="22" r="3" fill="none" stroke="var(--accent)" stroke-width="2"/>',
+    adrenal:'<path d="M13 12C9 12 7 16 7 20s2 6 6 6c-2.2-2-3-4-3-6s1-5 3-8z" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linejoin="round"/><path d="M9.5 12.5q4-4.5 8 0" fill="none" stroke="var(--accent)" stroke-width="2.2" stroke-linecap="round"/>',
+    thyroid:'<path d="M15 13q-6-6-9.5 0q-2 6 4.5 8q5 .5 5-4.5M15 13q6-6 9.5 0q2 6-4.5 8q-5 .5-5-4.5z" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linejoin="round"/><path d="M15 9v9" stroke="var(--accent)" stroke-width="1.5"/>',
+    sugar:'<rect x="8" y="8" width="14" height="14" rx="3" fill="none" stroke="var(--accent)" stroke-width="2.2"/><circle cx="12.5" cy="12.5" r="1.4" fill="var(--accent)"/><circle cx="18" cy="13.5" r="1.4" fill="var(--accent)"/><circle cx="14.5" cy="18" r="1.4" fill="var(--accent)"/>',
+    ruler:'<rect x="6" y="10" width="18" height="10" rx="2" fill="none" stroke="var(--accent)" stroke-width="2.2"/><path d="M10 10v4.5M14 10v6M18 10v4.5" stroke="var(--accent)" stroke-width="1.6"/>',
+    waterdrop:'<path d="M15 5c5 7 8 10 8 14a8 8 0 0 1-16 0c0-4 3-7 8-14z" fill="none" stroke="var(--accent)" stroke-width="2.2" stroke-linejoin="round"/><path d="M11 18a4 4 0 0 0 4 3" fill="none" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round"/>'
+  };
+  const TOOLS=[
+    {file:'FluidCompartments.html', accent:'#3a7aa0', icon:'compartments',
+      title:'Fluid Compartments', sub:'ICF vs ECF',
+      desc:'Where the body\'s water lives: two-thirds inside the cells (ICF, high potassium) and one-third outside (ECF, high sodium) — split into intravascular, interstitial, and transcellular. Click each to see its size and main ion.',
+      tags:['ICF','ECF','Na⁺','K⁺']},
+    {file:'Edema.html', accent:'#3a86a8', icon:'edema',
+      title:'Edema — Two Pressures', sub:'Hydrostatic vs oncotic',
+      desc:'At every capillary, hydrostatic pressure pushes fluid out and oncotic pressure (albumin) pulls it back. Tip the balance — too much push (heart failure) or too little pull (low albumin) — and watch the tissue flood with edema.',
+      tags:['hydrostatic','oncotic','albumin','edema']},
+    {file:'FluidHormones.html', accent:'#3a7a86', icon:'hormone',
+      title:'Fluid Regulation Hormones', sub:'RAAS · ADH · ANP/BNP',
+      desc:'Flip blood volume low or high and watch the right hormones fire. Low volume turns on RAAS and ADH to retain salt and water; high volume makes the stretched heart release ANP/BNP to dump it.',
+      tags:['RAAS','ADH','ANP/BNP','volume']},
+    {file:'Electrolytes.html', accent:'#5a7a9a', icon:'salt',
+      title:'Electrolytes', sub:'The big five, hypo to hyper',
+      desc:'Sodium, potassium, calcium, phosphate, magnesium — each with its normal range, job, and memory hint. Drag the level below or above normal and watch the hypo- and hyper- symptoms appear.',
+      tags:['sodium','potassium','calcium','ranges']},
+    {file:'BufferSystems.html', accent:'#5a7a9a', icon:'buffer',
+      title:'Buffer Systems', sub:'Three lines of pH defense',
+      desc:'The body defends its pH with three teams at different speeds: chemical buffers in seconds, the lungs in minutes, and the kidneys over days — but the kidneys are the strongest. See how speed and strength trade off.',
+      tags:['buffers','CO₂','HCO₃','Kussmaul']},
+    {file:'ABGInterpreter.html', accent:'#44528a', icon:'abg',
+      title:'ABG Interpreter', sub:'Type the numbers, get the answer',
+      desc:'Enter a blood gas and it walks you through the acid-base disorder step by step using the ROME method — respiratory vs metabolic, acidosis vs alkalosis, and the degree of compensation. Loads your four practice cases with one tap.',
+      tags:['ABG','ROME','acidosis','compensation']},
+    {file:'AnemiaExplorer.html', accent:'#a63333', icon:'cell',
+      title:'Anemia Explorer', sub:'Blood smear & the CBC',
+      desc:'See red-cell disorders under the microscope. Iron deficiency (small & pale), B12 / pernicious (large cells), aplastic (marrow failure), and sickle cell — each with its own smear, CBC labs, and size classification.',
+      tags:['MCV','iron','B12','aplastic','sickle']},
+    {file:'EKGReader.html', accent:'#1f7a5a', icon:'wave',
+      title:'EKG Reader', sub:'Waves & rhythms',
+      desc:'Click each part of the heartbeat — P, PR, QRS, ST, T — to see exactly what the heart is doing electrically. Then compare a normal sinus rhythm side-by-side with atrial fibrillation.',
+      tags:['P-QRS-T','sinus rhythm','AFib','rate']},
+    {file:'BleedingClotting.html', accent:'#8a2f5a', icon:'bleed',
+      title:'Bleeding & Clotting', sub:'Hemostasis & its disorders',
+      desc:'A clot forms in two steps — the platelet plug and the fibrin mesh — and each disorder breaks a specific one: thrombocytopenia, von Willebrand, hemophilia A & B, and clotting-too-much. Plus where warfarin and heparin act.',
+      tags:['platelets','hemophilia','vWD','warfarin/heparin']},
+    {file:'BloodTypes.html', accent:'#a1382c', icon:'abo',
+      title:'Blood Types & Transfusion', sub:'ABO / Rh compatibility',
+      desc:'Pick a recipient and a donor, and watch the red cells either flow safely or clump and burst. Covers ABO & Rh matching, universal donor/recipient, and the transfusion reactions — including the deadly acute hemolytic one.',
+      tags:['ABO','Rh','compatibility','reactions']},
+    {file:'BloodPressure.html', accent:'#1f6d7a', icon:'gauge',
+      title:'Blood Pressure & Cardiac Output', sub:'CO = SV × HR',
+      desc:'Turn the four dials — heart rate, preload, afterload, contractility — and watch stroke volume, cardiac output, and blood pressure respond live. Plus how RAAS raises BP and ANP/BNP lowers it.',
+      tags:['stroke volume','preload','afterload','RAAS']},
+    {file:'PeripheralVascular.html', accent:'#7a3c86', icon:'leg',
+      title:'Peripheral Vascular Disease', sub:'Arterial vs venous vs spasm',
+      desc:'Three limb problems students always mix up: PAD (not enough blood in), venous insufficiency (blood can\'t get out), and Raynaud\'s (vessels spasm shut) — with the classic PAD-vs-venous comparison table.',
+      tags:['PAD','venous ulcer','Raynaud\'s']},
+    {file:'CoronaryQuest3D.html', accent:'#d0524a', icon:'artery',
+      title:'Coronary Artery Disease & Heart Attacks', sub:'3D walk inside the artery',
+      desc:'Shrink down inside a coronary artery and watch atherosclerosis build in real time. Trigger the whole spectrum — stable angina → unstable angina → NSTEMI → STEMI — with live ECG and troponin, then reopen it with a stent.',
+      tags:['plaque','ACS','NSTEMI','STEMI','ECG','stent']},
+    {file:'HeartFailure.html', accent:'#3f6fd6', icon:'heart',
+      title:'Heart Failure', sub:'Left vs right · systolic vs diastolic',
+      desc:'Click a failing side and watch the blood dam back up in the chambers — into the lungs (left) or the body (right). See how ejection fraction changes, and push a patient into acute failure with real triggers.',
+      tags:['left / right','EF','congestion','triggers']},
+    {file:'ValveDisorders.html', accent:'#7a3486', icon:'valve',
+      title:'Heart Valve Disorders', sub:'Stenosis vs regurgitation',
+      desc:'A beating heart where you break each valve. See stenosis (won\'t open) vs regurgitation (won\'t close), and finally understand why each murmur is systolic or diastolic — with a live plain-English caption.',
+      tags:['mitral','aortic','murmur timing','audio']},
+    {file:'CongenitalShunts.html', accent:'#2f6d86', icon:'baby',
+      title:'Congenital Heart Defects', sub:'Shunts & the "blue baby"',
+      desc:'VSD, ASD, PDA and Tetralogy of Fallot. Follow the shortcut the blood takes and find out whether the baby stays pink or turns blue — the whole cyanotic-vs-non-cyanotic idea, made obvious.',
+      tags:['VSD','ASD','PDA','Tetralogy','cyanosis']},
+    {file:'CardiacTamponade.html', accent:'#c99a2e', icon:'drop',
+      title:'Cardiac Tamponade', sub:'Pericardium under pressure',
+      desc:'Fill the pericardial sac and watch the heart get squeezed until it can\'t fill. See Beck\'s triad light up, learn why the rate of fluid matters, then relieve it with pericardiocentesis.',
+      tags:['effusion','Beck\'s triad','obstructive shock']},
+    {file:'HeartInfections.html', accent:'#9a3b52', icon:'germ',
+      title:'Heart Infection & Inflammation', sub:'The three layers & their "-itis"',
+      desc:'Pericarditis, myocarditis, and endocarditis — one for each layer of the heart wall — plus rheumatic heart disease. See vegetations, emboli, and the peripheral signs, in plain language.',
+      tags:['endocarditis','pericarditis','myocarditis','rheumatic']},
+    {file:'NephroticNephritic.html', accent:'#3a6ea5', icon:'filter',
+      title:'Nephrotic vs Nephritic', sub:'What leaks through the filter?',
+      desc:'Watch the glomerular filter break two ways: nephrOtic leaks prOtein (foamy urine, edema), while nephrItic is Inflamed and leaks blood (cola-coloured urine, high BP). See exactly what crosses into the urine.',
+      tags:['glomerulus','proteinuria','hematuria','edema']},
+    {file:'AKILocalizer.html', accent:'#2f7d6a', icon:'kidney',
+      title:'Acute Kidney Injury', sub:'Pre / intra / post-renal',
+      desc:'Sort out AKI by location: before the kidney (not enough blood in), inside it (tissue damage / ATN), or after it (obstruction → hydronephrosis). Plus the oliguric → diuretic → recovery phases.',
+      tags:['pre-renal','ATN','obstruction','GFR']},
+    {file:'NephronExplorer.html', accent:'#3a7a86', icon:'nephron',
+      title:'Nephron Explorer', sub:'How the kidney filters',
+      desc:'Click through the nephron — glomerulus, proximal tubule, loop of Henle, distal tubule, collecting duct — to see filtration, reabsorption, and water conservation. Plus what GFR, creatinine, and BUN actually measure.',
+      tags:['glomerulus','loop of Henle','GFR','BUN']},
+    {file:'CKD.html', accent:'#8a5a2a', icon:'gauge',
+      title:'Chronic Kidney Disease', sub:'Falling GFR, cascading labs',
+      desc:'Drag the GFR down and watch the whole body change — creatinine, BUN and potassium climb while calcium, EPO and vitamin D fall — driving anemia, bone disease, acidosis and hyperkalemia. The kidney visibly scars and shrinks.',
+      tags:['GFR','anemia','hyperkalemia','stages']},
+    {file:'KidneyStones.html', accent:'#7a6030', icon:'stone',
+      title:'Kidney Stones & Obstruction', sub:'Nephrolithiasis → hydronephrosis',
+      desc:'Follow a stone from the kidney (silent) into the ureter (severe colic radiating to the groin) to a lodged obstruction that backs urine up and swells the kidney (hydronephrosis) — with a live pain meter.',
+      tags:['renal colic','flank pain','hydronephrosis']},
+    {file:'UrinaryIncontinence.html', accent:'#2f7a8a', icon:'drop',
+      title:'Urinary Incontinence', sub:'Overflow · stress · urge',
+      desc:'Three leaks students mix up: overflow (bladder too full → dribbles), stress (weak sphincter leaks with a cough), and urge / OAB (overactive bladder muscle squeezes on its own) — each with its own animation.',
+      tags:['overflow','stress','urge / OAB','BPH']},
+    {file:'UTI.html', accent:'#4a8a3a', icon:'germ',
+      title:'Urinary Tract Infection', sub:'Lower vs upper',
+      desc:'Watch bacteria climb the urethra: stop at the bladder for a lower UTI (cystitis — burning, frequency) or all the way to the kidney for an upper UTI (pyelonephritis — fever, flank pain, systemic).',
+      tags:['cystitis','pyelonephritis','ascending']},
+    {file:'RespirationVQ.html', accent:'#4a5aa0', icon:'lungs',
+      title:'Ventilation, Perfusion & V/Q', sub:'Where air meets blood',
+      desc:'The concept students struggle with most, made visual. Watch one alveolus and its capillary, then break the match: a shunt (blood but no air) or dead space (air but no blood) — and see whether oxygen actually loads onto the blood.',
+      tags:['ventilation','perfusion','shunt','dead space']},
+    {file:'COPD.html', accent:'#5c7038', icon:'airway',
+      title:'COPD — The Two Faces', sub:'Chronic bronchitis vs emphysema',
+      desc:'The two ways COPD shows up: chronic bronchitis (airways clogged with mucus) and emphysema (alveoli destroyed and floppy, trapping air). See each one, plus why too much oxygen can be dangerous — the hypoxic drive.',
+      tags:['chronic bronchitis','emphysema','mucus','hypoxic drive']},
+    {file:'Asthma.html', accent:'#b5793a', icon:'wind',
+      title:'Asthma — Attack & Rescue', sub:'Why the airway slams shut',
+      desc:'Look straight down a bronchiole and trigger an attack: the muscle clamps down and the lining swells with mucus until the opening is a slit — that\'s the wheeze. Then give a rescue inhaler and watch it spring back open.',
+      tags:['bronchoconstriction','inflammation','wheeze','triggers']},
+    {file:'AlveoliAttack.html', accent:'#3a6a8a', icon:'alveoli',
+      title:'Alveoli Under Attack', sub:'When the air sacs fill or collapse',
+      desc:'The "diffusion problem" diseases side by side: pneumonia (pus), pulmonary edema (watery fluid), ARDS (both lungs flooded), and atelectasis (collapse). Watch whether oxygen can still cross into the blood.',
+      tags:['pneumonia','edema','ARDS','atelectasis']},
+    {file:'PulmonaryEmbolism.html', accent:'#7a3a8a', icon:'clot',
+      title:'Pulmonary Embolism', sub:'A leg clot that lands in the lung',
+      desc:'Follow a clot from a deep leg vein (DVT), up through the right heart, until it lodges in a pulmonary artery and blocks blood flow to that lung zone — the classic dead space — with the risk factors and warning signs.',
+      tags:['DVT','embolus','dead space','hemoptysis']},
+    {file:'ChestTrauma.html', accent:'#a5392e', icon:'ribs',
+      title:'Chest Trauma', sub:'Pneumothorax, tension & flail chest',
+      desc:'Break the pleural seal and watch the lung collapse: simple pneumothorax, hemothorax, flail chest, and the true emergency — tension pneumothorax, where rising pressure shoves the heart to the other side and blood can\'t return.',
+      tags:['pneumothorax','tension','hemothorax','flail chest']},
+    {file:'LungSounds.html', accent:'#2f6a78', icon:'sound',
+      title:'Lung Sounds', sub:'Press play and actually hear them',
+      desc:'You can\'t learn lung sounds from a page — you have to hear them. Play synthesized normal breath sounds, wheezing, crackles, and rhonchi, each with a scrolling waveform and what it tells you about the lungs.',
+      tags:['wheeze','crackles','rhonchi','auscultation','audio']},
+    {file:'AirwayInfections.html', accent:'#4a8a3a', icon:'sinus',
+      title:'Airway Infections Map', sub:'Upper vs lower · viral vs bacterial',
+      desc:'Click an infection and watch where it lives on the respiratory tract — rhinitis, sinusitis, pharyngitis, laryngitis, acute bronchitis, pneumonia, influenza, and COVID. Learn the upper/lower divide at the larynx and why acute bronchitis isn\'t chronic bronchitis.',
+      tags:['URI','bronchitis','pneumonia','flu','COVID']},
+    {file:'RightHeartChain.html', accent:'#a5502a', icon:'rheart',
+      title:'Road to Right Heart Failure', sub:'Cor pulmonale, step by step',
+      desc:'Pick a lung problem — COPD, OSA, cystic fibrosis, PE, or fibrosis — and walk the cascade: chronic low oxygen → pulmonary vessels constrict → pulmonary hypertension → right ventricle strains → right heart failure → the body backs up (JVD, edema).',
+      tags:['pulmonary HTN','cor pulmonale','OSA','cystic fibrosis']},
+    {file:'GERD.html', accent:'#c0623a', icon:'flame',
+      title:'GERD & the Esophagus', sub:'Reflux → Barrett\'s → cancer',
+      desc:'Watch a weak lower esophageal sphincter (or a hiatal hernia) let stomach acid splash up and burn the esophagus. Then walk the long-term staircase: esophagitis → stricture → ulceration → Barrett\'s → esophageal cancer.',
+      tags:['GERD','hiatal hernia','Barrett\'s','dysphagia']},
+    {file:'PepticUlcer.html', accent:'#b0492a', icon:'stomach',
+      title:'Peptic Ulcers & Gastritis', sub:'Gastric vs duodenal · pain timing',
+      desc:'H. pylori and NSAIDs strip the stomach\'s protection and acid digs in — gastritis, then ulcers. Press "Just ate" and watch the pain go opposite ways: gastric ulcers hurt more with food, duodenal ulcers are relieved by it.',
+      tags:['H. pylori','NSAIDs','gastric','duodenal']},
+    {file:'GIBleed.html', accent:'#9a2f2a', icon:'gidrop',
+      title:'GI Bleed Localizer', sub:'The color tells you where',
+      desc:'The look of the blood pinpoints the bleed: bright-red hematemesis (esophagus), coffee-ground emesis (stomach), black tarry melena (upper GI, fully digested), or hematochezia (lower GI). Trace each back to its source.',
+      tags:['hematemesis','melena','coffee-ground','varices']},
+    {file:'Malabsorption.html', accent:'#3a8a6a', icon:'villi',
+      title:'Malabsorption', sub:'Celiac · short bowel · gastroenteritis',
+      desc:'Nutrients are absorbed through the intestine\'s tiny villi. Flatten them (celiac/gluten), run out of bowel (short bowel), or inflame them (gastroenteritis) and food passes straight through — diarrhea, steatorrhea, weight loss.',
+      tags:['celiac','villi','steatorrhea','norovirus']},
+    {file:'IBD.html', accent:'#7a5aa0', icon:'intestine',
+      title:'Crohn\'s vs Ulcerative Colitis', sub:'The two inflammatory bowel diseases',
+      desc:'The classic compare: Crohn\'s hits anywhere mouth-to-anus in patchy full-thickness "skip" lesions (fistulae, malabsorption); ulcerative colitis is continuous and shallow, colon only, from the rectum up (bloody diarrhea, cancer risk).',
+      tags:['Crohn\'s','UC','skip lesions','IBD']},
+    {file:'BowelObstruction.html', accent:'#a5702a', icon:'knot',
+      title:'Bowel Obstruction', sub:'Small vs large + the causes',
+      desc:'Block the gut and everything behind it swells. Compare small-bowel (early vomiting, mild distension) vs large-bowel (absolute constipation, massive distension), then explore the causes: adhesions, hernia, intussusception, volvulus, tumor.',
+      tags:['SBO','LBO','volvulus','adhesions']},
+    {file:'AcuteAbdomen.html', accent:'#b04a3a', icon:'abdomen',
+      title:'Acute Abdomen', sub:'Locate the pain by quadrant',
+      desc:'Where it hurts names the problem: appendicitis (RLQ, McBurney\'s point, migrates from center), diverticulitis (LLQ), and peritonitis (rigid, board-like, whole belly). See the classic exam signs light up and how a rupture leads to peritonitis.',
+      tags:['appendicitis','diverticulitis','peritonitis','McBurney']},
+    {file:'LiverStages.html', accent:'#a5642a', icon:'liver',
+      title:'Stages of Liver Disease', sub:'Hepatitis → cirrhosis',
+      desc:'Watch the liver tissue change as it moves from acute hepatitis (inflamed, can still heal) to chronic hepatitis (>6 months) to cirrhosis (scarred, shrunken, and permanent). Each stage lists its causes — virus, alcohol, NASH, autoimmune.',
+      tags:['hepatitis','cirrhosis','NASH','fibrosis']},
+    {file:'Bilirubin.html', accent:'#c99a1e', icon:'bili',
+      title:'Bilirubin & Liver Signs', sub:'Follow the bile',
+      desc:'One backup explains almost every sign of liver disease. Click jaundice, pruritus, dark urine, or clay stools to see the bilirubin logic — plus the portal-hypertension backup: hepatomegaly, ascites, and esophageal varices.',
+      tags:['jaundice','pruritus','ascites','varices']},
+    {file:'Gallstones.html', accent:'#5a8a3a', icon:'gallbladder',
+      title:'Gallstones & the Biliary Tree', sub:'Where the stone lodges = the disease',
+      desc:'A silent gallstone becomes dangerous when it moves. See how the same stone causes cholecystitis (cystic duct), jaundice/choledocholithiasis (common bile duct), or gallstone pancreatitis (pancreatic duct) — plus the classic 4 F\'s risk profile.',
+      tags:['cholelithiasis','cholecystitis','4 F\'s','biliary colic']},
+    {file:'Pancreatitis.html', accent:'#b06a2a', icon:'pancreas',
+      title:'Pancreatitis', sub:'The pancreas digesting itself',
+      desc:'Enzymes are supposed to stay off until they reach the gut. Watch them activate too early and digest the pancreas — acute (self-digestion, ↑ amylase/lipase) vs chronic (fibrosis → diabetes + malabsorption), with the classic labs and back pain.',
+      tags:['amylase','lipase','self-digestion','alcohol']},
+    {file:'MaleRepro.html', accent:'#3a6a9a', icon:'male',
+      title:'Male Reproductive Disorders', sub:'An atlas of the male tract',
+      desc:'Click through the male reproductive tract: testicular torsion (an emergency — twisted cord, ischemia), hydrocele, varicocele, epididymitis, BPH, balanitis, cryptorchidism, ED, and andropause — each mapped to where it happens.',
+      tags:['torsion','BPH','epididymitis','varicocele']},
+    {file:'FemaleRepro.html', accent:'#a83a6a', icon:'female',
+      title:'Female Reproductive Disorders', sub:'An atlas of the female tract',
+      desc:'Click through the female reproductive tract: PID, PCOS, ectopic pregnancy (an emergency if it ruptures), cervical cancer (HPV), endometriosis, and menopause — each shown on the ovaries, tubes, uterus, and cervix.',
+      tags:['PID','PCOS','ectopic','endometriosis']},
+    {file:'PathogenTypes.html', accent:'#5a8a4a', icon:'microbe',
+      title:'Pathogen Types', sub:'Bacteria, viruses, fungi, parasites',
+      desc:'The four families of germs and how each behaves — bacteria (Gram stain & resistance), viruses (need a host), fungi (superficial vs deep), and parasites — plus how a culture & sensitivity picks the right drug.',
+      tags:['Gram stain','TB','C&S','resistance']},
+    {file:'ViralReplication.html', accent:'#a5442a', icon:'virus',
+      title:'Viral Replication', sub:'How a virus hijacks your cell',
+      desc:'Step through the six stages a virus uses to turn your own cell into a virus factory — attachment, penetration, uncoating, replication, assembly, release — plus how HIV targets CD4 cells.',
+      tags:['6 steps','HIV','CD4','retrovirus']},
+    {file:'ImmuneDefense.html', accent:'#3a6a9a', icon:'shield',
+      title:'Three Lines of Defense', sub:'Barriers → innate → adaptive',
+      desc:'The immune system in three layers: barriers that keep germs out, the fast non-specific innate response (macrophages, neutrophils), and the slow, specific, remembering adaptive response (B & T cells) — plus active vs passive immunity.',
+      tags:['innate','adaptive','B & T cells','memory']},
+    {file:'Immunoglobulins.html', accent:'#6a5aa0', icon:'antibody',
+      title:'Immunoglobulins (GAMED)', sub:'The five antibodies',
+      desc:'Click each antibody to learn its job and a memory hook: IgG (long-term, crosses placenta), IgA (mucous secretions), IgM (first responder), IgE (allergy & parasites), IgD.',
+      tags:['IgG','IgA','IgM','IgE','GAMED']},
+    {file:'Hypersensitivity.html', accent:'#b0563a', icon:'allergy',
+      title:'Hypersensitivity Reactions', sub:'Types I–IV (ACID)',
+      desc:'When the immune system overreacts and the body is damaged by its own response. The four types with the ACID mnemonic — Allergic, antiBody (cytotoxic), immune Complex, Delayed — plus autoimmunity vs immunodeficiency.',
+      tags:['Type I–IV','ACID','anaphylaxis','autoimmune']},
+    {file:'BloodCancers.html', accent:'#8a3a6a', icon:'nodes',
+      title:'Blood Cancers', sub:'Leukemia & lymphoma',
+      desc:'The white-cell cancers: leukemia (of the early marrow/blood cells — lymphoblastic vs myelocytic) and lymphoma (of the lymph nodes — Hodgkin with Reed-Sternberg cells vs the scattered Non-Hodgkin).',
+      tags:['leukemia','Hodgkin','Non-Hodgkin','Reed-Sternberg']},
+    {file:'CellularAdaptation.html', accent:'#3a7a86', icon:'cells',
+      title:'Cellular Adaptation', sub:'How cells cope with stress',
+      desc:'Watch cells change to survive stress: hypertrophy (bigger), atrophy (smaller), hyperplasia (more), metaplasia (different type, reversible), and dysplasia (deranged, precancerous) — plus what happens when adaptation fails and cells are injured.',
+      tags:['hypertrophy','atrophy','metaplasia','dysplasia']},
+    {file:'Cancer.html', accent:'#8a4a76', icon:'tumor',
+      title:'Cancer', sub:'Benign vs malignant',
+      desc:'Whether a tumor stays put or invades and metastasizes — plus how we grade (differentiation), stage (TNM), and name cancers by their tissue of origin (carcinoma, sarcoma, lymphoma, and more).',
+      tags:['benign','malignant','TNM','metastasis']},
+    {file:'Inflammation.html', accent:'#c0562a', icon:'inflame',
+      title:'Inflammation', sub:'Acute vs chronic',
+      desc:'The body\'s response to injury: the red, hot, swollen, painful acute response vs the slow, scarring chronic one — with the key players (mast cells, neutrophils, macrophages, cytokines, prostaglandins, leukotrienes) and the systemic phase.',
+      tags:['acute','chronic','cardinal signs','mediators']},
+    {file:'Sepsis.html', accent:'#b0402a', icon:'alert',
+      title:'SIRS → Septic Shock', sub:'When infection spirals',
+      desc:'Step through the escalation — SIRS, sepsis, severe sepsis, septic shock — and watch the patient monitor deteriorate (temp, HR, BP, lactate) as the whole-body response spins out of control.',
+      tags:['SIRS','sepsis','septic shock','lactate']},
+    {file:'WoundHealing.html', accent:'#b06a3a', icon:'bandage',
+      title:'Wound Healing', sub:'The four phases',
+      desc:'Watch a cut heal through hemostasis (clot), inflammation (clean-up), proliferation (rebuild), and maturation (remodel & strengthen) — plus the factors that slow healing down.',
+      tags:['hemostasis','proliferation','remodeling','factors']},
+    {file:'PainPathway.html', accent:'#7a4a9a', icon:'bolt',
+      title:'The Pain Pathway', sub:'From injury to "ouch"',
+      desc:'Follow a pain signal from the toe to the brain — transduction, transmission, perception, modulation — plus nociceptive (somatic/visceral) vs neuropathic pain and acute vs chronic.',
+      tags:['transduction','perception','neuropathic','acute/chronic']},
+    {file:'AutoimmuneInflammatory.html', accent:'#a5445a', icon:'joint',
+      title:'Autoimmune & Inflammatory', sub:'When the body attacks itself',
+      desc:'The connective-tissue and joint diseases: gout (uric-acid crystals), rheumatoid arthritis (bilateral joints), lupus/SLE (DNA/RNA, butterfly rash), scleroderma/CREST, and fibromyalgia.',
+      tags:['gout','RA','lupus','CREST','fibromyalgia']},
+    {file:'Neurodegenerative.html', accent:'#4a6a9a', icon:'brain',
+      title:'Neurodegenerative Diseases', sub:'When the nervous system breaks down',
+      desc:'What each disease destroys explains its symptoms: Guillain-Barré (PNS myelin), Huntington\'s (chorea), Alzheimer\'s (plaques, 5 A\'s), Parkinson\'s (dopamine), MS (CNS myelin), and ALS (motor neurons, mind intact).',
+      tags:['GBS','Alzheimer\'s','Parkinson\'s','MS','ALS']},
+    {file:'NeuromuscularJunction.html', accent:'#4a7a8a', icon:'synapse',
+      title:'Neuromuscular Junction', sub:'Botulism · tetanus · myasthenia',
+      desc:'Three diseases that each sabotage a different point in the nerve-muscle handshake: botulism blocks ACh release (floppy), tetanus removes the brake (rigid spasms), and myasthenia gravis destroys the receptors (fatigable weakness).',
+      tags:['botulism','tetanus','myasthenia','ACh']},
+    {file:'MentalHealth.html', accent:'#6a5a9a', icon:'mind',
+      title:'Mental Health Disorders', sub:'The brain chemistry behind them',
+      desc:'Anxiety (GAD, OCD, panic, PTSD), depression & mood disorders, bipolar (mania vs depression), schizophrenia (positive vs negative symptoms and dopamine), and ADHD — each tied to its neurotransmitter imbalance.',
+      tags:['anxiety','depression','bipolar','schizophrenia']},
+    {file:'IntracranialPressure.html', accent:'#a5442a', icon:'skull',
+      title:'Increased Intracranial Pressure', sub:'The skull is a closed box',
+      desc:'Brain, blood, and CSF share one fixed space — add volume and pressure climbs. Drag the pressure up and watch it go from early signs (headache, N/V) to Cushing\'s triad and herniation onto the brainstem.',
+      tags:['Monro-Kellie','Cushing\'s triad','herniation','posturing']},
+    {file:'Stroke.html', accent:'#b0563a', icon:'strokeicon',
+      title:'Stroke (CVA)', sub:'Ischemic vs hemorrhagic',
+      desc:'Two ways the brain loses blood: ischemic (a clot blocks a vessel — thrombus, embolus, or a warning TIA — 80–85%) or hemorrhagic (a vessel ruptures and bleeds — 15–20%). Plus how to spot one with FAST.',
+      tags:['ischemic','hemorrhagic','TIA','FAST']},
+    {file:'HeadTrauma.html', accent:'#8a3a4a', icon:'headinjury',
+      title:'Head Trauma & Brain Bleeds', sub:'Where the blood collects',
+      desc:'The meningeal layers and the four brain bleeds — epidural (arterial), subdural (venous), subarachnoid, intracerebral — plus the TBI types: concussion, contusion (coup-countercoup), diffuse axonal, and penetrating.',
+      tags:['epidural','subdural','concussion','coup-countercoup']},
+    {file:'SpinalCord.html', accent:'#3a6a8a', icon:'spine',
+      title:'Spinal Cord Injury', sub:'Level decides everything',
+      desc:'How high the injury is decides how much is lost — quadriplegia (C8+, "C5 keeps the diaphragm alive") vs paraplegia (T1 below) — plus neurogenic shock, spinal shock, and autonomic dysreflexia.',
+      tags:['quadriplegia','neurogenic shock','autonomic dysreflexia']},
+    {file:'CNSInfections.html', accent:'#5a7a3a', icon:'meninges',
+      title:'Other Neurological Disorders', sub:'Infections, fluid, nerves',
+      desc:'A grab-bag of high-yield conditions: meningitis (the classic triad) vs encephalitis, hydrocephalus, seizures (and status epilepticus), Bell\'s palsy (CN 7), and spina bifida (folate).',
+      tags:['meningitis','encephalitis','hydrocephalus','Bell\'s palsy']},
+    {file:'FractureCare.html', accent:'#7a6a4a', icon:'bone',
+      title:'Fractures & the 5 P\'s', sub:'Break patterns + neurovascular check',
+      desc:'The common fracture patterns (transverse, oblique, spiral, comminuted, greenstick, open) plus the neurovascular assessment — Pain, Pulse, Pallor, Paresthesia, Paralysis — and the ABCDE primary survey.',
+      tags:['fracture types','5 P\'s','ABCDE','open']},
+    {file:'FractureComplications.html', accent:'#a5442a', icon:'bonecrack',
+      title:'Fracture Complications', sub:'When a break turns dangerous',
+      desc:'The three complications to watch: osteomyelitis (bone infection), compartment syndrome (pressure choking off blood flow — an emergency), and fat embolism (marrow fat traveling to the lungs).',
+      tags:['osteomyelitis','compartment','fat embolism']},
+    {file:'MSKDisorders.html', accent:'#5a7a6a', icon:'joint',
+      title:'Musculoskeletal Disorders', sub:'Bones, joints & muscles',
+      desc:'Osteoarthritis (wear & tear) vs osteoporosis (thin, porous bone), rhabdomyolysis (muscle breakdown → myoglobin), strain vs sprain, and the spine curvatures — kyphosis, lordosis, scoliosis.',
+      tags:['osteoarthritis','osteoporosis','rhabdo','strain/sprain']},
+    {file:'SkinInfections.html', accent:'#a5652a', icon:'skinlayers',
+      title:'Skin Infections', sub:'Bacterial · viral · fungal',
+      desc:'Skin infections by cause: bacterial (impetigo, cellulitis, MRSA), viral (herpes simplex, zoster/shingles, varicella), and fungal (tinea, candida, onychomycosis) — with what each looks like.',
+      tags:['impetigo','cellulitis','shingles','tinea']},
+    {file:'SkinConditions.html', accent:'#a5556a', icon:'rash',
+      title:'Skin Conditions', sub:'Chronic rashes, cancer & ulcers',
+      desc:'The chronic and inflammatory conditions — eczema, psoriasis, rosacea, urticaria, acne — plus skin cancer (screen moles with ABCDE) and the two chronic ulcers: pressure vs venous stasis.',
+      tags:['eczema','psoriasis','ABCDE','pressure ulcer']},
+    {file:'Burns.html', accent:'#c0562a', icon:'flame',
+      title:'Burns', sub:'How deep did it go?',
+      desc:'A burn is classified by depth into the skin. Click through 1st (superficial), 2nd (partial thickness, blisters), 3rd (full thickness, painless), and 4th degree (to muscle/bone) — plus the complications.',
+      tags:['1st–4th degree','partial/full','fluid loss','infection']},
+    {file:'DNAtoChromosome.html', accent:'#4a7a8a', icon:'dna',
+      title:'DNA → Chromosome', sub:'How DNA is packaged',
+      desc:'Zoom out step by step from a single nucleotide (sugar, phosphate, base) up through the double helix, histones, nucleosomes ("beads on a string"), chromatin, and finally a compact chromosome.',
+      tags:['nucleotide','histone','nucleosome','chromatin']},
+    {file:'MitosisMeiosis.html', accent:'#5a7a4a', icon:'celldiv',
+      title:'Mitosis vs Meiosis', sub:'Two kinds of cell division',
+      desc:'Mitosis makes two identical copies for growth and repair; meiosis makes four unique gametes for reproduction. Plus nondisjunction — the meiosis error that produces trisomy and monosomy.',
+      tags:['mitosis','meiosis','nondisjunction','gametes']},
+    {file:'ChromosomalDisorders.html', accent:'#7a5a9a', icon:'karyotype',
+      title:'Chromosomal Disorders', sub:'Trisomy & monosomy',
+      desc:'When the chromosome count is off: Down syndrome (Trisomy 21), Klinefelter (XXY), and Turner (a single X, "XO") — each shown on a karyotype with its characteristic features.',
+      tags:['Down','Klinefelter','Turner','karyotype']},
+    {file:'InheritancePatterns.html', accent:'#4a7a6a', icon:'pedigree',
+      title:'Inheritance Patterns', sub:'Dominant, recessive, X-linked',
+      desc:'Does a condition take one bad allele or two, and does it live on the X? See the rule for autosomal dominant (Huntington\'s, Marfan), autosomal recessive (CF, sickle cell), and X-linked recessive (hemophilia, Duchenne) — plus the key terms.',
+      tags:['dominant','recessive','X-linked','carrier']},
+    {file:'PunnettSquare.html', accent:'#44528a', icon:'grid',
+      title:'Punnett Square Calculator', sub:'Cross two parents, get the odds',
+      desc:'Pick the inheritance pattern and each parent\'s genotype and it builds the Punnett square and works out the probabilities — affected, carrier, or unaffected — including tricky X-linked crosses. Loads the practice problems with one tap.',
+      tags:['Punnett','probability','genotype','X-linked']},
+    {file:'Teratogens.html', accent:'#a5654a', icon:'fetus',
+      title:'Teratogens & Genetic Concepts', sub:'Environment meets the genes',
+      desc:'What can harm a developing fetus (teratogens, TORCH, the vulnerable 15–60 day window), whether a trait comes from one gene or many (single vs polygenic), and what a mutation actually is.',
+      tags:['teratogens','TORCH','polygenic','mutation']},
+    {file:'EndocrinePituitary.html', accent:'#7a5a8a', icon:'gland',
+      title:'The Endocrine Command Center', sub:'Hypothalamus → pituitary',
+      desc:'The chain of command: the hypothalamus directs the pituitary, whose anterior lobe makes six hormones (GH, PRL, ACTH, TSH, FSH, LH) and posterior lobe stores ADH & oxytocin — all governed by feedback loops.',
+      tags:['hypothalamus','pituitary','ACTH','feedback']},
+    {file:'AdrenalDisorders.html', accent:'#b0703a', icon:'adrenal',
+      title:'Adrenal Disorders', sub:'Cushing\'s vs Addison\'s',
+      desc:'Too much cortisol (Cushing\'s — weight gain, hyperglycemia, thin skin) vs too little (Addison\'s — hypotension, bronze skin, autoimmune), plus pheochromocytoma (an adrenal-medulla tumor) and why you never stop steroids abruptly.',
+      tags:['Cushing\'s','Addison\'s','cortisol','pheochromocytoma']},
+    {file:'ThyroidDisorders.html', accent:'#3a7a8a', icon:'thyroid',
+      title:'Thyroid Disorders', sub:'Hypo vs hyper + goiter',
+      desc:'Thyroid hormone sets your metabolic speed: too little slows everything (hypothyroid, Hashimoto\'s), too much speeds it up (hyperthyroid, Graves\'). Plus goiter and the classic TSH-feedback exam trick.',
+      tags:['hypothyroid','hyperthyroid','goiter','TSH']},
+    {file:'Diabetes.html', accent:'#5a7a9a', icon:'sugar',
+      title:'Diabetes Mellitus', sub:'Type 1, 2, gestational + DKA/HHS',
+      desc:'Insulin is the key that lets glucose into cells. Type 1 has no insulin (→ DKA), Type 2 has insulin resistance (→ HHS), gestational is pregnancy resistance. Compare the two emergencies side by side.',
+      tags:['Type 1','Type 2','DKA','HHS']},
+    {file:'GrowthHormone.html', accent:'#4a8a6a', icon:'ruler',
+      title:'Growth Hormone Disorders', sub:'Timing is everything',
+      desc:'Too little GH stunts growth (deficiency). Too much before the growth plates close makes the whole skeleton grow (gigantism); after they close, bones only thicken (acromegaly — big hands, feet, jaw).',
+      tags:['GH deficiency','gigantism','acromegaly']},
+    {file:'ADHDisorders.html', accent:'#3a7a9a', icon:'waterdrop',
+      title:'ADH Disorders', sub:'SIADH vs Diabetes Insipidus',
+      desc:'ADH tells the kidney to hold water. Two exact opposites: too much ADH (SIADH → retain water, low sodium) vs too little (Diabetes Insipidus → dump water, dehydration, high sodium).',
+      tags:['SIADH','DI','ADH','sodium']}
+  ];
+  const CARD=t=>`
+    <a class="tool" href="${t.file}" style="--accent:${t.accent}">
+      <div class="top">
+        <div class="icon"><svg viewBox="0 0 30 30">${ICONS[t.icon]}</svg></div>
+        <div><h3>${t.title}</h3><div class="sub">${t.sub}</div></div>
+      </div>
+      <p>${t.desc}</p>
+      <div class="tags">${t.tags.map(x=>`<span>${x}</span>`).join('')}</div>
+      <span class="go">Open lesson →</span>
+    </a>`;
+  const byFile={}; TOOLS.forEach(t=>byFile[t.file]=t);
+  const SECTIONS=[
+    {title:'💧 Fluids &amp; Electrolytes', files:['FluidCompartments.html','Edema.html','FluidHormones.html','Electrolytes.html']},
+    {title:'⚗️ Acid-Base &amp; ABGs', files:['BufferSystems.html','ABGInterpreter.html']},
+    {title:'🦠 Pathogens &amp; Immunity', files:['PathogenTypes.html','ViralReplication.html','ImmuneDefense.html','Immunoglobulins.html','Hypersensitivity.html','BloodCancers.html']},
+    {title:'🔬 Cells, Cancer &amp; Inflammation', files:['CellularAdaptation.html','Cancer.html','Inflammation.html']},
+    {title:'🧠 Sepsis, Pain &amp; Neuro', files:['Sepsis.html','WoundHealing.html','PainPathway.html','AutoimmuneInflammatory.html','Neurodegenerative.html','NeuromuscularJunction.html']},
+    {title:'🧩 Mental Health &amp; Brain', files:['MentalHealth.html','IntracranialPressure.html','Stroke.html','HeadTrauma.html','SpinalCord.html','CNSInfections.html']},
+    {title:'🦴 MSK, Skin &amp; Burns', files:['FractureCare.html','FractureComplications.html','MSKDisorders.html','SkinInfections.html','SkinConditions.html','Burns.html']},
+    {title:'🧬 Genetics &amp; Inheritance', files:['DNAtoChromosome.html','MitosisMeiosis.html','ChromosomalDisorders.html','InheritancePatterns.html','PunnettSquare.html','Teratogens.html']},
+    {title:'🦋 Endocrine &amp; Hormones', files:['EndocrinePituitary.html','AdrenalDisorders.html','ThyroidDisorders.html','Diabetes.html','GrowthHormone.html','ADHDisorders.html']},
+    {title:'🩸 Blood &amp; Bleeding', files:['AnemiaExplorer.html','BleedingClotting.html','BloodTypes.html']},
+    {title:'🫀 The Heart &amp; Vessels', files:['EKGReader.html','BloodPressure.html','CoronaryQuest3D.html','HeartFailure.html','ValveDisorders.html','CongenitalShunts.html','CardiacTamponade.html','HeartInfections.html','PeripheralVascular.html']},
+    {title:'🫘 Kidneys &amp; Urinary', files:['NephronExplorer.html','NephroticNephritic.html','AKILocalizer.html','CKD.html','KidneyStones.html','UrinaryIncontinence.html','UTI.html']},
+    {title:'🫁 Lungs &amp; Breathing', files:['RespirationVQ.html','COPD.html','Asthma.html','AirwayInfections.html','AlveoliAttack.html','PulmonaryEmbolism.html','RightHeartChain.html','ChestTrauma.html','LungSounds.html']},
+    {title:'🩻 Gut &amp; Digestion', files:['GERD.html','PepticUlcer.html','GIBleed.html','Malabsorption.html','IBD.html','BowelObstruction.html','AcuteAbdomen.html']},
+    {title:'🫙 Liver, Bile &amp; Pancreas', files:['LiverStages.html','Bilirubin.html','Gallstones.html','Pancreatitis.html']},
+    {title:'👶 Reproductive Systems', files:['MaleRepro.html','FemaleRepro.html']}
+  ];
+  document.getElementById('grid').innerHTML = SECTIONS.map(s=>
+    `<div class="sectitle">${s.title}<span class="rule"></span></div><div class="grid">${s.files.map(f=>byFile[f]?CARD(byFile[f]):'').join('')}</div>`
+  ).join('');
+</script>
+<script>(function(){var d=document.querySelector('.dd');if(!d)return;var b=d.querySelector('.ddbtn');b.addEventListener('click',function(e){e.stopPropagation();d.classList.toggle('open');b.setAttribute('aria-expanded',d.classList.contains('open'));});d.querySelector('.ddpanel').addEventListener('click',function(e){e.stopPropagation();});document.addEventListener('click',function(){d.classList.remove('open');b.setAttribute('aria-expanded','false');});})();</script>
+</body>
+</html>

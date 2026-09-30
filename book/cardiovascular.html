@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0c3a44">
+<title>Cardiovascular &mdash; Pathophysiology &middot; Dr. Akash Garg</title>
+<meta name="description" content="A student-friendly, exact pathophysiology chapter on the endocrine system — feedback loops, adrenal, thyroid, diabetes, growth hormone, and ADH — with the concept explained plainly and an interactive to play with in every section.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#22312f; --soft:#4a5a58; --muted:#7c8a88; --faint:#9aa8a6; --line:#e6e2d6;
+    --paper:#faf8f2; --card:#fffdf7; --accent:#0c7283; --accent-dk:#0c3a44; --gold:#b8862f;
+    --serif:"Source Serif 4",Georgia,"Times New Roman",serif; --disp:"Fraunces",Georgia,serif; --ui:"Inter",system-ui,sans-serif;
+    --shadow:0 1px 3px rgba(20,40,46,.06);
+  }
+  *{box-sizing:border-box;} html{scroll-behavior:smooth;}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--serif);font-size:18px;line-height:1.7;-webkit-font-smoothing:antialiased;}
+  a{color:var(--accent);text-decoration:none;} a:hover{text-decoration:underline;}
+
+  /* top bar + progress */
+  .topbar{position:sticky;top:0;z-index:50;background:rgba(250,248,242,.92);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid var(--line);}
+  .topbar .row{max-width:1120px;margin:0 auto;padding:11px 20px;display:flex;align-items:center;gap:14px;font-family:var(--ui);}
+  .topbar a.home{font-size:13.5px;font-weight:600;color:var(--soft);white-space:nowrap;}
+  .topbar a.home:hover{color:var(--accent);text-decoration:none;}
+  .topbar .ct{font-size:13px;color:var(--faint);font-weight:600;margin-left:auto;white-space:nowrap;}
+  .progress{height:3px;background:transparent;} .progress .bar{height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--gold));transition:width .1s;}
+
+  .layout{max-width:1120px;margin:0 auto;padding:0 20px;display:grid;grid-template-columns:230px 1fr;gap:30px;}
+  /* sidebar TOC */
+  aside{font-family:var(--ui);padding-top:34px;}
+  aside .toc{position:sticky;top:74px;}
+  aside .toc h4{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--faint);margin:0 0 12px;font-weight:700;}
+  aside .toc a{display:block;font-size:13.5px;color:var(--soft);padding:6px 10px;border-left:2px solid var(--line);line-height:1.35;}
+  aside .toc a:hover{color:var(--accent);text-decoration:none;border-left-color:var(--accent);}
+  aside .toc a.on{color:var(--accent-dk);font-weight:700;border-left-color:var(--gold);background:#f3efe3;border-radius:0 8px 8px 0;}
+
+  .reading{max-width:1040px;padding:30px 0 70px;min-width:0;}
+  .reading .col{max-width:718px;}
+  /* opener */
+  .kicker{font-family:var(--ui);font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);font-weight:700;}
+  h1{font-family:var(--disp);font-weight:600;font-size:clamp(32px,5.2vw,46px);line-height:1.08;letter-spacing:-.5px;color:var(--accent-dk);margin:10px 0 6px;max-width:718px;}
+  .lede{font-size:20px;line-height:1.6;color:var(--soft);max-width:718px;margin:14px 0 0;}
+  h2{font-family:var(--disp);font-weight:600;font-size:27px;letter-spacing:-.3px;color:var(--accent-dk);margin:52px 0 4px;scroll-margin-top:70px;max-width:718px;}
+  h2 .num{font-family:var(--ui);font-size:13px;font-weight:700;color:var(--gold);letter-spacing:1px;display:block;margin-bottom:4px;text-transform:uppercase;}
+  h3{font-family:var(--disp);font-weight:600;font-size:20px;color:var(--accent-dk);margin:26px 0 2px;max-width:718px;}
+  p{margin:14px 0;max-width:718px;} p b,li b{color:var(--accent-dk);font-weight:600;}
+  .reading ul,.reading ol{max-width:718px;padding-left:24px;} .reading li{margin:7px 0;}
+
+  .objectives{max-width:718px;background:#f2efe4;border:1px solid #e4ddc8;border-radius:14px;padding:18px 22px;margin:24px 0;font-family:var(--ui);}
+  .objectives h4{margin:0 0 8px;font-size:12px;letter-spacing:1px;text-transform:uppercase;color:var(--gold);font-weight:700;}
+  .objectives ul{margin:0;padding-left:20px;} .objectives li{font-size:14.5px;line-height:1.5;color:var(--soft);margin:6px 0;font-family:var(--serif);}
+
+  .kp{max-width:718px;background:#eef5f6;border:1px solid #d3e5e7;border-left:5px solid var(--accent);border-radius:0 12px 12px 0;padding:14px 20px;margin:22px 0;font-family:var(--ui);}
+  .kp .t{font-size:11.5px;letter-spacing:1px;text-transform:uppercase;color:var(--accent-dk);font-weight:700;margin-bottom:6px;}
+  .kp ul{margin:0;padding-left:18px;} .kp li{font-size:14.5px;line-height:1.55;color:var(--ink);margin:5px 0;font-family:var(--serif);}
+  .pearl{max-width:718px;background:#fbf3e2;border:1px solid #ecd9ac;border-left:5px solid var(--gold);border-radius:0 12px 12px 0;padding:13px 20px;margin:22px 0;font-family:var(--serif);font-size:15px;line-height:1.6;color:#6a5320;}
+  .pearl b{color:#5a4212;}
+
+  /* interactive embed (breaks out wider than prose) */
+  .embed{max-width:1040px;margin:26px 0 30px;}
+  .embed .cap{font-family:var(--ui);font-size:12.5px;font-weight:600;color:var(--muted);margin:0 0 8px;display:flex;align-items:center;gap:8px;}
+  .embed .cap .tag{background:var(--accent);color:#fff;font-size:10.5px;letter-spacing:.5px;text-transform:uppercase;font-weight:700;padding:3px 9px;border-radius:20px;}
+  .embed .frame{border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:0 8px 26px rgba(20,40,46,.09);background:#fff;}
+  .embed iframe{display:block;width:100%;height:640px;border:0;}
+  .embed .cap a{font-family:var(--ui);margin-left:auto;font-size:12.5px;font-weight:600;}
+
+  /* summary + quiz */
+  .summary{max-width:718px;background:var(--accent-dk);color:#eaf3f4;border-radius:16px;padding:24px 26px;margin:50px 0 30px;font-family:var(--serif);}
+  .summary h2{color:#fff;margin:0 0 6px;font-size:24px;}
+  .summary ul{margin:10px 0 0;padding-left:20px;} .summary li{margin:8px 0;font-size:15.5px;line-height:1.55;color:#dcebec;}
+  .summary li b{color:#fff;}
+  .quiz{max-width:718px;margin:36px 0;}
+  .quiz h2{margin-top:0;}
+  .q{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 20px;margin:12px 0;box-shadow:var(--shadow);}
+  .q .qq{font-weight:600;color:var(--accent-dk);font-family:var(--serif);}
+  .q button{margin-top:10px;font-family:var(--ui);font-size:13px;font-weight:700;color:var(--accent);background:#eef5f6;border:1px solid #d3e5e7;border-radius:20px;padding:7px 15px;cursor:pointer;}
+  .q button:hover{background:#e2eff0;}
+  .q .ans{display:none;margin-top:12px;padding-top:12px;border-top:1px dashed var(--line);font-size:15.5px;color:var(--soft);}
+  .q .ans .a{font-weight:700;color:var(--accent-dk);}
+  .q.show .ans{display:block;} .q.show button{display:none;}
+
+  .chapnav{max-width:718px;display:flex;justify-content:space-between;gap:12px;margin:44px 0 0;font-family:var(--ui);}
+  .chapnav a,.chapnav span{flex:1;border:1px solid var(--line);border-radius:12px;padding:14px 16px;font-size:13.5px;background:var(--card);}
+  .chapnav a{color:var(--accent-dk);font-weight:600;} .chapnav a:hover{border-color:var(--accent);text-decoration:none;}
+  .chapnav .k{display:block;font-size:11px;color:var(--faint);text-transform:uppercase;letter-spacing:.5px;margin-bottom:2px;}
+  .chapnav .next{text-align:right;} .chapnav .disabled{color:var(--faint);}
+
+  footer{font-family:var(--ui);text-align:center;color:var(--faint);font-size:12.5px;border-top:1px solid var(--line);padding:26px 20px 50px;margin-top:30px;}
+  footer b{color:var(--soft);}
+
+  @media(max-width:860px){
+    .layout{grid-template-columns:1fr;gap:0;}
+    aside{padding-top:16px;} aside .toc{position:static;}
+    aside .toc{border:1px solid var(--line);border-radius:12px;padding:12px 14px;background:var(--card);}
+    aside .toc a{border-left:none;padding:6px 4px;}
+    aside .toc a.on{background:none;}
+    .reading{padding-top:16px;}
+    .embed iframe{height:660px;}
+  }
+
+  /* comparison tables */
+  .ctwrap{max-width:718px;overflow-x:auto;margin:22px 0;-webkit-overflow-scrolling:touch;}
+  table.ctable{border-collapse:collapse;width:100%;min-width:520px;font-family:var(--ui);font-size:14px;background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden;}
+  table.ctable th,table.ctable td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);vertical-align:top;line-height:1.45;}
+  table.ctable thead th{background:#eef5f6;color:var(--accent-dk);font-weight:700;font-size:12.5px;letter-spacing:.3px;}
+  table.ctable tbody tr:last-child td{border-bottom:none;}
+  table.ctable td:first-child,table.ctable th:first-child{font-weight:600;color:var(--soft);white-space:nowrap;}
+  table.ctable td b{color:var(--accent-dk);font-weight:600;}
+  /* glossary */
+  dl.terms{max-width:718px;margin:18px 0;}
+  dl.terms dt{font-family:var(--ui);font-weight:700;color:var(--accent-dk);font-size:15px;margin-top:15px;}
+  dl.terms dd{margin:3px 0 0;color:var(--soft);}
+  /* flashcard drill widget */
+  .fc{max-width:718px;margin:20px 0;}
+  .fc-card{perspective:1600px;height:236px;cursor:pointer;margin-bottom:14px;}
+  .fc-inner{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform .55s cubic-bezier(.4,.2,.2,1);}
+  .fc-card.flip .fc-inner{transform:rotateY(180deg);}
+  .fc-face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border:1px solid var(--line);border-radius:16px;padding:26px 30px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:12px;box-shadow:0 8px 26px rgba(20,40,46,.09);overflow:auto;}
+  .fc-front{background:linear-gradient(180deg,#fffdf7,#eef5f6);}
+  .fc-back{background:linear-gradient(180deg,#fbf3e2,#f3e6c9);transform:rotateY(180deg);border-color:#e6d3a6;}
+  .fc-side{position:absolute;top:12px;left:16px;font-family:var(--ui);font-size:10px;font-weight:800;letter-spacing:1.3px;text-transform:uppercase;color:var(--faint);}
+  .fc-back .fc-side{color:var(--gold);}
+  .fc-q{font-family:var(--disp);font-weight:600;font-size:19px;line-height:1.35;color:var(--accent-dk);}
+  .fc-a{font-family:var(--serif);font-weight:600;font-size:17px;line-height:1.45;color:var(--ink);}
+  .fc-hint{position:absolute;bottom:11px;left:0;right:0;font-family:var(--ui);font-size:11.5px;color:var(--faint);}
+  .fc-nav{display:flex;gap:9px;align-items:center;}
+  .fc-count{flex:1;text-align:center;font-family:var(--ui);font-size:13px;color:var(--muted);font-weight:600;}
+  .fc-btn{font-family:var(--ui);font-size:13px;font-weight:700;color:var(--accent);background:#eef5f6;border:1px solid #d3e5e7;border-radius:20px;padding:8px 13px;cursor:pointer;}
+  .fc-btn:hover{background:#e2eff0;}
+  .fc-full{display:block;margin-top:14px;text-align:center;font-family:var(--ui);font-size:13.5px;font-weight:700;background:var(--accent-dk);color:#eaf3f4;border-radius:12px;padding:12px;}
+  .fc-full:hover{text-decoration:none;filter:brightness(1.12);}
+</style>
+</head>
+<body>
+
+
+  <div class="topbar">
+    <div class="row">
+      <a class="home" href="index.html">📖 Contents</a>
+      
+      <span class="ct">Week 9 · Cardiovascular</span>
+    </div>
+    <div class="progress"><div class="bar" id="bar"></div></div>
+  </div>
+
+  <div class="layout">
+    <aside>
+      <nav class="toc">
+        <h4>In this chapter</h4>
+        <a href="#w9_bp" class="on">1 · BP &amp; hypertension</a>
+        <a href="#w9_cad">2 · Coronary disease &amp; MI</a>
+        <a href="#w9_hf">3 · Heart failure</a>
+        <a href="#w9_valve">4 · Valve disorders</a>
+        <a href="#w9_ekg">5 · EKG &amp; arrhythmias</a>
+        <a href="#w9_pvd">6 · Peripheral vascular</a>
+        <a href="#summary">The chapter in one breath</a>
+        <a href="#glossary">Words worth knowing</a>
+        <a href="#cards">Flashcards</a>
+        <a href="#quiz">Check yourself</a>
+      </nav>
+    </aside>
+
+    <main class="reading">
+      <div class="kicker">Pathophysiology · Week 9</div>
+      <h1>Cardiovascular</h1>
+      <p class="lede">The cardiovascular system is a <b>pump</b> and a <b>plumbing network</b> that never rests, and small failures ripple everywhere. This chapter runs from the pressure in the pipes to the muscle of the pump itself: hypertension, coronary disease and heart attack, heart failure, valve problems, the rhythms on the EKG, and the diseases of the peripheral vessels.</p>
+      <div class="objectives">
+        <h4>By the end of this chapter you can</h4>
+        <ul>
+          <li>Explain what sets <b>blood pressure</b> and how hypertension damages organs.</li>
+          <li>Distinguish <b>stable angina</b> from a <b>myocardial infarction</b> and name its markers.</li>
+          <li>Contrast <b>left- and right-sided</b>, systolic and diastolic <b>heart failure</b>.</li>
+          <li>Tell valve <b>stenosis</b> from <b>regurgitation</b>.</li>
+          <li>Read the basic <b>EKG</b> waves and recognize dangerous arrhythmias and peripheral vascular disease.</li>
+        </ul>
+      </div>
+
+      <h2 id="w9_bp"><span class="num">Section 1</span>Blood pressure &amp; hypertension</h2>
+<figure class="bref" data-sec="1" style="max-width:1040px;margin:10px 0 24px;padding:0;"><div style="border:1px solid #e6e2d6;border-radius:16px;overflow:hidden;background:#fffdf7;box-shadow:0 8px 26px rgba(20,40,46,.09);"><img src="img/cardiovascular_s1.jpg" alt="Hypertension reference figure" loading="lazy" style="display:block;width:100%;height:auto;background:#fff;" onerror="this.closest('figure').style.display='none'"></div><figcaption style="font-family:Inter,system-ui,sans-serif;font-size:12.5px;color:#7c8a88;margin-top:8px;line-height:1.5;"><b style="color:#0c3a44;">Reference.</b> Hypertension <span style="color:#9aa8a6;">&mdash; https://www.myupchar.com/en, CC BY-SA 4.0 (via Wikimedia Commons)</span></figcaption></figure>
+
+
+      <p>Every time your heart beats, it pushes blood against the walls of your arteries. <b>Blood pressure</b> is simply the force of that push. We write it as two numbers, like 120/80 mmHg: the top (<b>systolic</b>) is the pressure when the heart squeezes, and the bottom (<b>diastolic</b>) is the pressure when the heart relaxes between beats. Healthy pressure keeps blood moving to every organ without hammering the vessels so hard they get damaged.</p>
+
+<h3>What actually sets the pressure</h3>
+<p>Two things multiplied together decide your blood pressure: how much blood the heart pumps per minute and how tight the pipes are. In textbook terms, <b>BP = cardiac output (CO) times systemic vascular resistance (SVR)</b>. <em>Cardiac output</em> is heart rate times stroke volume (how much blood leaves the heart with each beat). <em>Systemic vascular resistance</em> is how narrow or constricted the arterioles are. Think of a garden hose: turn up the water flow (more cardiac output) or squeeze the nozzle tighter (more resistance), and pressure rises. This is why a racing heart, extra fluid volume, or clamped-down vessels all push the number up.</p>
+
+<h3>How the body keeps it steady</h3>
+<p>Your body corrects blood pressure minute-to-minute and day-to-day using two main systems.</p>
+<p><b>Baroreceptors</b> are stretch sensors in the carotid arteries and aortic arch. When pressure drops, they sense less stretch and tell the brainstem to speed the heart and constrict vessels; when pressure spikes, they do the opposite. This is the <em>fast</em>, second-by-second reflex, and it is why you may feel dizzy standing up too quickly before the reflex catches up.</p>
+<p>The <b>RAAS (renin-angiotensin-aldosterone system)</b> is the <em>slower</em>, longer-term controller. When the kidneys sense low pressure or low blood flow, they release <b>renin</b>. Renin kicks off a chain that makes <b>angiotensin II</b>, a powerful vasoconstrictor that tightens vessels (raising SVR). Angiotensin II also triggers the adrenal glands to release <b>aldosterone</b>, which tells the kidneys to hold onto sodium and water, raising blood volume and therefore cardiac output. Both actions raise pressure. Many blood-pressure medications (ACE inhibitors, ARBs) work by interrupting this exact pathway.</p>
+
+<div class="pearl"><b>Why RAAS matters at the bedside.</b> Because angiotensin II and aldosterone both raise pressure, drugs that block them lower it, and they also protect the kidneys, which is why they are first-line in patients with diabetes or heart failure.</div>
+
+<h3>When pressure stays too high: hypertension</h3>
+<p><b>Hypertension</b> means blood pressure that stays elevated over time, usually defined as 130/80 mmHg or higher on repeated readings. It shows up in two flavors.</p>
+<div class="ctwrap"><table class="ctable"><thead><tr><th>Feature</th><th>Primary (essential)</th><th>Secondary</th></tr></thead><tbody><tr><td>How common</td><td>About 90-95% of cases</td><td>Roughly 5-10% of cases</td></tr><tr><td>Cause</td><td>No single identifiable cause; genetics, aging, salt, weight, stress</td><td>An identifiable underlying condition</td></tr><tr><td>Typical triggers</td><td>Family history, obesity, high-sodium diet, inactivity</td><td>Kidney disease, renal artery narrowing, pheochromocytoma, sleep apnea, certain drugs</td></tr><tr><td>Onset clue</td><td>Gradual, often midlife</td><td>Sudden, very high, or resistant to treatment; sometimes young patients</td></tr><tr><td>Treatment focus</td><td>Lifestyle plus medication</td><td>Fix the underlying cause</td></tr></tbody></table></div>
+<p><em>Primary hypertension</em> has no single fixable cause; it emerges from a mix of genetics, aging vessels, high sodium intake, and often extra weight. <em>Secondary hypertension</em> is driven by a specific, identifiable problem, so treating that problem can actually cure the high pressure.</p>
+
+<h3>The silent killer and its targets</h3>
+<p>Hypertension earns the nickname <b>the silent killer</b> because it usually causes <em>no symptoms</em> for years. There is no headache, no warning; the person feels fine while the elevated pressure quietly grinds away at organs. By the time damage shows, it can be advanced.</p>
+<p>That damage is called <b>target-organ damage</b>, and it strikes vessel-rich organs:</p>
+<ul>
+<li><b>Heart:</b> the left ventricle must pump against higher resistance, so it thickens (<em>left ventricular hypertrophy</em>), and over time can fail; coronary arteries also stiffen, raising heart-attack risk.</li>
+<li><b>Brain:</b> weakened, pressure-battered vessels can rupture or clot, causing <em>stroke</em>; chronic damage contributes to vascular dementia.</li>
+<li><b>Kidneys:</b> the tiny filtering vessels scar and narrow, leading to <em>chronic kidney disease</em> and eventually failure.</li>
+<li><b>Eyes:</b> the retinal vessels are visible windows onto this damage; <em>hypertensive retinopathy</em> can blur or steal vision.</li>
+</ul>
+
+<div class="pearl"><b>Teach the "silent" part.</b> Because patients feel nothing, they often stop taking their medication once they feel fine. Reinforcing that hypertension has no symptoms is one of the most important things a nurse can do. Explore the regulation figure below to see how the pieces connect.</div>
+
+      <div class="embed">
+        <div class="cap"><span class="tag">Interactive</span> Adjust cardiac output and resistance and watch the pressure respond. <a href="../patho/BloodPressure.html" target="_blank" rel="noopener">Open full &uarr;</a></div>
+        <div class="frame"><iframe src="../patho/BloodPressure.html" loading="lazy" title="Blood pressure interactive"></iframe></div>
+      </div>
+      <div class="kp"><div class="t">Key points</div><ul><li>Blood pressure equals cardiac output times systemic vascular resistance, so more fluid, a faster heart, or tighter vessels all raise it.</li><li>Baroreceptors give fast, moment-to-moment correction; the RAAS gives slower control by constricting vessels (angiotensin II) and retaining salt and water (aldosterone).</li><li>Primary (essential) hypertension is 90-95% of cases with no single cause; secondary hypertension has an identifiable, often treatable cause.</li><li>Hypertension is the silent killer because it causes no symptoms while quietly harming the heart, brain, kidneys, and eyes (target-organ damage).</li><li>Because patients feel fine, adherence teaching is critical; drugs like ACE inhibitors and ARBs work by blocking the RAAS pathway.</li></ul></div>
+
+      <h2 id="w9_cad"><span class="num">Section 2</span>Coronary artery disease, angina &amp; MI</h2>
+<figure class="bref" data-sec="2" style="max-width:1040px;margin:10px 0 24px;padding:0;"><div style="border:1px solid #e6e2d6;border-radius:16px;overflow:hidden;background:#fffdf7;box-shadow:0 8px 26px rgba(20,40,46,.09);"><img src="img/cardiovascular_s2.jpg" alt="CAD & MI reference figure" loading="lazy" style="display:block;width:100%;height:auto;background:#fff;" onerror="this.closest('figure').style.display='none'"></div><figcaption style="font-family:Inter,system-ui,sans-serif;font-size:12.5px;color:#7c8a88;margin-top:8px;line-height:1.5;"><b style="color:#0c3a44;">Reference.</b> CAD & MI <span style="color:#9aa8a6;">&mdash; https://www.myupchar.com/en, CC BY-SA 4.0 (via Wikimedia Commons)</span></figcaption></figure>
+
+
+      <p>Your heart is a muscle, and like any muscle it needs a steady supply of oxygen-rich blood to keep working. But here is the twist: even though gallons of blood rush <em>through</em> its chambers every hour, the heart muscle itself cannot use that blood directly. Instead, it feeds itself through its own dedicated plumbing, the <b>coronary arteries</b>, which branch off the aorta and wrap around the outside of the heart. When those vessels are open and healthy, supply easily keeps up with demand, and the muscle never notices. Trouble begins when the pipes get narrow.</p>
+
+<h3>How the coronary arteries get clogged</h3>
+<p>Over years, cholesterol, inflammatory cells, and cellular debris build up inside the artery wall, forming a fatty deposit called a <b>plaque</b>. This slow, silent process is <b>atherosclerosis</b>. As the plaque grows, it stiffens the vessel and squeezes the channel (the <em>lumen</em>) smaller, so less blood can get through. This is <b>coronary artery disease (CAD)</b>. For a long time the narrowing causes no symptoms because a resting heart does not demand much. The problem shows up when the heart is asked to work harder.</p>
+
+<h3>Angina: the heart's cry for oxygen</h3>
+<p><b>Angina</b> is chest pain or pressure caused by <b>myocardial ischemia</b> - the muscle is not getting enough oxygen for the work it is doing. It is a <em>demand-versus-supply</em> problem. In <b>stable angina</b>, a fixed plaque leaves just enough room for resting blood flow. But when someone climbs stairs, shovels snow, or gets upset, the heart rate and force climb, oxygen demand outstrips the narrowed supply, and the muscle aches. The classic tip-off is that it is <em>predictable</em>: it comes on with exertion and fades within minutes of <b>rest</b> or a <b>nitroglycerin</b> tablet, which dilates vessels and eases the heart's workload. Importantly, in stable angina the muscle is starved but not yet dying.</p>
+<p><b>Unstable angina</b> is a different, more dangerous animal. Here a plaque has become fragile and partly disrupted, and pain occurs at rest, lasts longer, or is suddenly worse than the patient's usual pattern. It is one of the <b>acute coronary syndromes (ACS)</b> and signals that a heart attack may be brewing.</p>
+
+<div class="ctwrap"><table class="ctable"><thead><tr><th>Feature</th><th>Stable angina</th><th>Unstable angina</th></tr></thead><tbody><tr><td>Trigger</td><td>Predictable exertion or stress</td><td>Often at rest, no clear trigger</td></tr><tr><td>Plaque</td><td>Fixed, stable narrowing</td><td>Disrupted, unstable plaque</td></tr><tr><td>Relief</td><td>Rest or nitroglycerin, minutes</td><td>Poorly relieved, may persist</td></tr><tr><td>Muscle status</td><td>Ischemic, not dying</td><td>At high risk, emergency</td></tr></tbody></table></div>
+
+<h3>When the pipe closes: myocardial infarction</h3>
+<p>A <b>myocardial infarction (MI)</b> - a heart attack - happens when an unstable plaque <b>ruptures</b>. The body treats the exposed plaque like a wound and rushes platelets and clotting factors to it, forming a blood clot, or <b>thrombus</b>. If that clot completely blocks the artery, blood flow stops cold. The muscle downstream is suddenly cut off from oxygen, and the starved heart muscle begins to die within about 20 to 30 minutes, and the damage spreads over the next few hours. This is <b>infarction</b> - <em>irreversible</em> tissue death (<b>necrosis</b>), not just the reversible starvation of angina. This is why nurses live by the phrase <em>time is muscle</em>: every minute the artery stays blocked, more heart is lost for good.</p>
+
+<h3>Recognizing an MI</h3>
+<p>The hallmark is <b>chest pain</b> - often crushing, heavy, or squeezing pressure, sometimes radiating to the left arm, jaw, or back, and frequently paired with sweating (<b>diaphoresis</b>), nausea, and shortness of breath. But nurses must stay alert for <b>atypical presentations</b>: women, older adults, and people with diabetes may have only fatigue, indigestion, or breathlessness with no dramatic chest pain, because <em>neuropathy</em> and different symptom patterns blunt the classic warning. Three tools confirm the diagnosis:</p>
+<ul>
+<li><b>ECG:</b> a <b>STEMI</b> (ST-elevation MI) shows a raised ST segment, meaning the full thickness of muscle is being injured by a completely blocked artery - a true emergency needing immediate reopening of the vessel.</li>
+<li><b>Troponin:</b> when heart cells die, they leak the protein <b>troponin</b> into the blood. A <em>rising</em> troponin level over serial draws is the most specific sign that muscle has actually been damaged.</li>
+<li><b>The story:</b> the pattern and timing of the pain ties it together.</li>
+</ul>
+
+<div class="pearl"><b>Angina spares, infarction scars.</b> Stable angina is reversible starvation that resolves with rest; an MI is cell death that leaves permanent scar tissue. That difference is why an MI can weaken the heart's pump for life.</div>
+
+<div class="pearl"><b>A normal first troponin does not clear the patient.</b> Troponin can take hours to rise after an artery closes, so a single early value can be falsely reassuring - which is why it is drawn in a series. Take a look at the interactive figure below to see how a clot chokes off the muscle it feeds.</div>
+
+      <div class="embed">
+        <div class="cap"><span class="tag">Interactive</span> Fly inside a coronary artery from healthy vessel to plaque, rupture, and MI. <a href="../patho/CoronaryQuest3D.html" target="_blank" rel="noopener">Open full &uarr;</a></div>
+        <div class="frame"><iframe src="../patho/CoronaryQuest3D.html" loading="lazy" title="CoronaryQuest 3D"></iframe></div>
+      </div>
+      <div class="kp"><div class="t">Key points</div><ul><li><b>Atherosclerosis</b> narrows the coronary arteries over years, reducing blood flow to the heart muscle (coronary artery disease).</li><li><b>Stable angina</b> is reversible ischemia from a demand-supply mismatch, relieved by rest or nitroglycerin; <b>unstable angina</b> occurs at rest and warns of an impending MI.</li><li>A <b>myocardial infarction</b> results from plaque rupture and a <b>thrombus</b> that blocks the artery, causing irreversible muscle death.</li><li>Recognize an MI by <b>chest pain</b> (watch for atypical presentations), <b>ST-elevation</b> on ECG, and <b>rising troponin</b> - and remember that <em>time is muscle</em>.</li></ul></div>
+
+      <h2 id="w9_hf"><span class="num">Section 3</span>Heart failure</h2>
+<figure class="bref" data-sec="3" style="max-width:1040px;margin:10px 0 24px;padding:0;"><div style="border:1px solid #e6e2d6;border-radius:16px;overflow:hidden;background:#fffdf7;box-shadow:0 8px 26px rgba(20,40,46,.09);"><img src="img/cardiovascular_s3.jpg" alt="Heart failure reference figure" loading="lazy" style="display:block;width:100%;height:auto;background:#fff;" onerror="this.closest('figure').style.display='none'"></div><figcaption style="font-family:Inter,system-ui,sans-serif;font-size:12.5px;color:#7c8a88;margin-top:8px;line-height:1.5;"><b style="color:#0c3a44;">Reference.</b> Heart failure <span style="color:#9aa8a6;">&mdash; CDC/ Dr. Thomas Hooten, Public domain (via Wikimedia Commons)</span></figcaption></figure>
+
+
+      <p>Picture the heart as a two-sided pump working every second of your life. The right side collects oxygen-poor blood returning from the body and pushes it to the lungs; the left side receives freshly oxygenated blood from the lungs and drives it out to every organ. When the heart is healthy, the amount of blood coming in matches the amount going out, and tissues get exactly the oxygen they need. <b>Heart failure</b> is what happens when the pump can no longer keep up with the body's demand. It does not mean the heart has stopped. It means the heart is failing to move blood forward efficiently, so blood <em>backs up</em> behind the weak side and organs downstream go under-supplied.</p>
+
+<h3>Left-sided failure: the backup floods the lungs</h3>
+<p>The left ventricle is the strongest chamber because it has to push blood to the whole body. When it weakens, blood cannot move forward fast enough, so it dams up behind the left side, back into the lungs' capillaries. Rising pressure forces fluid out of those capillaries and into the air sacs, a state called <b>pulmonary congestion</b> or pulmonary edema. This is why left-sided failure is a <em>lung</em> story. Patients feel short of breath (<b>dyspnea</b>), especially on exertion. Lying flat lets fluid redistribute toward the lungs, so they wake up gasping or need to prop up on pillows, which is <b>orthopnea</b> and <b>paroxysmal nocturnal dyspnea</b>. On auscultation you hear <b>crackles</b> (rales), the sound of air bubbling through fluid-filled alveoli. A frothy or pink-tinged cough can appear as fluid leaks into airways.</p>
+
+<h3>Right-sided failure: the backup floods the body</h3>
+<p>When the right ventricle fails, blood dams up behind <em>it</em>, into the systemic veins that were trying to return blood to the heart. Now the congestion shows up in the body, not the lungs. You see <b>jugular venous distention (JVD)</b> as neck veins bulge under the backed-up pressure, <b>peripheral edema</b> in the ankles and legs where gravity pulls the leaked fluid, and <b>hepatomegaly</b> as blood engorges the liver. The single most common cause of right-sided failure is left-sided failure itself: the lung congestion eventually strains the right ventricle, which is why untreated left failure often becomes biventricular.</p>
+
+<div class="ctwrap"><table class="ctable"><thead><tr><th>Feature</th><th>Left-sided failure</th><th>Right-sided failure</th></tr></thead><tbody><tr><td>Blood backs up into</td><td>Lungs (pulmonary circulation)</td><td>Body (systemic veins)</td></tr><tr><td>Hallmark signs</td><td>Dyspnea, orthopnea, crackles</td><td>JVD, peripheral edema, hepatomegaly</td></tr><tr><td>Classic complaint</td><td>Cannot breathe lying flat</td><td>Swollen legs, weight gain</td></tr><tr><td>Common cause</td><td>Hypertension, prior MI</td><td>Left-sided failure, lung disease</td></tr></tbody></table></div>
+
+<h3>Systolic vs diastolic: a squeeze problem or a filling problem</h3>
+<p>Failure can come from two different mechanical faults. In <b>systolic failure</b>, the ventricle is weak and cannot <em>contract</em> forcefully, so it ejects a smaller fraction of the blood it holds. This is measured as a reduced <b>ejection fraction (EF)</b>, often under 40% (normal is usually 55 to 70%), and is called <b>HFrEF</b> (heart failure with reduced ejection fraction). In <b>diastolic failure</b>, the ventricle contracts fine but is stiff and cannot <em>relax and fill</em> properly, so less blood is available to pump even though the squeeze percentage looks normal. This is <b>HFpEF</b> (preserved ejection fraction). The key teaching point: a normal EF does not rule out heart failure.</p>
+
+<div class="pearl"><b>Preserved does not mean healthy.</b> A patient with HFpEF can have a normal ejection fraction and still be in florid congestive failure. The problem is stiff filling, not weak squeezing, so EF alone will not catch it.</div>
+
+<h3>Compensation that turns against you</h3>
+<p>When cardiac output drops, the body reacts as if it were bleeding. The <b>sympathetic nervous system</b> fires, raising heart rate and squeezing vessels to prop up blood pressure. The kidneys, sensing low flow, activate the <b>renin-angiotensin-aldosterone system (RAAS)</b>, which retains sodium and water and constricts arteries. In the short term these buy time. Over weeks, though, they backfire: the extra fluid <em>worsens</em> the congestion, the higher pressure makes the failing heart work harder, and chronic overdrive drives <b>ventricular remodeling</b>, where the heart enlarges and stiffens. This vicious cycle is why the mainstay drugs (ACE inhibitors, ARBs, beta-blockers) work by <em>blocking</em> these compensations.</p>
+
+<p>The stretched, overworked ventricles release <b>B-type natriuretic peptide (BNP)</b>, a hormone that tries to promote fluid loss. Because BNP rises with wall stretch, a high level is a useful marker that shortness of breath is coming from heart failure rather than the lungs. Explore the left- versus right-sided comparison below.</p>
+
+<div class="pearl"><b>BNP tells the story.</b> An elevated BNP (or NT-proBNP) points toward cardiac congestion, and trending it down often tracks with a patient's response to diuresis and treatment.</div>
+
+      <div class="embed">
+        <div class="cap"><span class="tag">Interactive</span> See how left- vs right-sided failure backs up into the lungs or the body. <a href="../patho/HeartFailure.html" target="_blank" rel="noopener">Open full &uarr;</a></div>
+        <div class="frame"><iframe src="../patho/HeartFailure.html" loading="lazy" title="Heart failure interactive"></iframe></div>
+      </div>
+      <div class="kp"><div class="t">Key points</div><ul><li>Heart failure is a pump that cannot meet the body's demand; blood backs up behind the failing side.</li><li>Left-sided failure floods the lungs (dyspnea, orthopnea, crackles); right-sided failure floods the body (JVD, peripheral edema, hepatomegaly).</li><li>Systolic failure (HFrEF) is a weak squeeze with low EF; diastolic failure (HFpEF) is a stiff, poorly filling ventricle with normal EF.</li><li>RAAS and sympathetic activation compensate at first but eventually worsen congestion and drive remodeling.</li><li>BNP rises with ventricular stretch and helps confirm that dyspnea is cardiac in origin.</li></ul></div>
+
+      <h2 id="w9_valve"><span class="num">Section 4</span>Valve disorders</h2>
+<figure class="bref" data-sec="4" style="max-width:1040px;margin:10px 0 24px;padding:0;"><div style="border:1px solid #e6e2d6;border-radius:16px;overflow:hidden;background:#fffdf7;box-shadow:0 8px 26px rgba(20,40,46,.09);"><img src="img/cardiovascular_s4.jpg" alt="Valve disorders reference figure" loading="lazy" style="display:block;width:100%;height:auto;background:#fff;" onerror="this.closest('figure').style.display='none'"></div><figcaption style="font-family:Inter,system-ui,sans-serif;font-size:12.5px;color:#7c8a88;margin-top:8px;line-height:1.5;"><b style="color:#0c3a44;">Reference.</b> Valve disorders <span style="color:#9aa8a6;">&mdash; CDC/Dr. Edwin P. Ewing, Jr., Public domain (via Wikimedia Commons)</span></figcaption></figure>
+
+
+      <p>Picture your heart as a house with four rooms and four one-way doors between them. Those doors are your <b>valves</b>, and their whole job is simple: let blood move <em>forward</em> and never let it slip <em>backward</em>. When the heart squeezes, the doors ahead swing open easily; when it relaxes, they snap shut tight so nothing leaks back. Two of these doors do the heavy lifting on the left side of the heart, the side that pushes blood out to the whole body: the <b>mitral valve</b> (between the left atrium and left ventricle) and the <b>aortic valve</b> (between the left ventricle and the aorta). When a valve stops opening well or stops sealing well, the heart has to work harder for every single beat, and over time that extra work reshapes the chamber behind it.</p>
+
+<h3>The two ways a valve fails: stenosis vs. regurgitation</h3>
+<p>There are really only two things that can go wrong with a door. Either it is <em>hard to push open</em>, or it <em>does not shut all the way</em>. That is the entire concept.</p>
+<p><b>Stenosis</b> means the valve has become stiff, thick, or narrowed, so the opening is too small. The chamber behind it must generate much higher pressure to force blood through the tight gap, like trying to breathe through a pinched straw. <b>Regurgitation</b> (also called <em>insufficiency</em> or a leaky/incompetent valve) means the valve does not seal, so some blood sloshes <em>backward</em> with each beat. Now the chamber has to pump the same blood twice, handling both the normal load and the leaked-back volume. Stenosis is mainly a <em>pressure</em> problem; regurgitation is mainly a <em>volume</em> problem, and that distinction predicts how the heart changes.</p>
+
+<div class="ctwrap"><table class="ctable"><thead><tr><th>Feature</th><th>Stenosis</th><th>Regurgitation</th></tr></thead><tbody>
+<tr><td>Basic defect</td><td>Valve too narrow, hard to open</td><td>Valve leaks, does not close</td></tr>
+<tr><td>Main burden</td><td>Pressure overload</td><td>Volume overload</td></tr>
+<tr><td>Chamber response</td><td>Concentric hypertrophy (thick walls)</td><td>Eccentric hypertrophy/dilation (stretched)</td></tr>
+<tr><td>Classic murmur timing</td><td>Systolic (aortic) or diastolic (mitral)</td><td>Depends on valve; e.g., holosystolic in MR</td></tr>
+</tbody></table></div>
+
+<h3>The two lesions you will see most</h3>
+<p><b>Aortic stenosis (AS)</b> is the classic pressure problem. The aortic door stiffens, often from age-related calcification, so the left ventricle must slam against a tight opening to eject blood. To make that pressure, the ventricle wall thickens (<b>concentric hypertrophy</b>). The classic triad you learn for symptomatic AS is <em>angina, syncope, and exertional dyspnea</em>, often signaling a narrowed valve area. Patients frequently have a crescendo-decrescendo systolic murmur.</p>
+<p><b>Mitral regurgitation (MR)</b> is the classic volume problem. The mitral door does not seal, so with each squeeze, blood jets backward into the left atrium instead of only moving forward into the aorta. The left atrium and left ventricle stretch and enlarge (<b>eccentric hypertrophy</b>) to hold the extra volume. A holosystolic (pansystolic) murmur best heard at the apex is typical.</p>
+
+<h3>Rheumatic heart disease: a delayed autoimmune injury</h3>
+<p>One cause deserves its own spotlight because it is so testable and so preventable. <b>Rheumatic heart disease</b> follows <em>acute rheumatic fever</em>, which itself follows an untreated <b>group A streptococcal</b> throat infection (think untreated strep throat). The immune system makes antibodies against the bacteria, but through <b>molecular mimicry</b> those antibodies cross-react with the body's own tissues, including heart valves. Years of smoldering inflammation scar and fuse the valve leaflets. The <b>mitral valve</b> is the most commonly damaged, classically producing <em>mitral stenosis</em>. This is why treating strep throat with antibiotics is genuinely heart-protective.</p>
+
+<div class="pearl"><b>Same valve, either failure.</b> A scarred, deformed valve can end up too stiff to open (stenosis) or too warped to close (regurgitation), and sometimes both at once. The leaflet damage is the root; how it fails is just geometry.</div>
+
+<h3>Why chronic valve disease drifts toward heart failure</h3>
+<p>Here is the through-line that ties it all together. Whether the chamber is straining against high pressure (stenosis) or drowning in extra volume (regurgitation), it copes for a while by remodeling, thickening or stretching to keep output up. This <em>compensation</em> can last years, and patients often feel fine. But muscle that is chronically overworked eventually cannot keep up. Thick, stiff walls relax poorly and fill poorly; stretched, dilated walls squeeze weakly. Either way, the ventricle's ability to move blood forward drops, pressure backs up into the lungs, and you get the picture of <b>heart failure</b>: dyspnea, fatigue, and fluid congestion. Understanding <em>which</em> chamber is overloaded and <em>how</em> tells you exactly where the backup and symptoms will appear. Explore the figure below to see stenosis and regurgitation side by side.</p>
+
+<div class="pearl"><b>Compensated is not cured.</b> A quiet, symptom-free valve patient can be years into remodeling. Symptom onset, especially in aortic stenosis, often marks a turning point and warrants prompt evaluation.</div>
+
+      <div class="embed">
+        <div class="cap"><span class="tag">Interactive</span> Compare a stiff, narrowed valve with a leaky one. <a href="../patho/ValveDisorders.html" target="_blank" rel="noopener">Open full &uarr;</a></div>
+        <div class="frame"><iframe src="../patho/ValveDisorders.html" loading="lazy" title="Valve disorders interactive"></iframe></div>
+      </div>
+      <div class="kp"><div class="t">Key points</div><ul>
+<li><b>Two failure modes:</b> stenosis is a stiff, narrowed valve (pressure overload) while regurgitation is a leaky valve that allows backflow (volume overload).</li>
+<li><b>Signature lesions:</b> aortic stenosis drives left-ventricular concentric hypertrophy; mitral regurgitation dilates the left atrium and ventricle (eccentric hypertrophy).</li>
+<li><b>Rheumatic heart disease</b> stems from untreated group A strep via molecular mimicry and classically scars the mitral valve, so treating strep throat protects the heart.</li>
+<li><b>The common endpoint:</b> chronic pressure or volume overload compensates for years, then the overworked chamber fails, backing blood up into the lungs as heart failure.</li>
+<li><b>Watch symptom onset:</b> a compensated patient can feel well for years; new symptoms (especially in aortic stenosis) signal decompensation and need prompt evaluation.</li>
+</ul></div>
+
+      <h2 id="w9_ekg"><span class="num">Section 5</span>The EKG &amp; arrhythmias</h2>
+<figure class="bref" data-sec="5" style="max-width:1040px;margin:10px 0 24px;padding:0;"><div style="border:1px solid #e6e2d6;border-radius:16px;overflow:hidden;background:#fffdf7;box-shadow:0 8px 26px rgba(20,40,46,.09);"><img src="img/cardiovascular_s5.jpg" alt="EKG & arrhythmias reference figure" loading="lazy" style="display:block;width:100%;height:auto;background:#fff;" onerror="this.closest('figure').style.display='none'"></div><figcaption style="font-family:Inter,system-ui,sans-serif;font-size:12.5px;color:#7c8a88;margin-top:8px;line-height:1.5;"><b style="color:#0c3a44;">Reference.</b> EKG & arrhythmias <span style="color:#9aa8a6;">&mdash; Ewingdo, CC BY-SA 4.0 (via Wikimedia Commons)</span></figcaption></figure>
+
+
+      <p>Your heart has its own built-in electrical wiring, and every heartbeat starts as a tiny spark. Before we talk about what goes <em>wrong</em>, let us walk the normal path that spark travels, because every arrhythmia is really just a detour, a delay, or a short-circuit somewhere along that road.</p>
+
+<h3>The normal conduction system: the heart's spark and wire</h3>
+<p>The signal begins in the <b>sinoatrial (SA) node</b>, a patch of cells high in the right atrium. The SA node is the heart's natural <em>pacemaker</em> because it fires fastest, usually 60 to 100 times a minute in an adult at rest. Its spark spreads across both atria and squeezes them, then funnels down to the <b>atrioventricular (AV) node</b>. The AV node is the gatekeeper: it deliberately <em>delays</em> the signal a fraction of a second so the atria can finish emptying blood into the ventricles before the ventricles contract. From there the current races down the <b>bundle of His</b>, splits into the right and left bundle branches, and fans out through the <b>Purkinje fibers</b>, which fire both ventricles almost at once for a strong, coordinated pump.</p>
+
+<h3>Reading the P-QRS-T</h3>
+<p>An <b>EKG (ECG)</b> is simply a voltage recording of that electrical trip. Each normal beat draws three shapes:</p>
+<ul>
+<li><b>P wave</b> = <em>atrial depolarization</em> (the atria firing and contracting).</li>
+<li><b>QRS complex</b> = <em>ventricular depolarization</em> (the ventricles firing). It is tall and narrow because the Purkinje system spreads current so fast.</li>
+<li><b>T wave</b> = <em>ventricular repolarization</em> (the ventricles resetting for the next beat).</li>
+</ul>
+<p>To read a strip, check <b>rate</b> and <b>rhythm</b>. For rate, count the QRS complexes in a 6-second strip and multiply by 10, or use the interval between beats. For rhythm, ask three questions: Is there a P wave before every QRS? Is every QRS narrow? Are the intervals regular? A <em>normal sinus rhythm</em> answers yes to all three. When one of those answers turns to no, you have an <b>arrhythmia</b> (dysrhythmia).</p>
+
+<h3>Atrial fibrillation and its stroke risk</h3>
+<p>In <b>atrial fibrillation (AFib)</b> the atria stop firing from the SA node and instead quiver chaotically from many misfiring spots. On the strip the P waves disappear, replaced by a wavy baseline, and the QRS complexes march by <em>irregularly irregular</em> (no pattern at all). The danger is not the fast pulse itself but what happens to the blood: because the atria only quiver instead of squeezing, blood pools and stagnates, especially in the left atrial appendage. Stagnant blood clots (recall <em>Virchow's triad</em>, stasis being one leg), and a clot that breaks loose travels to the brain, causing an <b>embolic stroke</b>. That is why AFib patients are usually placed on anticoagulants.</p>
+
+<h3>Heart blocks: a traffic jam at the AV node</h3>
+<p>A <b>heart block</b> is a delay or failure of the signal passing from atria to ventricles. In <em>first-degree</em> block every beat gets through, just slowly (a long PR interval). In <em>second-degree</em> block some atrial signals reach the ventricles and some are dropped. In <em>third-degree (complete)</em> block nothing gets through: the atria and ventricles beat on their own, ignoring each other, and the ventricles rely on a slow backup pacemaker, often too slow to sustain blood pressure. Complete block frequently needs a <b>pacemaker</b>.</p>
+
+<h3>The lethal rhythms</h3>
+<p>Some arrhythmias are true emergencies because the ventricles, the pumping chambers, fail to move blood.</p>
+<div class="ctwrap"><table class="ctable"><thead><tr><th>Rhythm</th><th>What the ventricles do</th><th>Response</th></tr></thead><tbody>
+<tr><td><b>Ventricular tachycardia (VT)</b></td><td>Fire far too fast from a ventricular focus; wide QRS, little filling time</td><td>Emergency; if no pulse, defibrillate + CPR</td></tr>
+<tr><td><b>Ventricular fibrillation (VF)</b></td><td>Only quiver; no organized squeeze, no cardiac output</td><td>Immediate defibrillation + CPR</td></tr>
+<tr><td><b>Asystole</b></td><td>No electrical activity at all; flatline</td><td>CPR + epinephrine; <em>not</em> shockable</td></tr>
+</tbody></table></div>
+<p>VT and VF are <em>shockable</em> because a defibrillator can reset chaotic ventricular activity back to a coordinated rhythm. Asystole is not shockable, there is no electrical activity to reorganize, so the answer is high-quality CPR and drugs, not a shock.</p>
+
+<div class="pearl"><b>Irregularly irregular = think AFib.</b> A pulse with no discernible pattern and no visible P waves is the classic bedside fingerprint of atrial fibrillation.</div>
+
+<h3>When an arrhythmia is an emergency</h3>
+<p>Rhythm names matter less at the bedside than <em>how the patient looks</em>. Watch for signs of poor perfusion: chest pain, shortness of breath, low blood pressure, cool clammy skin, confusion, or fainting (<em>syncope</em>). A rhythm producing <b>no pulse</b>, VT without a pulse, VF, or asystole, means starting CPR and calling a code immediately. An unstable but conscious patient still needs urgent intervention. Explore the interactive EKG below to practice spotting P waves, QRS complexes, and the difference between an organized and a chaotic strip.</p>
+
+      <div class="embed">
+        <div class="cap"><span class="tag">Interactive</span> Read the P-QRS-T and spot common arrhythmias. <a href="../patho/EKGReader.html" target="_blank" rel="noopener">Open full &uarr;</a></div>
+        <div class="frame"><iframe src="../patho/EKGReader.html" loading="lazy" title="EKG reader"></iframe></div>
+      </div>
+      <div class="kp"><div class="t">Key points</div><ul>
+<li>The impulse travels SA node to AV node (which delays it) to bundle of His to Purkinje fibers; the EKG records this as the P wave (atria), QRS (ventricles firing), and T wave (ventricles resetting).</li>
+<li>Read a strip by checking rate and rhythm: a P before every narrow QRS at a regular interval is normal sinus rhythm.</li>
+<li>Atrial fibrillation is irregularly irregular with no P waves; quivering atria let blood pool and clot, raising stroke risk, so patients are usually anticoagulated.</li>
+<li>Heart blocks are AV conduction delays; complete (third-degree) block often needs a pacemaker.</li>
+<li>VT, VF, and asystole are lethal; VF and pulseless VT are shockable with defibrillation, but asystole is not, treat it with CPR and epinephrine.</li>
+</ul></div>
+
+      <h2 id="w9_pvd"><span class="num">Section 6</span>Peripheral vascular disease</h2>
+<figure class="bref" data-sec="6" style="max-width:1040px;margin:10px 0 24px;padding:0;"><div style="border:1px solid #e6e2d6;border-radius:16px;overflow:hidden;background:#fffdf7;box-shadow:0 8px 26px rgba(20,40,46,.09);"><img src="img/cardiovascular_s6.jpg" alt="Peripheral vascular reference figure" loading="lazy" style="display:block;width:100%;height:auto;background:#fff;" onerror="this.closest('figure').style.display='none'"></div><figcaption style="font-family:Inter,system-ui,sans-serif;font-size:12.5px;color:#7c8a88;margin-top:8px;line-height:1.5;"><b style="color:#0c3a44;">Reference.</b> Peripheral vascular <span style="color:#9aa8a6;">&mdash; Intermedichbo - Dr Milorad Dimić, Serbia, CC BY-SA 4.0 (via Wikimedia Commons)</span></figcaption></figure>
+
+
+      <p>Your legs are fed by a two-way plumbing system. <b>Arteries</b> carry bright, oxygen-rich blood <em>down</em> from the heart under high pressure to feed the muscles, skin, and nerves. <b>Veins</b> carry the used, oxygen-poor blood back <em>up</em> to the heart against gravity, helped by one-way valves and the squeeze of your calf muscles. When either half of this system fails, the tissue downstream suffers, but it suffers in very different ways depending on whether the problem is inflow (arterial) or outflow (venous). <b>Peripheral vascular disease</b> is the umbrella term for both.</p>
+
+<h3>Arterial disease (PAD): not enough blood getting in</h3>
+<p><b>Peripheral arterial disease (PAD)</b> is usually caused by <b>atherosclerosis</b> - the same cholesterol plaque that clogs coronary arteries, now narrowing the arteries of the legs. Less blood can squeeze past the plaque, so the muscles are starved of oxygen, especially when they demand more.</p>
+<p>The classic early sign is <b>intermittent claudication</b>: a cramping, aching pain in the calf, thigh, or buttock that predictably comes on <em>with walking</em> and reliably <em>eases with rest</em>. The mechanism is simple supply-and-demand - exercising muscle needs more oxygen than the narrowed artery can deliver, so it switches to anaerobic metabolism and lactic acid builds up, causing pain. Rest lowers the demand, the ache resolves, and the cycle repeats at the same walking distance.</p>
+<p>As disease worsens, the limb shows the hallmark <em>five P's</em>: it becomes <b>pale</b> (little blood filling the skin), <b>pulseless</b> or with faint/absent distal pulses, <b>cool</b> to the touch (warm blood is not arriving), <b>painful</b> - eventually even at rest, often worst at night when the leg is elevated in bed - and in severe cases <b>paresthesia</b> and <b>paralysis</b>. Chronic ischemia leaves the skin shiny, hairless, and thin, with thickened nails, because starved tissue cannot maintain normal growth. Patients often report that <em>dangling the leg over the side of the bed</em> relieves rest pain, because gravity helps pull the meager blood flow downhill.</p>
+
+<div class="pearl"><b>Elevation is the tell.</b> Arterial pain gets <em>worse</em> with elevation and better with dependency; venous pain gets <em>better</em> with elevation. Watching what a patient does with the leg is a free diagnostic clue.</div>
+
+<h3>Venous disease: not enough blood getting out</h3>
+<p><b>Chronic venous insufficiency (CVI)</b> is the mirror image. Here the arteries deliver blood fine, but the veins cannot return it. Damaged or incompetent <b>valves</b> - often after years of standing, obesity, pregnancy, or a prior clot - let blood flow backward and pool in the legs. This raises pressure in the veins and capillaries, a state called <b>venous hypertension</b>.</p>
+<p>That backed-up pressure pushes fluid out into the tissues, producing chronic <b>edema</b> that is usually worst by the end of the day and improves overnight. Red blood cells also leak out and break down, depositing iron (<b>hemosiderin</b>), which stains the skin a permanent <b>brownish</b> discoloration around the lower leg and ankle - a change called <b>stasis dermatitis</b>. Over time the skin becomes leathery and tight (<b>lipodermatosclerosis</b>). Because the tissue is congested and poorly nourished, it breaks down into <b>venous ulcers</b>, classically over the inner ankle (the <em>medial malleolus</em>), where venous pressure is highest.</p>
+
+<h3>Telling an arterial ulcer from a venous ulcer</h3>
+<p>Ulcers are where students most often mix these up, so match the wound to its mechanism. An <em>arterial</em> ulcer forms because tissue is <b>starved</b>, so it appears where flow is poorest and looks dead. A <em>venous</em> ulcer forms because tissue is <b>congested and weepy</b>, so it appears where pooling is worst and looks wet.</p>
+
+<div class="ctwrap"><table class="ctable"><thead><tr><th>Feature</th><th>Arterial ulcer</th><th>Venous ulcer</th></tr></thead><tbody>
+<tr><td>Usual location</td><td>Toes, heels, bony points, lateral foot</td><td>Around the medial (inner) ankle</td></tr>
+<tr><td>Wound edges</td><td>Well-defined, punched-out, deep</td><td>Irregular, shallow, sloping</td></tr>
+<tr><td>Wound bed</td><td>Pale, gray, or dry; little drainage</td><td>Ruddy/beefy red; heavy drainage</td></tr>
+<tr><td>Surrounding skin</td><td>Cool, pale, shiny, hairless</td><td>Warm, brown-stained, edematous</td></tr>
+<tr><td>Pain</td><td>Severe, worse with elevation</td><td>Mild-moderate, better with elevation</td></tr>
+<tr><td>Pulses</td><td>Diminished or absent</td><td>Usually present</td></tr>
+</tbody></table></div>
+
+<h3>DVT, PE, and one word on aneurysm</h3>
+<p>A <b>deep vein thrombosis (DVT)</b> is a clot in a deep leg vein, favored by <b>Virchow's triad</b>: venous stasis, vessel-wall injury, and hypercoagulability (immobility, surgery, and estrogen are common real-world triggers). The leg is often warm, red, swollen, and tender. The danger is not the leg itself - it is that a piece can break loose, travel to the lungs, and lodge as a <b>pulmonary embolism (PE)</b>, causing sudden shortness of breath, pleuritic chest pain, and a drop in oxygen. That is why we <em>never vigorously massage a suspected DVT</em>. Separately, an <b>abdominal aortic aneurysm (AAA)</b> is a balloon-like weakening of the aortic wall that may present as a pulsatile abdominal mass and can be fatal if it ruptures. Explore the arterial-versus-venous figure below to see these patterns side by side.</p>
+
+<div class="pearl"><b>Same word, opposite plumbing.</b> PAD is an inflow problem (arteries clogged); CVI and DVT are outflow problems (veins failing or blocked). Fix the mechanism in your head and the signs, ulcers, and even the nursing care fall into place.</div>
+
+      <div class="embed">
+        <div class="cap"><span class="tag">Interactive</span> Tell arterial disease from venous disease, limb by limb. <a href="../patho/PeripheralVascular.html" target="_blank" rel="noopener">Open full &uarr;</a></div>
+        <div class="frame"><iframe src="../patho/PeripheralVascular.html" loading="lazy" title="Peripheral vascular interactive"></iframe></div>
+      </div>
+      <div class="kp"><div class="t">Key points</div><ul>
+<li><b>PAD</b> starves tissue of inflow: intermittent claudication (pain with walking, relieved by rest) plus a limb that is cool, pale, pulseless, and painful - worse with elevation.</li>
+<li><b>Chronic venous insufficiency</b> is an outflow/pooling problem: edema, brownish hemosiderin staining, and ulcers around the medial ankle - better with elevation.</li>
+<li><b>Arterial ulcers</b> are punched-out, dry, and on toes/pressure points; <b>venous ulcers</b> are shallow, wet, and around the inner ankle.</li>
+<li><b>DVT</b> (Virchow's triad) can throw a clot to the lungs as a life-threatening <b>pulmonary embolism</b> - do not massage the leg.</li>
+<li>An <b>abdominal aortic aneurysm</b> is a weakened, ballooning aorta that can be fatal if it ruptures.</li>
+</ul></div>
+
+      <div class="summary">
+        <h2 id="summary">The chapter in one breath</h2>
+        <ul><li><b>Blood pressure</b> is cardiac output times systemic vascular resistance; <b>hypertension</b> (usually &ge;130/80) is the silent, mostly asymptomatic disease that thickens vessels and overworks the heart until it damages the brain, kidneys, and eyes.</li><li><b>Coronary artery disease</b> is atherosclerotic plaque starving the myocardium; when a plaque ruptures and a clot fully blocks flow, the muscle downstream infarcts, giving the crushing chest pain, elevated <b>troponin</b>, and ST changes of an <b>MI</b>.</li><li><b>Left-sided heart failure</b> backs blood up into the lungs, so the classic signs are pulmonary: crackles, dyspnea, orthopnea, and frothy sputum from <b>pulmonary edema</b>.</li><li><b>Right-sided heart failure</b> backs blood up into the body, so you see peripheral congestion: <b>dependent edema</b>, jugular venous distention, ascites, and a congested, tender liver.</li><li><b>Valve disorders</b> come in two flavors: <b>stenosis</b> (a stiff, narrow valve the heart must strain to push through) and <b>regurgitation</b> (a leaky valve that lets blood flow backward), both forcing the chamber behind them to hypertrophy or dilate over time.</li><li>The <b>EKG</b> tracks the electrical wave through the heart, where the P wave is atrial depolarization, the QRS is ventricular depolarization, and the T wave is ventricular repolarization.</li><li><b>Atrial fibrillation</b> is the most common serious arrhythmia, an irregularly irregular quiver that pools blood in the atria and throws clots, which is why these patients need <em>anticoagulation</em> to prevent stroke.</li><li>Lethal rhythms demand instant action: <b>ventricular fibrillation</b> and pulseless <b>ventricular tachycardia</b> are shockable (defibrillate plus CPR), while true <b>asystole</b> is not shocked but treated with CPR and epinephrine.</li><li><b>Peripheral vascular disease</b> splits by side: <b>arterial</b> insufficiency gives pain with walking (claudication), cool pale pulseless feet, and painful distal wounds, while <b>venous</b> insufficiency gives warm swollen legs, brownish skin, and weepy medial-ankle ulcers.</li></ul>
+      </div>
+
+      <h2 id="glossary"><span class="num">Reference</span>Words worth knowing</h2>
+      <p>A quick reference for the terms in this chapter &mdash; skim it now, or circle back whenever a word trips you up.</p>
+      <dl class="terms"><dt>Angina</dt><dd><b>Angina</b> is chest pain or pressure that happens when a section of heart muscle temporarily gets less oxygen-rich blood than it needs, usually because a coronary artery is narrowed by plaque.</dd><dt>Atherosclerosis</dt><dd><b>Atherosclerosis</b> is the slow buildup of fatty, cholesterol-rich plaque inside artery walls that stiffens and narrows the vessel and can eventually block blood flow.</dd><dt>Atrial fibrillation</dt><dd><b>Atrial fibrillation</b> is a fast, disorganized quivering of the atria instead of a coordinated squeeze, which pools blood in the atria and raises the risk of clots and stroke.</dd><dt>BNP (B-type natriuretic peptide)</dt><dd><b>BNP</b> is a hormone released by stretched, overworked heart muscle, so a high blood level often signals that the heart is failing to keep up with its fluid load.</dd><dt>Cardiac output</dt><dd><b>Cardiac output</b> is the amount of blood the heart pumps out each minute, calculated as heart rate multiplied by stroke volume (usually about 4 to 8 L/min in adults).</dd><dt>Claudication</dt><dd><b>Claudication</b> is cramping leg pain that comes on with walking and eases with rest, caused by narrowed arteries that can't deliver enough blood to exercising muscles.</dd><dt>Ejection fraction</dt><dd><b>Ejection fraction</b> is the percentage of blood in a filled ventricle that gets pumped out with each beat, normally around 55 to 70 percent.</dd><dt>Embolus</dt><dd>An <b>embolus</b> is a clot, plaque fragment, air bubble, or other mass that travels through the bloodstream until it lodges in and blocks a smaller vessel downstream.</dd><dt>Heart failure</dt><dd><b>Heart failure</b> is the condition in which the heart can no longer pump strongly enough or fill well enough to meet the body's needs, causing fluid backup and fatigue.</dd><dt>Hypertension</dt><dd><b>Hypertension</b> is persistently high blood pressure (usually 130/80 mmHg or above) that forces the heart to work harder and gradually damages vessel walls and organs.</dd><dt>Myocardial infarction</dt><dd><b>Myocardial infarction</b>, or heart attack, is the death of heart muscle caused when a coronary artery is fully blocked and that region of tissue is starved of oxygen.</dd><dt>RAAS (renin-angiotensin-aldosterone system)</dt><dd><b>RAAS</b> is a hormone cascade that raises blood pressure by tightening blood vessels and telling the kidneys to hold onto salt and water when blood flow drops.</dd><dt>Regurgitation</dt><dd><b>Regurgitation</b> is the backward leaking of blood through a heart valve that doesn't close tightly, forcing the heart to pump extra to make up for what flows the wrong way.</dd><dt>Stenosis</dt><dd><b>Stenosis</b> is the abnormal narrowing or stiffening of a heart valve or vessel that restricts forward blood flow and makes the heart push harder to move blood through.</dd><dt>Systemic vascular resistance</dt><dd><b>Systemic vascular resistance</b> is the total opposition to blood flow created by the tone (constriction or dilation) of the body's arteries, a major driver of blood pressure.</dd><dt>Troponin</dt><dd><b>Troponin</b> is a protein released into the blood when heart muscle cells are injured, so a rising level is a key marker used to confirm a myocardial infarction.</dd></dl>
+
+      <h2 id="cards"><span class="num">Drill</span>Flashcards for this unit</h2>
+      <p>These are the <b>Week 9</b> cards &mdash; the same deck as the hub, pulled in here so you can review the moment you finish reading. Tap the card to flip it; hit <em>Shuffle</em> to mix them up. To grade yourself and track mastery across the whole deck, open the <a href="../flashcards.html">full flashcards page</a>.</p>
+      <div class="fc" id="fc">
+        <div class="fc-card" id="fcCard" onclick="fcFlip()">
+          <div class="fc-inner">
+            <div class="fc-face fc-front"><span class="fc-side">Question</span><div class="fc-q" id="fcQ"></div><div class="fc-hint">Tap to reveal the answer</div></div>
+            <div class="fc-face fc-back"><span class="fc-side">Answer</span><div class="fc-a" id="fcA"></div><div class="fc-hint">Tap to flip back</div></div>
+          </div>
+        </div>
+        <div class="fc-nav">
+          <button class="fc-btn" type="button" onclick="fcPrev(event)">&larr; Prev</button>
+          <span class="fc-count" id="fcCount">&mdash;</span>
+          <button class="fc-btn" type="button" onclick="fcNext(event)">Next &rarr;</button>
+          <button class="fc-btn" type="button" onclick="fcShuffle(event)">&#128256; Shuffle</button>
+        </div>
+        <a class="fc-full" href="../flashcards.html">Open the full Week 9 deck &mdash; grade yourself &amp; track mastery &uarr;</a>
+      </div>
+
+      <div class="quiz">
+        <h2 id="quiz">Check yourself</h2>
+        <div class="q"><div class="qq">1. A nurse is teaching about what raises blood pressure. Which explanation best describes how the renin-angiotensin-aldosterone system (RAAS) increases BP?</div>
+<button onclick="this.parentNode.classList.add('show')">Reveal answer</button>
+<div class="ans"><span class="a">Angiotensin II constricts vessels and aldosterone makes the kidneys retain sodium and water, raising both resistance and volume.</span> Low renal perfusion triggers renin, which converts angiotensinogen to angiotensin I; ACE then makes angiotensin II, a potent vasoconstrictor that also releases aldosterone and ADH. Because BP equals cardiac output times systemic vascular resistance, adding volume (preload) and squeezing vessels drives pressure up.</div></div>
+<div class="q"><div class="qq">2. A 45-year-old has a BP of 148/94 mm Hg with no identifiable cause after workup. How should the nurse classify this, and what is the significance?</div>
+<button onclick="this.parentNode.classList.add('show')">Reveal answer</button>
+<div class="ans"><span class="a">Primary (essential) hypertension, which accounts for roughly 90 to 95 percent of cases.</span> Primary HTN has no single cure and is managed with lifestyle and medication, whereas secondary HTN stems from an identifiable cause such as renal artery stenosis, pheochromocytoma, or hyperaldosteronism. Naming it correctly guides whether to hunt for a reversible trigger.</div></div>
+<div class="q"><div class="qq">3. A client with long-standing uncontrolled hypertension asks why the doctor keeps checking the eyes, kidneys, and heart. What is the nurse's best response about target-organ damage?</div>
+<button onclick="this.parentNode.classList.add('show')">Reveal answer</button>
+<div class="ans"><span class="a">Chronic high pressure silently injures the small vessels feeding the brain, eyes, heart, and kidneys.</span> Sustained afterload thickens the left ventricle (LVH), damages retinal arteries (retinopathy), scars the kidneys (nephrosclerosis with rising creatinine), and accelerates atherosclerosis raising stroke and MI risk. Because it is often symptom-free, HTN earns the name the <em>silent killer</em>.</div></div>
+<div class="q"><div class="qq">4. A client reports chest pressure that appears with exertion and reliably eases with rest or nitroglycerin. How does the nurse distinguish stable angina from myocardial infarction?</div>
+<button onclick="this.parentNode.classList.add('show')">Reveal answer</button>
+<div class="ans"><span class="a">Stable angina is temporary, reversible ischemia relieved by rest; an MI is prolonged ischemia causing actual myocardial cell death (necrosis).</span> Angina reflects demand outstripping supply through a fixed narrowing and resolves in minutes. MI pain usually lasts longer than 20 minutes, is not relieved by rest or nitroglycerin, and releases cardiac biomarkers because tissue is dying.</div></div>
+<div class="q"><div class="qq">5. A client arrives with crushing chest pain. Which two findings most directly confirm myocardial infarction, and what does each mean?</div>
+<button onclick="this.parentNode.classList.add('show')">Reveal answer</button>
+<div class="ans"><span class="a">A rising <b>troponin</b> and <b>ST-segment elevation</b> on the EKG.</span> Troponin is a protein released only when cardiac muscle is damaged, so a rise and fall confirms infarction (though it takes hours to appear). ST elevation signals acute full-thickness ischemia (STEMI) and flags the need for emergent reperfusion, since <em>time is muscle</em>.</div></div>
+<div class="q"><div class="qq">6. A nurse assesses a client in heart failure and finds crackles, dyspnea, and frothy sputum. Is this left- or right-sided failure, and why?</div>
+<button onclick="this.parentNode.classList.add('show')">Reveal answer</button>
+<div class="ans"><span class="a">Left-sided failure, because blood backs up into the lungs.</span> When the left ventricle cannot move blood forward, pressure rises in the pulmonary circulation and fluid leaks into the alveoli, producing crackles, orthopnea, and pink frothy sputum. Remember: <em>left = lungs</em>.</div></div>
+<div class="q"><div class="qq">7. A client with heart failure has jugular vein distention, dependent edema, hepatomegaly, and weight gain. Which side is failing and what is the mechanism?</div>
+<button onclick="this.parentNode.classList.add('show')">Reveal answer</button>
+<div class="ans"><span class="a">Right-sided failure, because blood backs up into the systemic venous circulation.</span> A failing right ventricle cannot push blood into the lungs, so pressure builds in the venae cavae and body veins, causing peripheral edema, JVD, ascites, and liver congestion. Remember: <em>right = rest of the body</em>, and left failure is the most common cause of right failure.</div></div>
+<div class="q"><div class="qq">8. A client's echocardiogram shows a preserved ejection fraction but a stiff, poorly relaxing left ventricle, and the BNP is elevated. How does the nurse interpret systolic versus diastolic failure and the BNP?</div>
+<button onclick="this.parentNode.classList.add('show')">Reveal answer</button>
+<div class="ans"><span class="a">This is diastolic failure (a filling/relaxation problem with preserved EF); systolic failure is a pumping problem with reduced EF. A high BNP supports volume overload.</span> In systolic failure the ventricle cannot contract, dropping ejection fraction usually below 40 percent. In diastolic failure the stiff ventricle fills poorly despite normal EF. Stretched ventricular walls release <b>BNP</b>, so elevated levels help confirm heart failure and gauge severity.</div></div>
+<div class="q"><div class="qq">9. A nursing student is comparing valve problems. What is the fundamental difference between stenosis and regurgitation?</div>
+<button onclick="this.parentNode.classList.add('show')">Reveal answer</button>
+<div class="ans"><span class="a">Stenosis is a stiff, narrowed valve that obstructs forward flow; regurgitation (insufficiency) is a leaky valve that lets blood flow backward.</span> A stenotic valve forces the chamber behind it to work harder against resistance, causing pressure overload and hypertrophy. A regurgitant valve allows backflow, causing volume overload and chamber dilation over time.</div></div>
+<div class="q"><div class="qq">10. On the monitor a nurse sees an irregularly irregular rhythm with no identifiable P waves. What EKG basics and rhythm does this describe, and why does it matter?</div>
+<button onclick="this.parentNode.classList.add('show')">Reveal answer</button>
+<div class="ans"><span class="a">Atrial fibrillation; normally the P wave is atrial depolarization, the QRS is ventricular depolarization, and the T wave is ventricular repolarization.</span> In A-fib the atria quiver chaotically instead of contracting, so P waves vanish and the ventricular response is irregularly irregular. Blood pools in the fibrillating atria and can clot, so these clients need anticoagulation to prevent embolic stroke.</div></div>
+<div class="q"><div class="qq">11. A monitored client suddenly becomes pulseless. Which two rhythms are immediately life-threatening and require defibrillation?</div>
+<button onclick="this.parentNode.classList.add('show')">Reveal answer</button>
+<div class="ans"><span class="a">Ventricular fibrillation and pulseless ventricular tachycardia.</span> In V-fib the ventricles quiver and pump no blood, producing a chaotic waveline and no cardiac output; pulseless V-tach is similarly ineffective. Both are shockable and demand immediate defibrillation plus CPR, because untreated they are fatal within minutes.</div></div>
+<div class="q"><div class="qq">12. A client has one leg with a cool, pale, hairless foot and pain that worsens when walking, while another client has a warm leg with brown discoloration and edema. How does the nurse distinguish arterial from venous peripheral disease?</div>
+<button onclick="this.parentNode.classList.add('show')">Reveal answer</button>
+<div class="ans"><span class="a">Arterial disease means poor inflow (cool, pale, pulseless, painful with activity or when elevated); venous disease means poor outflow (warm, edematous, brown-stained skin with aching relieved by elevation).</span> Arterial insufficiency causes intermittent claudication and punched-out distal ulcers because tissue is starved of oxygen. Chronic venous insufficiency causes pooling, hemosiderin staining, and irregular ulcers near the medial ankle, so elevating the legs helps venous return but worsens arterial pain.</div></div>
+      </div>
+
+      <div class="chapnav">
+        <a href="index.html"><span class="k">Book</span>&larr; All chapters</a>
+        <a class="next" href="appendix.html"><span class="k">Appendix</span>The Arcade &amp; Lab &rarr;</a>
+      </div>
+    </main>
+  </div>
+
+  <footer>
+    A student-friendly pathophysiology guide · by <b>Dr. Akash Garg</b> <br>
+    The interactive figures open in place; tap “Open full ↗” for a full-screen version.
+  </footer>
+
+<script>
+  // reading progress bar
+  var bar=document.getElementById('bar');
+  function prog(){var h=document.documentElement, max=h.scrollHeight-h.clientHeight; bar.style.width=(max>0?(h.scrollTop/max*100):0)+'%';}
+  addEventListener('scroll',prog,{passive:true}); prog();
+  // scroll-spy TOC
+  var links=[].slice.call(document.querySelectorAll('.toc a'));
+  var ids=links.map(function(a){return a.getAttribute('href').slice(1);});
+  var secs=ids.map(function(id){return document.getElementById(id);});
+  function spy(){var y=scrollY+90,cur=0;
+    for(var i=0;i<secs.length;i++){ if(secs[i] && secs[i].offsetTop<=y) cur=i; }
+    links.forEach(function(a,i){a.classList.toggle('on',i===cur);});}
+  addEventListener('scroll',spy,{passive:true}); spy();
+</script>
+
+
+<script src="../flashcards/w9.js"></script>
+<script>
+(function(){
+  var WK="9";
+  var cards=(window.PATHO_CARDS&&window.PATHO_CARDS[WK])||[];
+  var fc=document.getElementById("fc"); if(!fc) return;
+  if(!cards.length){ fc.style.display="none"; return; }
+  var order=cards.map(function(_,i){return i;}), pos=0;
+  function dec(s){return String(s).replace(/&amp;/g,"&").replace(/&lt;/g,"<").replace(/&gt;/g,">").replace(/&nbsp;/g," ");}
+  var card=document.getElementById("fcCard"), q=document.getElementById("fcQ"), a=document.getElementById("fcA"), cnt=document.getElementById("fcCount");
+  function show(){ card.classList.remove("flip"); var c=cards[order[pos]]; q.textContent=dec(c.q); a.textContent=dec(c.a)+(c.exp?"  \u2014  "+dec(c.exp):""); cnt.textContent=(pos+1)+" / "+cards.length; }
+  window.fcFlip=function(){ card.classList.toggle("flip"); };
+  window.fcNext=function(e){ if(e&&e.stopPropagation)e.stopPropagation(); pos=(pos+1)%cards.length; show(); };
+  window.fcPrev=function(e){ if(e&&e.stopPropagation)e.stopPropagation(); pos=(pos-1+cards.length)%cards.length; show(); };
+  window.fcShuffle=function(e){ if(e&&e.stopPropagation)e.stopPropagation(); for(var i=order.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=order[i];order[i]=order[j];order[j]=t;} pos=0; show(); };
+  show();
+})();
+</script>
+<style id="pdfprint">
+.pdf-btn{position:fixed;right:16px;bottom:16px;z-index:400;font-family:'Inter',system-ui,sans-serif;font-weight:700;font-size:13.5px;color:#fff;background:#0c7283;border:none;border-radius:24px;padding:11px 17px;box-shadow:0 6px 20px rgba(12,58,68,.30);cursor:pointer;display:inline-flex;align-items:center;gap:7px;}
+.pdf-btn:hover{background:#0c3a44;}
+@media print{
+ @page{margin:14mm;}
+ html,body{background:#fff !important;}
+ .topbar,.progress,aside,.chapnav,.pdf-btn{display:none !important;}
+ #pbgate{display:none !important;}
+ .layout{display:block !important;max-width:100% !important;padding:0 !important;grid-template-columns:1fr !important;gap:0 !important;}
+ .reading,.reading .col{max-width:100% !important;padding:0 !important;}
+ .embed iframe,.embed .frame{display:none !important;}
+ .embed{margin:14px 0 !important;}
+ .embed .cap{color:#555 !important;font-style:italic;}
+ .embed .cap .tag{background:#0c7283 !important;color:#fff !important;}
+ .embed .cap a{display:none !important;}
+ .bref,.bref .fr{break-inside:avoid;page-break-inside:avoid;box-shadow:none !important;}
+ .bref img{max-height:150mm;width:auto !important;margin:0 auto;}
+ .ctwrap,table.ctable,.pearl,.kp,.q,.objectives,.summary,dl.terms,figure{break-inside:avoid;page-break-inside:avoid;}
+ h1,h2,h3{break-after:avoid;page-break-after:avoid;}
+ .quiz .ans{display:block !important;}
+ .quiz .q button{display:none !important;}
+ a{color:inherit !important;text-decoration:none !important;}
+ *{-webkit-print-color-adjust:exact !important;print-color-adjust:exact !important;}
+ footer{border-top:1px solid #ccc !important;}
+}
+</style>
+<button class="pdf-btn" onclick="window.print()" title="Save this chapter as a PDF">🖨 Save as PDF</button>
+</body>
+</html>

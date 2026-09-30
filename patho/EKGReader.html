@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f7f2ea">
+<title>EKG Reader — Waves &amp; Rhythms</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=VT323&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{ --bg:#f6f1e8; --card:#fffdf8; --ink:#2a2420; --muted:#7a6f63; --line:#e3d8c6;
+    --sans:'Inter',system-ui,sans-serif; --disp:'Cinzel Decorative',serif; --mono:'VT323',monospace; }
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  body{background:linear-gradient(160deg,#faf6ee,#efe7d8);color:var(--ink);font-family:var(--sans);min-height:100vh;padding:18px 16px 44px;}
+  header{max-width:1120px;margin:0 auto 16px;text-align:center;}
+  h1{font-family:var(--disp);font-weight:900;font-size:clamp(22px,4.2vw,36px);color:#1f7a5a;line-height:1.05;}
+  header .sub{color:var(--muted);font-size:15px;margin-top:4px;}
+  header .intro{max-width:820px;margin:10px auto 0;font-size:14.5px;line-height:1.5;color:#5c5248;}
+  header .intro b{color:#1f7a5a;}
+  .wrap{max-width:1120px;margin:0 auto;display:grid;grid-template-columns:1.1fr 1fr;gap:16px;}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;box-shadow:0 6px 22px rgba(30,120,90,.07);}
+  .card h2{font-family:var(--disp);font-weight:700;font-size:17px;color:#1f7a5a;margin-bottom:6px;}
+  .card h2 + .desc{font-size:13px;color:var(--muted);margin-bottom:10px;line-height:1.4;}
+  svg{display:block;width:100%;height:auto;}
+  .clk{cursor:pointer;}
+  .ekgscroll{animation:ekgscroll 3.4s linear infinite;}
+  @keyframes ekgscroll{from{transform:translateX(0)}to{transform:translateX(-420px)}}
+  .ekgsweep{animation:ekgsweep 2.2s linear infinite;opacity:.4;}
+  @keyframes ekgsweep{from{transform:translateX(28px)}to{transform:translateX(402px)}}
+  #ekg .trace{filter:drop-shadow(0 0 3px rgba(192,50,43,.4));}
+
+  #waveCap{margin-top:8px;background:#eef7f2;border:1px solid #c9e5d8;border-radius:10px;padding:10px 13px;font-size:14px;line-height:1.5;color:#22402f;text-align:center;} #waveCap b{color:#155c40;}
+
+  .wlist{display:flex;flex-direction:column;gap:7px;}
+  .wrow{display:flex;align-items:center;gap:10px;padding:9px 11px;border:1px solid var(--line);border-radius:10px;background:#fff;cursor:pointer;transition:.15s;}
+  .wrow:hover{background:#f3faf6;}
+  .wrow.on{border-color:var(--wc);background:color-mix(in srgb,var(--wc) 12%,#fff);}
+  .wrow .pip{width:14px;height:14px;border-radius:4px;background:var(--wc);flex:none;}
+  .wrow b{font-size:14px;} .wrow span{font-size:12px;color:var(--muted);}
+
+  #info{border:1px solid var(--line);border-left:5px solid #1f7a5a;background:#f1f8f4;border-radius:10px;padding:12px 13px;margin-top:14px;}
+  #info .n{font-family:var(--disp);font-weight:700;font-size:18px;color:#1f7a5a;}
+  #info .mech{display:inline-block;font-size:12px;font-weight:700;padding:2px 10px;border-radius:20px;margin:6px 0;background:#dcefe4;color:#186047;}
+  #info .plain{font-size:14.5px;line-height:1.55;color:#2a2420;margin-top:8px;}
+
+  .seg{display:flex;border:1px solid var(--line);border-radius:10px;overflow:hidden;margin:2px 0 10px;}
+  .seg button{flex:1;border:none;background:#fff;color:var(--ink);font-family:var(--sans);font-weight:700;font-size:14px;padding:10px;cursor:pointer;transition:.12s;}
+  .seg button.on{background:#1f7a5a;color:#fff;} .seg button small{display:block;font-weight:500;font-size:11px;opacity:.85;}
+  #rhythmCap{font-size:13.5px;line-height:1.5;color:#3a3630;margin-top:8px;background:#fff;border:1px solid var(--line);border-radius:9px;padding:10px 12px;}
+  #rhythmCap b{color:#155c40;}
+  .rate{background:#eef7f2;border:1px solid #c9e5d8;border-radius:10px;padding:10px 12px;margin-top:12px;font-size:12.8px;line-height:1.5;color:#22402f;}
+  .rate b{color:#155c40;}
+  @media (max-width:880px){ .wrap{grid-template-columns:1fr;} }
+</style>
+</head>
+<body>
+<header>
+  <h1>EKG Reader</h1>
+  <div class="sub">The waves, what each one means, and reading rhythms · Week 9</div>
+  <div class="intro">An EKG is a picture of the heart's <b>electrical signal</b>. Each bump is one step of a heartbeat — the atria fire, a pause, the ventricles fire and squeeze, then reset. <b>Click each wave</b> below to see what's happening in the heart at that moment.</div>
+</header>
+
+<div class="wrap">
+  <div>
+    <div class="card">
+      <h2>One heartbeat, wave by wave</h2>
+      <div class="desc">Click <b>P</b>, <b>PR</b>, <b>QRS</b>, <b>ST</b>, or <b>T</b> on the tracing (or in the list on the right).</div>
+      <svg id="ekg" viewBox="0 0 420 240" aria-label="EKG complex"></svg>
+      <div id="waveCap">👆 Click a part of the wave to learn what the heart is doing.</div>
+    </div>
+
+    <div class="card" style="margin-top:16px;">
+      <h2>Reading the rhythm</h2>
+      <div class="desc">Compare a normal rhythm with atrial fibrillation — the difference is spacing and P waves.</div>
+      <div class="seg" id="rhythmSeg">
+        <button data-r="nsr" class="on">Normal Sinus Rhythm<small>regular</small></button>
+        <button data-r="afib">Atrial Fibrillation<small>irregular</small></button>
+      </div>
+      <svg id="strip" viewBox="0 0 420 130" aria-label="rhythm strip"></svg>
+      <div id="rhythmCap"></div>
+      <div class="rate">🧮 <b>Finding the rate:</b> count the QRS complexes (the tall spikes) in a <b>6-second strip</b> and <b>multiply by 10</b> = beats per minute. It's the quick bedside trick, and it still works when the rhythm is irregular like AFib.</div>
+    </div>
+  </div>
+
+  <div>
+    <div class="card">
+      <h2>The five parts</h2>
+      <div class="wlist" id="wlist"></div>
+      <div id="info"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const $=id=>document.getElementById(id);
+  const WAVES={
+    p:{name:'P wave',mech:'Atrial depolarization',color:'#3fa66a',
+      plain:'The atria fire (depolarize) — the signal spreads across the top chambers and squeezes them to top off the ventricles. It starts in the SA node, the heart\'s natural pacemaker.'},
+    pr:{name:'PR segment',mech:'AV-node delay (the pause)',color:'#d99321',
+      plain:'A deliberate pause. The signal reaches the AV node and slows down for a split second, giving the ventricles time to finish filling before they squeeze.'},
+    qrs:{name:'QRS complex',mech:'Ventricular depolarization · SYSTOLE',color:'#d6443f',
+      plain:'The ventricles fire — the big tall spike. This is the powerful squeeze that ejects blood to the lungs and body. It\'s tall because the ventricles are large and muscular.'},
+    st:{name:'ST segment',mech:'No electrical activity',color:'#8a54c0',
+      plain:'A flat resting line — the ventricles are contracted but nothing new is firing. Watch this segment closely: elevation or depression here is a red flag for a heart attack (see the Coronary lesson).'},
+    t:{name:'T wave',mech:'Ventricular repolarization · DIASTOLE',color:'#3f6fd6',
+      plain:'The ventricles reset (repolarize) — recharging so they can fire again. This is the electrical side of relaxation.'}
+  };
+  const ORDER=['p','pr','qrs','st','t'];
+  let cur='p';
+
+  // one big PQRST complex as a polyline; regions are clickable
+  function complex(ox,scale,withP){
+    // returns {path, R x for spacing}. baseline y=150
+    const b=150, s=scale;
+    let p=[];
+    const pt=(x,y)=>{p.push((ox+x).toFixed(1)+','+y.toFixed(1));};
+    pt(0,b);
+    if(withP){ pt(18*s,b); pt(30*s,b-22); pt(42*s,b); }   // P bump
+    else { pt(42*s,b); }
+    pt(70*s,b);                                            // PR flat
+    pt(78*s,b+10); pt(86*s,b-72); pt(94*s,b+26); pt(100*s,b); // QRS
+    pt(150*s,b);                                           // ST flat
+    pt(168*s,b-30); pt(186*s,b); pt(210*s,b);              // T bump
+    return p.join(' ');
+  }
+
+  function drawEKG(){
+    const b=150;
+    let s='';
+    // graph paper
+    s+='<rect x="0" y="0" width="420" height="240" fill="#fff6f6"/>';
+    for(let x=0;x<=420;x+=15) s+='<line x1="'+x+'" y1="0" x2="'+x+'" y2="240" stroke="'+(x%75===0?'#f0b8b8':'#f7d8d8')+'" stroke-width="1"/>';
+    for(let y=0;y<=240;y+=15) s+='<line x1="0" y1="'+y+'" x2="420" y2="'+y+'" stroke="'+(y%75===0?'#f0b8b8':'#f7d8d8')+'" stroke-width="1"/>';
+    // highlight band for selected region
+    const bands={p:[55,95],pr:[95,120],qrs:[120,168],st:[168,235],t:[235,320]};
+    const bd=bands[cur];
+    s+='<rect x="'+bd[0]+'" y="20" width="'+(bd[1]-bd[0])+'" height="215" fill="'+WAVES[cur].color+'" opacity="0.16" rx="6"/>';
+    // the trace
+    s+='<polyline class="trace" points="'+complex(30,1.4,true)+'" fill="none" stroke="#c0322b" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>';
+    // sweeping monitor cursor
+    s+='<line class="ekgsweep" x1="0" y1="20" x2="0" y2="235" stroke="#1f7a5a" stroke-width="2.5"/><circle class="ekgsweep" cx="0" cy="150" r="4" fill="#1f7a5a"/>';
+    // labels
+    const L=(x,t,c)=>'<text x="'+x+'" y="34" text-anchor="middle" font-weight="700" font-size="13" fill="'+c+'">'+t+'</text>';
+    s+=L(75,'P',WAVES.p.color)+L(107,'PR',WAVES.pr.color)+L(144,'QRS',WAVES.qrs.color)+L(200,'ST',WAVES.st.color)+L(278,'T',WAVES.t.color);
+    // clickable zones
+    for(const k in bands){ const z=bands[k]; s+='<rect class="clk" data-w="'+k+'" x="'+z[0]+'" y="20" width="'+(z[1]-z[0])+'" height="215" fill="transparent"/>'; }
+    $('ekg').innerHTML=s;
+    $('ekg').querySelectorAll('.clk').forEach(r=>r.addEventListener('click',()=>{ cur=r.dataset.w; render(); }));
+  }
+
+  function drawStrip(rhythm){
+    const b=78;
+    // static grid
+    let s='<rect x="0" y="0" width="420" height="130" fill="#fff6f6"/>';
+    for(let x=0;x<=420;x+=15) s+='<line x1="'+x+'" y1="0" x2="'+x+'" y2="130" stroke="#f7d8d8" stroke-width="1"/>';
+    for(let y=0;y<=130;y+=15) s+='<line x1="0" y1="'+y+'" x2="420" y2="'+y+'" stroke="#f7d8d8" stroke-width="1"/>';
+    // scrolling trace: built over 0–840 so it loops seamlessly at translateX(-420)
+    let scroll='';
+    if(rhythm==='nsr'){
+      let pts=''; for(let i=0;i<10;i++){ pts+=mini(6+i*84,b); }   // 5 complexes / 420, spacing 84
+      scroll='<polyline points="'+pts+'" fill="none" stroke="#1f7a5a" stroke-width="2.6" stroke-linejoin="round"/>';
+      s+='<text x="210" y="122" text-anchor="middle" font-size="11" fill="#186047" font-weight="600">even spacing · a P wave before every QRS</text>';
+    } else {
+      let base=''; for(let x=0;x<=840;x+=6){ base+=x+','+(b-3*Math.sin(x*2*Math.PI*8/420)-2*Math.sin(x*2*Math.PI*13/420)).toFixed(1)+' '; }
+      let sp=''; const xs=[26,96,150,232,286,368];
+      [0,420].forEach(o=>xs.forEach(x=>{const X=x+o; sp+=(X-8)+','+b+' '+(X-4)+','+(b+9)+' '+X+','+(b-58)+' '+(X+4)+','+(b+20)+' '+(X+8)+','+b+' ';}));
+      scroll='<polyline points="'+base+'" fill="none" stroke="#c98a8a" stroke-width="1.6"/><polyline points="'+sp+'" fill="none" stroke="#c0322b" stroke-width="2.6" stroke-linejoin="round"/>';
+      s+='<text x="210" y="122" text-anchor="middle" font-size="11" fill="#a53e37" font-weight="600">uneven spacing · no P waves · wavy baseline</text>';
+    }
+    s+='<g class="ekgscroll">'+scroll+'</g>';
+    $('strip').innerHTML=s;
+  }
+  function mini(ox,b){
+    let p='';const pt=(x,y)=>{p+=(ox+x).toFixed(1)+','+y.toFixed(1)+' ';};
+    pt(0,b);pt(6,b);pt(12,b-9);pt(18,b);            // P
+    pt(30,b);pt(34,b+5);pt(39,b-40);pt(44,b+14);pt(48,b);  // QRS
+    pt(58,b);pt(66,b-15);pt(74,b);pt(84,b);          // T + gap
+    return p;
+  }
+
+  function render(){
+    drawEKG();
+    // wave list
+    $('wlist').innerHTML=ORDER.map(k=>{const w=WAVES[k];
+      return '<div class="wrow'+(k===cur?' on':'')+'" data-w="'+k+'" style="--wc:'+w.color+'"><span class="pip"></span><div><b>'+w.name+'</b> <span>— '+w.mech+'</span></div></div>';}).join('');
+    $('wlist').querySelectorAll('.wrow').forEach(r=>r.addEventListener('click',()=>{ cur=r.dataset.w; render(); }));
+    // caption + info
+    const w=WAVES[cur];
+    $('waveCap').innerHTML='<b>'+w.name+'</b> — '+w.mech+'.';
+    $('info').innerHTML='<div class="n">'+w.name+'</div><div class="mech">'+w.mech+'</div><div class="plain">'+w.plain+'</div>';
+  }
+
+  // rhythm section
+  let rhythm='nsr';
+  const RH={ nsr:'<b>Normal Sinus Rhythm:</b> regular rate and rhythm. For every QRS there is a P wave and a T wave, with even spacing between beats — the signal starts in the SA node exactly as it should.',
+    afib:'<b>Atrial Fibrillation:</b> "irregularly irregular" with <b>no P waves</b>. The atria quiver chaotically instead of beating, so the baseline looks wavy and only <i>some</i> impulses randomly sneak through the AV node → uneven QRS spacing. Common in older adults and with CAD, CHF, or after surgery.'};
+  function renderRhythm(){ drawStrip(rhythm); $('rhythmCap').innerHTML=RH[rhythm];
+    document.querySelectorAll('#rhythmSeg button').forEach(b=>b.classList.toggle('on',b.dataset.r===rhythm)); }
+  document.querySelectorAll('#rhythmSeg button').forEach(b=>b.addEventListener('click',()=>{ rhythm=b.dataset.r; renderRhythm(); }));
+
+  render(); renderRhythm();
+})();
+</script>
+</body>
+</html>

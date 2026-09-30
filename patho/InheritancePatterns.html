@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f7f2ea">
+<title>Inheritance Patterns</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{ --card:#fffdf8; --ink:#2a2420; --muted:#7a6f63; --line:#e3d8c6;
+    --sans:'Inter',system-ui,sans-serif; --disp:'Cinzel Decorative',serif; --accent:#4a7a6a; }
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  body{background:linear-gradient(160deg,#eef5f2,#e6ece9);color:var(--ink);font-family:var(--sans);min-height:100vh;padding:18px 16px 44px;}
+  header{max-width:1120px;margin:0 auto 16px;text-align:center;}
+  h1{font-family:var(--disp);font-weight:900;font-size:clamp(21px,4vw,34px);color:#356254;line-height:1.05;}
+  header .sub{color:var(--muted);font-size:15px;margin-top:4px;}
+  header .intro{max-width:860px;margin:10px auto 0;font-size:14.5px;line-height:1.5;color:#5c5248;}
+  header .intro b{color:#356254;}
+  .wrap{max-width:1120px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;box-shadow:0 6px 22px rgba(50,100,80,.07);}
+  .card h2{font-family:var(--disp);font-weight:700;font-size:16px;color:#356254;margin-bottom:6px;}
+  .card h2 + .desc{font-size:13px;color:var(--muted);margin-bottom:10px;line-height:1.4;}
+  svg{display:block;width:100%;height:auto;max-height:250px;}
+  #liveCap{margin-top:8px;background:#e6f0eb;border:1px solid #c6ddd2;border-radius:10px;padding:10px 13px;font-size:14px;line-height:1.5;color:#24503f;text-align:center;} #liveCap b{color:#1a4030;}
+  #stage{border-radius:12px;padding:11px 14px;margin-bottom:12px;color:#fff;font-weight:700;font-size:16px;text-align:center;background:#4a8a72;}
+  #stage small{display:block;font-weight:500;font-size:13px;opacity:.93;margin-top:2px;}
+  .seg{display:grid;grid-template-columns:1fr 1fr 1fr;border:1px solid var(--line);border-radius:11px;overflow:hidden;gap:1px;background:var(--line);}
+  .seg button{border:none;background:#fff;color:var(--ink);font-family:var(--sans);font-weight:700;font-size:12px;padding:10px 5px;cursor:pointer;transition:.12s;line-height:1.15;}
+  .seg button small{display:block;font-weight:500;font-size:9px;color:var(--muted);margin-top:1px;}
+  .seg button.on{color:#fff;} .seg button.ad.on{background:#a5652a;} .seg button.ar.on{background:#4a7a6a;} .seg button.xl.on{background:#7a5a9a;}
+  #info{border:1px solid var(--line);border-left:5px solid var(--accent);background:#eef5f2;border-radius:10px;padding:12px 13px;margin-top:12px;}
+  #info .n{font-family:var(--disp);font-weight:700;font-size:16px;color:#356254;} #info .rule{background:#fff;border-radius:8px;padding:9px 11px;margin-top:8px;font-size:13px;line-height:1.5;border:1px solid #cfe0d7;} #info .rule b{color:#356254;}
+  #info .cond{margin-top:8px;font-size:12.5px;color:#5c5248;} #info .cond b{color:#1a4030;}
+  .terms{margin-top:12px;} .terms .lbl{font-size:11.5px;font-weight:700;text-transform:uppercase;color:var(--muted);letter-spacing:.03em;margin-bottom:6px;}
+  .terms table{width:100%;border-collapse:collapse;font-size:12.2px;} .terms td{padding:5px 8px;border-bottom:1px solid var(--line);} .terms td:first-child{font-weight:700;color:#356254;white-space:nowrap;}
+  @media (max-width:880px){ .wrap{grid-template-columns:1fr;} }
+</style>
+</head>
+<body>
+<header>
+  <h1>Inheritance Patterns</h1>
+  <div class="sub">How conditions pass down · Week 7</div>
+  <div class="intro">Whether you inherit a condition depends on its <b>pattern</b>: does it take <b>one</b> bad allele or <b>two</b>? And does it live on a regular chromosome or the <b>X</b>? Click each pattern to see its rule and classic conditions.</div>
+</header>
+<div class="wrap">
+  <div>
+    <div class="card">
+      <h2>The alleles you need</h2>
+      <div class="desc">Capital = dominant allele, lowercase = recessive. Red = affected genotype.</div>
+      <svg id="art" viewBox="0 0 300 220" aria-label="inheritance"></svg>
+      <div id="liveCap">Pick a pattern.</div>
+    </div>
+  </div>
+  <div>
+    <div id="stage">Pick a pattern<small>dominant · recessive · X-linked</small></div>
+    <div class="card">
+      <div class="seg" id="seg">
+        <button data-d="ad" class="ad on">Autosomal Dominant<small>1 copy</small></button>
+        <button data-d="ar" class="ar">Autosomal Recessive<small>2 copies</small></button>
+        <button data-d="xl" class="xl">X-Linked Recessive<small>on the X</small></button>
+      </div>
+    </div>
+    <div class="card" style="margin-top:16px;"><h2>The rule</h2><div id="info"></div>
+      <div class="terms"><div class="lbl">Key terms</div>
+        <table>
+          <tr><td>Homozygous</td><td>two identical alleles (BB or bb)</td></tr>
+          <tr><td>Heterozygous</td><td>mixed alleles (Bb) — one dominant, one recessive</td></tr>
+          <tr><td>Genotype</td><td>the allele code (e.g. Bb)</td></tr>
+          <tr><td>Phenotype</td><td>the physical trait you actually see</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+(function(){
+  const $=id=>document.getElementById(id); let cur='ad';
+  const INFO={
+    ad:{name:'Autosomal Dominant',color:'#a5652a',
+      rule:'You need just <b>ONE dominant allele</b> to have the condition. Genotypes <b>BB</b> or <b>Bb</b> are affected; only <b>bb</b> is unaffected.',
+      cond:'Examples: <b>Huntington\'s Disease</b>, <b>Marfan Syndrome</b>.',
+      draw:['BB','Bb','bb'], affected:['BB','Bb']},
+    ar:{name:'Autosomal Recessive',color:'#4a7a6a',
+      rule:'You need <b>TWO recessive alleles</b> (<b>bb</b>) to have the condition. <b>Bb</b> is a healthy <b>carrier</b> — no condition, but can pass it on.',
+      cond:'Examples: <b>Cystic Fibrosis</b>, <b>Sickle Cell</b>, <b>Tay-Sachs</b>, <b>PKU</b>.',
+      draw:['BB','Bb','bb'], affected:['bb']},
+    xl:{name:'X-Linked Recessive',color:'#7a5a9a',
+      rule:'The gene is on the <b>X</b> chromosome. An <b>XX</b> person needs <b>two</b> copies (xx) to be affected (one = carrier). An <b>XY</b> person needs only <b>one</b> (xY) — no second X to mask it.',
+      cond:'Examples: <b>Hemophilia A/B</b>, <b>Red-Green Color Blindness</b>, <b>Duchenne Muscular Dystrophy</b>.',
+      draw:['XX','Xx','xx','xY'], affected:['xx','xY']},
+  };
+  function draw(){ const inf=INFO[cur],C=inf.color; let s='';
+    const items=inf.draw; const w=300/items.length;
+    items.forEach((g,i)=>{ const cx=w*i+w/2; const aff=inf.affected.includes(g);
+      s+='<circle cx="'+cx+'" cy="90" r="34" fill="'+(aff?C:'#dce8e2')+'" stroke="'+(aff?'#5a3a20':'#a8c0b4')+'" stroke-width="2.5"/>';
+      s+='<text x="'+cx+'" y="97" text-anchor="middle" font-size="18" font-weight="800" fill="'+(aff?'#fff':'#4a6a5a')+'">'+g+'</text>';
+      s+='<text x="'+cx+'" y="150" text-anchor="middle" font-size="10.5" font-weight="700" fill="'+(aff?C:'#7a8a80')+'">'+(aff?'affected':(cur!=='ad'&&(g==='Bb'||g==='Xx')?'carrier':'unaffected'))+'</text>'; });
+    $('art').innerHTML=s;
+  }
+  function render(){ const inf=INFO[cur]; draw();
+    document.querySelectorAll('#seg button').forEach(b=>b.classList.toggle('on',b.dataset.d===cur));
+    $('stage').style.background=inf.color; $('stage').innerHTML=inf.name+'<small>'+(cur==='ad'?'1 dominant allele':cur==='ar'?'2 recessive alleles':'gene on the X')+'</small>';
+    $('info').innerHTML='<div class="n">'+inf.name+'</div><div class="rule">'+inf.rule+'</div><div class="cond">'+inf.cond+'</div>';
+    $('liveCap').innerHTML=cur==='ad'?'<b>Dominant</b> — one bad copy is enough.':cur==='ar'?'<b>Recessive</b> — you need two; one copy = carrier.':'<b>X-linked</b> — males (XY) need only one bad X.';
+  }
+  document.querySelectorAll('#seg button').forEach(b=>b.addEventListener('click',()=>{ cur=b.dataset.d; render(); }));
+  render();
+})();
+</script>
+</body>
+</html>

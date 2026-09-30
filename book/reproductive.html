@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0c3a44">
+<title>Reproductive &mdash; Pathophysiology &middot; Dr. Akash Garg</title>
+<meta name="description" content="A student-friendly, exact pathophysiology chapter on the endocrine system — feedback loops, adrenal, thyroid, diabetes, growth hormone, and ADH — with the concept explained plainly and an interactive to play with in every section.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#22312f; --soft:#4a5a58; --muted:#7c8a88; --faint:#9aa8a6; --line:#e6e2d6;
+    --paper:#faf8f2; --card:#fffdf7; --accent:#0c7283; --accent-dk:#0c3a44; --gold:#b8862f;
+    --serif:"Source Serif 4",Georgia,"Times New Roman",serif; --disp:"Fraunces",Georgia,serif; --ui:"Inter",system-ui,sans-serif;
+    --shadow:0 1px 3px rgba(20,40,46,.06);
+  }
+  *{box-sizing:border-box;} html{scroll-behavior:smooth;}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--serif);font-size:18px;line-height:1.7;-webkit-font-smoothing:antialiased;}
+  a{color:var(--accent);text-decoration:none;} a:hover{text-decoration:underline;}
+
+  /* top bar + progress */
+  .topbar{position:sticky;top:0;z-index:50;background:rgba(250,248,242,.92);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid var(--line);}
+  .topbar .row{max-width:1120px;margin:0 auto;padding:11px 20px;display:flex;align-items:center;gap:14px;font-family:var(--ui);}
+  .topbar a.home{font-size:13.5px;font-weight:600;color:var(--soft);white-space:nowrap;}
+  .topbar a.home:hover{color:var(--accent);text-decoration:none;}
+  .topbar .ct{font-size:13px;color:var(--faint);font-weight:600;margin-left:auto;white-space:nowrap;}
+  .progress{height:3px;background:transparent;} .progress .bar{height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--gold));transition:width .1s;}
+
+  .layout{max-width:1120px;margin:0 auto;padding:0 20px;display:grid;grid-template-columns:230px 1fr;gap:30px;}
+  /* sidebar TOC */
+  aside{font-family:var(--ui);padding-top:34px;}
+  aside .toc{position:sticky;top:74px;}
+  aside .toc h4{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--faint);margin:0 0 12px;font-weight:700;}
+  aside .toc a{display:block;font-size:13.5px;color:var(--soft);padding:6px 10px;border-left:2px solid var(--line);line-height:1.35;}
+  aside .toc a:hover{color:var(--accent);text-decoration:none;border-left-color:var(--accent);}
+  aside .toc a.on{color:var(--accent-dk);font-weight:700;border-left-color:var(--gold);background:#f3efe3;border-radius:0 8px 8px 0;}
+
+  .reading{max-width:1040px;padding:30px 0 70px;min-width:0;}
+  .reading .col{max-width:718px;}
+  /* opener */
+  .kicker{font-family:var(--ui);font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);font-weight:700;}
+  h1{font-family:var(--disp);font-weight:600;font-size:clamp(32px,5.2vw,46px);line-height:1.08;letter-spacing:-.5px;color:var(--accent-dk);margin:10px 0 6px;max-width:718px;}
+  .lede{font-size:20px;line-height:1.6;color:var(--soft);max-width:718px;margin:14px 0 0;}
+  h2{font-family:var(--disp);font-weight:600;font-size:27px;letter-spacing:-.3px;color:var(--accent-dk);margin:52px 0 4px;scroll-margin-top:70px;max-width:718px;}
+  h2 .num{font-family:var(--ui);font-size:13px;font-weight:700;color:var(--gold);letter-spacing:1px;display:block;margin-bottom:4px;text-transform:uppercase;}
+  h3{font-family:var(--disp);font-weight:600;font-size:20px;color:var(--accent-dk);margin:26px 0 2px;max-width:718px;}
+  p{margin:14px 0;max-width:718px;} p b,li b{color:var(--accent-dk);font-weight:600;}
+  .reading ul,.reading ol{max-width:718px;padding-left:24px;} .reading li{margin:7px 0;}
+
+  .objectives{max-width:718px;background:#f2efe4;border:1px solid #e4ddc8;border-radius:14px;padding:18px 22px;margin:24px 0;font-family:var(--ui);}
+  .objectives h4{margin:0 0 8px;font-size:12px;letter-spacing:1px;text-transform:uppercase;color:var(--gold);font-weight:700;}
+  .objectives ul{margin:0;padding-left:20px;} .objectives li{font-size:14.5px;line-height:1.5;color:var(--soft);margin:6px 0;font-family:var(--serif);}
+
+  .kp{max-width:718px;background:#eef5f6;border:1px solid #d3e5e7;border-left:5px solid var(--accent);border-radius:0 12px 12px 0;padding:14px 20px;margin:22px 0;font-family:var(--ui);}
+  .kp .t{font-size:11.5px;letter-spacing:1px;text-transform:uppercase;color:var(--accent-dk);font-weight:700;margin-bottom:6px;}
+  .kp ul{margin:0;padding-left:18px;} .kp li{font-size:14.5px;line-height:1.55;color:var(--ink);margin:5px 0;font-family:var(--serif);}
+  .pearl{max-width:718px;background:#fbf3e2;border:1px solid #ecd9ac;border-left:5px solid var(--gold);border-radius:0 12px 12px 0;padding:13px 20px;margin:22px 0;font-family:var(--serif);font-size:15px;line-height:1.6;color:#6a5320;}
+  .pearl b{color:#5a4212;}
+
+  /* interactive embed (breaks out wider than prose) */
+  .embed{max-width:1040px;margin:26px 0 30px;}
+  .embed .cap{font-family:var(--ui);font-size:12.5px;font-weight:600;color:var(--muted);margin:0 0 8px;display:flex;align-items:center;gap:8px;}
+  .embed .cap .tag{background:var(--accent);color:#fff;font-size:10.5px;letter-spacing:.5px;text-transform:uppercase;font-weight:700;padding:3px 9px;border-radius:20px;}
+  .embed .frame{border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:0 8px 26px rgba(20,40,46,.09);background:#fff;}
+  .embed iframe{display:block;width:100%;height:640px;border:0;}
+  .embed .cap a{font-family:var(--ui);margin-left:auto;font-size:12.5px;font-weight:600;}
+
+  /* summary + quiz */
+  .summary{max-width:718px;background:var(--accent-dk);color:#eaf3f4;border-radius:16px;padding:24px 26px;margin:50px 0 30px;font-family:var(--serif);}
+  .summary h2{color:#fff;margin:0 0 6px;font-size:24px;}
+  .summary ul{margin:10px 0 0;padding-left:20px;} .summary li{margin:8px 0;font-size:15.5px;line-height:1.55;color:#dcebec;}
+  .summary li b{color:#fff;}
+  .quiz{max-width:718px;margin:36px 0;}
+  .quiz h2{margin-top:0;}
+  .q{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 20px;margin:12px 0;box-shadow:var(--shadow);}
+  .q .qq{font-weight:600;color:var(--accent-dk);font-family:var(--serif);}
+  .q button{margin-top:10px;font-family:var(--ui);font-size:13px;font-weight:700;color:var(--accent);background:#eef5f6;border:1px solid #d3e5e7;border-radius:20px;padding:7px 15px;cursor:pointer;}
+  .q button:hover{background:#e2eff0;}
+  .q .ans{display:none;margin-top:12px;padding-top:12px;border-top:1px dashed var(--line);font-size:15.5px;color:var(--soft);}
+  .q .ans .a{font-weight:700;color:var(--accent-dk);}
+  .q.show .ans{display:block;} .q.show button{display:none;}
+
+  .chapnav{max-width:718px;display:flex;justify-content:space-between;gap:12px;margin:44px 0 0;font-family:var(--ui);}
+  .chapnav a,.chapnav span{flex:1;border:1px solid var(--line);border-radius:12px;padding:14px 16px;font-size:13.5px;background:var(--card);}
+  .chapnav a{color:var(--accent-dk);font-weight:600;} .chapnav a:hover{border-color:var(--accent);text-decoration:none;}
+  .chapnav .k{display:block;font-size:11px;color:var(--faint);text-transform:uppercase;letter-spacing:.5px;margin-bottom:2px;}
+  .chapnav .next{text-align:right;} .chapnav .disabled{color:var(--faint);}
+
+  footer{font-family:var(--ui);text-align:center;color:var(--faint);font-size:12.5px;border-top:1px solid var(--line);padding:26px 20px 50px;margin-top:30px;}
+  footer b{color:var(--soft);}
+
+  @media(max-width:860px){
+    .layout{grid-template-columns:1fr;gap:0;}
+    aside{padding-top:16px;} aside .toc{position:static;}
+    aside .toc{border:1px solid var(--line);border-radius:12px;padding:12px 14px;background:var(--card);}
+    aside .toc a{border-left:none;padding:6px 4px;}
+    aside .toc a.on{background:none;}
+    .reading{padding-top:16px;}
+    .embed iframe{height:660px;}
+  }
+
+  /* comparison tables */
+  .ctwrap{max-width:718px;overflow-x:auto;margin:22px 0;-webkit-overflow-scrolling:touch;}
+  table.ctable{border-collapse:collapse;width:100%;min-width:520px;font-family:var(--ui);font-size:14px;background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden;}
+  table.ctable th,table.ctable td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);vertical-align:top;line-height:1.45;}
+  table.ctable thead th{background:#eef5f6;color:var(--accent-dk);font-weight:700;font-size:12.5px;letter-spacing:.3px;}
+  table.ctable tbody tr:last-child td{border-bottom:none;}
+  table.ctable td:first-child,table.ctable th:first-child{font-weight:600;color:var(--soft);white-space:nowrap;}
+  table.ctable td b{color:var(--accent-dk);font-weight:600;}
+  /* glossary */
+  dl.terms{max-width:718px;margin:18px 0;}
+  dl.terms dt{font-family:var(--ui);font-weight:700;color:var(--accent-dk);font-size:15px;margin-top:15px;}
+  dl.terms dd{margin:3px 0 0;color:var(--soft);}
+  /* flashcard drill widget */
+  .fc{max-width:718px;margin:20px 0;}
+  .fc-card{perspective:1600px;height:236px;cursor:pointer;margin-bottom:14px;}
+  .fc-inner{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform .55s cubic-bezier(.4,.2,.2,1);}
+  .fc-card.flip .fc-inner{transform:rotateY(180deg);}
+  .fc-face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border:1px solid var(--line);border-radius:16px;padding:26px 30px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:12px;box-shadow:0 8px 26px rgba(20,40,46,.09);overflow:auto;}
+  .fc-front{background:linear-gradient(180deg,#fffdf7,#eef5f6);}
+  .fc-back{background:linear-gradient(180deg,#fbf3e2,#f3e6c9);transform:rotateY(180deg);border-color:#e6d3a6;}
+  .fc-side{position:absolute;top:12px;left:16px;font-family:var(--ui);font-size:10px;font-weight:800;letter-spacing:1.3px;text-transform:uppercase;color:var(--faint);}
+  .fc-back .fc-side{color:var(--gold);}
+  .fc-q{font-family:var(--disp);font-weight:600;font-size:19px;line-height:1.35;color:var(--accent-dk);}
+  .fc-a{font-family:var(--serif);font-weight:600;font-size:17px;line-height:1.45;color:var(--ink);}
+  .fc-hint{position:absolute;bottom:11px;left:0;right:0;font-family:var(--ui);font-size:11.5px;color:var(--faint);}
+  .fc-nav{display:flex;gap:9px;align-items:center;}
+  .fc-count{flex:1;text-align:center;font-family:var(--ui);font-size:13px;color:var(--muted);font-weight:600;}
+  .fc-btn{font-family:var(--ui);font-size:13px;font-weight:700;color:var(--accent);background:#eef5f6;border:1px solid #d3e5e7;border-radius:20px;padding:8px 13px;cursor:pointer;}
+  .fc-btn:hover{background:#e2eff0;}
+  .fc-full{display:block;margin-top:14px;text-align:center;font-family:var(--ui);font-size:13.5px;font-weight:700;background:var(--accent-dk);color:#eaf3f4;border-radius:12px;padding:12px;}
+  .fc-full:hover{text-decoration:none;filter:brightness(1.12);}
+</style>
+</head>
+<body>
+
+
+  <div class="topbar">
+    <div class="row">
+      <a class="home" href="index.html">📖 Contents</a>
+      
+      <span class="ct">Week 12 · Reproductive</span>
+    </div>
+    <div class="progress"><div class="bar" id="bar"></div></div>
+  </div>
+
+  <div class="layout">
+    <aside>
+      <nav class="toc">
+        <h4>In this chapter</h4>
+        <a href="#w12_female" class="on">1 · Female disorders</a>
+        <a href="#w12_femcancer">2 · Female cancers</a>
+        <a href="#w12_male">3 · Male disorders</a>
+        <a href="#w12_malecancer">4 · Male cancers</a>
+        <a href="#w12_sti">5 · STIs</a>
+        <a href="#summary">The chapter in one breath</a>
+        <a href="#glossary">Words worth knowing</a>
+        <a href="#cards">Flashcards</a>
+        <a href="#quiz">Check yourself</a>
+      </nav>
+    </aside>
+
+    <main class="reading">
+      <div class="kicker">Pathophysiology · Week 12</div>
+      <h1>Reproductive</h1>
+      <p class="lede">The reproductive systems bring their own set of disorders &mdash; hormonal, structural, infectious, and malignant. This chapter covers the common <b>female and male</b> conditions students meet on the floor, the <b>cancers</b> to screen for, and the <b>sexually transmitted infections</b> that quietly cause the most long-term harm.</p>
+      <div class="objectives">
+        <h4>By the end of this chapter you can</h4>
+        <ul>
+          <li>Recognize common female disorders (<b>PCOS</b>, endometriosis, fibroids, PID).</li>
+          <li>Name the female cancers and how <b>cervical</b> and <b>breast</b> cancer are screened.</li>
+          <li>Explain <b>BPH</b> and tell it from prostate cancer.</li>
+          <li>Identify <b>testicular torsion</b> as an emergency.</li>
+          <li>Distinguish the major bacterial and viral <b>STIs</b>.</li>
+        </ul>
+      </div>
+
+      <h2 id="w12_female"><span class="num">Section 1</span>Female reproductive disorders</h2>
+<figure class="bref" data-sec="1" style="max-width:1040px;margin:10px 0 24px;padding:0;"><div style="border:1px solid #e6e2d6;border-radius:16px;overflow:hidden;background:#fffdf7;box-shadow:0 8px 26px rgba(20,40,46,.09);"><img src="img/reproductive_s1.jpg" alt="Female disorders reference figure" loading="lazy" style="display:block;width:100%;height:auto;background:#fff;" onerror="this.closest('figure').style.display='none'"></div><figcaption style="font-family:Inter,system-ui,sans-serif;font-size:12.5px;color:#7c8a88;margin-top:8px;line-height:1.5;"><b style="color:#0c3a44;">Reference.</b> Female disorders <span style="color:#9aa8a6;">&mdash; BruceBlaus, CC BY-SA 4.0 (via Wikimedia Commons)</span></figcaption></figure>
+
+
+      <p>Every month, a healthy uterus rehearses for a pregnancy that usually does not come. This rehearsal is the <b>menstrual cycle</b>, and understanding its normal rhythm makes almost every female reproductive disorder easier to reason through. In the first half (the <b>follicular phase</b>), the pituitary releases <b>FSH</b>, an ovarian follicle matures, and rising <b>estrogen</b> thickens the uterine lining (the <b>endometrium</b>). A surge of <b>LH</b> triggers <b>ovulation</b> around day 14. The emptied follicle becomes the <b>corpus luteum</b>, which pumps out <b>progesterone</b> to hold the lining stable (the <b>luteal phase</b>). If no pregnancy implants, the corpus luteum dies, hormones fall, and the lining sheds as <b>menstruation</b>. Roughly a 28-day loop, though 21 to 35 days is often normal.</p>
+
+<h3>When the cycle misbehaves: menstrual disorders</h3>
+<p><b>Dysmenorrhea</b> is painful periods. The primary type comes from excess <b>prostaglandins</b>, which cause the uterine muscle to cramp hard and briefly cut off its own blood supply (ischemia) - the same mechanism behind the crampy, labor-like pain. This is why NSAIDs, which block prostaglandin synthesis, work so well. <em>Secondary</em> dysmenorrhea points to an underlying problem like endometriosis or fibroids.</p>
+<p><b>Amenorrhea</b> means absent periods. <em>Primary</em> is never having started by around age 15; <em>secondary</em> is a loss of previously regular cycles for 3 or more months. Pregnancy is the most common cause of secondary amenorrhea and must be ruled out first, but stress, extreme exercise, low body weight, and thyroid or prolactin problems also silence the hypothalamic-pituitary-ovarian axis.</p>
+<p><b>Abnormal uterine bleeding (AUB)</b> covers bleeding that is too heavy (<b>menorrhagia</b>), too frequent, or between periods (<b>metrorrhagia</b>). Often it reflects <em>anovulation</em>: without ovulation there is no progesterone, so estrogen builds the lining unopposed until it outgrows its blood supply and sheds erratically. Chronic heavy loss commonly causes iron-deficiency anemia.</p>
+
+<h3>PCOS: the hormone-and-metabolism tangle</h3>
+<p><b>Polycystic ovary syndrome</b> is the most common endocrine disorder in reproductive-age women. Think of three linked problems: <b>irregular or absent cycles</b> (from chronic anovulation), <b>androgen excess</b> (causing hirsutism, acne, and scalp thinning), and <b>insulin resistance</b>. The insulin piece is the engine that drives much of the rest: high insulin nudges the ovaries to make more <b>androgens</b> and lowers <b>SHBG</b>, freeing even more testosterone to circulate. The ovaries fill with many small immature follicles - the "polycystic" appearance on ultrasound. Because cycles do not complete, the lining sits under unopposed estrogen, raising the long-term risk of <b>endometrial hyperplasia</b>. PCOS also carries higher risk for type 2 diabetes and metabolic syndrome, which is why lifestyle change and sometimes metformin are frontline.</p>
+
+<div class="pearl"><b>Unopposed estrogen is the common thread.</b> Anovulation (in PCOS, perimenopause, or obesity) means no progesterone to shed the lining cleanly, so estrogen builds it up unchecked - the setup for both AUB and endometrial cancer risk.</div>
+
+<h3>Endometriosis: the right tissue in the wrong place</h3>
+<p>In <b>endometriosis</b>, tissue that behaves like endometrium grows <em>outside</em> the uterus - on the ovaries, ligaments, and pelvic peritoneum. It still answers to the monthly hormone cues, so it thickens and bleeds with each cycle. But that blood has nowhere to drain. The result is chronic inflammation, scarring, and <b>adhesions</b> that glue pelvic organs together. Classic symptoms are cyclic pelvic pain that worsens with menses, <b>dyspareunia</b> (painful intercourse), and <b>infertility</b>. On the ovary, trapped old blood can form a "chocolate cyst" (<b>endometrioma</b>). Diagnosis is often confirmed by laparoscopy.</p>
+
+<h3>Fibroids and pelvic inflammatory disease</h3>
+<p><b>Uterine fibroids (leiomyomas)</b> are benign smooth-muscle tumors of the uterine wall. They are <em>estrogen-sensitive</em>, so they tend to grow during reproductive years and shrink after menopause. Many are silent, but larger ones cause heavy or prolonged bleeding, pelvic pressure, and sometimes urinary frequency by pressing on the bladder.</p>
+<p><b>Pelvic inflammatory disease (PID)</b> is an ascending infection - usually <em>Chlamydia</em> or <em>gonorrhea</em> - that climbs from the cervix up into the uterus, tubes, and ovaries. The inflammation scars the fallopian tubes, which is why PID is a leading cause of <b>ectopic pregnancy</b> and infertility. Watch for lower abdominal pain, fever, discharge, and <b>cervical motion tenderness</b>.</p>
+
+<div class="ctwrap"><table class="ctable"><thead><tr><th>Feature</th><th>Endometriosis</th><th>Uterine fibroids</th></tr></thead><tbody><tr><td>Nature</td><td>Endometrial-type tissue outside the uterus</td><td>Benign smooth-muscle tumor in the uterine wall</td></tr><tr><td>Hallmark pain</td><td>Cyclic pain, dyspareunia</td><td>Pressure, heaviness; often painless</td></tr><tr><td>Bleeding</td><td>Variable</td><td>Heavy or prolonged menses</td></tr><tr><td>Fertility impact</td><td>Common (adhesions)</td><td>Depends on size and location</td></tr></tbody></table></div>
+
+<p>You can explore these disorders side by side in the interactive figure below.</p>
+
+      <div class="embed">
+        <div class="cap"><span class="tag">Interactive</span> Explore the common female reproductive disorders. <a href="../patho/FemaleRepro.html" target="_blank" rel="noopener">Open full &uarr;</a></div>
+        <div class="frame"><iframe src="../patho/FemaleRepro.html" loading="lazy" title="Female reproductive interactive"></iframe></div>
+      </div>
+      <div class="kp"><div class="t">Key points</div><ul><li>The cycle runs on FSH/LH driving estrogen (builds the lining) then progesterone (stabilizes it); when ovulation fails, unopposed estrogen causes abnormal bleeding and raises endometrial cancer risk.</li><li>Primary dysmenorrhea is prostaglandin-driven uterine ischemia (NSAIDs help); rule out pregnancy first in secondary amenorrhea.</li><li>PCOS links anovulation, androgen excess, and insulin resistance - insulin resistance often drives the androgen excess.</li><li>Endometriosis is uterine-type tissue outside the uterus causing cyclic pain, adhesions, and infertility; fibroids are estrogen-sensitive benign muscle tumors causing heavy bleeding and pressure.</li><li>PID is an ascending STI-related infection that scars the tubes, raising the risk of ectopic pregnancy and infertility.</li></ul></div>
+
+      <h2 id="w12_femcancer"><span class="num">Section 2</span>Cancers of the female system</h2>
+<figure class="bref" data-sec="2" style="max-width:1040px;margin:10px 0 24px;padding:0;"><div style="border:1px solid #e6e2d6;border-radius:16px;overflow:hidden;background:#fffdf7;box-shadow:0 8px 26px rgba(20,40,46,.09);"><img src="img/reproductive_s2.jpg" alt="Female cancers reference figure" loading="lazy" style="display:block;width:100%;height:auto;background:#fff;" onerror="this.closest('figure').style.display='none'"></div><figcaption style="font-family:Inter,system-ui,sans-serif;font-size:12.5px;color:#7c8a88;margin-top:8px;line-height:1.5;"><b style="color:#0c3a44;">Reference.</b> Female cancers <span style="color:#9aa8a6;">&mdash; CDC, Public domain (via Wikimedia Commons)</span></figcaption></figure>
+
+
+      <p>Every month during the reproductive years, the ovaries release estrogen and progesterone in a carefully timed rhythm. Estrogen tells the <b>endometrium</b> (the uterine lining) to grow and thicken; progesterone, released after ovulation, matures that lining and then allows it to shed as a period. The <b>cervix</b> (the neck of the uterus) is lined by fast-turnover cells where two tissue types meet, and the <b>breast</b> is made of milk-making glands and ducts that respond to those same hormones. Cancer arises when the normal instructions for cell growth get corrupted and cells divide without a stop signal. Here is where that goes wrong in the female reproductive system, and why each one behaves the way it does.</p>
+
+<h3>Cervical cancer: a virus you can vaccinate against</h3>
+<p>Nearly all cervical cancer starts with <b>human papillomavirus (HPV)</b>, a common sexually transmitted virus. High-risk strains (especially <b>types 16 and 18</b>) slip proteins into cervical cells that switch off the body's tumor-suppressor genes, so damaged cells keep dividing instead of self-destructing. This usually happens slowly: normal cells become <b>dysplasia</b> (pre-cancer), and only years later become invasive cancer. That slow lag is exactly what makes cervical cancer so preventable. A <b>Pap smear</b> scrapes cells from the cervix to catch dysplasia <em>before</em> it turns malignant, and <b>HPV co-testing</b> looks for the virus itself. The <b>HPV vaccine</b> (given ideally around ages 11 to 12, before exposure) blocks infection in the first place. Early cervical cancer is often silent; a classic later warning sign is <b>postcoital bleeding</b> (bleeding after intercourse) or abnormal spotting.</p>
+
+<div class="pearl"><b>Prevention stacks.</b> Vaccine plus regular Pap and HPV screening is why cervical cancer has become one of the most preventable cancers. Teach patients that a normal Pap does not cancel the need for the vaccine, and vice versa.</div>
+
+<h3>Endometrial (uterine) cancer: too much estrogen, unopposed</h3>
+<p>Estrogen builds the endometrium; progesterone keeps that growth in check and triggers shedding. When estrogen acts <em>without</em> enough progesterone to balance it, the lining keeps thickening. This is called <b>unopposed estrogen</b>, and over time it drives <b>endometrial hyperplasia</b>, which can progress to cancer. This explains the risk factors: <b>obesity</b> (fat tissue makes extra estrogen), <b>never having been pregnant</b>, early menarche and late menopause (more lifetime estrogen), <b>PCOS</b>, and taking estrogen therapy without progesterone. The good news is that this cancer usually announces itself early with <b>postmenopausal bleeding</b> or abnormal uterine bleeding. Any bleeding after menopause is endometrial cancer until proven otherwise and warrants prompt evaluation.</p>
+
+<h3>Ovarian cancer: the quiet one</h3>
+<p>The ovaries sit deep in the pelvis with room to grow unnoticed, so ovarian cancer often causes no clear symptoms until it has spread. When symptoms do appear they are vague and easy to dismiss: <b>bloating</b>, early satiety (feeling full quickly), pelvic or abdominal discomfort, and urinary urgency. Because there is no reliable screening test for average-risk women, it is frequently found <em>late</em>, which is why it carries a high mortality. Risk rises with <b>BRCA1/BRCA2 gene mutations</b>, family history, and, like endometrial cancer, more lifetime ovulations. Nurses play a real role here by taking persistent, new bloating or fullness seriously rather than brushing it off.</p>
+
+<div class="pearl"><b>Persistent and new is the red flag.</b> Bloating everyone gets; bloating that is new, daily, and does not resolve over a few weeks deserves a workup.</div>
+
+<h3>Breast cancer: risk, warning signs, and screening</h3>
+<p>Breast tissue is estrogen-responsive, so most risk factors trace back to lifetime estrogen exposure and genetics: early menarche, late menopause, never breastfeeding, older age, and inherited <b>BRCA1/BRCA2</b> mutations (which sharply raise both breast and ovarian risk). Warning signs come from a growing mass distorting normal tissue: a <b>hard, fixed, painless lump</b>, skin dimpling or a <b>peau d'orange</b> (orange-peel) texture, nipple retraction, or bloody nipple discharge. Screening <b>mammography</b> (usually starting around age 40 to 50 and continuing regularly) catches tumors before they can be felt.</p>
+
+<div class="ctwrap"><table class="ctable"><thead><tr><th>Feature</th><th>Cervical</th><th>Endometrial</th></tr></thead><tbody><tr><td>Main driver</td><td>HPV infection</td><td>Unopposed estrogen</td></tr><tr><td>Key prevention/screen</td><td>Pap smear, HPV vaccine</td><td>Watch for abnormal bleeding</td></tr><tr><td>Classic warning sign</td><td>Postcoital bleeding</td><td>Postmenopausal bleeding</td></tr><tr><td>Detected</td><td>Often early (screenable)</td><td>Often early (bleeds)</td></tr></tbody></table></div>
+
+<p>Notice the pattern: cancers that bleed or can be screened tend to be caught early, while the quiet ovaries are caught late. That single idea organizes most of what you need to remember.</p>
+
+      <div class="kp"><div class="t">Key points</div><ul><li><b>Cervical cancer</b> is caused by <b>HPV</b>; the Pap smear catches pre-cancer and the HPV vaccine prevents infection, making it highly preventable.</li><li><b>Endometrial cancer</b> is driven by <b>unopposed estrogen</b>; obesity, nulliparity, and estrogen-only therapy raise risk, and postmenopausal bleeding is the key early sign.</li><li><b>Ovarian cancer</b> is the quiet one, usually found late with vague bloating and fullness because there is no reliable screening test.</li><li><b>Breast cancer</b> risk rises with estrogen exposure and <b>BRCA1/BRCA2</b>; watch for a hard fixed lump, skin dimpling, or nipple changes, and screen with mammography.</li><li>Any <b>postmenopausal bleeding</b> is cancer until proven otherwise and needs prompt evaluation.</li></ul></div>
+
+      <h2 id="w12_male"><span class="num">Section 3</span>Male reproductive disorders</h2>
+<figure class="bref" data-sec="3" style="max-width:1040px;margin:10px 0 24px;padding:0;"><div style="border:1px solid #e6e2d6;border-radius:16px;overflow:hidden;background:#fffdf7;box-shadow:0 8px 26px rgba(20,40,46,.09);"><img src="img/reproductive_s3.jpg" alt="Male disorders reference figure" loading="lazy" style="display:block;width:100%;height:auto;background:#fff;" onerror="this.closest('figure').style.display='none'"></div><figcaption style="font-family:Inter,system-ui,sans-serif;font-size:12.5px;color:#7c8a88;margin-top:8px;line-height:1.5;"><b style="color:#0c3a44;">Reference.</b> Male disorders <span style="color:#9aa8a6;">&mdash; BruceBlaus, CC BY-SA 4.0 (via Wikimedia Commons)</span></figcaption></figure>
+
+
+      <p>The male reproductive system is built around a simple plumbing problem: the same tube, the <b>urethra</b>, has to carry both urine out of the bladder and semen out during ejaculation. That urethra runs straight through the middle of the <b>prostate</b>, a walnut-sized gland that sits just below the bladder and adds fluid to semen. Blood flow matters too: an erection is really a <em>vascular</em> event, where arteries relax and let blood pool inside the penis. Keep those two ideas in mind, the tube running through the prostate and the blood-flow story, and most male reproductive disorders start to make sense.</p>
+
+<h3>Benign prostatic hyperplasia (BPH)</h3>
+<p><b>BPH</b> is exactly what the name says: <em>benign</em> (not cancer), <em>hyperplasia</em> (too many cells). With age and lifelong androgen (mostly <b>DHT</b>, dihydrotestosterone) exposure, the prostate slowly enlarges. Because the urethra passes right through the gland, that growth squeezes the tube like a hand gently closing around a straw. Everything downstream flows from that pinch. The stream gets <b>weak and hesitant</b> because it is harder to push urine past the narrowing. The bladder muscle (detrusor) has to work harder, so it thickens and becomes irritable, which drives <b>urinary frequency</b>, <b>urgency</b>, and <b>nocturia</b> (waking at night to void). Over time the bladder cannot fully empty, leaving <b>residual urine</b>, and in the worst case flow stops completely, called <b>acute urinary retention</b>. These lower urinary tract symptoms are often lumped as <b>LUTS</b>.</p>
+<div class="pearl"><b>Watch the medicine cabinet.</b> Decongestants (alpha-agonists) tighten the bladder neck, while some antihistamines (anticholinergics) weaken the bladder's squeeze - either way urine backs up, and they can tip a man with BPH straight into acute retention. Always ask what over-the-counter drugs he took recently.</div>
+
+<h3>Prostatitis</h3>
+<p><b>Prostatitis</b> is inflammation of that same gland, and it feels very different from BPH. <b>Acute bacterial prostatitis</b> is usually caused by gut or urinary organisms (often <em>E. coli</em>) tracking into the prostate. Because it is an active infection, the man is genuinely sick: <b>fever</b>, <b>chills</b>, <b>malaise</b>, plus <b>pelvic or perineal pain</b> and painful, difficult urination (<b>dysuria</b>). On exam the prostate is <em>boggy, swollen, and exquisitely tender</em>. <b>Chronic prostatitis</b> is the slow-burn version, with lingering pelvic discomfort and recurrent urinary infections but few systemic signs.</p>
+
+<div class="ctwrap"><table class="ctable"><thead><tr><th>Feature</th><th>BPH</th><th>Acute prostatitis</th></tr></thead><tbody><tr><td>Cause</td><td>Age-related growth (androgen-driven)</td><td>Bacterial infection</td></tr><tr><td>Fever / feeling sick</td><td>No</td><td>Yes, often high</td></tr><tr><td>Onset</td><td>Gradual, over years</td><td>Sudden, over hours to days</td></tr><tr><td>Prostate on exam</td><td>Enlarged, smooth, firm</td><td>Swollen, boggy, very tender</td></tr><tr><td>Main problem</td><td>Obstructed flow</td><td>Infection plus dysuria</td></tr></tbody></table></div>
+
+<h3>Erectile dysfunction (ED)</h3>
+<p><b>Erectile dysfunction</b> is the consistent inability to get or keep an erection firm enough for intercourse. Since an erection depends on arteries dilating and filling the penis with blood, ED is most often a <em>vascular</em> problem. The same processes that clog coronary arteries, <b>atherosclerosis</b>, <b>diabetes</b>, <b>hypertension</b>, and smoking, also damage the small penile vessels and the endothelium that releases <b>nitric oxide</b>, the signal that tells smooth muscle to relax. This is why ED is often called an early warning sign: those small vessels narrow before the big ones cause a heart attack. Nerve damage (as in diabetes or after prostate surgery), low testosterone, certain medications, and psychological factors add to the picture.</p>
+<div class="pearl"><b>ED can be the canary in the coal mine.</b> New-onset erectile dysfunction in a middle-aged man often signals underlying cardiovascular disease. It is a reason to check blood pressure, glucose, and lipids, not just an intimacy issue.</div>
+
+<h3>Testicular torsion</h3>
+<p><b>Testicular torsion</b> is a true surgical emergency. The testicle twists on its <b>spermatic cord</b>, kinking the blood supply exactly like stepping on a garden hose. Without arterial flow the testicle becomes <em>ischemic</em> and, if not fixed quickly, dies. It classically strikes adolescents with <b>sudden, severe</b> one-sided scrotal pain, often with <b>nausea and vomiting</b>. The affected testicle may sit <b>high and horizontal</b>, and the <b>cremasteric reflex</b> (stroking the inner thigh normally lifts the testicle) is typically <em>absent</em>. Time is the whole story: salvage rates are best within about <b>6 hours</b>, so torsion goes straight to surgery, and often it is <em>not</em> imaged first if the diagnosis is clear.</p>
+<div class="pearl"><b>Sudden scrotal pain is torsion until proven otherwise.</b> Do not wait, do not apply heat, do not delay for tests you cannot get quickly. Surgical detorsion within roughly 6 hours saves the testicle.</div>
+
+<p>Explore the interactive figure below to see how each of these disorders maps onto male reproductive anatomy.</p>
+
+      <div class="embed">
+        <div class="cap"><span class="tag">Interactive</span> Explore the common male reproductive disorders. <a href="../patho/MaleRepro.html" target="_blank" rel="noopener">Open full &uarr;</a></div>
+        <div class="frame"><iframe src="../patho/MaleRepro.html" loading="lazy" title="Male reproductive interactive"></iframe></div>
+      </div>
+      <div class="kp"><div class="t">Key points</div><ul><li><b>BPH</b> is benign, age-related prostate growth that squeezes the urethra, causing weak stream, frequency, nocturia, and possible retention.</li><li><b>Prostatitis</b> is inflammation of the prostate; the acute bacterial form brings fever, pelvic pain, and a boggy, tender gland, unlike the painless enlargement of BPH.</li><li><b>Erectile dysfunction</b> is usually vascular and can be an early warning sign of underlying cardiovascular disease like atherosclerosis or diabetes.</li><li><b>Testicular torsion</b> is a surgical emergency: sudden severe scrotal pain with an absent cremasteric reflex, best salvaged within about 6 hours.</li><li>Because the urethra runs through the prostate, most prostate disorders show up first as changes in the urinary stream.</li></ul></div>
+
+      <h2 id="w12_malecancer"><span class="num">Section 4</span>Cancers of the male system</h2>
+<figure class="bref" data-sec="4" style="max-width:1040px;margin:10px 0 24px;padding:0;"><div style="border:1px solid #e6e2d6;border-radius:16px;overflow:hidden;background:#fffdf7;box-shadow:0 8px 26px rgba(20,40,46,.09);"><img src="img/reproductive_s4.jpg" alt="Male cancers reference figure" loading="lazy" style="display:block;width:100%;height:auto;background:#fff;" onerror="this.closest('figure').style.display='none'"></div><figcaption style="font-family:Inter,system-ui,sans-serif;font-size:12.5px;color:#7c8a88;margin-top:8px;line-height:1.5;"><b style="color:#0c3a44;">Reference.</b> Male cancers <span style="color:#9aa8a6;">&mdash; Office for National Statistics, CC BY 2.0 (via Wikimedia Commons)</span></figcaption></figure>
+
+
+      <p>The male reproductive system runs on two organs that quietly do very different jobs. The <b>testes</b> sit outside the body in the scrotum, where the slightly cooler temperature lets them make sperm and pump out <b>testosterone</b>. The <b>prostate</b> is a walnut-sized gland wrapped around the urethra just below the bladder; its job is to add fluid to semen. Because the prostate hugs the urine tube, anything that makes it swell can squeeze that tube and change how a man pees. Keep that anatomy in mind, because it explains almost every symptom in this section.</p>
+
+<h3>Prostate cancer: common and often patient</h3>
+<p>Prostate cancer is the <em>most common</em> non-skin cancer in men, and the risk climbs steeply with age, especially after 65. It is also frequently <b>slow-growing</b>, so many men live for years with disease that never threatens them. The tumor usually starts in the <em>peripheral (outer) zone</em> of the gland, which is why it often causes no early symptoms at all, and why a clinician can sometimes feel a hard, irregular nodule on a <b>digital rectal exam (DRE)</b>. Screening pairs the DRE with a blood test for <b>PSA (prostate-specific antigen)</b>, a protein the prostate normally leaks in small amounts. When cancer cells disrupt the gland's architecture, more PSA escapes into the blood, so a rising level is a red flag, though not a diagnosis. Because prostate cancer likes to spread to <b>bone</b>, a later sign can be deep, unexplained back or hip pain.</p>
+
+<div class="pearl"><b>PSA is a clue, not a verdict.</b> Infection (prostatitis), a recent exam, ejaculation, and plain BPH can all raise PSA. A high or rising value earns a referral and often a biopsy, not an immediate cancer label.</div>
+
+<h3>Cancer versus BPH: same gland, different problem</h3>
+<p>Students mix these up constantly because both make the prostate bigger and both mess with urination. The key difference is <em>where</em> and <em>what kind</em>. <b>Benign prostatic hyperplasia (BPH)</b> is non-cancerous overgrowth of the <em>inner (transitional) zone</em>, the part closest to the urethra, so it squeezes the tube early and loudly. Cancer usually grows in the <em>outer zone</em>, so it stays quiet until it is more advanced.</p>
+
+<div class="ctwrap"><table class="ctable"><thead><tr><th>Feature</th><th>BPH (benign)</th><th>Prostate cancer</th></tr></thead><tbody><tr><td>Nature</td><td>Overgrowth of normal cells</td><td>Malignant cells that can spread</td></tr><tr><td>Usual zone</td><td>Inner/transitional (near urethra)</td><td>Peripheral/outer</td></tr><tr><td>Early urinary symptoms</td><td>Common and prominent</td><td>Often none until advanced</td></tr><tr><td>DRE finding</td><td>Smooth, rubbery, symmetric</td><td>Hard, irregular nodule</td></tr><tr><td>PSA</td><td>Mildly elevated</td><td>Often higher or rising</td></tr></tbody></table></div>
+
+<p>The urinary symptoms of BPH follow directly from the squeezed urethra: a <em>weak stream</em>, <em>hesitancy</em> (waiting for flow to start), <em>dribbling</em>, and <em>nocturia</em> (waking to pee) because the bladder never fully empties. These same symptoms can appear in advanced cancer, so symptoms alone cannot tell the two apart. That is exactly why the exam and PSA matter.</p>
+
+<h3>Testicular cancer: the young man's cancer</h3>
+<p>Testicular cancer flips the age script. It is the most common solid cancer in men roughly <b>15 to 35 years old</b>, and the biggest risk factor is a history of an <b>undescended testicle (cryptorchidism)</b>, even one surgically corrected in childhood. The classic presentation is a <em>painless, firm lump or swelling</em> in one testicle, often found by chance or during a shower. Because it is painless, men easily ignore it, which is dangerous because these tumors can grow quickly. Many arise from <b>germ cells</b> and can raise tumor markers such as <b>AFP, beta-hCG, and LDH</b>, which help with diagnosis and tracking. The reassuring news is that testicular cancer is highly treatable, with excellent cure rates even when it has spread, so <em>early detection changes outcomes dramatically</em>.</p>
+
+<div class="pearl"><b>Teach the testicular self-exam (TSE).</b> Monthly, after a warm shower when the scrotum is relaxed, roll each testicle gently between thumb and fingers. Any new painless lump, firmness, or size change gets reported, no waiting.</div>
+
+<h3>When to worry and refer</h3>
+<p>Refer promptly for evaluation when you see a <b>hard or nodular prostate</b> on exam, a <em>rising or clearly elevated PSA</em>, or new <em>bone pain</em> with a prostate history. For testes, any <b>painless testicular mass</b>, new firmness, or size change warrants urgent workup, usually a scrotal ultrasound, before assuming it is benign. Red flags such as blood in the urine or semen, unexplained weight loss, or difficulty urinating also deserve escalation. Your nursing role is not to diagnose but to <em>notice, document, and route</em>, and to normalize screening so men actually show up.</p>
+
+      <div class="kp"><div class="t">Key points</div><ul><li>Prostate cancer is common, often slow-growing, favors older men, grows in the gland's outer zone, and is screened with PSA plus digital rectal exam.</li><li>BPH is benign inner-zone overgrowth that squeezes the urethra early (weak stream, hesitancy, nocturia); cancer stays outer and quiet until advanced, so exam and PSA distinguish them.</li><li>PSA is a clue, not a diagnosis; infection, BPH, and recent exam can raise it, and a rising level earns a referral.</li><li>Testicular cancer strikes young men (usually 15 to 35), typically a painless firm mass, and is highly curable, so monthly self-exam and early reporting matter.</li><li>Refer promptly for a hard or nodular prostate, rising PSA, new bone pain, or any painless testicular mass.</li></ul></div>
+
+      <h2 id="w12_sti"><span class="num">Section 5</span>Sexually transmitted infections</h2>
+<figure class="bref" data-sec="5" style="max-width:1040px;margin:10px 0 24px;padding:0;"><div style="border:1px solid #e6e2d6;border-radius:16px;overflow:hidden;background:#fffdf7;box-shadow:0 8px 26px rgba(20,40,46,.09);"><img src="img/reproductive_s5.jpg" alt="STIs reference figure" loading="lazy" style="display:block;width:100%;height:auto;background:#fff;" onerror="this.closest('figure').style.display='none'"></div><figcaption style="font-family:Inter,system-ui,sans-serif;font-size:12.5px;color:#7c8a88;margin-top:8px;line-height:1.5;"><b style="color:#0c3a44;">Reference.</b> STIs <span style="color:#9aa8a6;">&mdash; http://www.scientificanimations.com, CC BY-SA 4.0 (via Wikimedia Commons)</span></figcaption></figure>
+
+
+      <p>The reproductive tract has built-in defenses. The vagina keeps an <em>acidic</em> pH thanks to <b>lactobacilli</b>, cervical mucus forms a physical plug, and the mucosal lining of the urethra, cervix, and rectum is coated in immune cells ready to trap invaders. <b>Sexually transmitted infections (STIs)</b> happen when a pathogen — bacterial, viral, or protozoal — is passed through vaginal, anal, or oral contact and gets past those defenses to colonize mucosa or enter the bloodstream. The tricky part for nursing care is that many STIs are <em>silent</em>: the person feels fine while the organism quietly climbs the tract or spreads systemically.</p>
+
+<h3>Bacterial STIs: chlamydia and gonorrhea</h3>
+<p><b>Chlamydia trachomatis</b> and <b>Neisseria gonorrhoeae</b> are the two most commonly reported bacterial STIs, and they often travel together. Both infect columnar epithelial cells of the cervix and urethra. When symptoms do appear, expect <em>dysuria</em>, mucopurulent discharge, or post-coital bleeding — but roughly 70% of women and many men have <b>no symptoms at all</b>, which is exactly why they spread. That silence is dangerous. If the organism ascends from the cervix into the uterus and fallopian tubes, it triggers <b>pelvic inflammatory disease (PID)</b>. The resulting inflammation and scarring of the tubes can block egg transport, causing <b>infertility</b> and raising the risk of a life-threatening <b>ectopic pregnancy</b>. Gonorrhea can also disseminate into blood and joints (disseminated gonococcal infection). Both are treatable with antibiotics — chlamydia with doxycycline, gonorrhea with ceftriaxone — but treatment does not reverse scarring already done.</p>
+
+<div class="pearl"><b>Treat both, and treat the partner.</b> Because co-infection is common, gonorrhea is often treated with coverage for chlamydia too. And the patient stays exposed to reinfection until sexual partners are treated — this is why <em>partner notification and treatment</em> is standard care.</div>
+
+<h3>Syphilis and its stages</h3>
+<p><b>Syphilis</b>, caused by the spirochete <b>Treponema pallidum</b>, is the great imitator because it moves through the body in distinct stages, each with different signs as the organism spreads from local tissue to the bloodstream and eventually the nervous system.</p>
+
+<div class="ctwrap"><table class="ctable"><thead><tr><th>Stage</th><th>What you see</th><th>Why</th></tr></thead><tbody><tr><td>Primary</td><td>Single painless <b>chancre</b> at entry site; heals on its own</td><td>Local spirochete replication; often missed because it does not hurt</td></tr><tr><td>Secondary</td><td>Diffuse rash (often palms/soles), fever, lymphadenopathy</td><td>Organism has spread through blood, provoking a systemic immune response</td></tr><tr><td>Latent</td><td>No symptoms; positive serology</td><td>Bacteria persist quietly; still transmissible early on</td></tr><tr><td>Tertiary</td><td>Gummas, cardiovascular damage, <b>neurosyphilis</b></td><td>Years of unchecked tissue and vessel destruction</td></tr></tbody></table></div>
+
+<p>Penicillin remains the treatment. The painless, self-healing early lesions are exactly why untreated syphilis marches forward — the patient assumes it is gone.</p>
+
+<h3>Viral STIs</h3>
+<p>Viral STIs differ in a key way: antibiotics do nothing, and several are <em>lifelong</em> because the virus integrates into or hides within host cells.</p>
+<ul>
+<li><b>Human papillomavirus (HPV)</b> — infects squamous epithelium. Low-risk strains cause genital warts; high-risk strains (16, 18) drive <b>cervical, anal, and oropharyngeal cancers</b> by disrupting tumor-suppressor genes. The <em>HPV vaccine</em> prevents the high-risk strains, and Pap/HPV screening catches precancerous change early.</li>
+<li><b>Herpes simplex virus (HSV)</b> — causes painful vesicular genital lesions, then retreats into sacral nerve ganglia where it stays for life, reactivating under stress. Antivirals (acyclovir) suppress outbreaks but do not cure.</li>
+<li><b>HIV</b> — attacks <b>CD4 T-helper cells</b>, progressively crippling immunity until opportunistic infections define AIDS. Modern antiretroviral therapy lets people live long lives and, when viral load is undetectable, prevents transmission.</li>
+<li><b>Hepatitis B</b> — a bloodborne and sexually transmitted virus that inflames the liver and can cause chronic hepatitis, cirrhosis, and liver cancer. It is <em>vaccine-preventable</em>.</li>
+</ul>
+
+<div class="pearl"><b>Silent now, costly later.</b> The through-line of STIs is that early infection is often painless or invisible, while the long-term complications — infertility, ectopic pregnancy, cancer, neurosyphilis, liver failure, immune collapse — are severe. This is the entire rationale for routine screening.</div>
+
+<h3>Why screening and prevention matter</h3>
+<p>Because so many STIs are asymptomatic, <b>screening</b> finds them before complications set in, and treating partners breaks the reinfection loop. Prevention layers together: <b>barrier methods</b> (condoms) reduce transmission, <b>vaccines</b> stop HPV and hepatitis B before exposure, and prompt treatment shortens the window of infectivity. For nurses, patient teaching is nonjudgmental, practical, and centered on the truth that catching an STI early is almost always easier than treating what it becomes.</p>
+
+      <div class="kp"><div class="t">Key points</div><ul><li>Chlamydia and gonorrhea are often silent but can ascend to cause PID, infertility, and ectopic pregnancy; treat the patient and partners.</li><li>Syphilis progresses through primary (painless chancre), secondary (systemic rash), latent, and tertiary (neurosyphilis, cardiovascular) stages; penicillin treats it.</li><li>Viral STIs (HPV, HSV, HIV, hepatitis B) resist antibiotics and are often lifelong; HPV and hepatitis B are vaccine-preventable.</li><li>High-risk HPV drives cervical and other cancers; HIV destroys CD4 cells and immunity.</li><li>Screening, partner treatment, barrier methods, and vaccination prevent the severe long-term complications of untreated STIs.</li></ul></div>
+
+      <div class="summary">
+        <h2 id="summary">The chapter in one breath</h2>
+        <ul><li><b>Endometriosis</b> is ectopic endometrial tissue that still bleeds each cycle, causing chronic pelvic pain, dysmenorrhea, and infertility from adhesions and scarring.</li><li><b>PID</b> (usually ascending chlamydia or gonorrhea) inflames the upper tract, and its scarring is a leading cause of ectopic pregnancy and infertility.</li><li><b>Cervical cancer</b> is nearly always caused by persistent high-risk <b>HPV</b> (types 16 and 18), which is why HPV vaccination and Pap/HPV co-testing screening catch it early.</li><li><b>Breast cancer</b> risk climbs with lifetime estrogen exposure and <b>BRCA1/BRCA2</b> mutations, and a new painless hard fixed lump or nipple change warrants mammography.</li><li><b>BPH</b> is a non-malignant enlargement of the prostate's inner zone that squeezes the urethra, causing hesitancy, weak stream, nocturia, and urinary retention.</li><li><b>Prostate cancer</b> usually arises in the peripheral zone (so it is felt on DRE and rarely obstructs early), often silent until an elevated <b>PSA</b> or bone metastases appear.</li><li><b>Testicular cancer</b> is the most common solid tumor in young men aged 15 to 35 and typically presents as a painless firm testicular lump.</li><li><b>STIs</b> often hide silently: <b>chlamydia and gonorrhea</b> may be asymptomatic yet cause PID and infertility, while untreated <b>syphilis</b> progresses through primary chancre, secondary rash, and tertiary organ damage.</li></ul>
+      </div>
+
+      <h2 id="glossary"><span class="num">Reference</span>Words worth knowing</h2>
+      <p>A quick reference for the terms in this chapter &mdash; skim it now, or circle back whenever a word trips you up.</p>
+      <dl class="terms"><dt>Amenorrhea</dt><dd>The absence of menstrual periods, either because they never started by the expected age (primary) or because they stopped for three or more cycles in someone who previously menstruated (secondary), often signaling pregnancy, hormonal imbalance, or excessive stress or exercise.</dd><dt>Benign prostatic hyperplasia (BPH)</dt><dd>A non-cancerous enlargement of the prostate gland common in aging men that squeezes the urethra and causes urinary symptoms like weak stream, hesitancy, frequency, and nighttime urination (nocturia).</dd><dt>BRCA</dt><dd>The <em>BRCA1</em> and <em>BRCA2</em> tumor-suppressor genes whose inherited mutations sharply raise a person's lifetime risk of breast and ovarian (and some prostate) cancers because the damaged gene can no longer help repair DNA.</dd><dt>Chlamydia</dt><dd>A very common bacterial sexually transmitted infection caused by <em>Chlamydia trachomatis</em> that is often silent (asymptomatic) yet can quietly scar the reproductive tract and lead to pelvic inflammatory disease and infertility if untreated.</dd><dt>Dysmenorrhea</dt><dd>Painful menstrual cramping caused mainly by prostaglandin-driven uterine contractions, ranging from primary (no underlying disease) to secondary (from conditions like endometriosis or fibroids).</dd><dt>Endometriosis</dt><dd>A condition in which tissue resembling the uterine lining grows outside the uterus, bleeding cyclically with each period to cause chronic pelvic pain, painful intercourse, and often infertility.</dd><dt>Fibroid</dt><dd>A benign (non-cancerous) tumor of uterine smooth muscle, also called a <em>leiomyoma</em>, that can enlarge the uterus and cause heavy menstrual bleeding, pelvic pressure, and pain.</dd><dt>Gonorrhea</dt><dd>A bacterial sexually transmitted infection caused by <em>Neisseria gonorrhoeae</em> that inflames the urethra, cervix, or other mucous membranes and, if untreated, can spread to cause pelvic inflammatory disease or disseminated infection.</dd><dt>HPV (human papillomavirus)</dt><dd>A very common sexually transmitted virus whose high-risk strains can cause cervical, anal, and other cancers, while low-risk strains cause genital warts.</dd><dt>HPV vaccine</dt><dd>A vaccine (such as Gardasil) that protects against the high-risk human papillomavirus strains most likely to cause cervical and other cancers, given ideally before a person becomes sexually active.</dd><dt>Pap smear</dt><dd>A screening test that samples cells from the cervix to detect precancerous or cancerous changes early, often paired with HPV testing to catch problems before they become cancer.</dd><dt>Pelvic inflammatory disease (PID)</dt><dd>An infection of the upper female reproductive organs (uterus, fallopian tubes, ovaries), usually spreading upward from an untreated STI like chlamydia or gonorrhea, that can scar the tubes and cause infertility or ectopic pregnancy.</dd><dt>Polycystic ovary syndrome (PCOS)</dt><dd>A common hormonal disorder marked by irregular or absent ovulation, elevated androgens (causing acne and excess hair growth), and often insulin resistance, frequently seen with multiple small ovarian follicles on ultrasound.</dd><dt>PSA (prostate-specific antigen)</dt><dd>A protein made by the prostate and measured in the blood as a screening marker; higher levels can suggest prostate cancer but also rise with benign prostatic hyperplasia, infection, or inflammation.</dd><dt>Syphilis</dt><dd>A sexually transmitted infection caused by the bacterium <em>Treponema pallidum</em> that progresses in stages, starting with a painless sore (chancre) and, if untreated, eventually damaging the heart, brain, and other organs.</dd><dt>Testicular torsion</dt><dd>A surgical emergency in which the testicle twists on its spermatic cord, cutting off blood flow and causing sudden severe scrotal pain and swelling that must be relieved within hours to save the testicle.</dd></dl>
+
+      <h2 id="cards"><span class="num">Drill</span>Flashcards for this unit</h2>
+      <p>These are the <b>Week 12</b> cards &mdash; the same deck as the hub, pulled in here so you can review the moment you finish reading. Tap the card to flip it; hit <em>Shuffle</em> to mix them up. To grade yourself and track mastery across the whole deck, open the <a href="../flashcards.html">full flashcards page</a>.</p>
+      <div class="fc" id="fc">
+        <div class="fc-card" id="fcCard" onclick="fcFlip()">
+          <div class="fc-inner">
+            <div class="fc-face fc-front"><span class="fc-side">Question</span><div class="fc-q" id="fcQ"></div><div class="fc-hint">Tap to reveal the answer</div></div>
+            <div class="fc-face fc-back"><span class="fc-side">Answer</span><div class="fc-a" id="fcA"></div><div class="fc-hint">Tap to flip back</div></div>
+          </div>
+        </div>
+        <div class="fc-nav">
+          <button class="fc-btn" type="button" onclick="fcPrev(event)">&larr; Prev</button>
+          <span class="fc-count" id="fcCount">&mdash;</span>
+          <button class="fc-btn" type="button" onclick="fcNext(event)">Next &rarr;</button>
+          <button class="fc-btn" type="button" onclick="fcShuffle(event)">&#128256; Shuffle</button>
+        </div>
+        <a class="fc-full" href="../flashcards.html">Open the full Week 12 deck &mdash; grade yourself &amp; track mastery &uarr;</a>
+      </div>
+
+      <div class="quiz">
+        <h2 id="quiz">Check yourself</h2>
+        <div class="q"><div class="qq">1. A 24-year-old client reports severe, cramping lower-abdominal pain that starts with the first day of her period and has no underlying pelvic disease. Which term best describes this condition?</div>
+<button onclick="this.parentNode.classList.add('show')">Reveal answer</button>
+<div class="ans"><span class="a">Primary dysmenorrhea.</span> Primary dysmenorrhea is painful menstruation with no identifiable pelvic pathology, driven by excess prostaglandins (PGF2-alpha) that cause strong uterine contractions and ischemia; secondary dysmenorrhea, by contrast, is caused by an underlying disorder such as endometriosis or fibroids.</div></div>
+<div class="q"><div class="qq">2. A nurse is teaching a client about polycystic ovary syndrome (PCOS). Which set of findings is most consistent with this diagnosis?</div>
+<button onclick="this.parentNode.classList.add('show')">Reveal answer</button>
+<div class="ans"><span class="a">Irregular or absent periods, hirsutism/acne, and insulin resistance.</span> PCOS classically shows oligo-ovulation (irregular or missed cycles), signs of hyperandrogenism such as hirsutism and acne, and polycystic-appearing ovaries; it is strongly linked to insulin resistance, obesity, and increased long-term risk of type 2 diabetes.</div></div>
+<div class="q"><div class="qq">3. A 30-year-old woman reports chronic pelvic pain that worsens before her period, painful intercourse (dyspareunia), and difficulty getting pregnant. Which condition should the nurse suspect?</div>
+<button onclick="this.parentNode.classList.add('show')">Reveal answer</button>
+<div class="ans"><span class="a">Endometriosis.</span> Endometriosis is endometrial-like tissue growing outside the uterus; this tissue responds to cyclic hormones, bleeds, and triggers inflammation and scarring, which explains the cyclic pain, dyspareunia, and infertility. Definitive diagnosis is usually made by laparoscopy.</div></div>
+<div class="q"><div class="qq">4. A client with pelvic inflammatory disease (PID) asks why the nurse is so concerned about long-term effects. Which complication is the nurse most focused on preventing?</div>
+<button onclick="this.parentNode.classList.add('show')">Reveal answer</button>
+<div class="ans"><span class="a">Infertility and ectopic pregnancy from tubal scarring.</span> PID is infection ascending into the upper reproductive tract (often from untreated chlamydia or gonorrhea); the resulting inflammation scars the fallopian tubes, which can block eggs and cause infertility, ectopic pregnancy, and chronic pelvic pain.</div></div>
+<div class="q"><div class="qq">5. A nurse is teaching a group of young women about cervical cancer prevention. Which statement is most accurate?</div>
+<button onclick="this.parentNode.classList.add('show')">Reveal answer</button>
+<div class="ans"><span class="a">Persistent high-risk HPV infection (especially types 16 and 18) is the main cause, and the HPV vaccine plus regular Pap screening lowers risk.</span> Most cervical cancer is caused by persistent infection with high-risk HPV strains that drive dysplasia over time; vaccination and routine Pap (and HPV) testing catch precancerous changes early, so cervical cancer is largely preventable.</div></div>
+<div class="q"><div class="qq">6. A 45-year-old woman asks about her personal risk for breast cancer. Which factor does the nurse identify as increasing her risk?</div>
+<button onclick="this.parentNode.classList.add('show')">Reveal answer</button>
+<div class="ans"><span class="a">A BRCA1 or BRCA2 gene mutation (or a strong family history).</span> Risk rises with inherited BRCA1/BRCA2 mutations, older age, early menarche or late menopause, nulliparity, and prolonged estrogen exposure; more estrogen exposure over a lifetime fuels growth of hormone-sensitive breast tissue. Average-risk women usually begin mammography screening around age 40 to 50.</div></div>
+<div class="q"><div class="qq">7. A 68-year-old man reports a weak urinary stream, hesitancy, and frequent nighttime urination. His PSA is only mildly elevated and the prostate feels smooth and rubbery. Which condition is most likely?</div>
+<button onclick="this.parentNode.classList.add('show')">Reveal answer</button>
+<div class="ans"><span class="a">Benign prostatic hyperplasia (BPH).</span> BPH is non-cancerous enlargement of the prostate that squeezes the urethra, causing obstructive symptoms like weak stream, hesitancy, and nocturia; the gland is typically smooth, symmetric, and rubbery. A hard, irregular nodule would instead raise concern for prostate cancer.</div></div>
+<div class="q"><div class="qq">8. The nurse is comparing BPH and prostate cancer. Which finding most strongly points toward prostate cancer rather than BPH?</div>
+<button onclick="this.parentNode.classList.add('show')">Reveal answer</button>
+<div class="ans"><span class="a">A hard, irregular, or nodular prostate on digital rectal exam with a significantly elevated PSA.</span> BPH usually enlarges the central prostate smoothly, while prostate cancer often begins in the peripheral zone as a firm, irregular nodule and may cause a higher PSA; bone pain can signal metastasis, since prostate cancer commonly spreads to bone.</div></div>
+<div class="q"><div class="qq">9. A 16-year-old boy arrives with sudden, severe one-sided scrotal pain, nausea, and a high-riding testicle with an absent cremasteric reflex. What is the priority action?</div>
+<button onclick="this.parentNode.classList.add('show')">Reveal answer</button>
+<div class="ans"><span class="a">Treat as testicular torsion and prepare for emergent surgery.</span> Testicular torsion twists the spermatic cord and cuts off blood flow; it is a surgical emergency because the testicle can become nonviable within roughly 6 hours. Rapid detorsion and orchiopexy are needed to save the testis.</div></div>
+<div class="q"><div class="qq">10. A 28-year-old man reports a painless, firm lump on his testicle that he found during self-examination. Which statement reflects correct nursing knowledge?</div>
+<button onclick="this.parentNode.classList.add('show')">Reveal answer</button>
+<div class="ans"><span class="a">A painless testicular mass should be evaluated promptly because it may be testicular cancer.</span> Testicular cancer is the most common solid malignancy in young men (about ages 15 to 35) and typically presents as a painless, firm, unilateral lump; because it is often highly treatable when caught early, any new painless mass warrants prompt evaluation.</div></div>
+<div class="q"><div class="qq">11. A nurse is teaching about chlamydia and gonorrhea. Which statement is accurate?</div>
+<button onclick="this.parentNode.classList.add('show')">Reveal answer</button>
+<div class="ans"><span class="a">Both are often asymptomatic (especially in women) and can ascend to cause PID, so partner treatment and screening are essential.</span> Chlamydia (caused by <em>Chlamydia trachomatis</em>) and gonorrhea (caused by <em>Neisseria gonorrhoeae</em>) frequently cause silent infections; untreated, they can spread to the upper tract and cause PID, infertility, and ectopic pregnancy, which is why sexually active young women are screened routinely and partners are treated.</div></div>
+<div class="q"><div class="qq">12. A client is diagnosed with a painless, firm genital ulcer (chancre) that heals on its own. The nurse recognizes this as which stage of syphilis, and what typically follows if untreated?</div>
+<button onclick="this.parentNode.classList.add('show')">Reveal answer</button>
+<div class="ans"><span class="a">Primary syphilis; without treatment it usually progresses to secondary syphilis.</span> Primary syphilis (caused by the spirochete <em>Treponema pallidum</em>) presents as a painless chancre that heals even without treatment, which can falsely reassure the client. Untreated, it advances to secondary syphilis (rash, often on the palms and soles), then a latent stage, and possibly tertiary syphilis with cardiovascular and neurologic damage years later.</div></div>
+      </div>
+
+      <div class="chapnav">
+        <a href="index.html"><span class="k">Book</span>&larr; All chapters</a>
+        <a class="next" href="appendix.html"><span class="k">Appendix</span>The Arcade &amp; Lab &rarr;</a>
+      </div>
+    </main>
+  </div>
+
+  <footer>
+    A student-friendly pathophysiology guide · by <b>Dr. Akash Garg</b> <br>
+    The interactive figures open in place; tap “Open full ↗” for a full-screen version.
+  </footer>
+
+<script>
+  // reading progress bar
+  var bar=document.getElementById('bar');
+  function prog(){var h=document.documentElement, max=h.scrollHeight-h.clientHeight; bar.style.width=(max>0?(h.scrollTop/max*100):0)+'%';}
+  addEventListener('scroll',prog,{passive:true}); prog();
+  // scroll-spy TOC
+  var links=[].slice.call(document.querySelectorAll('.toc a'));
+  var ids=links.map(function(a){return a.getAttribute('href').slice(1);});
+  var secs=ids.map(function(id){return document.getElementById(id);});
+  function spy(){var y=scrollY+90,cur=0;
+    for(var i=0;i<secs.length;i++){ if(secs[i] && secs[i].offsetTop<=y) cur=i; }
+    links.forEach(function(a,i){a.classList.toggle('on',i===cur);});}
+  addEventListener('scroll',spy,{passive:true}); spy();
+</script>
+
+
+<script src="../flashcards/w12.js"></script>
+<script>
+(function(){
+  var WK="12";
+  var cards=(window.PATHO_CARDS&&window.PATHO_CARDS[WK])||[];
+  var fc=document.getElementById("fc"); if(!fc) return;
+  if(!cards.length){ fc.style.display="none"; return; }
+  var order=cards.map(function(_,i){return i;}), pos=0;
+  function dec(s){return String(s).replace(/&amp;/g,"&").replace(/&lt;/g,"<").replace(/&gt;/g,">").replace(/&nbsp;/g," ");}
+  var card=document.getElementById("fcCard"), q=document.getElementById("fcQ"), a=document.getElementById("fcA"), cnt=document.getElementById("fcCount");
+  function show(){ card.classList.remove("flip"); var c=cards[order[pos]]; q.textContent=dec(c.q); a.textContent=dec(c.a)+(c.exp?"  \u2014  "+dec(c.exp):""); cnt.textContent=(pos+1)+" / "+cards.length; }
+  window.fcFlip=function(){ card.classList.toggle("flip"); };
+  window.fcNext=function(e){ if(e&&e.stopPropagation)e.stopPropagation(); pos=(pos+1)%cards.length; show(); };
+  window.fcPrev=function(e){ if(e&&e.stopPropagation)e.stopPropagation(); pos=(pos-1+cards.length)%cards.length; show(); };
+  window.fcShuffle=function(e){ if(e&&e.stopPropagation)e.stopPropagation(); for(var i=order.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=order[i];order[i]=order[j];order[j]=t;} pos=0; show(); };
+  show();
+})();
+</script>
+<style id="pdfprint">
+.pdf-btn{position:fixed;right:16px;bottom:16px;z-index:400;font-family:'Inter',system-ui,sans-serif;font-weight:700;font-size:13.5px;color:#fff;background:#0c7283;border:none;border-radius:24px;padding:11px 17px;box-shadow:0 6px 20px rgba(12,58,68,.30);cursor:pointer;display:inline-flex;align-items:center;gap:7px;}
+.pdf-btn:hover{background:#0c3a44;}
+@media print{
+ @page{margin:14mm;}
+ html,body{background:#fff !important;}
+ .topbar,.progress,aside,.chapnav,.pdf-btn{display:none !important;}
+ #pbgate{display:none !important;}
+ .layout{display:block !important;max-width:100% !important;padding:0 !important;grid-template-columns:1fr !important;gap:0 !important;}
+ .reading,.reading .col{max-width:100% !important;padding:0 !important;}
+ .embed iframe,.embed .frame{display:none !important;}
+ .embed{margin:14px 0 !important;}
+ .embed .cap{color:#555 !important;font-style:italic;}
+ .embed .cap .tag{background:#0c7283 !important;color:#fff !important;}
+ .embed .cap a{display:none !important;}
+ .bref,.bref .fr{break-inside:avoid;page-break-inside:avoid;box-shadow:none !important;}
+ .bref img{max-height:150mm;width:auto !important;margin:0 auto;}
+ .ctwrap,table.ctable,.pearl,.kp,.q,.objectives,.summary,dl.terms,figure{break-inside:avoid;page-break-inside:avoid;}
+ h1,h2,h3{break-after:avoid;page-break-after:avoid;}
+ .quiz .ans{display:block !important;}
+ .quiz .q button{display:none !important;}
+ a{color:inherit !important;text-decoration:none !important;}
+ *{-webkit-print-color-adjust:exact !important;print-color-adjust:exact !important;}
+ footer{border-top:1px solid #ccc !important;}
+}
+</style>
+<button class="pdf-btn" onclick="window.print()" title="Save this chapter as a PDF">🖨 Save as PDF</button>
+</body>
+</html>

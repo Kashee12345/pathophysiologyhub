@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f7f2ea">
+<title>ABG Interpreter</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{ --card:#fffdf8; --ink:#2a2420; --muted:#7a6f63; --line:#e3d8c6;
+    --sans:'Inter',system-ui,sans-serif; --disp:'Cinzel Decorative',serif; --accent:#5a6a9a;
+    --acid:#c0392b; --alk:#3a6ea5; --norm:#2f8a55; }
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  body{background:linear-gradient(160deg,#eef1f8,#e7e9ee);color:var(--ink);font-family:var(--sans);min-height:100vh;padding:18px 16px 44px;}
+  header{max-width:1120px;margin:0 auto 16px;text-align:center;}
+  h1{font-family:var(--disp);font-weight:900;font-size:clamp(22px,4.2vw,36px);color:#44528a;line-height:1.05;}
+  header .sub{color:var(--muted);font-size:15px;margin-top:4px;}
+  header .intro{max-width:860px;margin:10px auto 0;font-size:14.5px;line-height:1.5;color:#5c5248;}
+  header .intro b{color:#44528a;}
+  .wrap{max-width:1120px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;box-shadow:0 6px 22px rgba(60,70,120,.07);}
+  .card h2{font-family:var(--disp);font-weight:700;font-size:16px;color:#44528a;margin-bottom:6px;}
+  .card h2 + .desc{font-size:13px;color:var(--muted);margin-bottom:10px;line-height:1.4;}
+
+  .inputs{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;}
+  .inp{border:1px solid var(--line);border-radius:11px;padding:10px;text-align:center;background:#fff;}
+  .inp label{display:block;font-size:12px;font-weight:700;color:#44528a;}
+  .inp .ref{font-size:10px;color:var(--muted);margin-bottom:6px;}
+  .inp input{width:100%;border:1px solid var(--line);border-radius:8px;padding:8px;font-family:var(--disp);font-weight:800;font-size:20px;text-align:center;color:#2a2420;background:#fbfaf6;}
+  .inp input:focus{outline:2px solid #9aa8d8;}
+  .presets{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px;}
+  .presets button{border:1px solid var(--line);background:#fff;border-radius:9px;padding:7px 11px;font-size:12px;font-weight:700;color:#5c5248;cursor:pointer;transition:.12s;}
+  .presets button:hover{transform:translateY(-2px);box-shadow:0 4px 11px rgba(60,70,120,.12);}
+  .presets button.norm{border-color:#8fc4a4;color:#2f7d50;}
+
+  .rome{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:14px;}
+  .rc{border:1px solid var(--line);border-radius:11px;padding:10px 8px;text-align:center;background:#fbfaf6;transition:.2s;}
+  .rc .lab{font-size:11px;font-weight:700;color:var(--muted);}
+  .rc .val{font-family:var(--disp);font-weight:800;font-size:19px;margin:2px 0;}
+  .rc .cls{font-size:12px;font-weight:800;border-radius:20px;padding:2px 10px;display:inline-block;}
+  .rc.acid{border-color:var(--acid);} .rc.acid .cls{background:#f6dcd8;color:var(--acid);}
+  .rc.alk{border-color:var(--alk);} .rc.alk .cls{background:#dde8f4;color:var(--alk);}
+  .rc.norm{border-color:var(--norm);} .rc.norm .cls{background:#dcefe2;color:var(--norm);}
+  .rc.match{box-shadow:0 0 0 3px rgba(90,106,154,.28);}
+
+  @keyframes pop{0%{transform:scale(.97)}60%{transform:scale(1.015)}100%{transform:scale(1)}}
+  #result{margin-top:4px;border-radius:14px;padding:16px;text-align:center;color:#fff;animation:pop .3s ease;background:#7a86b0;}
+  #result .dx{font-family:var(--disp);font-weight:900;font-size:clamp(18px,3.4vw,24px);line-height:1.1;}
+  #result .comp{font-size:14px;font-weight:600;margin-top:5px;opacity:.95;}
+  #result.acid{background:linear-gradient(135deg,#c0392b,#9a2a1e);}
+  #result.alk{background:linear-gradient(135deg,#3a6ea5,#2a5080);}
+  #result.norm{background:linear-gradient(135deg,#2f8a55,#227044);}
+
+  .steps{margin-top:12px;font-size:12.5px;line-height:1.6;color:#3a3630;background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px 12px;}
+  .steps b{color:#44528a;}
+  #causes{border:1px solid var(--line);border-left:5px solid var(--accent);background:#eef1f8;border-radius:10px;padding:11px 13px;margin-top:12px;}
+  #causes .h{font-weight:800;font-size:13px;color:#44528a;margin-bottom:5px;}
+  #causes ul{margin:0 0 0 16px;font-size:12.5px;line-height:1.5;color:#3a3630;}
+  #causes .k{margin-top:6px;font-size:12px;color:#5c5248;} #causes .k b{color:#8a3018;}
+  .pearl{background:#eef4fb;border:1px solid #cbdcf0;border-radius:10px;padding:10px 12px;margin-top:12px;font-size:12.4px;line-height:1.5;color:#274d7a;} .pearl b{color:#173b5a;}
+  @media (max-width:880px){ .wrap{grid-template-columns:1fr;} }
+</style>
+</head>
+<body>
+<header>
+  <h1>ABG Interpreter</h1>
+  <div class="sub">Type the numbers — get the answer · Week 1</div>
+  <div class="intro">Enter a blood gas and this tells you the acid-base disorder step by step. It uses the <b>ROME</b> trick: <b>R</b>espiratory = pH and CO₂ move <b>O</b>pposite; <b>M</b>etabolic = pH and HCO₃ move <b>E</b>qual (same way). Try your practice cases with one tap.</div>
+</header>
+
+<div class="wrap">
+  <div>
+    <div class="card">
+      <h2>Enter the values</h2>
+      <div class="desc">Type any ABG, or load a practice case. Normal: pH 7.35–7.45 · CO₂ 35–45 · HCO₃ 22–26.</div>
+      <div class="inputs">
+        <div class="inp"><label>pH</label><div class="ref">7.35–7.45</div><input id="pH" type="number" step="0.01" value="7.40"></div>
+        <div class="inp"><label>PaCO₂</label><div class="ref">35–45 mmHg</div><input id="co2" type="number" step="1" value="40"></div>
+        <div class="inp"><label>HCO₃</label><div class="ref">22–26 mEq/L</div><input id="hco3" type="number" step="1" value="24"></div>
+      </div>
+      <div class="presets" id="presets">
+        <button class="norm" data-p="7.40,40,24">Normal</button>
+        <button data-p="7.29,47,24">Case 1</button>
+        <button data-p="7.25,49,30">Case 2</button>
+        <button data-p="7.31,30,18">Case 3</button>
+        <button data-p="7.48,41,29">Case 4</button>
+      </div>
+      <div class="rome" id="rome">
+        <div class="rc" id="rcPh"><div class="lab">pH</div><div class="val" id="vPh">7.40</div><div class="cls" id="cPh">Normal</div></div>
+        <div class="rc" id="rcCo2"><div class="lab">CO₂ · Respiratory</div><div class="val" id="vCo2">40</div><div class="cls" id="cCo2">Normal</div></div>
+        <div class="rc" id="rcHco3"><div class="lab">HCO₃ · Metabolic</div><div class="val" id="vHco3">24</div><div class="cls" id="cHco3">Normal</div></div>
+      </div>
+      <div class="pearl"><b>How to read it:</b> first decide if the pH is <b>acidotic</b> (&lt;7.35) or <b>alkalotic</b> (&gt;7.45). Then find which column — <b>CO₂</b> or <b>HCO₃</b> — is off in the <i>same</i> direction as the pH. That column is the <b>primary</b> problem. The other column, if abnormal, is <b>compensation</b>.</div>
+    </div>
+  </div>
+  <div>
+    <div class="card">
+      <h2>Interpretation</h2>
+      <div id="result"><div class="dx">Normal ABG</div><div class="comp">everything in range</div></div>
+      <div class="steps" id="steps"></div>
+      <div id="causes"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const $=id=>document.getElementById(id);
+  const CAUSES={
+    'Respiratory acidosis':{list:['Hypoventilation','Pneumonia (fluid in alveoli)','COPD','Opioid overdose'],k:'Patient will have <b>hypercapnia</b> and <b>hyperkalemia</b>.'},
+    'Respiratory alkalosis':{list:['Hyperventilation','Panic attacks','Anxiety, pain, fever'],k:'Patient will have <b>hypocapnia</b> and <b>hypokalemia</b>.'},
+    'Metabolic acidosis':{list:['Increased acid — DKA (ketones)','↓ HCO₃ production — liver/kidney disease','Loss of HCO₃ — severe diarrhea'],k:'Often <b>high anion gap</b> and <b>hyperkalemia</b>. Compensation = <b>Kussmaul</b> breathing.'},
+    'Metabolic alkalosis':{list:['Loss of H⁺ — severe vomiting, NG suction','↑ HCO₃ intake — excess calcium carbonate','Kidney disease'],k:'Patient will have <b>hypokalemia</b>.'}
+  };
+  function classify(pH,co2,hco3){
+    const pHc = pH<7.35?'acid':(pH>7.45?'alk':'normal');
+    const co2c = co2>45?'acid':(co2<35?'alk':'normal');   // high CO2 = acid
+    const hco3c = hco3<22?'acid':(hco3>26?'alk':'normal'); // low HCO3 = acid
+    return {pHc,co2c,hco3c};
+  }
+  function interpret(pH,co2,hco3){
+    const {pHc,co2c,hco3c}=classify(pH,co2,hco3);
+    let primary=null, side=null, comp=null, dx='', compTxt='', kind='norm';
+    if(pHc==='normal'){
+      if(co2c==='normal' && hco3c==='normal'){ return {dx:'Normal ABG',compTxt:'everything in range',kind:'norm',primary:null,pHc,co2c,hco3c}; }
+      // fully compensated: primary matches the side pH leans toward
+      side = pH<7.40? 'acid':'alk';
+      if(co2c===side) primary='Respiratory';
+      else if(hco3c===side) primary='Metabolic';
+      else primary = (co2c!=='normal')?'Respiratory':'Metabolic';
+      kind = side==='acid'?'acid':'alk';
+      dx = primary+' '+(side==='acid'?'acidosis':'alkalosis');
+      compTxt='fully compensated (pH back in range)';
+      return {dx,compTxt,kind,primary:dx,pHc,co2c,hco3c};
+    }
+    side=pHc; kind=pHc;
+    const bothMatch = (co2c===side && hco3c===side);
+    if(bothMatch){
+      dx='Mixed '+(side==='acid'?'acidosis':'alkalosis');
+      return {dx,compTxt:'both respiratory & metabolic in the same direction',kind,primary:null,pHc,co2c,hco3c};
+    }
+    if(co2c===side) primary='Respiratory';
+    else if(hco3c===side) primary='Metabolic';
+    else primary='Respiratory'; // fallback
+    const other = primary==='Respiratory'? hco3c : co2c;
+    comp = (other==='normal')?'uncompensated':'partially compensated';
+    dx = primary+' '+(side==='acid'?'acidosis':'alkalosis');
+    compTxt = comp;
+    return {dx,compTxt,kind,primary:dx,pHc,co2c,hco3c};
+  }
+  function clsLabel(c){ return c==='acid'?'Acidic':(c==='alk'?'Alkalotic':'Normal'); }
+  function setRC(el,valEl,clsEl,val,c,matchSide){
+    $(valEl).textContent=val;
+    $(clsEl).textContent=clsLabel(c);
+    const rc=$(el); rc.className='rc '+(c==='acid'?'acid':c==='alk'?'alk':'norm')+(matchSide&&c===matchSide?' match':'');
+  }
+  function render(){
+    const pH=parseFloat($('pH').value)||0, co2=parseFloat($('co2').value)||0, hco3=parseFloat($('hco3').value)||0;
+    const r=interpret(pH,co2,hco3);
+    const matchSide = (r.pHc==='acid'||r.pHc==='alk')? r.pHc : null;
+    setRC('rcPh','vPh','cPh',pH.toFixed(2),r.pHc,null);
+    setRC('rcCo2','vCo2','cCo2',co2,r.co2c,matchSide);
+    setRC('rcHco3','vHco3','cHco3',hco3,r.hco3c,matchSide);
+    const res=$('result'); res.className=r.kind;
+    res.innerHTML='<div class="dx">'+r.dx+'</div><div class="comp">'+r.compTxt+'</div>';
+    // steps
+    let steps='<b>Step 1 — pH:</b> '+pH.toFixed(2)+' → '+(r.pHc==='acid'?'<span style="color:#c0392b">acidosis</span>':r.pHc==='alk'?'<span style="color:#3a6ea5">alkalosis</span>':'normal')+'.<br>';
+    steps+='<b>Step 2 — CO₂ (lungs):</b> '+co2+' → '+clsLabel(r.co2c)+'.<br>';
+    steps+='<b>Step 3 — HCO₃ (kidneys):</b> '+hco3+' → '+clsLabel(r.hco3c)+'.<br>';
+    if(r.primary && r.dx.indexOf('Mixed')<0 && r.dx!=='Normal ABG'){
+      const primSys = r.dx.indexOf('Respiratory')>=0?'CO₂':'HCO₃';
+      steps+='<b>Step 4 — match:</b> the <b>'+primSys+'</b> matches the pH, so it\'s the <b>primary</b> problem. '+
+        (r.compTxt.indexOf('uncompensated')>=0?'The other value is normal → <b>uncompensated</b>.':r.compTxt.indexOf('fully')>=0?'pH is back in range while both are abnormal → <b>fully compensated</b>.':'The other value is shifting to help → <b>partially compensated</b>.');
+    }
+    $('steps').innerHTML=steps;
+    // causes
+    const cz=CAUSES[r.dx];
+    if(cz){ $('causes').style.display='block'; $('causes').innerHTML='<div class="h">Common causes of '+r.dx+'</div><ul>'+cz.list.map(x=>'<li>'+x+'</li>').join('')+'</ul><div class="k">'+cz.k+'</div>'; }
+    else { $('causes').style.display='none'; }
+  }
+  ['pH','co2','hco3'].forEach(id=>$(id).addEventListener('input',render));
+  document.querySelectorAll('#presets button').forEach(b=>b.addEventListener('click',()=>{
+    const [p,c,h]=b.dataset.p.split(','); $('pH').value=p; $('co2').value=c; $('hco3').value=h; render();
+  }));
+  render();
+})();
+</script>
+</body>
+</html>

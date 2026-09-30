@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0c3a44">
+<title>Appendix — The Arcade &amp; Lab · Pathophysiology · Dr. Akash Garg</title>
+<meta name="description" content="The interactive companion to the pathophysiology book — games to play, interactive lessons to explore, and flashcards to drill, all by Dr. Akash Garg.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500&display=swap" rel="stylesheet">
+<style>
+  :root{ --ink:#22312f; --soft:#4a5a58; --muted:#7c8a88; --faint:#9aa8a6; --line:#e6e2d6;
+    --paper:#faf8f2; --card:#fffdf7; --accent:#0c7283; --accent-dk:#0c3a44; --gold:#b8862f;
+    --serif:"Source Serif 4",Georgia,serif; --disp:"Fraunces",Georgia,serif; --ui:"Inter",system-ui,sans-serif;
+    --shadow:0 1px 3px rgba(20,40,46,.06); }
+  *{box-sizing:border-box;} html{scroll-behavior:smooth;}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--serif);line-height:1.7;-webkit-font-smoothing:antialiased;}
+  a{color:var(--accent);text-decoration:none;}
+  .topbar{border-bottom:1px solid var(--line);position:sticky;top:0;background:rgba(250,248,242,.93);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);z-index:20;}
+  .topbar .row{max-width:900px;margin:0 auto;padding:11px 20px;font-family:var(--ui);font-size:13.5px;font-weight:600;display:flex;gap:16px;}
+  .topbar a{color:var(--soft);} .topbar a:hover{color:var(--accent);}
+
+  .cover{max-width:900px;margin:0 auto;padding:52px 20px 6px;text-align:center;}
+  .cover .kicker{font-family:var(--ui);font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);font-weight:700;}
+  .cover h1{font-family:var(--disp);font-weight:600;font-size:clamp(34px,7vw,56px);line-height:1.03;letter-spacing:-1px;color:var(--accent-dk);margin:14px 0 6px;}
+  .cover .sub{font-family:var(--disp);font-weight:500;font-style:italic;font-size:clamp(17px,3.2vw,22px);color:var(--gold);margin:0;}
+  .cover .lede{max-width:600px;margin:20px auto 0;font-size:18px;line-height:1.6;color:var(--soft);}
+  .rule{width:70px;height:3px;background:linear-gradient(90deg,var(--accent),var(--gold));margin:24px auto 0;border-radius:3px;}
+
+  main{max-width:900px;margin:0 auto;padding:8px 20px 80px;}
+  .sec{margin-top:40px;}
+  .sec h2{font-family:var(--disp);font-weight:600;font-size:24px;color:var(--accent-dk);margin:0 0 4px;display:flex;align-items:center;gap:11px;}
+  .sec h2 .ic{font-size:24px;}
+  .sec .intro{font-size:15.5px;color:var(--muted);margin:0 0 18px;max-width:640px;}
+
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:16px;}
+  .item{display:flex;flex-direction:column;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px;box-shadow:var(--shadow);transition:border-color .15s,transform .15s;}
+  .item:hover{border-color:var(--accent);transform:translateY(-3px);}
+  .item .ic{font-size:30px;line-height:1;}
+  .item h3{font-family:var(--disp);font-weight:600;font-size:19px;color:var(--accent-dk);margin:12px 0 0;line-height:1.15;}
+  .item .tag{font-family:var(--ui);font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--gold);margin-top:5px;}
+  .item p{font-size:14.5px;color:var(--soft);line-height:1.55;margin:10px 0 0;flex:1;}
+  .item .go{align-self:flex-start;margin-top:16px;font-family:var(--ui);font-weight:700;font-size:13.5px;background:var(--accent);color:#fff;border-radius:10px;padding:9px 16px;}
+  .item:hover .go{filter:brightness(1.08);text-decoration:none;}
+  .item .go.dk{background:var(--accent-dk);}
+
+  .feature{display:flex;flex-wrap:wrap;gap:22px;align-items:center;background:var(--accent-dk);color:#eaf3f4;border-radius:18px;padding:26px 28px;}
+  .feature .big{font-size:52px;line-height:1;}
+  .feature .ftx{flex:1;min-width:220px;}
+  .feature h3{font-family:var(--disp);font-weight:600;font-size:22px;color:#fff;margin:0 0 6px;}
+  .feature p{margin:0;font-size:15px;color:#cfe3e5;line-height:1.55;}
+  .feature .go{display:inline-block;margin-top:14px;font-family:var(--ui);font-weight:700;font-size:14px;background:var(--gold);color:#3a2a06;border-radius:10px;padding:11px 20px;}
+  .feature .go:hover{filter:brightness(1.06);text-decoration:none;}
+
+  .backhub{margin-top:44px;text-align:center;font-size:15px;color:var(--muted);background:#f2efe4;border:1px solid #e4ddc8;border-radius:14px;padding:18px 22px;}
+  .backhub a{font-weight:600;}
+  footer{font-family:var(--ui);text-align:center;color:var(--faint);font-size:12.5px;border-top:1px solid var(--line);padding:26px 20px 50px;margin-top:40px;} footer b{color:var(--soft);}
+</style>
+</head>
+<body>
+
+
+  <div class="topbar"><div class="row"><a href="index.html">&larr; Contents</a></div></div>
+
+  <header class="cover">
+    <div class="kicker">Appendix</div>
+    <h1>The Arcade &amp; Lab</h1>
+    <p class="sub">everything interactive that goes with the book</p>
+    <p class="lede">The chapters teach the ideas; this is where you <b>play with them</b>. Games to test yourself under pressure, interactive lessons to poke at the mechanisms, and every flashcard deck in one place.</p>
+    <div class="rule"></div>
+  </header>
+
+  <main>
+    <section class="sec">
+      <h2><span class="ic">🎮</span> Games</h2>
+      <p class="intro">Same pathophysiology, higher stakes. Each one pulls from across the course.</p>
+      <div class="grid">
+        <div class="item">
+          <div class="ic">🏃</div>
+          <h3>The Chase</h3>
+          <div class="tag">Quiz-show · start here</div>
+          <p>Dr. Akash Garg&rsquo;s quiz-show chase. Outrun the Chaser down the board by answering pathophysiology questions from every unit &mdash; one wrong step and it gains on you.</p>
+          <a class="go" href="../games/the-chase.html" target="_blank" rel="noopener">Play →</a>
+        </div>
+        <div class="item">
+          <div class="ic">⚔️</div>
+          <h3>PathoQuest</h3>
+          <div class="tag">Pixel-art RPG</div>
+          <p>A top-down RPG through the body systems. Explore each zone, then face its boss in a 20-question NCLEX-style battle with rationales after every answer.</p>
+          <a class="go" href="../games/pathoquest.html" target="_blank" rel="noopener">Play →</a>
+        </div>
+        <div class="item">
+          <div class="ic">🔎</div>
+          <h3>Medical Mystery</h3>
+          <div class="tag">Clinical sim</div>
+          <p>Play the clinician. Work a patient up from chief complaint through the chart to a diagnosis &mdash; reasoning like you will on the floor, not just recalling facts.</p>
+          <a class="go" href="../games/medical-mystery.html" target="_blank" rel="noopener">Play →</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec">
+      <h2><span class="ic">🧪</span> The Interactive Lab</h2>
+      <p class="intro">The same interactives embedded in the chapters &mdash; browse the whole library, or take a walk inside an artery.</p>
+      <div class="feature">
+        <div class="big">🫀</div>
+        <div class="ftx">
+          <h3>The Lesson Library</h3>
+          <p>Every interactive in one place &mdash; fluids &amp; acid-base, immunity, genetics with Punnett-square calculators, endocrine, brain &amp; nerves, heart, lungs, kidneys, GI, and more. Tap any one and start clicking.</p>
+          <a class="go" href="../patho/lessons.html" target="_blank" rel="noopener">Open the library →</a>
+        </div>
+      </div>
+      <div class="grid" style="margin-top:16px;">
+        <div class="item">
+          <div class="ic">🩻</div>
+          <h3>CoronaryQuest 3D</h3>
+          <div class="tag">3D fly-through</div>
+          <p>Fly <em>inside</em> a coronary artery and turn a dial from a healthy vessel to advancing plaque, rupture, and a heart attack &mdash; then place a stent.</p>
+          <a class="go dk" href="../patho/CoronaryQuest3D.html" target="_blank" rel="noopener">Explore →</a>
+        </div>
+        <div class="item">
+          <div class="ic">🫁</div>
+          <h3>ABG Interpreter</h3>
+          <div class="tag">Calculator</div>
+          <p>Punch in a blood-gas and walk through acidosis vs alkalosis, respiratory vs metabolic, and compensation &mdash; step by step.</p>
+          <a class="go dk" href="../patho/ABGInterpreter.html" target="_blank" rel="noopener">Open →</a>
+        </div>
+        <div class="item">
+          <div class="ic">🧬</div>
+          <h3>Inheritance Patterns</h3>
+          <div class="tag">Punnett squares</div>
+          <p>Build a Punnett square and see dominant, recessive, and X-linked traits play out across a family &mdash; the genetics chapter, made clickable.</p>
+          <a class="go dk" href="../patho/InheritancePatterns.html" target="_blank" rel="noopener">Open →</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec">
+      <h2><span class="ic">🃏</span> Flashcards &amp; Daily Challenge</h2>
+      <p class="intro">Every chapter ends with its own deck &mdash; here they all live together, with self-grading and a fresh 20-question challenge each day.</p>
+      <div class="feature" style="background:linear-gradient(135deg,#0c3a44,#0c7283);">
+        <div class="big">🪔</div>
+        <div class="ftx">
+          <h3>All 13 decks &middot; 900+ cards</h3>
+          <p>Flip through any week, rate yourself <b>Again</b> or <b>Got it</b>, and watch each deck fill up. Then test the whole course with the date-seeded Daily Challenge and keep your streak alive.</p>
+          <a class="go" href="../flashcards.html" target="_blank" rel="noopener">Open flashcards →</a>
+        </div>
+      </div>
+    </section>
+
+    <div class="backhub">
+      Want the interactive lessons, games, and exam prep?
+      They all live on the <a href="../index.html">course hub</a>.
+    </div>
+  </main>
+
+  <footer>A student-friendly pathophysiology guide · by <b>Dr. Akash Garg</b> </footer>
+<style id="pdfprint">
+.pdf-btn{position:fixed;right:16px;bottom:16px;z-index:400;font-family:'Inter',system-ui,sans-serif;font-weight:700;font-size:13.5px;color:#fff;background:#0c7283;border:none;border-radius:24px;padding:11px 17px;box-shadow:0 6px 20px rgba(12,58,68,.30);cursor:pointer;display:inline-flex;align-items:center;gap:7px;}
+.pdf-btn:hover{background:#0c3a44;}
+@media print{
+ @page{margin:14mm;}
+ html,body{background:#fff !important;}
+ .topbar,.progress,aside,.chapnav,.pdf-btn{display:none !important;}
+ #pbgate{display:none !important;}
+ .layout{display:block !important;max-width:100% !important;padding:0 !important;grid-template-columns:1fr !important;gap:0 !important;}
+ .reading,.reading .col{max-width:100% !important;padding:0 !important;}
+ .embed iframe,.embed .frame{display:none !important;}
+ .embed{margin:14px 0 !important;}
+ .embed .cap{color:#555 !important;font-style:italic;}
+ .embed .cap .tag{background:#0c7283 !important;color:#fff !important;}
+ .embed .cap a{display:none !important;}
+ .bref,.bref .fr{break-inside:avoid;page-break-inside:avoid;box-shadow:none !important;}
+ .bref img{max-height:150mm;width:auto !important;margin:0 auto;}
+ .ctwrap,table.ctable,.pearl,.kp,.q,.objectives,.summary,dl.terms,figure{break-inside:avoid;page-break-inside:avoid;}
+ h1,h2,h3{break-after:avoid;page-break-after:avoid;}
+ .quiz .ans{display:block !important;}
+ .quiz .q button{display:none !important;}
+ a{color:inherit !important;text-decoration:none !important;}
+ *{-webkit-print-color-adjust:exact !important;print-color-adjust:exact !important;}
+ footer{border-top:1px solid #ccc !important;}
+}
+</style>
+<button class="pdf-btn" onclick="window.print()" title="Save this chapter as a PDF">🖨 Save as PDF</button>
+</body>
+</html>

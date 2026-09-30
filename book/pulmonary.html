@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0c3a44">
+<title>Pulmonary &mdash; Pathophysiology &middot; Dr. Akash Garg</title>
+<meta name="description" content="A student-friendly, exact pathophysiology chapter on the endocrine system — feedback loops, adrenal, thyroid, diabetes, growth hormone, and ADH — with the concept explained plainly and an interactive to play with in every section.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#22312f; --soft:#4a5a58; --muted:#7c8a88; --faint:#9aa8a6; --line:#e6e2d6;
+    --paper:#faf8f2; --card:#fffdf7; --accent:#0c7283; --accent-dk:#0c3a44; --gold:#b8862f;
+    --serif:"Source Serif 4",Georgia,"Times New Roman",serif; --disp:"Fraunces",Georgia,serif; --ui:"Inter",system-ui,sans-serif;
+    --shadow:0 1px 3px rgba(20,40,46,.06);
+  }
+  *{box-sizing:border-box;} html{scroll-behavior:smooth;}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--serif);font-size:18px;line-height:1.7;-webkit-font-smoothing:antialiased;}
+  a{color:var(--accent);text-decoration:none;} a:hover{text-decoration:underline;}
+
+  /* top bar + progress */
+  .topbar{position:sticky;top:0;z-index:50;background:rgba(250,248,242,.92);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid var(--line);}
+  .topbar .row{max-width:1120px;margin:0 auto;padding:11px 20px;display:flex;align-items:center;gap:14px;font-family:var(--ui);}
+  .topbar a.home{font-size:13.5px;font-weight:600;color:var(--soft);white-space:nowrap;}
+  .topbar a.home:hover{color:var(--accent);text-decoration:none;}
+  .topbar .ct{font-size:13px;color:var(--faint);font-weight:600;margin-left:auto;white-space:nowrap;}
+  .progress{height:3px;background:transparent;} .progress .bar{height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--gold));transition:width .1s;}
+
+  .layout{max-width:1120px;margin:0 auto;padding:0 20px;display:grid;grid-template-columns:230px 1fr;gap:30px;}
+  /* sidebar TOC */
+  aside{font-family:var(--ui);padding-top:34px;}
+  aside .toc{position:sticky;top:74px;}
+  aside .toc h4{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--faint);margin:0 0 12px;font-weight:700;}
+  aside .toc a{display:block;font-size:13.5px;color:var(--soft);padding:6px 10px;border-left:2px solid var(--line);line-height:1.35;}
+  aside .toc a:hover{color:var(--accent);text-decoration:none;border-left-color:var(--accent);}
+  aside .toc a.on{color:var(--accent-dk);font-weight:700;border-left-color:var(--gold);background:#f3efe3;border-radius:0 8px 8px 0;}
+
+  .reading{max-width:1040px;padding:30px 0 70px;min-width:0;}
+  .reading .col{max-width:718px;}
+  /* opener */
+  .kicker{font-family:var(--ui);font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);font-weight:700;}
+  h1{font-family:var(--disp);font-weight:600;font-size:clamp(32px,5.2vw,46px);line-height:1.08;letter-spacing:-.5px;color:var(--accent-dk);margin:10px 0 6px;max-width:718px;}
+  .lede{font-size:20px;line-height:1.6;color:var(--soft);max-width:718px;margin:14px 0 0;}
+  h2{font-family:var(--disp);font-weight:600;font-size:27px;letter-spacing:-.3px;color:var(--accent-dk);margin:52px 0 4px;scroll-margin-top:70px;max-width:718px;}
+  h2 .num{font-family:var(--ui);font-size:13px;font-weight:700;color:var(--gold);letter-spacing:1px;display:block;margin-bottom:4px;text-transform:uppercase;}
+  h3{font-family:var(--disp);font-weight:600;font-size:20px;color:var(--accent-dk);margin:26px 0 2px;max-width:718px;}
+  p{margin:14px 0;max-width:718px;} p b,li b{color:var(--accent-dk);font-weight:600;}
+  .reading ul,.reading ol{max-width:718px;padding-left:24px;} .reading li{margin:7px 0;}
+
+  .objectives{max-width:718px;background:#f2efe4;border:1px solid #e4ddc8;border-radius:14px;padding:18px 22px;margin:24px 0;font-family:var(--ui);}
+  .objectives h4{margin:0 0 8px;font-size:12px;letter-spacing:1px;text-transform:uppercase;color:var(--gold);font-weight:700;}
+  .objectives ul{margin:0;padding-left:20px;} .objectives li{font-size:14.5px;line-height:1.5;color:var(--soft);margin:6px 0;font-family:var(--serif);}
+
+  .kp{max-width:718px;background:#eef5f6;border:1px solid #d3e5e7;border-left:5px solid var(--accent);border-radius:0 12px 12px 0;padding:14px 20px;margin:22px 0;font-family:var(--ui);}
+  .kp .t{font-size:11.5px;letter-spacing:1px;text-transform:uppercase;color:var(--accent-dk);font-weight:700;margin-bottom:6px;}
+  .kp ul{margin:0;padding-left:18px;} .kp li{font-size:14.5px;line-height:1.55;color:var(--ink);margin:5px 0;font-family:var(--serif);}
+  .pearl{max-width:718px;background:#fbf3e2;border:1px solid #ecd9ac;border-left:5px solid var(--gold);border-radius:0 12px 12px 0;padding:13px 20px;margin:22px 0;font-family:var(--serif);font-size:15px;line-height:1.6;color:#6a5320;}
+  .pearl b{color:#5a4212;}
+
+  /* interactive embed (breaks out wider than prose) */
+  .embed{max-width:1040px;margin:26px 0 30px;}
+  .embed .cap{font-family:var(--ui);font-size:12.5px;font-weight:600;color:var(--muted);margin:0 0 8px;display:flex;align-items:center;gap:8px;}
+  .embed .cap .tag{background:var(--accent);color:#fff;font-size:10.5px;letter-spacing:.5px;text-transform:uppercase;font-weight:700;padding:3px 9px;border-radius:20px;}
+  .embed .frame{border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:0 8px 26px rgba(20,40,46,.09);background:#fff;}
+  .embed iframe{display:block;width:100%;height:640px;border:0;}
+  .embed .cap a{font-family:var(--ui);margin-left:auto;font-size:12.5px;font-weight:600;}
+
+  /* summary + quiz */
+  .summary{max-width:718px;background:var(--accent-dk);color:#eaf3f4;border-radius:16px;padding:24px 26px;margin:50px 0 30px;font-family:var(--serif);}
+  .summary h2{color:#fff;margin:0 0 6px;font-size:24px;}
+  .summary ul{margin:10px 0 0;padding-left:20px;} .summary li{margin:8px 0;font-size:15.5px;line-height:1.55;color:#dcebec;}
+  .summary li b{color:#fff;}
+  .quiz{max-width:718px;margin:36px 0;}
+  .quiz h2{margin-top:0;}
+  .q{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 20px;margin:12px 0;box-shadow:var(--shadow);}
+  .q .qq{font-weight:600;color:var(--accent-dk);font-family:var(--serif);}
+  .q button{margin-top:10px;font-family:var(--ui);font-size:13px;font-weight:700;color:var(--accent);background:#eef5f6;border:1px solid #d3e5e7;border-radius:20px;padding:7px 15px;cursor:pointer;}
+  .q button:hover{background:#e2eff0;}
+  .q .ans{display:none;margin-top:12px;padding-top:12px;border-top:1px dashed var(--line);font-size:15.5px;color:var(--soft);}
+  .q .ans .a{font-weight:700;color:var(--accent-dk);}
+  .q.show .ans{display:block;} .q.show button{display:none;}
+
+  .chapnav{max-width:718px;display:flex;justify-content:space-between;gap:12px;margin:44px 0 0;font-family:var(--ui);}
+  .chapnav a,.chapnav span{flex:1;border:1px solid var(--line);border-radius:12px;padding:14px 16px;font-size:13.5px;background:var(--card);}
+  .chapnav a{color:var(--accent-dk);font-weight:600;} .chapnav a:hover{border-color:var(--accent);text-decoration:none;}
+  .chapnav .k{display:block;font-size:11px;color:var(--faint);text-transform:uppercase;letter-spacing:.5px;margin-bottom:2px;}
+  .chapnav .next{text-align:right;} .chapnav .disabled{color:var(--faint);}
+
+  footer{font-family:var(--ui);text-align:center;color:var(--faint);font-size:12.5px;border-top:1px solid var(--line);padding:26px 20px 50px;margin-top:30px;}
+  footer b{color:var(--soft);}
+
+  @media(max-width:860px){
+    .layout{grid-template-columns:1fr;gap:0;}
+    aside{padding-top:16px;} aside .toc{position:static;}
+    aside .toc{border:1px solid var(--line);border-radius:12px;padding:12px 14px;background:var(--card);}
+    aside .toc a{border-left:none;padding:6px 4px;}
+    aside .toc a.on{background:none;}
+    .reading{padding-top:16px;}
+    .embed iframe{height:660px;}
+  }
+
+  /* comparison tables */
+  .ctwrap{max-width:718px;overflow-x:auto;margin:22px 0;-webkit-overflow-scrolling:touch;}
+  table.ctable{border-collapse:collapse;width:100%;min-width:520px;font-family:var(--ui);font-size:14px;background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden;}
+  table.ctable th,table.ctable td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);vertical-align:top;line-height:1.45;}
+  table.ctable thead th{background:#eef5f6;color:var(--accent-dk);font-weight:700;font-size:12.5px;letter-spacing:.3px;}
+  table.ctable tbody tr:last-child td{border-bottom:none;}
+  table.ctable td:first-child,table.ctable th:first-child{font-weight:600;color:var(--soft);white-space:nowrap;}
+  table.ctable td b{color:var(--accent-dk);font-weight:600;}
+  /* glossary */
+  dl.terms{max-width:718px;margin:18px 0;}
+  dl.terms dt{font-family:var(--ui);font-weight:700;color:var(--accent-dk);font-size:15px;margin-top:15px;}
+  dl.terms dd{margin:3px 0 0;color:var(--soft);}
+  /* flashcard drill widget */
+  .fc{max-width:718px;margin:20px 0;}
+  .fc-card{perspective:1600px;height:236px;cursor:pointer;margin-bottom:14px;}
+  .fc-inner{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform .55s cubic-bezier(.4,.2,.2,1);}
+  .fc-card.flip .fc-inner{transform:rotateY(180deg);}
+  .fc-face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border:1px solid var(--line);border-radius:16px;padding:26px 30px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:12px;box-shadow:0 8px 26px rgba(20,40,46,.09);overflow:auto;}
+  .fc-front{background:linear-gradient(180deg,#fffdf7,#eef5f6);}
+  .fc-back{background:linear-gradient(180deg,#fbf3e2,#f3e6c9);transform:rotateY(180deg);border-color:#e6d3a6;}
+  .fc-side{position:absolute;top:12px;left:16px;font-family:var(--ui);font-size:10px;font-weight:800;letter-spacing:1.3px;text-transform:uppercase;color:var(--faint);}
+  .fc-back .fc-side{color:var(--gold);}
+  .fc-q{font-family:var(--disp);font-weight:600;font-size:19px;line-height:1.35;color:var(--accent-dk);}
+  .fc-a{font-family:var(--serif);font-weight:600;font-size:17px;line-height:1.45;color:var(--ink);}
+  .fc-hint{position:absolute;bottom:11px;left:0;right:0;font-family:var(--ui);font-size:11.5px;color:var(--faint);}
+  .fc-nav{display:flex;gap:9px;align-items:center;}
+  .fc-count{flex:1;text-align:center;font-family:var(--ui);font-size:13px;color:var(--muted);font-weight:600;}
+  .fc-btn{font-family:var(--ui);font-size:13px;font-weight:700;color:var(--accent);background:#eef5f6;border:1px solid #d3e5e7;border-radius:20px;padding:8px 13px;cursor:pointer;}
+  .fc-btn:hover{background:#e2eff0;}
+  .fc-full{display:block;margin-top:14px;text-align:center;font-family:var(--ui);font-size:13.5px;font-weight:700;background:var(--accent-dk);color:#eaf3f4;border-radius:12px;padding:12px;}
+  .fc-full:hover{text-decoration:none;filter:brightness(1.12);}
+</style>
+</head>
+<body>
+
+
+  <div class="topbar">
+    <div class="row">
+      <a class="home" href="index.html">📖 Contents</a>
+      
+      <span class="ct">Week 10 · Pulmonary</span>
+    </div>
+    <div class="progress"><div class="bar" id="bar"></div></div>
+  </div>
+
+  <div class="layout">
+    <aside>
+      <nav class="toc">
+        <h4>In this chapter</h4>
+        <a href="#w10_vq" class="on">1 · Ventilation &amp; V/Q</a>
+        <a href="#w10_copd">2 · COPD</a>
+        <a href="#w10_asthma">3 · Asthma</a>
+        <a href="#w10_pe">4 · Pulmonary embolism</a>
+        <a href="#w10_pna">5 · Pneumonia</a>
+        <a href="#w10_sounds">6 · Lung sounds</a>
+        <a href="#summary">The chapter in one breath</a>
+        <a href="#glossary">Words worth knowing</a>
+        <a href="#cards">Flashcards</a>
+        <a href="#quiz">Check yourself</a>
+      </nav>
+    </aside>
+
+    <main class="reading">
+      <div class="kicker">Pathophysiology · Week 10</div>
+      <h1>Pulmonary</h1>
+      <p class="lede">Every cell in the body runs on oxygen, and the lungs are where it gets in and carbon dioxide gets out. This chapter follows a breath from the air to the bloodstream and back &mdash; how <b>ventilation and perfusion</b> must match, what happens when airways narrow or a clot lodges, and how to read the story in a patient&rsquo;s <b>lung sounds</b>.</p>
+      <div class="objectives">
+        <h4>By the end of this chapter you can</h4>
+        <ul>
+          <li>Explain ventilation, perfusion, and <b>V/Q mismatch</b> (dead space vs shunt).</li>
+          <li>Contrast chronic bronchitis with emphysema in <b>COPD</b>.</li>
+          <li>Describe the three problems in <b>asthma</b> and rescue vs controller inhalers.</li>
+          <li>Recognize a <b>pulmonary embolism</b> and its setup (Virchow&rsquo;s triad).</li>
+          <li>Match lung sounds (crackles, wheezes, stridor) to their causes.</li>
+        </ul>
+      </div>
+
+      <h2 id="w10_vq"><span class="num">Section 1</span>How breathing works: ventilation, perfusion &amp; V/Q</h2>
+<figure class="bref" data-sec="1" style="max-width:1040px;margin:10px 0 24px;padding:0;"><div style="border:1px solid #e6e2d6;border-radius:16px;overflow:hidden;background:#fffdf7;box-shadow:0 8px 26px rgba(20,40,46,.09);"><img src="img/pulmonary_s1.jpg" alt="Ventilation & V/Q reference figure" loading="lazy" style="display:block;width:100%;height:auto;background:#fff;" onerror="this.closest('figure').style.display='none'"></div><figcaption style="font-family:Inter,system-ui,sans-serif;font-size:12.5px;color:#7c8a88;margin-top:8px;line-height:1.5;"><b style="color:#0c3a44;">Reference.</b> Ventilation & V/Q <span style="color:#9aa8a6;">&mdash; Hellerhoff, CC BY-SA 4.0 (via Wikimedia Commons)</span></figcaption></figure>
+
+
+      <p>Every breath you take is really two jobs happening at once, and they have to be perfectly coordinated. <b>Ventilation</b> is the movement of air in and out of the lungs, delivering fresh oxygen to the tiny air sacs called <b>alveoli</b> and carrying carbon dioxide away. <b>Perfusion</b> is the flow of blood through the <b>pulmonary capillaries</b> that wrap around those alveoli. Think of it like a delivery system: ventilation brings the packages (oxygen) to the loading dock, and perfusion is the truck fleet that picks them up. If the packages arrive but no trucks show up, or the trucks show up but there are no packages, the whole system stalls. For gas exchange to work, air and blood must meet at the <em>same place, at the same time</em>.</p>
+
+<h3>Matching air to blood: the V/Q ratio</h3>
+<p>Nurses describe how well ventilation and perfusion line up using the <b>V/Q ratio</b>, where V is ventilation and Q is perfusion (blood flow). In an ideal, healthy lung the overall ratio is about <b>0.8</b> usually, because we perfuse a touch more than we ventilate. That number is not the same everywhere in the lung, though. Because of gravity, the <em>bases</em> (bottoms) of the lungs get more blood flow, while the <em>apices</em> (tops) get relatively more air, so the ratio naturally varies from top to bottom. What matters clinically is that when air and blood are reasonably balanced, oxygen crosses into the blood and carbon dioxide is blown off efficiently. When they fall out of balance, we call it a <b>V/Q mismatch</b>, and it comes in two flavors.</p>
+
+<h3>Two ways it goes wrong: dead space and shunt</h3>
+<p>A high V/Q means ventilation without matching perfusion. The air arrives, but no blood is there to pick up the oxygen. This wasted ventilation is called <b>dead space</b>. The classic cause is a <b>pulmonary embolism</b>, where a clot blocks a pulmonary artery. The alveoli fill with air, but the blood truck never arrives.</p>
+<p>A low V/Q means perfusion without matching ventilation. Blood keeps flowing past alveoli that are not getting fresh air, so it returns to the heart still low on oxygen. This is called a <b>shunt</b>. Think <b>pneumonia</b> filling alveoli with pus, <b>pulmonary edema</b> flooding them with fluid, or <b>atelectasis</b> (collapsed alveoli). One clinical clue: pure shunt often responds <em>poorly</em> to supplemental oxygen, because the extra oxygen cannot reach blood flowing past blocked alveoli.</p>
+
+<div class="ctwrap"><table class="ctable"><thead><tr><th>Feature</th><th>Dead space (high V/Q)</th><th>Shunt (low V/Q)</th></tr></thead><tbody><tr><td>What is missing</td><td>Perfusion (blood flow)</td><td>Ventilation (air)</td></tr><tr><td>Plain-English picture</td><td>Air arrives, no blood to load it</td><td>Blood arrives, no fresh air to load</td></tr><tr><td>Classic cause</td><td>Pulmonary embolism</td><td>Pneumonia, pulmonary edema, atelectasis</td></tr><tr><td>Response to oxygen</td><td>Limited (no blood flow there)</td><td>Poor (air cannot reach the blood)</td></tr></tbody></table></div>
+
+<div class="pearl"><b>A quick memory hook.</b> Dead space = <em>dead-end for blood</em> (a clot blocks the vessel). Shunt = air is <em>shut</em> out of the alveolus (fluid, pus, or collapse). Both lower the oxygen in the blood, but for opposite reasons.</div>
+
+<h3>Gas exchange across the alveolar membrane</h3>
+<p>Where air and blood actually meet is the <b>alveolar-capillary membrane</b>, an incredibly thin barrier just a few cells thick. Gases cross it by <b>diffusion</b>, always moving from high pressure to low pressure. Oxygen is more concentrated in the alveolus than in the incoming blood, so it diffuses <em>into</em> the blood; carbon dioxide is more concentrated in the blood, so it diffuses <em>out</em> into the alveolus to be exhaled. Anything that thickens this membrane (fluid, scar tissue, inflammation) slows diffusion and worsens gas exchange, even when ventilation and perfusion are otherwise present.</p>
+
+<h3>Hypoxemia vs hypoxia, and how oxygen travels</h3>
+<p>These two words sound alike but mean different things, and nursing exams love to test the difference. <b>Hypoxemia</b> is low oxygen level <em>in the blood</em> (measured as a low PaO2 on an arterial blood gas or a low SpO2 on the pulse oximeter). <b>Hypoxia</b> is low oxygen reaching the <em>tissues</em> themselves. They often travel together, but not always. Severe anemia, for example, can cause tissue hypoxia even when the blood oxygen level (PaO2) looks normal, because there simply are not enough carriers to deliver it.</p>
+<p>And those carriers are the key to the whole system: about <b>97 percent</b> of oxygen in the blood rides bound to <b>hemoglobin</b> inside red blood cells, with only a tiny fraction dissolved in plasma. Explore the figure below to see ventilation, perfusion, and V/Q matching working together.</p>
+
+<div class="pearl"><b>Watch the trend, not just one number.</b> A pulse oximeter reads hemoglobin saturation (SpO2), so it can look reassuring even when oxygen delivery is failing, as in anemia or carbon monoxide poisoning. Always pair the number with how the patient actually looks and breathes.</div>
+
+      <div class="embed">
+        <div class="cap"><span class="tag">Interactive</span> Match air and blood flow, and see what a V/Q mismatch does. <a href="../patho/RespirationVQ.html" target="_blank" rel="noopener">Open full &uarr;</a></div>
+        <div class="frame"><iframe src="../patho/RespirationVQ.html" loading="lazy" title="Ventilation-perfusion interactive"></iframe></div>
+      </div>
+      <div class="kp"><div class="t">Key points</div><ul><li><b>Ventilation</b> (air in and out) and <b>perfusion</b> (blood flow past alveoli) must match at the same place and time for gas exchange to work; the normal <b>V/Q ratio</b> is about 0.8.</li><li><b>Dead space</b> is ventilation without perfusion (high V/Q, classic cause pulmonary embolism); <b>shunt</b> is perfusion without ventilation (low V/Q, classic causes pneumonia, edema, atelectasis).</li><li>Gases cross the thin <b>alveolar-capillary membrane</b> by <b>diffusion</b> from high to low pressure; a thickened membrane slows oxygen uptake.</li><li><b>Hypoxemia</b> is low oxygen in the blood; <b>hypoxia</b> is low oxygen in the tissues, and they do not always occur together.</li><li>About 97 percent of oxygen is carried bound to <b>hemoglobin</b>, so oxygen delivery depends on carriers, not just lung function.</li></ul></div>
+
+      <h2 id="w10_copd"><span class="num">Section 2</span>Obstructive disease: COPD</h2>
+<figure class="bref" data-sec="2" style="max-width:1040px;margin:10px 0 24px;padding:0;"><div style="border:1px solid #e6e2d6;border-radius:16px;overflow:hidden;background:#fffdf7;box-shadow:0 8px 26px rgba(20,40,46,.09);"><img src="img/pulmonary_s2.jpg" alt="COPD reference figure" loading="lazy" style="display:block;width:100%;height:auto;background:#fff;" onerror="this.closest('figure').style.display='none'"></div><figcaption style="font-family:Inter,system-ui,sans-serif;font-size:12.5px;color:#7c8a88;margin-top:8px;line-height:1.5;"><b style="color:#0c3a44;">Reference.</b> COPD <span style="color:#9aa8a6;">&mdash; NIH Image Gallery from Bethesda, Maryland, USA, Public domain (via Wikimedia Commons)</span></figcaption></figure>
+
+
+      <p>Every time you breathe, air travels down your windpipe, splits into smaller and smaller tubes (the <b>bronchi</b> and <b>bronchioles</b>), and finally reaches millions of tiny balloon-like sacs called <b>alveoli</b>. This is where oxygen slips into the blood and carbon dioxide slips out. Two things make this work: the airways must stay <em>open</em>, and the lung tissue must be <em>springy</em>. That springiness, called <b>elastic recoil</b>, is what quietly squeezes air back out when you exhale. Normal exhalation is passive and effortless.</p>
+
+<p>In <b>chronic obstructive pulmonary disease (COPD)</b>, that easy exhale breaks down. The airways narrow and the springiness is lost, so air flows in but gets <em>stuck</em> on the way out. Think of COPD as a disease of getting air <b>OUT</b>, not in. Stale air piles up behind the blockage, a problem called <b>air trapping</b>, and the lungs stay over-inflated. This is why patients often push air out through pursed lips and why their exhale takes so long.</p>
+
+<h3>Why air gets trapped</h3>
+<p>COPD is really two overlapping problems, and most patients have some of each.</p>
+<p><b>Chronic bronchitis</b> is an airway problem. Long-term irritation inflames the bronchial lining, so it swells and the mucus glands grow larger and pump out thick secretions. The airway is now narrowed by both swelling and mucus, and the tiny sweeping hairs (<b>cilia</b>) that clear that mucus are damaged. Mucus sits and grows bacteria, so infections keep coming. It is defined clinically by a <b>a chronic productive cough for at least 3 months in each of 2 consecutive years</b>.</p>
+<p><b>Emphysema</b> is a tissue problem. The walls between alveoli are destroyed and merge into fewer, larger, floppy sacs. That destroys surface area for gas exchange <em>and</em> destroys the elastic recoil that normally props the small airways open and drives exhalation. Without that support, airways collapse on exhale and trap air even more.</p>
+
+<div class="ctwrap"><table class="ctable"><thead><tr><th>Feature</th><th>Chronic bronchitis (blue bloater)</th><th>Emphysema (pink puffer)</th></tr></thead><tbody>
+<tr><td>Core problem</td><td>Inflamed, mucus-clogged airways</td><td>Destroyed alveolar walls, lost recoil</td></tr>
+<tr><td>Classic look</td><td>Cyanotic, often overweight, edematous</td><td>Thin, barrel chest, leaning forward</td></tr>
+<tr><td>Cough &amp; mucus</td><td>Heavy productive cough</td><td>Minimal cough, little sputum</td></tr>
+<tr><td>Oxygen level</td><td>Lower early (hypoxemia, blue tint)</td><td>Kept closer to normal by fast breathing</td></tr>
+<tr><td>Breathing style</td><td>Wet, congested</td><td>Pursed-lip, working hard to exhale</td></tr>
+</tbody></table></div>
+
+<p>The nicknames are memory hooks, not real patient types. The <em>blue bloater</em> is cyanotic and puffy from fluid backup; the <em>pink puffer</em> stays pinker by breathing fast and hard. The over-inflated, air-trapped chest that becomes rounded and rigid is called a <b>barrel chest</b> (an increased anteroposterior diameter).</p>
+
+<h3>The leading cause</h3>
+<p><b>Cigarette smoking</b> is by far the number-one cause. Smoke keeps the airways inflamed and floods the lung with enzymes that digest alveolar walls, while overwhelming the body's natural defense against those enzymes. Over years, this drives both the bronchitis and the emphysema. (A smaller group inherits <b>alpha-1 antitrypsin deficiency</b>, which removes that natural defense and causes emphysema even in nonsmokers.) Quitting smoking is the single most powerful thing that slows the disease.</p>
+
+<h3>When the strain reaches the heart</h3>
+<p>Chronically low oxygen in the lungs makes lung blood vessels clamp down (<b>hypoxic pulmonary vasoconstriction</b>). That raises pressure in the pulmonary arteries (<b>pulmonary hypertension</b>), and the right side of the heart must pump against it. Over time the right ventricle enlarges and fails, a condition called <b>cor pulmonale</b>. Nurses see this as jugular vein distension, liver enlargement, and <b>peripheral edema</b>, which is part of why the blue bloater looks swollen.</p>
+
+<div class="pearl"><b>Oxygen is a medication, not a comfort.</b> In advanced COPD, in some patients extra oxygen can worsen carbon dioxide retention (through V/Q mismatch and the Haldane effect). Oxygen is therefore titrated to a target SpO2 of about 88 to 92 percent - but it is never withheld from a hypoxemic patient out of fear of removing a drive to breathe. Titrate to the ordered target, usually an <b>SpO2 around 88 to 92 percent</b>, and watch for rising drowsiness or confusion.</div>
+
+<p>You can explore how the clogged airway and the destroyed alveoli differ in the interactive figure below.</p>
+
+<div class="pearl"><b>Watch the exhale, not just the inhale.</b> A prolonged expiratory phase, pursed-lip breathing, and a barrel chest all point to air trapping. Teaching pursed-lip breathing actually helps by holding the airways open longer so trapped air can escape.</div>
+
+      <div class="embed">
+        <div class="cap"><span class="tag">Interactive</span> Compare chronic bronchitis and emphysema. <a href="../patho/COPD.html" target="_blank" rel="noopener">Open full &uarr;</a></div>
+        <div class="frame"><iframe src="../patho/COPD.html" loading="lazy" title="COPD interactive"></iframe></div>
+      </div>
+      <div class="kp"><div class="t">Key points</div><ul>
+<li>COPD is trouble getting air <b>OUT</b>: narrowed airways and lost elastic recoil cause <b>air trapping</b> and a prolonged, labored exhale.</li>
+<li><b>Chronic bronchitis</b> is inflamed, mucus-filled airways (productive cough, blue bloater); <b>emphysema</b> is destroyed alveolar walls with lost recoil (barrel chest, pink puffer).</li>
+<li><b>Smoking</b> is the leading cause and quitting is the most effective way to slow progression.</li>
+<li>Chronic hypoxia and pulmonary hypertension can strain the right heart into <b>cor pulmonale</b> (edema, JVD).</li>
+<li>Give oxygen carefully, usually targeting <b>SpO2 88 to 92 percent</b>, since very high-flow O2 can worsen CO2 retention.</li>
+</ul></div>
+
+      <h2 id="w10_asthma"><span class="num">Section 3</span>Asthma</h2>
+<figure class="bref" data-sec="3" style="max-width:1040px;margin:10px 0 24px;padding:0;"><div style="border:1px solid #e6e2d6;border-radius:16px;overflow:hidden;background:#fffdf7;box-shadow:0 8px 26px rgba(20,40,46,.09);"><img src="img/pulmonary_s3.jpg" alt="Asthma reference figure" loading="lazy" style="display:block;width:100%;height:auto;background:#fff;" onerror="this.closest('figure').style.display='none'"></div><figcaption style="font-family:Inter,system-ui,sans-serif;font-size:12.5px;color:#7c8a88;margin-top:8px;line-height:1.5;"><b style="color:#0c3a44;">Reference.</b> Asthma <span style="color:#9aa8a6;">&mdash; BruceBlaus, CC BY-SA 4.0 (via Wikimedia Commons)</span></figcaption></figure>
+
+
+      <p>Take a slow breath in. Air rushes down your windpipe, splits into two <b>bronchi</b>, then branches again and again into ever-smaller <b>bronchioles</b> before reaching the tiny air sacs where gas exchange happens. Those small airways are wrapped in a thin layer of smooth muscle, lined with a moist membrane, and are supposed to stay <em>open and springy</em> so air moves in and out with almost no effort. In a healthy lung, breathing out is passive and quiet: the airways stay wide, and the air leaves easily.</p>
+
+<p>In <b>asthma</b>, those small airways become hyperreactive. They overreact to things that should be harmless, and the airway narrows. The key word for asthma is <b>reversible</b> obstruction: unlike the fixed damage of emphysema, an asthma attack can open back up with treatment or even on its own. But while it is happening, air gets trapped, and the person has to work hard to move it.</p>
+
+<h3>Three problems at once</h3>
+<p>An asthma attack is not one thing going wrong; it is <em>three</em> processes hitting the airway together, which is why it can escalate fast.</p>
+<ul>
+<li><b>Bronchospasm.</b> The ring of smooth muscle around the bronchioles squeezes and tightens, physically narrowing the tube. This is the fast part, and it is what rescue inhalers target.</li>
+<li><b>Airway inflammation.</b> The lining swells (edema) as immune cells release <b>histamine</b>, leukotrienes, and other mediators. A swollen wall makes an already-narrow tube even tighter.</li>
+<li><b>Mucus.</b> Irritated airways pump out thick mucus that clogs the passage from the inside.</li>
+</ul>
+<p>Muscle squeeze plus swollen walls plus mucus plugs equals a much smaller opening for the same amount of air. Explore the interactive figure below to see how the bronchospasm and inflammation stack up.</p>
+
+<h3>What sets it off</h3>
+<p>Asthma airways are twitchy, and different people have different <b>triggers</b>. Common ones include <b>allergens</b> (pollen, dust mites, pet dander, mold), <b>exercise</b> (especially in dry air), <b>cold air</b>, respiratory <b>infections</b> like the common cold, cigarette smoke, and strong odors or air pollution. Part of good asthma care is helping the patient identify and avoid their personal triggers.</p>
+
+<h3>Why it sounds the way it does</h3>
+<p>When air is forced through those narrowed airways, it makes a high-pitched musical whistle called a <b>wheeze</b>, classically heard on <em>expiration</em>. Here is the mechanism that trips up new nurses: getting air <em>in</em> is easier than getting it <em>out</em>. Breathing in naturally widens the airways; breathing out lets them collapse a little. So air gets trapped, and you see <b>prolonged expiration</b> (a long, labored breath out) as the patient struggles to empty their lungs.</p>
+
+<div class="pearl"><b>A silent chest is an emergency, not an improvement.</b> Wheezing needs enough airflow to make noise. If a struggling asthmatic suddenly goes quiet, it usually means so little air is moving that there is nothing left to wheeze with. This ominous <em>silent chest</em>, along with rising fatigue and a falling oxygen level, signals impending respiratory failure. Get help now.</div>
+
+<h3>The two inhalers</h3>
+<p>Patients often carry two inhalers that do very different jobs, and confusing them is dangerous.</p>
+<div class="ctwrap"><table class="ctable"><thead><tr><th>Feature</th><th>Rescue (reliever)</th><th>Controller (preventer)</th></tr></thead><tbody>
+<tr><td>Drug class</td><td>Short-acting beta-agonist (SABA), e.g. albuterol</td><td>Inhaled corticosteroid (ICS)</td></tr>
+<tr><td>What it does</td><td>Relaxes bronchial smooth muscle fast (bronchodilation)</td><td>Reduces underlying airway inflammation over time</td></tr>
+<tr><td>When to use</td><td>During an attack, for quick relief</td><td>Every day, even when feeling well</td></tr>
+<tr><td>Onset</td><td>Minutes</td><td>Days to weeks of regular use</td></tr>
+</tbody></table></div>
+<p>The rescue inhaler opens the muscle spasm in minutes but does <em>nothing</em> for the inflammation. The controller quiets the inflammation but is <em>useless</em> in a sudden attack. A patient reaching for their rescue inhaler more and more often is a red flag that their disease is poorly controlled.</p>
+
+<div class="pearl"><b>Steady your patient, then their breathing.</b> Sitting upright, pursed-lip breathing, and calm coaching all reduce the panic that worsens bronchospasm. Anxiety and air hunger feed each other.</div>
+
+<h3>When it will not break: status asthmaticus</h3>
+<p><b>Status asthmaticus</b> is a severe, prolonged attack that does <em>not</em> respond to the usual rescue treatment. It is a medical emergency. The patient tires out, gas exchange fails, and carbon dioxide climbs. Watch for the silent chest, use of accessory muscles, a rising respiratory rate that then slows as they fatigue, cyanosis, and a rising <b>PaCO2</b> on blood gas (a dangerous sign, because a tiring asthmatic should normally be blowing off CO2, not retaining it). These patients need aggressive care and often intensive monitoring.</p>
+
+      <div class="embed">
+        <div class="cap"><span class="tag">Interactive</span> Trigger an asthma attack and watch the airway narrow. <a href="../patho/Asthma.html" target="_blank" rel="noopener">Open full &uarr;</a></div>
+        <div class="frame"><iframe src="../patho/Asthma.html" loading="lazy" title="Asthma interactive"></iframe></div>
+      </div>
+      <div class="kp"><div class="t">Key points</div><ul>
+<li>Asthma is <b>reversible</b> airway obstruction driven by three things at once: <b>bronchospasm</b>, <b>inflammation/edema</b>, and <b>mucus</b>.</li>
+<li>Common triggers include allergens, exercise, cold air, and respiratory infections.</li>
+<li>Expect <b>wheezing</b> and <b>prolonged expiration</b>; a <em>silent chest</em> means almost no air is moving and is an ominous emergency sign.</li>
+<li>Rescue <b>SABA</b> inhalers (albuterol) relieve spasm fast; daily controller <b>inhaled corticosteroids</b> treat the inflammation but do not help an acute attack.</li>
+<li><b>Status asthmaticus</b> is a severe attack unresponsive to standard treatment; a rising PaCO2 signals impending respiratory failure.</li>
+</ul></div>
+
+      <h2 id="w10_pe"><span class="num">Section 4</span>Pulmonary embolism</h2>
+<figure class="bref" data-sec="4" style="max-width:1040px;margin:10px 0 24px;padding:0;"><div style="border:1px solid #e6e2d6;border-radius:16px;overflow:hidden;background:#fffdf7;box-shadow:0 8px 26px rgba(20,40,46,.09);"><img src="img/pulmonary_s4.jpg" alt="Pulmonary embolism reference figure" loading="lazy" style="display:block;width:100%;height:auto;background:#fff;" onerror="this.closest('figure').style.display='none'"></div><figcaption style="font-family:Inter,system-ui,sans-serif;font-size:12.5px;color:#7c8a88;margin-top:8px;line-height:1.5;"><b style="color:#0c3a44;">Reference.</b> Pulmonary embolism <span style="color:#9aa8a6;">&mdash; Laboratoires Servier, CC BY-SA 3.0 (via Wikimedia Commons)</span></figcaption></figure>
+
+
+      <p>Every breath you take is only half the job. Your lungs pull in <b>oxygen</b>, but that oxygen is useless unless blood flows past the air sacs to pick it up and carry it to the rest of your body. Normally, the right side of your heart pumps blood through the <b>pulmonary arteries</b> into a lacy network of capillaries wrapped around millions of tiny air sacs called <b>alveoli</b>. There, oxygen loads onto red blood cells and carbon dioxide unloads. Air (ventilation) and blood (perfusion) meet in perfect partnership. A <b>pulmonary embolism (PE)</b> is what happens when that partnership is suddenly broken by a plug in the pipe.</p>
+
+<h3>What actually goes wrong</h3>
+<p>A PE is a <b>clot that lodges in a pulmonary artery</b> and blocks blood flow to part of the lung. Most of the time the clot did not form in the lung at all. It usually starts as a <b>deep vein thrombosis (DVT)</b> in a leg or pelvic vein, then a piece breaks loose. Once free, that traveling clot is called an <b>embolus</b>. It rides the venous blood up to the right heart, gets pumped into the pulmonary circulation, and wedges wherever the vessel becomes too narrow to pass. The lung tissue downstream still gets air, but no blood arrives to collect the oxygen.</p>
+
+<h3>Why the clot forms: Virchow's triad</h3>
+<p>Clots do not appear at random. Back in the 1800s, Rudolf Virchow described three conditions that set the stage, and nurses still use his <b>triad</b> today to spot at-risk patients:</p>
+<ul>
+<li><b>Venous stasis</b> (blood pooling and sitting still). Long flights, bed rest, surgery, immobility, and heart failure all slow the flow so clotting factors accumulate instead of washing away.</li>
+<li><b>Hypercoagulability</b> (blood that clots too easily). Pregnancy, estrogen-containing contraceptives, cancer, dehydration, and inherited clotting disorders tip the balance toward clotting.</li>
+<li><b>Endothelial injury</b> (damage to the vessel's inner lining). Trauma, surgery, central lines, and inflammation expose the surfaces that trigger clot formation.</li>
+</ul>
+<p>When two or three of these overlap, a DVT becomes far more likely, and a DVT is the seed of most PEs.</p>
+
+<h3>Dead space: ventilation without perfusion</h3>
+<p>Here is the core problem in one phrase: <b>ventilation without perfusion</b>. The blocked region of lung is still being filled with air, but no blood flows past it, so that air is wasted. Physiologists call this wasted, air-but-no-blood region <b>alveolar dead space</b>. Gas exchange simply cannot happen there. Meanwhile, blood that should have gone to that region is shoved into the remaining open vessels, and the mismatch drops the oxygen level in the blood. The result is <b>hypoxemia</b> (low blood oxygen), which is why a PE is a true <em>medical emergency</em>: a large clot can crash oxygen levels and strain the right heart within minutes.</p>
+
+<div class="pearl"><b>A shunt is the mirror image.</b> In pneumonia there is perfusion without ventilation (blood flows past fluid-filled sacs). In PE there is ventilation without perfusion. Both break the ventilation-perfusion (V/Q) match, but from opposite directions.</div>
+
+<h3>Why the signs happen</h3>
+<p>PE symptoms come on <em>suddenly</em>, and each one traces straight back to the mechanism:</p>
+<ul>
+<li><b>Sudden dyspnea</b> (breathlessness) and <b>hypoxia</b> because a chunk of lung can no longer oxygenate blood, so the body is starved of oxygen and screams for more air.</li>
+<li><b>Pleuritic chest pain</b> (sharp pain that worsens with a deep breath) because the oxygen-starved lung tissue and its lining, the <b>pleura</b>, become irritated and inflamed.</li>
+<li><b>Tachycardia</b> (fast heart rate) because the heart speeds up to push blood past the blockage and compensate for falling oxygen. You may also see tachypnea, anxiety, and a cough.</li>
+</ul>
+
+<div class="ctwrap"><table class="ctable"><thead><tr><th>Feature</th><th>Normal lung unit</th><th>Pulmonary embolism</th></tr></thead><tbody>
+<tr><td>Air in alveoli</td><td>Yes</td><td>Yes (still ventilated)</td></tr>
+<tr><td>Blood flow past alveoli</td><td>Yes</td><td>No (clot blocks perfusion)</td></tr>
+<tr><td>Gas exchange</td><td>Efficient</td><td>Fails in the blocked zone</td></tr>
+<tr><td>Result</td><td>Normal oxygen</td><td>Dead space, hypoxemia</td></tr>
+</tbody></table></div>
+
+<div class="pearl"><b>Prevention is the win.</b> Because most PEs start as leg DVTs, early ambulation, compression devices, and prophylactic anticoagulation in at-risk patients stop the clot before it can ever travel. Watch for the classic warning sign: a swollen, warm, tender calf.</div>
+
+<p>Explore the figure below to see a clot lodged in a pulmonary artery and how it cuts off blood flow to the lung beyond it.</p>
+
+      <div class="embed">
+        <div class="cap"><span class="tag">Interactive</span> Follow a clot from the leg to the lung. <a href="../patho/PulmonaryEmbolism.html" target="_blank" rel="noopener">Open full &uarr;</a></div>
+        <div class="frame"><iframe src="../patho/PulmonaryEmbolism.html" loading="lazy" title="Pulmonary embolism interactive"></iframe></div>
+      </div>
+      <div class="kp"><div class="t">Key points</div><ul>
+<li>A PE is usually a leg <b>DVT</b> that broke loose, traveled as an <b>embolus</b>, and lodged in a pulmonary artery, blocking blood flow to part of the lung.</li>
+<li><b>Virchow's triad</b> (stasis, hypercoagulability, endothelial injury) sets up the clot in the first place, so prevention targets these three.</li>
+<li>The blocked lung is ventilated but not perfused, creating <b>alveolar dead space</b> (ventilation without perfusion) and dropping blood oxygen.</li>
+<li>Classic signs are <b>sudden dyspnea, pleuritic chest pain, tachycardia, and hypoxia</b>, each explained by lost gas exchange and the body's compensation.</li>
+<li>PE is a <b>medical emergency</b>; a swollen, tender calf is an early clue that a DVT could embolize.</li>
+</ul></div>
+
+      <h2 id="w10_pna"><span class="num">Section 5</span>Pneumonia &amp; respiratory infections</h2>
+<figure class="bref" data-sec="5" style="max-width:1040px;margin:10px 0 24px;padding:0;"><div style="border:1px solid #e6e2d6;border-radius:16px;overflow:hidden;background:#fffdf7;box-shadow:0 8px 26px rgba(20,40,46,.09);"><img src="img/pulmonary_s5.jpg" alt="Pneumonia reference figure" loading="lazy" style="display:block;width:100%;height:auto;background:#fff;" onerror="this.closest('figure').style.display='none'"></div><figcaption style="font-family:Inter,system-ui,sans-serif;font-size:12.5px;color:#7c8a88;margin-top:8px;line-height:1.5;"><b style="color:#0c3a44;">Reference.</b> Pneumonia <span style="color:#9aa8a6;">&mdash; Department of Pathology, Calicut Medical College, CC BY-SA 4.0 (via Wikimedia Commons)</span></figcaption></figure>
+
+
+      <p>Every time you take a breath, air travels down to about 300 million tiny air sacs called <b>alveoli</b>. These sacs are wrapped in a fine mesh of capillaries, and their walls are astonishingly thin, roughly one cell thick, so oxygen can slip across into the blood while carbon dioxide slips out. This trade is called <b>gas exchange</b>, and it depends on those air sacs staying open, dry, and full of air. Pneumonia is what happens when that clean, air-filled space becomes a battleground.</p>
+
+<h3>What goes wrong: the alveoli flood</h3>
+<p><b>Pneumonia</b> is an infection of the lung tissue itself, most often caused by bacteria (classically <em>Streptococcus pneumoniae</em>), but also viruses and fungi. When a pathogen reaches the alveoli, the immune system rushes in. White blood cells, fluid, and cellular debris pour into the air sacs, creating pus and inflammatory <b>exudate</b>. The problem is that a sac full of fluid and pus can no longer hold air. Oxygen cannot cross a wall of liquid nearly as well as it crosses air, so gas exchange breaks down. This is why the hallmark of pneumonia is <b>hypoxemia</b> (low blood oxygen) and shortness of breath, or <b>dyspnea</b>. When enough neighboring alveoli fill and clump into a solid, airless region, we call it <b>consolidation</b>, and it shows up as a white patch on a chest X-ray.</p>
+
+<div class="pearl"><b>Why the crackles?</b> Those fine popping sounds you hear on auscultation, called <b>crackles</b> or <em>rales</em>, are the sound of fluid-collapsed alveoli snapping back open with each breath. They are a direct clue that the air sacs are wet.</div>
+
+<h3>The classic signs, and the mechanism behind each</h3>
+<p>Pneumonia tends to announce itself with a recognizable cluster:</p>
+<ul>
+<li><b>Fever and chills</b> are the body's response to infection. Chemical signals called <em>pyrogens</em> reset the brain's thermostat upward to make the environment hostile to microbes.</li>
+<li><b>Productive cough</b> brings up thick, often yellow, green, or rust-colored <b>sputum</b>, which is the pus and debris being cleared from flooded airways.</li>
+<li><b>Tachypnea and tachycardia</b> (fast breathing and heart rate) are compensations. The body speeds up to move more air and pump oxygen-poor blood faster.</li>
+<li><b>Pleuritic chest pain</b>, a sharp pain that worsens with a deep breath, appears when inflammation reaches the lining of the lung.</li>
+</ul>
+<p>On imaging, that patch of <b>consolidation</b> confirms the flooded region. In older or immunocompromised patients, though, the picture is often quieter, and confusion or simply "not acting right" may be the only early sign.</p>
+
+<h3>Where you caught it matters</h3>
+<p>Nursing care changes depending on where the infection was acquired, because the likely organisms and their drug resistance differ.</p>
+
+<div class="ctwrap"><table class="ctable"><thead><tr><th>Feature</th><th>Community-acquired (CAP)</th><th>Hospital-acquired (HAP / VAP)</th></tr></thead><tbody>
+<tr><td>Where acquired</td><td>Out in daily life; onset before or within 48 hrs of admission</td><td>48+ hrs after admission; VAP is a subtype tied to a ventilator</td></tr>
+<tr><td>Common organisms</td><td><em>S. pneumoniae</em>, respiratory viruses, atypicals</td><td>Often <em>Pseudomonas</em>, <em>Staph aureus</em> including MRSA</td></tr>
+<tr><td>Drug resistance</td><td>Usually lower</td><td>Often higher, harder to treat</td></tr>
+<tr><td>Typical severity</td><td>Ranges mild to severe</td><td>Frequently sicker, higher mortality</td></tr>
+</tbody></table></div>
+
+<p><b>Ventilator-associated pneumonia (VAP)</b> deserves special note: a breathing tube bypasses the natural filtering and cough defenses of the upper airway, giving bacteria a direct highway into the lungs. This is why nurses follow a "VAP bundle," including keeping the head of the bed elevated and providing regular oral care.</p>
+
+<h3>Who is most at risk</h3>
+<p>Anyone whose defenses are weakened is more vulnerable. This includes the very young and adults <em>over 65</em>, smokers, and people with chronic lung disease such as <b>COPD</b>. It also includes patients who are immunocompromised, those with difficulty swallowing (who may <b>aspirate</b> food or secretions into the lungs), and anyone whose cough reflex is blunted by sedation or a decreased level of consciousness.</p>
+
+<div class="pearl"><b>Prevention is real medicine.</b> Pneumococcal and annual influenza vaccines, plus simple mobility and deep-breathing exercises after surgery, genuinely lower pneumonia risk. Getting a bedbound patient to cough and breathe deeply keeps alveoli open.</div>
+
+<h3>A word on tuberculosis</h3>
+<p><b>Tuberculosis (TB)</b> is a distinct, airborne infection from <em>Mycobacterium tuberculosis</em> in which the immune system walls the bacteria inside a <b>granuloma</b>; it can stay dormant for years as <em>latent</em> TB (no symptoms, not contagious) before reactivating into <em>active</em> TB with cough, weight loss, and night sweats. Explore the interactive figure below to see how infection fills the alveoli.</p>
+
+      <div class="embed">
+        <div class="cap"><span class="tag">Interactive</span> See infection fill the airways and alveoli. <a href="../patho/AirwayInfections.html" target="_blank" rel="noopener">Open full &uarr;</a></div>
+        <div class="frame"><iframe src="../patho/AirwayInfections.html" loading="lazy" title="Respiratory infections interactive"></iframe></div>
+      </div>
+      <div class="kp"><div class="t">Key points</div><ul>
+<li>Pneumonia fills the alveoli with fluid and pus, so oxygen cannot cross into the blood, producing hypoxemia, dyspnea, and consolidation on imaging.</li>
+<li>Classic signs are fever, productive cough, crackles from fluid-filled sacs re-opening, and pleuritic chest pain; older adults may only show confusion.</li>
+<li>Community-acquired pneumonia (CAP) is usually less resistant; hospital-acquired (HAP) and ventilator-associated (VAP) pneumonia involve tougher organisms like Pseudomonas and MRSA.</li>
+<li>Highest risk: the very young, adults over 65, smokers, COPD, immunocompromised, and those who aspirate; vaccines and deep breathing help prevent it.</li>
+<li>TB is a separate airborne infection walled into granulomas, existing as latent (dormant, non-contagious) or active disease.</li>
+</ul></div>
+
+      <h2 id="w10_sounds"><span class="num">Section 6</span>Lung sounds &amp; assessment</h2>
+<figure class="bref" data-sec="6" style="max-width:1040px;margin:10px 0 24px;padding:0;"><div style="border:1px solid #e6e2d6;border-radius:16px;overflow:hidden;background:#fffdf7;box-shadow:0 8px 26px rgba(20,40,46,.09);"><img src="img/pulmonary_s6.jpg" alt="Lung assessment reference figure" loading="lazy" style="display:block;width:100%;height:auto;background:#fff;" onerror="this.closest('figure').style.display='none'"></div><figcaption style="font-family:Inter,system-ui,sans-serif;font-size:12.5px;color:#7c8a88;margin-top:8px;line-height:1.5;"><b style="color:#0c3a44;">Reference.</b> Lung assessment <span style="color:#9aa8a6;">&mdash; Pöllö, CC BY 3.0 (via Wikimedia Commons)</span></figcaption></figure>
+
+
+      <p>Every time you breathe, air rushes down your windpipe, splits into smaller and smaller tubes, and finally reaches millions of tiny air sacs called <b>alveoli</b>. When those airways are open and the air sacs are dry and elastic, air moves smoothly and quietly. That smooth flow is exactly what a stethoscope is listening for. When you place your stethoscope on someone's chest, you are eavesdropping on how easily air is getting in and out, and whether anything, fluid, mucus, swelling, or scarring, is getting in the way.</p>
+
+<h3>Normal breath sounds: the quiet baseline</h3>
+<p>Over most of the lung fields you should hear <b>vesicular</b> breath sounds, a soft, low, rustling whoosh that is louder on inspiration and fades quickly on expiration. Over the large central airways (the trachea and around the sternum) sounds are naturally louder and more tubular (<b>bronchial</b> and <b>bronchovesicular</b>). The key idea for students: normal air movement is <em>clear and quiet</em>. Anything extra you hear layered on top is called an <b>adventitious</b> (added) sound, and each type tells a different mechanical story about what is happening inside the airways.</p>
+
+<h3>Crackles: air popping open through fluid</h3>
+<p><b>Crackles</b> (older term: <em>rales</em>) are brief, discontinuous popping or bubbling sounds, often compared to Velcro pulling apart or hair rubbed between your fingers. Mechanistically, they happen when air suddenly pushes open small airways and alveoli that were stuck shut or filled with fluid. You hear them most on <em>inspiration</em> because that is when the collapsed spaces snap open. Crackles usually point toward <b>fluid or collapse in the air sacs</b>, classically <b>pneumonia</b> (inflammatory exudate) or <b>heart failure</b> (fluid backing up into the lungs, called <em>pulmonary edema</em>). In heart failure they often start at the lung bases, where gravity pools fluid.</p>
+
+<h3>Wheezes: air squeezing through narrowed tubes</h3>
+<p><b>Wheezes</b> are high-pitched, musical, whistling sounds, usually loudest on <em>expiration</em>. Picture blowing through a nearly pinched straw. They happen when airways are <b>narrowed</b> by bronchospasm, swelling (edema), or mucus, so air is forced through a tight channel and the walls vibrate. Wheezes are the signature of <b>asthma</b> and <b>COPD</b>. One important safety note: a wheeze that suddenly goes <em>silent</em> in someone struggling to breathe is ominous, it can mean airflow has dropped so low that no sound is being made (a "silent chest"), which is an emergency, not an improvement.</p>
+
+<h3>Stridor: the upper-airway alarm bell</h3>
+<p><b>Stridor</b> is a harsh, high-pitched crowing sound heard <em>without</em> a stethoscope, typically on <b>inspiration</b>. It comes from obstruction high up in the <b>upper airway</b>, the larynx or trachea, from swelling (croup, epiglottitis, anaphylaxis) or a foreign body. Treat stridor as an <b>airway emergency</b>: the tube that keeps a person alive is narrowing, and it can close.</p>
+
+<h3>Pleural friction rub: surfaces that should glide, grating instead</h3>
+<p>The lungs are wrapped in two thin membranes (the <b>pleura</b>) that normally slide silently past each other. When they become inflamed (<em>pleuritis</em>, often from infection), they grate together, producing a <b>pleural friction rub</b>, a low-pitched, grating, leathery sound heard on both inspiration and expiration, often with pain on breathing.</p>
+
+<div class="ctwrap"><table class="ctable"><thead><tr><th>Feature</th><th>Crackles</th><th>Wheezes</th></tr></thead><tbody>
+<tr><td>Sound</td><td>Popping / bubbling</td><td>Musical / whistling</td></tr>
+<tr><td>Cause</td><td>Fluid or collapsed air sacs</td><td>Narrowed airways</td></tr>
+<tr><td>Timing</td><td>Mainly inspiration</td><td>Mainly expiration</td></tr>
+<tr><td>Points toward</td><td>Pneumonia, heart failure</td><td>Asthma, COPD</td></tr>
+</tbody></table></div>
+
+<div class="pearl"><b>Stridor is different from a wheeze.</b> A wheeze is lower airway and expiratory; stridor is upper airway and usually inspiratory, and you can hear it across the room. Stridor buys you minutes, not hours.</div>
+
+<h3>Pulse oximetry: seeing the result of all this airflow</h3>
+<p>Listening tells you <em>how</em> air is moving; the <b>pulse oximeter</b> (SpO2) tells you the <em>result</em>, how well oxygen is actually reaching the blood. It clips on a finger and estimates the percent of hemoglobin carrying oxygen, usually <b>95 to 100%</b> in healthy adults. When crackles, wheezes, or obstruction block oxygen from reaching the alveoli, the SpO2 often falls (<b>hypoxemia</b>).</p>
+<p>Tie this back to the <b>arterial blood gas (ABG)</b> from Week 1. The pulse ox is a quick, noninvasive estimate; the ABG is the precise lab measurement, giving true PaO2, PaCO2, and pH. Remember the oxyhemoglobin dissociation curve: because of its S-shape, an SpO2 that drops below roughly <b>90%</b> often signals a much larger fall in PaO2 than the number suggests. Trust the ABG for the full picture, especially for <em>carbon dioxide</em>, which the pulse ox cannot see at all.</p>
+
+<div class="pearl"><b>Look and listen, don't just read the number.</b> Pulse ox can read falsely high in poor perfusion, cold fingers, or carbon monoxide poisoning. A comfortable-looking number never overrules a patient who looks like they are working hard to breathe.</div>
+
+<p>Explore the interactive figure below to hear how normal breath sounds differ from crackles, wheezes, stridor, and a friction rub.</p>
+
+      <div class="embed">
+        <div class="cap"><span class="tag">Interactive</span> Listen for crackles, wheezes, and stridor. <a href="../patho/LungSounds.html" target="_blank" rel="noopener">Open full &uarr;</a></div>
+        <div class="frame"><iframe src="../patho/LungSounds.html" loading="lazy" title="Lung sounds interactive"></iframe></div>
+      </div>
+      <div class="kp"><div class="t">Key points</div><ul>
+<li><b>Normal breath sounds are clear and quiet;</b> any added (adventitious) sound signals something interfering with airflow.</li>
+<li><b>Crackles</b> = fluid or reopening air sacs (pneumonia, heart failure), mostly on inspiration; <b>wheezes</b> = narrowed airways (asthma, COPD), mostly on expiration.</li>
+<li><b>Stridor</b> is a harsh inspiratory sound from upper-airway obstruction, treat it as an emergency; a <b>pleural friction rub</b> is grating and painful from inflamed pleura.</li>
+<li><b>Pulse oximetry (SpO2, usually 95 to 100%)</b> estimates oxygen saturation noninvasively but cannot measure CO2 and can read falsely.</li>
+<li>The <b>ABG</b> confirms true oxygenation, ventilation, and pH; always weigh the number against how the patient actually looks.</li>
+</ul></div>
+
+      <div class="summary">
+        <h2 id="summary">The chapter in one breath</h2>
+        <ul>
+<li><b>Ventilation</b> is air moving in and out of alveoli; when it drops (hypoventilation), CO2 backs up and the pH falls, giving <b>respiratory acidosis</b>.</li>
+<li><b>Perfusion</b> is blood flow through the pulmonary capillaries, and gas exchange only works where ventilated alveoli meet perfused capillaries.</li>
+<li>A normal <b>V/Q ratio</b> is about 0.8; a blocked airway (pneumonia, mucus) creates a low-V/Q <em>shunt</em>, while a blocked vessel (PE) creates a high-V/Q <b>dead space</b>.</li>
+<li><b>COPD</b> is chronic airflow limitation from emphysema plus chronic bronchitis, where air-trapping and a barrel chest cause a prolonged expiratory phase and chronically retained CO2.</li>
+<li><b>Asthma</b> is reversible bronchospasm with airway inflammation and mucus, producing expiratory <b>wheezing</b>; a silent chest with a rising CO2 signals dangerous fatigue, not improvement.</li>
+<li><b>Pulmonary embolism</b> is a clot (often from a DVT) lodging in the pulmonary artery, causing sudden dyspnea, pleuritic chest pain, tachycardia, and <b>hypoxemia</b> with a low CO2 from hyperventilating.</li>
+<li><b>Pneumonia</b> fills alveoli with inflammatory exudate, so you see fever, productive cough, crackles, and consolidation that impairs oxygenation.</li>
+<li><b>Adventitious lung sounds</b> localize the problem: <b>crackles</b> mean fluid or reopening alveoli, <b>wheezes</b> mean narrowed airways, and <b>stridor</b> means a dangerous upper-airway obstruction.</li>
+</ul>
+      </div>
+
+      <h2 id="glossary"><span class="num">Reference</span>Words worth knowing</h2>
+      <p>A quick reference for the terms in this chapter &mdash; skim it now, or circle back whenever a word trips you up.</p>
+      <dl class="terms"><dt>Bronchospasm</dt><dd>Sudden tightening of the smooth muscle wrapping the bronchi and bronchioles that narrows the airways, making it harder to move air (especially out) and often causing wheezing.</dd><dt>Chronic bronchitis</dt><dd>A form of COPD defined clinically as a productive cough lasting at least 3 months in each of 2 consecutive years, caused by chronic airway inflammation, mucus-gland hypertrophy, and excess sputum.</dd><dt>Consolidation</dt><dd>Lung tissue that has filled with fluid, pus, blood, or inflammatory cells instead of air (as in pneumonia), making that region solid and impairing gas exchange.</dd><dt>COPD (chronic obstructive pulmonary disease)</dt><dd>A progressive, largely irreversible airflow-limiting disease—usually from smoking—that blends emphysema and chronic bronchitis and traps air on exhalation.</dd><dt>Crackles</dt><dd>Brief, discontinuous popping or bubbling sounds heard (usually on inspiration) when collapsed or fluid-filled alveoli and small airways suddenly snap open, often signaling fluid or infection.</dd><dt>Dead space</dt><dd>Air that is inhaled but does not take part in gas exchange—either the conducting airways (anatomic) or alveoli that are ventilated but not perfused (physiologic).</dd><dt>Emphysema</dt><dd>A form of COPD in which the alveolar walls are destroyed and enlarged, reducing surface area for gas exchange and the elastic recoil that normally pushes air out.</dd><dt>Hypoxemia</dt><dd>A lower-than-normal level of oxygen in the arterial blood (usually a PaO2 below about 80 mmHg or SaO2 under about 95%), which starves tissues of oxygen if uncorrected.</dd><dt>Perfusion</dt><dd>The flow of blood through the pulmonary capillaries that surround the alveoli, releasing carbon dioxide to be exhaled and picking up oxygen from the alveolar air.</dd><dt>Pulmonary embolism</dt><dd>A blockage of a pulmonary artery—most often by a clot that traveled from a deep vein—that suddenly cuts off blood flow to part of the lung, creating dead space and often causing sharp dyspnea and hypoxemia.</dd><dt>Shunt</dt><dd>Blood that passes through the lungs without being oxygenated because it flows past alveoli that are perfused but not ventilated (as in consolidation or collapse), a cause of hypoxemia that oxygen alone often cannot fix.</dd><dt>Status asthmaticus</dt><dd>A severe, prolonged asthma attack that does not respond to usual bronchodilators, a medical emergency that can progress to respiratory failure.</dd><dt>Stridor</dt><dd>A harsh, high-pitched sound heard mainly on inspiration that signals narrowing or obstruction of the <em>upper</em> airway (larynx or trachea) and warrants urgent attention.</dd><dt>Ventilation</dt><dd>The mechanical movement of air into and out of the lungs, bringing oxygen to the alveoli and carrying carbon dioxide away.</dd><dt>V/Q ratio</dt><dd>The balance between ventilation (V, airflow) and perfusion (Q, blood flow) in a lung region, normally about 0.8; mismatches in either direction impair gas exchange.</dd><dt>Wheeze</dt><dd>A continuous, musical, usually high-pitched whistling sound—often loudest on expiration—produced when air is forced through narrowed lower airways, as in asthma or COPD.</dd></dl>
+
+      <h2 id="cards"><span class="num">Drill</span>Flashcards for this unit</h2>
+      <p>These are the <b>Week 10</b> cards &mdash; the same deck as the hub, pulled in here so you can review the moment you finish reading. Tap the card to flip it; hit <em>Shuffle</em> to mix them up. To grade yourself and track mastery across the whole deck, open the <a href="../flashcards.html">full flashcards page</a>.</p>
+      <div class="fc" id="fc">
+        <div class="fc-card" id="fcCard" onclick="fcFlip()">
+          <div class="fc-inner">
+            <div class="fc-face fc-front"><span class="fc-side">Question</span><div class="fc-q" id="fcQ"></div><div class="fc-hint">Tap to reveal the answer</div></div>
+            <div class="fc-face fc-back"><span class="fc-side">Answer</span><div class="fc-a" id="fcA"></div><div class="fc-hint">Tap to flip back</div></div>
+          </div>
+        </div>
+        <div class="fc-nav">
+          <button class="fc-btn" type="button" onclick="fcPrev(event)">&larr; Prev</button>
+          <span class="fc-count" id="fcCount">&mdash;</span>
+          <button class="fc-btn" type="button" onclick="fcNext(event)">Next &rarr;</button>
+          <button class="fc-btn" type="button" onclick="fcShuffle(event)">&#128256; Shuffle</button>
+        </div>
+        <a class="fc-full" href="../flashcards.html">Open the full Week 10 deck &mdash; grade yourself &amp; track mastery &uarr;</a>
+      </div>
+
+      <div class="quiz">
+        <h2 id="quiz">Check yourself</h2>
+        <div class="q"><div class="qq">1. A client with a large pulmonary embolism has a normal chest that moves air well, yet the pulse oximeter reads 84%. In terms of V/Q matching, what is happening?</div>
+<button onclick="this.parentNode.classList.add('show')">Reveal answer</button>
+<div class="ans"><span class="a">This is dead space (high V/Q) - the alveoli are ventilated but not perfused.</span> The clot blocks blood flow (Q) to alveoli that are still getting air (V), so fresh oxygen never meets blood to be picked up. Air moving in and out of a lung region with no circulation is <b>wasted ventilation</b>, and the resulting hypoxemia usually still improves with supplemental oxygen (unlike a true shunt).</div></div>
+<div class="q"><div class="qq">2. A client with severe pneumonia has fluid- and pus-filled alveoli in the right lower lobe. Blood keeps flowing past those flooded alveoli. Is this dead space or shunt, and why does giving 100% oxygen barely help?</div>
+<button onclick="this.parentNode.classList.add('show')">Reveal answer</button>
+<div class="ans"><span class="a">This is a shunt (low V/Q) - blood is perfused but the alveoli are not ventilated.</span> Blood flows past alveoli that are filled with exudate instead of air, so it returns to the heart still deoxygenated. Because that blood never contacts <em>any</em> oxygen, raising the FiO2 in the working alveoli cannot fix the mixed result, which is why <b>shunt-related hypoxemia is refractory to supplemental oxygen</b>.</div></div>
+<div class="q"><div class="qq">3. Two clients have COPD. One is described as the classic barrel-chested pink puffer who is thin and breathes through pursed lips; the other is a heavier blue bloater with a chronic productive cough. Match each to chronic bronchitis versus emphysema and name the core problem.</div>
+<button onclick="this.parentNode.classList.add('show')">Reveal answer</button>
+<div class="ans"><span class="a">Pink puffer = emphysema (alveolar wall destruction); blue bloater = chronic bronchitis (chronic airway mucus and inflammation).</span> In <b>emphysema</b> the alveolar walls and elastic recoil are destroyed, so air trapping causes the barrel chest and pursed-lip breathing while gas exchange is preserved longer. In <b>chronic bronchitis</b> (a productive cough on most days for 3 months over 2 consecutive years) mucus and inflammation obstruct airways, causing early hypoxemia, cyanosis, and cor pulmonale.</div></div>
+<div class="q"><div class="qq">4. During an acute asthma attack, a client who was loudly wheezing suddenly goes quiet, and you can hear almost no air movement. Why is this quiet chest an emergency rather than a sign of improvement?</div>
+<button onclick="this.parentNode.classList.add('show')">Reveal answer</button>
+<div class="ans"><span class="a">The silent chest means airflow is so severely obstructed that too little air is moving to make a wheeze - an ominous sign of impending respiratory failure.</span> Wheezing requires turbulent airflow through narrowed airways; when bronchoconstriction and mucus plugging become critical, air barely moves, so the sound disappears. This client needs <b>immediate</b> intervention, as the quiet chest often precedes respiratory arrest.</div></div>
+<div class="q"><div class="qq">5. A newly diagnosed asthma client asks which of two inhalers to grab when she suddenly cannot breathe. One is albuterol (a short-acting beta-2 agonist) and one is an inhaled corticosteroid. Which is the rescue inhaler, and how do the two differ in role?</div>
+<button onclick="this.parentNode.classList.add('show')">Reveal answer</button>
+<div class="ans"><span class="a">Albuterol is the rescue inhaler; the inhaled corticosteroid is the controller.</span> The short-acting beta-2 agonist relaxes bronchial smooth muscle within minutes for quick relief of acute bronchospasm. The <b>inhaled corticosteroid</b> reduces underlying airway inflammation over days to weeks and must be taken daily to prevent attacks - it does <em>nothing</em> during an acute attack, so teach clients never to substitute it for their rescue inhaler.</div></div>
+<div class="q"><div class="qq">6. Explain Virchow's triad and give one example of each component in a hospitalized client at risk for a pulmonary embolism.</div>
+<button onclick="this.parentNode.classList.add('show')">Reveal answer</button>
+<div class="ans"><span class="a">Virchow's triad is venous stasis, endothelial (vessel wall) injury, and hypercoagulability - the three factors that promote clot formation.</span> Examples include <b>stasis</b> from prolonged bed rest or immobility, <b>endothelial injury</b> from recent surgery, trauma, or a central line, and <b>hypercoagulability</b> from cancer, pregnancy, or estrogen therapy. A deep vein thrombosis that dislodges and travels to the lungs becomes a pulmonary embolism.</div></div>
+<div class="q"><div class="qq">7. What classic set of signs and symptoms would make you suspect a pulmonary embolism, and what is often the first vital sign change?</div>
+<button onclick="this.parentNode.classList.add('show')">Reveal answer</button>
+<div class="ans"><span class="a">Sudden dyspnea, pleuritic chest pain, and tachypnea, often with tachycardia and anxiety; the earliest change is usually a sudden rise in respiratory rate.</span> The clot obstructs pulmonary blood flow, creating dead space and abruptly dropping oxygenation, which the body answers with <b>tachypnea and tachycardia</b>. Other findings may include hypoxemia, low-grade fever, hemoptysis, and in a massive PE, hypotension and signs of right heart strain.</div></div>
+<div class="q"><div class="qq">8. A client is admitted with community-acquired pneumonia. Describe the hallmark assessment findings and briefly distinguish community-acquired, hospital-acquired, and aspiration pneumonia.</div>
+<button onclick="this.parentNode.classList.add('show')">Reveal answer</button>
+<div class="ans"><span class="a">Expect fever, productive cough, pleuritic chest pain, tachypnea, crackles over the affected lobe, dullness to percussion, and increased fremitus; the types differ by where and how the infection was acquired.</span> <b>Community-acquired</b> pneumonia develops outside a facility (often <em>Streptococcus pneumoniae</em>), <b>hospital-acquired</b> pneumonia begins 48 hours or more after admission and tends to involve more resistant organisms, and <b>aspiration</b> pneumonia follows inhalation of oral or gastric contents, commonly in clients with impaired swallowing or a decreased level of consciousness. Consolidation from inflammatory exudate is what produces the crackles and dullness.</div></div>
+<div class="q"><div class="qq">9. A client's tuberculosis skin test is positive but the chest x-ray is clear and the client feels well with no cough. Does this client have active TB, and can they spread it?</div>
+<button onclick="this.parentNode.classList.add('show')">Reveal answer</button>
+<div class="ans"><span class="a">No - this is latent TB infection: the person is infected with <em>Mycobacterium tuberculosis</em> but the bacteria are dormant, so they have no symptoms and are not contagious.</span> In latent TB the immune system has walled off the organism, giving a positive skin or blood test without active disease. <b>Active TB</b> - with a productive cough, hemoptysis, night sweats, fever, and weight loss - is the contagious form spread by airborne droplet nuclei, requiring airborne isolation and multidrug therapy.</div></div>
+<div class="q"><div class="qq">10. During auscultation you hear three different abnormal sounds in three clients: fine crackles, wheezes, and stridor. Match each sound to its likely mechanism and note which one is the most urgent.</div>
+<button onclick="this.parentNode.classList.add('show')">Reveal answer</button>
+<div class="ans"><span class="a">Crackles = fluid or collapsed alveoli popping open; wheezes = air squeezing through narrowed lower airways; stridor = obstruction of the upper airway, and stridor is the most urgent.</span> Fine <b>crackles</b> suggest fluid or atelectasis (as in pneumonia, heart failure, or fibrosis), <b>wheezes</b> reflect bronchoconstriction or mucus in the bronchi (as in asthma or COPD), and <b>stridor</b> is a high-pitched crowing over the trachea signaling a narrowed upper airway. Stridor warns of imminent airway compromise and demands immediate assessment.</div></div>
+<div class="q"><div class="qq">11. A nursing student asks you to explain the difference between hypoxemia and hypoxia, since the words sound the same. How would you clarify, and can one occur without the other?</div>
+<button onclick="this.parentNode.classList.add('show')">Reveal answer</button>
+<div class="ans"><span class="a">Hypoxemia is low oxygen in the arterial blood; hypoxia is inadequate oxygen delivery to or use by the tissues - and yes, either can occur without the other.</span> <b>Hypoxemia</b> is measured (a low PaO2 or SpO2) and often causes hypoxia, but tissues can be hypoxic with a normal blood oxygen level, as in severe anemia or cyanide poisoning where oxygen is present but cannot be carried or used. Conversely, mild hypoxemia may not yet starve the tissues if delivery is compensated.</div></div>
+<div class="q"><div class="qq">12. A postoperative client who has been on bed rest suddenly develops sharp chest pain, an SpO2 of 88%, a respiratory rate of 30, and a heart rate of 118. Connect this presentation to Virchow's triad and explain the V/Q abnormality causing the low oxygen.</div>
+<button onclick="this.parentNode.classList.add('show')">Reveal answer</button>
+<div class="ans"><span class="a">This picture strongly suggests a pulmonary embolism from a DVT, and the hypoxemia comes from dead space (high V/Q) where alveoli are ventilated but not perfused.</span> Surgery and immobility supplied two arms of <b>Virchow's triad</b> - venous stasis and endothelial injury - plus a postoperative hypercoagulable state, setting up clot formation. The embolus blocks pulmonary perfusion so ventilated alveoli receive no blood flow, creating wasted ventilation and hypoxemia, and compensatory tachypnea and tachycardia; elevate the head, apply oxygen, and notify the provider urgently.</div></div>
+      </div>
+
+      <div class="chapnav">
+        <a href="index.html"><span class="k">Book</span>&larr; All chapters</a>
+        <a class="next" href="appendix.html"><span class="k">Appendix</span>The Arcade &amp; Lab &rarr;</a>
+      </div>
+    </main>
+  </div>
+
+  <footer>
+    A student-friendly pathophysiology guide · by <b>Dr. Akash Garg</b> <br>
+    The interactive figures open in place; tap “Open full ↗” for a full-screen version.
+  </footer>
+
+<script>
+  // reading progress bar
+  var bar=document.getElementById('bar');
+  function prog(){var h=document.documentElement, max=h.scrollHeight-h.clientHeight; bar.style.width=(max>0?(h.scrollTop/max*100):0)+'%';}
+  addEventListener('scroll',prog,{passive:true}); prog();
+  // scroll-spy TOC
+  var links=[].slice.call(document.querySelectorAll('.toc a'));
+  var ids=links.map(function(a){return a.getAttribute('href').slice(1);});
+  var secs=ids.map(function(id){return document.getElementById(id);});
+  function spy(){var y=scrollY+90,cur=0;
+    for(var i=0;i<secs.length;i++){ if(secs[i] && secs[i].offsetTop<=y) cur=i; }
+    links.forEach(function(a,i){a.classList.toggle('on',i===cur);});}
+  addEventListener('scroll',spy,{passive:true}); spy();
+</script>
+
+
+<script src="../flashcards/w10.js"></script>
+<script>
+(function(){
+  var WK="10";
+  var cards=(window.PATHO_CARDS&&window.PATHO_CARDS[WK])||[];
+  var fc=document.getElementById("fc"); if(!fc) return;
+  if(!cards.length){ fc.style.display="none"; return; }
+  var order=cards.map(function(_,i){return i;}), pos=0;
+  function dec(s){return String(s).replace(/&amp;/g,"&").replace(/&lt;/g,"<").replace(/&gt;/g,">").replace(/&nbsp;/g," ");}
+  var card=document.getElementById("fcCard"), q=document.getElementById("fcQ"), a=document.getElementById("fcA"), cnt=document.getElementById("fcCount");
+  function show(){ card.classList.remove("flip"); var c=cards[order[pos]]; q.textContent=dec(c.q); a.textContent=dec(c.a)+(c.exp?"  \u2014  "+dec(c.exp):""); cnt.textContent=(pos+1)+" / "+cards.length; }
+  window.fcFlip=function(){ card.classList.toggle("flip"); };
+  window.fcNext=function(e){ if(e&&e.stopPropagation)e.stopPropagation(); pos=(pos+1)%cards.length; show(); };
+  window.fcPrev=function(e){ if(e&&e.stopPropagation)e.stopPropagation(); pos=(pos-1+cards.length)%cards.length; show(); };
+  window.fcShuffle=function(e){ if(e&&e.stopPropagation)e.stopPropagation(); for(var i=order.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=order[i];order[i]=order[j];order[j]=t;} pos=0; show(); };
+  show();
+})();
+</script>
+<style id="pdfprint">
+.pdf-btn{position:fixed;right:16px;bottom:16px;z-index:400;font-family:'Inter',system-ui,sans-serif;font-weight:700;font-size:13.5px;color:#fff;background:#0c7283;border:none;border-radius:24px;padding:11px 17px;box-shadow:0 6px 20px rgba(12,58,68,.30);cursor:pointer;display:inline-flex;align-items:center;gap:7px;}
+.pdf-btn:hover{background:#0c3a44;}
+@media print{
+ @page{margin:14mm;}
+ html,body{background:#fff !important;}
+ .topbar,.progress,aside,.chapnav,.pdf-btn{display:none !important;}
+ #pbgate{display:none !important;}
+ .layout{display:block !important;max-width:100% !important;padding:0 !important;grid-template-columns:1fr !important;gap:0 !important;}
+ .reading,.reading .col{max-width:100% !important;padding:0 !important;}
+ .embed iframe,.embed .frame{display:none !important;}
+ .embed{margin:14px 0 !important;}
+ .embed .cap{color:#555 !important;font-style:italic;}
+ .embed .cap .tag{background:#0c7283 !important;color:#fff !important;}
+ .embed .cap a{display:none !important;}
+ .bref,.bref .fr{break-inside:avoid;page-break-inside:avoid;box-shadow:none !important;}
+ .bref img{max-height:150mm;width:auto !important;margin:0 auto;}
+ .ctwrap,table.ctable,.pearl,.kp,.q,.objectives,.summary,dl.terms,figure{break-inside:avoid;page-break-inside:avoid;}
+ h1,h2,h3{break-after:avoid;page-break-after:avoid;}
+ .quiz .ans{display:block !important;}
+ .quiz .q button{display:none !important;}
+ a{color:inherit !important;text-decoration:none !important;}
+ *{-webkit-print-color-adjust:exact !important;print-color-adjust:exact !important;}
+ footer{border-top:1px solid #ccc !important;}
+}
+</style>
+<button class="pdf-btn" onclick="window.print()" title="Save this chapter as a PDF">🖨 Save as PDF</button>
+</body>
+</html>

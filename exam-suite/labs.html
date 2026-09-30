@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lab Signature Drill · Pathophysiology</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="suite.css">
+<style>
+  .panel{display:flex;flex-direction:column;gap:7px;margin:6px 0 16px;}
+  .lab{display:flex;align-items:center;gap:12px;background:var(--card);border:1.5px solid var(--line);
+       border-radius:10px;padding:10px 14px;}
+  .lab .ln{flex:1 1 auto;font-size:14.5px;font-weight:600;}
+  .lab .lv{flex:0 0 auto;font-size:19px;font-weight:800;width:34px;text-align:center;}
+  .lab .lt{flex:0 0 auto;font-size:11.5px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;width:74px;text-align:right;}
+  .lab.up{border-color:#d98b84;background:#fdf3f2;} .lab.up .lv,.lab.up .lt{color:var(--bad);}
+  .lab.down{border-color:#7fa8c9;background:#f1f7fb;} .lab.down .lv,.lab.down .lt{color:#1f5f8b;}
+  .lab.n{border-color:#8ec5ac;background:var(--ok-lt);} .lab.n .lv,.lab.n .lt{color:var(--ok);}
+  .lab.abn{border-color:var(--gold);background:var(--gold-lt);} .lab.abn .lv,.lab.abn .lt{color:#8a6416;}
+  @media(max-width:520px){ .lab .lt{width:auto;} .lab .ln{font-size:13.5px;} }
+</style>
+</head>
+<body>
+<div id="bar"></div>
+<div class="wrap">
+
+  <div class="hero">
+    <div class="eyebrow"><span data-label>Final Exam</span> Suite</div>
+    <h1>Lab Signature Drill</h1>
+    <p>Read the arrows, name the disorder. This is the single most reliable question shape on the final &mdash; a pattern of values that identifies one condition.</p>
+  </div>
+
+  <div class="tiles">
+    <div class="tile"><b id="tScore">0</b><span>Correct</span></div>
+    <div class="tile"><b id="tSeen">0</b><span>Attempted</span></div>
+    <div class="tile"><b id="tPct">—</b><span>Accuracy</span></div>
+    <div class="tile"><b id="tStreak">0</b><span>Streak</span></div>
+  </div>
+
+  <div class="card">
+    <div class="row" style="justify-content:space-between;">
+      <span class="chip" id="wkChip"></span>
+      <span class="note" id="counter"></span>
+    </div>
+    <div class="panel" id="panel"></div>
+    <div class="opts" id="opts"></div>
+    <div id="after" class="hide">
+      <div class="why" id="why"></div>
+      <div class="row" style="margin-top:14px;">
+        <button class="btn" id="nextBtn">Next &rsaquo;</button>
+        <a class="btn ghost sm" href="#" data-hq="1">Back to HQ</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="card hide" id="doneCard">
+    <div class="sect" style="margin-top:0;">Round complete</div>
+    <p id="doneTxt" class="note"></p>
+    <div class="row"><button class="btn" onclick="location.reload()">Go again</button>
+    <a class="btn ghost" href="#" data-hq="1">Back to HQ</a></div>
+  </div>
+
+</div>
+
+<script src="suite.js"></script>
+<script>
+window.FinalSuite.loadData(function(){
+  var S=window.FinalSuite, P=S.Progress;
+  document.getElementById('bar').innerHTML=S.topbar('Lab Signature Drill','<span id="tbS"></span>');
+
+  var items=S.shuffle(window.FINAL_DRILLS.labs), i=0, stats={c:0,n:0,streak:0}, answered=false;
+
+  var ARROW={up:'↑',down:'↓',n:'=',abn:'!'};
+  var WORD={up:'High',down:'Low',n:'Normal',abn:'Abnormal'};
+
+  function draw(){
+    if(i>=items.length){ finish(); return; }
+    answered=false;
+    var it=items[i];
+    document.getElementById('wkChip').textContent='Week '+it.week;
+    document.getElementById('counter').textContent=(i+1)+' of '+items.length;
+    document.getElementById('panel').innerHTML=it.labs.map(function(l){
+      var dir=l[1];
+      return '<div class="lab '+dir+'"><span class="lv">'+ARROW[dir]+'</span>'+
+             '<span class="ln">'+S.esc(l[0])+'</span>'+
+             '<span class="lt">'+WORD[dir]+'</span></div>';
+    }).join('');
+    var order=S.shuffle(it.opts.map(function(o,j){return {o:o,j:j};}));
+    document.getElementById('opts').innerHTML=order.map(function(x,k){
+      return '<button class="opt" data-j="'+x.j+'"><span class="k">'+'ABCD'[k]+'</span><span>'+S.esc(x.o)+'</span></button>';
+    }).join('');
+    document.getElementById('after').classList.add('hide');
+  }
+
+  document.getElementById('opts').addEventListener('click',function(e){
+    var b=e.target.closest('[data-j]'); if(!b||answered)return;
+    answered=true;
+    var it=items[i], ok=(+b.dataset.j===it.c);
+    Array.prototype.forEach.call(this.querySelectorAll('.opt'),function(el){
+      el.disabled=true;
+      if(+el.dataset.j===it.c) el.classList.add('correct');
+      else if(el===b) el.classList.add('wrong');
+      else el.classList.add('muted');
+    });
+    stats.n++; if(ok){stats.c++;stats.streak++;} else stats.streak=0;
+    P.hit('labs', it.week, ok);
+    var el=document.getElementById('why');
+    el.className='why'+(ok?'':' miss');
+    el.innerHTML='<span class="vd">'+(ok?'Correct':'The answer is '+S.esc(it.opts[it.c]))+'</span>'+S.esc(it.why);
+    document.getElementById('after').classList.remove('hide');
+    stat();
+  });
+
+  function stat(){
+    document.getElementById('tScore').textContent=stats.c;
+    document.getElementById('tSeen').textContent=stats.n;
+    document.getElementById('tPct').textContent=stats.n?Math.round(stats.c/stats.n*100)+'%':'—';
+    document.getElementById('tStreak').textContent=stats.streak;
+    var tb=document.getElementById('tbS'); if(tb) tb.textContent=stats.n?stats.c+'/'+stats.n:'';
+  }
+
+  function finish(){
+    var pct=stats.n?Math.round(stats.c/stats.n*100):0;
+    P.run('labs',pct);
+    document.querySelector('.card').classList.add('hide');
+    var d=document.getElementById('doneCard');
+    d.classList.remove('hide');
+    document.getElementById('doneTxt').textContent='You scored '+stats.c+' of '+stats.n+' ('+pct+'%). '+
+      (pct>=85?'Lab signatures are solid.':pct>=70?'Close — re-read the ones you missed above.':'Worth another pass; these are guaranteed points on the final.');
+  }
+
+  document.getElementById('nextBtn').addEventListener('click',function(){ i++; draw(); });
+  draw(); stat();
+});
+</script>
+</body>
+</html>

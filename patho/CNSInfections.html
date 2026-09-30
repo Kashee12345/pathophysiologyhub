@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f7f2ea">
+<title>Other Neurological Disorders</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{ --card:#fffdf8; --ink:#2a2420; --muted:#7a6f63; --line:#e3d8c6;
+    --sans:'Inter',system-ui,sans-serif; --disp:'Cinzel Decorative',serif; --accent:#5a7a3a; }
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  body{background:linear-gradient(160deg,#f1f5ea,#e8ece2);color:var(--ink);font-family:var(--sans);min-height:100vh;padding:18px 16px 44px;}
+  header{max-width:1120px;margin:0 auto 16px;text-align:center;}
+  h1{font-family:var(--disp);font-weight:900;font-size:clamp(20px,3.8vw,32px);color:#4a6a2c;line-height:1.05;}
+  header .sub{color:var(--muted);font-size:15px;margin-top:4px;}
+  header .intro{max-width:860px;margin:10px auto 0;font-size:14.5px;line-height:1.5;color:#5c5248;}
+  header .intro b{color:#4a6a2c;}
+  .wrap{max-width:1120px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;box-shadow:0 6px 22px rgba(70,100,40,.07);}
+  .card h2{font-family:var(--disp);font-weight:700;font-size:16px;color:#4a6a2c;margin-bottom:6px;}
+  .card h2 + .desc{font-size:13px;color:var(--muted);margin-bottom:10px;line-height:1.4;}
+  svg{display:block;width:100%;height:auto;max-height:280px;}
+  #liveCap{margin-top:8px;background:#eaf1e0;border:1px solid #cfe0bb;border-radius:10px;padding:10px 13px;font-size:14px;line-height:1.5;color:#3a5620;text-align:center;} #liveCap b{color:#2f4a18;}
+  @keyframes pulse{0%,100%{opacity:.4}50%{opacity:.85}}
+  .pulse{animation:pulse 1.3s ease-in-out infinite;}
+  @keyframes zig{0%,100%{transform:translateX(0)}50%{transform:translateX(6px)}}
+  .zig{animation:zig .3s ease-in-out infinite;}
+  #stage{border-radius:12px;padding:11px 14px;margin-bottom:12px;color:#fff;font-weight:700;font-size:16px;text-align:center;background:#6a8a4a;}
+  #stage small{display:block;font-weight:500;font-size:13px;opacity:.93;margin-top:2px;}
+  .btns{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px;}
+  .nb{border:1px solid var(--line);background:#fff;border-radius:10px;padding:9px 6px;cursor:pointer;text-align:center;font-weight:700;font-size:12px;color:#4a4038;transition:.12s;line-height:1.2;}
+  .nb small{display:block;font-weight:500;font-size:9px;color:var(--muted);margin-top:1px;}
+  .nb:hover{transform:translateY(-2px);} .nb.on{background:#5a7a3a;color:#fff;border-color:transparent;} .nb.on small{color:rgba(255,255,255,.9);}
+  #info{border:1px solid var(--line);border-left:5px solid var(--accent);background:#f0f5e8;border-radius:10px;padding:12px 13px;margin-top:16px;}
+  #info .n{font-family:var(--disp);font-weight:700;font-size:16px;color:#4a6a2c;} #info .plain{font-size:14px;line-height:1.5;color:#2a2420;margin-top:8px;font-weight:600;}
+  #info .story{font-size:12.8px;line-height:1.5;color:#3a3630;margin-top:8px;background:#fff;border-radius:8px;padding:9px 11px;border:1px solid #d7e2c6;}
+  #info .ss{margin-top:8px;font-size:12.3px;color:#5c5248;} #info .ss b{color:#2f4a18;}
+  @media (max-width:880px){ .wrap{grid-template-columns:1fr;} }
+</style>
+</head>
+<body>
+<header>
+  <h1>Other Neurological Disorders</h1>
+  <div class="sub">Infections, fluid, nerves &amp; development · Week 5</div>
+  <div class="intro">A grab-bag of high-yield neuro conditions — brain and cord infections, too much CSF, a facial nerve palsy, misfiring electrical activity, and a developmental defect. Click each.</div>
+</header>
+<div class="wrap">
+  <div>
+    <div class="card">
+      <h2>The picture</h2>
+      <div class="desc">A simple visual of what goes wrong in each.</div>
+      <svg id="art" viewBox="0 0 300 250" aria-label="neuro disorder"></svg>
+      <div id="liveCap">Pick a condition.</div>
+    </div>
+  </div>
+  <div>
+    <div id="stage">Pick a condition<small>tap to learn</small></div>
+    <div class="card">
+      <div class="btns" id="btns">
+        <button class="nb on" data-d="meningitis">Meningitis<small>meninges</small></button>
+        <button class="nb" data-d="encephalitis">Encephalitis<small>brain tissue</small></button>
+        <button class="nb" data-d="hydro">Hydrocephalus<small>CSF ↑</small></button>
+        <button class="nb" data-d="seizure">Seizures<small>electrical</small></button>
+        <button class="nb" data-d="bells">Bell's Palsy<small>CN 7</small></button>
+        <button class="nb" data-d="bifida">Spina Bifida<small>folate</small></button>
+      </div>
+    </div>
+    <div class="card" style="margin-top:16px;"><h2>What it is</h2><div id="info"></div></div>
+  </div>
+</div>
+<script>
+(function(){
+  const $=id=>document.getElementById(id); let cur='meningitis';
+  const INFO={
+    meningitis:{name:'Meningitis',color:'#a5442a',
+      plain:'Inflammation of the meninges — the classic triad is a stiff neck, severe headache, and fever.',
+      story:'Inflammation of the <b>meningeal tissues</b> around the brain and cord. <b>Bacterial is more severe</b>; <b>viral is usually self-limiting</b>. Classic triad: <b>nuchal rigidity (stiff neck), severe headache, and fever</b> (fever especially with bacterial).',
+      ss:'Triad: nuchal rigidity · severe headache · fever.'},
+    encephalitis:{name:'Encephalitis',color:'#8a4a2a',
+      plain:'Acute inflammation of the brain tissue itself — most often from a virus (herpes).',
+      story:'Inflammation of the <b>brain tissue</b> (vs the meninges). Most common cause is a <b>virus — herpes</b> — but also bacteria, parasites, or rabies. Symptoms are <b>non-specific</b>: fever, headache, photophobia, confusion.',
+      ss:'Fever, headache, photophobia, confusion. Herpes is #1 viral cause.'},
+    hydro:{name:'Hydrocephalus',color:'#3a86b0',
+      plain:'"Water head" — CSF builds up in the brain\'s ventricles, either overmade or unable to drain.',
+      story:'Accumulation of <b>CSF in the ventricles</b> — from <b>overproduction</b> or a <b>drainage blockage</b>. In <b>infants (congenital, most common)</b>: enlarging head circumference, irritability, LOC changes. In <b>adults</b>: headache, vomiting, ataxia, urinary incontinence, lethargy.',
+      ss:'Infant: ↑ head circumference. Adult: headache, ataxia, incontinence.'},
+    seizure:{name:'Seizures',color:'#7a5aa0',
+      plain:'A burst of disturbed, disorganized electrical activity in the brain.',
+      story:'A <b>disturbance of the brain\'s electrical activity</b>. <b>Status epilepticus</b> is a prolonged seizure (or repeated seizures without recovery in between) — a medical emergency because sustained activity can damage the brain.',
+      ss:'Status epilepticus = prolonged/continuous seizure = emergency.'},
+    bells:{name:"Bell's Palsy",color:'#b0862a',
+      plain:'A sudden one-sided facial droop from facial-nerve (CN 7) palsy — the face only.',
+      story:'<b>Unilateral paralysis of the facial nerve (CN 7)</b>, cause mostly unknown (<b>herpes</b> suspected in many). Only the <b>face</b> is weak — <b>no arm/leg weakness</b>, which helps tell it from a stroke.',
+      ss:'Facial weakness only, no limb involvement (vs stroke).'},
+    bifida:{name:'Spina Bifida',color:'#5a7a3a',
+      plain:'A birth defect where the spinal column doesn\'t close properly — linked to low folate.',
+      story:'<b>Improper closing of the spinal column</b> during development, caused by <b>maternal folate deficiency</b> (the neural tube forms at ~3 weeks). Types range from mild to severe: <b>occulta</b> (hidden), <b>meningocele</b>, and <b>myelomeningocele</b> (most severe).',
+      ss:'Occulta (hidden) → meningocele → myelomeningocele. Prevent with folate.'}
+  };
+  function draw(){ const st=cur,C=INFO[st].color; let s='';
+    if(st==='meningitis'||st==='encephalitis'||st==='hydro'||st==='seizure'){
+      // brain/head
+      const big = st==='hydro';
+      s+='<circle cx="150" cy="115" r="'+(big?85:70)+'" fill="#f2ddc8" stroke="#d8b898" stroke-width="2.5"/>';
+      s+='<path d="M150 '+(big?45:60)+' C110 '+(big?45:60)+' 88 100 88 130 C88 160 110 '+(big?185:175)+' 150 '+(big?188:178)+' C190 '+(big?185:175)+' 212 160 212 130 C212 100 190 '+(big?45:60)+' 150 '+(big?45:60)+' Z" fill="#f0c8bc" stroke="#c9a090" stroke-width="2"/>';
+      if(st==='meningitis'){ s+='<circle class="pulse" cx="150" cy="115" r="76" fill="none" stroke="'+C+'" stroke-width="6"/>'; s+='<text x="150" y="220" text-anchor="middle" font-size="10.5" font-weight="700" fill="'+C+'">meninges inflamed (outer layers)</text>'; }
+      else if(st==='encephalitis'){ s+='<circle class="pulse" cx="150" cy="120" r="40" fill="'+C+'" opacity="0.35"/>'; s+='<text x="150" y="220" text-anchor="middle" font-size="10.5" font-weight="700" fill="'+C+'">brain tissue inflamed (inside)</text>'; }
+      else if(st==='hydro'){ s+='<g class="pulse"><path d="M135 90 q-18 25 0 55 M165 90 q18 25 0 55" fill="#8fc0e0" stroke="#3a86b0" stroke-width="2"/></g>'; s+='<text x="150" y="228" text-anchor="middle" font-size="10.5" font-weight="700" fill="'+C+'">CSF fills the ventricles</text>'; }
+      else { s+='<g class="zig"><path d="M105 115 l12 -22 l10 40 l12 -50 l12 44 l10 -18 l16 0" fill="none" stroke="'+C+'" stroke-width="3"/></g>'; s+='<text x="150" y="220" text-anchor="middle" font-size="10.5" font-weight="700" fill="'+C+'">disordered electrical activity</text>'; }
+    } else if(st==='bells'){
+      s+='<circle cx="150" cy="115" r="70" fill="#f2ddc8" stroke="#d8b898" stroke-width="2.5"/>';
+      // droopy left side
+      s+='<circle cx="128" cy="100" r="5" fill="#4a3a2a"/><circle cx="172" cy="100" r="5" fill="#4a3a2a"/>';
+      s+='<path class="pulse" d="M118 125 q10 18 0 34" stroke="'+C+'" stroke-width="3" fill="none"/>';
+      s+='<path d="M128 145 q22 -14 44 0" fill="none" stroke="#4a3a2a" stroke-width="3" stroke-linecap="round"/>';
+      s+='<text x="118" y="180" text-anchor="middle" font-size="9" font-weight="700" fill="'+C+'">droop (one side)</text>';
+      s+='<text x="150" y="210" text-anchor="middle" font-size="10.5" font-weight="700" fill="'+C+'">facial nerve (CN 7) only</text>';
+    } else {
+      // spine with defect
+      s+='<rect x="140" y="40" width="20" height="170" rx="6" fill="#e8dcc8" stroke="#c9b498" stroke-width="1.5"/>';
+      for(let i=0;i<7;i++)s+='<rect x="136" y="'+(50+i*22)+'" width="28" height="14" rx="4" fill="#f0e4d0" stroke="#c9b498" stroke-width="1"/>';
+      s+='<g class="pulse"><circle cx="150" cy="160" r="14" fill="'+C+'"/><path d="M150 160 q0 20 0 24" stroke="'+C+'" stroke-width="4"/></g>';
+      s+='<text x="150" y="228" text-anchor="middle" font-size="10.5" font-weight="700" fill="'+C+'">spinal column doesn\'t close</text>';
+    }
+    $('art').innerHTML=s;
+  }
+  function render(){ const inf=INFO[cur]; draw();
+    document.querySelectorAll('.nb').forEach(b=>b.classList.toggle('on',b.dataset.d===cur));
+    $('stage').style.background=inf.color; $('stage').innerHTML=inf.name+'<small>'+inf.plain.slice(0,40)+'…</small>';
+    $('info').innerHTML='<div class="n">'+inf.name+'</div><div class="plain">'+inf.plain+'</div><div class="story">'+inf.story+'</div><div class="ss"><b>Key:</b> '+inf.ss+'</div>';
+    $('liveCap').innerHTML='<b>'+inf.name+'</b> — '+inf.plain;
+  }
+  document.querySelectorAll('.nb').forEach(b=>b.addEventListener('click',()=>{ cur=b.dataset.d; render(); }));
+  render();
+})();
+</script>
+</body>
+</html>

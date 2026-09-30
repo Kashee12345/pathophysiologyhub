@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f7f2ea">
+<title>SIRS to Septic Shock</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{ --card:#fffdf8; --ink:#2a2420; --muted:#7a6f63; --line:#e3d8c6;
+    --sans:'Inter',system-ui,sans-serif; --disp:'Cinzel Decorative',serif; --accent:#b0402a; }
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  body{background:linear-gradient(160deg,#faf1ef,#ece4e2);color:var(--ink);font-family:var(--sans);min-height:100vh;padding:18px 16px 44px;}
+  header{max-width:1120px;margin:0 auto 16px;text-align:center;}
+  h1{font-family:var(--disp);font-weight:900;font-size:clamp(21px,4vw,34px);color:#9a341f;line-height:1.05;}
+  header .sub{color:var(--muted);font-size:15px;margin-top:4px;}
+  header .intro{max-width:860px;margin:10px auto 0;font-size:14.5px;line-height:1.5;color:#5c5248;}
+  header .intro b{color:#9a341f;}
+  .wrap{max-width:1120px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;box-shadow:0 6px 22px rgba(150,60,40,.07);}
+  .card h2{font-family:var(--disp);font-weight:700;font-size:16px;color:#9a341f;margin-bottom:6px;}
+  .card h2 + .desc{font-size:13px;color:var(--muted);margin-bottom:10px;line-height:1.4;}
+  .monitor{background:#12100e;border-radius:12px;padding:14px;color:#fff;}
+  .mrow{display:grid;grid-template-columns:1fr 1fr;gap:9px;}
+  .mcell{background:#1c1a17;border-radius:9px;padding:9px 11px;}
+  .mcell .lab{font-size:10.5px;color:#9a9088;text-transform:uppercase;letter-spacing:.04em;}
+  .mcell .v{font-family:'Cinzel Decorative',serif;font-weight:800;font-size:24px;line-height:1.1;transition:.4s;}
+  .mcell .v.hi{color:#ff6a4a;} .mcell .v.ok{color:#6fe0a0;} .mcell .v.warn{color:#f0c040;}
+  #liveCap{margin-top:12px;background:#f6e8e4;border:1px solid #ecc9bf;border-radius:10px;padding:10px 13px;font-size:14px;line-height:1.5;color:#7a3018;text-align:center;} #liveCap b{color:#8a2810;}
+  .steps{display:flex;flex-direction:column;gap:6px;}
+  .st{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:10px;border:1px solid var(--line);background:#faf4f2;opacity:.42;transition:.25s;}
+  .st.lit{opacity:1;background:#fff;} .st.cur{border-left:5px solid #b0402a;box-shadow:0 3px 12px rgba(150,60,40,.12);}
+  .st .num{width:26px;height:26px;flex:none;border-radius:50%;background:#ecdcd6;color:#8a6a5a;font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center;}
+  .st.lit .num{background:#b0402a;color:#fff;} .st.cur .num{background:#c0392b;}
+  .st .tx b{font-size:13.5px;} .st .tx small{display:block;color:var(--muted);font-size:11.5px;margin-top:1px;}
+  .ctrl{display:flex;gap:9px;margin-top:12px;} .ctrl button{flex:1;border:none;border-radius:11px;padding:12px;font-family:var(--sans);font-weight:800;font-size:14px;color:#fff;cursor:pointer;}
+  .adv{background:#b0402a;} .adv:disabled{background:#d8c3bc;} .rst{background:#8a8078;flex:0 0 38%;}
+  #info{border:1px solid var(--line);border-left:5px solid var(--accent);background:#f8efec;border-radius:10px;padding:11px 13px;margin-top:12px;}
+  #info .n{font-family:var(--disp);font-weight:700;font-size:16px;color:#9a341f;} #info .story{font-size:13px;line-height:1.5;color:#3a3630;margin-top:6px;}
+  @media (max-width:880px){ .wrap{grid-template-columns:1fr;} }
+</style>
+</head>
+<body>
+<header>
+  <h1>SIRS → Septic Shock</h1>
+  <div class="sub">How an infection spirals out of control · Week 4</div>
+  <div class="intro">Sepsis is a runaway, whole-body reaction to infection. It escalates in stages — from a general inflammatory alarm (<b>SIRS</b>) to organ failure and dangerously low blood pressure (<b>septic shock</b>). Step through it and watch the monitor.</div>
+</header>
+<div class="wrap">
+  <div>
+    <div class="card">
+      <h2>Patient monitor</h2>
+      <div class="desc">Watch the vital signs and labs deteriorate as the infection takes over.</div>
+      <div class="monitor">
+        <div class="mrow">
+          <div class="mcell"><div class="lab">Temp</div><div class="v ok" id="mTemp">37.0°</div></div>
+          <div class="mcell"><div class="lab">Heart rate</div><div class="v ok" id="mHr">78</div></div>
+          <div class="mcell"><div class="lab">Resp rate</div><div class="v ok" id="mRr">16</div></div>
+          <div class="mcell"><div class="lab">Blood pressure</div><div class="v ok" id="mBp">120/78</div></div>
+          <div class="mcell"><div class="lab">WBC</div><div class="v ok" id="mWbc">7.5</div></div>
+          <div class="mcell"><div class="lab">Lactate</div><div class="v ok" id="mLac">1.0</div></div>
+        </div>
+      </div>
+      <div id="liveCap">Press Advance to escalate.</div>
+    </div>
+  </div>
+  <div>
+    <div class="card">
+      <h2>The escalation</h2>
+      <div class="steps" id="steps"></div>
+      <div class="ctrl"><button class="adv" id="adv">► Advance</button><button class="rst" id="rst">↺ Reset</button></div>
+      <div id="info"></div>
+    </div>
+  </div>
+</div>
+<script>
+(function(){
+  const $=id=>document.getElementById(id); let step=0;
+  const STAGES=[
+    {b:'Baseline',s:'stable — normal vitals',n:'Healthy baseline',story:'Vitals are normal. An infection may be brewing, but the body is compensating.',
+      v:{temp:['37.0°','ok'],hr:['78','ok'],rr:['16','ok'],bp:['120/78','ok'],wbc:['7.5','ok'],lac:['1.0','ok']}},
+    {b:'SIRS',s:'systemic inflammatory response (≥2 signs)',n:'SIRS',story:'The <b>Systemic Inflammatory Response Syndrome</b>: the body reacts all over. Diagnosed with <b>≥2 of</b>: temp &gt;38 or &lt;36°, HR &gt;90, RR &gt;20, or an abnormal WBC. SIRS alone doesn\'t require infection (trauma or burns can cause it too).',
+      v:{temp:['38.6°','hi'],hr:['104','hi'],rr:['24','hi'],bp:['118/74','ok'],wbc:['14.2','hi'],lac:['1.4','ok']}},
+    {b:'Sepsis',s:'SIRS + a confirmed infection',n:'Sepsis',story:'<b>SIRS plus a documented (or strongly suspected) infection.</b> Now it\'s sepsis — the inflammatory storm is being driven by a real pathogen.',
+      v:{temp:['39.1°','hi'],hr:['118','hi'],rr:['28','hi'],bp:['104/64','warn'],wbc:['18.0','hi'],lac:['2.2','warn']}},
+    {b:'Severe Sepsis',s:'sepsis + organ dysfunction',n:'Severe Sepsis',story:'Sepsis now with <b>organ dysfunction</b> — rising <b>lactate</b>, falling urine output, or altered mental status signal that tissues aren\'t getting enough oxygen.',
+      v:{temp:['39.4°','hi'],hr:['128','hi'],rr:['32','hi'],bp:['88/52','warn'],wbc:['21.5','hi'],lac:['3.6','hi']}},
+    {b:'Septic Shock',s:'persistent hypotension despite fluids',n:'Septic Shock',story:'The most dangerous stage: <b>blood pressure stays low despite IV fluids</b>. Vessels are dilated and leaky, organs are starved, and the patient needs pressors and aggressive care. High mortality.',
+      v:{temp:['39.0°','hi'],hr:['138','hi'],rr:['36','hi'],bp:['74/40','hi'],wbc:['24.0','hi'],lac:['5.8','hi']}}
+  ];
+  function render(){
+    const st=STAGES[step], v=st.v;
+    function set(id,pair){ const el=$(id); el.textContent=pair[0]; el.className='v '+pair[1]; }
+    set('mTemp',v.temp); set('mHr',v.hr); set('mRr',v.rr); set('mBp',v.bp); set('mWbc',v.wbc); set('mLac',v.lac);
+    $('steps').innerHTML=STAGES.map((s,i)=>'<div class="st '+(i<=step?'lit':'')+' '+(i===step?'cur':'')+'"><div class="num">'+i+'</div><div class="tx"><b>'+s.b+'</b><small>'+s.s+'</small></div></div>').join('');
+    $('adv').disabled=step>=STAGES.length-1; $('adv').textContent=step>=STAGES.length-1?'✓ Septic shock':'► Advance';
+    $('info').innerHTML='<div class="n">'+st.n+'</div><div class="story">'+st.story+'</div>';
+    $('liveCap').innerHTML='<b>'+st.b+'</b> — '+st.s+'.';
+  }
+  $('adv').addEventListener('click',()=>{ if(step<STAGES.length-1){step++;render();} });
+  $('rst').addEventListener('click',()=>{ step=0; render(); });
+  render();
+})();
+</script>
+</body>
+</html>

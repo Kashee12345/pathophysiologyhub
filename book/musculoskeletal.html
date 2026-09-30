@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0c3a44">
+<title>Musculoskeletal &amp; Integumentary &mdash; Pathophysiology &middot; Dr. Akash Garg</title>
+<meta name="description" content="A student-friendly, exact pathophysiology chapter on the endocrine system — feedback loops, adrenal, thyroid, diabetes, growth hormone, and ADH — with the concept explained plainly and an interactive to play with in every section.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#22312f; --soft:#4a5a58; --muted:#7c8a88; --faint:#9aa8a6; --line:#e6e2d6;
+    --paper:#faf8f2; --card:#fffdf7; --accent:#0c7283; --accent-dk:#0c3a44; --gold:#b8862f;
+    --serif:"Source Serif 4",Georgia,"Times New Roman",serif; --disp:"Fraunces",Georgia,serif; --ui:"Inter",system-ui,sans-serif;
+    --shadow:0 1px 3px rgba(20,40,46,.06);
+  }
+  *{box-sizing:border-box;} html{scroll-behavior:smooth;}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--serif);font-size:18px;line-height:1.7;-webkit-font-smoothing:antialiased;}
+  a{color:var(--accent);text-decoration:none;} a:hover{text-decoration:underline;}
+
+  /* top bar + progress */
+  .topbar{position:sticky;top:0;z-index:50;background:rgba(250,248,242,.92);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid var(--line);}
+  .topbar .row{max-width:1120px;margin:0 auto;padding:11px 20px;display:flex;align-items:center;gap:14px;font-family:var(--ui);}
+  .topbar a.home{font-size:13.5px;font-weight:600;color:var(--soft);white-space:nowrap;}
+  .topbar a.home:hover{color:var(--accent);text-decoration:none;}
+  .topbar .ct{font-size:13px;color:var(--faint);font-weight:600;margin-left:auto;white-space:nowrap;}
+  .progress{height:3px;background:transparent;} .progress .bar{height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--gold));transition:width .1s;}
+
+  .layout{max-width:1120px;margin:0 auto;padding:0 20px;display:grid;grid-template-columns:230px 1fr;gap:30px;}
+  /* sidebar TOC */
+  aside{font-family:var(--ui);padding-top:34px;}
+  aside .toc{position:sticky;top:74px;}
+  aside .toc h4{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--faint);margin:0 0 12px;font-weight:700;}
+  aside .toc a{display:block;font-size:13.5px;color:var(--soft);padding:6px 10px;border-left:2px solid var(--line);line-height:1.35;}
+  aside .toc a:hover{color:var(--accent);text-decoration:none;border-left-color:var(--accent);}
+  aside .toc a.on{color:var(--accent-dk);font-weight:700;border-left-color:var(--gold);background:#f3efe3;border-radius:0 8px 8px 0;}
+
+  .reading{max-width:1040px;padding:30px 0 70px;min-width:0;}
+  .reading .col{max-width:718px;}
+  /* opener */
+  .kicker{font-family:var(--ui);font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);font-weight:700;}
+  h1{font-family:var(--disp);font-weight:600;font-size:clamp(32px,5.2vw,46px);line-height:1.08;letter-spacing:-.5px;color:var(--accent-dk);margin:10px 0 6px;max-width:718px;}
+  .lede{font-size:20px;line-height:1.6;color:var(--soft);max-width:718px;margin:14px 0 0;}
+  h2{font-family:var(--disp);font-weight:600;font-size:27px;letter-spacing:-.3px;color:var(--accent-dk);margin:52px 0 4px;scroll-margin-top:70px;max-width:718px;}
+  h2 .num{font-family:var(--ui);font-size:13px;font-weight:700;color:var(--gold);letter-spacing:1px;display:block;margin-bottom:4px;text-transform:uppercase;}
+  h3{font-family:var(--disp);font-weight:600;font-size:20px;color:var(--accent-dk);margin:26px 0 2px;max-width:718px;}
+  p{margin:14px 0;max-width:718px;} p b,li b{color:var(--accent-dk);font-weight:600;}
+  .reading ul,.reading ol{max-width:718px;padding-left:24px;} .reading li{margin:7px 0;}
+
+  .objectives{max-width:718px;background:#f2efe4;border:1px solid #e4ddc8;border-radius:14px;padding:18px 22px;margin:24px 0;font-family:var(--ui);}
+  .objectives h4{margin:0 0 8px;font-size:12px;letter-spacing:1px;text-transform:uppercase;color:var(--gold);font-weight:700;}
+  .objectives ul{margin:0;padding-left:20px;} .objectives li{font-size:14.5px;line-height:1.5;color:var(--soft);margin:6px 0;font-family:var(--serif);}
+
+  .kp{max-width:718px;background:#eef5f6;border:1px solid #d3e5e7;border-left:5px solid var(--accent);border-radius:0 12px 12px 0;padding:14px 20px;margin:22px 0;font-family:var(--ui);}
+  .kp .t{font-size:11.5px;letter-spacing:1px;text-transform:uppercase;color:var(--accent-dk);font-weight:700;margin-bottom:6px;}
+  .kp ul{margin:0;padding-left:18px;} .kp li{font-size:14.5px;line-height:1.55;color:var(--ink);margin:5px 0;font-family:var(--serif);}
+  .pearl{max-width:718px;background:#fbf3e2;border:1px solid #ecd9ac;border-left:5px solid var(--gold);border-radius:0 12px 12px 0;padding:13px 20px;margin:22px 0;font-family:var(--serif);font-size:15px;line-height:1.6;color:#6a5320;}
+  .pearl b{color:#5a4212;}
+
+  /* interactive embed (breaks out wider than prose) */
+  .embed{max-width:1040px;margin:26px 0 30px;}
+  .embed .cap{font-family:var(--ui);font-size:12.5px;font-weight:600;color:var(--muted);margin:0 0 8px;display:flex;align-items:center;gap:8px;}
+  .embed .cap .tag{background:var(--accent);color:#fff;font-size:10.5px;letter-spacing:.5px;text-transform:uppercase;font-weight:700;padding:3px 9px;border-radius:20px;}
+  .embed .frame{border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:0 8px 26px rgba(20,40,46,.09);background:#fff;}
+  .embed iframe{display:block;width:100%;height:640px;border:0;}
+  .embed .cap a{font-family:var(--ui);margin-left:auto;font-size:12.5px;font-weight:600;}
+
+  /* summary + quiz */
+  .summary{max-width:718px;background:var(--accent-dk);color:#eaf3f4;border-radius:16px;padding:24px 26px;margin:50px 0 30px;font-family:var(--serif);}
+  .summary h2{color:#fff;margin:0 0 6px;font-size:24px;}
+  .summary ul{margin:10px 0 0;padding-left:20px;} .summary li{margin:8px 0;font-size:15.5px;line-height:1.55;color:#dcebec;}
+  .summary li b{color:#fff;}
+  .quiz{max-width:718px;margin:36px 0;}
+  .quiz h2{margin-top:0;}
+  .q{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 20px;margin:12px 0;box-shadow:var(--shadow);}
+  .q .qq{font-weight:600;color:var(--accent-dk);font-family:var(--serif);}
+  .q button{margin-top:10px;font-family:var(--ui);font-size:13px;font-weight:700;color:var(--accent);background:#eef5f6;border:1px solid #d3e5e7;border-radius:20px;padding:7px 15px;cursor:pointer;}
+  .q button:hover{background:#e2eff0;}
+  .q .ans{display:none;margin-top:12px;padding-top:12px;border-top:1px dashed var(--line);font-size:15.5px;color:var(--soft);}
+  .q .ans .a{font-weight:700;color:var(--accent-dk);}
+  .q.show .ans{display:block;} .q.show button{display:none;}
+
+  .chapnav{max-width:718px;display:flex;justify-content:space-between;gap:12px;margin:44px 0 0;font-family:var(--ui);}
+  .chapnav a,.chapnav span{flex:1;border:1px solid var(--line);border-radius:12px;padding:14px 16px;font-size:13.5px;background:var(--card);}
+  .chapnav a{color:var(--accent-dk);font-weight:600;} .chapnav a:hover{border-color:var(--accent);text-decoration:none;}
+  .chapnav .k{display:block;font-size:11px;color:var(--faint);text-transform:uppercase;letter-spacing:.5px;margin-bottom:2px;}
+  .chapnav .next{text-align:right;} .chapnav .disabled{color:var(--faint);}
+
+  footer{font-family:var(--ui);text-align:center;color:var(--faint);font-size:12.5px;border-top:1px solid var(--line);padding:26px 20px 50px;margin-top:30px;}
+  footer b{color:var(--soft);}
+
+  @media(max-width:860px){
+    .layout{grid-template-columns:1fr;gap:0;}
+    aside{padding-top:16px;} aside .toc{position:static;}
+    aside .toc{border:1px solid var(--line);border-radius:12px;padding:12px 14px;background:var(--card);}
+    aside .toc a{border-left:none;padding:6px 4px;}
+    aside .toc a.on{background:none;}
+    .reading{padding-top:16px;}
+    .embed iframe{height:660px;}
+  }
+
+  /* comparison tables */
+  .ctwrap{max-width:718px;overflow-x:auto;margin:22px 0;-webkit-overflow-scrolling:touch;}
+  table.ctable{border-collapse:collapse;width:100%;min-width:520px;font-family:var(--ui);font-size:14px;background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden;}
+  table.ctable th,table.ctable td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);vertical-align:top;line-height:1.45;}
+  table.ctable thead th{background:#eef5f6;color:var(--accent-dk);font-weight:700;font-size:12.5px;letter-spacing:.3px;}
+  table.ctable tbody tr:last-child td{border-bottom:none;}
+  table.ctable td:first-child,table.ctable th:first-child{font-weight:600;color:var(--soft);white-space:nowrap;}
+  table.ctable td b{color:var(--accent-dk);font-weight:600;}
+  /* glossary */
+  dl.terms{max-width:718px;margin:18px 0;}
+  dl.terms dt{font-family:var(--ui);font-weight:700;color:var(--accent-dk);font-size:15px;margin-top:15px;}
+  dl.terms dd{margin:3px 0 0;color:var(--soft);}
+  /* flashcard drill widget */
+  .fc{max-width:718px;margin:20px 0;}
+  .fc-card{perspective:1600px;height:236px;cursor:pointer;margin-bottom:14px;}
+  .fc-inner{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform .55s cubic-bezier(.4,.2,.2,1);}
+  .fc-card.flip .fc-inner{transform:rotateY(180deg);}
+  .fc-face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border:1px solid var(--line);border-radius:16px;padding:26px 30px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:12px;box-shadow:0 8px 26px rgba(20,40,46,.09);overflow:auto;}
+  .fc-front{background:linear-gradient(180deg,#fffdf7,#eef5f6);}
+  .fc-back{background:linear-gradient(180deg,#fbf3e2,#f3e6c9);transform:rotateY(180deg);border-color:#e6d3a6;}
+  .fc-side{position:absolute;top:12px;left:16px;font-family:var(--ui);font-size:10px;font-weight:800;letter-spacing:1.3px;text-transform:uppercase;color:var(--faint);}
+  .fc-back .fc-side{color:var(--gold);}
+  .fc-q{font-family:var(--disp);font-weight:600;font-size:19px;line-height:1.35;color:var(--accent-dk);}
+  .fc-a{font-family:var(--serif);font-weight:600;font-size:17px;line-height:1.45;color:var(--ink);}
+  .fc-hint{position:absolute;bottom:11px;left:0;right:0;font-family:var(--ui);font-size:11.5px;color:var(--faint);}
+  .fc-nav{display:flex;gap:9px;align-items:center;}
+  .fc-count{flex:1;text-align:center;font-family:var(--ui);font-size:13px;color:var(--muted);font-weight:600;}
+  .fc-btn{font-family:var(--ui);font-size:13px;font-weight:700;color:var(--accent);background:#eef5f6;border:1px solid #d3e5e7;border-radius:20px;padding:8px 13px;cursor:pointer;}
+  .fc-btn:hover{background:#e2eff0;}
+  .fc-full{display:block;margin-top:14px;text-align:center;font-family:var(--ui);font-size:13.5px;font-weight:700;background:var(--accent-dk);color:#eaf3f4;border-radius:12px;padding:12px;}
+  .fc-full:hover{text-decoration:none;filter:brightness(1.12);}
+</style>
+</head>
+<body>
+
+
+  <div class="topbar">
+    <div class="row">
+      <a class="home" href="index.html">📖 Contents</a>
+      
+      <span class="ct">Week 14 · MSK &amp; Skin</span>
+    </div>
+    <div class="progress"><div class="bar" id="bar"></div></div>
+  </div>
+
+  <div class="layout">
+    <aside>
+      <nav class="toc">
+        <h4>In this chapter</h4>
+        <a href="#w14_fracture" class="on">1 · Fractures</a>
+        <a href="#w14_fxcomp">2 · Fracture complications</a>
+        <a href="#w14_msk">3 · Bone &amp; joint disorders</a>
+        <a href="#w14_skin">4 · Skin conditions</a>
+        <a href="#w14_skininf">5 · Skin infections</a>
+        <a href="#w14_burns">6 · Burns</a>
+        <a href="#summary">The chapter in one breath</a>
+        <a href="#glossary">Words worth knowing</a>
+        <a href="#cards">Flashcards</a>
+        <a href="#quiz">Check yourself</a>
+      </nav>
+    </aside>
+
+    <main class="reading">
+      <div class="kicker">Pathophysiology · Week 14</div>
+      <h1>Musculoskeletal &amp; Integumentary</h1>
+      <p class="lede">This final chapter covers the <b>frame</b> and the <b>wrapping</b> &mdash; the bones and joints that hold us up and the skin that keeps the world out. It runs from fractures and their dangerous complications through the common joint diseases, then across the skin&rsquo;s own disorders, infections, and the whole-body emergency of a serious <b>burn</b>.</p>
+      <div class="objectives">
+        <h4>By the end of this chapter you can</h4>
+        <ul>
+          <li>Describe fracture types and the stages of <b>bone healing</b>.</li>
+          <li>Recognize <b>compartment syndrome</b> and fat embolism as emergencies.</li>
+          <li>Tell <b>osteoarthritis</b> from <b>rheumatoid arthritis</b>, and recognize gout and osteoporosis.</li>
+          <li>Stage pressure injuries and recognize <b>melanoma</b> (ABCDE).</li>
+          <li>Assess <b>burn</b> depth and size and name the priorities.</li>
+        </ul>
+      </div>
+
+      <h2 id="w14_fracture"><span class="num">Section 1</span>Fractures &amp; bone healing</h2>
+<figure class="bref" data-sec="1" style="max-width:1040px;margin:10px 0 24px;padding:0;"><div style="border:1px solid #e6e2d6;border-radius:16px;overflow:hidden;background:#fffdf7;box-shadow:0 8px 26px rgba(20,40,46,.09);"><img src="img/musculoskeletal_s1.jpg" alt="Fractures reference figure" loading="lazy" style="display:block;width:100%;height:auto;background:#fff;" onerror="this.closest('figure').style.display='none'"></div><figcaption style="font-family:Inter,system-ui,sans-serif;font-size:12.5px;color:#7c8a88;margin-top:8px;line-height:1.5;"><b style="color:#0c3a44;">Reference.</b> Fractures <span style="color:#9aa8a6;">&mdash; Laboratoires Servier, CC BY-SA 3.0 (via Wikimedia Commons)</span></figcaption></figure>
+
+
+      <p>Bone looks solid and permanent, but it is actually <b>living tissue</b> that constantly rebuilds itself. A tough outer shell of <b>compact (cortical) bone</b> surrounds a spongy inner layer, and the whole thing is wrapped in a thin, blood-rich, nerve-rich membrane called the <b>periosteum</b>. Inside, bone cells work in a lifelong partnership: <b>osteoblasts</b> lay down new matrix, and <b>osteoclasts</b> break old matrix down. Because bone is loaded with blood vessels and nerves, a break bleeds and hurts a lot. A <b>fracture</b> is simply a break in the continuity of a bone, and it happens when the force applied is greater than the bone can absorb, whether from a fall, a crash, repetitive stress, or a bone already weakened by disease.</p>
+
+<h3>Types of fractures</h3>
+<p>Naming a fracture describes what actually happened to the bone, which guides how it is treated. The first question is always whether the skin is broken.</p>
+<div class="ctwrap"><table class="ctable"><thead><tr><th>Feature</th><th>Closed (simple)</th><th>Open (compound)</th></tr></thead><tbody><tr><td>Skin</td><td>Intact over the break</td><td>Bone pierces skin or wound reaches the bone</td></tr><tr><td>Infection risk</td><td>Lower</td><td>High, an <em>orthopedic emergency</em></td></tr><tr><td>Priority</td><td>Alignment and immobilization</td><td>Prevent infection (osteomyelitis), then repair</td></tr></tbody></table></div>
+<p>Beyond that, we describe the break pattern. A <b>complete</b> fracture goes all the way through, splitting the bone into pieces. An <b>incomplete</b> fracture only cracks part way, and the classic example is a <b>greenstick</b> fracture, where a soft child's bone bends and splinters on one side like a young twig. Other common patterns include <b>comminuted</b> (the bone shatters into three or more fragments, often from high-energy trauma), <b>transverse</b> (a straight break across the shaft), <b>oblique</b> (an angled line), <b>spiral</b> (a twisting force, sometimes a red flag for abuse), <b>compression</b> (bone is crushed, typical in osteoporotic vertebrae), and <b>pathologic</b> (a break through bone already weakened by tumor or disease). A <b>stress fracture</b> is a tiny crack from repeated overuse.</p>
+
+<h3>How bone heals</h3>
+<p>Bone is one of the few tissues that can heal without a scar, rebuilding itself back to living bone. It moves through overlapping stages, usually taking weeks to months.</p>
+<ul>
+<li><b>Hematoma formation (first hours to days):</b> torn vessels bleed, and a clot forms at the break. This <b>fracture hematoma</b> seals the ends and delivers inflammatory cells that clean up debris. This is why the area is swollen, warm, and painful early on.</li>
+<li><b>Soft callus (roughly days to 2-3 weeks):</b> fibroblasts and chondroblasts build a soft bridge of fibrous tissue and cartilage between the fragments. It is fragile, which is exactly why the bone must stay still now.</li>
+<li><b>Hard callus (about 3 weeks to several months):</b> osteoblasts replace the soft callus with woven bone, forming a bumpy but sturdy <b>bony callus</b> that unites the pieces.</li>
+<li><b>Remodeling (months to years):</b> osteoclasts and osteoblasts reshape the callus along lines of mechanical stress, restoring the bone's original strength and contour.</li>
+</ul>
+<div class="pearl"><b>Callus needs calm.</b> Movement during the soft-callus stage tears the fragile bridge and can lead to delayed union or a <em>nonunion</em>. That single fact explains why immobilization is not optional.</div>
+
+<h3>Signs of a fracture, and why we align and immobilize</h3>
+<p>Suspect a fracture with <b>pain</b> that worsens with movement, <b>swelling</b>, <b>bruising (ecchymosis)</b>, obvious <b>deformity</b> or shortening, <b>loss of function</b>, and sometimes <b>crepitus</b>, a grating sound or feel as bone ends rub. <b>Alignment (reduction)</b> puts the fragments back into their normal position so the callus bridges correctly and the limb heals straight. <b>Immobilization</b> with a cast, splint, or fixation holds that alignment so healing can proceed and, just as importantly, protects nearby nerves and vessels from being torn by sharp bone ends.</p>
+<div class="pearl"><b>Check the 5 P's.</b> After any fracture or cast, assess <em>pain, pallor, pulses, paresthesia, and paralysis</em> distal to the injury to catch compartment syndrome or vascular compromise early.</div>
+
+<h3>Why osteoporosis raises fracture risk</h3>
+<p>In a healthy adult, bone breakdown and rebuilding stay balanced. In <b>osteoporosis</b>, osteoclast activity outpaces osteoblast activity, so bone is resorbed faster than it is replaced. The result is <em>low bone mass and deteriorated microarchitecture</em>, leaving bone porous and brittle. It is often called a silent disease because there are no symptoms until a bone breaks. Falling estrogen after menopause is a major driver, since estrogen normally restrains osteoclasts. That is why postmenopausal women often suffer <b>fragility fractures</b> of the hip, wrist, and spine from forces that would never break healthy bone, sometimes just a minor bump or even a hard cough.</p>
+
+<p>The interactive figure lets you compare fracture patterns and walk through the healing stages, so explore it below.</p>
+
+      <div class="embed">
+        <div class="cap"><span class="tag">Interactive</span> Explore fracture types and how bone heals. <a href="../patho/FractureCare.html" target="_blank" rel="noopener">Open full &uarr;</a></div>
+        <div class="frame"><iframe src="../patho/FractureCare.html" loading="lazy" title="Fracture care interactive"></iframe></div>
+      </div>
+      <div class="kp"><div class="t">Key points</div><ul><li>A fracture is a break in bone continuity; describe it by skin status (open vs closed) and pattern (complete, greenstick, comminuted, and others) because those details guide treatment.</li><li>Healing proceeds through hematoma, soft callus, hard callus, then remodeling, and the soft-callus stage is fragile, which is why immobilization matters.</li><li>Classic signs include pain, swelling, deformity, loss of function, and crepitus; always check neurovascular status (the 5 P's) distal to the injury.</li><li>Reduction restores alignment and immobilization holds it, allowing straight healing and protecting nearby nerves and vessels.</li><li>Osteoporosis tips the balance toward resorption, creating porous, brittle bone and fragility fractures, especially in postmenopausal women.</li></ul></div>
+
+      <h2 id="w14_fxcomp"><span class="num">Section 2</span>Fracture complications</h2>
+<figure class="bref" data-sec="2" style="max-width:1040px;margin:10px 0 24px;padding:0;"><div style="border:1px solid #e6e2d6;border-radius:16px;overflow:hidden;background:#fffdf7;box-shadow:0 8px 26px rgba(20,40,46,.09);"><img src="img/musculoskeletal_s2.jpg" alt="Fracture complications reference figure" loading="lazy" style="display:block;width:100%;height:auto;background:#fff;" onerror="this.closest('figure').style.display='none'"></div><figcaption style="font-family:Inter,system-ui,sans-serif;font-size:12.5px;color:#7c8a88;margin-top:8px;line-height:1.5;"><b style="color:#0c3a44;">Reference.</b> Fracture complications <span style="color:#9aa8a6;">&mdash; Lklundin, CC BY-SA 4.0 (via Wikimedia Commons)</span></figcaption></figure>
+
+
+      <p>When a bone breaks, the body kicks off a beautifully organized repair project. Blood pools at the fracture site and clots into a <b>hematoma</b>, inflammatory cells clean up debris, a soft cartilage <b>callus</b> bridges the gap, and over weeks that callus is replaced by hard bone and finally remodeled back to shape. For this to work, the tissue around the break needs steady blood flow, oxygen, and room to swell. Most fracture complications happen when one of those requirements is violated: pressure builds where it cannot escape, clots or fat droplets travel where they should not, or the healing timeline stalls. Explore the interactive figure below as you read.</p>
+
+<h3>Compartment syndrome: pressure with nowhere to go</h3>
+<p>Muscles are packed into <b>compartments</b> wrapped by tough, inelastic <b>fascia</b>. After a fracture (classically the tibia or forearm), bleeding and swelling raise the pressure inside that closed box. Because the fascia will not stretch, rising pressure first collapses the thin-walled <b>veins</b>, so blood backs up and swelling worsens, then it squeezes <b>capillaries</b> until tissue no longer gets oxygen. This is <b>acute compartment syndrome</b>, and it is a surgical emergency: without prompt <b>fasciotomy</b> to open the compartment, muscle and nerve die within hours, sometimes costing the limb.</p>
+<p>Bedside recognition rests on the <b>6 P's</b>. The earliest and most reliable is <b>pain out of proportion</b> to the injury, especially pain on passive stretch of the fingers or toes. The others are <b>paresthesia</b> (pins-and-needles from nerve ischemia), <b>pallor</b>, <b>pressure</b> (a tight, tense feeling), <b>paralysis</b>, and <b>pulselessness</b>. A crucial teaching point: pulselessness is a <em>late</em> sign. Waiting for the pulse to disappear means waiting until the muscle is already dying.</p>
+
+<div class="pearl"><b>Pain plus a tight cast equals a phone call.</b> Escalating pain that is not relieved by opioids is compartment syndrome until proven otherwise. Never elevate the limb above heart level or apply ice, both reduce arterial inflow, and never assume a good pulse rules it out.</div>
+
+<h3>Fat embolism syndrome: droplets on the move</h3>
+<p>Long bones like the femur and the pelvis contain fatty <b>yellow marrow</b>. When they fracture, marrow fat can enter torn venous channels, travel to the lungs, and trigger an inflammatory cascade. Classic <b>fat embolism syndrome (FES)</b> shows up <em>12 to 72 hours</em> after injury as a triad: <b>respiratory distress</b> (hypoxemia, tachypnea, dyspnea from fat lodging in pulmonary capillaries), <b>neurologic changes</b> (confusion, restlessness, decreased level of consciousness), and a <b>petechial rash</b> across the chest, axillae, and conjunctivae. Those petechiae are fairly specific, so watch for them. Care is largely supportive with oxygen; the best medicine is prevention through early fracture stabilization.</p>
+
+<h3>Clots from lying still: DVT and PE</h3>
+<p>Immobility after a fracture checks every box of <b>Virchow's triad</b>: <em>venous stasis</em> (no calf-muscle pumping), <em>hypercoagulability</em> (the injury itself is prothrombotic), and <em>endothelial injury</em>. The result is <b>deep vein thrombosis (DVT)</b>, usually in the calf, with unilateral swelling, warmth, and tenderness. The feared sequel is a piece breaking off and lodging in the lung, a <b>pulmonary embolism (PE)</b>, presenting as sudden dyspnea, pleuritic chest pain, tachycardia, and hypoxia. Prevention is nursing gold: early mobilization, sequential compression devices, and prophylactic anticoagulation.</p>
+
+<div class="ctwrap"><table class="ctable"><thead><tr><th>Feature</th><th>Fat embolism</th><th>Pulmonary embolism (from DVT)</th></tr></thead><tbody><tr><td>Usual timing</td><td>12 to 72 hours post-fracture</td><td>Days to weeks (immobility)</td></tr><tr><td>Embolic material</td><td>Marrow fat droplets</td><td>Blood clot</td></tr><tr><td>Telltale sign</td><td>Petechiae + confusion</td><td>Sudden pleuritic chest pain, leg DVT</td></tr><tr><td>Fracture link</td><td>Long-bone / pelvic</td><td>Any, from immobility</td></tr></tbody></table></div>
+
+<h3>When healing stalls: delayed union, nonunion, and infection</h3>
+<p>Healing needs blood supply, stability, and apposed bone ends. <b>Delayed union</b> is healing that is slower than expected but still progressing. <b>Nonunion</b> is a fracture that stops healing altogether, often from poor blood flow, too much motion, a wide gap, or infection, and typically requires surgery or bone grafting. <b>Malunion</b> heals in a crooked position. <b>Osteomyelitis</b>, a bone infection, is a special threat in open fractures where skin is broken and bacteria reach bone directly; it presents with localized pain, warmth, drainage, and fever, and is notoriously stubborn to clear.</p>
+
+<div class="pearl"><b>Neurovascular checks are the priority.</b> After any fracture, cast, or surgery, assess the "5 P's plus" distal to the injury, color, temperature, capillary refill, pulses, movement, and sensation, and compare sides. A change over time is your earliest warning of the most limb-threatening complications.</div>
+
+      <div class="embed">
+        <div class="cap"><span class="tag">Interactive</span> See the complications that make fractures dangerous. <a href="../patho/FractureComplications.html" target="_blank" rel="noopener">Open full &uarr;</a></div>
+        <div class="frame"><iframe src="../patho/FractureComplications.html" loading="lazy" title="Fracture complications interactive"></iframe></div>
+      </div>
+      <div class="kp"><div class="t">Key points</div><ul><li><b>Compartment syndrome</b> is a surgical emergency: <b>pain out of proportion</b> is the earliest sign and <b>pulselessness is late</b>, treat with fasciotomy, and never ice or elevate above the heart.</li><li>The <b>6 P's</b>: pain, paresthesia, pallor, pressure, paralysis, pulselessness.</li><li><b>Fat embolism</b> follows long-bone or pelvic fractures at 12 to 72 hours with respiratory distress, neuro changes, and petechiae; prevent it with early stabilization.</li><li>Immobility drives <b>DVT and PE</b> via Virchow's triad, prevent with early mobility, SCDs, and anticoagulation.</li><li><b>Nonunion, malunion, and osteomyelitis</b> stall recovery; frequent <b>neurovascular checks</b> are the nursing priority for catching complications early.</li></ul></div>
+
+      <h2 id="w14_msk"><span class="num">Section 3</span>Musculoskeletal disorders</h2>
+<figure class="bref" data-sec="3" style="max-width:1040px;margin:10px 0 24px;padding:0;"><div style="border:1px solid #e6e2d6;border-radius:16px;overflow:hidden;background:#fffdf7;box-shadow:0 8px 26px rgba(20,40,46,.09);"><img src="img/musculoskeletal_s3.jpg" alt="MSK disorders reference figure" loading="lazy" style="display:block;width:100%;height:auto;background:#fff;" onerror="this.closest('figure').style.display='none'"></div><figcaption style="font-family:Inter,system-ui,sans-serif;font-size:12.5px;color:#7c8a88;margin-top:8px;line-height:1.5;"><b style="color:#0c3a44;">Reference.</b> MSK disorders <span style="color:#9aa8a6;">&mdash; Laboratoires Servier, CC BY-SA 3.0 (via Wikimedia Commons)</span></figcaption></figure>
+
+
+      <p>Bone can feel like the most lifeless part of us, but it is actually <b>living, changing tissue</b>. Throughout your whole life, two crews are at work: <b>osteoblasts</b> lay down new bone, and <b>osteoclasts</b> chew old bone away. This constant teardown-and-rebuild is called <b>remodeling</b>, and when the two crews stay balanced, bone stays strong. Joints, meanwhile, glide smoothly because the ends of bones are capped with slick <b>articular cartilage</b> and cushioned by <b>synovial fluid</b>. When that balance or that cushioning breaks down, you get the disorders below. Explore the interactive figure below to see each one.</p>
+
+<h3>Osteoporosis: quietly losing bone</h3>
+<p>In <b>osteoporosis</b>, the osteoclasts outpace the osteoblasts, so more bone is removed than replaced. The bone that remains is normal in chemistry but there is simply <em>less of it</em> - lower <b>bone mineral density (BMD)</b> and a thinner, more porous internal scaffold. The result is <b>fragility</b>: bones that snap under loads a healthy skeleton would shrug off. This is why a minor fall, or even a hard cough, can cause a <b>fragility fracture</b>, classically at the <b>hip, wrist, and vertebrae</b>. Vertebral compression fractures explain the height loss and stooped upper-back curve (<b>kyphosis</b>) often seen in older adults.</p>
+<p>The scary part is that it is usually <em>silent</em> until something breaks - patients feel nothing while density slips away. Risk climbs with age, being female (estrogen normally restrains osteoclasts, so density often drops sharply after menopause), small body frame, smoking, low calcium and vitamin D, and long-term corticosteroid use. Screening is done with a <b>DEXA scan</b>, reported as a <b>T-score</b>; a value of -2.5 or lower usually defines osteoporosis.</p>
+
+<div class="pearl"><b>Prevent the fall, protect the bone.</b> Because osteoporotic bone is silently fragile, fall prevention (lighting, clutter, footwear) plus weight-bearing exercise, calcium, and vitamin D does as much good as any pill.</div>
+
+<h3>Osteoarthritis vs rheumatoid arthritis</h3>
+<p>Both are called "arthritis," but they are completely different problems. <b>Osteoarthritis (OA)</b> is a <b>mechanical, wear-and-tear</b> process: over years, the articular cartilage cushioning a joint frays and thins until bone rubs on bone. It targets the <b>weight-bearing joints</b> - knees, hips, spine - plus the small joints at the fingertips. The pain is <em>use-related</em>: worse after activity and at the end of the day, better with rest. Because it is local mechanical damage, there are <b>no systemic signs</b> - no fever, no fatigue. Any morning stiffness is brief, usually under 30 minutes.</p>
+<p><b>Rheumatoid arthritis (RA)</b> is an <b>autoimmune</b> disease. The immune system attacks the <b>synovium</b> (the joint lining), inflaming it into a destructive tissue called <b>pannus</b> that erodes cartilage and bone from within. RA is <b>symmetric</b> (both hands, both wrists) and favors the <b>small joints</b> of the hands and feet. Its hallmark is <b>morning stiffness lasting longer than an hour</b>. Because it is a body-wide immune process, it brings <b>systemic signs</b>: fatigue, low-grade fever, and elevated inflammatory markers (ESR, CRP). Over time it can deform joints into patterns like ulnar deviation.</p>
+
+<div class="ctwrap"><table class="ctable"><thead><tr><th>Feature</th><th>Osteoarthritis</th><th>Rheumatoid arthritis</th></tr></thead><tbody>
+<tr><td>Cause</td><td>Wear-and-tear cartilage loss</td><td>Autoimmune synovial attack</td></tr>
+<tr><td>Joints</td><td>Weight-bearing, often asymmetric</td><td>Small joints, symmetric</td></tr>
+<tr><td>Pain pattern</td><td>Worse with use, better with rest</td><td>Stiff after rest, eases with movement</td></tr>
+<tr><td>Morning stiffness</td><td>Usually &lt; 30 min</td><td>Usually &gt; 1 hour</td></tr>
+<tr><td>Systemic signs</td><td>None</td><td>Fatigue, fever, high ESR/CRP</td></tr>
+</tbody></table></div>
+
+<h3>Gout: crystals in the joint</h3>
+<p><b>Gout</b> comes from too much <b>uric acid</b>, a waste product of purine breakdown. When blood uric acid stays high (<b>hyperuricemia</b>), needle-shaped <b>monosodium urate crystals</b> precipitate inside a joint. The immune system treats these crystals as invaders and mounts a fierce inflammatory response. The result is a <b>sudden, severe</b> attack - often overnight - with a joint that is red, hot, swollen, and so tender that even a bedsheet hurts. The classic first target is the <b>big toe</b> (the first metatarsophalangeal joint), a presentation called <b>podagra</b>. Attacks are often triggered by red meat, shellfish, alcohol, or dehydration.</p>
+
+<div class="pearl"><b>Sudden, single, and searing.</b> One hot, exquisitely tender joint that flared overnight - especially the big toe - is gout until proven otherwise. The definitive test is joint aspiration showing urate crystals.</div>
+
+<h3>Telling them apart at the bedside</h3>
+<p>A few quick questions usually sort these out. Ask about <b>tempo</b>: gout explodes over hours; OA and RA build over years. Ask about <b>pattern</b>: OA hits big weight-bearing joints and worsens with use; RA hits small joints <em>symmetrically</em> with long morning stiffness; gout usually strikes one joint, classically the toe. Ask about the <b>whole body</b>: fatigue and fever point toward RA (or an acute gout flare), while OA stays purely local. And remember osteoporosis lives in a different lane entirely - it is <em>painless</em> until a fragile bone fractures.</p>
+
+      <div class="embed">
+        <div class="cap"><span class="tag">Interactive</span> Compare osteoarthritis, rheumatoid arthritis, and gout. <a href="../patho/MSKDisorders.html" target="_blank" rel="noopener">Open full &uarr;</a></div>
+        <div class="frame"><iframe src="../patho/MSKDisorders.html" loading="lazy" title="Musculoskeletal disorders interactive"></iframe></div>
+      </div>
+      <div class="kp"><div class="t">Key points</div><ul>
+<li><b>Osteoporosis</b> is silent low bone density (osteoclasts &gt; osteoblasts) leading to fragility fractures of the hip, wrist, and spine; diagnosed by DEXA T-score.</li>
+<li><b>Osteoarthritis</b> is mechanical cartilage wear in weight-bearing joints, worse with use, with brief stiffness and <em>no</em> systemic signs.</li>
+<li><b>Rheumatoid arthritis</b> is autoimmune synovitis: symmetric small joints, morning stiffness &gt; 1 hour, and systemic features (fatigue, fever, high ESR/CRP).</li>
+<li><b>Gout</b> is urate crystal deposition causing a sudden, severe, single hot joint - classically the big toe (podagra).</li>
+<li>At the bedside, sort by <b>tempo, pattern, and systemic signs</b>: hours vs years, one joint vs symmetric, local vs whole-body.</li>
+</ul></div>
+
+      <h2 id="w14_skin"><span class="num">Section 4</span>Skin conditions</h2>
+<figure class="bref" data-sec="4" style="max-width:1040px;margin:10px 0 24px;padding:0;"><div style="border:1px solid #e6e2d6;border-radius:16px;overflow:hidden;background:#fffdf7;box-shadow:0 8px 26px rgba(20,40,46,.09);"><img src="img/musculoskeletal_s4.jpg" alt="Skin conditions reference figure" loading="lazy" style="display:block;width:100%;height:auto;background:#fff;" onerror="this.closest('figure').style.display='none'"></div><figcaption style="font-family:Inter,system-ui,sans-serif;font-size:12.5px;color:#7c8a88;margin-top:8px;line-height:1.5;"><b style="color:#0c3a44;">Reference.</b> Skin conditions <span style="color:#9aa8a6;">&mdash; Mohammad2018, CC BY-SA 4.0 (via Wikimedia Commons)</span></figcaption></figure>
+
+
+      <p>Your skin is the largest organ you have, and its main job is to be a <b>barrier</b> - a smart, self-repairing wall between your insides and the outside world. It keeps water in, keeps microbes out, senses touch and temperature, and helps regulate body heat. When you understand that barrier job, most skin diseases start to make sense: they are what happens when the wall gets inflamed, overbuilt, broken down, or invaded.</p>
+
+<p>Skin has three layers. The <b>epidermis</b> is the thin, tough outer layer that makes the waterproof <em>keratin</em> shell and constantly sheds and regrows. Beneath it, the <b>dermis</b> holds collagen, blood vessels, nerves, hair follicles, and sweat glands. Under that sits the <b>subcutaneous (hypodermis)</b> layer of fat and connective tissue for insulation and cushioning. Damage that stays in the epidermis usually heals cleanly; damage that reaches the dermis or deeper is where scarring and serious injury begin.</p>
+
+<h3>Dermatitis (eczema) and psoriasis</h3>
+<p><b>Dermatitis</b>, often called <b>eczema</b> in its atopic form, is inflammation of the epidermis. The skin barrier is leaky, so it loses water and lets irritants and allergens in. The immune system overreacts, and the result is red, itchy, sometimes weepy or crusted skin. Because it is <em>inflammatory and often allergic</em>, it tends to flare with triggers - soaps, stress, dry air - and improves with moisturizers and topical steroids that calm the inflammation.</p>
+
+<p><b>Psoriasis</b> looks different because the mechanism is different. Here the problem is <em>rapid epidermal turnover</em>: skin cells that normally take about a month to rise and shed do so in just days, driven by an overactive immune (T-cell) response. The cells pile up faster than they can mature, forming thick plaques topped with <b>silvery scales</b>, classically on elbows, knees, and scalp. It is chronic and autoimmune in nature, so it is managed, not cured.</p>
+
+<div class="ctwrap"><table class="ctable"><thead><tr><th>Feature</th><th>Eczema/Dermatitis</th><th>Psoriasis</th></tr></thead><tbody><tr><td>Core mechanism</td><td>Barrier defect + allergic inflammation</td><td>Rapid cell turnover (autoimmune)</td></tr><tr><td>Look</td><td>Red, weepy, crusted, very itchy</td><td>Thick plaques with silvery scale</td></tr><tr><td>Typical sites</td><td>Flexural folds, hands, face</td><td>Elbows, knees, scalp (extensor)</td></tr></tbody></table></div>
+
+<h3>Pressure injuries</h3>
+<p>A <b>pressure injury</b> (formerly pressure ulcer or bedsore) happens when sustained pressure - usually over a bony spot like the sacrum, heels, or hips - squeezes blood vessels shut. Without blood flow, tissue is starved of oxygen (<em>ischemia</em>) and begins to die. Shear and moisture make it worse. This is why immobile patients are so vulnerable, and why prevention is a nursing priority. Standard staging:</p>
+<ul>
+<li><b>Stage 1:</b> intact skin with <em>non-blanchable</em> redness.</li>
+<li><b>Stage 2:</b> partial-thickness loss into the dermis; a shallow open sore or blister.</li>
+<li><b>Stage 3:</b> full-thickness loss with visible fat.</li>
+<li><b>Stage 4:</b> full-thickness loss exposing muscle, tendon, or bone.</li>
+<li><b>Unstageable</b> (base obscured by slough/eschar) and <b>deep tissue injury</b> (persistent maroon/purple area) are separate categories.</li>
+</ul>
+<p>Prevention centers on relieving pressure: reposition usually every 2 hours, offload heels, use support surfaces, keep skin clean and dry, and maintain nutrition and hydration so tissue can repair.</p>
+
+<div class="pearl"><b>Blanch test.</b> Press a red area - if it whitens then refills, blood flow is intact. Redness that does <em>not</em> blanch signals early tissue damage and a Stage 1 injury.</div>
+
+<h3>Skin cancers and the ABCDE rule</h3>
+<p>Most skin cancers trace back to <em>UV-damaged DNA</em> in epidermal cells that then grow uncontrolled. The three big ones differ sharply in danger.</p>
+<ul>
+<li><b>Basal cell carcinoma:</b> the most common and least aggressive. Arises from basal keratinocytes; often a pearly, pink, or waxy bump that may ulcerate. It rarely spreads (metastasizes) but destroys local tissue.</li>
+<li><b>Squamous cell carcinoma:</b> from upper keratinocytes; a scaly, crusted, or firm red nodule. More likely than basal cell to metastasize if ignored.</li>
+<li><b>Melanoma:</b> the deadliest, arising from pigment-making <em>melanocytes</em>. It grows and metastasizes quickly, so early recognition saves lives.</li>
+</ul>
+<p>Screen suspicious moles with <b>ABCDE</b>: <b>A</b>symmetry, <b>B</b>order irregularity, <b>C</b>olor variation, <b>D</b>iameter larger than about 6 mm (pencil eraser), and <b>E</b>volving - any change in size, shape, color, or new bleeding/itching.</p>
+
+<div class="pearl"><b>Melanoma is the one to fear.</b> It is far less common than basal cell cancer but causes most skin-cancer deaths because it spreads early - which is exactly why ABCDE screening matters.</div>
+
+<p>Take a look at the interactive figure below to compare how these common skin conditions actually appear.</p>
+
+      <div class="embed">
+        <div class="cap"><span class="tag">Interactive</span> Explore common skin conditions and skin cancers. <a href="../patho/SkinConditions.html" target="_blank" rel="noopener">Open full &uarr;</a></div>
+        <div class="frame"><iframe src="../patho/SkinConditions.html" loading="lazy" title="Skin conditions interactive"></iframe></div>
+      </div>
+      <div class="kp"><div class="t">Key points</div><ul><li>The skin's three layers (epidermis, dermis, subcutaneous) form a barrier, and most skin disease is that barrier inflamed, overbuilt, broken down, or invaded.</li><li>Eczema is a leaky-barrier allergic inflammation (red, weepy, itchy); psoriasis is rapid autoimmune turnover producing thick, silvery plaques.</li><li>Pressure injuries come from ischemia under sustained pressure; stage 1 (non-blanchable redness) through stage 4 (muscle/bone exposed), prevented by repositioning, offloading, skin care, and nutrition.</li><li>Basal cell is common and local, squamous cell can metastasize, and melanoma is the deadliest because it spreads early.</li><li>Use ABCDE - Asymmetry, Border, Color, Diameter &gt;6 mm, Evolving - to flag suspicious lesions for evaluation.</li></ul></div>
+
+      <h2 id="w14_skininf"><span class="num">Section 5</span>Skin infections</h2>
+<figure class="bref" data-sec="5" style="max-width:1040px;margin:10px 0 24px;padding:0;"><div style="border:1px solid #e6e2d6;border-radius:16px;overflow:hidden;background:#fffdf7;box-shadow:0 8px 26px rgba(20,40,46,.09);"><img src="img/musculoskeletal_s5.jpg" alt="Skin infections reference figure" loading="lazy" style="display:block;width:100%;height:auto;background:#fff;" onerror="this.closest('figure').style.display='none'"></div><figcaption style="font-family:Inter,system-ui,sans-serif;font-size:12.5px;color:#7c8a88;margin-top:8px;line-height:1.5;"><b style="color:#0c3a44;">Reference.</b> Skin infections <span style="color:#9aa8a6;">&mdash; S.M. Samee, CC BY-SA 4.0 (via Wikimedia Commons)</span></figcaption></figure>
+
+
+      <p>Your skin is your body's <b>largest organ</b> and its first wall of defense. Two layers do the heavy lifting: the tough outer <b>epidermis</b>, waterproofed by a protein called keratin, and the deeper <b>dermis</b>, which holds blood vessels, nerves, and hair follicles. On top of all this lives a healthy crowd of harmless bacteria and fungi called the <b>normal skin flora</b>, plus an oily, slightly acidic film (the <em>acid mantle</em>) that keeps troublemakers in check. Infection happens when that barrier is breached, a cut, a scratch, cracked skin, a bug bite, or a weakened immune system, and organisms slip past the wall and multiply faster than your defenses can clear them.</p>
+
+<h3>Bacterial infections: cellulitis, impetigo, and MRSA</h3>
+<p><b>Cellulitis</b> is a deep infection of the dermis and the fat below it, usually caused by <em>Streptococcus</em> or <em>Staphylococcus aureus</em>. Bacteria enter through a break in the skin and your immune system floods the area, which is exactly why you see the classic signs: <b>redness, warmth, swelling, and pain</b>. Those aren't the bacteria, they're inflammation, dilated vessels bringing white blood cells and fluid. The border is often poorly defined and spreading; nurses frequently outline the edge with a pen and note the time so the team can see if it advances.</p>
+<p><b>Impetigo</b> is a superficial infection of the epidermis, most common in children. It produces oozing sores that dry into a signature <em>honey-colored crust</em>. It is highly contagious by direct contact and easily spreads with scratching. <b>MRSA</b> (methicillin-resistant <em>Staphylococcus aureus</em>) is not a different disease but a resistant strain, it shrugs off common penicillin-family antibiotics because of an altered penicillin-binding protein. MRSA often looks like an angry, painful <em>abscess</em> or boil that patients swear is a "spider bite." It demands specific antibiotics and, for abscesses, drainage.</p>
+
+<div class="pearl"><b>Trace the border.</b> Marking the edge of cellulitis and timing it turns a fuzzy judgment call into hard data, spread past the line means the current treatment isn't winning.</div>
+
+<h3>Fungal infections: tinea and candida</h3>
+<p>Fungi love <em>warm, dark, moist</em> places, which tells you exactly where to look. <b>Tinea</b> (dermatophyte infection) feeds on keratin in the dead outer skin. As the fungus grows outward and the center clears, it forms the ring-with-raised-scaly-edge that gives <b>ringworm</b> its name (there is no worm involved). Tinea gets body-part names: <em>tinea pedis</em> (athlete's foot), <em>tinea cruris</em> (jock itch), <em>tinea capitis</em> (scalp).</p>
+<p><b>Candida</b> is a yeast that normally lives quietly on us but overgrows in skin folds, under breasts, in the groin, in diaper areas, producing a <em>beefy-red rash with satellite lesions</em> (small separate spots at the edges). It thrives after antibiotics wipe out competing bacteria and in patients with diabetes or immune suppression, a reason high blood sugar and recurrent yeast infections often travel together.</p>
+
+<h3>Viral infections: herpes simplex and herpes zoster</h3>
+<p>Herpes viruses share a signature trick: after the first infection they hide in nerve cells for life and <b>reactivate</b> under stress, illness, sunlight, or immune suppression. <b>Herpes simplex virus (HSV)</b> causes painful, grouped, fluid-filled <em>vesicles</em>, cold sores around the mouth (HSV-1) or genital lesions (HSV-2).</p>
+<p><b>Herpes zoster (shingles)</b> is the reactivation of the chickenpox virus, <em>varicella-zoster</em>, which had been lying dormant in a sensory (dorsal root) ganglion since childhood. When it wakes, it travels down that single nerve and erupts as a painful blistering rash in a <b>dermatome</b>, the strip of skin one nerve supplies. That's why shingles classically appears as a stripe on one side of the body that stops abruptly at the midline. Burning pain often precedes the rash, and pain can linger for months as <em>postherpetic neuralgia</em>.</p>
+
+<div class="ctwrap"><table class="ctable"><thead><tr><th>Feature</th><th>Herpes simplex</th><th>Herpes zoster (shingles)</th></tr></thead><tbody><tr><td>Virus</td><td>HSV-1 / HSV-2</td><td>Varicella-zoster (reactivated)</td></tr><tr><td>Pattern</td><td>Grouped vesicles, mouth or genitals</td><td>Single dermatome, one side, stops at midline</td></tr><tr><td>Recurs?</td><td>Yes, same site</td><td>Usually once; pain can persist</td></tr></tbody></table></div>
+
+<h3>When skin infection turns dangerous: necrotizing fasciitis</h3>
+<p><b>Necrotizing fasciitis</b>, sometimes called "flesh-eating" infection, is a surgical emergency. Aggressive bacteria race along the <em>fascia</em> (the sheet beneath the skin and fat), releasing toxins that kill tissue and clot off its blood supply. The tell-tale clue is <b>pain out of proportion</b> to what you see, the surface may look only mildly red while the patient is in agony. Later signs include rapid spread, dusky or purple skin, blisters, crepitus (crackling from gas in tissue), and a patient who looks systemically sick. Treatment is emergent surgical removal of dead tissue plus IV antibiotics; delay costs limbs and lives. Explore the infection types in the interactive figure below.</p>
+
+<div class="pearl"><b>Pain out of proportion is a red flag.</b> When a patient's pain far outruns the visible redness, think necrotizing fasciitis and escalate fast, this is time-critical.</div>
+
+      <div class="embed">
+        <div class="cap"><span class="tag">Interactive</span> Compare bacterial, fungal, and viral skin infections. <a href="../patho/SkinInfections.html" target="_blank" rel="noopener">Open full &uarr;</a></div>
+        <div class="frame"><iframe src="../patho/SkinInfections.html" loading="lazy" title="Skin infections interactive"></iframe></div>
+      </div>
+      <div class="kp"><div class="t">Key points</div><ul><li>Skin infection starts when the epidermal barrier is breached; redness, warmth, and swelling are <b>inflammation</b>, not the microbe itself.</li><li><b>Cellulitis</b> is deep and spreading (mark the border); <b>impetigo</b> shows honey-colored crusts; <b>MRSA</b> is antibiotic-resistant staph, often a painful abscess.</li><li>Fungi (<b>tinea</b>, <b>candida</b>) favor warm, moist areas; candida overgrows after antibiotics and in diabetes.</li><li><b>HSV</b> and <b>zoster</b> hide in nerves and reactivate; shingles follows a single <b>dermatome</b> and stops at the midline.</li><li><b>Necrotizing fasciitis</b> is a surgical emergency, pain out of proportion to the exam is the warning sign.</li></ul></div>
+
+      <h2 id="w14_burns"><span class="num">Section 6</span>Burns</h2>
+<figure class="bref" data-sec="6" style="max-width:1040px;margin:10px 0 24px;padding:0;"><div style="border:1px solid #e6e2d6;border-radius:16px;overflow:hidden;background:#fffdf7;box-shadow:0 8px 26px rgba(20,40,46,.09);"><img src="img/musculoskeletal_s6.jpg" alt="Burns reference figure" loading="lazy" style="display:block;width:100%;height:auto;background:#fff;" onerror="this.closest('figure').style.display='none'"></div><figcaption style="font-family:Inter,system-ui,sans-serif;font-size:12.5px;color:#7c8a88;margin-top:8px;line-height:1.5;"><b style="color:#0c3a44;">Reference.</b> Burns <span style="color:#9aa8a6;">&mdash; Sir MemeGod, CC BY 4.0 (via Wikimedia Commons)</span></figcaption></figure>
+
+
+      <p>Your skin is the largest organ you have, and it does a lot of quiet work you never think about. It holds fluid <em>in</em>, keeps germs <em>out</em>, senses touch and temperature, and helps regulate your body heat. A burn injures this barrier, and once enough of it is gone, the problems ripple far beyond the skin itself. That is the single most important idea in burn care: <b>a large burn is a whole-body emergency, not just a wound.</b></p>
+
+<h3>Burn depth: how deep did the injury go?</h3>
+<p>Skin has layers. The thin outer <b>epidermis</b> sits on top of the thicker <b>dermis</b>, which holds blood vessels, nerve endings, hair follicles, and sweat glands. Below that is subcutaneous fat, then muscle and bone. How deep a burn reaches determines how it looks, how much it hurts, and whether it can heal on its own.</p>
+
+<div class="ctwrap"><table class="ctable"><thead><tr><th>Feature</th><th>Superficial</th><th>Partial-thickness</th><th>Full-thickness</th></tr></thead><tbody>
+<tr><td>Layers involved</td><td>Epidermis only</td><td>Epidermis + part of dermis</td><td>All of epidermis and dermis (may reach fat, muscle, bone)</td></tr>
+<tr><td>Old name</td><td>First-degree</td><td>Second-degree</td><td>Third-degree</td></tr>
+<tr><td>Appearance</td><td>Red, dry, no blisters</td><td>Red, moist, blisters, weeping</td><td>White, leathery, waxy, or charred; dry</td></tr>
+<tr><td>Pain</td><td>Painful</td><td><em>Very</em> painful</td><td>Often painless in the deepest areas</td></tr>
+<tr><td>Healing</td><td>Days, no scar</td><td>Weeks, may scar</td><td>Cannot self-heal; needs grafting</td></tr>
+</tbody></table></div>
+
+<p>The pain pattern surprises students. A superficial burn (think mild sunburn) hurts because the nerve endings are irritated but intact. A <b>full-thickness</b> burn can be eerily <em>painless</em> in its center because the sensory nerves themselves were destroyed. So a quiet, leathery, white patch is often <em>worse</em> than a screaming red blistered one. Deeper full-thickness burns can also form a tight, inelastic band of dead tissue called an <b>eschar</b>, which may need to be surgically released (an <b>escharotomy</b>) if it constricts a limb or the chest.</p>
+
+<div class="pearl"><b>Painless can mean deepest.</b> Do not judge severity by how loudly it hurts. Destroyed nerves in a full-thickness burn can leave the worst injury the quietest.</div>
+
+<h3>Estimating burn size: the rule of nines</h3>
+<p>Depth tells you how bad; <b>size</b> tells you how big the whole-body threat is. Clinicians estimate the <b>total body surface area (TBSA)</b> burned using the <b>rule of nines</b>, which divides the adult body into sections worth about 9% each (or multiples of 9): head and neck 9%, each arm 9%, the front of the torso 18%, the back 18%, each leg 18%, and the genital area 1%. For scattered small burns, the patient's own palm is roughly 1% TBSA. Children have proportionally larger heads, so pediatric charts differ. TBSA matters because it drives fluid resuscitation math and decisions about transfer to a burn center.</p>
+
+<h3>Why a big burn threatens the whole body</h3>
+<p>Once TBSA climbs past roughly 20-25%, the injury stops being local. Damaged tissue releases inflammatory mediators that make capillaries everywhere <em>leaky</em>. Plasma, protein, and fluid pour out of the bloodstream into the tissues, causing massive <b>third-spacing</b> and edema. The result is <b>burn shock</b>, a form of <b>hypovolemic shock</b>: blood volume drops even though total body water has not, so blood pressure falls and organs are underperfused. This is why we prioritize the ABCs.</p>
+
+<ul>
+<li><b>Airway first.</b> If someone was burned in an enclosed space, watch for <b>inhalation injury</b>. Clues include facial burns, singed nose hairs, soot in the mouth, hoarseness, and carbonaceous sputum. Hot gases and swelling can close the airway <em>fast</em>, so early intubation is often chosen <em>before</em> swelling makes it impossible.</li>
+<li><b>Breathing and circulation.</b> Suspect <b>carbon monoxide poisoning</b> in smoke exposure; give high-flow oxygen. A pulse oximeter can read falsely normal because it cannot tell oxygen from carbon monoxide.</li>
+<li><b>Fluid resuscitation.</b> Large burns need aggressive IV fluids, usually <b>lactated Ringer's</b>, guided by a formula such as the <b>Parkland formula</b> and titrated to <b>urine output</b> (often about 0.5 mL/kg/hr in adults). Too little fluid worsens shock; too much causes dangerous edema.</li>
+</ul>
+
+<h3>The delayed threat: infection</h3>
+<p>The burned skin barrier is gone, and the burn wound is a warm, protein-rich surface that bacteria love. After the first day or two, <b>infection and sepsis</b> become the leading cause of death in major burns. This is why burn wounds get meticulous cleaning, topical antimicrobials, and strict aseptic technique. The immune disruption plus the huge open surface make these patients extraordinarily vulnerable.</p>
+
+<div class="pearl"><b>Three phases, three enemies.</b> First minutes: the airway. First hours to days: fluid shifts and shock. Days later: infection. Great burn nursing means staying one step ahead of each one. Explore the depth-and-severity figure below.</div>
+
+      <div class="embed">
+        <div class="cap"><span class="tag">Interactive</span> Assess burn depth and estimate size with the rule of nines. <a href="../patho/Burns.html" target="_blank" rel="noopener">Open full &uarr;</a></div>
+        <div class="frame"><iframe src="../patho/Burns.html" loading="lazy" title="Burns interactive"></iframe></div>
+      </div>
+      <div class="kp"><div class="t">Key points</div><ul>
+<li><b>Depth</b> ranges from superficial (red, dry, painful) to partial-thickness (blistered, weeping, very painful) to full-thickness (white/leathery, often painless because nerves are destroyed).</li>
+<li>The <b>rule of nines</b> estimates TBSA (head 9%, each arm 9%, front torso 18%, back 18%, each leg 18%, genitals 1%; palm about 1%) and drives fluid and transfer decisions.</li>
+<li>Large burns cause <b>leaky capillaries and third-spacing</b>, producing hypovolemic <b>burn shock</b> despite intact total body water.</li>
+<li>Priorities follow time: <b>airway</b> first (inhalation injury), then <b>fluid resuscitation</b> (lactated Ringer's, titrated to urine output), then <b>infection/sepsis</b> prevention.</li>
+<li>A large burn is a <b>whole-body emergency</b>, not just a skin wound.</li>
+</ul></div>
+
+      <div class="summary">
+        <h2 id="summary">The chapter in one breath</h2>
+        <ul><li><b>Fracture healing</b> moves through hematoma, soft then hard callus, and remodeling, so pain, swelling, and deformity are the body walling off and rebuilding bone over weeks to months.</li><li><b>Compartment syndrome</b> is the can't-miss fracture emergency: rising pressure in a closed muscle compartment is diagnosed EARLY by pain out of proportion to injury and pain with passive stretch, with paresthesia as an early sensory sign; pulselessness, pallor, paralysis, and poikilothermia are LATE, ominous signs that tissue is already dying, so although the classic list is the 6 P's (pain, paresthesia, pallor, pulselessness, paralysis, poikilothermia), do not wait for the late P's — a palpable pulse does not rule it out — and it demands a fasciotomy before tissue dies.</li><li><b>Fat embolism</b> usually follows long-bone or pelvic fractures within 24 to 72 hours, classically showing dyspnea, confusion, and a petechial rash as marrow fat lodges in the lungs and brain.</li><li><b>Osteoporosis</b> is silent low bone density from bone resorption outpacing formation, so the first sign is often a fragility fracture of the hip, wrist, or a vertebra rather than pain.</li><li>Tell the arthritides apart: <b>osteoarthritis</b> is asymmetric wear-and-tear joint pain worse with use, while <b>rheumatoid arthritis</b> is symmetric autoimmune inflammation with prolonged morning stiffness, and <b>gout</b> is monosodium urate crystals causing a hot, red, exquisitely painful great-toe (podagra) attack.</li><li>Learn skin cancer by <b>ABCDE</b> (Asymmetry, Border, Color, Diameter &gt;6 mm, Evolving), because melanoma is the deadliest due to early metastasis, unlike the more common but rarely fatal basal and squamous cell carcinomas.</li><li><b>Cellulitis</b> is a deeper dermal and subcutaneous bacterial infection (often Staph or Strep) that is warm, red, swollen, and tender with poorly defined borders, and it can turn systemic with fever.</li><li>Estimate burn extent with the <b>rule of nines</b> and depth by tissue: superficial reddens and blanches, partial-thickness blisters and hurts intensely, and full-thickness is leathery, painless, and needs grafting.</li><li>For major burns the killer is <b>hypovolemic (burn) shock</b> from massive capillary fluid leak, so fluid resuscitation (often Parkland formula) and airway watch for inhalation injury come first.</li></ul>
+      </div>
+
+      <h2 id="glossary"><span class="num">Reference</span>Words worth knowing</h2>
+      <p>A quick reference for the terms in this chapter &mdash; skim it now, or circle back whenever a word trips you up.</p>
+      <dl class="terms"><dt>ABCDE rule</dt><dd>A quick screening checklist for suspicious skin lesions, prompting you to watch for <b>A</b>symmetry, irregular <b>B</b>orders, uneven <b>C</b>olor, <b>D</b>iameter greater than about 6 mm, and any <b>E</b>volving change in size, shape, or color over time.</dd><dt>Callus</dt><dd>The soft, new woven bone and cartilage that forms as a bridge around a healing fracture, which the body later remodels into stronger, mature <em>lamellar</em> bone.</dd><dt>Cellulitis</dt><dd>A deeper bacterial skin infection (usually <em>Staphylococcus</em> or <em>Streptococcus</em>) that spreads through the dermis and subcutaneous tissue, producing warmth, redness, swelling, and tenderness with poorly defined edges.</dd><dt>Compartment syndrome</dt><dd>A limb-threatening emergency in which swelling or bleeding inside a closed muscle compartment raises pressure high enough to cut off circulation, classically signaled by pain out of proportion and worsening with passive stretch.</dd><dt>Fat embolism</dt><dd>A complication, most often after long-bone or pelvic fractures, in which fat globules from the marrow enter the bloodstream and lodge in the lungs or brain, typically causing shortness of breath, confusion, and a petechial rash.</dd><dt>Fracture</dt><dd>A break or disruption in the continuity of a bone, ranging from a tiny <em>hairline</em> crack to a complete separation, caused when force exceeds what the bone can absorb.</dd><dt>Gout</dt><dd>A form of inflammatory arthritis caused by <em>uric acid</em> crystals depositing in a joint (classically the big toe), triggering sudden severe pain, redness, warmth, and swelling.</dd><dt>Herpes zoster</dt><dd>Also called shingles, a painful blistering rash that erupts along a single <em>dermatome</em> when the dormant varicella-zoster (chickenpox) virus reactivates in a nerve root.</dd><dt>Melanoma</dt><dd>The most dangerous skin cancer, arising from pigment-producing <em>melanocytes</em>, which can spread (metastasize) early and is often first spotted by applying the ABCDE rule to a changing mole.</dd><dt>Osteoarthritis</dt><dd>A degenerative "wear-and-tear" joint disease in which cartilage gradually breaks down, causing pain and stiffness that <em>worsens with use</em> and typically eases with rest.</dd><dt>Osteoporosis</dt><dd>A condition of low bone mass and weakened bone microstructure that leaves bones porous and fragile, greatly raising the risk of fractures, especially in the hip, spine, and wrist.</dd><dt>Partial-thickness burn</dt><dd>A burn that damages the epidermis and part of the dermis, usually appearing red, moist, and blistered, and remaining painful because sensory nerve endings are still intact.</dd><dt>Pressure injury</dt><dd>Localized damage to skin and underlying tissue over a bony prominence caused by sustained pressure that cuts off blood flow (<em>ischemia</em>), often developing in immobile patients over the sacrum, heels, or hips.</dd><dt>Psoriasis</dt><dd>A chronic autoimmune skin disorder in which skin cells turn over far too quickly, building up into well-defined red plaques covered by silvery scales, commonly on the elbows, knees, and scalp.</dd><dt>Rheumatoid arthritis</dt><dd>A chronic autoimmune disease in which the body attacks the joint lining (<em>synovium</em>), producing symmetric pain, swelling, and morning stiffness that typically <em>improves with movement</em>.</dd><dt>Rule of nines</dt><dd>A rapid method for estimating the percentage of total body surface area burned by dividing the adult body into regions worth about 9% each (or multiples of nine), used to guide fluid resuscitation.</dd></dl>
+
+      <h2 id="cards"><span class="num">Drill</span>Flashcards for this unit</h2>
+      <p>These are the <b>Week 14</b> cards &mdash; the same deck as the hub, pulled in here so you can review the moment you finish reading. Tap the card to flip it; hit <em>Shuffle</em> to mix them up. To grade yourself and track mastery across the whole deck, open the <a href="../flashcards.html">full flashcards page</a>.</p>
+      <div class="fc" id="fc">
+        <div class="fc-card" id="fcCard" onclick="fcFlip()">
+          <div class="fc-inner">
+            <div class="fc-face fc-front"><span class="fc-side">Question</span><div class="fc-q" id="fcQ"></div><div class="fc-hint">Tap to reveal the answer</div></div>
+            <div class="fc-face fc-back"><span class="fc-side">Answer</span><div class="fc-a" id="fcA"></div><div class="fc-hint">Tap to flip back</div></div>
+          </div>
+        </div>
+        <div class="fc-nav">
+          <button class="fc-btn" type="button" onclick="fcPrev(event)">&larr; Prev</button>
+          <span class="fc-count" id="fcCount">&mdash;</span>
+          <button class="fc-btn" type="button" onclick="fcNext(event)">Next &rarr;</button>
+          <button class="fc-btn" type="button" onclick="fcShuffle(event)">&#128256; Shuffle</button>
+        </div>
+        <a class="fc-full" href="../flashcards.html">Open the full Week 14 deck &mdash; grade yourself &amp; track mastery &uarr;</a>
+      </div>
+
+      <div class="quiz">
+        <h2 id="quiz">Check yourself</h2>
+        <div class="q"><div class="qq">1. A client falls onto an outstretched hand, and the radiograph shows the bone broke into more than two separate pieces. Which fracture type does the nurse expect to see documented?</div>
+<button onclick="this.parentNode.classList.add('show')">Reveal answer</button>
+<div class="ans"><span class="a">Comminuted fracture.</span> A comminuted fracture means the bone is splintered or crushed into three or more fragments, which usually results from high-energy or crushing force. Contrast this with a transverse (straight across), oblique (angled), or greenstick (incomplete, bent on one side, common in children) pattern.</div></div>
+<div class="q"><div class="qq">2. During a lecture on bone healing, a student asks which stage happens FIRST after a fracture. What is the nurse educator's best response?</div>
+<button onclick="this.parentNode.classList.add('show')">Reveal answer</button>
+<div class="ans"><span class="a">Hematoma formation.</span> Within the first several hours, bleeding from the broken bone ends and torn vessels forms a hematoma (clot) at the fracture site, which is the framework for healing. The stages that follow are usually fibrocartilaginous (soft) callus, then bony (hard) callus, and finally remodeling.</div></div>
+<div class="q"><div class="qq">3. Six hours after a tibial fracture and cast application, a client reports deep, throbbing pain unrelieved by opioids and pain with passive stretching of the toes. What is the nurse's priority action?</div>
+<button onclick="this.parentNode.classList.add('show')">Reveal answer</button>
+<div class="ans"><span class="a">Notify the provider immediately and prepare for cast removal; this is compartment syndrome.</span> Pain out of proportion to injury and pain on passive stretch are the earliest and most sensitive signs. Pressure inside the fascial compartment is rising and cutting off perfusion, so the cast must be bivalved or removed to prevent irreversible muscle and nerve ischemia (a fasciotomy may be needed).</div></div>
+<div class="q"><div class="qq">4. The nurse is teaching new graduates the 6 P's of compartment syndrome. Which finding is usually a LATE and ominous sign rather than an early one?</div>
+<button onclick="this.parentNode.classList.add('show')">Reveal answer</button>
+<div class="ans"><span class="a">Pulselessness.</span> The 6 P's are Pain, Paresthesia, Pallor, Poikilothermia (coolness), Paralysis, and Pulselessness. Pain (especially with passive stretch) and paresthesia appear early, while a lost pulse and paralysis are late signs that often indicate the limb is already at high risk for permanent damage. Never wait for a lost pulse to act.</div></div>
+<div class="q"><div class="qq">5. Twenty-four to seventy-two hours after a femur fracture in a young adult, the client suddenly becomes confused and dyspneic, and the nurse notes a petechial rash across the chest and axillae. Which complication is most likely?</div>
+<button onclick="this.parentNode.classList.add('show')">Reveal answer</button>
+<div class="ans"><span class="a">Fat embolism syndrome.</span> Fat globules from the marrow of a long-bone or pelvic fracture travel to the lungs and brain, producing the classic triad of hypoxemia (dyspnea), neurologic changes (confusion), and a petechial rash. Onset is usually 24 to 72 hours after injury, and care is largely supportive with oxygen and respiratory support.</div></div>
+<div class="q"><div class="qq">6. A postmenopausal woman is diagnosed with osteoporosis. Which statement best explains the underlying pathophysiology in plain terms with the correct mechanism?</div>
+<button onclick="this.parentNode.classList.add('show')">Reveal answer</button>
+<div class="ans"><span class="a">Bone breakdown outpaces bone building, so bone mass and density drop.</span> Osteoclast (resorption) activity exceeds osteoblast (formation) activity, and the loss of estrogen after menopause accelerates this because estrogen normally restrains osteoclasts. The bone becomes porous and brittle, raising fracture risk especially at the hip, spine, and wrist. A T-score at or below -2.5 usually confirms the diagnosis.</div></div>
+<div class="q"><div class="qq">7. A client asks the nurse how to tell osteoarthritis apart from rheumatoid arthritis. Which contrast is accurate?</div>
+<button onclick="this.parentNode.classList.add('show')">Reveal answer</button>
+<div class="ans"><span class="a">OA is localized, asymmetric wear-and-tear worsened by activity; RA is a symmetric autoimmune inflammation with prolonged morning stiffness.</span> In OA, cartilage degenerates in weight-bearing joints and stiffness usually eases within about 30 minutes of moving. RA is a systemic autoimmune disease where the synovium is attacked, producing symmetric joint swelling, morning stiffness often lasting more than an hour, and fatigue or low-grade fever.</div></div>
+<div class="q"><div class="qq">8. A client presents with a sudden, exquisitely painful, red, swollen great toe (podagra). Which pathophysiology and dietary teaching should the nurse reinforce for gout?</div>
+<button onclick="this.parentNode.classList.add('show')">Reveal answer</button>
+<div class="ans"><span class="a">Uric acid crystals deposit in the joint; limit purine-rich foods and alcohol and increase fluids.</span> Gout results from hyperuricemia, where monosodium urate crystals precipitate in the joint and trigger intense inflammation. Teaching includes avoiding high-purine foods (organ meats, shellfish, red meat), limiting alcohol especially beer, and staying well hydrated to help excrete uric acid.</div></div>
+<div class="q"><div class="qq">9. The nurse assesses a sacral wound with intact skin that is non-blanchable and red but not broken open. How should this pressure injury be staged?</div>
+<button onclick="this.parentNode.classList.add('show')">Reveal answer</button>
+<div class="ans"><span class="a">Stage 1 pressure injury.</span> A Stage 1 injury is intact skin with a localized area of non-blanchable erythema, meaning the redness does not fade when pressed. Because the skin is not yet open, it is distinguished from Stage 2 (partial-thickness loss with an exposed dermis, often a shallow open ulcer or intact/ruptured blister).</div></div>
+<div class="q"><div class="qq">10. A nurse documents a pressure injury as unstageable. What finding supports this designation?</div>
+<button onclick="this.parentNode.classList.add('show')">Reveal answer</button>
+<div class="ans"><span class="a">The wound base is obscured by slough or eschar so the true depth cannot be seen.</span> An unstageable injury involves full-thickness tissue loss, but slough (yellow/tan) or eschar (black/brown) covers the base, hiding the extent of damage. Once that nonviable tissue is removed and the base is visible, it will usually reveal a Stage 3 or Stage 4 injury.</div></div>
+<div class="q"><div class="qq">11. A client points out a changing mole. Using the ABCDE rule for melanoma, which set of features is most concerning and should prompt referral?</div>
+<button onclick="this.parentNode.classList.add('show')">Reveal answer</button>
+<div class="ans"><span class="a">Asymmetry, irregular Borders, variegated Color, Diameter greater than 6 mm, and Evolving change.</span> ABCDE stands for Asymmetry (one half unlike the other), Border irregularity, Color variation, Diameter over about 6 mm (roughly a pencil eraser), and Evolving (any change in size, shape, color, or new symptoms). Melanoma is the most deadly skin cancer because it can metastasize early, so any of these warrants prompt evaluation.</div></div>
+<div class="q"><div class="qq">12. An adult sustains full-thickness burns to the entire anterior chest and abdomen and the entire front of one leg. Using the rule of nines, what percentage of total body surface area is burned, and what depth does full-thickness indicate?</div>
+<button onclick="this.parentNode.classList.add('show')">Reveal answer</button>
+<div class="ans"><span class="a">About 27% TBSA; full-thickness (third-degree) destroys the epidermis and entire dermis.</span> The anterior trunk (chest plus abdomen) is 18% and the front of one leg is 9%, totaling 27%. A full-thickness burn extends through the dermis into subcutaneous tissue and usually appears dry, leathery, and waxy white or charred, and is painless in the deepest areas because nerve endings are destroyed.</div></div>
+      </div>
+
+      <div class="chapnav">
+        <a href="index.html"><span class="k">Book</span>&larr; All chapters</a>
+        <a class="next" href="appendix.html"><span class="k">Appendix</span>The Arcade &amp; Lab &rarr;</a>
+      </div>
+    </main>
+  </div>
+
+  <footer>
+    A student-friendly pathophysiology guide · by <b>Dr. Akash Garg</b> <br>
+    The interactive figures open in place; tap “Open full ↗” for a full-screen version.
+  </footer>
+
+<script>
+  // reading progress bar
+  var bar=document.getElementById('bar');
+  function prog(){var h=document.documentElement, max=h.scrollHeight-h.clientHeight; bar.style.width=(max>0?(h.scrollTop/max*100):0)+'%';}
+  addEventListener('scroll',prog,{passive:true}); prog();
+  // scroll-spy TOC
+  var links=[].slice.call(document.querySelectorAll('.toc a'));
+  var ids=links.map(function(a){return a.getAttribute('href').slice(1);});
+  var secs=ids.map(function(id){return document.getElementById(id);});
+  function spy(){var y=scrollY+90,cur=0;
+    for(var i=0;i<secs.length;i++){ if(secs[i] && secs[i].offsetTop<=y) cur=i; }
+    links.forEach(function(a,i){a.classList.toggle('on',i===cur);});}
+  addEventListener('scroll',spy,{passive:true}); spy();
+</script>
+
+
+<script src="../flashcards/w14.js"></script>
+<script>
+(function(){
+  var WK="14";
+  var cards=(window.PATHO_CARDS&&window.PATHO_CARDS[WK])||[];
+  var fc=document.getElementById("fc"); if(!fc) return;
+  if(!cards.length){ fc.style.display="none"; return; }
+  var order=cards.map(function(_,i){return i;}), pos=0;
+  function dec(s){return String(s).replace(/&amp;/g,"&").replace(/&lt;/g,"<").replace(/&gt;/g,">").replace(/&nbsp;/g," ");}
+  var card=document.getElementById("fcCard"), q=document.getElementById("fcQ"), a=document.getElementById("fcA"), cnt=document.getElementById("fcCount");
+  function show(){ card.classList.remove("flip"); var c=cards[order[pos]]; q.textContent=dec(c.q); a.textContent=dec(c.a)+(c.exp?"  \u2014  "+dec(c.exp):""); cnt.textContent=(pos+1)+" / "+cards.length; }
+  window.fcFlip=function(){ card.classList.toggle("flip"); };
+  window.fcNext=function(e){ if(e&&e.stopPropagation)e.stopPropagation(); pos=(pos+1)%cards.length; show(); };
+  window.fcPrev=function(e){ if(e&&e.stopPropagation)e.stopPropagation(); pos=(pos-1+cards.length)%cards.length; show(); };
+  window.fcShuffle=function(e){ if(e&&e.stopPropagation)e.stopPropagation(); for(var i=order.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=order[i];order[i]=order[j];order[j]=t;} pos=0; show(); };
+  show();
+})();
+</script>
+<style id="pdfprint">
+.pdf-btn{position:fixed;right:16px;bottom:16px;z-index:400;font-family:'Inter',system-ui,sans-serif;font-weight:700;font-size:13.5px;color:#fff;background:#0c7283;border:none;border-radius:24px;padding:11px 17px;box-shadow:0 6px 20px rgba(12,58,68,.30);cursor:pointer;display:inline-flex;align-items:center;gap:7px;}
+.pdf-btn:hover{background:#0c3a44;}
+@media print{
+ @page{margin:14mm;}
+ html,body{background:#fff !important;}
+ .topbar,.progress,aside,.chapnav,.pdf-btn{display:none !important;}
+ #pbgate{display:none !important;}
+ .layout{display:block !important;max-width:100% !important;padding:0 !important;grid-template-columns:1fr !important;gap:0 !important;}
+ .reading,.reading .col{max-width:100% !important;padding:0 !important;}
+ .embed iframe,.embed .frame{display:none !important;}
+ .embed{margin:14px 0 !important;}
+ .embed .cap{color:#555 !important;font-style:italic;}
+ .embed .cap .tag{background:#0c7283 !important;color:#fff !important;}
+ .embed .cap a{display:none !important;}
+ .bref,.bref .fr{break-inside:avoid;page-break-inside:avoid;box-shadow:none !important;}
+ .bref img{max-height:150mm;width:auto !important;margin:0 auto;}
+ .ctwrap,table.ctable,.pearl,.kp,.q,.objectives,.summary,dl.terms,figure{break-inside:avoid;page-break-inside:avoid;}
+ h1,h2,h3{break-after:avoid;page-break-after:avoid;}
+ .quiz .ans{display:block !important;}
+ .quiz .q button{display:none !important;}
+ a{color:inherit !important;text-decoration:none !important;}
+ *{-webkit-print-color-adjust:exact !important;print-color-adjust:exact !important;}
+ footer{border-top:1px solid #ccc !important;}
+}
+</style>
+<button class="pdf-btn" onclick="window.print()" title="Save this chapter as a PDF">🖨 Save as PDF</button>
+</body>
+</html>

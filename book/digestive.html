@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0c3a44">
+<title>Digestive: GI, Liver &amp; Pancreas &mdash; Pathophysiology &middot; Dr. Akash Garg</title>
+<meta name="description" content="A student-friendly, exact pathophysiology chapter on the endocrine system — feedback loops, adrenal, thyroid, diabetes, growth hormone, and ADH — with the concept explained plainly and an interactive to play with in every section.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#22312f; --soft:#4a5a58; --muted:#7c8a88; --faint:#9aa8a6; --line:#e6e2d6;
+    --paper:#faf8f2; --card:#fffdf7; --accent:#0c7283; --accent-dk:#0c3a44; --gold:#b8862f;
+    --serif:"Source Serif 4",Georgia,"Times New Roman",serif; --disp:"Fraunces",Georgia,serif; --ui:"Inter",system-ui,sans-serif;
+    --shadow:0 1px 3px rgba(20,40,46,.06);
+  }
+  *{box-sizing:border-box;} html{scroll-behavior:smooth;}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--serif);font-size:18px;line-height:1.7;-webkit-font-smoothing:antialiased;}
+  a{color:var(--accent);text-decoration:none;} a:hover{text-decoration:underline;}
+
+  /* top bar + progress */
+  .topbar{position:sticky;top:0;z-index:50;background:rgba(250,248,242,.92);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid var(--line);}
+  .topbar .row{max-width:1120px;margin:0 auto;padding:11px 20px;display:flex;align-items:center;gap:14px;font-family:var(--ui);}
+  .topbar a.home{font-size:13.5px;font-weight:600;color:var(--soft);white-space:nowrap;}
+  .topbar a.home:hover{color:var(--accent);text-decoration:none;}
+  .topbar .ct{font-size:13px;color:var(--faint);font-weight:600;margin-left:auto;white-space:nowrap;}
+  .progress{height:3px;background:transparent;} .progress .bar{height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--gold));transition:width .1s;}
+
+  .layout{max-width:1120px;margin:0 auto;padding:0 20px;display:grid;grid-template-columns:230px 1fr;gap:30px;}
+  /* sidebar TOC */
+  aside{font-family:var(--ui);padding-top:34px;}
+  aside .toc{position:sticky;top:74px;}
+  aside .toc h4{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--faint);margin:0 0 12px;font-weight:700;}
+  aside .toc a{display:block;font-size:13.5px;color:var(--soft);padding:6px 10px;border-left:2px solid var(--line);line-height:1.35;}
+  aside .toc a:hover{color:var(--accent);text-decoration:none;border-left-color:var(--accent);}
+  aside .toc a.on{color:var(--accent-dk);font-weight:700;border-left-color:var(--gold);background:#f3efe3;border-radius:0 8px 8px 0;}
+
+  .reading{max-width:1040px;padding:30px 0 70px;min-width:0;}
+  .reading .col{max-width:718px;}
+  /* opener */
+  .kicker{font-family:var(--ui);font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);font-weight:700;}
+  h1{font-family:var(--disp);font-weight:600;font-size:clamp(32px,5.2vw,46px);line-height:1.08;letter-spacing:-.5px;color:var(--accent-dk);margin:10px 0 6px;max-width:718px;}
+  .lede{font-size:20px;line-height:1.6;color:var(--soft);max-width:718px;margin:14px 0 0;}
+  h2{font-family:var(--disp);font-weight:600;font-size:27px;letter-spacing:-.3px;color:var(--accent-dk);margin:52px 0 4px;scroll-margin-top:70px;max-width:718px;}
+  h2 .num{font-family:var(--ui);font-size:13px;font-weight:700;color:var(--gold);letter-spacing:1px;display:block;margin-bottom:4px;text-transform:uppercase;}
+  h3{font-family:var(--disp);font-weight:600;font-size:20px;color:var(--accent-dk);margin:26px 0 2px;max-width:718px;}
+  p{margin:14px 0;max-width:718px;} p b,li b{color:var(--accent-dk);font-weight:600;}
+  .reading ul,.reading ol{max-width:718px;padding-left:24px;} .reading li{margin:7px 0;}
+
+  .objectives{max-width:718px;background:#f2efe4;border:1px solid #e4ddc8;border-radius:14px;padding:18px 22px;margin:24px 0;font-family:var(--ui);}
+  .objectives h4{margin:0 0 8px;font-size:12px;letter-spacing:1px;text-transform:uppercase;color:var(--gold);font-weight:700;}
+  .objectives ul{margin:0;padding-left:20px;} .objectives li{font-size:14.5px;line-height:1.5;color:var(--soft);margin:6px 0;font-family:var(--serif);}
+
+  .kp{max-width:718px;background:#eef5f6;border:1px solid #d3e5e7;border-left:5px solid var(--accent);border-radius:0 12px 12px 0;padding:14px 20px;margin:22px 0;font-family:var(--ui);}
+  .kp .t{font-size:11.5px;letter-spacing:1px;text-transform:uppercase;color:var(--accent-dk);font-weight:700;margin-bottom:6px;}
+  .kp ul{margin:0;padding-left:18px;} .kp li{font-size:14.5px;line-height:1.55;color:var(--ink);margin:5px 0;font-family:var(--serif);}
+  .pearl{max-width:718px;background:#fbf3e2;border:1px solid #ecd9ac;border-left:5px solid var(--gold);border-radius:0 12px 12px 0;padding:13px 20px;margin:22px 0;font-family:var(--serif);font-size:15px;line-height:1.6;color:#6a5320;}
+  .pearl b{color:#5a4212;}
+
+  /* interactive embed (breaks out wider than prose) */
+  .embed{max-width:1040px;margin:26px 0 30px;}
+  .embed .cap{font-family:var(--ui);font-size:12.5px;font-weight:600;color:var(--muted);margin:0 0 8px;display:flex;align-items:center;gap:8px;}
+  .embed .cap .tag{background:var(--accent);color:#fff;font-size:10.5px;letter-spacing:.5px;text-transform:uppercase;font-weight:700;padding:3px 9px;border-radius:20px;}
+  .embed .frame{border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:0 8px 26px rgba(20,40,46,.09);background:#fff;}
+  .embed iframe{display:block;width:100%;height:640px;border:0;}
+  .embed .cap a{font-family:var(--ui);margin-left:auto;font-size:12.5px;font-weight:600;}
+
+  /* summary + quiz */
+  .summary{max-width:718px;background:var(--accent-dk);color:#eaf3f4;border-radius:16px;padding:24px 26px;margin:50px 0 30px;font-family:var(--serif);}
+  .summary h2{color:#fff;margin:0 0 6px;font-size:24px;}
+  .summary ul{margin:10px 0 0;padding-left:20px;} .summary li{margin:8px 0;font-size:15.5px;line-height:1.55;color:#dcebec;}
+  .summary li b{color:#fff;}
+  .quiz{max-width:718px;margin:36px 0;}
+  .quiz h2{margin-top:0;}
+  .q{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 20px;margin:12px 0;box-shadow:var(--shadow);}
+  .q .qq{font-weight:600;color:var(--accent-dk);font-family:var(--serif);}
+  .q button{margin-top:10px;font-family:var(--ui);font-size:13px;font-weight:700;color:var(--accent);background:#eef5f6;border:1px solid #d3e5e7;border-radius:20px;padding:7px 15px;cursor:pointer;}
+  .q button:hover{background:#e2eff0;}
+  .q .ans{display:none;margin-top:12px;padding-top:12px;border-top:1px dashed var(--line);font-size:15.5px;color:var(--soft);}
+  .q .ans .a{font-weight:700;color:var(--accent-dk);}
+  .q.show .ans{display:block;} .q.show button{display:none;}
+
+  .chapnav{max-width:718px;display:flex;justify-content:space-between;gap:12px;margin:44px 0 0;font-family:var(--ui);}
+  .chapnav a,.chapnav span{flex:1;border:1px solid var(--line);border-radius:12px;padding:14px 16px;font-size:13.5px;background:var(--card);}
+  .chapnav a{color:var(--accent-dk);font-weight:600;} .chapnav a:hover{border-color:var(--accent);text-decoration:none;}
+  .chapnav .k{display:block;font-size:11px;color:var(--faint);text-transform:uppercase;letter-spacing:.5px;margin-bottom:2px;}
+  .chapnav .next{text-align:right;} .chapnav .disabled{color:var(--faint);}
+
+  footer{font-family:var(--ui);text-align:center;color:var(--faint);font-size:12.5px;border-top:1px solid var(--line);padding:26px 20px 50px;margin-top:30px;}
+  footer b{color:var(--soft);}
+
+  @media(max-width:860px){
+    .layout{grid-template-columns:1fr;gap:0;}
+    aside{padding-top:16px;} aside .toc{position:static;}
+    aside .toc{border:1px solid var(--line);border-radius:12px;padding:12px 14px;background:var(--card);}
+    aside .toc a{border-left:none;padding:6px 4px;}
+    aside .toc a.on{background:none;}
+    .reading{padding-top:16px;}
+    .embed iframe{height:660px;}
+  }
+
+  /* comparison tables */
+  .ctwrap{max-width:718px;overflow-x:auto;margin:22px 0;-webkit-overflow-scrolling:touch;}
+  table.ctable{border-collapse:collapse;width:100%;min-width:520px;font-family:var(--ui);font-size:14px;background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden;}
+  table.ctable th,table.ctable td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);vertical-align:top;line-height:1.45;}
+  table.ctable thead th{background:#eef5f6;color:var(--accent-dk);font-weight:700;font-size:12.5px;letter-spacing:.3px;}
+  table.ctable tbody tr:last-child td{border-bottom:none;}
+  table.ctable td:first-child,table.ctable th:first-child{font-weight:600;color:var(--soft);white-space:nowrap;}
+  table.ctable td b{color:var(--accent-dk);font-weight:600;}
+  /* glossary */
+  dl.terms{max-width:718px;margin:18px 0;}
+  dl.terms dt{font-family:var(--ui);font-weight:700;color:var(--accent-dk);font-size:15px;margin-top:15px;}
+  dl.terms dd{margin:3px 0 0;color:var(--soft);}
+  /* flashcard drill widget */
+  .fc{max-width:718px;margin:20px 0;}
+  .fc-card{perspective:1600px;height:236px;cursor:pointer;margin-bottom:14px;}
+  .fc-inner{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform .55s cubic-bezier(.4,.2,.2,1);}
+  .fc-card.flip .fc-inner{transform:rotateY(180deg);}
+  .fc-face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border:1px solid var(--line);border-radius:16px;padding:26px 30px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:12px;box-shadow:0 8px 26px rgba(20,40,46,.09);overflow:auto;}
+  .fc-front{background:linear-gradient(180deg,#fffdf7,#eef5f6);}
+  .fc-back{background:linear-gradient(180deg,#fbf3e2,#f3e6c9);transform:rotateY(180deg);border-color:#e6d3a6;}
+  .fc-side{position:absolute;top:12px;left:16px;font-family:var(--ui);font-size:10px;font-weight:800;letter-spacing:1.3px;text-transform:uppercase;color:var(--faint);}
+  .fc-back .fc-side{color:var(--gold);}
+  .fc-q{font-family:var(--disp);font-weight:600;font-size:19px;line-height:1.35;color:var(--accent-dk);}
+  .fc-a{font-family:var(--serif);font-weight:600;font-size:17px;line-height:1.45;color:var(--ink);}
+  .fc-hint{position:absolute;bottom:11px;left:0;right:0;font-family:var(--ui);font-size:11.5px;color:var(--faint);}
+  .fc-nav{display:flex;gap:9px;align-items:center;}
+  .fc-count{flex:1;text-align:center;font-family:var(--ui);font-size:13px;color:var(--muted);font-weight:600;}
+  .fc-btn{font-family:var(--ui);font-size:13px;font-weight:700;color:var(--accent);background:#eef5f6;border:1px solid #d3e5e7;border-radius:20px;padding:8px 13px;cursor:pointer;}
+  .fc-btn:hover{background:#e2eff0;}
+  .fc-full{display:block;margin-top:14px;text-align:center;font-family:var(--ui);font-size:13.5px;font-weight:700;background:var(--accent-dk);color:#eaf3f4;border-radius:12px;padding:12px;}
+  .fc-full:hover{text-decoration:none;filter:brightness(1.12);}
+</style>
+</head>
+<body>
+
+
+  <div class="topbar">
+    <div class="row">
+      <a class="home" href="index.html">📖 Contents</a>
+      
+      <span class="ct">Week 13 · Digestive</span>
+    </div>
+    <div class="progress"><div class="bar" id="bar"></div></div>
+  </div>
+
+  <div class="layout">
+    <aside>
+      <nav class="toc">
+        <h4>In this chapter</h4>
+        <a href="#w13_upper" class="on">1 · GERD &amp; ulcers</a>
+        <a href="#w13_ibd">2 · Inflammatory bowel disease</a>
+        <a href="#w13_obstruction">3 · Obstruction &amp; bleeding</a>
+        <a href="#w13_liver">4 · Liver &amp; cirrhosis</a>
+        <a href="#w13_gallpanc">5 · Gallbladder &amp; pancreas</a>
+        <a href="#w13_jaundice">6 · Jaundice</a>
+        <a href="#summary">The chapter in one breath</a>
+        <a href="#glossary">Words worth knowing</a>
+        <a href="#cards">Flashcards</a>
+        <a href="#quiz">Check yourself</a>
+      </nav>
+    </aside>
+
+    <main class="reading">
+      <div class="kicker">Pathophysiology · Week 13</div>
+      <h1>Digestive: GI, Liver &amp; Pancreas</h1>
+      <p class="lede">The digestive tract is a single long tube with some powerful accessory organs, and trouble anywhere along it shows up fast. This chapter runs from the reflux and ulcers of the upper GI down through <b>inflammatory bowel disease</b> and obstruction, then into the <b>liver, gallbladder, and pancreas</b> &mdash; and the jaundice that signals something is backing up.</p>
+      <div class="objectives">
+        <h4>By the end of this chapter you can</h4>
+        <ul>
+          <li>Explain <b>GERD</b> and <b>peptic ulcer</b> disease and their dangers.</li>
+          <li>Contrast <b>Crohn disease</b> with <b>ulcerative colitis</b>.</li>
+          <li>Recognize bowel obstruction and tell an upper from a lower <b>GI bleed</b>.</li>
+          <li>Describe <b>cirrhosis</b> and its consequences (portal hypertension, varices, ascites, encephalopathy).</li>
+          <li>Explain gallstones, <b>pancreatitis</b>, and the three types of jaundice.</li>
+        </ul>
+      </div>
+
+      <h2 id="w13_upper"><span class="num">Section 1</span>Upper GI: GERD &amp; peptic ulcers</h2>
+<figure class="bref" data-sec="1" style="max-width:1040px;margin:10px 0 24px;padding:0;"><div style="border:1px solid #e6e2d6;border-radius:16px;overflow:hidden;background:#fffdf7;box-shadow:0 8px 26px rgba(20,40,46,.09);"><img src="img/digestive_s1.jpg" alt="GERD & ulcers reference figure" loading="lazy" style="display:block;width:100%;height:auto;background:#fff;" onerror="this.closest('figure').style.display='none'"></div><figcaption style="font-family:Inter,system-ui,sans-serif;font-size:12.5px;color:#7c8a88;margin-top:8px;line-height:1.5;"><b style="color:#0c3a44;">Reference.</b> GERD & ulcers <span style="color:#9aa8a6;">&mdash; BruceBlaus, CC BY-SA 4.0 (via Wikimedia Commons)</span></figcaption></figure>
+
+
+      <p>Your stomach makes acid on purpose. Special <b>parietal cells</b> in the stomach lining pump out <b>hydrochloric acid (HCl)</b> to start digesting food and to kill swallowed bacteria. That acid is powerful enough to burn skin, so the body has to protect itself in two ways. First, a muscular ring at the bottom of the esophagus called the <b>lower esophageal sphincter (LES)</b> stays tightly closed to keep acid <em>down in the stomach</em> where it belongs. Second, the stomach and duodenum are coated in a thick layer of <b>mucus and bicarbonate</b> that acts like a chemical raincoat, keeping acid from touching the delicate cells underneath. Trouble in the upper GI tract almost always comes down to one of these two defenses failing.</p>
+
+<h3>GERD: when the sphincter leaks</h3>
+<p><b>Gastroesophageal reflux disease (GERD)</b> happens when the LES is weak or relaxes at the wrong time, letting stomach acid splash <em>backward</em> into the esophagus. The esophagus has no mucus raincoat, so the acid irritates its lining. That is why the classic symptom is <b>heartburn (pyrosis)</b> - a burning behind the breastbone, often worse after big meals or when lying down (gravity is no longer helping keep acid down). Patients may also describe <b>regurgitation</b> of sour fluid, a chronic cough, or a hoarse voice from acid reaching the throat.</p>
+<p>Occasional reflux is normal; GERD is when it happens often enough to cause symptoms or damage. The real long-term worry is what repeated acid exposure does to the esophageal lining. Over years, the normal squamous cells can transform into intestinal-type columnar cells - a change called <b>Barrett esophagus</b>. This is the body adapting to survive the acid, but it is a form of <em>metaplasia</em> that raises the risk of <b>esophageal adenocarcinoma</b>. That is why chronic GERD is monitored, not just medicated.</p>
+
+<div class="pearl"><b>Why we raise the head of the bed.</b> Elevating the head of the bed and avoiding meals within 2-3 hours of lying down uses gravity to keep acid in the stomach - a simple, drug-free way to protect a weak LES.</div>
+
+<h3>Peptic ulcer disease: when the raincoat wears through</h3>
+<p>A <b>peptic ulcer</b> is an open sore that erodes through the protective mucosa into the wall of the stomach or duodenum. The two big culprits both attack the mucus defense. First is <b>Helicobacter pylori</b>, a spiral bacterium that burrows into the mucus layer and triggers inflammation that weakens it. Second is chronic use of <b>NSAIDs</b> (like ibuprofen and aspirin). NSAIDs block <b>prostaglandins</b> - the very chemicals that tell the stomach to make protective mucus and bicarbonate. Take away the prostaglandins and you take away the raincoat, so acid digests the tissue itself. Together, <b>H. pylori and NSAIDs cause the large majority of peptic ulcers</b>.</p>
+
+<h3>Gastric vs. duodenal: read the pain</h3>
+<p>Where the ulcer sits changes the timing of the pain, and this is a favorite exam point. The trick is to think about where the food goes.</p>
+<div class="ctwrap"><table class="ctable"><thead><tr><th>Feature</th><th>Gastric ulcer</th><th>Duodenal ulcer</th></tr></thead><tbody><tr><td>Location</td><td>In the stomach lining</td><td>In the first part of the small intestine</td></tr><tr><td>Pain timing</td><td>Often <em>worse</em> with food (usually 30 min after eating)</td><td>Often <em>relieved</em> by food, then returns 2-3 hours later</td></tr><tr><td>Classic clue</td><td>May avoid eating, can lose weight</td><td>Night pain that eating settles; may gain weight</td></tr><tr><td>Typical cause lean</td><td>More often NSAID-related</td><td>More often H. pylori-related</td></tr></tbody></table></div>
+<p>The logic: in a <b>gastric ulcer</b>, food entering the stomach means more acid production right on top of the sore, so eating <em>hurts</em>. In a <b>duodenal ulcer</b>, food buffers the acid and stimulates the stomach to close its outlet briefly, so eating <em>soothes</em> the pain until the meal moves through.</p>
+
+<h3>When an ulcer turns dangerous</h3>
+<p>Ulcers matter because they can go deeper. Two complications are emergencies. <b>Bleeding</b> occurs when the ulcer erodes into a blood vessel. Watch for <b>hematemesis</b> (vomiting blood, sometimes coffee-ground colored from digested blood) and <b>melena</b> (black, tarry, foul stool - blood that has traveled the whole gut). Slow chronic bleeding shows up as <b>iron-deficiency anemia</b> and fatigue. The second is <b>perforation</b>: the ulcer bores all the way through the wall, spilling acid and gut contents into the abdominal cavity. This causes sudden, severe pain and a rigid, <b>board-like abdomen</b> - a sign of <b>peritonitis</b> and a surgical emergency.</p>
+
+<div class="pearl"><b>NSAIDs plus an anticoagulant is a red flag.</b> A patient on chronic NSAIDs who is also on a blood thinner has both a reason to form ulcers and a reason to bleed heavily from them - a combination to catch early.</div>
+
+<p>Take a look at the interactive figure below to see how a weak sphincter lets acid climb back into the esophagus.</p>
+
+      <div class="embed">
+        <div class="cap"><span class="tag">Interactive</span> See acid reflux past a weak sphincter and the damage it does. <a href="../patho/GERD.html" target="_blank" rel="noopener">Open full &uarr;</a></div>
+        <div class="frame"><iframe src="../patho/GERD.html" loading="lazy" title="GERD interactive"></iframe></div>
+      </div>
+      <div class="kp"><div class="t">Key points</div><ul><li><b>GERD</b> is acid refluxing past a weak <b>LES</b>; chronic exposure can drive <b>Barrett esophagus</b> and raise esophageal cancer risk.</li><li><b>Peptic ulcers</b> form when the mucus defense fails - usually from <b>H. pylori</b> or <b>NSAIDs</b> (which block protective prostaglandins).</li><li><b>Gastric</b> ulcer pain is often <em>worse</em> with food; <b>duodenal</b> ulcer pain is often <em>relieved</em> by food and returns hours later.</li><li>The dangerous complications are <b>bleeding</b> (hematemesis, melena, anemia) and <b>perforation</b> (sudden pain, rigid board-like abdomen, peritonitis).</li></ul></div>
+
+      <h2 id="w13_ibd"><span class="num">Section 2</span>Inflammatory bowel disease</h2>
+<figure class="bref" data-sec="2" style="max-width:1040px;margin:10px 0 24px;padding:0;"><div style="border:1px solid #e6e2d6;border-radius:16px;overflow:hidden;background:#fffdf7;box-shadow:0 8px 26px rgba(20,40,46,.09);"><img src="img/digestive_s2.jpg" alt="IBD reference figure" loading="lazy" style="display:block;width:100%;height:auto;background:#fff;" onerror="this.closest('figure').style.display='none'"></div><figcaption style="font-family:Inter,system-ui,sans-serif;font-size:12.5px;color:#7c8a88;margin-top:8px;line-height:1.5;"><b style="color:#0c3a44;">Reference.</b> IBD <span style="color:#9aa8a6;">&mdash; Nephron, CC BY-SA 3.0 (via Wikimedia Commons)</span></figcaption></figure>
+
+
+      <p>Your <b>gut</b> is a long tube that runs from your mouth to your anus, and its inner lining has a hard job: pull nutrients out of food while keeping trillions of bacteria on the <em>inside</em> of the tube and out of your bloodstream. That lining, the <b>mucosa</b>, sits on top of your immune system like a screen door, letting the good stuff through and holding the line against invaders. Normally your immune cells and your gut bacteria live in a quiet truce. In <b>inflammatory bowel disease (IBD)</b>, that truce breaks down. The immune system starts attacking the bowel wall itself, causing chronic, <em>immune-mediated</em> inflammation that flares and settles, flares and settles, for the rest of a person's life.</p>
+
+<h3>Two diseases, one family</h3>
+<p>IBD is an umbrella term for two related conditions: <b>Crohn disease</b> and <b>ulcerative colitis (UC)</b>. They share a lot. Both are <em>chronic</em> and <em>relapsing</em>, meaning they cycle between <b>flares</b> (active inflammation, misery) and <b>remission</b> (things calm down). Both involve an immune system that overreacts to the normal gut, driven by a mix of genetics and environmental triggers. And both can produce systemic misery beyond the belly, including fatigue, weight loss, and low-grade fever, because widespread inflammation is a whole-body event. What sets them apart is <em>where</em> they attack and <em>how deep</em> they go.</p>
+
+<h3>Crohn disease: patchy and deep</h3>
+<p>Crohn can strike <b>anywhere from the mouth to the anus</b>, though it loves the terminal ileum (the tail end of the small intestine) and the colon. Its signature is <b>skip lesions</b>: patches of angry, inflamed bowel sitting right next to perfectly healthy tissue, like a moth-eaten pattern. Crucially, the inflammation is <b>transmural</b>, meaning it burrows through <em>all the layers</em> of the bowel wall, not just the surface.</p>
+<p>That depth explains Crohn's worst complications. When inflammation tunnels all the way through the wall, it can carve an abnormal connection between two structures, called a <b>fistula</b> (for example, bowel-to-skin or bowel-to-bladder). Chronic transmural damage also scars and narrows the tube, producing <b>strictures</b> that can block the bowel. Because the small intestine does most nutrient absorption, Crohn often causes <em>malabsorption</em>, weight loss, and vitamin deficiencies. The diarrhea is frequently non-bloody, and patients may have right-lower-quadrant pain that mimics appendicitis.</p>
+
+<h3>Ulcerative colitis: shallow but continuous</h3>
+<p>UC is more predictable in its footprint. It is limited to the <b>colon only</b>, it almost always starts in the rectum, and it spreads <b>continuously</b> upward with no skip areas, one unbroken zone of inflammation. It is also shallow: the damage stays in the <b>mucosa</b> (and submucosa), sparing the deeper muscle layers. Because it doesn't go transmural, UC rarely causes fistulas or strictures.</p>
+<p>But that inflamed, ulcerated mucosal surface bleeds easily, so the hallmark symptom is <b>bloody diarrhea</b> mixed with mucus, often with crampy lower-abdominal pain and a constant urge to go (<b>tenesmus</b>). Losing blood and fluid stool many times a day can leave patients anemic and dehydrated. A feared emergency is <b>toxic megacolon</b>, where the colon dilates and can perforate. Long-standing UC also raises the risk of <b>colorectal cancer</b>, so patients need ongoing colonoscopy surveillance.</p>
+
+<div class="pearl"><b>A memory hook.</b> Crohn = <em>Cobblestones, Creeping skip lesions, and all the way through</em> (transmural, fistulas). UC = <em>Continuous, Colon-only, and bloody</em>. If you see fistulas think Crohn; if you see bloody diarrhea think UC.</div>
+
+<h3>Side by side</h3>
+<div class="ctwrap"><table class="ctable"><thead><tr><th>Feature</th><th>Crohn disease</th><th>Ulcerative colitis</th></tr></thead><tbody><tr><td>Location</td><td>Mouth to anus (often terminal ileum)</td><td>Colon only, starts in rectum</td></tr><tr><td>Pattern</td><td>Skip lesions (patchy)</td><td>Continuous</td></tr><tr><td>Depth</td><td>Transmural (all layers)</td><td>Mucosa/submucosa only</td></tr><tr><td>Classic stool</td><td>Diarrhea, often non-bloody</td><td>Bloody diarrhea with mucus</td></tr><tr><td>Complications</td><td>Fistulas, strictures, malabsorption</td><td>Toxic megacolon, higher colon cancer risk</td></tr></tbody></table></div>
+
+<h3>IBD is not IBS</h3>
+<p>One last distinction that trips people up because the letters look alike. <b>IBD is structural</b>, real, visible inflammation and tissue damage you can see on scope and biopsy; <b>IBS (irritable bowel syndrome) is functional</b>, meaning the gut hurts and misbehaves but the tissue itself looks normal. Explore the interactive figure below to compare the Crohn and UC patterns side by side.</p>
+
+<div class="pearl"><b>Why it matters at the bedside.</b> Because Crohn is transmural, watch for signs of obstruction and fistula; because UC bleeds from the surface, monitor for anemia, dehydration, and the abdominal distension of toxic megacolon.</div>
+
+      <div class="embed">
+        <div class="cap"><span class="tag">Interactive</span> Compare Crohn disease and ulcerative colitis. <a href="../patho/IBD.html" target="_blank" rel="noopener">Open full &uarr;</a></div>
+        <div class="frame"><iframe src="../patho/IBD.html" loading="lazy" title="Inflammatory bowel disease interactive"></iframe></div>
+      </div>
+      <div class="kp"><div class="t">Key points</div><ul><li><b>IBD</b> is chronic, immune-mediated inflammation of the bowel that <em>relapses</em> in flares and settles into remission; it splits into Crohn disease and ulcerative colitis.</li><li><b>Crohn</b> can hit anywhere mouth-to-anus with <b>skip lesions</b> and <b>transmural</b> inflammation, so it causes <b>fistulas</b>, strictures, and malabsorption.</li><li><b>Ulcerative colitis</b> stays in the <b>colon only</b>, spreads <b>continuously</b> from the rectum, and stays <b>mucosal</b>, so its hallmark is <b>bloody diarrhea</b>.</li><li>Deep vs shallow explains the complications: Crohn tunnels through the wall (fistulas), UC ulcerates the surface (bleeding, toxic megacolon, cancer risk).</li><li>Do not confuse <b>IBD</b> (structural inflammation, visible damage) with <b>IBS</b> (a functional disorder with normal-looking tissue).</li></ul></div>
+
+      <h2 id="w13_obstruction"><span class="num">Section 3</span>Bowel obstruction &amp; GI bleeding</h2>
+<figure class="bref" data-sec="3" style="max-width:1040px;margin:10px 0 24px;padding:0;"><div style="border:1px solid #e6e2d6;border-radius:16px;overflow:hidden;background:#fffdf7;box-shadow:0 8px 26px rgba(20,40,46,.09);"><img src="img/digestive_s3.jpg" alt="Obstruction & bleeding reference figure" loading="lazy" style="display:block;width:100%;height:auto;background:#fff;" onerror="this.closest('figure').style.display='none'"></div><figcaption style="font-family:Inter,system-ui,sans-serif;font-size:12.5px;color:#7c8a88;margin-top:8px;line-height:1.5;"><b style="color:#0c3a44;">Reference.</b> Obstruction & bleeding <span style="color:#9aa8a6;">&mdash; James Heilman, MD, CC BY-SA 3.0 (via Wikimedia Commons)</span></figcaption></figure>
+
+
+      <p>Picture your intestines as a long, muscular hose, roughly 20 feet of it, that never stops working. Normally the gut moves its contents forward with rhythmic squeezing waves called <b>peristalsis</b>, driven by smooth muscle and coordinated by the <em>enteric nervous system</em> (the gut's own built-in wiring). Food, fluid, gas, and eventually stool all travel one direction: down and out. When that forward flow stops, everything backs up behind the blockage, and the trouble begins.</p>
+
+<h3>Mechanical obstruction vs paralytic ileus</h3>
+<p>There are two very different reasons the highway can shut down. In a <b>mechanical obstruction</b>, something physically plugs the lumen. The most common culprits are <b>adhesions</b> (bands of internal scar tissue, usually from previous abdominal surgery), a <b>hernia</b> (a loop of bowel trapped where it pokes through the abdominal wall), and <b>tumors</b> (especially in the colon). The muscle still wants to push, so early on it squeezes <em>harder</em> against the wall it cannot pass.</p>
+<p>In a <b>paralytic ileus</b>, nothing is physically blocking the tube, but the muscle simply <em>stops moving</em>. Peristalsis goes quiet. This happens after abdominal surgery (the gut is famously sluggish for a day or two), with <b>peritonitis</b>, with electrolyte problems (especially <b>hypokalemia</b>, since potassium is needed for smooth-muscle contraction), and with opioids, which slow the gut down. The distinction matters enormously: mechanical blockages often need a procedure to relieve them, while an ileus usually needs the underlying cause fixed and the bowel rested.</p>
+
+<div class="ctwrap"><table class="ctable"><thead><tr><th>Feature</th><th>Mechanical obstruction</th><th>Paralytic ileus</th></tr></thead><tbody>
+<tr><td>Problem</td><td>Physical blockage of the lumen</td><td>Gut muscle stops contracting</td></tr>
+<tr><td>Common causes</td><td>Adhesions, hernia, tumor</td><td>Post-op state, hypokalemia, opioids, peritonitis</td></tr>
+<tr><td>Bowel sounds (early)</td><td>High-pitched, hyperactive, tinkling</td><td>Diminished to absent from the start</td></tr>
+<tr><td>Pain pattern</td><td>Crampy, wave-like (colicky)</td><td>Steady, diffuse discomfort</td></tr>
+<tr><td>Usual fix</td><td>Often surgical or decompression</td><td>Treat the cause, rest the bowel</td></tr>
+</tbody></table></div>
+
+<h3>The cardinal signs and why they happen</h3>
+<p>No matter the cause, obstruction produces a classic quartet. <b>Abdominal distension</b> develops because fluid and swallowed air pile up behind the block and the bowel balloons outward. <b>Vomiting</b> follows as the backed-up contents have nowhere to go but up; a low (distal) blockage often produces foul, feculent vomiting, while a high (proximal) small-bowel block causes earlier, more forceful emesis. <b>Obstipation</b>, the complete failure to pass any stool <em>or</em> gas, is a telling sign that nothing is getting through.</p>
+<p>Bowel sounds tell a story over time. Early in a mechanical obstruction, listen for <b>high-pitched, hyperactive, tinkling sounds</b> as the muscle strains against the blockage. As hours pass and the muscle fatigues, or as an ileus sets in, those sounds fade to <b>absent</b>. The classic teaching: sounds go <em>high-pitched then silent</em>.</p>
+
+<div class="pearl"><b>Distension plus no gas is a red flag.</b> A patient who cannot pass flatus is often more worrisome than one who cannot pass stool. Gas moves easily, so if even gas is stuck, the blockage is likely complete.</div>
+
+<h3>Why obstruction is an emergency</h3>
+<p>Trapped bowel does not just hurt, it dies. Fluid pours into the distended loop (<b>third-spacing</b>), dropping circulating volume and risking <b>hypovolemic shock</b> plus <b>metabolic</b> imbalances from all that lost fluid and electrolytes. Worse, if the swelling squeezes off the bowel's blood supply, the tissue becomes <b>strangulated</b>, turns ischemic, and can <b>perforate</b>, spilling gut contents into the abdomen and triggering life-threatening <b>peritonitis</b> and sepsis. Fever, rising heart rate, and sudden severe pain signal that a simple blockage has become a surgical emergency.</p>
+
+<h3>GI bleeding: upper vs lower</h3>
+<p>Bleeding anywhere in the digestive tract is graded by <em>where</em> it starts, because the appearance of the blood is a built-in clue. An <b>upper GI bleed</b> comes from above the ligament of Treitz, meaning the esophagus, stomach, or duodenum, and is often caused by <b>peptic ulcers</b> or <b>esophageal varices</b>. It shows up as <b>hematemesis</b> (vomited blood, sometimes <em>coffee-ground</em> in appearance once stomach acid has partly digested it) and <b>melena</b> (black, tarry, sticky stool). The stool is black because hemoglobin is chemically broken down during its long trip through the gut.</p>
+<p>A <b>lower GI bleed</b> arises in the jejunum, ileum, or colon, commonly from <b>diverticulosis</b>, <b>angiodysplasia</b>, hemorrhoids, or colorectal cancer. Because the blood exits quickly without time to be digested, it appears as <b>hematochezia</b>: bright red or maroon blood mixed with or coating the stool.</p>
+
+<div class="pearl"><b>Black and tarry means digested and usually upper.</b> Bright red usually means fresh and lower, but a very brisk upper bleed can move so fast it comes out red too, so read the whole picture, not one sign alone.</div>
+
+<h3>Why a major bleed is an emergency</h3>
+<p>A significant GI bleed can quietly drain enough blood to cause <b>hypovolemic shock</b> before the source is even found. Watch for <b>tachycardia</b>, falling blood pressure, <b>orthostatic</b> dizziness, pallor, and a dropping <em>hemoglobin and hematocrit</em>. Early vital-sign changes often precede a visible drop in labs, so trending them and securing IV access is a nursing priority.</p>
+
+      <div class="embed">
+        <div class="cap"><span class="tag">Interactive</span> Block the bowel and watch the pressure build. <a href="../patho/BowelObstruction.html" target="_blank" rel="noopener">Open full &uarr;</a></div>
+        <div class="frame"><iframe src="../patho/BowelObstruction.html" loading="lazy" title="Bowel obstruction interactive"></iframe></div>
+      </div>
+      <div class="kp"><div class="t">Key points</div><ul>
+<li><b>Mechanical obstruction</b> (adhesions, hernia, tumor) physically plugs the bowel, while <b>paralytic ileus</b> means the gut muscle simply stops moving.</li>
+<li>The cardinal signs are <b>distension, vomiting, obstipation</b> (no stool or gas), and bowel sounds that go <b>high-pitched then absent</b>.</li>
+<li><b>Upper GI bleed</b> = hematemesis and melena (black, tarry, digested blood); <b>lower GI bleed</b> = hematochezia (bright red or maroon).</li>
+<li>Obstruction can progress to strangulation, perforation, and peritonitis; a major bleed can cause hypovolemic shock, so both are true emergencies.</li>
+<li>Monitor trending vital signs, look for tachycardia and hypotension, and watch for third-spacing and electrolyte loss.</li>
+</ul></div>
+
+      <h2 id="w13_liver"><span class="num">Section 4</span>The liver: hepatitis &amp; cirrhosis</h2>
+<figure class="bref" data-sec="4" style="max-width:1040px;margin:10px 0 24px;padding:0;"><div style="border:1px solid #e6e2d6;border-radius:16px;overflow:hidden;background:#fffdf7;box-shadow:0 8px 26px rgba(20,40,46,.09);"><img src="img/digestive_s4.jpg" alt="Hepatitis & cirrhosis reference figure" loading="lazy" style="display:block;width:100%;height:auto;background:#fff;" onerror="this.closest('figure').style.display='none'"></div><figcaption style="font-family:Inter,system-ui,sans-serif;font-size:12.5px;color:#7c8a88;margin-top:8px;line-height:1.5;"><b style="color:#0c3a44;">Reference.</b> Hepatitis & cirrhosis <span style="color:#9aa8a6;">&mdash; BruceBlaus, CC BY-SA 4.0 (via Wikimedia Commons)</span></figcaption></figure>
+
+
+      <p>Think of your <b>liver</b> as the body's busiest chemistry lab. It sits under your right rib cage and quietly runs hundreds of jobs at once. Three of those jobs matter most for understanding what goes wrong. First, it is the body's <b>detox center</b>: it filters drugs, alcohol, and metabolic waste out of the blood, and it converts toxic <b>ammonia</b> (a byproduct of protein breakdown) into <b>urea</b> so the kidneys can excrete it. Second, it is a <b>factory</b>: it manufactures most of the body's <b>clotting factors</b> and <b>albumin</b>, the protein that holds fluid inside blood vessels. Third, it processes <b>bilirubin</b>, the yellow-orange pigment left over when old red blood cells are recycled, packaging it so it can leave the body in bile and stool. Hold onto those three jobs, because nearly every symptom of liver disease traces back to one of them failing.</p>
+
+<h3>Hepatitis: when the liver gets inflamed</h3>
+<p><b>Hepatitis</b> simply means inflammation of the liver. The most common causes are viral, but alcohol and certain drugs (notably <b>acetaminophen</b> in overdose) can do the same damage. The three viral players behave differently, and that difference drives nursing care.</p>
+
+<div class="ctwrap"><table class="ctable"><thead><tr><th>Feature</th><th>Hepatitis A</th><th>Hepatitis B &amp; C</th></tr></thead><tbody>
+<tr><td>How it spreads</td><td>Fecal-oral (contaminated food/water)</td><td>Blood &amp; body fluids (needles, sex, birth)</td></tr>
+<tr><td>Course</td><td>Acute, self-limiting; usually full recovery</td><td>Often becomes <b>chronic</b>; can smolder for years</td></tr>
+<tr><td>Long-term risk</td><td>Rarely lasting damage</td><td>Cirrhosis &amp; liver cancer</td></tr>
+<tr><td>Prevention</td><td>Vaccine; hand hygiene</td><td>Hep B vaccine; no Hep C vaccine yet</td></tr>
+</tbody></table></div>
+
+<p>During acute hepatitis, patients often feel fatigued and nauseated, and many turn <b>jaundiced</b> (yellow skin and eyes) because the inflamed liver cannot keep up with bilirubin processing. <em>Alcoholic</em> and <em>drug-induced</em> hepatitis follow the same theme: the toxin injures liver cells (<b>hepatocytes</b>) faster than they can heal.</p>
+
+<div class="pearl"><b>Chronic is the dangerous word.</b> Hepatitis B and C often cause no symptoms for years while silently scarring the liver. That is why they are the leading cause of cirrhosis and liver cancer worldwide, and why screening matters.</div>
+
+<h3>Cirrhosis: scarring that does not undo</h3>
+<p>When injury to the liver continues long enough, healing itself becomes the problem. Instead of regenerating normal tissue, the liver lays down <b>fibrosis</b> (scar tissue). <b>Cirrhosis</b> is the end-stage result: the once-soft organ becomes hard, nodular, and shrunken. Scar tissue does not do liver work, and it does not let blood flow through normally. Both of those facts explain the cascade of complications that follow.</p>
+
+<h3>Portal hypertension and its downstream chaos</h3>
+<p>Normally, blood from the intestines drains through the <b>portal vein</b> into the liver. Cirrhotic scar tissue squeezes those channels, so pressure backs up, a state called <b>portal hypertension</b>. High pressure in this system forces blood to find detours through smaller veins that were never built for the load. Where those veins swell, we get problems:</p>
+<ul>
+<li><b>Esophageal varices</b> are ballooned, fragile veins at the base of the esophagus. They can rupture and cause sudden, massive, life-threatening bleeding.</li>
+<li><b>Ascites</b> is fluid pooling in the abdomen. Two forces drive it: the high portal pressure pushes fluid out of vessels, and the failing liver makes too little <b>albumin</b> to hold fluid in. Low albumin means low <em>oncotic pressure</em>, so water leaks into the belly.</li>
+</ul>
+
+<h3>Why liver failure causes bleeding and jaundice</h3>
+<p>Remember the factory job. A failing liver stops making enough <b>clotting factors</b>, so patients bruise and bleed easily, and lab tests show a prolonged <b>PT/INR</b>. Pair that with fragile varices, and bleeding becomes a true emergency. Remember the bilirubin job, too: as the liver falters, bilirubin builds up in the blood and stains the skin and sclera yellow, the classic <b>jaundice</b>.</p>
+
+<h3>Hepatic encephalopathy: the toxin job fails</h3>
+<p>When the detox center goes down, <b>ammonia</b> from protein digestion is no longer converted to urea. It accumulates and crosses into the brain, causing <b>hepatic encephalopathy</b>: confusion, personality changes, and a flapping tremor of the hands called <b>asterixis</b>. Nurses often watch for early confusion as a warning sign, and the drug <b>lactulose</b> is given to trap ammonia in the gut and pull it out in stool.</p>
+
+<div class="pearl"><b>One organ, three failures.</b> Nearly every sign of liver failure maps to a lost job: jaundice (bilirubin), bleeding (clotting factors), ascites (albumin), and confusion (ammonia detox). Explore the stages of liver disease below.</div>
+
+      <div class="embed">
+        <div class="cap"><span class="tag">Interactive</span> Follow the liver from healthy to fatty to cirrhotic. <a href="../patho/LiverStages.html" target="_blank" rel="noopener">Open full &uarr;</a></div>
+        <div class="frame"><iframe src="../patho/LiverStages.html" loading="lazy" title="Liver disease interactive"></iframe></div>
+      </div>
+      <div class="kp"><div class="t">Key points</div><ul>
+<li>The liver detoxifies (converting <b>ammonia</b> to urea), builds <b>clotting factors</b> and <b>albumin</b>, and processes <b>bilirubin</b> — remember these jobs and the symptoms make sense.</li>
+<li><b>Hepatitis</b> is liver inflammation; Hep A spreads fecal-oral and resolves, while Hep B and C spread through blood, often turn chronic, and lead to cirrhosis.</li>
+<li><b>Cirrhosis</b> is irreversible scarring; the scar tissue blocks blood flow and causes <b>portal hypertension</b>, driving <b>esophageal varices</b> and <b>ascites</b>.</li>
+<li>Liver failure causes <b>bleeding</b> (too few clotting factors, high PT/INR) and <b>jaundice</b> (bilirubin buildup).</li>
+<li>Rising ammonia causes <b>hepatic encephalopathy</b> (confusion, asterixis), typically treated with <b>lactulose</b>.</li>
+</ul></div>
+
+      <h2 id="w13_gallpanc"><span class="num">Section 5</span>Gallbladder &amp; pancreas</h2>
+<figure class="bref" data-sec="5" style="max-width:1040px;margin:10px 0 24px;padding:0;"><div style="border:1px solid #e6e2d6;border-radius:16px;overflow:hidden;background:#fffdf7;box-shadow:0 8px 26px rgba(20,40,46,.09);"><img src="img/digestive_s5.jpg" alt="Gallbladder & pancreas reference figure" loading="lazy" style="display:block;width:100%;height:auto;background:#fff;" onerror="this.closest('figure').style.display='none'"></div><figcaption style="font-family:Inter,system-ui,sans-serif;font-size:12.5px;color:#7c8a88;margin-top:8px;line-height:1.5;"><b style="color:#0c3a44;">Reference.</b> Gallbladder & pancreas <span style="color:#9aa8a6;">&mdash; George Chernilevsky, CC BY-SA 4.0 (via Wikimedia Commons)</span></figcaption></figure>
+
+
+      <p>Your <b>gallbladder</b> and <b>pancreas</b> are two quiet helpers that sit just under your liver and stomach. Normally, the gallbladder is a small green sac that stores <b>bile</b> (a soap-like fluid the liver makes to break up fat). When you eat a greasy meal, a hormone called <b>cholecystokinin (CCK)</b> tells the gallbladder to squeeze, sending bile down the <b>common bile duct</b> into the small intestine. The pancreas, meanwhile, pours powerful <b>digestive enzymes</b> down its own <b>pancreatic duct</b>, which usually joins the bile duct right before both empty into the duodenum. Those enzymes are supposed to stay switched <em>off</em> until they reach the gut. Trouble starts when a stone plugs the plumbing, or when those enzymes turn on too early.</p>
+
+<h3>Gallstones and cholecystitis</h3>
+<p>When bile has too much cholesterol or sits too long, it can harden into <b>gallstones</b> (<em>cholelithiasis</em>). Many stones are silent. But if a stone lodges in the gallbladder's neck or the <b>cystic duct</b>, the gallbladder keeps squeezing against a locked door, becomes trapped, inflamed, and infected. This is <b>acute cholecystitis</b>. Because fatty food is the trigger for gallbladder contraction, the classic story is <b>right-upper-quadrant (RUQ) pain 30 minutes to a few hours after a fatty meal</b>, often radiating to the right shoulder or scapula, plus nausea and vomiting. The pain can be severe and cramping (<b>biliary colic</b>).</p>
+<p>A bedside clue is <b>Murphy's sign</b>. You place your hand under the right rib margin and ask the patient to take a deep breath. As the inflamed gallbladder descends onto your fingers, the patient catches their breath and stops from pain. A <b>positive Murphy's sign</b> points strongly to cholecystitis. Think of the classic risk profile as the <em>4 F's</em>: female, forty, fertile, and overweight.</p>
+
+<h3>When a stone blocks the ducts</h3>
+<p>A stone that escapes the gallbladder can travel and wedge deeper. If it blocks the <b>common bile duct</b> (<em>choledocholithiasis</em>), bile backs up. <b>Bilirubin</b> spills into the blood, so the skin and eyes turn yellow (<b>jaundice</b>), the urine darkens, and stools turn clay-pale because bile pigment no longer reaches the gut. Trapped, stagnant bile invites infection of the whole biliary tree (<b>cholangitis</b>).</p>
+<p>Here is the dangerous overlap: because the bile duct and pancreatic duct usually share a final channel, one stone can dam <em>both</em>. If it blocks where the pancreatic duct drains, enzymes cannot escape, pressure rises, and the pancreas is set up to attack itself.</p>
+
+<h3>Acute pancreatitis: the organ that digests itself</h3>
+<p><b>Acute pancreatitis</b> happens when those digestive enzymes activate <em>inside</em> the pancreas instead of the intestine. <b>Trypsin</b> switches on prematurely and triggers the rest, so the gland begins to <em>autodigest</em> its own tissue (<b>autodigestion</b>). The result is intense inflammation, swelling, and sometimes bleeding.</p>
+<p>The hallmark is <b>severe, constant epigastric pain that bores straight through to the back</b>. Patients often feel worse lying flat and better leaning forward. Nausea and vomiting are common, and the belly may be tender and distended. On labs, <b>lipase</b> rises sharply (usually more than three times the upper normal limit) and stays elevated longer than amylase, which makes lipase the more specific marker.</p>
+
+<div class="pearl"><b>Lipase over amylase.</b> Both can rise in pancreatitis, but lipase is more specific to the pancreas and stays up longer, so it is the preferred test.</div>
+
+<h3>What causes it</h3>
+<p>By far the two leading causes are <b>gallstones</b> and <b>alcohol</b> (a helpful memory hook is <em>"I GET SMASHED,"</em> where the first culprits are Idiopathic, Gallstones, and Ethanol). Gallstones block the shared duct; alcohol is directly toxic to pancreatic cells and thickens secretions.</p>
+
+<div class="ctwrap"><table class="ctable"><thead><tr><th>Feature</th><th>Cholecystitis</th><th>Acute pancreatitis</th></tr></thead><tbody><tr><td>Core problem</td><td>Blocked, inflamed gallbladder</td><td>Pancreas digesting itself</td></tr><tr><td>Pain location</td><td>Right upper quadrant, to right shoulder</td><td>Epigastric, boring to the back</td></tr><tr><td>Trigger</td><td>Fatty meal</td><td>Alcohol or a gallstone</td></tr><tr><td>Key exam/lab</td><td>Positive Murphy's sign</td><td>High lipase</td></tr></tbody></table></div>
+
+<div class="pearl"><b>One stone, two organs.</b> Because the bile and pancreatic ducts share a common channel, a single gallstone can cause both jaundice and pancreatitis at once. Take a look at the interactive figure below to explore biliary anatomy.</div>
+
+      <div class="embed">
+        <div class="cap"><span class="tag">Interactive</span> See a gallstone block the biliary tract. <a href="../patho/Gallstones.html" target="_blank" rel="noopener">Open full &uarr;</a></div>
+        <div class="frame"><iframe src="../patho/Gallstones.html" loading="lazy" title="Gallstones interactive"></iframe></div>
+      </div>
+      <div class="kp"><div class="t">Key points</div><ul><li>Gallstones can block bile flow; if the neck or cystic duct is trapped, the gallbladder inflames (<b>cholecystitis</b>) with RUQ pain after fatty meals and a positive <b>Murphy's sign</b>.</li><li>A stone in the <b>common bile duct</b> causes jaundice, dark urine, and pale stools; because the ducts share a channel, one stone can block the pancreatic duct too.</li><li><b>Acute pancreatitis</b> is autodigestion: enzymes activate early and the pancreas attacks itself, causing severe epigastric pain that bores to the back.</li><li><b>Lipase</b> is the key lab, usually more than triple the upper limit, and is more specific than amylase.</li><li>The top two causes of pancreatitis are <b>gallstones</b> and <b>alcohol</b>.</li></ul></div>
+
+      <h2 id="w13_jaundice"><span class="num">Section 6</span>Jaundice &amp; bilirubin</h2>
+<figure class="bref" data-sec="6" style="max-width:1040px;margin:10px 0 24px;padding:0;"><div style="border:1px solid #e6e2d6;border-radius:16px;overflow:hidden;background:#fffdf7;box-shadow:0 8px 26px rgba(20,40,46,.09);"><img src="img/digestive_s6.jpg" alt="Jaundice reference figure" loading="lazy" style="display:block;width:100%;height:auto;background:#fff;" onerror="this.closest('figure').style.display='none'"></div><figcaption style="font-family:Inter,system-ui,sans-serif;font-size:12.5px;color:#7c8a88;margin-top:8px;line-height:1.5;"><b style="color:#0c3a44;">Reference.</b> Jaundice <span style="color:#9aa8a6;">&mdash; Krispysalad26, CC BY-SA 4.0 (via Wikimedia Commons)</span></figcaption></figure>
+
+
+      <p>Every day, your body quietly retires about 1% of its red blood cells, mostly because they have worn out after roughly 120 days in circulation. When a red cell breaks down, the <b>hemoglobin</b> inside it is dismantled. The heme portion becomes a yellow-orange pigment called <b>bilirubin</b>. This first form is <b>unconjugated (indirect) bilirubin</b>, and it has a problem: it is <em>fat-loving</em> and not water-soluble, so it cannot simply be flushed out in urine. Instead it rides through the blood attached to <b>albumin</b> and is delivered to the liver.</p>
+
+<h3>How the liver handles bilirubin</h3>
+<p>The liver is the cleanup station. Liver cells (<b>hepatocytes</b>) take up unconjugated bilirubin and attach sugar molecules to it using an enzyme called <b>UDP-glucuronyl transferase</b>. This step is <b>conjugation</b>, and it converts the pigment into <b>conjugated (direct) bilirubin</b>, which is now <em>water-soluble</em>. The liver secretes conjugated bilirubin into <b>bile</b>, which drains through the bile ducts into the small intestine. There, gut bacteria change it into <b>urobilinogen</b> and then <b>stercobilin</b>, the pigment that gives stool its normal brown color. A small amount is reabsorbed and leaves in urine as <b>urobilin</b>, giving urine its yellow tint.</p>
+
+<p><b>Jaundice</b> (also called <em>icterus</em>) is the yellowing of skin, mucous membranes, and the <b>sclera</b> of the eyes. It appears when serum bilirubin rises above roughly 2 to 3 mg/dL. Because bilirubin loves fatty tissue and elastin-rich tissue, the sclera and skin show it first. Jaundice is never a disease by itself; it is a signal that one of the steps above has broken down. To find the break, nurses group jaundice by <em>where</em> in the pathway the problem sits.</p>
+
+<h3>The three types of jaundice</h3>
+<p><b>Prehepatic (hemolytic)</b> jaundice happens <em>before</em> the liver, when red cells are destroyed faster than the liver can keep up. Causes include hemolytic anemias, sickle cell crisis, and transfusion reactions. The liver is healthy but overwhelmed, so <em>unconjugated</em> bilirubin piles up in the blood.</p>
+<p><b>Hepatic (intrahepatic)</b> jaundice comes from the liver itself being sick. In hepatitis, cirrhosis, or drug injury, damaged hepatocytes cannot conjugate and excrete bilirubin efficiently. Both unconjugated and conjugated forms often rise.</p>
+<p><b>Posthepatic (obstructive)</b> jaundice happens <em>after</em> the liver, when bile cannot drain. A gallstone in the common bile duct or a pancreatic head tumor blocks the flow. Conjugated bilirubin, already water-soluble, backs up and spills into the blood.</p>
+
+<div class="ctwrap"><table class="ctable"><thead><tr><th>Feature</th><th>Prehepatic (hemolytic)</th><th>Posthepatic (obstructive)</th></tr></thead><tbody>
+<tr><td>Problem</td><td>Too many red cells breaking down</td><td>Blocked bile drainage</td></tr>
+<tr><td>Main bilirubin type</td><td>Unconjugated (indirect)</td><td>Conjugated (direct)</td></tr>
+<tr><td>Urine color</td><td>Usually normal</td><td>Dark (tea-colored)</td></tr>
+<tr><td>Stool color</td><td>Normal or dark</td><td>Pale/clay-colored</td></tr>
+<tr><td>Itching (pruritus)</td><td>Uncommon</td><td>Common</td></tr>
+</tbody></table></div>
+
+<h3>Why urine darkens and stool turns pale</h3>
+<p>This clue is one of the most useful at the bedside, and it makes sense once you follow the plumbing. In <b>obstruction</b>, conjugated bilirubin cannot reach the intestine, so no stercobilin is made and stool loses its brown pigment, turning <b>pale or clay-colored</b>. Meanwhile the water-soluble conjugated bilirubin backs up into the blood, and because the kidneys <em>can</em> filter this water-soluble form, it appears in urine, turning it <b>dark, tea-colored</b>. Bile salts also build up under the skin, often causing intense <b>pruritus</b> (itching).</p>
+
+<div class="pearl"><b>Follow the color trail.</b> Dark urine plus pale stool points strongly toward posthepatic obstruction. In pure hemolysis the extra bilirubin is unconjugated and fat-bound, so it cannot enter urine, and stool color stays normal or even darkens.</div>
+
+<h3>Newborn jaundice in one line</h3>
+<p><b>Physiologic jaundice of the newborn</b> is common and usually harmless: a baby's immature liver has not yet made enough UDP-glucuronyl transferase to conjugate bilirubin quickly, so unconjugated bilirubin rises for a few days and is often treated with <b>phototherapy</b>.</p>
+
+<div class="pearl"><b>Watch the brain.</b> In infants, very high unconjugated bilirubin can cross the immature blood-brain barrier and deposit in brain tissue, causing <b>kernicterus</b>, a preventable form of permanent neurologic injury.</div>
+
+<p>An interactive figure below lets you explore how rising bilirubin turns tissues yellow.</p>
+
+      <div class="embed">
+        <div class="cap"><span class="tag">Interactive</span> Trace bilirubin and the three kinds of jaundice. <a href="../patho/Bilirubin.html" target="_blank" rel="noopener">Open full &uarr;</a></div>
+        <div class="frame"><iframe src="../patho/Bilirubin.html" loading="lazy" title="Bilirubin interactive"></iframe></div>
+      </div>
+      <div class="kp"><div class="t">Key points</div><ul>
+<li>Bilirubin is a pigment from broken-down red cells; the liver <b>conjugates</b> it (making it water-soluble) and excretes it in bile.</li>
+<li>Jaundice appears when serum bilirubin exceeds about 2 to 3 mg/dL and is classified as <b>prehepatic</b> (hemolysis, unconjugated), <b>hepatic</b> (liver disease, both), or <b>posthepatic</b> (obstruction, conjugated).</li>
+<li>Obstruction causes <b>dark urine</b> (water-soluble conjugated bilirubin spills into urine) and <b>pale stool</b> (no stercobilin reaches the gut), often with pruritus.</li>
+<li>Hemolytic jaundice usually leaves urine and stool color normal because the excess bilirubin is unconjugated and cannot enter urine.</li>
+<li>Newborn physiologic jaundice reflects an immature liver enzyme system and is often treated with phototherapy; severe cases risk <b>kernicterus</b>.</li>
+</ul></div>
+
+      <div class="summary">
+        <h2 id="summary">The chapter in one breath</h2>
+        <ul><li><b>GERD</b> happens when a weak lower esophageal sphincter lets acidic stomach contents wash back up, burning the esophageal lining and causing heartburn, regurgitation, and (over time) <em>Barrett esophagus</em> from chronic acid injury.</li><li><b>Peptic ulcers</b> are breaks in the stomach or duodenal wall, usually from <em>H. pylori</em> infection or NSAIDs stripping the protective mucus barrier, so acid digests the tissue itself; watch for coffee-ground emesis or melena signaling a bleed.</li><li><b>Crohn disease</b> causes patchy, full-thickness (transmural) inflammation <em>anywhere</em> mouth-to-anus with skip lesions and fistulas, while <b>ulcerative colitis</b> is continuous, mucosa-only inflammation limited to the colon with bloody diarrhea.</li><li>A <b>bowel obstruction</b> blocks intestinal flow, backing up gas and fluid to cause distension, vomiting, and often high-pitched then absent bowel sounds; strangulation cuts off blood supply and threatens <em>ischemic necrosis</em>.</li><li>A <b>GI bleed</b> from an upper source shows as black tarry <em>melena</em> or hematemesis, while a lower source shows bright red <em>hematochezia</em>; either can drop hemoglobin and drive the patient toward hypovolemic shock.</li><li><b>Hepatitis</b> is liver inflammation (viral A-E, alcohol, or toxins) that impairs the liver's jobs, and repeated injury drives scarring into <b>cirrhosis</b>, where fibrosis raises <em>portal hypertension</em> and causes ascites, esophageal varices, and bleeding from lost clotting factors.</li><li><b>Gallstones</b> form when bile is oversaturated with cholesterol; a stone lodged in the cystic duct triggers <em>cholecystitis</em> with RUQ pain worsening after fatty meals, and a stone blocking the common duct can back bile into the pancreas.</li><li><b>Pancreatitis</b> is auto-digestion of the pancreas by its own activated enzymes (usually from gallstones or alcohol), producing severe epigastric pain radiating to the back with sharply elevated <em>lipase</em> and amylase.</li><li><b>Jaundice</b> is yellow skin and sclera from bilirubin buildup, and its type points to the problem: <em>unconjugated</em> from excess hemolysis or an immature/failing liver, versus <em>conjugated</em> from blocked bile flow that also gives dark urine and clay-colored stools.</li></ul>
+      </div>
+
+      <h2 id="glossary"><span class="num">Reference</span>Words worth knowing</h2>
+      <p>A quick reference for the terms in this chapter &mdash; skim it now, or circle back whenever a word trips you up.</p>
+      <dl class="terms"><dt>Ascites</dt><dd>The buildup of protein-rich fluid inside the peritoneal cavity (the belly), usually driven by portal hypertension and low blood albumin, which makes the abdomen swell and feel tight.</dd><dt>Barrett esophagus</dt><dd>A change in the lower esophageal lining from normal squamous cells to intestinal-type columnar cells (metaplasia) after years of acid reflux, which raises the risk of esophageal cancer.</dd><dt>Bilirubin</dt><dd>The yellow pigment made when the body breaks down old red blood cells; when it builds up in the blood it causes jaundice and turns the skin and whites of the eyes yellow.</dd><dt>Cholecystitis</dt><dd>Inflammation of the gallbladder, usually because a gallstone blocks the cystic duct, causing right-upper-quadrant pain, fever, and often a positive Murphy sign.</dd><dt>Cirrhosis</dt><dd>Permanent scarring (fibrosis) of the liver that replaces working tissue with hard nodules, so the liver slowly loses its ability to filter blood, make proteins, and process toxins.</dd><dt>Crohn disease</dt><dd>A chronic inflammatory bowel disease that can inflame any part of the GI tract from mouth to anus in patchy skip lesions, with inflammation going through the full thickness of the bowel wall (transmural).</dd><dt>GERD</dt><dd>Gastroesophageal reflux disease, the frequent backflow of stomach acid into the esophagus because the lower esophageal sphincter is weak or relaxes too easily, causing heartburn and regurgitation.</dd><dt>Hematochezia</dt><dd>The passage of bright red or maroon blood through the rectum, usually signaling bleeding low in the GI tract (colon, rectum, or anus) or a very rapid upper GI bleed.</dd><dt>Hepatic encephalopathy</dt><dd>A decline in brain function, ranging from confusion to coma, that happens when a failing liver can no longer clear ammonia and other toxins from the blood so they reach the brain.</dd><dt>H. pylori</dt><dd><em>Helicobacter pylori</em>, a spiral-shaped bacterium that burrows into the stomach's protective mucus layer and is the leading cause of peptic ulcers and chronic gastritis.</dd><dt>Ileus</dt><dd>A temporary loss of the normal muscular wave motion (peristalsis) of the intestine, often after abdominal surgery, so contents stop moving even though nothing is physically blocking them.</dd><dt>Melena</dt><dd>Black, tarry, foul-smelling stool that forms when blood from an upper GI bleed is digested on its way through the gut, turning the hemoglobin dark.</dd><dt>Pancreatitis</dt><dd>Inflammation of the pancreas that occurs when its digestive enzymes activate too early and begin to digest the organ itself, usually triggered by gallstones or alcohol and causing severe epigastric pain that radiates to the back.</dd><dt>Peptic ulcer</dt><dd>An open sore in the lining of the stomach or duodenum where acid and pepsin have eroded through the protective mucosa, most often caused by <em>H. pylori</em> or NSAID use.</dd><dt>Portal hypertension</dt><dd>Abnormally high blood pressure in the portal venous system feeding the liver, usually from cirrhosis backing up blood flow, which drives ascites, esophageal varices, and an enlarged spleen.</dd><dt>Ulcerative colitis</dt><dd>A chronic inflammatory bowel disease limited to the colon and rectum that inflames only the innermost lining (mucosa) in one continuous stretch, causing bloody diarrhea and urgency.</dd></dl>
+
+      <h2 id="cards"><span class="num">Drill</span>Flashcards for this unit</h2>
+      <p>These are the <b>Week 13</b> cards &mdash; the same deck as the hub, pulled in here so you can review the moment you finish reading. Tap the card to flip it; hit <em>Shuffle</em> to mix them up. To grade yourself and track mastery across the whole deck, open the <a href="../flashcards.html">full flashcards page</a>.</p>
+      <div class="fc" id="fc">
+        <div class="fc-card" id="fcCard" onclick="fcFlip()">
+          <div class="fc-inner">
+            <div class="fc-face fc-front"><span class="fc-side">Question</span><div class="fc-q" id="fcQ"></div><div class="fc-hint">Tap to reveal the answer</div></div>
+            <div class="fc-face fc-back"><span class="fc-side">Answer</span><div class="fc-a" id="fcA"></div><div class="fc-hint">Tap to flip back</div></div>
+          </div>
+        </div>
+        <div class="fc-nav">
+          <button class="fc-btn" type="button" onclick="fcPrev(event)">&larr; Prev</button>
+          <span class="fc-count" id="fcCount">&mdash;</span>
+          <button class="fc-btn" type="button" onclick="fcNext(event)">Next &rarr;</button>
+          <button class="fc-btn" type="button" onclick="fcShuffle(event)">&#128256; Shuffle</button>
+        </div>
+        <a class="fc-full" href="../flashcards.html">Open the full Week 13 deck &mdash; grade yourself &amp; track mastery &uarr;</a>
+      </div>
+
+      <div class="quiz">
+        <h2 id="quiz">Check yourself</h2>
+        <div class="q"><div class="qq">1. A patient with chronic GERD undergoes endoscopy showing that the normal squamous lining of the lower esophagus has changed to columnar epithelium. The nurse recognizes this finding requires ongoing surveillance because of which risk?</div>
+<button onclick="this.parentNode.classList.add('show')">Reveal answer</button>
+<div class="ans"><span class="a">Barrett esophagus, which raises the risk of esophageal adenocarcinoma.</span> Years of acid reflux injure the esophageal lining, so the body swaps the delicate squamous cells for tougher columnar cells (<b>intestinal metaplasia</b>). This adaptation is more acid-resistant but is premalignant, so patients need periodic surveillance endoscopy.</div></div>
+<div class="q"><div class="qq">2. A patient reports a burning sensation behind the sternum that worsens when lying flat after meals and improves when sitting upright. Which underlying problem best explains these symptoms?</div>
+<button onclick="this.parentNode.classList.add('show')">Reveal answer</button>
+<div class="ans"><span class="a">An incompetent lower esophageal sphincter (LES) allowing acid reflux.</span> When the LES tone is too low, stomach acid flows backward into the esophagus, especially when gravity is not helping (lying flat) and when gastric volume is high (after eating). Sitting upright lets gravity keep acid in the stomach, easing the <b>pyrosis</b> (heartburn).</div></div>
+<div class="q"><div class="qq">3. A patient is diagnosed with a peptic ulcer, and testing confirms Helicobacter pylori infection. The patient asks how a bug could cause an ulcer. What is the nurse's best explanation of the mechanism?</div>
+<button onclick="this.parentNode.classList.add('show')">Reveal answer</button>
+<div class="ans"><span class="a">H. pylori damages the protective mucus layer, letting acid injure the underlying tissue.</span> The bacterium burrows into the gastric mucus and produces <b>urease</b>, which triggers inflammation and weakens the mucosal barrier. With the protective coat compromised, normal stomach acid erodes the wall and forms an ulcer.</div></div>
+<div class="q"><div class="qq">4. A patient who takes daily ibuprofen for arthritis develops a gastric ulcer. Which mechanism explains why chronic NSAID use causes ulcers?</div>
+<button onclick="this.parentNode.classList.add('show')">Reveal answer</button>
+<div class="ans"><span class="a">NSAIDs inhibit prostaglandins, reducing the stomach's protective mucus and bicarbonate.</span> Prostaglandins normally stimulate the mucus-bicarbonate barrier that shields the gastric lining from acid. NSAIDs block <b>cyclooxygenase (COX)</b>, so prostaglandin production drops and the mucosa becomes vulnerable to acid injury even at normal acid levels.</div></div>
+<div class="q"><div class="qq">5. Two patients have peptic ulcers. One reports epigastric pain 2 to 3 hours after eating that is often relieved by food; the other reports pain that worsens with eating. Which patient most likely has a duodenal ulcer, and why?</div>
+<button onclick="this.parentNode.classList.add('show')">Reveal answer</button>
+<div class="ans"><span class="a">The patient whose pain improves with food has a duodenal ulcer.</span> With a <b>duodenal</b> ulcer, pain typically comes when the stomach is empty and acid hits the raw duodenum, so eating (which buffers acid) brings relief. With a <b>gastric</b> ulcer, food stimulates acid secretion against the stomach lesion, so eating usually worsens the pain and patients may lose weight.</div></div>
+<div class="q"><div class="qq">6. A young adult presents with skip lesions and transmural inflammation that can occur anywhere from mouth to anus. The nurse identifies this as which inflammatory bowel disease, and how does it differ from ulcerative colitis?</div>
+<button onclick="this.parentNode.classList.add('show')">Reveal answer</button>
+<div class="ans"><span class="a">Crohn disease, which features patchy, full-thickness lesions, unlike the continuous mucosal disease of ulcerative colitis.</span> Crohn causes <b>skip lesions</b> (diseased patches with normal tissue between) that go through the entire bowel wall, raising the risk of fistulas and strictures. <b>Ulcerative colitis</b> stays continuous, limited to the mucosa, and confined to the colon and rectum.</div></div>
+<div class="q"><div class="qq">7. A patient with a mechanical small-bowel obstruction is being assessed. Which cluster of findings would the nurse expect early in the course?</div>
+<button onclick="this.parentNode.classList.add('show')">Reveal answer</button>
+<div class="ans"><span class="a">Crampy abdominal pain, abdominal distention, vomiting, and high-pitched hyperactive bowel sounds.</span> Above the blockage, the bowel contracts hard to push contents through, producing colicky pain and <b>borborygmi</b> (high-pitched tinkling sounds). Trapped gas and fluid cause distention and vomiting; if the obstruction persists, bowel sounds later become absent as peristalsis fails.</div></div>
+<div class="q"><div class="qq">8. A patient vomits bright red blood and also passes black, tarry stools. The nurse recognizes these findings point to bleeding from which portion of the GI tract, and what causes the stool color?</div>
+<button onclick="this.parentNode.classList.add('show')">Reveal answer</button>
+<div class="ans"><span class="a">An upper GI bleed; the black tarry stool (melena) results from blood being digested as it passes through the gut.</span> <b>Hematemesis</b> (vomiting blood) and <b>melena</b> point to a source above the ligament of Treitz, such as a bleeding ulcer or varices. Digestive enzymes and bacteria break down hemoglobin, turning the blood dark and tarry. Bright red blood per rectum (<b>hematochezia</b>) usually signals a lower GI source instead.</div></div>
+<div class="q"><div class="qq">9. A patient with alcoholic cirrhosis develops esophageal varices, ascites, and an enlarged spleen. The nurse understands these findings all stem from which underlying process?</div>
+<button onclick="this.parentNode.classList.add('show')">Reveal answer</button>
+<div class="ans"><span class="a">Portal hypertension from scarring that obstructs blood flow through the liver.</span> Fibrosis and regenerative nodules squeeze the hepatic vessels, so pressure backs up into the <b>portal venous system</b>. That high pressure forces blood into collateral vessels (varices), pushes fluid into the peritoneum (ascites), and congests the spleen (splenomegaly).</div></div>
+<div class="q"><div class="qq">10. A patient with cirrhosis becomes confused, disoriented, and develops a flapping tremor of the hands. The nurse links these neurologic changes to the buildup of which substance?</div>
+<button onclick="this.parentNode.classList.add('show')">Reveal answer</button>
+<div class="ans"><span class="a">Ammonia, which the failing liver can no longer convert to urea.</span> Normally the liver detoxifies gut-derived ammonia; in liver failure it accumulates and crosses into the brain, producing <b>hepatic encephalopathy</b> with confusion and <b>asterixis</b> (the flapping tremor). This is why lactulose is given to trap and eliminate ammonia in the stool.</div></div>
+<div class="q"><div class="qq">11. A patient reports right upper quadrant pain after a fatty meal. During palpation of the RUQ, the patient stops inspiration abruptly due to pain. The nurse documents this as which sign, and what does it suggest?</div>
+<button onclick="this.parentNode.classList.add('show')">Reveal answer</button>
+<div class="ans"><span class="a">A positive Murphy sign, suggesting acute cholecystitis.</span> When the examiner presses under the right rib cage, the descending inflamed gallbladder meets the fingers and the sudden pain halts the breath. Fatty meals trigger gallbladder contraction against an obstructing stone, inflaming the <b>cholecyst</b> and reproducing the pain.</div></div>
+<div class="q"><div class="qq">12. A patient with severe, boring epigastric pain radiating to the back is being evaluated for acute pancreatitis. Which laboratory result most specifically supports this diagnosis?</div>
+<button onclick="this.parentNode.classList.add('show')">Reveal answer</button>
+<div class="ans"><span class="a">An elevated serum lipase.</span> When pancreatic enzymes activate inside the gland instead of the duodenum, they begin digesting pancreatic tissue (<b>autodigestion</b>) and spill into the blood. <b>Lipase</b> is more specific to the pancreas and stays elevated longer than amylase, making it the preferred confirmatory marker.</div></div>
+      </div>
+
+      <div class="chapnav">
+        <a href="index.html"><span class="k">Book</span>&larr; All chapters</a>
+        <a class="next" href="appendix.html"><span class="k">Appendix</span>The Arcade &amp; Lab &rarr;</a>
+      </div>
+    </main>
+  </div>
+
+  <footer>
+    A student-friendly pathophysiology guide · by <b>Dr. Akash Garg</b> <br>
+    The interactive figures open in place; tap “Open full ↗” for a full-screen version.
+  </footer>
+
+<script>
+  // reading progress bar
+  var bar=document.getElementById('bar');
+  function prog(){var h=document.documentElement, max=h.scrollHeight-h.clientHeight; bar.style.width=(max>0?(h.scrollTop/max*100):0)+'%';}
+  addEventListener('scroll',prog,{passive:true}); prog();
+  // scroll-spy TOC
+  var links=[].slice.call(document.querySelectorAll('.toc a'));
+  var ids=links.map(function(a){return a.getAttribute('href').slice(1);});
+  var secs=ids.map(function(id){return document.getElementById(id);});
+  function spy(){var y=scrollY+90,cur=0;
+    for(var i=0;i<secs.length;i++){ if(secs[i] && secs[i].offsetTop<=y) cur=i; }
+    links.forEach(function(a,i){a.classList.toggle('on',i===cur);});}
+  addEventListener('scroll',spy,{passive:true}); spy();
+</script>
+
+
+<script src="../flashcards/w13.js"></script>
+<script>
+(function(){
+  var WK="13";
+  var cards=(window.PATHO_CARDS&&window.PATHO_CARDS[WK])||[];
+  var fc=document.getElementById("fc"); if(!fc) return;
+  if(!cards.length){ fc.style.display="none"; return; }
+  var order=cards.map(function(_,i){return i;}), pos=0;
+  function dec(s){return String(s).replace(/&amp;/g,"&").replace(/&lt;/g,"<").replace(/&gt;/g,">").replace(/&nbsp;/g," ");}
+  var card=document.getElementById("fcCard"), q=document.getElementById("fcQ"), a=document.getElementById("fcA"), cnt=document.getElementById("fcCount");
+  function show(){ card.classList.remove("flip"); var c=cards[order[pos]]; q.textContent=dec(c.q); a.textContent=dec(c.a)+(c.exp?"  \u2014  "+dec(c.exp):""); cnt.textContent=(pos+1)+" / "+cards.length; }
+  window.fcFlip=function(){ card.classList.toggle("flip"); };
+  window.fcNext=function(e){ if(e&&e.stopPropagation)e.stopPropagation(); pos=(pos+1)%cards.length; show(); };
+  window.fcPrev=function(e){ if(e&&e.stopPropagation)e.stopPropagation(); pos=(pos-1+cards.length)%cards.length; show(); };
+  window.fcShuffle=function(e){ if(e&&e.stopPropagation)e.stopPropagation(); for(var i=order.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=order[i];order[i]=order[j];order[j]=t;} pos=0; show(); };
+  show();
+})();
+</script>
+<style id="pdfprint">
+.pdf-btn{position:fixed;right:16px;bottom:16px;z-index:400;font-family:'Inter',system-ui,sans-serif;font-weight:700;font-size:13.5px;color:#fff;background:#0c7283;border:none;border-radius:24px;padding:11px 17px;box-shadow:0 6px 20px rgba(12,58,68,.30);cursor:pointer;display:inline-flex;align-items:center;gap:7px;}
+.pdf-btn:hover{background:#0c3a44;}
+@media print{
+ @page{margin:14mm;}
+ html,body{background:#fff !important;}
+ .topbar,.progress,aside,.chapnav,.pdf-btn{display:none !important;}
+ #pbgate{display:none !important;}
+ .layout{display:block !important;max-width:100% !important;padding:0 !important;grid-template-columns:1fr !important;gap:0 !important;}
+ .reading,.reading .col{max-width:100% !important;padding:0 !important;}
+ .embed iframe,.embed .frame{display:none !important;}
+ .embed{margin:14px 0 !important;}
+ .embed .cap{color:#555 !important;font-style:italic;}
+ .embed .cap .tag{background:#0c7283 !important;color:#fff !important;}
+ .embed .cap a{display:none !important;}
+ .bref,.bref .fr{break-inside:avoid;page-break-inside:avoid;box-shadow:none !important;}
+ .bref img{max-height:150mm;width:auto !important;margin:0 auto;}
+ .ctwrap,table.ctable,.pearl,.kp,.q,.objectives,.summary,dl.terms,figure{break-inside:avoid;page-break-inside:avoid;}
+ h1,h2,h3{break-after:avoid;page-break-after:avoid;}
+ .quiz .ans{display:block !important;}
+ .quiz .q button{display:none !important;}
+ a{color:inherit !important;text-decoration:none !important;}
+ *{-webkit-print-color-adjust:exact !important;print-color-adjust:exact !important;}
+ footer{border-top:1px solid #ccc !important;}
+}
+</style>
+<button class="pdf-btn" onclick="window.print()" title="Save this chapter as a PDF">🖨 Save as PDF</button>
+</body>
+</html>

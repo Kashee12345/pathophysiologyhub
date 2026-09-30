@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0c3a44">
+<title>Hematology: The Blood &mdash; Pathophysiology &middot; Dr. Akash Garg</title>
+<meta name="description" content="A student-friendly, exact pathophysiology chapter on the endocrine system — feedback loops, adrenal, thyroid, diabetes, growth hormone, and ADH — with the concept explained plainly and an interactive to play with in every section.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#22312f; --soft:#4a5a58; --muted:#7c8a88; --faint:#9aa8a6; --line:#e6e2d6;
+    --paper:#faf8f2; --card:#fffdf7; --accent:#0c7283; --accent-dk:#0c3a44; --gold:#b8862f;
+    --serif:"Source Serif 4",Georgia,"Times New Roman",serif; --disp:"Fraunces",Georgia,serif; --ui:"Inter",system-ui,sans-serif;
+    --shadow:0 1px 3px rgba(20,40,46,.06);
+  }
+  *{box-sizing:border-box;} html{scroll-behavior:smooth;}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--serif);font-size:18px;line-height:1.7;-webkit-font-smoothing:antialiased;}
+  a{color:var(--accent);text-decoration:none;} a:hover{text-decoration:underline;}
+
+  /* top bar + progress */
+  .topbar{position:sticky;top:0;z-index:50;background:rgba(250,248,242,.92);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid var(--line);}
+  .topbar .row{max-width:1120px;margin:0 auto;padding:11px 20px;display:flex;align-items:center;gap:14px;font-family:var(--ui);}
+  .topbar a.home{font-size:13.5px;font-weight:600;color:var(--soft);white-space:nowrap;}
+  .topbar a.home:hover{color:var(--accent);text-decoration:none;}
+  .topbar .ct{font-size:13px;color:var(--faint);font-weight:600;margin-left:auto;white-space:nowrap;}
+  .progress{height:3px;background:transparent;} .progress .bar{height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--gold));transition:width .1s;}
+
+  .layout{max-width:1120px;margin:0 auto;padding:0 20px;display:grid;grid-template-columns:230px 1fr;gap:30px;}
+  /* sidebar TOC */
+  aside{font-family:var(--ui);padding-top:34px;}
+  aside .toc{position:sticky;top:74px;}
+  aside .toc h4{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--faint);margin:0 0 12px;font-weight:700;}
+  aside .toc a{display:block;font-size:13.5px;color:var(--soft);padding:6px 10px;border-left:2px solid var(--line);line-height:1.35;}
+  aside .toc a:hover{color:var(--accent);text-decoration:none;border-left-color:var(--accent);}
+  aside .toc a.on{color:var(--accent-dk);font-weight:700;border-left-color:var(--gold);background:#f3efe3;border-radius:0 8px 8px 0;}
+
+  .reading{max-width:1040px;padding:30px 0 70px;min-width:0;}
+  .reading .col{max-width:718px;}
+  /* opener */
+  .kicker{font-family:var(--ui);font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);font-weight:700;}
+  h1{font-family:var(--disp);font-weight:600;font-size:clamp(32px,5.2vw,46px);line-height:1.08;letter-spacing:-.5px;color:var(--accent-dk);margin:10px 0 6px;max-width:718px;}
+  .lede{font-size:20px;line-height:1.6;color:var(--soft);max-width:718px;margin:14px 0 0;}
+  h2{font-family:var(--disp);font-weight:600;font-size:27px;letter-spacing:-.3px;color:var(--accent-dk);margin:52px 0 4px;scroll-margin-top:70px;max-width:718px;}
+  h2 .num{font-family:var(--ui);font-size:13px;font-weight:700;color:var(--gold);letter-spacing:1px;display:block;margin-bottom:4px;text-transform:uppercase;}
+  h3{font-family:var(--disp);font-weight:600;font-size:20px;color:var(--accent-dk);margin:26px 0 2px;max-width:718px;}
+  p{margin:14px 0;max-width:718px;} p b,li b{color:var(--accent-dk);font-weight:600;}
+  .reading ul,.reading ol{max-width:718px;padding-left:24px;} .reading li{margin:7px 0;}
+
+  .objectives{max-width:718px;background:#f2efe4;border:1px solid #e4ddc8;border-radius:14px;padding:18px 22px;margin:24px 0;font-family:var(--ui);}
+  .objectives h4{margin:0 0 8px;font-size:12px;letter-spacing:1px;text-transform:uppercase;color:var(--gold);font-weight:700;}
+  .objectives ul{margin:0;padding-left:20px;} .objectives li{font-size:14.5px;line-height:1.5;color:var(--soft);margin:6px 0;font-family:var(--serif);}
+
+  .kp{max-width:718px;background:#eef5f6;border:1px solid #d3e5e7;border-left:5px solid var(--accent);border-radius:0 12px 12px 0;padding:14px 20px;margin:22px 0;font-family:var(--ui);}
+  .kp .t{font-size:11.5px;letter-spacing:1px;text-transform:uppercase;color:var(--accent-dk);font-weight:700;margin-bottom:6px;}
+  .kp ul{margin:0;padding-left:18px;} .kp li{font-size:14.5px;line-height:1.55;color:var(--ink);margin:5px 0;font-family:var(--serif);}
+  .pearl{max-width:718px;background:#fbf3e2;border:1px solid #ecd9ac;border-left:5px solid var(--gold);border-radius:0 12px 12px 0;padding:13px 20px;margin:22px 0;font-family:var(--serif);font-size:15px;line-height:1.6;color:#6a5320;}
+  .pearl b{color:#5a4212;}
+
+  /* interactive embed (breaks out wider than prose) */
+  .embed{max-width:1040px;margin:26px 0 30px;}
+  .embed .cap{font-family:var(--ui);font-size:12.5px;font-weight:600;color:var(--muted);margin:0 0 8px;display:flex;align-items:center;gap:8px;}
+  .embed .cap .tag{background:var(--accent);color:#fff;font-size:10.5px;letter-spacing:.5px;text-transform:uppercase;font-weight:700;padding:3px 9px;border-radius:20px;}
+  .embed .frame{border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:0 8px 26px rgba(20,40,46,.09);background:#fff;}
+  .embed iframe{display:block;width:100%;height:640px;border:0;}
+  .embed .cap a{font-family:var(--ui);margin-left:auto;font-size:12.5px;font-weight:600;}
+
+  /* summary + quiz */
+  .summary{max-width:718px;background:var(--accent-dk);color:#eaf3f4;border-radius:16px;padding:24px 26px;margin:50px 0 30px;font-family:var(--serif);}
+  .summary h2{color:#fff;margin:0 0 6px;font-size:24px;}
+  .summary ul{margin:10px 0 0;padding-left:20px;} .summary li{margin:8px 0;font-size:15.5px;line-height:1.55;color:#dcebec;}
+  .summary li b{color:#fff;}
+  .quiz{max-width:718px;margin:36px 0;}
+  .quiz h2{margin-top:0;}
+  .q{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 20px;margin:12px 0;box-shadow:var(--shadow);}
+  .q .qq{font-weight:600;color:var(--accent-dk);font-family:var(--serif);}
+  .q button{margin-top:10px;font-family:var(--ui);font-size:13px;font-weight:700;color:var(--accent);background:#eef5f6;border:1px solid #d3e5e7;border-radius:20px;padding:7px 15px;cursor:pointer;}
+  .q button:hover{background:#e2eff0;}
+  .q .ans{display:none;margin-top:12px;padding-top:12px;border-top:1px dashed var(--line);font-size:15.5px;color:var(--soft);}
+  .q .ans .a{font-weight:700;color:var(--accent-dk);}
+  .q.show .ans{display:block;} .q.show button{display:none;}
+
+  .chapnav{max-width:718px;display:flex;justify-content:space-between;gap:12px;margin:44px 0 0;font-family:var(--ui);}
+  .chapnav a,.chapnav span{flex:1;border:1px solid var(--line);border-radius:12px;padding:14px 16px;font-size:13.5px;background:var(--card);}
+  .chapnav a{color:var(--accent-dk);font-weight:600;} .chapnav a:hover{border-color:var(--accent);text-decoration:none;}
+  .chapnav .k{display:block;font-size:11px;color:var(--faint);text-transform:uppercase;letter-spacing:.5px;margin-bottom:2px;}
+  .chapnav .next{text-align:right;} .chapnav .disabled{color:var(--faint);}
+
+  footer{font-family:var(--ui);text-align:center;color:var(--faint);font-size:12.5px;border-top:1px solid var(--line);padding:26px 20px 50px;margin-top:30px;}
+  footer b{color:var(--soft);}
+
+  @media(max-width:860px){
+    .layout{grid-template-columns:1fr;gap:0;}
+    aside{padding-top:16px;} aside .toc{position:static;}
+    aside .toc{border:1px solid var(--line);border-radius:12px;padding:12px 14px;background:var(--card);}
+    aside .toc a{border-left:none;padding:6px 4px;}
+    aside .toc a.on{background:none;}
+    .reading{padding-top:16px;}
+    .embed iframe{height:660px;}
+  }
+
+  /* comparison tables */
+  .ctwrap{max-width:718px;overflow-x:auto;margin:22px 0;-webkit-overflow-scrolling:touch;}
+  table.ctable{border-collapse:collapse;width:100%;min-width:520px;font-family:var(--ui);font-size:14px;background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden;}
+  table.ctable th,table.ctable td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);vertical-align:top;line-height:1.45;}
+  table.ctable thead th{background:#eef5f6;color:var(--accent-dk);font-weight:700;font-size:12.5px;letter-spacing:.3px;}
+  table.ctable tbody tr:last-child td{border-bottom:none;}
+  table.ctable td:first-child,table.ctable th:first-child{font-weight:600;color:var(--soft);white-space:nowrap;}
+  table.ctable td b{color:var(--accent-dk);font-weight:600;}
+  /* glossary */
+  dl.terms{max-width:718px;margin:18px 0;}
+  dl.terms dt{font-family:var(--ui);font-weight:700;color:var(--accent-dk);font-size:15px;margin-top:15px;}
+  dl.terms dd{margin:3px 0 0;color:var(--soft);}
+  /* flashcard drill widget */
+  .fc{max-width:718px;margin:20px 0;}
+  .fc-card{perspective:1600px;height:236px;cursor:pointer;margin-bottom:14px;}
+  .fc-inner{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform .55s cubic-bezier(.4,.2,.2,1);}
+  .fc-card.flip .fc-inner{transform:rotateY(180deg);}
+  .fc-face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border:1px solid var(--line);border-radius:16px;padding:26px 30px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:12px;box-shadow:0 8px 26px rgba(20,40,46,.09);overflow:auto;}
+  .fc-front{background:linear-gradient(180deg,#fffdf7,#eef5f6);}
+  .fc-back{background:linear-gradient(180deg,#fbf3e2,#f3e6c9);transform:rotateY(180deg);border-color:#e6d3a6;}
+  .fc-side{position:absolute;top:12px;left:16px;font-family:var(--ui);font-size:10px;font-weight:800;letter-spacing:1.3px;text-transform:uppercase;color:var(--faint);}
+  .fc-back .fc-side{color:var(--gold);}
+  .fc-q{font-family:var(--disp);font-weight:600;font-size:19px;line-height:1.35;color:var(--accent-dk);}
+  .fc-a{font-family:var(--serif);font-weight:600;font-size:17px;line-height:1.45;color:var(--ink);}
+  .fc-hint{position:absolute;bottom:11px;left:0;right:0;font-family:var(--ui);font-size:11.5px;color:var(--faint);}
+  .fc-nav{display:flex;gap:9px;align-items:center;}
+  .fc-count{flex:1;text-align:center;font-family:var(--ui);font-size:13px;color:var(--muted);font-weight:600;}
+  .fc-btn{font-family:var(--ui);font-size:13px;font-weight:700;color:var(--accent);background:#eef5f6;border:1px solid #d3e5e7;border-radius:20px;padding:8px 13px;cursor:pointer;}
+  .fc-btn:hover{background:#e2eff0;}
+  .fc-full{display:block;margin-top:14px;text-align:center;font-family:var(--ui);font-size:13.5px;font-weight:700;background:var(--accent-dk);color:#eaf3f4;border-radius:12px;padding:12px;}
+  .fc-full:hover{text-decoration:none;filter:brightness(1.12);}
+</style>
+</head>
+<body>
+
+
+  <div class="topbar">
+    <div class="row">
+      <a class="home" href="index.html">📖 Contents</a>
+      
+      <span class="ct">Week 8 · Hematology</span>
+    </div>
+    <div class="progress"><div class="bar" id="bar"></div></div>
+  </div>
+
+  <div class="layout">
+    <aside>
+      <nav class="toc">
+        <h4>In this chapter</h4>
+        <a href="#w8_basics" class="on">1 · Blood &amp; marrow</a>
+        <a href="#w8_anemia">2 · Anemias</a>
+        <a href="#w8_clotting">3 · Bleeding &amp; clotting</a>
+        <a href="#w8_types">4 · Blood types</a>
+        <a href="#w8_cancers">5 · Blood cancers</a>
+        <a href="#summary">The chapter in one breath</a>
+        <a href="#glossary">Words worth knowing</a>
+        <a href="#cards">Flashcards</a>
+        <a href="#quiz">Check yourself</a>
+      </nav>
+    </aside>
+
+    <main class="reading">
+      <div class="kicker">Pathophysiology · Week 8</div>
+      <h1>Hematology: The Blood</h1>
+      <p class="lede">Blood is a <b>liquid organ</b> &mdash; it carries oxygen, stops leaks, and defends the body &mdash; so when it goes wrong, the whole body feels it. This chapter covers how blood cells are made, the <b>anemias</b> that starve tissues of oxygen, the clotting and bleeding disorders, the rules of blood typing and transfusion, and the cancers of the blood itself.</p>
+      <div class="objectives">
+        <h4>By the end of this chapter you can</h4>
+        <ul>
+          <li>Describe <b>hematopoiesis</b> and the role of <b>erythropoietin</b>.</li>
+          <li>Classify the common <b>anemias</b> and match each to its cause.</li>
+          <li>Explain <b>hemostasis</b> and the major bleeding and clotting disorders.</li>
+          <li>Apply <b>ABO/Rh</b> compatibility and respond to a transfusion reaction.</li>
+          <li>Distinguish <b>leukemia, lymphoma,</b> and <b>multiple myeloma</b>.</li>
+        </ul>
+      </div>
+
+      <h2 id="w8_basics"><span class="num">Section 1</span>Blood, marrow &amp; how cells are made</h2>
+<figure class="bref" data-sec="1" style="max-width:1040px;margin:10px 0 24px;padding:0;"><div style="border:1px solid #e6e2d6;border-radius:16px;overflow:hidden;background:#fffdf7;box-shadow:0 8px 26px rgba(20,40,46,.09);"><img src="img/hematology_s1.jpg" alt="Blood & marrow reference figure" loading="lazy" style="display:block;width:100%;height:auto;background:#fff;" onerror="this.closest('figure').style.display='none'"></div><figcaption style="font-family:Inter,system-ui,sans-serif;font-size:12.5px;color:#7c8a88;margin-top:8px;line-height:1.5;"><b style="color:#0c3a44;">Reference.</b> Blood & marrow <span style="color:#9aa8a6;">&mdash; Mikael Häggström , adapted from work by A. Rad, CC BY-SA 3.0 (via Wikimedia Commons)</span></figcaption></figure>
+
+
+      <p>Think of blood as a river that touches every cell you own. It looks like a simple red liquid, but it is actually a <b>connective tissue</b> - living cells suspended in fluid. Blood delivers oxygen and nutrients, hauls away carbon dioxide and waste, carries hormones and immune defenders, helps clot a wound, and even balances your temperature and pH. When something goes wrong with blood, the effects show up everywhere at once, because everything depends on it.</p>
+
+<h3>What blood is made of</h3>
+<p>If you spin a tube of blood in a centrifuge, it separates into layers. The top ~55% is <b>plasma</b> - a straw-colored fluid that is mostly water plus proteins (<b>albumin</b>, which holds fluid inside vessels; <b>clotting factors</b>; and antibodies), electrolytes, glucose, and wastes. The bottom ~45% is packed red cells; that percentage is the <b>hematocrit</b>. A thin middle layer, the <em>buffy coat</em>, holds white cells and platelets.</p>
+<ul>
+<li><b>Red blood cells (erythrocytes)</b> - carry oxygen. By far the most numerous.</li>
+<li><b>White blood cells (leukocytes)</b> - the immune army (neutrophils, lymphocytes, monocytes, eosinophils, basophils).</li>
+<li><b>Platelets (thrombocytes)</b> - cell fragments that plug leaks and start clotting.</li>
+</ul>
+
+<div class="ctwrap"><table class="ctable"><thead><tr><th>Feature</th><th>Red cells</th><th>Platelets</th></tr></thead><tbody>
+<tr><td>Main job</td><td>Carry oxygen</td><td>Stop bleeding (hemostasis)</td></tr>
+<tr><td>Has a nucleus?</td><td>No (mature RBCs)</td><td>No - they are cell fragments</td></tr>
+<tr><td>Typical lifespan</td><td>About 120 days</td><td>About 8 to 10 days</td></tr>
+<tr><td>Made from</td><td>Bone marrow stem cells</td><td>Megakaryocytes in marrow</td></tr>
+</tbody></table></div>
+
+<h3>Hematopoiesis - where blood cells are born</h3>
+<p>Every blood cell traces back to one ancestor: the <b>hematopoietic stem cell (HSC)</b> living in the red bone marrow (in adults, mainly the pelvis, sternum, vertebrae, and ends of long bones). This process is called <b>hematopoiesis</b>. A stem cell is <em>pluripotent</em> - it can become any blood cell - and it makes copies of itself so the factory never runs out. As daughter cells mature, they commit down one of two big lines: the <b>myeloid line</b> (red cells, platelets, and most white cells) or the <b>lymphoid line</b> (B and T lymphocytes). Because the marrow constantly replaces cells that wear out, anything that damages the marrow - chemotherapy, radiation, leukemia crowding it out, or aplastic anemia - can drop <em>all</em> the cell lines at once, a state called <b>pancytopenia</b>.</p>
+
+<div class="pearl"><b>One factory, many products.</b> When you see a low red cell, white cell, AND platelet count together, think marrow, not three separate problems. The common thread is the stem cell nursery.</div>
+
+<h3>Erythropoietin - the kidney's oxygen alarm</h3>
+<p>How does the body know to make <em>more</em> red cells? The <b>kidneys</b> act as oxygen sensors. When they detect low oxygen reaching their own tissue (<em>hypoxia</em>) - from blood loss, high altitude, or lung disease - they release a hormone called <b>erythropoietin (EPO)</b>. EPO travels to the bone marrow and tells it to ramp up red cell production. This is a beautiful negative-feedback loop: more red cells means more oxygen delivery, which quiets the alarm and lowers EPO again.</p>
+<p>This explains a classic clinical picture. In <b>chronic kidney disease</b>, the damaged kidneys stop making enough EPO, so the marrow never gets the signal - the patient develops <b>anemia of chronic kidney disease</b> even though the marrow itself is healthy. That is why these patients are often treated with synthetic EPO. It also explains why athletes and high-altitude dwellers naturally run higher red cell counts.</p>
+
+<h3>Hemoglobin - how red cells carry oxygen</h3>
+<p>A red cell is essentially a bag stuffed with <b>hemoglobin (Hgb)</b>, the iron-containing protein that actually binds oxygen. Each hemoglobin molecule has four <em>heme</em> groups, and each heme holds one iron atom that grabs one oxygen molecule - so one hemoglobin carries up to four oxygen molecules. The red cell's flexible <em>biconcave disc</em> shape gives it lots of surface area and lets it squeeze through tiny capillaries.</p>
+<p>This is why the pieces have to line up. You need enough <b>iron</b> (to build heme), enough <b>vitamin B12 and folate</b> (to build the cell), and a healthy marrow responding to EPO. Take away any one and oxygen delivery falls. Low hemoglobin is <b>anemia</b>, and its symptoms flow directly from the mechanism: <em>fatigue</em> and <em>pallor</em> because tissues are starved of oxygen, and <em>tachycardia</em> and shortness of breath because the heart speeds up to move the remaining oxygen faster. Nurses usually watch the <b>hemoglobin</b> and <b>hematocrit</b> together as the fastest read on a patient's oxygen-carrying capacity.</p>
+
+<div class="pearl"><b>Symptoms follow oxygen, not just numbers.</b> A patient who bleeds fast can feel terrible before their hemoglobin fully drops, while someone with slow chronic anemia may compensate and feel okay at a surprisingly low value. Always treat the patient, not only the lab.</div>
+
+      <div class="kp"><div class="t">Key points</div><ul>
+<li>Blood is a connective tissue: ~55% plasma (water plus albumin, clotting factors, antibodies) and ~45% cells - red cells, white cells, and platelets.</li>
+<li><b>Hematopoiesis</b> makes all blood cells from pluripotent stem cells in the red bone marrow, splitting into myeloid and lymphoid lines; marrow damage can cause pancytopenia.</li>
+<li>The <b>kidneys</b> sense low oxygen and release <b>erythropoietin</b> to drive red cell production - so chronic kidney disease causes anemia from lost EPO.</li>
+<li><b>Hemoglobin</b> is the iron-based protein that binds oxygen; each molecule carries up to four O2, and building it needs iron, B12, and folate.</li>
+<li>Low hemoglobin (<b>anemia</b>) starves tissues of oxygen, producing fatigue, pallor, and compensatory tachycardia - watch Hgb and hematocrit together.</li>
+</ul></div>
+
+      <h2 id="w8_anemia"><span class="num">Section 2</span>Anemias</h2>
+<figure class="bref" data-sec="2" style="max-width:1040px;margin:10px 0 24px;padding:0;"><div style="border:1px solid #e6e2d6;border-radius:16px;overflow:hidden;background:#fffdf7;box-shadow:0 8px 26px rgba(20,40,46,.09);"><img src="img/hematology_s2.jpg" alt="Anemias reference figure" loading="lazy" style="display:block;width:100%;height:auto;background:#fff;" onerror="this.closest('figure').style.display='none'"></div><figcaption style="font-family:Inter,system-ui,sans-serif;font-size:12.5px;color:#7c8a88;margin-top:8px;line-height:1.5;"><b style="color:#0c3a44;">Reference.</b> Anemias <span style="color:#9aa8a6;">&mdash; Spicy, CC BY-SA 4.0 (via Wikimedia Commons)</span></figcaption></figure>
+
+
+      <p>Every one of your cells needs a steady supply of oxygen to make energy, and oxygen does not travel through blood on its own. It rides on <b>hemoglobin</b>, the iron-rich protein packed inside your red blood cells (RBCs). Healthy bone marrow constantly builds new RBCs, stuffs them with hemoglobin, and releases them to circulate for about 120 days. When there is not enough <em>functional</em> hemoglobin to carry the oxygen your tissues need, we call that <b>anemia</b>. Notice the wording: anemia is not simply "low blood." It is low oxygen-carrying capacity, whether from too few RBCs, too little hemoglobin per cell, or hemoglobin that does not work.</p>
+
+<p>Because the problem is tissue oxygen delivery, the classic symptoms make sense once you trace the mechanism. Tissues starved of oxygen produce less energy, so patients feel <b>fatigue</b> and weakness. With fewer red cells reflecting light through the skin and mucous membranes, you see <b>pallor</b> (pale skin, conjunctiva, nail beds). The heart tries to compensate by pumping faster to move what little oxygen there is, causing <b>tachycardia</b>. And because the blood is oxygen-poor, patients breathe faster and feel short of breath, especially with exertion, which is <b>dyspnea</b>. These are the shared symptoms of almost every anemia; the differences lie in <em>why</em> the hemoglobin is missing.</p>
+
+<h3>Iron-deficiency anemia (microcytic)</h3>
+<p>Iron is the core of the heme molecule that binds oxygen. Without enough iron, the marrow makes red cells that are small (<b>microcytic</b>, low MCV) and pale (<b>hypochromic</b>) because they simply cannot fill with hemoglobin. This is the <em>most common</em> anemia worldwide. Causes usually fall into three buckets: <b>blood loss</b> (heavy menstrual periods, or slow GI bleeding from ulcers or colon cancer, which quietly drains iron), <b>increased demand</b> (pregnancy, infancy, rapid growth), and <b>poor intake or absorption</b> (diets low in iron, or gut conditions). Lab clues include low ferritin (the body's iron storage form) and low serum iron.</p>
+
+<div class="pearl"><b>Trace the bleed.</b> New iron-deficiency anemia in an older adult is considered a GI bleed (and possible colon cancer) until proven otherwise. Iron pills treat the number, but the source must be found.</div>
+
+<h3>B12 and folate deficiency (macrocytic)</h3>
+<p>Vitamin B12 and folate are required to build DNA. When they run short, developing red cells cannot divide properly, so they grow large and fragile instead, producing <b>macrocytic</b> (high MCV) <b>megaloblastic</b> anemia. Folate deficiency comes from poor diet (few leafy greens), alcohol use, or pregnancy demand. B12 deficiency has a special cause worth memorizing: <b>pernicious anemia</b>. Absorbing B12 from food requires <b>intrinsic factor</b>, a protein made by the stomach's parietal cells. In pernicious anemia, an autoimmune attack destroys those cells, intrinsic factor disappears, and B12 cannot be absorbed no matter how much is eaten, so it must be replaced by injection. One key distinction: because B12 also maintains the nervous system, its deficiency adds <b>neurologic signs</b> (numbness, tingling, balance problems) that folate deficiency does not.</p>
+
+<div class="ctwrap"><table class="ctable"><thead><tr><th>Feature</th><th>Iron deficiency</th><th>B12 / folate deficiency</th></tr></thead><tbody><tr><td>Cell size (MCV)</td><td>Small (microcytic)</td><td>Large (macrocytic)</td></tr><tr><td>Core problem</td><td>Too little hemoglobin</td><td>Faulty DNA / cell division</td></tr><tr><td>Typical cause</td><td>Blood loss, low intake</td><td>Poor diet, pernicious anemia</td></tr><tr><td>Neuro symptoms</td><td>No</td><td>Yes (B12 only)</td></tr></tbody></table></div>
+
+<h3>Hemolytic anemias and sickle cell disease</h3>
+<p><b>Hemolytic</b> anemias occur when red cells are destroyed faster than the marrow can replace them (<em>hemolysis</em> means RBC breakdown). Because dying cells spill their contents, you often see jaundice from the released bilirubin. The classic inherited example is <b>sickle cell disease</b>. A single genetic change produces abnormal hemoglobin called <b>HbS</b>. When oxygen levels drop, or with dehydration, infection, or cold, HbS molecules stick together and warp the soft round RBC into a rigid, crescent (<b>sickle</b>) shape. These stiff cells jam small vessels, blocking blood flow in what is called a <b>vaso-occlusive crisis</b> - episodes of severe, sudden pain as tissues downstream are starved of oxygen. The sickled cells are also fragile and are destroyed early, driving chronic anemia.</p>
+
+<div class="pearl"><b>Crisis care is oxygen, fluids, and pain control.</b> Hydration and oxygen help unsickle cells and prevent further vaso-occlusion; pain is often severe and real. Treat it.</div>
+
+<p>Finally, <b>aplastic anemia</b> is a marrow-failure state where the bone marrow stops producing blood cells altogether, so RBCs, white cells, and platelets all fall together (pancytopenia). Explore the different anemia types in the figure below.</p>
+
+      <div class="embed">
+        <div class="cap"><span class="tag">Interactive</span> Compare iron-deficiency, B12, hemolytic, and sickle cell anemia. <a href="../patho/AnemiaExplorer.html" target="_blank" rel="noopener">Open full &uarr;</a></div>
+        <div class="frame"><iframe src="../patho/AnemiaExplorer.html" loading="lazy" title="Anemia explorer"></iframe></div>
+      </div>
+      <div class="kp"><div class="t">Key points</div><ul><li>Anemia is low <b>functional hemoglobin</b>, reducing oxygen delivery; shared signs (fatigue, pallor, tachycardia, dyspnea) all stem from tissue hypoxia and cardiac compensation.</li><li><b>Iron-deficiency</b> anemia is microcytic and most common; a new case in an older adult means rule out GI bleeding.</li><li><b>B12 and folate</b> deficiencies are macrocytic; only B12 deficiency causes neurologic signs, and <b>pernicious anemia</b> is loss of intrinsic factor blocking B12 absorption.</li><li><b>Sickle cell disease</b> (HbS) sickles under low oxygen, causing painful <b>vaso-occlusive crises</b>; manage with oxygen, hydration, and pain control.</li><li><b>Aplastic anemia</b> is bone marrow failure producing pancytopenia.</li></ul></div>
+
+      <h2 id="w8_clotting"><span class="num">Section 3</span>Bleeding &amp; clotting disorders</h2>
+<figure class="bref" data-sec="3" style="max-width:1040px;margin:10px 0 24px;padding:0;"><div style="border:1px solid #e6e2d6;border-radius:16px;overflow:hidden;background:#fffdf7;box-shadow:0 8px 26px rgba(20,40,46,.09);"><img src="img/hematology_s3.jpg" alt="Bleeding & clotting reference figure" loading="lazy" style="display:block;width:100%;height:auto;background:#fff;" onerror="this.closest('figure').style.display='none'"></div><figcaption style="font-family:Inter,system-ui,sans-serif;font-size:12.5px;color:#7c8a88;margin-top:8px;line-height:1.5;"><b style="color:#0c3a44;">Reference.</b> Bleeding & clotting <span style="color:#9aa8a6;">&mdash; Otocast, CC BY-SA 4.0 (via Wikimedia Commons)</span></figcaption></figure>
+
+
+      <p>Every time you get a paper cut, a beautifully choreographed emergency response kicks in to stop the bleeding within minutes. This process is called <b>hemostasis</b> (literally "blood standing still"), and it happens in overlapping steps. Understanding the normal sequence is the key to understanding what goes wrong in bleeding and clotting disorders.</p>
+
+<h3>Normal hemostasis: how the body plugs a leak</h3>
+<p>The moment a blood vessel is injured, three things happen in quick succession. First, <b>vasoconstriction</b>: the vessel clamps down to slow blood flow to the area. Second, the <b>platelet plug</b> forms. Platelets are tiny cell fragments that normally glide past smooth vessel walls, but when they touch exposed <b>collagen</b> at an injury, they stick, activate, change shape, and clump together, helped by a bridging protein called <b>von Willebrand factor (vWF)</b>. This soft plug is a quick fix. Third comes the <b>coagulation cascade</b>, a chain reaction of clotting proteins (factors) that activate one another in sequence. The cascade has an <em>intrinsic</em> and <em>extrinsic</em> pathway that converge, ultimately turning <b>prothrombin into thrombin</b>. Thrombin then converts <b>fibrinogen into fibrin</b>, tough protein threads that weave through the platelet plug like rebar in concrete, creating a stable clot. Later, the clot is dissolved by <b>fibrinolysis</b> once healing is underway.</p>
+
+<div class="pearl"><b>Two clues, two problems.</b> Platelet or vWF problems cause <em>immediate, superficial</em> bleeding like petechiae, bruising, and mucosal ooze. Clotting-factor problems cause <em>delayed, deep</em> bleeding into joints and muscles. The pattern tells you where the defect is.</div>
+
+<h3>Thrombocytopenia and ITP: too few platelets</h3>
+<p><b>Thrombocytopenia</b> means a low platelet count (usually below 150,000/mm3, with serious bleeding risk often under 20,000). With too few platelets, the first plug is weak. Patients show <b>petechiae</b> (pinpoint red spots), <b>purpura</b>, easy bruising, nosebleeds, and gum bleeding. In <b>immune thrombocytopenic purpura (ITP)</b>, the immune system makes antibodies that tag the patient's own platelets, and the spleen destroys them. It often follows a viral illness in children and is more chronic in adults. Treatment targets the immune attack, using <b>corticosteroids</b>, IVIG, and sometimes splenectomy.</p>
+
+<h3>Hemophilia and von Willebrand disease: the factor problems</h3>
+<p><b>Hemophilia</b> is an inherited deficiency of a clotting factor, so the platelet plug forms fine but the fibrin mesh never sets properly. Both common types are <b>X-linked recessive</b>, which is why they classically affect males, whose mothers are carriers. <b>Hemophilia A</b> is a deficiency of <b>factor VIII</b>; <b>hemophilia B</b> (Christmas disease) is a deficiency of <b>factor IX</b>. Clinically they look identical: <b>hemarthrosis</b> (deep bleeding into joints), muscle bleeds, and prolonged bleeding after surgery or trauma. Lab work shows a prolonged <b>aPTT</b> with a normal platelet count. Treatment is <em>replacing the missing factor</em>.</p>
+
+<p><b>Von Willebrand disease</b> is the most common <em>inherited</em> bleeding disorder and is usually autosomal (affecting both sexes equally). Missing or defective vWF means platelets cannot stick well, and because vWF also carries factor VIII, that factor drops too. So it blends both worlds: mucosal, platelet-type bleeding (heavy menstrual periods, nosebleeds) plus a mild factor picture.</p>
+
+<div class="ctwrap"><table class="ctable"><thead><tr><th>Feature</th><th>ITP</th><th>Hemophilia A/B</th><th>von Willebrand</th></tr></thead><tbody><tr><td>Core defect</td><td>Platelets destroyed</td><td>Factor VIII or IX missing</td><td>vWF missing/defective</td></tr><tr><td>Inheritance</td><td>Acquired (autoimmune)</td><td>X-linked recessive</td><td>Usually autosomal</td></tr><tr><td>Bleeding type</td><td>Petechiae, mucosal</td><td>Deep joints, muscles</td><td>Mucosal, menstrual</td></tr><tr><td>Key lab</td><td>Low platelet count</td><td>Prolonged aPTT</td><td>Low vWF, sometimes low VIII</td></tr></tbody></table></div>
+
+<h3>DIC and DVT: when clotting itself becomes the disease</h3>
+<p><b>Disseminated intravascular coagulation (DIC)</b> is a dangerous paradox. Triggered by sepsis, trauma, obstetric complications, or cancer, the cascade fires <em>everywhere at once</em>, throwing tiny clots throughout the microcirculation. This <b>consumes</b> platelets and clotting factors faster than the body can replace them. The result is a patient who is <em>both clotting and bleeding</em>: microclots damage organs while the depleted supply leaves them oozing from IV sites, gums, and incisions. Labs show low platelets, prolonged PT/aPTT, low fibrinogen, and elevated <b>D-dimer</b>. DIC is always secondary, so treatment means fixing the underlying cause.</p>
+
+<p>Clotting can also go wrong in a single vessel. A <b>deep vein thrombosis (DVT)</b> is a clot in a deep vein, usually of the leg. <b>Virchow's triad</b> names the three ingredients that promote it: <b>venous stasis</b> (immobility), <b>endothelial injury</b> (vessel-wall damage), and <b>hypercoagulability</b> (blood that clots too readily). The feared complication is a piece breaking off and traveling to the lungs as a <b>pulmonary embolism</b>.</p>
+
+<p>You can explore hemostasis, bleeding, and clotting in the interactive figure below.</p>
+
+      <div class="embed">
+        <div class="cap"><span class="tag">Interactive</span> Trace hemostasis, and see where clotting and bleeding disorders break it. <a href="../patho/BleedingClotting.html" target="_blank" rel="noopener">Open full &uarr;</a></div>
+        <div class="frame"><iframe src="../patho/BleedingClotting.html" loading="lazy" title="Bleeding and clotting interactive"></iframe></div>
+      </div>
+      <div class="kp"><div class="t">Key points</div><ul><li>Hemostasis runs in order: vasoconstriction, platelet plug (needs vWF), then the coagulation cascade making thrombin and fibrin.</li><li>Platelet/vWF problems cause immediate superficial bleeding (petechiae, mucosal); factor problems cause delayed deep bleeding (joints, muscles).</li><li>ITP is autoimmune platelet destruction; hemophilia A (factor VIII) and B (factor IX) are X-linked; von Willebrand disease is the most common inherited bleeding disorder.</li><li>DIC consumes platelets and factors, so the patient clots AND bleeds at once, with a high D-dimer; it is always secondary to another problem.</li><li>DVT forms via Virchow's triad (stasis, endothelial injury, hypercoagulability) and can embolize to the lungs.</li></ul></div>
+
+      <h2 id="w8_types"><span class="num">Section 4</span>Blood types &amp; transfusion</h2>
+<figure class="bref" data-sec="4" style="max-width:1040px;margin:10px 0 24px;padding:0;"><div style="border:1px solid #e6e2d6;border-radius:16px;overflow:hidden;background:#fffdf7;box-shadow:0 8px 26px rgba(20,40,46,.09);"><img src="img/hematology_s4.jpg" alt="Blood types reference figure" loading="lazy" style="display:block;width:100%;height:auto;background:#fff;" onerror="this.closest('figure').style.display='none'"></div><figcaption style="font-family:Inter,system-ui,sans-serif;font-size:12.5px;color:#7c8a88;margin-top:8px;line-height:1.5;"><b style="color:#0c3a44;">Reference.</b> Blood types <span style="color:#9aa8a6;">&mdash; BruceBlaus (Blausen), CC BY 3.0 (via Wikimedia Commons)</span></figcaption></figure>
+
+
+      <p>Every drop of blood carries a kind of ID badge. On the surface of your red blood cells sit tiny protein and sugar markers called <b>antigens</b>, and floating in your plasma are <b>antibodies</b>, immune proteins that attack any antigen your body does not recognize as its own. Your immune system learns early in life to leave your own red cells alone while staying armed against foreign ones. This self-versus-nonself recognition is the whole reason transfusions must be matched. Give someone blood carrying an antigen their plasma has antibodies against, and those antibodies clamp onto the donor cells and destroy them, sometimes with life-threatening speed.</p>
+
+<h3>The ABO system</h3>
+<p>The <b>ABO system</b> sorts blood into four types based on which antigens sit on the red cells. Type A cells carry the A antigen, type B carry B, type AB carry both, and type O carry neither. Here is the elegant, slightly counterintuitive part: your plasma automatically makes antibodies against whatever antigen you <em>lack</em>. So type A blood has anti-B antibodies, type B has anti-A, type O has both anti-A and anti-B, and type AB has neither.</p>
+<p>Because type O cells carry no A or B antigen, there is nothing on them for a recipient's antibodies to attack, which is why <b>O-negative</b> is called the <em>universal donor</em>, the go-to in a trauma emergency before typing is done. Because type AB plasma carries no anti-A or anti-B antibodies, an AB person can receive any ABO type, making <b>AB-positive</b> the <em>universal recipient</em>.</p>
+
+<div class="ctwrap"><table class="ctable"><thead><tr><th>Blood type</th><th>Antigen on red cell</th><th>Antibody in plasma</th></tr></thead><tbody><tr><td>A</td><td>A</td><td>anti-B</td></tr><tr><td>B</td><td>B</td><td>anti-A</td></tr><tr><td>AB</td><td>A and B</td><td>none</td></tr><tr><td>O</td><td>none</td><td>anti-A and anti-B</td></tr></tbody></table></div>
+
+<h3>The Rh factor and hemolytic disease of the newborn</h3>
+<p>On top of ABO sits a second marker, the <b>Rh factor</b> (also called the D antigen). If your red cells carry it, you are Rh-positive; if not, Rh-negative. Unlike ABO, Rh-negative people do <em>not</em> come with ready-made anti-Rh antibodies. They only build them after being <em>exposed</em> to Rh-positive blood, a process called <b>sensitization</b>.</p>
+<p>This matters most in pregnancy. If an Rh-negative mother carries an Rh-positive baby, a small leak of fetal blood, often during delivery, can sensitize her. The first baby is usually fine, but in a later Rh-positive pregnancy her anti-Rh antibodies can cross the placenta and destroy the fetal red cells. This is <b>hemolytic disease of the newborn (HDN)</b>, also called erythroblastosis fetalis, causing fetal anemia, jaundice, and heart failure.</p>
+<p>The fix is <b>RhoGAM</b> (Rh immune globulin), given around 28 weeks and again within 72 hours of delivery. RhoGAM works by mopping up any stray fetal Rh-positive cells before the mother's immune system can notice them and start making its own permanent antibodies, so sensitization never happens.</p>
+
+<div class="pearl"><b>RhoGAM prevents, it does not treat.</b> Once a mother is already sensitized, RhoGAM cannot undo it. Its whole job is to stop that first alarm from ever sounding.</div>
+
+<h3>Type, screen, and crossmatch</h3>
+<p>Before any transfusion, the lab <b>types</b> the blood (identifies ABO and Rh), <b>screens</b> the plasma for unexpected antibodies, and <b>crossmatches</b> by mixing donor cells with recipient plasma to confirm they do not clump. Clumping, called <b>agglutination</b>, is the visible warning that antibodies are attacking, and it means that unit is unsafe. This careful matching is why transfusion is normally so safe.</p>
+
+<h3>When a transfusion goes wrong</h3>
+<p>Reactions still happen, and telling them apart guides your response.</p>
+<ul>
+<li><b>Acute hemolytic reaction</b> is the feared one, usually from an ABO mismatch (often a clerical or ID error). Recipient antibodies destroy donor cells, releasing hemoglobin that can trigger fever, chills, flank or back pain, dark urine, hypotension, and kidney failure.</li>
+<li><b>Febrile non-hemolytic reaction</b> is the most common: fever and chills from the recipient reacting to donor white blood cells, uncomfortable but usually not dangerous.</li>
+<li><b>Allergic reaction</b> is a response to donor plasma proteins, ranging from hives and itching up to anaphylaxis.</li>
+</ul>
+<p>For <em>any</em> suspected reaction, the priority is the same: <b>stop the transfusion immediately</b>. Keep the IV line open with normal saline (using fresh tubing so no more blood enters), then check vital signs, notify the provider and blood bank, and send the blood bag and tubing back for analysis.</p>
+
+<div class="pearl"><b>Stop first, assess second.</b> Every extra milliliter of mismatched blood adds to the damage. Stopping the infusion is always the first nursing action, before vitals, before the phone call.</div>
+
+<p>Explore the ABO and Rh types in the figure below.</p>
+
+      <div class="embed">
+        <div class="cap"><span class="tag">Interactive</span> Match ABO and Rh types for a safe transfusion. <a href="../patho/BloodTypes.html" target="_blank" rel="noopener">Open full &uarr;</a></div>
+        <div class="frame"><iframe src="../patho/BloodTypes.html" loading="lazy" title="Blood types interactive"></iframe></div>
+      </div>
+      <div class="kp"><div class="t">Key points</div><ul><li>ABO type is set by antigens on red cells; plasma carries antibodies against the antigens you lack, so O-negative is the universal donor and AB-positive the universal recipient.</li><li>Rh-negative people make anti-Rh antibodies only after exposure; RhoGAM prevents maternal sensitization and hemolytic disease of the newborn.</li><li>Blood is typed, screened, and crossmatched to catch agglutination before it reaches the patient.</li><li>Acute hemolytic reactions (ABO mismatch) are the most dangerous; febrile and allergic reactions are more common but usually milder.</li><li>For any suspected transfusion reaction, stop the transfusion first, then keep the line open with saline and notify the provider and blood bank.</li></ul></div>
+
+      <h2 id="w8_cancers"><span class="num">Section 5</span>Blood cancers</h2>
+<figure class="bref" data-sec="5" style="max-width:1040px;margin:10px 0 24px;padding:0;"><div style="border:1px solid #e6e2d6;border-radius:16px;overflow:hidden;background:#fffdf7;box-shadow:0 8px 26px rgba(20,40,46,.09);"><img src="img/hematology_s5.jpg" alt="Blood cancers reference figure" loading="lazy" style="display:block;width:100%;height:auto;background:#fff;" onerror="this.closest('figure').style.display='none'"></div><figcaption style="font-family:Inter,system-ui,sans-serif;font-size:12.5px;color:#7c8a88;margin-top:8px;line-height:1.5;"><b style="color:#0c3a44;">Reference.</b> Blood cancers <span style="color:#9aa8a6;">&mdash; Osaretin, CC BY-SA 4.0 (via Wikimedia Commons)</span></figcaption></figure>
+
+
+      <p>Your bone marrow is a busy blood factory. Deep inside your big bones, <b>hematopoietic stem cells</b> divide and mature into three great families of blood cells: red cells that carry oxygen, platelets that plug leaks, and white cells that fight infection. Normally this factory is tightly controlled. Every cell knows when to grow, when to stop, and when to die. <b>Blood cancers</b> happen when one line of blood cells loses that control and multiplies without a brake. The trouble is not just the abnormal cells themselves, but the fact that they take up space, resources, and function that healthy cells need. Understanding <em>which</em> cell went rogue and <em>where</em> it piles up explains almost every symptom your patient will have.</p>
+
+<h3>Leukemia: the marrow gets crowded out</h3>
+<p><b>Leukemia</b> is cancer of the white-cell-forming lines in the <em>bone marrow</em>. Immature, useless white cells (often called <b>blasts</b>) reproduce so fast that they physically crowd out normal production. Picture a factory floor jammed with defective units so nothing else can be built. That single mechanism explains the classic triad: too few red cells means <b>anemia</b> (fatigue, pallor, shortness of breath), too few platelets means <b>thrombocytopenia</b> (easy bruising, petechiae, bleeding gums), and too few functional white cells means dangerous <b>infection risk</b>, even though the total white count on the lab report may look high.</p>
+<p>Leukemias are sorted two ways. <b>Acute</b> vs <b>chronic</b> describes tempo: acute leukemias explode with immature blasts and make patients sick in days to weeks, while chronic leukemias smolder for months to years with more mature-looking cells. <b>Myeloid</b> vs <b>lymphocytic</b> describes the parent line: myeloid cells give rise to red cells, platelets, and granulocytes, while lymphocytic cells give rise to lymphocytes. Combine them and you get the four big names.</p>
+<div class="ctwrap"><table class="ctable"><thead><tr><th>Type</th><th>Who it usually affects</th><th>Key feature</th></tr></thead><tbody><tr><td><b>ALL</b> (acute lymphocytic)</td><td>Children most often</td><td>Most common childhood cancer; responds well to treatment</td></tr><tr><td><b>AML</b> (acute myeloid)</td><td>Older adults</td><td>Blasts may show <em>Auer rods</em></td></tr><tr><td><b>CLL</b> (chronic lymphocytic)</td><td>Older adults</td><td>Often found by accident on routine bloodwork</td></tr><tr><td><b>CML</b> (chronic myeloid)</td><td>Middle-aged adults</td><td>Linked to the <em>Philadelphia chromosome</em></td></tr></tbody></table></div>
+
+<h3>Lymphoma: cancer that builds tumors in lymph tissue</h3>
+<p>Where leukemia floods the marrow and blood, <b>lymphoma</b> is a solid cancer of <b>lymphocytes</b> that grows into masses inside <em>lymph nodes</em> and lymphoid organs like the spleen. The hallmark sign is <b>painless lymphadenopathy</b>: a firm, swollen, non-tender node in the neck, armpit, or groin. Patients often also have <b>B symptoms</b>, which is the textbook name for the trio of drenching night sweats, unexplained fever, and weight loss.</p>
+<p>Lymphomas split into two branches. <b>Hodgkin lymphoma</b> is defined by a specific giant abnormal cell, the <b>Reed-Sternberg cell</b>, on biopsy. It usually starts in one node region and spreads in an orderly, predictable pattern, which helps make it one of the more curable cancers. <b>Non-Hodgkin lymphoma</b> is a large, diverse group without Reed-Sternberg cells; it tends to be more scattered and unpredictable at diagnosis and is far more common overall.</p>
+
+<h3>Multiple myeloma: rogue plasma cells attack bone and kidney</h3>
+<p>Plasma cells are the mature <em>antibody-factory</em> version of B lymphocytes. In <b>multiple myeloma</b>, one plasma cell line turns malignant and churns out a single useless antibody, called a <b>monoclonal (M) protein</b>, while crowding the marrow. Its damage spells out neatly with the mnemonic <b>CRAB</b>: <b>C</b>alcium elevated, <b>R</b>enal (kidney) injury, <b>A</b>nemia, and <b>B</b>one lesions.</p>
+<ul><li><b>Bone lesions:</b> myeloma cells activate osteoclasts that eat away bone, creating punched-out <em>lytic lesions</em>, deep bone pain, and pathologic fractures.</li><li><b>Hypercalcemia:</b> the dissolving bone dumps calcium into the blood, causing confusion, constipation, and thirst.</li><li><b>Kidney injury:</b> the flood of M protein and calcium clogs and damages the renal tubules.</li><li><b>Anemia and infection:</b> marrow crowding plus antibodies that do not actually work.</li></ul>
+
+<div class="pearl"><b>One presentation, three cancers.</b> Notice that fatigue (anemia), frequent infections, and easy bruising show up again and again. Any patient with that trio plus swollen nodes, bone pain, or an odd CBC deserves a closer hematologic look.</div>
+
+<div class="pearl"><b>The high white count that still means infection risk.</b> In acute leukemia the WBC number can be sky-high, but those cells are non-functional blasts. Treat the patient as immunocompromised regardless of what the count says.</div>
+
+<p>Explore the interactive figure below to see how leukemia fills the marrow, how lymphoma builds masses in nodes, and how myeloma eats into bone.</p>
+
+      <div class="embed">
+        <div class="cap"><span class="tag">Interactive</span> Compare leukemia, lymphoma, and myeloma. <a href="../patho/BloodCancers.html" target="_blank" rel="noopener">Open full &uarr;</a></div>
+        <div class="frame"><iframe src="../patho/BloodCancers.html" loading="lazy" title="Blood cancers interactive"></iframe></div>
+      </div>
+      <div class="kp"><div class="t">Key points</div><ul><li><b>Leukemia</b> crowds the bone marrow with abnormal white cells, causing anemia, bleeding (thrombocytopenia), and infection; classified acute vs chronic and myeloid vs lymphocytic (ALL, AML, CLL, CML).</li><li><b>Lymphoma</b> forms solid masses in lymph nodes: Hodgkin shows <b>Reed-Sternberg cells</b> and spreads predictably; non-Hodgkin is more common and more scattered. Watch for painless lymphadenopathy plus B symptoms.</li><li><b>Multiple myeloma</b> is malignant plasma cells; remember <b>CRAB</b>: hyperCalcemia, Renal injury, Anemia, Bone lytic lesions, driven by a monoclonal M protein.</li><li>The shared red flags across blood cancers are <b>fatigue, frequent infections, and easy bruising</b>; a high WBC in leukemia still means the patient is immunocompromised.</li></ul></div>
+
+      <div class="summary">
+        <h2 id="summary">The chapter in one breath</h2>
+        <ul><li><b>Hematopoiesis</b> from a single bone-marrow stem cell makes all blood cells; <b>erythropoietin</b> from the kidney drives red-cell production, so kidney failure often causes anemia.</li><li>Blood splits into <b>plasma</b> (fluid, proteins, clotting factors) and formed elements: <b>RBCs</b> carry oxygen via hemoglobin, <b>WBCs</b> fight infection, and <b>platelets</b> plug leaks.</li><li><b>Iron-deficiency anemia</b> makes RBCs small and pale (<b>microcytic, hypochromic</b>) with low ferritin, causing fatigue, pallor, and pica.</li><li><b>Vitamin B12/folate deficiency</b> causes large immature cells (<b>macrocytic, megaloblastic anemia</b>); only B12 loss adds neuro signs, and B12 needs stomach <b>intrinsic factor</b> to absorb.</li><li><b>Sickle cell anemia</b> is inherited hemoglobin S that warps RBCs when deoxygenated, triggering painful <b>vaso-occlusive crises</b>, while <b>hemolytic anemias</b> destroy cells early and raise bilirubin.</li><li>Clotting fails from too few platelets (<b>thrombocytopenia</b>), missing factors (<b>hemophilia</b>), or widespread clotting-then-bleeding (<b>DIC</b>); watch for petechiae, bruising, and prolonged bleeding.</li><li>Transfusion safety hinges on <b>ABO and Rh</b> typing: type O is the universal RBC donor, AB the universal recipient, and a mismatch triggers a life-threatening <b>hemolytic reaction</b>.</li><li><b>Leukemias</b> flood the marrow with abnormal white cells (crowding out normal lines), <b>lymphomas</b> grow in lymph nodes (<b>Hodgkin vs non-Hodgkin</b>), and <b>multiple myeloma</b> is malignant plasma cells eating bone.</li></ul>
+      </div>
+
+      <h2 id="glossary"><span class="num">Reference</span>Words worth knowing</h2>
+      <p>A quick reference for the terms in this chapter &mdash; skim it now, or circle back whenever a word trips you up.</p>
+      <dl class="terms"><dt>ABO system</dt><dd>The main red-cell blood-group classification (A, B, AB, O) based on which sugar antigens sit on the red-cell surface, so a patient's plasma carries antibodies against the antigens they lack and a mismatched transfusion triggers a dangerous hemolytic reaction.</dd><dt>Anemia</dt><dd>A reduced number of red blood cells or amount of hemoglobin, which lowers the blood's oxygen-carrying capacity and usually causes fatigue, pallor, and shortness of breath.</dd><dt>DIC (disseminated intravascular coagulation)</dt><dd>A life-threatening emergency in which widespread clotting is switched on throughout the small vessels, using up clotting factors and platelets so fast that the patient paradoxically both clots and bleeds at the same time.</dd><dt>Erythropoietin</dt><dd>A hormone released mainly by the kidneys in response to low oxygen that signals the bone marrow to make more red blood cells.</dd><dt>Hematopoiesis</dt><dd>The ongoing process, occurring mostly in red bone marrow, by which stem cells mature into all the formed elements of blood: red cells, white cells, and platelets.</dd><dt>Hemoglobin</dt><dd>The iron-containing protein inside red blood cells that binds oxygen in the lungs and releases it to the tissues, and also gives blood its red color.</dd><dt>Hemophilia</dt><dd>An inherited (usually X-linked) bleeding disorder caused by a missing or deficient clotting factor (factor VIII in type A, factor IX in type B), leading to prolonged bleeding, often into joints and muscles.</dd><dt>Hemostasis</dt><dd>The body's coordinated process of stopping bleeding, moving from blood-vessel spasm to a platelet plug and finally a stable fibrin clot.</dd><dt>Intrinsic factor</dt><dd>A protein made by the stomach's parietal cells that binds vitamin B12 so it can be absorbed in the small intestine, without which B12 deficiency develops.</dd><dt>Leukemia</dt><dd>A cancer of the blood-forming tissue in which the marrow overproduces abnormal, immature white blood cells that crowd out healthy cells, leaving the patient prone to infection, bleeding, and anemia.</dd><dt>Macrocytic</dt><dd>Describing red blood cells that are abnormally large, a pattern often seen in vitamin B12 or folate deficiency.</dd><dt>Microcytic</dt><dd>Describing red blood cells that are abnormally small, a pattern classically seen in iron-deficiency anemia.</dd><dt>Pernicious anemia</dt><dd>A type of macrocytic anemia caused by loss of intrinsic factor (often from autoimmune damage to the stomach lining), which prevents vitamin B12 absorption and impairs red-cell maturation.</dd><dt>Sickle cell disease</dt><dd>An inherited disorder in which abnormal hemoglobin S makes red cells stiffen into a crescent shape under low-oxygen stress, so the rigid cells block small vessels and cause painful crises, hemolysis, and organ damage.</dd><dt>Thrombocytopenia</dt><dd>An abnormally low platelet count, which raises the risk of easy bruising and prolonged or spontaneous bleeding.</dd><dt>Virchow's triad</dt><dd>The three conditions that together promote abnormal clot formation: sluggish blood flow (stasis), vessel-wall injury, and increased blood clottability (hypercoagulability).</dd></dl>
+
+      <h2 id="cards"><span class="num">Drill</span>Flashcards for this unit</h2>
+      <p>These are the <b>Week 8</b> cards &mdash; the same deck as the hub, pulled in here so you can review the moment you finish reading. Tap the card to flip it; hit <em>Shuffle</em> to mix them up. To grade yourself and track mastery across the whole deck, open the <a href="../flashcards.html">full flashcards page</a>.</p>
+      <div class="fc" id="fc">
+        <div class="fc-card" id="fcCard" onclick="fcFlip()">
+          <div class="fc-inner">
+            <div class="fc-face fc-front"><span class="fc-side">Question</span><div class="fc-q" id="fcQ"></div><div class="fc-hint">Tap to reveal the answer</div></div>
+            <div class="fc-face fc-back"><span class="fc-side">Answer</span><div class="fc-a" id="fcA"></div><div class="fc-hint">Tap to flip back</div></div>
+          </div>
+        </div>
+        <div class="fc-nav">
+          <button class="fc-btn" type="button" onclick="fcPrev(event)">&larr; Prev</button>
+          <span class="fc-count" id="fcCount">&mdash;</span>
+          <button class="fc-btn" type="button" onclick="fcNext(event)">Next &rarr;</button>
+          <button class="fc-btn" type="button" onclick="fcShuffle(event)">&#128256; Shuffle</button>
+        </div>
+        <a class="fc-full" href="../flashcards.html">Open the full Week 8 deck &mdash; grade yourself &amp; track mastery &uarr;</a>
+      </div>
+
+      <div class="quiz">
+        <h2 id="quiz">Check yourself</h2>
+        <div class="q"><div class="qq">1. A patient with chronic kidney disease has a hemoglobin of 8.2 g/dL. The nurse understands the anemia is most directly caused by which mechanism?</div>
+<button onclick="this.parentNode.classList.add('show')">Reveal answer</button>
+<div class="ans"><span class="a">Decreased erythropoietin production by the diseased kidneys.</span> The kidneys sense oxygen levels and normally release <b>erythropoietin (EPO)</b>, the hormone that tells red bone marrow to make more red blood cells. When kidney tissue is damaged, it makes less EPO, so <b>hematopoiesis</b> slows and the patient becomes anemic despite having enough iron.</div></div>
+<div class="q"><div class="qq">2. A 32-year-old woman with heavy menstrual periods reports fatigue and pale skin. Labs show low hemoglobin, low MCV, and low ferritin. Which type of anemia is most consistent with these findings?</div>
+<button onclick="this.parentNode.classList.add('show')">Reveal answer</button>
+<div class="ans"><span class="a">Iron-deficiency anemia (microcytic, hypochromic).</span> Iron is the core of <b>hemoglobin</b>, so when iron runs low the marrow builds red cells that are small (<b>low MCV, microcytic</b>) and pale (<b>hypochromic</b>). A low <b>ferritin</b> confirms depleted iron stores, and chronic blood loss such as heavy menses is the classic cause in menstruating women.</div></div>
+<div class="q"><div class="qq">3. A patient with a macrocytic anemia asks why their red blood cells are larger than normal. What is the nurse's best explanation of the underlying mechanism?</div>
+<button onclick="this.parentNode.classList.add('show')">Reveal answer</button>
+<div class="ans"><span class="a">Lack of B12 or folate impairs DNA synthesis, so cells grow large but divide poorly.</span> <b>Vitamin B12 and folate</b> are needed for DNA replication during cell division. Without them the developing red cells keep growing but cannot divide on schedule, producing the large, immature <b>megaloblasts</b> that show up as a <b>high MCV (macrocytic)</b> anemia.</div></div>
+<div class="q"><div class="qq">4. A patient with pernicious anemia asks why oral vitamin B12 pills did not work and they now need injections. What is the nurse's best response?</div>
+<button onclick="this.parentNode.classList.add('show')">Reveal answer</button>
+<div class="ans"><span class="a">Pernicious anemia lacks intrinsic factor, so B12 cannot be absorbed from the gut.</span> The stomach's parietal cells normally make <b>intrinsic factor</b>, which binds B12 so it can be absorbed in the terminal ileum. In <b>pernicious anemia</b> an autoimmune attack destroys these cells, so oral B12 passes through unabsorbed and lifelong <em>intramuscular</em> (or high-dose) B12 is usually required.</div></div>
+<div class="q"><div class="qq">5. A patient in sickle cell crisis is admitted with severe bone and joint pain. Which set of nursing priorities best addresses the underlying pathophysiology?</div>
+<button onclick="this.parentNode.classList.add('show')">Reveal answer</button>
+<div class="ans"><span class="a">Hydration, oxygen, and aggressive pain management (often opioids).</span> In a <b>vaso-occlusive crisis</b>, abnormal hemoglobin S causes red cells to sickle and clump, blocking small vessels and starving tissue of oxygen (<b>ischemia</b>), which triggers the pain. IV fluids lower blood viscosity to restore flow, and oxygen (when the patient is hypoxic) helps limit further sickling, while pain is real and usually needs opioids, not undertreatment.</div></div>
+<div class="q"><div class="qq">6. When explaining hemostasis, the nurse describes the step immediately after a blood vessel is injured and before the clotting cascade fully activates. Which event occurs first?</div>
+<button onclick="this.parentNode.classList.add('show')">Reveal answer</button>
+<div class="ans"><span class="a">Platelet plug formation (primary hemostasis).</span> After <b>vasoconstriction</b> narrows the injured vessel, <b>platelets</b> stick to the exposed collagen and to each other, forming a temporary <b>platelet plug</b>. Then the <b>coagulation cascade</b> (secondary hemostasis) lays down <b>fibrin</b> to reinforce that plug into a stable clot.</div></div>
+<div class="q"><div class="qq">7. A patient with hemophilia A is missing which specific component of the coagulation cascade?</div>
+<button onclick="this.parentNode.classList.add('show')">Reveal answer</button>
+<div class="ans"><span class="a">Clotting factor VIII.</span> <b>Hemophilia A</b> is an X-linked deficiency of <b>factor VIII</b>, a protein in the coagulation cascade. Without it, the fibrin-building steps stall, so patients form platelet plugs but cannot stabilize them, leading to prolonged bleeding and hallmark <b>hemarthrosis</b> (bleeding into joints).</div></div>
+<div class="q"><div class="qq">8. A critically ill septic patient is simultaneously oozing from IV sites and forming small clots throughout the body. Labs show low platelets, low fibrinogen, and elevated D-dimer. Which condition does the nurse suspect?</div>
+<button onclick="this.parentNode.classList.add('show')">Reveal answer</button>
+<div class="ans"><span class="a">Disseminated intravascular coagulation (DIC).</span> In <b>DIC</b> the cascade is switched on everywhere at once, forming tiny clots that consume platelets and clotting factors. Once those are used up, the patient paradoxically bleeds; the <em>consumption</em> pattern shows as <b>low platelets, low fibrinogen, and high D-dimer</b> from clot breakdown.</div></div>
+<div class="q"><div class="qq">9. A patient has type O-negative blood. The nurse recognizes this blood type is known as the universal what, and why?</div>
+<button onclick="this.parentNode.classList.add('show')">Reveal answer</button>
+<div class="ans"><span class="a">Universal donor, because O-negative red cells have no A, B, or Rh antigens.</span> <b>ABO and Rh</b> typing is based on antigens on the red cell surface. O-negative cells carry <em>none</em> of the A, B, or D (Rh) antigens, so a recipient's antibodies find nothing to attack, making these red cells safe to give to almost anyone in an emergency.</div></div>
+<div class="q"><div class="qq">10. Which blood type is considered the universal recipient, and what makes it able to receive red cells from any ABO/Rh type?</div>
+<button onclick="this.parentNode.classList.add('show')">Reveal answer</button>
+<div class="ans"><span class="a">Type AB-positive, because the plasma has no anti-A or anti-B antibodies.</span> An <b>AB-positive</b> person has A, B, and Rh antigens on their cells, so their immune system never made antibodies against them. With no anti-A, anti-B, or anti-Rh antibodies circulating, donor red cells of any ABO/Rh type are not attacked.</div></div>
+<div class="q"><div class="qq">11. Fifteen minutes into a blood transfusion, a patient develops fever, chills, low back pain, and dark urine. What is the nurse's FIRST action?</div>
+<button onclick="this.parentNode.classList.add('show')">Reveal answer</button>
+<div class="ans"><span class="a">Stop the transfusion immediately.</span> These are signs of an <b>acute hemolytic transfusion reaction</b>, usually from ABO incompatibility where recipient antibodies destroy donor cells. Stopping the blood halts further antigen-antibody destruction; the nurse then keeps the IV line open with <b>normal saline</b>, notifies the provider and blood bank, and monitors for shock and renal injury.</div></div>
+<div class="q"><div class="qq">12. A nursing instructor asks a student to distinguish leukemia, lymphoma, and multiple myeloma. Which statement is correct?</div>
+<button onclick="this.parentNode.classList.add('show')">Reveal answer</button>
+<div class="ans"><span class="a">Leukemia arises in blood/bone marrow (WBCs), lymphoma in lymph nodes/lymphatic tissue, and myeloma in plasma cells.</span> <b>Leukemia</b> is a cancer of white blood cells that crowds the bone marrow; <b>lymphoma</b> forms solid tumors in lymph nodes and lymphoid tissue (often painless lymphadenopathy); <b>multiple myeloma</b> is a malignancy of antibody-producing <b>plasma cells</b> that damages bone and produces abnormal proteins.</div></div>
+      </div>
+
+      <div class="chapnav">
+        <a href="index.html"><span class="k">Book</span>&larr; All chapters</a>
+        <a class="next" href="appendix.html"><span class="k">Appendix</span>The Arcade &amp; Lab &rarr;</a>
+      </div>
+    </main>
+  </div>
+
+  <footer>
+    A student-friendly pathophysiology guide · by <b>Dr. Akash Garg</b> <br>
+    The interactive figures open in place; tap “Open full ↗” for a full-screen version.
+  </footer>
+
+<script>
+  // reading progress bar
+  var bar=document.getElementById('bar');
+  function prog(){var h=document.documentElement, max=h.scrollHeight-h.clientHeight; bar.style.width=(max>0?(h.scrollTop/max*100):0)+'%';}
+  addEventListener('scroll',prog,{passive:true}); prog();
+  // scroll-spy TOC
+  var links=[].slice.call(document.querySelectorAll('.toc a'));
+  var ids=links.map(function(a){return a.getAttribute('href').slice(1);});
+  var secs=ids.map(function(id){return document.getElementById(id);});
+  function spy(){var y=scrollY+90,cur=0;
+    for(var i=0;i<secs.length;i++){ if(secs[i] && secs[i].offsetTop<=y) cur=i; }
+    links.forEach(function(a,i){a.classList.toggle('on',i===cur);});}
+  addEventListener('scroll',spy,{passive:true}); spy();
+</script>
+
+
+<script src="../flashcards/w8.js"></script>
+<script>
+(function(){
+  var WK="8";
+  var cards=(window.PATHO_CARDS&&window.PATHO_CARDS[WK])||[];
+  var fc=document.getElementById("fc"); if(!fc) return;
+  if(!cards.length){ fc.style.display="none"; return; }
+  var order=cards.map(function(_,i){return i;}), pos=0;
+  function dec(s){return String(s).replace(/&amp;/g,"&").replace(/&lt;/g,"<").replace(/&gt;/g,">").replace(/&nbsp;/g," ");}
+  var card=document.getElementById("fcCard"), q=document.getElementById("fcQ"), a=document.getElementById("fcA"), cnt=document.getElementById("fcCount");
+  function show(){ card.classList.remove("flip"); var c=cards[order[pos]]; q.textContent=dec(c.q); a.textContent=dec(c.a)+(c.exp?"  \u2014  "+dec(c.exp):""); cnt.textContent=(pos+1)+" / "+cards.length; }
+  window.fcFlip=function(){ card.classList.toggle("flip"); };
+  window.fcNext=function(e){ if(e&&e.stopPropagation)e.stopPropagation(); pos=(pos+1)%cards.length; show(); };
+  window.fcPrev=function(e){ if(e&&e.stopPropagation)e.stopPropagation(); pos=(pos-1+cards.length)%cards.length; show(); };
+  window.fcShuffle=function(e){ if(e&&e.stopPropagation)e.stopPropagation(); for(var i=order.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=order[i];order[i]=order[j];order[j]=t;} pos=0; show(); };
+  show();
+})();
+</script>
+<style id="pdfprint">
+.pdf-btn{position:fixed;right:16px;bottom:16px;z-index:400;font-family:'Inter',system-ui,sans-serif;font-weight:700;font-size:13.5px;color:#fff;background:#0c7283;border:none;border-radius:24px;padding:11px 17px;box-shadow:0 6px 20px rgba(12,58,68,.30);cursor:pointer;display:inline-flex;align-items:center;gap:7px;}
+.pdf-btn:hover{background:#0c3a44;}
+@media print{
+ @page{margin:14mm;}
+ html,body{background:#fff !important;}
+ .topbar,.progress,aside,.chapnav,.pdf-btn{display:none !important;}
+ #pbgate{display:none !important;}
+ .layout{display:block !important;max-width:100% !important;padding:0 !important;grid-template-columns:1fr !important;gap:0 !important;}
+ .reading,.reading .col{max-width:100% !important;padding:0 !important;}
+ .embed iframe,.embed .frame{display:none !important;}
+ .embed{margin:14px 0 !important;}
+ .embed .cap{color:#555 !important;font-style:italic;}
+ .embed .cap .tag{background:#0c7283 !important;color:#fff !important;}
+ .embed .cap a{display:none !important;}
+ .bref,.bref .fr{break-inside:avoid;page-break-inside:avoid;box-shadow:none !important;}
+ .bref img{max-height:150mm;width:auto !important;margin:0 auto;}
+ .ctwrap,table.ctable,.pearl,.kp,.q,.objectives,.summary,dl.terms,figure{break-inside:avoid;page-break-inside:avoid;}
+ h1,h2,h3{break-after:avoid;page-break-after:avoid;}
+ .quiz .ans{display:block !important;}
+ .quiz .q button{display:none !important;}
+ a{color:inherit !important;text-decoration:none !important;}
+ *{-webkit-print-color-adjust:exact !important;print-color-adjust:exact !important;}
+ footer{border-top:1px solid #ccc !important;}
+}
+</style>
+<button class="pdf-btn" onclick="window.print()" title="Save this chapter as a PDF">🖨 Save as PDF</button>
+</body>
+</html>

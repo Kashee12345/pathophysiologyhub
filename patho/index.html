@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f7f2ea">
+<title>The Interactive Body — Pathophysiology</title>
+<meta name="description" content="A free, animated, interactive way to learn pathophysiology — 86 hands-on lessons across every body system. A study resource by Dr. Akash Garg.">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{ --bg:#f6f1e8; --card:#fffdf8; --ink:#241f1b; --muted:#7a6f63; --line:#e6dccb;
+    --gold:#c99a2e; --maroon:#8a2f36; --disp:'Cinzel Decorative',serif; --sans:'Inter',system-ui,sans-serif; }
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  body{background:radial-gradient(1200px 620px at 50% -120px,#fff6ea,#efe6d6);color:var(--ink);font-family:var(--sans);min-height:100vh;}
+  a{text-decoration:none;color:inherit;}
+  .topnav{position:sticky;top:0;z-index:60;background:rgba(255,250,240,.93);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:11px 22px;gap:12px;flex-wrap:wrap;}
+  .topnav .brand{font-family:var(--disp);font-weight:900;font-size:18px;color:var(--maroon);display:flex;align-items:center;gap:8px;}
+  .topnav nav{display:flex;gap:4px;flex-wrap:wrap;}
+  .topnav nav a{font-size:14px;font-weight:600;color:#5c5248;padding:7px 13px;border-radius:9px;transition:.12s;}
+  .topnav nav a:hover{background:#f4ecdd;color:var(--maroon);}
+  .topnav nav a.active{background:var(--maroon);color:#fff;}
+  .dd{position:relative;}
+  .ddbtn{font-family:var(--sans);font-size:14px;font-weight:600;color:#5c5248;padding:7px 13px;border-radius:9px;background:none;border:none;cursor:pointer;transition:.12s;}
+  .ddbtn:hover{background:#f4ecdd;color:#8a2f36;}
+  .ddbtn.active,.dd.open .ddbtn{background:#8a2f36;color:#fff;}
+  .ddpanel{position:absolute;top:calc(100% + 8px);right:0;width:252px;max-height:72vh;overflow-y:auto;background:#fff;border:1px solid #e6dccb;border-radius:12px;box-shadow:0 14px 34px rgba(90,60,30,.20);padding:6px;display:none;z-index:70;}
+  .dd.open .ddpanel{display:block;}
+  .ddpanel a{display:block;font-size:13px;font-weight:600;color:#4a4038;padding:8px 11px;border-radius:8px;}
+  .ddpanel a:hover{background:#f4ecdd;color:#8a2f36;}
+  .ddpanel a.ddhead{font-weight:800;color:#8a2f36;border-bottom:1px solid #e6dccb;margin-bottom:4px;}
+
+  .hero{max-width:1000px;margin:0 auto;padding:56px 20px 12px;text-align:center;}
+  .kicker{font-size:13px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);font-weight:700;}
+  .hero h1{font-family:var(--disp);font-weight:900;font-size:clamp(34px,7.5vw,68px);line-height:1.02;margin-top:10px;
+    background:linear-gradient(180deg,#8a2f36,#c0453f 55%,#8a2f36);-webkit-background-clip:text;background-clip:text;color:transparent;}
+  .hero .beat{display:inline-block;animation:beat 1.3s ease-in-out infinite;}
+  @keyframes beat{0%,100%{transform:scale(1)}15%{transform:scale(1.14)}30%{transform:scale(1)}45%{transform:scale(1.08)}}
+  .hero p.lead{max-width:660px;margin:16px auto 0;font-size:17px;line-height:1.6;color:#544a40;}
+  .cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:26px;}
+  .btn{border-radius:12px;padding:13px 24px;font-weight:800;font-size:15px;transition:transform .14s,box-shadow .14s,filter .14s;}
+  .btn.primary{background:var(--maroon);color:#fff;box-shadow:0 8px 22px rgba(138,47,54,.24);}
+  .btn.ghost{background:#fff;color:var(--maroon);border:1.5px solid #e0c9b0;}
+  .btn:hover{transform:translateY(-2px);} .btn.primary:hover{filter:brightness(1.06);}
+  .byline{margin-top:18px;font-size:13.5px;color:var(--muted);}
+  .byline b{color:var(--maroon);}
+
+  .stats{max-width:900px;margin:40px auto 0;padding:0 20px;display:grid;grid-template-columns:repeat(4,1fr);gap:14px;}
+  .stat{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px 12px;text-align:center;box-shadow:0 6px 20px rgba(90,60,30,.05);}
+  .stat .n{font-family:var(--disp);font-weight:900;font-size:30px;color:var(--maroon);line-height:1;}
+  .stat .l{font-size:12.5px;color:var(--muted);margin-top:6px;font-weight:600;}
+
+  .section{max-width:1080px;margin:56px auto 0;padding:0 20px;}
+  .section h2{font-family:var(--disp);font-weight:700;font-size:26px;color:var(--maroon);text-align:center;}
+  .section .sub{text-align:center;color:#544a40;font-size:15px;margin-top:8px;max-width:640px;margin-left:auto;margin-right:auto;line-height:1.5;}
+  .feats{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px;margin-top:26px;}
+  .feat{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px;box-shadow:0 6px 20px rgba(90,60,30,.05);}
+  .feat .ic{font-size:26px;}
+  .feat h3{font-size:16.5px;font-weight:800;margin-top:10px;color:#2a231e;}
+  .feat p{font-size:13.7px;line-height:1.55;color:#544a40;margin-top:7px;}
+
+  .paths{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:26px;}
+  .path{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:24px;box-shadow:0 8px 24px rgba(90,60,30,.06);
+    border-top:4px solid var(--gold);transition:transform .15s,box-shadow .15s;}
+  .path:hover{transform:translateY(-3px);box-shadow:0 16px 36px rgba(90,60,30,.13);}
+  .path .ic{font-size:30px;} .path h3{font-family:var(--disp);font-weight:700;font-size:20px;color:var(--maroon);margin-top:8px;}
+  .path p{font-size:14px;line-height:1.55;color:#544a40;margin-top:8px;}
+  .path .go{display:inline-block;margin-top:14px;color:var(--maroon);font-weight:800;font-size:14px;}
+
+  .hl{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:12px;margin-top:24px;}
+  .hlc{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:14px 16px;box-shadow:0 5px 16px rgba(90,60,30,.05);transition:transform .14s;}
+  .hlc:hover{transform:translateY(-2px);}
+  .hlc .t{font-weight:800;font-size:14.5px;color:#2a231e;} .hlc .d{font-size:12.3px;color:#6a5f52;margin-top:3px;line-height:1.4;}
+  .hlc .tag{display:inline-block;margin-top:8px;font-size:11px;font-weight:700;color:#2f7d50;background:#e9f4ec;border-radius:20px;padding:2px 9px;}
+
+  footer{max-width:1080px;margin:60px auto 0;padding:24px 20px 50px;border-top:1px solid var(--line);text-align:center;color:var(--muted);font-size:13px;}
+  footer b{color:var(--maroon);font-family:var(--disp);letter-spacing:.5px;}
+  footer .note{max-width:640px;margin:0 auto 12px;font-size:12.5px;line-height:1.5;color:#7a6f63;}
+  @media (max-width:720px){ .stats{grid-template-columns:1fr 1fr;} .paths{grid-template-columns:1fr;} }
+</style>
+</head>
+<body>
+  <header class="topnav">
+    <a class="brand" href="index.html">🫀 The Interactive Body</a>
+    <nav>
+      <a href="index.html" class="active">Home</a>
+      <a href="lessons.html">Lessons</a>
+      <div class="dd">
+        <button class="ddbtn" aria-haspopup="true" aria-expanded="false">By Week ▾</button>
+        <div class="ddpanel">
+          <a class="ddhead" href="weeks.html">📅 All 14 weeks →</a>
+          <a href="weeks.html#wk1">Week 1 · Fluids &amp; ABGs</a>
+          <a href="weeks.html#wk2">Week 2 · Pathogens &amp; Immunity</a>
+          <a href="weeks.html#wk3">Week 3 · Cell Injury &amp; Cancer</a>
+          <a href="weeks.html#wk4">Week 4 · Sepsis, Pain &amp; Neuro</a>
+          <a href="weeks.html#wk5">Week 5 · Mental Health &amp; Neuro</a>
+          <a href="weeks.html#wk6">Week 6 · MSK, Skin &amp; Burns</a>
+          <a href="weeks.html#wk7">Week 7 · Genetics</a>
+          <a href="weeks.html#wk8">Week 8 · Endocrine</a>
+          <a href="weeks.html#wk9">Week 9 · Blood &amp; Cardiovascular I</a>
+          <a href="weeks.html#wk10">Week 10 · Cardiovascular II</a>
+          <a href="weeks.html#wk11">Week 11 · Renal &amp; Urinary</a>
+          <a href="weeks.html#wk12">Week 12 · Respiratory</a>
+          <a href="weeks.html#wk13">Week 13 · Gastrointestinal</a>
+          <a href="weeks.html#wk14">Week 14 · Liver &amp; Reproductive</a>
+        </div>
+      </div>
+      <a href="about.html">About</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="kicker">Pathophysiology</div>
+    <h1>The Interactive <span class="beat">🫀</span> Body</h1>
+    <p class="lead">Pathophysiology you can actually <b>play with</b>. The whole course — every body system — as <b>86 hands-on, animated lessons</b>. Build a plaque, interpret a blood gas, solve a Punnett square, raise the intracranial pressure — and learn it in plain English.</p>
+    <div class="cta">
+      <a class="btn primary" href="lessons.html">Browse all 86 lessons →</a>
+      <a class="btn ghost" href="weeks.html">Explore by week</a>
+    </div>
+    <div class="byline">A free pathophysiology study resource · by <b>Dr. Akash Garg</b></div>
+  </section>
+
+  <div class="stats">
+    <div class="stat"><div class="n">86</div><div class="l">interactive lessons</div></div>
+    <div class="stat"><div class="n">16</div><div class="l">body systems</div></div>
+    <div class="stat"><div class="n">14</div><div class="l">weeks covered</div></div>
+    <div class="stat"><div class="n">100%</div><div class="l">free · no sign-up</div></div>
+  </div>
+
+  <section class="section">
+    <h2>Two ways in</h2>
+    <div class="sub">Jump straight to any topic, or follow along with the week you're studying.</div>
+    <div class="paths">
+      <a class="path" href="lessons.html">
+        <div class="ic">📚</div><h3>The Lesson Library</h3>
+        <p>All 86 lessons, grouped into 16 body-system sections — from fluids &amp; acid-base to the heart, lungs, gut, brain, and more. Great for looking up one topic fast.</p>
+        <span class="go">Open the library →</span>
+      </a>
+      <a class="path" href="weeks.html">
+        <div class="ic">🗓️</div><h3>By Course Week</h3>
+        <p>The same lessons, mapped to Weeks 1–14. See exactly which tools go with this week's lecture and study right along with class.</p>
+        <span class="go">See the weekly plan →</span>
+      </a>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Why it works</h2>
+    <div class="feats">
+      <div class="feat"><div class="ic">🎛️</div><h3>Interactive, not slides</h3><p>Every lesson is something you <b>do</b> — click, drag, and toggle to watch the pathophysiology unfold, instead of staring at a static image.</p></div>
+      <div class="feat"><div class="ic">💬</div><h3>Plain-English first</h3><p>Each topic starts with an everyday explanation and analogy, then layers in the clinical detail — so it clicks whether it's new or review.</p></div>
+      <div class="feat"><div class="ic">🧮</div><h3>Real calculators</h3><p>Throw any values at the <b>ABG Interpreter</b> and <b>Punnett Square</b> tools — they solve it step by step. Perfect for self-testing.</p></div>
+      <div class="feat"><div class="ic">📱</div><h3>Works everywhere</h3><p>Runs in any browser on a phone, tablet, or class projector. Nothing to install, no account, no ads.</p></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Start with a few favorites</h2>
+    <div class="sub">A taste of what's inside — tap any to try it.</div>
+    <div class="hl">
+      <a class="hlc" href="ABGInterpreter.html"><div class="t">ABG Interpreter</div><div class="d">Type a blood gas → get the acid-base diagnosis, step by step.</div><span class="tag">calculator</span></a>
+      <a class="hlc" href="PunnettSquare.html"><div class="t">Punnett Square</div><div class="d">Cross two parents → see the affected / carrier odds.</div><span class="tag">calculator</span></a>
+      <a class="hlc" href="CoronaryQuest3D.html"><div class="t">Coronary Artery Disease</div><div class="d">A 3D voyage inside an artery as plaque builds.</div><span class="tag">3D</span></a>
+      <a class="hlc" href="LungSounds.html"><div class="t">Lung Sounds</div><div class="d">Actually hear wheezes, crackles, and rhonchi.</div><span class="tag">audio</span></a>
+      <a class="hlc" href="Diabetes.html"><div class="t">Diabetes Mellitus</div><div class="d">Type 1 vs 2, plus DKA vs HHS side by side.</div><span class="tag">compare</span></a>
+      <a class="hlc" href="IntracranialPressure.html"><div class="t">Intracranial Pressure</div><div class="d">Drag the pressure up and watch Cushing's triad appear.</div><span class="tag">slider</span></a>
+    </div>
+  </section>
+
+  <footer>
+    <p class="note">An independent pathophysiology study resource. Free to use and share.</p>
+    Built for nursing &amp; health-science students by <b>Dr. Akash Garg</b>.<br>
+    The Interactive Body · Pathophysiology, playable
+  </footer>
+<script>(function(){var d=document.querySelector('.dd');if(!d)return;var b=d.querySelector('.ddbtn');b.addEventListener('click',function(e){e.stopPropagation();d.classList.toggle('open');b.setAttribute('aria-expanded',d.classList.contains('open'));});d.querySelector('.ddpanel').addEventListener('click',function(e){e.stopPropagation();});document.addEventListener('click',function(){d.classList.remove('open');b.setAttribute('aria-expanded','false');});})();</script>
+</body>
+</html>

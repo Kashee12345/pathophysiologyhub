@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f7f2ea">
+<title>Cancer — Benign vs Malignant</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{ --card:#fffdf8; --ink:#2a2420; --muted:#7a6f63; --line:#e3d8c6;
+    --sans:'Inter',system-ui,sans-serif; --disp:'Cinzel Decorative',serif; --accent:#7a3a6a; }
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  body{background:linear-gradient(160deg,#f7f0f5,#ece5ea);color:var(--ink);font-family:var(--sans);min-height:100vh;padding:18px 16px 44px;}
+  header{max-width:1120px;margin:0 auto 16px;text-align:center;}
+  h1{font-family:var(--disp);font-weight:900;font-size:clamp(21px,4vw,34px);color:#6a3058;line-height:1.05;}
+  header .sub{color:var(--muted);font-size:15px;margin-top:4px;}
+  header .intro{max-width:870px;margin:10px auto 0;font-size:14.5px;line-height:1.5;color:#5c5248;}
+  header .intro b{color:#6a3058;}
+  .wrap{max-width:1120px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;box-shadow:0 6px 22px rgba(120,50,100,.07);}
+  .card h2{font-family:var(--disp);font-weight:700;font-size:16px;color:#6a3058;margin-bottom:6px;}
+  .card h2 + .desc{font-size:13px;color:var(--muted);margin-bottom:10px;line-height:1.4;}
+  svg{display:block;width:100%;height:auto;max-height:290px;}
+  #liveCap{margin-top:8px;background:#f4e8f0;border:1px solid #e4c6da;border-radius:10px;padding:10px 13px;font-size:14px;line-height:1.5;color:#5f2850;text-align:center;} #liveCap b{color:#4f1a40;}
+  @keyframes creep{0%,100%{transform:translate(0,0)}50%{transform:translate(2px,2px)}}
+  .creep{animation:creep 2s ease-in-out infinite;}
+  #stage{border-radius:12px;padding:11px 14px;margin-bottom:12px;color:#fff;font-weight:700;font-size:16px;text-align:center;background:#8a4a76;}
+  #stage small{display:block;font-weight:500;font-size:13px;opacity:.93;margin-top:2px;}
+  .seg{display:flex;border:1px solid var(--line);border-radius:11px;overflow:hidden;}
+  .seg button{flex:1;border:none;background:#fff;color:var(--ink);font-family:var(--sans);font-weight:700;font-size:13.5px;padding:12px 6px;cursor:pointer;transition:.12s;line-height:1.15;}
+  .seg button small{display:block;font-weight:500;font-size:10.5px;color:var(--muted);margin-top:2px;}
+  .seg button.on{color:#fff;} .seg button.on small{color:rgba(255,255,255,.9);}
+  .seg button.benign.on{background:#3fa66a;} .seg button.malig.on{background:#a5392e;}
+  #info{border:1px solid var(--line);border-left:5px solid var(--accent);background:#f5eef2;border-radius:10px;padding:12px 13px;}
+  #info .n{font-family:var(--disp);font-weight:700;font-size:17px;color:#6a3058;}
+  #info .plain{font-size:14.5px;line-height:1.5;color:#2a2420;margin-top:8px;font-weight:600;}
+  #info .story{font-size:13px;line-height:1.5;color:#3a3630;margin-top:8px;background:#fff;border-radius:8px;padding:9px 11px;border:1px solid #eaccdd;}
+  .gs{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px;}
+  .gsb{border:1px solid var(--line);border-radius:10px;padding:9px 11px;font-size:12.3px;line-height:1.45;background:#fff;}
+  .gsb h4{font-size:12.5px;color:#6a3058;margin-bottom:3px;}
+  .name{margin-top:12px;} .name .lbl{font-size:11.5px;font-weight:700;text-transform:uppercase;color:var(--muted);letter-spacing:.03em;margin-bottom:6px;}
+  .name table{width:100%;border-collapse:collapse;font-size:12px;} .name td{padding:5px 8px;border-bottom:1px solid var(--line);} .name td:first-child{font-weight:700;color:#8a3a6a;}
+  .pearl{background:#eef4fb;border:1px solid #cbdcf0;border-radius:10px;padding:10px 12px;margin-top:12px;font-size:12.4px;line-height:1.5;color:#274d7a;} .pearl b{color:#173b5a;}
+  @media (max-width:880px){ .wrap{grid-template-columns:1fr;} .gs{grid-template-columns:1fr;} }
+</style>
+</head>
+<body>
+<header>
+  <h1>Cancer</h1>
+  <div class="sub">Benign vs malignant, and how we classify it · Week 3</div>
+  <div class="intro">Cancer starts when <b>carcinogens damage DNA</b> and cells grow out of control. The big question is whether a tumor is <b>benign</b> (stays put) or <b>malignant</b> (invades and spreads). Click each, then see how we grade, stage, and name tumors.</div>
+</header>
+<div class="wrap">
+  <div>
+    <div class="card">
+      <h2>How the tumor behaves</h2>
+      <div class="desc">Watch whether the tumor stays neatly walled off or invades nearby tissue and spreads.</div>
+      <svg id="art" viewBox="0 0 300 250" aria-label="tumor"></svg>
+      <div id="liveCap">Pick benign or malignant.</div>
+    </div>
+  </div>
+  <div>
+    <div id="stage">Pick a tumor type<small>benign vs malignant</small></div>
+    <div class="card">
+      <div class="seg" id="seg">
+        <button data-d="benign" class="benign on">Benign<small>stays put</small></button>
+        <button data-d="malig" class="malig">Malignant<small>invades &amp; spreads</small></button>
+      </div>
+    </div>
+    <div class="card" style="margin-top:16px;"><h2>What it means</h2><div id="info"></div>
+      <div class="gs">
+        <div class="gsb"><h4>Grading</h4>How <b>abnormal the cells look</b> under the microscope (differentiation). Well-differentiated = looks normal; poorly = aggressive.</div>
+        <div class="gsb"><h4>Staging (TNM)</h4>How far it has <b>spread</b>: <b>T</b>umor size, lymph <b>N</b>odes, <b>M</b>etastasis. Local → invasion → nodes → distant organs.</div>
+      </div>
+      <div class="name"><div class="lbl">Naming by tissue of origin</div>
+        <table>
+          <tr><td>Carcinoma</td><td>epithelial cells</td></tr>
+          <tr><td>Sarcoma</td><td>connective tissue</td></tr>
+          <tr><td>Lymphoma</td><td>lymphatic tissue</td></tr>
+          <tr><td>Melanoma</td><td>pigmented cells</td></tr>
+          <tr><td>Myeloma</td><td>plasma cells</td></tr>
+          <tr><td>Leukemia</td><td>white blood cells</td></tr>
+          <tr><td>Glioma</td><td>neural tissue</td></tr>
+        </table>
+      </div>
+      <div class="pearl"><b>Free radicals</b> are unstable molecules that cause <b>oxidative DNA damage</b> — and <b>antioxidants</b> neutralize them. Early warning signs use <b>CAUTION</b>: Change in bowel/bladder, A sore that won't heal, Unusual bleeding, Thickening/lump, Indigestion, Obvious mole change, Nagging cough.</div>
+    </div>
+  </div>
+</div>
+<script>
+(function(){
+  const $=id=>document.getElementById(id); let cur='benign';
+  const INFO={
+    benign:{name:'Benign Tumor',color:'#3fa66a',
+      plain:'An orderly growth that stays walled-off in one place and does not spread.',
+      story:'Benign tumors are usually <b>encapsulated</b>, grow <b>slowly</b>, and <b>stay local</b>. The cells look close to normal (well-differentiated). They can still cause problems by <b>pressing on</b> nearby structures, but they don\'t invade or metastasize.'},
+    malig:{name:'Malignant Tumor',color:'#a5392e',
+      plain:'A disorderly growth that invades neighboring tissue and spreads to distant sites.',
+      story:'Malignant tumors grow <b>fast</b>, have <b>irregular, poorly-differentiated</b> cells, and <b>invade</b> surrounding tissue. Worst of all, cells break off and <b>metastasize</b> — traveling through blood or lymph to seed <b>distant organs</b>. This spread is what staging (TNM) tracks.'}
+  };
+  function draw(){ const st=cur; let s='';
+    // normal tissue background
+    for(let r=0;r<4;r++)for(let c=0;c<6;c++)s+='<circle cx="'+(35+c*45)+'" cy="'+(45+r*50)+'" r="14" fill="#eadff0" stroke="#c9b4d8" stroke-width="1"/>';
+    if(st==='benign'){ // encapsulated round mass
+      s+='<circle cx="150" cy="125" r="46" fill="#8fd0a6" stroke="#3fa66a" stroke-width="4"/>';
+      s+='<circle cx="150" cy="125" r="52" fill="none" stroke="#2f7d50" stroke-width="2" stroke-dasharray="5 4"/>';
+      s+='<text x="150" y="129" text-anchor="middle" font-size="10" font-weight="700" fill="#1f5a38">walled off</text>';
+      s+='<text x="150" y="235" text-anchor="middle" font-size="11" font-weight="700" fill="#2f7d50">encapsulated · local · slow</text>'; }
+    else { // irregular invading blob + metastases
+      s+='<g class="creep"><path d="M110 95 q20 -20 45 -8 q30 -6 34 22 q18 16 2 38 q6 26 -26 26 q-24 12 -44 -8 q-26 -4 -22 -32 q-14 -20 11 -30 Z" fill="#e08a80" stroke="#a5392e" stroke-width="3"/></g>';
+      // invading fingers
+      s+='<path d="M105 100 l-16 -12 M195 105 l18 -10 M120 165 l-14 16 M180 168 l16 14" stroke="#a5392e" stroke-width="3" stroke-linecap="round"/>';
+      // metastases
+      [[40,40],[262,55],[45,210],[258,205]].forEach((p,i)=>s+='<circle class="creep" style="animation-delay:'+(i*0.3)+'s" cx="'+p[0]+'" cy="'+p[1]+'" r="8" fill="#a5392e"/>');
+      s+='<text x="150" y="128" text-anchor="middle" font-size="10" font-weight="700" fill="#fff">invading</text>';
+      s+='<text x="150" y="238" text-anchor="middle" font-size="11" font-weight="700" fill="#a5392e">invades + metastasizes to distant sites</text>'; }
+    $('art').innerHTML=s;
+  }
+  function render(){ const inf=INFO[cur]; draw();
+    document.querySelectorAll('#seg button').forEach(b=>b.classList.toggle('on',b.dataset.d===cur));
+    $('stage').style.background=inf.color; $('stage').innerHTML=inf.name+'<small>'+(cur==='benign'?'stays local':'spreads / metastasizes')+'</small>';
+    $('info').innerHTML='<div class="n">'+inf.name+'</div><div class="plain">'+inf.plain+'</div><div class="story">'+inf.story+'</div>';
+    $('liveCap').innerHTML='<b>'+inf.name+'</b> — '+inf.plain;
+  }
+  document.querySelectorAll('#seg button').forEach(b=>b.addEventListener('click',()=>{ cur=b.dataset.d; render(); }));
+  render();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f7f2ea">
+<title>Blood Types &amp; Transfusion</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{ --bg:#f6f1e8; --card:#fffdf8; --ink:#2a2420; --muted:#7a6f63; --line:#e3d8c6;
+    --bad:#d6443f; --good:#3fa66a; --sans:'Inter',system-ui,sans-serif; --disp:'Cinzel Decorative',serif; }
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  body{background:linear-gradient(160deg,#faf6ee,#efe7d8);color:var(--ink);font-family:var(--sans);min-height:100vh;padding:18px 16px 44px;}
+  header{max-width:1120px;margin:0 auto 16px;text-align:center;}
+  h1{font-family:var(--disp);font-weight:900;font-size:clamp(22px,4.2vw,36px);color:#a1382c;line-height:1.05;}
+  header .sub{color:var(--muted);font-size:15px;margin-top:4px;}
+  header .intro{max-width:840px;margin:10px auto 0;font-size:14.5px;line-height:1.5;color:#5c5248;}
+  header .intro b{color:#a1382c;}
+  .wrap{max-width:1120px;margin:0 auto;display:grid;grid-template-columns:1.05fr 1fr;gap:16px;}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;box-shadow:0 6px 22px rgba(140,50,40,.07);}
+  .card h2{font-family:var(--disp);font-weight:700;font-size:17px;color:#a1382c;margin-bottom:6px;}
+  .card h2 + .desc{font-size:13px;color:var(--muted);margin-bottom:10px;line-height:1.4;}
+  svg{display:block;width:100%;height:auto;}
+  @keyframes bob{0%,100%{transform:translate(0,0)}50%{transform:translate(2px,-3px)}}
+  @keyframes shake{0%,100%{transform:translate(0,0)}20%{transform:translate(-2.5px,1.5px)}50%{transform:translate(2px,-1px)}80%{transform:translate(-1px,2px)}}
+
+  #result{border-radius:12px;padding:12px 14px;margin-top:8px;color:#fff;text-align:center;font-weight:800;font-size:18px;transition:.3s;}
+  #result small{display:block;font-weight:500;font-size:13px;opacity:.95;margin-top:3px;}
+
+  .pick{margin-bottom:12px;}
+  .pick .l{font-size:13px;font-weight:700;margin-bottom:5px;}
+  .seg{display:flex;gap:6px;}
+  .seg button{flex:1;border:1px solid var(--line);background:#fff;color:var(--ink);font-family:var(--sans);font-weight:700;font-size:14px;padding:9px 4px;border-radius:9px;cursor:pointer;transition:.12s;}
+  .seg.rec button.on{background:#a1382c;color:#fff;border-color:transparent;}
+  .seg.don button.on{background:#2f6db0;color:#fff;border-color:transparent;}
+  .rh{display:flex;gap:6px;margin-top:6px;}
+  .rh button{flex:1;border:1px solid var(--line);background:#fff;font-weight:700;font-size:13px;padding:7px;border-radius:8px;cursor:pointer;}
+  .rh.rec button.on{background:#c0503f;color:#fff;border-color:transparent;} .rh.don button.on{background:#4a86c8;color:#fff;border-color:transparent;}
+
+  .chart{width:100%;border-collapse:collapse;margin-top:4px;font-size:12.5px;}
+  .chart th,.chart td{border:1px solid var(--line);padding:6px 8px;text-align:center;}
+  .chart th{background:#f4ece0;font-weight:700;} .chart td:first-child{font-weight:800;background:#faf3ea;}
+  .chart .u{font-size:11px;color:var(--muted);}
+  .rx{margin-top:12px;}
+  .rxitem{border:1px solid var(--line);border-radius:10px;padding:10px 12px;margin-bottom:8px;background:#fff;font-size:13px;line-height:1.45;}
+  .rxitem.crit{border-color:#f0b6b0;background:#fdeeec;}
+  .rxitem b{color:#a1382c;} .rxitem .h{font-weight:800;font-size:13.5px;margin-bottom:2px;}
+  @media (max-width:880px){ .wrap{grid-template-columns:1fr;} }
+</style>
+</head>
+<body>
+<header>
+  <h1>Blood Types &amp; Transfusion</h1>
+  <div class="sub">ABO / Rh compatibility &amp; transfusion reactions · Week 9</div>
+  <div class="intro">Red cells carry <b>antigens</b> on their surface (A, B, and the Rh "D" antigen). Your plasma carries <b>antibodies</b> against the antigens you <i>don't</i> have. Give someone red cells their antibodies recognize and the cells <b>clump and burst</b>. Pick a recipient and a donor and see what happens.</div>
+</header>
+
+<div class="wrap">
+  <div>
+    <div class="card">
+      <h2>In the recipient's bloodstream</h2>
+      <div class="desc">Donor red cells (with their antigens) meet the recipient's antibodies. A match = they attack.</div>
+      <svg id="viz" viewBox="0 0 400 260" aria-label="transfusion compatibility"></svg>
+      <div id="result">—</div>
+    </div>
+    <div class="card" style="margin-top:16px;">
+      <h2>The ABO cheat-sheet</h2>
+      <table class="chart">
+        <tr><th>Type</th><th>Antigen on RBC</th><th>Antibody in plasma</th><th>Can receive</th></tr>
+        <tr><td>A</td><td>A</td><td>anti-B</td><td>A, O</td></tr>
+        <tr><td>B</td><td>B</td><td>anti-A</td><td>B, O</td></tr>
+        <tr><td>AB</td><td>A &amp; B</td><td>none</td><td class="u">everyone — <b>universal recipient</b></td></tr>
+        <tr><td>O</td><td>none</td><td>anti-A &amp; anti-B</td><td class="u">O only — but is the <b>universal donor</b></td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div>
+    <div class="card">
+      <h2>Set up the transfusion</h2>
+      <div class="pick">
+        <div class="l" style="color:#a1382c">🧍 RECIPIENT (the patient)</div>
+        <div class="seg rec" id="recSeg"><button data-t="A">A</button><button data-t="B">B</button><button data-t="AB" class="on">AB</button><button data-t="O">O</button></div>
+        <div class="rh rec" id="recRh"><button data-r="+" class="on">Rh +</button><button data-r="-">Rh −</button></div>
+      </div>
+      <div class="pick">
+        <div class="l" style="color:#2f6db0">🩸 DONOR (the bag of blood)</div>
+        <div class="seg don" id="donSeg"><button data-t="A">A</button><button data-t="B">B</button><button data-t="AB">AB</button><button data-t="O" class="on">O</button></div>
+        <div class="rh don" id="donRh"><button data-r="+" class="on">Rh +</button><button data-r="-">Rh −</button></div>
+      </div>
+      <div id="why" style="font-size:13px;line-height:1.5;color:#3a3630;background:#fbf3f2;border:1px solid #eed3cf;border-radius:10px;padding:10px 12px;"></div>
+    </div>
+
+    <div class="card" style="margin-top:16px;">
+      <h2>Transfusion reactions</h2>
+      <div class="rx">
+        <div class="rxitem crit"><div class="h">🚨 Acute Hemolytic Reaction</div><b>ABO incompatibility</b> — the worst one. Recipient IgM antibodies destroy donor cells <b>within ~15 minutes</b>: fever, chills, low BP, back pain, <b>dark urine</b> (hemoglobinuria). Can trigger <b>DIC</b> and <b>acute renal failure</b>.</div>
+        <div class="rxitem"><div class="h">Febrile Reaction</div>Against donor <b>white cells</b> (leukocyte incompatibility). Fever &amp; chills, but <b>no hemolysis</b> — uncomfortable, not usually dangerous.</div>
+        <div class="rxitem"><div class="h">Fluid Overload</div>Too much volume, too fast → strains the heart (<b>CHF</b>), especially in the elderly.</div>
+        <div class="rxitem"><div class="h">Infection / Sepsis</div>Contaminated blood introduces bacteria → sepsis.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const $=id=>document.getElementById(id);
+  const ANTIGEN={A:['A'],B:['B'],AB:['A','B'],O:[]};
+  const ANTIBODY={A:['B'],B:['A'],AB:[],O:['A','B']};   // antibodies target these antigens
+  const state={rec:'AB',recRh:'+',don:'O',donRh:'+'};
+
+  function compat(){
+    const donAg=ANTIGEN[state.don], recAb=ANTIBODY[state.rec];
+    const aboHit=donAg.filter(a=>recAb.includes(a));      // donor antigens attacked
+    const rhHit=(state.donRh==='+' && state.recRh==='-'); // Rh+ donor into Rh- recipient
+    return {aboHit,rhHit,ok:aboHit.length===0 && !rhHit};
+  }
+
+  function drawViz(){
+    const c=compat();
+    let s='<rect x="0" y="0" width="400" height="260" rx="14" fill="#fbeae7"/>';   // plasma
+    // recipient antibody markers floating
+    const recAb=ANTIBODY[state.rec];
+    const abColor={A:'#2f6db0',B:'#2f9d6b'};
+    let abLabel=[]; recAb.forEach(a=>abLabel.push('anti-'+a)); if(state.recRh==='-') abLabel.push('(can make anti-D)');
+    s+='<text x="200" y="24" text-anchor="middle" font-size="12" font-weight="700" fill="#7a3a33">recipient plasma antibodies: '+(abLabel.length?abLabel.join(', '):'none')+'</text>';
+    // draw donor RBCs
+    const donAg=ANTIGEN[state.don];
+    const spots=[[95,110],[200,95],[300,120],[140,185],[255,180]];
+    spots.forEach((p,i)=>{
+      const hit=c.aboHit.length>0 || c.rhHit;
+      const jitter = hit? (i%2?6:-6):0;
+      const x=p[0]+jitter, y=p[1];
+      let cs='<circle cx="'+x+'" cy="'+y+'" r="26" fill="'+(hit?'#b83a30':'#d0524a')+'" stroke="'+(hit?'#7a1f18':'#a53e37')+'" stroke-width="2"/><ellipse cx="'+x+'" cy="'+y+'" rx="11" ry="9" fill="#e89b8e" opacity="0.85"/>';
+      let tags=donAg.slice(); if(state.donRh==='+') tags.push('D');
+      cs+='<text x="'+x+'" y="'+(y+4)+'" text-anchor="middle" font-size="11" font-weight="800" fill="#5a120c">'+(tags.length?tags.join(''):'–')+'</text>';
+      if(hit){ cs+='<circle cx="'+(x+20)+'" cy="'+(y-20)+'" r="7" fill="'+(c.rhHit&&!c.aboHit.length?'#8a54c0':abColor[c.aboHit[0]]||'#8a54c0')+'"/><path d="M'+(x+14)+' '+(y-14)+' l6 6" stroke="#fff" stroke-width="2"/>'; }
+      const anim = hit? ('shake '+(0.34+i*0.05).toFixed(2)+'s ease-in-out infinite') : ('bob '+(2.3+i*0.35).toFixed(2)+'s ease-in-out infinite');
+      s+='<g style="animation:'+anim+'">'+cs+'</g>';
+    });
+    if(!c.ok){
+      // clumping / hemolysis burst marks
+      s+='<text x="200" y="245" text-anchor="middle" font-size="13" font-weight="800" fill="#a5140c">✗ antibodies bind → cells clump &amp; burst (hemolysis)</text>';
+    } else {
+      s+='<text x="200" y="245" text-anchor="middle" font-size="13" font-weight="800" fill="#2f7d50">✓ no match — cells flow safely</text>';
+    }
+    $('viz').innerHTML=s;
+  }
+
+  function render(){
+    const c=compat();
+    drawViz();
+    ['recSeg','donSeg'].forEach(id=>{const key=id==='recSeg'?'rec':'don';
+      document.querySelectorAll('#'+id+' button').forEach(b=>b.classList.toggle('on',b.dataset.t===state[key]));});
+    document.querySelectorAll('#recRh button').forEach(b=>b.classList.toggle('on',b.dataset.r===state.recRh));
+    document.querySelectorAll('#donRh button').forEach(b=>b.classList.toggle('on',b.dataset.r===state.donRh));
+    const R=$('result');
+    if(c.ok){ R.style.background='#3fa66a'; R.innerHTML='✓ COMPATIBLE — safe to transfuse<small>'+state.don+state.donRh+' → '+state.rec+state.recRh+'</small>'; }
+    else { R.style.background='#c0392b'; R.innerHTML='✗ INCOMPATIBLE — transfusion reaction<small>'+state.don+state.donRh+' → '+state.rec+state.recRh+'</small>'; }
+    // why
+    let w='';
+    if(c.ok){ w='The recipient ('+state.rec+state.recRh+') has no antibodies against anything on these donor ('+state.don+state.donRh+') cells, so nothing attacks them. '+ (state.don==='O'&&state.donRh==='-'?'<b>O− is the universal donor.</b>':state.rec==='AB'&&state.recRh==='+'?'<b>AB+ is the universal recipient.</b>':''); }
+    else {
+      let parts=[];
+      if(c.aboHit.length) parts.push('the recipient\'s <b>anti-'+c.aboHit.join(' &amp; anti-')+'</b> antibodies attack the <b>'+c.aboHit.join('/')+' antigen'+(c.aboHit.length>1?'s':'')+'</b> on the donor cells');
+      if(c.rhHit) parts.push('the donor is <b>Rh+</b> but the recipient is <b>Rh−</b>, so the recipient can react to the <b>D antigen</b>');
+      w='🚨 '+parts.join(', and ')+' → the cells clump and burst (an <b>acute hemolytic reaction</b>).';
+    }
+    $('why').innerHTML=w;
+  }
+  document.querySelectorAll('#recSeg button').forEach(b=>b.addEventListener('click',()=>{state.rec=b.dataset.t;render();}));
+  document.querySelectorAll('#donSeg button').forEach(b=>b.addEventListener('click',()=>{state.don=b.dataset.t;render();}));
+  document.querySelectorAll('#recRh button').forEach(b=>b.addEventListener('click',()=>{state.recRh=b.dataset.r;render();}));
+  document.querySelectorAll('#donRh button').forEach(b=>b.addEventListener('click',()=>{state.donRh=b.dataset.r;render();}));
+  render();
+})();
+</script>
+</body>
+</html>

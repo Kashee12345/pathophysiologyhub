@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f7f2ea">
+<title>Blood Pressure &amp; Cardiac Output</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=VT323&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{ --bg:#f6f1e8; --card:#fffdf8; --ink:#2a2420; --muted:#7a6f63; --line:#e3d8c6;
+    --bad:#d6443f; --good:#3fa66a; --warn:#d99321; --sans:'Inter',system-ui,sans-serif; --disp:'Cinzel Decorative',serif; --mono:'VT323',monospace; }
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  body{background:linear-gradient(160deg,#faf6ee,#efe7d8);color:var(--ink);font-family:var(--sans);min-height:100vh;padding:18px 16px 44px;}
+  header{max-width:1120px;margin:0 auto 16px;text-align:center;}
+  h1{font-family:var(--disp);font-weight:900;font-size:clamp(22px,4.2vw,36px);color:#1f6d7a;line-height:1.05;}
+  header .sub{color:var(--muted);font-size:15px;margin-top:4px;}
+  header .intro{max-width:840px;margin:10px auto 0;font-size:14.5px;line-height:1.5;color:#5c5248;}
+  header .intro b{color:#1f6d7a;}
+  .wrap{max-width:1120px;margin:0 auto;display:grid;grid-template-columns:1.05fr 1fr;gap:16px;}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;box-shadow:0 6px 22px rgba(30,110,120,.07);}
+  .card h2{font-family:var(--disp);font-weight:700;font-size:17px;color:#1f6d7a;margin-bottom:6px;}
+  .card h2 + .desc{font-size:13px;color:var(--muted);margin-bottom:10px;line-height:1.4;}
+
+  .eq{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;margin:6px 0 12px;}
+  .eqbox{background:#f2f8f9;border:1px solid #cfe4e7;border-radius:12px;padding:10px 14px;text-align:center;min-width:92px;}
+  .eqbox .k{font-size:11px;letter-spacing:.5px;text-transform:uppercase;color:#5c7d82;font-weight:700;}
+  .eqbox .v{font-family:var(--mono);font-size:30px;line-height:1;color:#1f6d7a;} .eqbox .u{font-size:10.5px;color:#7a8f92;}
+  .eq .op{font-family:var(--mono);font-size:26px;color:#8a7f70;}
+  .eqbox.co{background:#1f6d7a;} .eqbox.co .k{color:#bfe6ea;} .eqbox.co .v{color:#fff;} .eqbox.co .u{color:#cfeef1;}
+
+  .heart{font-size:42px;text-align:center;animation:beat 0.83s ease-in-out infinite;}
+  @keyframes beat{0%,100%{transform:scale(1)}15%{transform:scale(1.16)}30%{transform:scale(1)}45%{transform:scale(1.09)}}
+
+  /* BP readout */
+  .bpbox{margin-top:6px;text-align:center;}
+  .bpbig{font-family:var(--mono);font-size:40px;line-height:1;}
+  .bpcat{display:inline-block;margin-top:6px;font-weight:800;font-size:13.5px;padding:4px 14px;border-radius:20px;color:#fff;}
+  .bpscale{display:flex;height:12px;border-radius:8px;overflow:hidden;margin-top:10px;border:1px solid var(--line);}
+  .bpscale div{flex:1;} .bpscale .n{background:#5fc98a;} .bpscale .e{background:#e6c15a;} .bpscale .s1{background:#e69542;} .bpscale .s2{background:#d6443f;}
+  .bpscale small{}
+  .scalelbl{display:flex;justify-content:space-between;font-size:9.5px;color:var(--muted);margin-top:2px;}
+
+  /* sliders */
+  .slider{margin-top:14px;}
+  .slider .top{display:flex;justify-content:space-between;font-size:13.5px;font-weight:700;}
+  .slider .top .val{font-family:var(--mono);font-size:19px;color:#1f6d7a;}
+  input[type=range]{width:100%;height:26px;accent-color:#1f6d7a;cursor:pointer;}
+  .slider .fx{font-size:12px;color:var(--muted);margin-top:2px;line-height:1.35;}
+  .slider .fx b{color:#1f6d7a;}
+
+  .loop{border:1px solid var(--line);border-radius:11px;padding:11px 13px;margin-top:10px;font-size:13px;line-height:1.5;}
+  .loop.up{background:#fdf0ec;border-color:#f0cabf;} .loop.down{background:#eaf5f0;border-color:#c6e5d5;}
+  .loop .h{font-family:var(--disp);font-weight:700;font-size:15px;margin-bottom:3px;} .loop.up .h{color:#b0472e;} .loop.down .h{color:#1f7a54;}
+  .loop b{color:#2a2420;}
+  @media (max-width:880px){ .wrap{grid-template-columns:1fr;} }
+</style>
+</head>
+<body>
+<header>
+  <h1>Blood Pressure &amp; Cardiac Output</h1>
+  <div class="sub">CO = Stroke Volume × Heart Rate · Week 9</div>
+  <div class="intro">How much blood the heart moves per minute (<b>cardiac output</b>) is just how much it pushes each beat (<b>stroke volume</b>) times how fast it beats (<b>heart rate</b>). Stroke volume itself depends on three dials — <b>preload, afterload, and contractility</b>. Play with them and watch cardiac output and blood pressure respond.</div>
+</header>
+
+<div class="wrap">
+  <div>
+    <div class="card">
+      <h2>The pump, live</h2>
+      <div class="heart" id="heart">🫀</div>
+      <div class="eq">
+        <div class="eqbox"><div class="k">Stroke Volume</div><div class="v" id="svV">70</div><div class="u">mL / beat</div></div>
+        <div class="op">×</div>
+        <div class="eqbox"><div class="k">Heart Rate</div><div class="v" id="hrV">72</div><div class="u">beats / min</div></div>
+        <div class="op">=</div>
+        <div class="eqbox co"><div class="k">Cardiac Output</div><div class="v" id="coV">5.0</div><div class="u">L / min</div></div>
+      </div>
+    </div>
+    <div class="card" style="margin-top:16px;">
+      <h2>Resulting blood pressure</h2>
+      <div class="bpbox">
+        <div class="bpbig" id="bpBig">116/74</div>
+        <div class="bpcat" id="bpCat">Normal</div>
+        <div class="bpscale"><div class="n"></div><div class="e"></div><div class="s1"></div><div class="s2"></div></div>
+        <div class="scalelbl"><span>Normal &lt;120/80</span><span>Elevated</span><span>Stage 1 ≥130/80</span><span>Stage 2 ≥140/90</span></div>
+      </div>
+      <div class="desc" style="margin-top:12px;"><b>Systolic</b> (top) = the pressure while the ventricles <b>contract</b>. <b>Diastolic</b> (bottom) = the pressure while they <b>relax</b> and refill. Chronically high = <b>hypertension</b> — driven by extra volume, stiff/constricted arteries (afterload), or an overworking heart.</div>
+    </div>
+  </div>
+
+  <div>
+    <div class="card">
+      <h2>The four dials</h2>
+      <div class="slider">
+        <div class="top"><span>❤️ Heart Rate</span><span class="val"><span id="hrLbl">72</span> bpm</span></div>
+        <input type="range" id="hr" min="40" max="180" value="72">
+        <div class="fx" id="hrFx"></div>
+      </div>
+      <div class="slider">
+        <div class="top"><span>🫗 Preload</span><span class="val" id="preLbl">normal</span></div>
+        <input type="range" id="pre" min="0" max="100" value="50">
+        <div class="fx" id="preFx"></div>
+      </div>
+      <div class="slider">
+        <div class="top"><span>🧱 Afterload</span><span class="val" id="aftLbl">normal</span></div>
+        <input type="range" id="aft" min="0" max="100" value="50">
+        <div class="fx" id="aftFx"></div>
+      </div>
+      <div class="slider">
+        <div class="top"><span>💪 Contractility</span><span class="val" id="conLbl">normal</span></div>
+        <input type="range" id="con" min="0" max="100" value="50">
+        <div class="fx" id="conFx"></div>
+      </div>
+    </div>
+    <div class="card" style="margin-top:16px;">
+      <h2>How the body regulates BP</h2>
+      <div class="loop up">
+        <div class="h">↑ RAAS — the "raise BP" system</div>
+        When blood flow to the <b>kidney</b> drops, it releases <b>renin</b> → angiotensin II (a strong <b>vasoconstrictor</b>, raises afterload) → <b>aldosterone</b> (kidneys keep salt &amp; water, raises preload/volume). <b>ADH</b> holds water too. Net effect: <b>BP up</b>.
+      </div>
+      <div class="loop down">
+        <div class="h">↓ ANP / BNP — the "lower BP" system</div>
+        When the heart chambers are <b>over-stretched</b> by too much volume, they release <b>ANP &amp; BNP</b> → arteries dilate and the kidneys <b>dump salt &amp; water</b>. Net effect: <b>BP down</b>. (BNP is also the classic <b>heart-failure blood test</b>.)
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const $=id=>document.getElementById(id);
+  const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+  function calc(){
+    const hr=+$('hr').value, pre=+$('pre').value, aft=+$('aft').value, con=+$('con').value;
+    let sv = 70 + (pre-50)*0.42 + (con-50)*0.5 - (aft-50)*0.34;
+    if(hr>120) sv *= (1-(hr-120)/320);           // very fast → less filling time
+    sv=clamp(Math.round(sv),28,132);
+    const co = sv*hr/1000;
+    let sys = clamp(Math.round(108 + (co-5)*11 + (aft-50)*0.7), 82, 215);
+    let dia = clamp(Math.round(72 + (aft-50)*0.55 + (co-5)*2), 44, 132);
+    return {hr,pre,aft,con,sv,co,sys,dia};
+  }
+  function bpCat(sys,dia){
+    if(sys>=140||dia>=90) return ['Stage 2 Hypertension','#d6443f'];
+    if(sys>=130||dia>=80) return ['Stage 1 Hypertension','#e69542'];
+    if(sys>=120) return ['Elevated','#c9a02e'];
+    if(sys<90||dia<60) return ['Low (hypotension)','#3f6fd6'];
+    return ['Normal','#3fa66a'];
+  }
+  const lvl=(v)=> v<25?'very low':v<42?'low':v<58?'normal':v<75?'high':'very high';
+  function render(){
+    const m=calc();
+    $('svV').textContent=m.sv; $('hrV').textContent=m.hr; $('coV').textContent=m.co.toFixed(1);
+    $('hrLbl').textContent=m.hr; $('preLbl').textContent=lvl(m.pre); $('aftLbl').textContent=lvl(m.aft); $('conLbl').textContent=lvl(m.con);
+    $('bpBig').textContent=m.sys+'/'+m.dia;
+    const [cat,col]=bpCat(m.sys,m.dia); $('bpCat').textContent=cat; $('bpCat').style.background=col; $('bpBig').style.color=col;
+    // beating heart speed
+    $('heart').style.animationDuration=(60/m.hr).toFixed(2)+'s';
+    // slider effect notes
+    $('hrFx').innerHTML='More beats per minute multiplies output — <b>CO = SV × HR</b>. But push it too high and there\'s no time to fill, so stroke volume falls.';
+    $('preFx').innerHTML='How <b>full</b> the ventricle is before it squeezes (venous return/volume). More stretch → a stronger squeeze (<b>Frank-Starling</b>) → <b>↑ stroke volume</b>. Raised by IV fluids; lowered by bleeding/dehydration.';
+    $('aftFx').innerHTML='The <b>resistance</b> the ventricle must pump against (arterial pressure/constriction). Higher afterload → harder to eject → <b>↓ stroke volume</b> and a heart that tires. Raised by hypertension &amp; vasoconstriction.';
+    $('conFx').innerHTML='How <b>hard</b> the muscle squeezes, independent of filling. Boosted by adrenaline/sympathetic drive (→ <b>↑ SV</b>); weakened by a damaged heart (MI, failure).';
+  }
+  ['hr','pre','aft','con'].forEach(id=>$(id).addEventListener('input',render));
+  render();
+})();
+</script>
+</body>
+</html>

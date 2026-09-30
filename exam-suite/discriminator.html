@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Which Is It? · Pathophysiology</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="suite.css">
+<style>
+  .clue{font-family:"Fraunces",Georgia,serif;font-size:22px;font-weight:600;line-height:1.42;
+        text-align:center;padding:22px 16px 20px;color:var(--accent-dk);}
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:11px;}
+  .two .opt{justify-content:center;text-align:center;font-size:15px;font-weight:600;padding:18px 14px;}
+  .two .opt .k{display:none;}
+  @media(max-width:520px){ .two{grid-template-columns:1fr;} .clue{font-size:19px;} }
+</style>
+</head>
+<body>
+<div id="bar"></div>
+<div class="wrap">
+
+  <div class="hero">
+    <div class="eyebrow"><span data-label>Final Exam</span> Suite</div>
+    <h1>Which Is It?</h1>
+    <p>One clue, two look-alikes. Most missed exam questions are not gaps in knowledge &mdash; they are two conditions getting mixed up. This drills the single fact that separates each pair.</p>
+  </div>
+
+  <div class="tiles">
+    <div class="tile"><b id="tScore">0</b><span>Correct</span></div>
+    <div class="tile"><b id="tSeen">0</b><span>Attempted</span></div>
+    <div class="tile"><b id="tPct">—</b><span>Accuracy</span></div>
+    <div class="tile"><b id="tStreak">0</b><span>Streak</span></div>
+  </div>
+
+  <div class="card" id="playCard">
+    <div class="row" style="justify-content:space-between;">
+      <span class="chip" id="wkChip"></span>
+      <span class="note" id="counter"></span>
+    </div>
+    <div class="clue" id="clue"></div>
+    <div class="two" id="opts"></div>
+    <div id="after" class="hide">
+      <div class="why" id="why"></div>
+      <div class="row" style="margin-top:14px;">
+        <button class="btn" id="nextBtn">Next &rsaquo;</button>
+        <a class="btn ghost sm" href="#" data-hq="1">Back to HQ</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="card hide" id="doneCard">
+    <div class="sect" style="margin-top:0;">Round complete</div>
+    <p id="doneTxt" class="note"></p>
+    <div class="row"><button class="btn" onclick="location.reload()">Go again</button>
+    <a class="btn ghost" href="#" data-hq="1">Back to HQ</a></div>
+  </div>
+
+</div>
+
+<script src="suite.js"></script>
+<script>
+window.FinalSuite.loadData(function(){
+  var S=window.FinalSuite, P=S.Progress;
+  document.getElementById('bar').innerHTML=S.topbar('Which Is It?','<span id="tbS"></span>');
+
+  var items=S.shuffle(window.FINAL_DRILLS.pairs), i=0, stats={c:0,n:0,streak:0}, answered=false, flip=false;
+
+  function draw(){
+    if(i>=items.length){ finish(); return; }
+    answered=false;
+    var it=items[i];
+    flip=Math.random()<0.5;                    /* vary which side the answer sits on */
+    document.getElementById('wkChip').textContent='Week '+it.week;
+    document.getElementById('counter').textContent=(i+1)+' of '+items.length;
+    document.getElementById('clue').textContent=it.clue;
+    var left  = flip ? it.b : it.a;
+    var right = flip ? it.a : it.b;
+    /* honour it.c rather than assuming "a" is the answer, so new pairs can use c:1 */
+    var correctText = (it.c === 1) ? it.b : it.a;
+    var correctSide = (left === correctText) ? 'l' : 'r';
+    it._ans = correctText;
+    document.getElementById('opts').innerHTML=
+      '<button class="opt" data-s="l"><span class="k"></span><span>'+S.esc(left)+'</span></button>'+
+      '<button class="opt" data-s="r"><span class="k"></span><span>'+S.esc(right)+'</span></button>';
+    document.getElementById('opts').dataset.correct=correctSide;
+    document.getElementById('after').classList.add('hide');
+  }
+
+  document.getElementById('opts').addEventListener('click',function(e){
+    var b=e.target.closest('[data-s]'); if(!b||answered)return;
+    answered=true;
+    var it=items[i], correctSide=this.dataset.correct, ok=(b.dataset.s===correctSide);
+    Array.prototype.forEach.call(this.querySelectorAll('.opt'),function(el){
+      el.disabled=true;
+      if(el.dataset.s===correctSide) el.classList.add('correct');
+      else if(el===b) el.classList.add('wrong');
+      else el.classList.add('muted');
+    });
+    stats.n++; if(ok){stats.c++;stats.streak++;} else stats.streak=0;
+    P.hit('discriminator', it.week, ok);
+    var el=document.getElementById('why');
+    el.className='why'+(ok?'':' miss');
+    el.innerHTML='<span class="vd">'+(ok?'Correct — '+S.esc(it._ans):'It is '+S.esc(it._ans))+'</span>'+S.esc(it.why);
+    document.getElementById('after').classList.remove('hide');
+    stat();
+  });
+
+  function stat(){
+    document.getElementById('tScore').textContent=stats.c;
+    document.getElementById('tSeen').textContent=stats.n;
+    document.getElementById('tPct').textContent=stats.n?Math.round(stats.c/stats.n*100)+'%':'—';
+    document.getElementById('tStreak').textContent=stats.streak;
+    var tb=document.getElementById('tbS'); if(tb) tb.textContent=stats.n?stats.c+'/'+stats.n:'';
+  }
+
+  function finish(){
+    var pct=stats.n?Math.round(stats.c/stats.n*100):0;
+    P.run('discriminator',pct);
+    document.getElementById('playCard').classList.add('hide');
+    document.getElementById('doneCard').classList.remove('hide');
+    document.getElementById('doneTxt').textContent='You scored '+stats.c+' of '+stats.n+' ('+pct+'%). '+
+      (pct>=85?'You are separating the look-alikes cleanly.':pct>=70?'Good — revisit the pairs you missed.':'These pairs are where most marks are lost. Worth a second run.');
+  }
+
+  document.getElementById('nextBtn').addEventListener('click',function(){ i++; draw(); });
+  draw(); stat();
+});
+</script>
+</body>
+</html>

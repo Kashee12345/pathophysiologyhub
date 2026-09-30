@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f7f2ea">
+<title>Punnett Square Calculator</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{ --card:#fffdf8; --ink:#2a2420; --muted:#7a6f63; --line:#e3d8c6;
+    --sans:'Inter',system-ui,sans-serif; --disp:'Cinzel Decorative',serif; --accent:#5a6a9a;
+    --aff:#c0392b; --car:#c9922a; --un:#2f8a55; }
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  body{background:linear-gradient(160deg,#eef1f8,#e7e9ee);color:var(--ink);font-family:var(--sans);min-height:100vh;padding:18px 16px 44px;}
+  header{max-width:1120px;margin:0 auto 16px;text-align:center;}
+  h1{font-family:var(--disp);font-weight:900;font-size:clamp(22px,4.2vw,36px);color:#44528a;line-height:1.05;}
+  header .sub{color:var(--muted);font-size:15px;margin-top:4px;}
+  header .intro{max-width:860px;margin:10px auto 0;font-size:14.5px;line-height:1.5;color:#5c5248;}
+  header .intro b{color:#44528a;}
+  .wrap{max-width:1120px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;box-shadow:0 6px 22px rgba(60,70,120,.07);}
+  .card h2{font-family:var(--disp);font-weight:700;font-size:16px;color:#44528a;margin-bottom:6px;}
+  .card h2 + .desc{font-size:13px;color:var(--muted);margin-bottom:10px;line-height:1.4;}
+  .row{display:flex;gap:8px;margin-bottom:10px;} .row .lab{flex:0 0 90px;font-size:12.5px;font-weight:700;color:#44528a;align-self:center;}
+  .seg{display:flex;flex:1;border:1px solid var(--line);border-radius:10px;overflow:hidden;}
+  .seg button{flex:1;border:none;background:#fff;color:var(--ink);font-family:var(--sans);font-weight:700;font-size:12.5px;padding:9px 5px;cursor:pointer;border-right:1px solid var(--line);}
+  .seg button:last-child{border-right:none;} .seg button.on{background:#5a6a9a;color:#fff;}
+  select{flex:1;border:1px solid var(--line);border-radius:10px;padding:9px;font-family:var(--sans);font-weight:700;font-size:14px;background:#fbfaf6;color:#2a2420;}
+  .presets{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;}
+  .presets button{border:1px solid var(--line);background:#fff;border-radius:9px;padding:7px 11px;font-size:12px;font-weight:700;color:#5c5248;cursor:pointer;}
+  .presets button:hover{transform:translateY(-2px);}
+  .pq{background:#eef1f8;border:1px solid #cdd4ea;border-radius:10px;padding:10px 12px;margin-top:10px;font-size:12.8px;line-height:1.5;color:#3a4568;display:none;} .pq.on{display:block;} .pq b{color:#2a3560;}
+
+  .grid{display:grid;grid-template-columns:44px 1fr 1fr;gap:6px;margin:0 auto;max-width:320px;}
+  .gc{border-radius:10px;display:flex;align-items:center;justify-content:center;font-family:var(--disp);font-weight:800;font-size:20px;min-height:66px;text-align:center;}
+  .hd{background:#ece4d6;color:#6a5a3a;font-size:17px;}
+  .corner{background:transparent;}
+  .cell{color:#fff;flex-direction:column;} .cell small{font-size:10px;font-weight:600;font-family:var(--sans);opacity:.95;margin-top:2px;}
+  .cell.aff{background:var(--aff);} .cell.car{background:var(--car);} .cell.un{background:var(--un);}
+  .res{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:14px;}
+  .rc{border-radius:11px;padding:11px 8px;text-align:center;color:#fff;} .rc.aff{background:var(--aff);} .rc.car{background:var(--car);} .rc.un{background:var(--un);}
+  .rc .p{font-family:var(--disp);font-weight:900;font-size:22px;line-height:1;} .rc .l{font-size:11px;font-weight:600;margin-top:3px;opacity:.95;}
+  .pearl{background:#eef4fb;border:1px solid #cbdcf0;border-radius:10px;padding:10px 12px;margin-top:12px;font-size:12.3px;line-height:1.5;color:#274d7a;} .pearl b{color:#173b5a;}
+  @media (max-width:880px){ .wrap{grid-template-columns:1fr;} }
+</style>
+</head>
+<body>
+<header>
+  <h1>Punnett Square Calculator</h1>
+  <div class="sub">Cross two parents, get the odds · Week 7</div>
+  <div class="intro">Pick the inheritance pattern and each parent's genotype, and this builds the <b>Punnett square</b> and works out the <b>probabilities</b> — affected, carrier, or unaffected. Load a practice problem with one tap.</div>
+</header>
+<div class="wrap">
+  <div>
+    <div class="card">
+      <h2>Set up the cross</h2>
+      <div class="desc">Capital = dominant allele, lowercase = recessive.</div>
+      <div class="row"><span class="lab">Pattern</span>
+        <div class="seg" id="modeSeg"><button data-m="auto" class="on">Autosomal</button><button data-m="xlink">X-linked</button></div></div>
+      <div class="row" id="condRow"><span class="lab">Condition</span>
+        <div class="seg" id="condSeg"><button data-c="dom" class="on">Dominant</button><button data-c="rec">Recessive</button></div></div>
+      <div class="row"><span class="lab" id="p1lab">Parent 1</span><select id="p1"></select></div>
+      <div class="row"><span class="lab" id="p2lab">Parent 2</span><select id="p2"></select></div>
+      <div class="presets" id="presets">
+        <button data-p="0">Practice 1</button><button data-p="1">Practice 2</button>
+        <button data-p="2">Practice 3</button><button data-p="3">Practice 4</button>
+      </div>
+      <div class="pq" id="pq"></div>
+    </div>
+  </div>
+  <div>
+    <div class="card">
+      <h2>The Punnett square</h2>
+      <div class="grid" id="grid"></div>
+      <div class="res" id="res"></div>
+      <div class="pearl"><b>Reading it:</b> each box is one equally-likely offspring (25% each). Count the boxes of a type and divide by 4. <span style="color:#c0392b">Red</span> = affected, <span style="color:#c9922a">amber</span> = carrier (has one recessive allele but no condition), <span style="color:#2f8a55">green</span> = unaffected.</div>
+    </div>
+  </div>
+</div>
+<script>
+(function(){
+  const $=id=>document.getElementById(id);
+  let mode='auto', cond='dom', p1='Aa', p2='Aa';
+  const AUTO_OPTS=['AA','Aa','aa'];
+  const MOM_OPTS=[['XAXA','Xᴬ Xᴬ'],['XAXa','Xᴬ Xᵃ'],['XaXa','Xᵃ Xᵃ']];
+  const DAD_OPTS=[['XAY','Xᴬ Y'],['XaY','Xᵃ Y']];
+  const PRESETS=[
+    {mode:'auto',cond:'rec',p1:'Aa',p2:'Aa',q:'<b>Autosomal recessive.</b> Both parents Aa. <b>What is the probability a child is a carrier?</b> → look at the amber (Aa) boxes.'},
+    {mode:'auto',cond:'dom',p1:'Aa',p2:'aa',q:'<b>Autosomal dominant.</b> Aa × aa. <b>Probability a child HAS the condition?</b> → red boxes.'},
+    {mode:'auto',cond:'dom',p1:'Aa',p2:'Aa',q:'<b>Marfan (autosomal dominant).</b> Two heterozygous (Aa × Aa). <b>Probability a child is UNAFFECTED?</b> → green (aa) box.'},
+    {mode:'xlink',cond:'rec',p1:'XAXa',p2:'XaY',q:'<b>X-linked (hemophilia).</b> An affected father (XᵃY) × … (try a carrier mother XᴬXᵃ). <b>Which sons/daughters are affected?</b> Sons get dad\'s Y, so their X comes only from mom.'}
+  ];
+
+  function fillSelect(sel,opts,val){ sel.innerHTML=opts.map(o=>{ const v=Array.isArray(o)?o[0]:o, t=Array.isArray(o)?o[1]:o; return '<option value="'+v+'"'+(v===val?' selected':'')+'>'+t+'</option>'; }).join(''); }
+  function setupControls(){
+    $('condRow').style.display = mode==='auto'?'flex':'none';
+    if(mode==='auto'){ $('p1lab').textContent='Parent 1'; $('p2lab').textContent='Parent 2'; fillSelect($('p1'),AUTO_OPTS,p1); fillSelect($('p2'),AUTO_OPTS,p2); }
+    else { $('p1lab').textContent='Mother (XX)'; $('p2lab').textContent='Father (XY)'; fillSelect($('p1'),MOM_OPTS,p1); fillSelect($('p2'),DAD_OPTS,p2); }
+  }
+  // classification
+  function classifyAuto(geno){ // geno like 'AA','Aa','aa'
+    const hasDom=geno.includes('A'), isRec=(geno==='aa');
+    if(cond==='dom') return hasDom?'aff':'un';
+    return isRec?'aff':(geno==='Aa'?'car':'un');
+  }
+  function build(){
+    let cells=[], colH, rowH;
+    if(mode==='auto'){
+      const a=p1.split(''), b=p2.split('');
+      rowH=a; colH=b;
+      for(const r of a){ for(const c of b){ const g=[r,c].sort((x,y)=>x==='A'?-1:1).join(''); cells.push({label:g,cls:classifyAuto(g)}); } }
+    } else {
+      // mother alleles (two X), father [X-allele, Y]
+      const mAll=[p1[1],p1[3]]; // XAXa -> ['A','a']
+      const fX=p2[1]; // XAY -> 'A'
+      rowH=mAll.map(x=>'X'+(x==='A'?'ᴬ':'ᵃ'));
+      colH=['X'+(fX==='A'?'ᴬ':'ᵃ'),'Y'];
+      for(const m of mAll){
+        // daughter (father X)
+        const d=[m,fX]; const aff = d.every(x=>x==='a'); const car = d.includes('a')&&!aff;
+        cells.push({label:'X'+sup(m)+' X'+sup(fX),cls:aff?'aff':(car?'car':'un'),sub:'daughter'});
+        // son (Y)
+        const sAff = m==='a';
+        cells.push({label:'X'+sup(m)+' Y',cls:sAff?'aff':'un',sub:'son'});
+      }
+    }
+    return {cells,rowH,colH};
+  }
+  function sup(a){ return a==='A'?'ᴬ':'ᵃ'; }
+  function render(){
+    document.querySelectorAll('#modeSeg button').forEach(b=>b.classList.toggle('on',b.dataset.m===mode));
+    document.querySelectorAll('#condSeg button').forEach(b=>b.classList.toggle('on',b.dataset.c===cond));
+    setupControls();
+    const {cells,rowH,colH}=build();
+    // grid: corner, colH[0], colH[1]; rowH[0], cell, cell; rowH[1], cell, cell
+    let g='<div class="gc corner"></div>';
+    g+='<div class="gc hd">'+colH[0]+'</div><div class="gc hd">'+colH[1]+'</div>';
+    for(let r=0;r<2;r++){ g+='<div class="gc hd">'+rowH[r]+'</div>';
+      for(let c=0;c<2;c++){ const cell=cells[r*2+c]; g+='<div class="gc cell '+cell.cls+'">'+cell.label+(cell.sub?'<small>'+cell.sub+'</small>':'')+'</div>'; } }
+    $('grid').innerHTML=g;
+    // tally
+    const t={aff:0,car:0,un:0}; cells.forEach(c=>t[c.cls]++);
+    const pct=n=>Math.round(n/4*100);
+    $('res').innerHTML='<div class="rc aff"><div class="p">'+pct(t.aff)+'%</div><div class="l">affected</div></div>'+
+      '<div class="rc car"><div class="p">'+pct(t.car)+'%</div><div class="l">carrier</div></div>'+
+      '<div class="rc un"><div class="p">'+pct(t.un)+'%</div><div class="l">unaffected</div></div>';
+  }
+  document.querySelectorAll('#modeSeg button').forEach(b=>b.addEventListener('click',()=>{ mode=b.dataset.m; if(mode==='auto'){p1='Aa';p2='Aa';}else{p1='XAXa';p2='XaY';} $('pq').classList.remove('on'); render(); }));
+  document.querySelectorAll('#condSeg button').forEach(b=>b.addEventListener('click',()=>{ cond=b.dataset.c; render(); }));
+  $('p1').addEventListener('change',e=>{ p1=e.target.value; render(); });
+  $('p2').addEventListener('change',e=>{ p2=e.target.value; render(); });
+  document.querySelectorAll('#presets button').forEach(b=>b.addEventListener('click',()=>{ const p=PRESETS[+b.dataset.p]; mode=p.mode; cond=p.cond; p1=p.p1; p2=p.p2; $('pq').innerHTML=p.q; $('pq').classList.add('on'); render(); }));
+  render();
+})();
+</script>
+</body>
+</html>

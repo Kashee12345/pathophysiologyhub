@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f7f2ea">
+<title>Inflammation</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{ --card:#fffdf8; --ink:#2a2420; --muted:#7a6f63; --line:#e3d8c6;
+    --sans:'Inter',system-ui,sans-serif; --disp:'Cinzel Decorative',serif; --accent:#c0562a; }
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  body{background:linear-gradient(160deg,#fbf3ee,#ece5e0);color:var(--ink);font-family:var(--sans);min-height:100vh;padding:18px 16px 44px;}
+  header{max-width:1120px;margin:0 auto 16px;text-align:center;}
+  h1{font-family:var(--disp);font-weight:900;font-size:clamp(22px,4.2vw,36px);color:#a5491f;line-height:1.05;}
+  header .sub{color:var(--muted);font-size:15px;margin-top:4px;}
+  header .intro{max-width:860px;margin:10px auto 0;font-size:14.5px;line-height:1.5;color:#5c5248;}
+  header .intro b{color:#a5491f;}
+  .wrap{max-width:1120px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;box-shadow:0 6px 22px rgba(140,70,40,.07);}
+  .card h2{font-family:var(--disp);font-weight:700;font-size:16px;color:#a5491f;margin-bottom:6px;}
+  .card h2 + .desc{font-size:13px;color:var(--muted);margin-bottom:10px;line-height:1.4;}
+  svg{display:block;width:100%;height:auto;max-height:300px;}
+  #liveCap{margin-top:8px;background:#f7ebe3;border:1px solid #ecccb8;border-radius:10px;padding:10px 13px;font-size:14px;line-height:1.5;color:#7a3e18;text-align:center;} #liveCap b{color:#8a3810;}
+  @keyframes throb{0%,100%{opacity:.4;transform:scale(.96)}50%{opacity:.85;transform:scale(1.05)}}
+  .throb{animation:throb 1.4s ease-in-out infinite;transform-origin:center;}
+  @keyframes crawl{0%{transform:translateX(-8px)}100%{transform:translateX(8px)}}
+  .crawl{animation:crawl 1.6s ease-in-out infinite alternate;}
+  #stage{border-radius:12px;padding:11px 14px;margin-bottom:12px;color:#fff;font-weight:700;font-size:16px;text-align:center;background:#c0763a;}
+  #stage small{display:block;font-weight:500;font-size:13px;opacity:.93;margin-top:2px;}
+  .seg{display:flex;border:1px solid var(--line);border-radius:11px;overflow:hidden;margin-bottom:6px;}
+  .seg button{flex:1;border:none;background:#fff;color:var(--ink);font-family:var(--sans);font-weight:700;font-size:13.5px;padding:12px 6px;cursor:pointer;transition:.12s;line-height:1.15;}
+  .seg button small{display:block;font-weight:500;font-size:10.5px;color:var(--muted);margin-top:2px;}
+  .seg button.on{color:#fff;} .seg button.on small{color:rgba(255,255,255,.9);}
+  .seg button.acute.on{background:#c0562a;} .seg button.chronic.on{background:#8a5a3a;}
+  #info{border:1px solid var(--line);border-left:5px solid var(--accent);background:#f8efe8;border-radius:10px;padding:12px 13px;margin-top:12px;}
+  #info .n{font-family:var(--disp);font-weight:700;font-size:17px;color:#a5491f;}
+  #info .plain{font-size:14.5px;line-height:1.5;color:#2a2420;margin-top:8px;font-weight:600;}
+  #info .story{font-size:13px;line-height:1.5;color:#3a3630;margin-top:8px;background:#fff;border-radius:8px;padding:9px 11px;border:1px solid #ecd6c6;}
+  .players{margin-top:12px;} .players .lbl{font-size:11.5px;font-weight:700;text-transform:uppercase;color:var(--muted);letter-spacing:.03em;margin-bottom:6px;}
+  .players table{width:100%;border-collapse:collapse;font-size:12px;} .players td{padding:5px 8px;border-bottom:1px solid var(--line);line-height:1.35;} .players td:first-child{font-weight:700;color:#a5491f;white-space:nowrap;}
+  .pearl{background:#eef4fb;border:1px solid #cbdcf0;border-radius:10px;padding:10px 12px;margin-top:12px;font-size:12.4px;line-height:1.5;color:#274d7a;} .pearl b{color:#173b5a;}
+  @media (max-width:880px){ .wrap{grid-template-columns:1fr;} }
+</style>
+</head>
+<body>
+<header>
+  <h1>Inflammation</h1>
+  <div class="sub">The body's response to injury · Week 3</div>
+  <div class="intro">Inflammation is how the body <b>fights injury and infection</b> — rushing blood, fluid, and cells to the damaged spot. <b>Acute</b> inflammation is short and protective; <b>chronic</b> inflammation drags on and can damage tissue. Click each and meet the key players.</div>
+</header>
+<div class="wrap">
+  <div>
+    <div class="card">
+      <h2>Injured tissue</h2>
+      <div class="desc">Watch the classic signs of inflammation appear at the site of injury.</div>
+      <svg id="art" viewBox="0 0 300 250" aria-label="inflammation"></svg>
+      <div id="liveCap">Pick acute or chronic.</div>
+    </div>
+  </div>
+  <div>
+    <div id="stage">Pick a type<small>acute vs chronic</small></div>
+    <div class="card">
+      <div class="seg" id="seg">
+        <button data-d="acute" class="acute on">Acute<small>short, protective</small></button>
+        <button data-d="chronic" class="chronic">Chronic<small>prolonged, damaging</small></button>
+      </div>
+    </div>
+    <div class="card" style="margin-top:16px;"><h2>What's happening</h2><div id="info"></div>
+      <div class="players"><div class="lbl">Key players</div>
+        <table>
+          <tr><td>Mast cells</td><td>primary <b>histamine</b> releaser (kicks it off)</td></tr>
+          <tr><td>Neutrophils</td><td>the <b>first cell to arrive</b> at the site</td></tr>
+          <tr><td>Macrophages</td><td>engulf antigens tagged by <b>opsonization</b></td></tr>
+          <tr><td>Cytokines</td><td>communicate between WBCs &amp; other cells</td></tr>
+          <tr><td>Prostaglandins</td><td>stimulate <b>fever &amp; pain</b> in the brain</td></tr>
+          <tr><td>Leukotrienes</td><td>chemical that <b>speeds up</b> the response</td></tr>
+        </table>
+      </div>
+      <div class="pearl"><b>Systemic phase:</b> when inflammation goes whole-body (driven by prostaglandins, cytokines, leukotrienes) you see <b>fever, ↑ WBC count, and changes in vital signs</b>. Short-term trigger = infection; long-term = asthma, lupus, or RA.</div>
+    </div>
+  </div>
+</div>
+<script>
+(function(){
+  const $=id=>document.getElementById(id); let cur='acute';
+  const INFO={
+    acute:{name:'Acute Inflammation',color:'#c0562a',
+      plain:'A fast, short-lived, protective response — the classic red, hot, swollen, painful site.',
+      story:'Right after injury, vessels <b>dilate and leak</b>, flooding the area with blood, fluid, and cells. The five cardinal signs appear: <b>redness, heat, swelling, pain, and loss of function</b>. It\'s <b>self-limiting</b> and sets up healing.'},
+    chronic:{name:'Chronic Inflammation',color:'#8a5a3a',
+      plain:'Inflammation that persists for weeks to years, slowly damaging and scarring tissue.',
+      story:'When the trigger won\'t go away, inflammation becomes <b>chronic</b>. <b>Macrophages</b> dominate, tissue is slowly destroyed and replaced with <b>fibrosis/scar</b>. Seen in ongoing conditions like <b>asthma, lupus, and rheumatoid arthritis</b>.'}
+  };
+  function draw(){ const st=cur; let s='';
+    // tissue block
+    s+='<rect x="20" y="30" width="260" height="180" rx="16" fill="#f6e6d6"/>';
+    if(st==='acute'){
+      // red hot swollen zone
+      s+='<circle class="throb" cx="150" cy="120" r="70" fill="#e0402a" opacity="0.35"/>';
+      s+='<circle cx="150" cy="120" r="46" fill="#e88a6a" stroke="#c0392b" stroke-width="3"/>';
+      // neutrophils rushing in
+      [[80,70],[220,75],[85,175],[218,170]].forEach((p,i)=>s+='<g class="crawl" style="animation-delay:'+(i*0.2)+'s"><circle cx="'+p[0]+'" cy="'+p[1]+'" r="9" fill="#f0c040"/><circle cx="'+p[0]+'" cy="'+p[1]+'" r="3" fill="#fff"/></g>');
+      // signs labels
+      s+='<text x="150" y="124" text-anchor="middle" font-size="9.5" font-weight="700" fill="#7a1a12">red·hot·swollen</text>';
+      s+='<text x="150" y="232" text-anchor="middle" font-size="10.5" font-weight="700" fill="#c0562a">redness · heat · swelling · pain · loss of function</text>';
+    } else {
+      // duller, fibrotic
+      s+='<circle cx="150" cy="118" r="44" fill="#c99a7a" stroke="#8a5a3a" stroke-width="3"/>';
+      // fibrosis lines
+      for(let i=0;i<5;i++)s+='<line x1="'+(115+i*18)+'" y1="90" x2="'+(120+i*18)+'" y2="150" stroke="#8a5a3a" stroke-width="2" opacity="0.7"/>';
+      // macrophages
+      [[95,80],[210,85],[100,165],[205,160]].forEach((p,i)=>s+='<circle class="throb" style="animation-delay:'+(i*0.25)+'s" cx="'+p[0]+'" cy="'+p[1]+'" r="12" fill="#a5714a"/><circle cx="'+p[0]+'" cy="'+p[1]+'" r="4" fill="#fff"/>');
+      s+='<text x="150" y="122" text-anchor="middle" font-size="9" font-weight="700" fill="#5a3a20">scarring</text>';
+      s+='<text x="150" y="232" text-anchor="middle" font-size="10.5" font-weight="700" fill="#8a5a3a">macrophages · fibrosis · slow damage</text>';
+    }
+    $('art').innerHTML=s;
+  }
+  function render(){ const inf=INFO[cur]; draw();
+    document.querySelectorAll('#seg button').forEach(b=>b.classList.toggle('on',b.dataset.d===cur));
+    $('stage').style.background=inf.color; $('stage').innerHTML=inf.name+'<small>'+(cur==='acute'?'short & protective':'prolonged & damaging')+'</small>';
+    $('info').innerHTML='<div class="n">'+inf.name+'</div><div class="plain">'+inf.plain+'</div><div class="story">'+inf.story+'</div>';
+    $('liveCap').innerHTML='<b>'+inf.name+'</b> — '+inf.plain;
+  }
+  document.querySelectorAll('#seg button').forEach(b=>b.addEventListener('click',()=>{ cur=b.dataset.d; render(); }));
+  render();
+})();
+</script>
+</body>
+</html>

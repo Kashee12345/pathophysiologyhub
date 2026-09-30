@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f7f2ea">
+<title>Pathogen Types</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{ --card:#fffdf8; --ink:#2a2420; --muted:#7a6f63; --line:#e3d8c6;
+    --sans:'Inter',system-ui,sans-serif; --disp:'Cinzel Decorative',serif; --accent:#5a8a4a; }
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  body{background:linear-gradient(160deg,#f0f6ea,#e8ede2);color:var(--ink);font-family:var(--sans);min-height:100vh;padding:18px 16px 44px;}
+  header{max-width:1120px;margin:0 auto 16px;text-align:center;}
+  h1{font-family:var(--disp);font-weight:900;font-size:clamp(22px,4.2vw,36px);color:#48762c;line-height:1.05;}
+  header .sub{color:var(--muted);font-size:15px;margin-top:4px;}
+  header .intro{max-width:860px;margin:10px auto 0;font-size:14.5px;line-height:1.5;color:#5c5248;}
+  header .intro b{color:#48762c;}
+  .wrap{max-width:1120px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;box-shadow:0 6px 22px rgba(70,110,40,.07);}
+  .card h2{font-family:var(--disp);font-weight:700;font-size:16px;color:#48762c;margin-bottom:6px;}
+  .card h2 + .desc{font-size:13px;color:var(--muted);margin-bottom:10px;line-height:1.4;}
+  svg{display:block;width:100%;height:auto;max-height:320px;}
+  #liveCap{margin-top:8px;background:#eaf2e0;border:1px solid #cfe0bb;border-radius:10px;padding:10px 13px;font-size:14px;line-height:1.5;color:#3a5e22;text-align:center;} #liveCap b{color:#2f5218;}
+  @keyframes wob{0%,100%{transform:translate(0,0)}50%{transform:translate(1.5px,-1.5px)}}
+  .wob{animation:wob 1.8s ease-in-out infinite;}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .spin{animation:spin 14s linear infinite;transform-origin:center;}
+  #stage{border-radius:12px;padding:11px 14px;margin-bottom:12px;color:#fff;font-weight:700;font-size:16px;text-align:center;background:#6a9a4a;}
+  #stage small{display:block;font-weight:500;font-size:13px;opacity:.93;margin-top:2px;}
+  .seg{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--line);border-radius:11px;overflow:hidden;gap:1px;background:var(--line);}
+  .seg button{border:none;background:#fff;color:var(--ink);font-family:var(--sans);font-weight:700;font-size:13px;padding:11px 6px;cursor:pointer;transition:.12s;line-height:1.15;}
+  .seg button small{display:block;font-weight:500;font-size:10px;color:var(--muted);margin-top:2px;}
+  .seg button.on{color:#fff;} .seg button.on small{color:rgba(255,255,255,.9);}
+  .seg button.bact.on{background:#5a8a4a;} .seg button.vir.on{background:#a5442a;} .seg button.fun.on{background:#b0862a;} .seg button.par.on{background:#7a5a3a;}
+  #info{border:1px solid var(--line);border-left:5px solid var(--accent);background:#f0f5e8;border-radius:10px;padding:12px 13px;margin-top:16px;}
+  #info .n{font-family:var(--disp);font-weight:700;font-size:17px;color:#48762c;}
+  #info .plain{font-size:14.5px;line-height:1.5;color:#2a2420;margin-top:8px;font-weight:600;}
+  #info .story{font-size:13px;line-height:1.5;color:#3a3630;margin-top:8px;background:#fff;border-radius:8px;padding:9px 11px;border:1px solid #d7e2c6;}
+  #info .ss{margin-top:8px;font-size:12.5px;color:#5c5248;} #info .ss b{color:#2f5218;}
+  .pearl{background:#eef4fb;border:1px solid #cbdcf0;border-radius:10px;padding:10px 12px;margin-top:12px;font-size:12.5px;line-height:1.5;color:#274d7a;} .pearl b{color:#173b5a;}
+  @media (max-width:880px){ .wrap{grid-template-columns:1fr;} }
+</style>
+</head>
+<body>
+<header>
+  <h1>Pathogen Types</h1>
+  <div class="sub">The four kinds of germs · Week 2</div>
+  <div class="intro">Infections come from four families of pathogens — <b>bacteria, viruses, fungi,</b> and <b>parasites</b> — and each behaves (and is treated) differently. Click each to see what it is, how we find it, and how we fight it.</div>
+</header>
+<div class="wrap">
+  <div>
+    <div class="card">
+      <h2>Meet the germ</h2>
+      <div class="desc">A simple picture of each pathogen family and how it makes us sick.</div>
+      <svg id="art" viewBox="0 0 300 280" aria-label="pathogen"></svg>
+      <div id="liveCap">Pick a pathogen to explore.</div>
+    </div>
+  </div>
+  <div>
+    <div id="stage">Pick a pathogen<small>bacteria · virus · fungus · parasite</small></div>
+    <div class="card">
+      <div class="seg" id="seg">
+        <button data-d="bact" class="bact on">Bacteria<small>single cells</small></button>
+        <button data-d="vir" class="vir">Viruses<small>need a host</small></button>
+        <button data-d="fun" class="fun">Fungi<small>spores</small></button>
+        <button data-d="par" class="par">Parasites<small>live off host</small></button>
+      </div>
+    </div>
+    <div class="card" style="margin-top:16px;"><h2>What it is</h2><div id="info"></div>
+      <div class="pearl"><b>How we test:</b> a <b>Gram stain</b> sorts bacteria by cell wall — <b>gram-positive</b> = thick wall, stains purple; <b>gram-negative</b> = thin wall + outer membrane, stains pink and is <b>harder to treat</b>. A <b>culture &amp; sensitivity</b> then names the bug (culture) and picks the antibiotic (sensitivity).</div>
+    </div>
+  </div>
+</div>
+<script>
+(function(){
+  const $=id=>document.getElementById(id);
+  let cur='bact';
+  const INFO={
+    bact:{name:'Bacteria',color:'#5a8a4a',
+      plain:'Single-celled organisms that can live and multiply on their own — treated with antibiotics.',
+      story:'Bacteria are <b>complete single cells</b>. We classify them by <b>Gram stain</b> (positive = thick purple wall; negative = thin pink wall, tougher). Overusing antibiotics breeds <b>resistance</b> — strains that survive treatment. Example: <b>tuberculosis</b>, walled off (latent) by a strong immune system but able to spread if immunity weakens.',
+      ss:'Tools: Gram stain + culture &amp; sensitivity. Treatment: antibiotics.'},
+    vir:{name:'Viruses',color:'#a5442a',
+      plain:'Tiny genetic packets that can\'t reproduce alone — they hijack your cells to copy themselves.',
+      story:'A virus is basically <b>DNA/RNA in a shell</b>. It has no metabolism of its own, so it <b>depends on the host cell</b> to replicate (attach → penetrate → uncoat → replicate → assemble → release). <b>HIV</b> is a retrovirus that targets <b>CD4 T-helper cells</b>, crippling immunity and opening the door to <b>opportunistic infections</b>.',
+      ss:'Treatment: antivirals (antibiotics don\'t work on viruses).'},
+    fun:{name:'Fungi',color:'#b0862a',
+      plain:'Spore-producing organisms — many live on us normally and only cause trouble when they overgrow.',
+      story:'Fungi are <b>spore-producers</b>, and many are <b>normal flora</b>. Infection happens when they <b>overgrow or invade</b>. <b>Superficial</b>: mouth/skin/vagina — "tinea" (ringworm), "candida" (thrush, yeast infection). <b>Deep</b>: reaches internal organs — usually a sign of a <b>weakened immune system</b>.',
+      ss:'Superficial vs deep. Deep fungal infection = immunity red flag.'},
+    par:{name:'Parasites',color:'#7a5a3a',
+      plain:'Organisms that live on or in a host and benefit at the host\'s expense.',
+      story:'Parasites <b>benefit from their host</b> while harming it. The big groups are <b>helminths</b> (worms), <b>protozoa</b> (single-celled, e.g. malaria, toxoplasmosis), and <b>insects</b> (e.g. lice, mites). They\'re often spread by contaminated food/water or vectors.',
+      ss:'Helminths (worms) · protozoa · insects.'}
+  };
+  function draw(){
+    const st=cur, C=INFO[st].color; let s='';
+    if(st==='bact'){ s+='<g class="wob"><ellipse cx="150" cy="140" rx="70" ry="34" fill="'+C+'" stroke="#3a5e22" stroke-width="3"/>';
+      for(let i=0;i<5;i++) s+='<circle cx="'+(105+i*22)+'" cy="140" r="6" fill="#eef7e0" opacity="0.6"/>';
+      s+='<path d="M80 118 q-14 -10 -6 -22 M220 118 q14 -10 6 -22" stroke="#3a5e22" stroke-width="3" fill="none" stroke-linecap="round"/></g>';
+      s+='<text x="150" y="210" text-anchor="middle" font-size="11" font-weight="700" fill="#48762c">a bacterium (whole cell)</text>'; }
+    else if(st==='vir'){ s+='<g class="spin"><circle cx="150" cy="130" r="42" fill="'+C+'" stroke="#7a2a1a" stroke-width="3"/>';
+      for(let i=0;i<12;i++){const a=i/12*Math.PI*2,x=150+Math.cos(a)*42,y=130+Math.sin(a)*42,x2=150+Math.cos(a)*58,y2=130+Math.sin(a)*58;
+        s+='<line x1="'+x+'" y1="'+y+'" x2="'+x2+'" y2="'+y2+'" stroke="#7a2a1a" stroke-width="3"/><circle cx="'+x2+'" cy="'+y2+'" r="4" fill="#7a2a1a"/>';}
+      s+='<path d="M150 118 l0 24 M138 130 l24 0" stroke="#eecec4" stroke-width="3"/></g>';
+      s+='<text x="150" y="215" text-anchor="middle" font-size="11" font-weight="700" fill="#a5442a">a virus (spikes + genome)</text>'; }
+    else if(st==='fun'){ s+='<g class="wob"><path d="M150 60 C120 60 118 110 118 150 L182 150 C182 110 180 60 150 60 Z" fill="'+C+'" stroke="#7a5a12" stroke-width="3"/>';
+      s+='<rect x="140" y="150" width="20" height="60" fill="#d8c088" stroke="#7a5a12" stroke-width="2"/>';
+      for(let i=0;i<4;i++) s+='<circle cx="'+(130+i*14)+'" cy="'+(90+(i%2)*20)+'" r="4" fill="#eecf8a"/></g>';
+      s+='<text x="150" y="230" text-anchor="middle" font-size="11" font-weight="700" fill="#b0862a">a fungus (spore-former)</text>'; }
+    else { s+='<g class="wob"><path d="M70 150 q30 -40 60 0 q30 40 60 0 q10 -14 30 -6" fill="none" stroke="'+C+'" stroke-width="12" stroke-linecap="round"/>';
+      s+='<circle cx="70" cy="150" r="12" fill="'+C+'"/><circle cx="66" cy="147" r="3" fill="#fff"/><circle cx="74" cy="147" r="3" fill="#fff"/></g>';
+      s+='<text x="150" y="215" text-anchor="middle" font-size="11" font-weight="700" fill="#7a5a3a">a parasite (e.g. a worm)</text>'; }
+    $('art').innerHTML=s;
+  }
+  function render(){ const inf=INFO[cur]; draw();
+    document.querySelectorAll('#seg button').forEach(b=>b.classList.toggle('on',b.dataset.d===cur));
+    $('stage').style.background=inf.color; $('stage').innerHTML=inf.name+'<small>'+inf.plain.slice(0,42)+'…</small>';
+    $('info').innerHTML='<div class="n">'+inf.name+'</div><div class="plain">'+inf.plain+'</div><div class="story">'+inf.story+'</div><div class="ss"><b>Key:</b> '+inf.ss+'</div>';
+    $('liveCap').innerHTML='<b>'+inf.name+'</b> — '+inf.plain;
+  }
+  document.querySelectorAll('#seg button').forEach(b=>b.addEventListener('click',()=>{ cur=b.dataset.d; render(); }));
+  render();
+})();
+</script>
+</body>
+</html>

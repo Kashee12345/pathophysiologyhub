@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f7f2ea">
+<title>By Week — The Interactive Body</title>
+<meta name="description" content="Lessons mapped week by week (Weeks 1–14) — find the interactive tools that match each week's lecture.">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{ --bg:#f6f1e8; --card:#fffdf8; --ink:#241f1b; --muted:#7a6f63; --line:#e6dccb;
+    --gold:#c99a2e; --maroon:#8a2f36; --disp:'Cinzel Decorative',serif; --sans:'Inter',system-ui,sans-serif; }
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  body{background:radial-gradient(1200px 600px at 50% -120px,#fff6ea,#efe6d6);color:var(--ink);font-family:var(--sans);min-height:100vh;}
+  a{text-decoration:none;color:inherit;}
+  .topnav{position:sticky;top:0;z-index:60;background:rgba(255,250,240,.93);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:11px 22px;gap:12px;flex-wrap:wrap;}
+  .topnav .brand{font-family:var(--disp);font-weight:900;font-size:18px;color:var(--maroon);display:flex;align-items:center;gap:8px;}
+  .topnav nav{display:flex;gap:4px;flex-wrap:wrap;}
+  .topnav nav a{font-size:14px;font-weight:600;color:#5c5248;padding:7px 13px;border-radius:9px;transition:.12s;}
+  .topnav nav a:hover{background:#f4ecdd;color:var(--maroon);}
+  .topnav nav a.active{background:var(--maroon);color:#fff;}
+  .dd{position:relative;}
+  .ddbtn{font-family:var(--sans);font-size:14px;font-weight:600;color:#5c5248;padding:7px 13px;border-radius:9px;background:none;border:none;cursor:pointer;transition:.12s;}
+  .ddbtn:hover{background:#f4ecdd;color:#8a2f36;}
+  .ddbtn.active,.dd.open .ddbtn{background:#8a2f36;color:#fff;}
+  .ddpanel{position:absolute;top:calc(100% + 8px);right:0;width:252px;max-height:72vh;overflow-y:auto;background:#fff;border:1px solid #e6dccb;border-radius:12px;box-shadow:0 14px 34px rgba(90,60,30,.20);padding:6px;display:none;z-index:70;}
+  .dd.open .ddpanel{display:block;}
+  .ddpanel a{display:block;font-size:13px;font-weight:600;color:#4a4038;padding:8px 11px;border-radius:8px;}
+  .ddpanel a:hover{background:#f4ecdd;color:#8a2f36;}
+  .ddpanel a.ddhead{font-weight:800;color:#8a2f36;border-bottom:1px solid #e6dccb;margin-bottom:4px;}
+
+  .head{max-width:1000px;margin:0 auto;padding:44px 20px 6px;text-align:center;}
+  .head .kicker{font-size:13px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);font-weight:700;}
+  .head h1{font-family:var(--disp);font-weight:900;font-size:clamp(28px,5.5vw,46px);color:var(--maroon);margin-top:8px;}
+  .head p{max-width:640px;margin:12px auto 0;font-size:15.5px;line-height:1.6;color:#544a40;}
+
+  .weeks{max-width:1080px;margin:30px auto 0;padding:0 18px;display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:18px;}
+  .wk{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px;box-shadow:0 8px 24px rgba(90,60,30,.06);border-top:4px solid var(--gold);scroll-margin-top:80px;}
+  .wk .top{display:flex;align-items:center;gap:13px;}
+  .wk .num{width:52px;height:52px;flex:none;border-radius:14px;background:linear-gradient(160deg,#8a2f36,#b3433d);color:#fff;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1;}
+  .wk .num .k{font-size:9px;letter-spacing:1px;opacity:.85;text-transform:uppercase;}
+  .wk .num .v{font-family:var(--disp);font-weight:900;font-size:22px;}
+  .wk h3{font-size:17px;font-weight:800;line-height:1.2;color:#2a231e;}
+  .wk .topic{font-size:12.5px;color:var(--muted);margin-top:2px;line-height:1.4;}
+  .wk ul{list-style:none;margin-top:14px;display:flex;flex-direction:column;gap:6px;}
+  .wk li a{display:flex;align-items:center;gap:9px;padding:8px 11px;border-radius:10px;background:#faf4ea;border:1px solid #efe4d3;
+    font-size:13.5px;font-weight:600;color:#4a4038;transition:.12s;}
+  .wk li a:hover{background:#fff;border-color:var(--gold);transform:translateX(3px);color:var(--maroon);}
+  .wk li a .arrow{margin-left:auto;color:var(--gold);font-weight:800;}
+  .wk .count{font-size:11.5px;color:var(--muted);margin-top:12px;font-weight:600;}
+
+  footer{max-width:1080px;margin:44px auto 0;padding:22px 20px 46px;border-top:1px solid var(--line);text-align:center;color:var(--muted);font-size:13px;}
+  footer b{color:var(--maroon);font-family:var(--disp);letter-spacing:.5px;}
+</style>
+</head>
+<body>
+  <header class="topnav">
+    <a class="brand" href="index.html">🫀 The Interactive Body</a>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="lessons.html">Lessons</a>
+      <div class="dd">
+        <button class="ddbtn active" aria-haspopup="true" aria-expanded="false">By Week ▾</button>
+        <div class="ddpanel">
+          <a class="ddhead" href="weeks.html">📅 All 14 weeks →</a>
+          <a href="weeks.html#wk1">Week 1 · Fluids &amp; ABGs</a>
+          <a href="weeks.html#wk2">Week 2 · Pathogens &amp; Immunity</a>
+          <a href="weeks.html#wk3">Week 3 · Cell Injury &amp; Cancer</a>
+          <a href="weeks.html#wk4">Week 4 · Sepsis, Pain &amp; Neuro</a>
+          <a href="weeks.html#wk5">Week 5 · Mental Health &amp; Neuro</a>
+          <a href="weeks.html#wk6">Week 6 · MSK, Skin &amp; Burns</a>
+          <a href="weeks.html#wk7">Week 7 · Genetics</a>
+          <a href="weeks.html#wk8">Week 8 · Endocrine</a>
+          <a href="weeks.html#wk9">Week 9 · Blood &amp; Cardiovascular I</a>
+          <a href="weeks.html#wk10">Week 10 · Cardiovascular II</a>
+          <a href="weeks.html#wk11">Week 11 · Renal &amp; Urinary</a>
+          <a href="weeks.html#wk12">Week 12 · Respiratory</a>
+          <a href="weeks.html#wk13">Week 13 · Gastrointestinal</a>
+          <a href="weeks.html#wk14">Week 14 · Liver &amp; Reproductive</a>
+        </div>
+      </div>
+      <a href="about.html">About</a>
+    </nav>
+  </header>
+
+  <section class="head">
+    <div class="kicker">Pathophysiology · Weeks 1–14</div>
+    <h1>The Course, Week by Week</h1>
+    <p>Studying for a specific week? Here's exactly which interactive lessons go with each lecture — follow along in order, or jump to the topic you need.</p>
+  </section>
+
+  <main class="weeks" id="weeks"></main>
+
+  <footer>
+    A pathophysiology study resource · by <b>Dr. Akash Garg</b>.<br>
+    Free to use and share.
+  </footer>
+
+<script>
+  const WEEKS=[
+    {n:1, title:'Fluids, Electrolytes & ABGs', topic:'Fluid compartments, edema, RAAS/ADH/ANP, electrolytes, buffers & blood-gas interpretation.',
+      L:[['FluidCompartments.html','Fluid Compartments'],['Edema.html','Edema — Hydrostatic vs Oncotic'],['FluidHormones.html','Fluid Regulation Hormones'],['Electrolytes.html','Electrolytes'],['BufferSystems.html','Buffer Systems'],['ABGInterpreter.html','ABG Interpreter']]},
+    {n:2, title:'Pathogens & Immune Disorders', topic:'Bacteria/virus/fungi/parasites, viral replication, the immune defenses, antibodies & hypersensitivity.',
+      L:[['PathogenTypes.html','Pathogen Types'],['ViralReplication.html','Viral Replication'],['ImmuneDefense.html','Three Lines of Defense'],['Immunoglobulins.html','Immunoglobulins (GAMED)'],['Hypersensitivity.html','Hypersensitivity Reactions'],['BloodCancers.html','Blood Cancers']]},
+    {n:3, title:'Cell Injury, Cancer & Inflammation', topic:'Cellular adaptation & injury, benign vs malignant, and the inflammatory response.',
+      L:[['CellularAdaptation.html','Cellular Adaptation'],['Cancer.html','Cancer'],['Inflammation.html','Inflammation']]},
+    {n:4, title:'Sepsis, Pain, Healing & Neuro', topic:'SIRS→septic shock, wound healing, the pain pathway, autoimmune & neurodegenerative disease.',
+      L:[['Sepsis.html','SIRS → Septic Shock'],['WoundHealing.html','Wound Healing'],['PainPathway.html','The Pain Pathway'],['AutoimmuneInflammatory.html','Autoimmune & Inflammatory'],['Neurodegenerative.html','Neurodegenerative Diseases'],['NeuromuscularJunction.html','Neuromuscular Junction']]},
+    {n:5, title:'Mental Health & Neurological', topic:'Mental-health disorders, ICP, stroke, head trauma, spinal cord injury & CNS conditions.',
+      L:[['MentalHealth.html','Mental Health Disorders'],['IntracranialPressure.html','Intracranial Pressure'],['Stroke.html','Stroke (CVA)'],['HeadTrauma.html','Head Trauma & Brain Bleeds'],['SpinalCord.html','Spinal Cord Injury'],['CNSInfections.html','Other Neuro Disorders']]},
+    {n:6, title:'MSK, Skin & Burns', topic:'Fractures & the 5 P\'s, fracture complications, bone/joint disorders, skin conditions & burns.',
+      L:[['FractureCare.html','Fractures & the 5 P\'s'],['FractureComplications.html','Fracture Complications'],['MSKDisorders.html','Musculoskeletal Disorders'],['SkinInfections.html','Skin Infections'],['SkinConditions.html','Skin Conditions'],['Burns.html','Burns']]},
+    {n:7, title:'Genetics', topic:'DNA packaging, mitosis vs meiosis, chromosomal disorders, inheritance patterns & Punnett squares.',
+      L:[['DNAtoChromosome.html','DNA → Chromosome'],['MitosisMeiosis.html','Mitosis vs Meiosis'],['ChromosomalDisorders.html','Chromosomal Disorders'],['InheritancePatterns.html','Inheritance Patterns'],['PunnettSquare.html','Punnett Square Calculator'],['Teratogens.html','Teratogens & Concepts']]},
+    {n:8, title:'Endocrine', topic:'Hypothalamus/pituitary axis, adrenal & thyroid disorders, diabetes, growth hormone & ADH.',
+      L:[['EndocrinePituitary.html','Endocrine Command Center'],['AdrenalDisorders.html','Adrenal Disorders'],['ThyroidDisorders.html','Thyroid Disorders'],['Diabetes.html','Diabetes Mellitus'],['GrowthHormone.html','Growth Hormone Disorders'],['ADHDisorders.html','ADH Disorders (SIADH/DI)']]},
+    {n:9, title:'Blood Disorders & Cardiovascular I', topic:'Anemias, EKG, hemostasis, blood types, blood pressure & peripheral vascular disease.',
+      L:[['AnemiaExplorer.html','Anemia Explorer'],['EKGReader.html','EKG Reader'],['BleedingClotting.html','Bleeding & Clotting'],['BloodTypes.html','Blood Types & Transfusion'],['BloodPressure.html','Blood Pressure & Cardiac Output'],['PeripheralVascular.html','Peripheral Vascular Disease']]},
+    {n:10, title:'Cardiovascular II', topic:'Coronary artery disease & MI, heart failure, valves, congenital defects, tamponade & infections.',
+      L:[['CoronaryQuest3D.html','Coronary Artery Disease (3D)'],['HeartFailure.html','Heart Failure'],['ValveDisorders.html','Heart Valve Disorders'],['CongenitalShunts.html','Congenital Heart Defects'],['CardiacTamponade.html','Cardiac Tamponade'],['HeartInfections.html','Heart Infection & Inflammation']]},
+    {n:11, title:'Renal & Urinary', topic:'The nephron, nephrotic vs nephritic, AKI, CKD, stones, incontinence & UTIs.',
+      L:[['NephronExplorer.html','Nephron Explorer'],['NephroticNephritic.html','Nephrotic vs Nephritic'],['AKILocalizer.html','Acute Kidney Injury'],['CKD.html','Chronic Kidney Disease'],['KidneyStones.html','Kidney Stones & Obstruction'],['UrinaryIncontinence.html','Urinary Incontinence'],['UTI.html','Urinary Tract Infection']]},
+    {n:12, title:'Respiratory', topic:'V/Q mismatch, COPD, asthma, infections, alveolar disease, PE, cor pulmonale, trauma & lung sounds.',
+      L:[['RespirationVQ.html','Ventilation, Perfusion & V/Q'],['COPD.html','COPD'],['Asthma.html','Asthma'],['AirwayInfections.html','Airway Infections Map'],['AlveoliAttack.html','Alveoli Under Attack'],['PulmonaryEmbolism.html','Pulmonary Embolism'],['RightHeartChain.html','Road to Right Heart Failure'],['ChestTrauma.html','Chest Trauma'],['LungSounds.html','Lung Sounds']]},
+    {n:13, title:'Gastrointestinal', topic:'GERD, ulcers, GI bleeds, malabsorption, IBD, bowel obstruction & the acute abdomen.',
+      L:[['GERD.html','GERD & the Esophagus'],['PepticUlcer.html','Peptic Ulcers & Gastritis'],['GIBleed.html','GI Bleed Localizer'],['Malabsorption.html','Malabsorption'],['IBD.html','Crohn\'s vs Ulcerative Colitis'],['BowelObstruction.html','Bowel Obstruction'],['AcuteAbdomen.html','Acute Abdomen']]},
+    {n:14, title:'Liver, Biliary & Reproductive', topic:'Liver disease stages, bilirubin, gallstones, pancreatitis, and male & female reproductive disorders.',
+      L:[['LiverStages.html','Stages of Liver Disease'],['Bilirubin.html','Bilirubin & Liver Signs'],['Gallstones.html','Gallstones & the Biliary Tree'],['Pancreatitis.html','Pancreatitis'],['MaleRepro.html','Male Reproductive Disorders'],['FemaleRepro.html','Female Reproductive Disorders']]}
+  ];
+  document.getElementById('weeks').innerHTML = WEEKS.map(w=>
+    '<div class="wk" id="wk'+w.n+'"><div class="top"><div class="num"><span class="k">Week</span><span class="v">'+w.n+'</span></div>'+
+    '<div><h3>'+w.title+'</h3><div class="topic">'+w.topic+'</div></div></div>'+
+    '<ul>'+w.L.map(l=>'<a href="'+l[0]+'"><span>'+l[1]+'</span><span class="arrow">→</span></a>').map(x=>'<li>'+x+'</li>').join('')+'</ul>'+
+    '<div class="count">'+w.L.length+' lesson'+(w.L.length>1?'s':'')+'</div></div>'
+  ).join('');
+</script>
+<script>(function(){var d=document.querySelector('.dd');if(!d)return;var b=d.querySelector('.ddbtn');b.addEventListener('click',function(e){e.stopPropagation();d.classList.toggle('open');b.setAttribute('aria-expanded',d.classList.contains('open'));});d.querySelector('.ddpanel').addEventListener('click',function(e){e.stopPropagation();});document.addEventListener('click',function(){d.classList.remove('open');b.setAttribute('aria-expanded','false');});})();</script>
+</body>
+</html>

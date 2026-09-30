@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f7f2ea">
+<title>Stages of Liver Disease</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{ --card:#fffdf8; --ink:#2a2420; --muted:#7a6f63; --line:#e3d8c6;
+    --sans:'Inter',system-ui,sans-serif; --disp:'Cinzel Decorative',serif; --accent:#a5642a; }
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  body{background:linear-gradient(160deg,#faf4ea,#ece5d8);color:var(--ink);font-family:var(--sans);min-height:100vh;padding:18px 16px 44px;}
+  header{max-width:1120px;margin:0 auto 16px;text-align:center;}
+  h1{font-family:var(--disp);font-weight:900;font-size:clamp(21px,4vw,34px);color:#96581f;line-height:1.05;}
+  header .sub{color:var(--muted);font-size:15px;margin-top:4px;}
+  header .intro{max-width:860px;margin:10px auto 0;font-size:14.5px;line-height:1.5;color:#5c5248;}
+  header .intro b{color:#96581f;}
+  .wrap{max-width:1120px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;box-shadow:0 6px 22px rgba(120,90,40,.07);}
+  .card h2{font-family:var(--disp);font-weight:700;font-size:16px;color:#96581f;margin-bottom:6px;}
+  .card h2 + .desc{font-size:13px;color:var(--muted);margin-bottom:10px;line-height:1.4;}
+  svg{display:block;width:100%;height:auto;max-height:340px;}
+  #liveCap{margin-top:8px;background:#f5ecdb;border:1px solid #e3d3ae;border-radius:10px;padding:10px 13px;font-size:14px;line-height:1.5;color:#6a4a1a;text-align:center;} #liveCap b{color:#7a4e10;}
+
+  @keyframes inflame{0%,100%{opacity:.4}50%{opacity:.85}}
+  .inflame{animation:inflame 1.4s ease-in-out infinite;}
+  @keyframes float{0%,100%{transform:translate(0,0)}50%{transform:translate(2px,-3px)}}
+  .imm{animation:float 2s ease-in-out infinite;}
+
+  #stage{border-radius:12px;padding:11px 14px;margin-bottom:12px;color:#fff;font-weight:700;font-size:16px;text-align:center;background:#b0803a;}
+  #stage small{display:block;font-weight:500;font-size:13px;opacity:.93;margin-top:2px;}
+  .seg{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--line);border-radius:11px;overflow:hidden;gap:1px;background:var(--line);}
+  .seg button{border:none;background:#fff;color:var(--ink);font-family:var(--sans);font-weight:700;font-size:13px;padding:11px 6px;cursor:pointer;transition:.12s;line-height:1.15;}
+  .seg button small{display:block;font-weight:500;font-size:10px;color:var(--muted);margin-top:2px;}
+  .seg button.on{color:#fff;} .seg button.on small{color:rgba(255,255,255,.9);}
+  .seg button.healthy.on{background:#3fa66a;} .seg button.acute.on{background:#e0902a;} .seg button.chronic.on{background:#c0632a;} .seg button.cirrhosis.on{background:#8a4a2a;}
+  .revbadge{display:inline-block;margin-top:10px;font-size:12px;font-weight:700;border-radius:20px;padding:4px 12px;}
+  .rev-ok{background:#e4f2e8;color:#2f7d50;} .rev-no{background:#f6e0dc;color:#a5392e;}
+
+  #info{border:1px solid var(--line);border-left:5px solid var(--accent);background:#f7f1e6;border-radius:10px;padding:12px 13px;margin-top:14px;}
+  #info .n{font-family:var(--disp);font-weight:700;font-size:17px;color:#96581f;}
+  #info .plain{font-size:14.5px;line-height:1.5;color:#2a2420;margin-top:8px;font-weight:600;}
+  #info .story{font-size:13px;line-height:1.5;color:#3a3630;margin-top:8px;background:#fff;border-radius:8px;padding:9px 11px;border:1px solid #e6dcc6;}
+  .causes{margin-top:12px;} .causes .lbl{font-size:11.5px;font-weight:700;text-transform:uppercase;color:var(--muted);letter-spacing:.03em;margin-bottom:6px;}
+  .causes .chips{display:flex;flex-wrap:wrap;gap:6px;} .causes .chips span{background:#f2e6d2;border:1px solid #e0cfa8;border-radius:20px;padding:4px 11px;font-size:12px;color:#7a5420;font-weight:600;}
+  @media (max-width:880px){ .wrap{grid-template-columns:1fr;} }
+</style>
+</head>
+<body>
+<header>
+  <h1>Stages of Liver Disease</h1>
+  <div class="sub">From inflammation to scarring · Week 14</div>
+  <div class="intro">The liver takes a hit and inflames (<b>acute hepatitis</b>). If that never settles, it smolders for months (<b>chronic hepatitis</b>), and over years the working liver cells get replaced by <b>scar tissue</b> (<b>cirrhosis</b>) — which is <b>permanent</b>. Click through the stages and watch the tissue change.</div>
+</header>
+
+<div class="wrap">
+  <div>
+    <div class="card">
+      <h2>Inside the liver</h2>
+      <div class="desc">The liver on the left; a zoomed-in patch of tissue on the right. Watch healthy cells give way to inflammation, then scar.</div>
+      <svg id="liver" viewBox="0 0 320 300" aria-label="liver tissue"></svg>
+      <div id="liveCap">Pick a stage to see the tissue.</div>
+    </div>
+  </div>
+  <div>
+    <div id="stage">Pick a stage<small>healthy → acute → chronic → cirrhosis</small></div>
+    <div class="card">
+      <div class="seg" id="seg">
+        <button data-d="healthy" class="healthy on">Healthy<small>working liver</small></button>
+        <button data-d="acute" class="acute">Acute Hepatitis<small>inflamed</small></button>
+        <button data-d="chronic" class="chronic">Chronic Hepatitis<small>&gt; 6 months</small></button>
+        <button data-d="cirrhosis" class="cirrhosis">Cirrhosis<small>scarred</small></button>
+      </div>
+    </div>
+    <div class="card" style="margin-top:16px;"><h2>What's happening</h2><div id="info"></div>
+      <div class="causes"><div class="lbl">Common causes</div><div class="chips" id="chips"></div></div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const $=id=>document.getElementById(id);
+  let cur='healthy';
+  const INFO={
+    healthy:{name:'Healthy Liver',color:'#3fa66a',rev:'ok',revtxt:'Fully functional',
+      plain:'Neat rows of working liver cells (hepatocytes) doing their jobs.',
+      story:'The liver is packed with organized <b>hepatocytes</b> that filter blood, make bile, store energy, and handle bilirubin. Blood flows smoothly through.',
+      causes:['—']},
+    acute:{name:'Acute Hepatitis',color:'#e0902a',rev:'ok',revtxt:'May fully resolve',
+      plain:'The liver is inflamed and infiltrated by immune cells — but this can still heal.',
+      story:'An insult — a <b>virus (Hep A, B, C)</b>, <b>alcohol</b>, a <b>drug/toxin</b>, autoimmune or metabolic disease — inflames the hepatocytes. Immune cells flood in and some cells are damaged. Acute hepatitis <b>may fully resolve</b>, or if it doesn\'t settle, progress to chronic.',
+      causes:['Hep A / B / C','Alcohol','Drugs / toxins','Autoimmune','Metabolic','Genetics']},
+    chronic:{name:'Chronic Hepatitis',color:'#c0632a',rev:'ok',revtxt:'Reversible, but at risk',
+      plain:'Inflammation that persists longer than 6 months, slowly wearing the liver down.',
+      story:'When the inflammation <b>lasts more than 6 months</b>, it\'s chronic. The ongoing damage begins laying down early scar tissue. Many acute causes — especially <b>viral hepatitis B or C and alcohol</b> — become chronic if not resolved, setting the stage for cirrhosis.',
+      causes:['Chronic Hep B / C','Ongoing alcohol','Unresolved acute']},
+    cirrhosis:{name:'Cirrhosis',color:'#8a4a2a',rev:'no',revtxt:'NOT reversible',
+      plain:'Working liver cells are replaced by diffuse scar tissue — permanent damage.',
+      story:'Over <b>years to decades</b>, healthy tissue is replaced by <b>diffuse fibrosis and scarring</b>, with <b>loss of hepatocytes</b>. The liver becomes hard, shrunken, and nodular — and it does <b>not recover</b>. Causes: <b>alcoholic liver disease, chronic Hep B/C, NASH</b> (obesity/diabetes), and <b>primary biliary cirrhosis</b> (autoimmune bile-duct destruction).',
+      causes:['Alcoholic liver disease','Chronic Hep B / C','NASH (obesity/diabetes)','Primary biliary cirrhosis']}
+  };
+
+  function draw(){
+    const st=cur; let s='';
+    // liver silhouette (shrinks + darkens with cirrhosis)
+    const scale = st==='cirrhosis'? 0.9:1;
+    const lc = {healthy:'#a5503a',acute:'#c0503a',chronic:'#b0472f',cirrhosis:'#8a5a3a'}[st];
+    s+='<g transform="translate('+(st==='cirrhosis'?12:0)+','+(st==='cirrhosis'?12:0)+') scale('+scale+')">';
+    s+='<path d="M30 90 C30 60 120 55 200 62 C240 66 250 90 240 130 C232 165 180 180 120 172 C70 165 30 140 30 90 Z" fill="'+lc+'" stroke="#7a3a2a" stroke-width="2.5"/>';
+    // nodular surface for cirrhosis
+    if(st==='cirrhosis'){ [ [70,100],[110,90],[150,95],[190,100],[95,130],[145,135],[185,130] ].forEach(p=> s+='<circle cx="'+p[0]+'" cy="'+p[1]+'" r="12" fill="none" stroke="#c9a86a" stroke-width="2"/>'); }
+    s+='</g>';
+    s+='<text x="130" y="200" text-anchor="middle" font-size="10.5" font-weight="700" fill="'+INFO[st].color+'">'+(st==='cirrhosis'?'shrunken, hard, nodular':st==='healthy'?'smooth, healthy liver':'inflamed liver')+'</text>';
+    // zoom bracket
+    s+='<line x1="200" y1="70" x2="250" y2="40" stroke="#c9b48a" stroke-width="1.5" stroke-dasharray="3 3"/>';
+    s+='<line x1="200" y1="120" x2="250" y2="150" stroke="#c9b48a" stroke-width="1.5" stroke-dasharray="3 3"/>';
+    // tissue inset (right)
+    s+='<rect x="250" y="40" width="66" height="110" rx="6" fill="#fff" stroke="#d8c8a8"/>';
+    s+='<text x="283" y="34" text-anchor="middle" font-size="9" font-weight="700" fill="#8a6a44">tissue zoom</text>';
+    // draw hepatocytes grid
+    for(let r=0;r<5;r++) for(let cc=0;cc<3;cc++){
+      const x=258+cc*19, y=48+r*19;
+      let cellColor='#e79a86';
+      if(st==='cirrhosis' && ((r+cc)%2===0)) cellColor='#c9a86a'; // scar patches
+      s+='<rect x="'+x+'" y="'+y+'" width="15" height="15" rx="3" fill="'+cellColor+'" stroke="#c07a5a" stroke-width="0.8"/>';
+    }
+    // scar bands for cirrhosis
+    if(st==='cirrhosis'){ s+='<path d="M252 70 L314 78 M252 108 L314 116" stroke="#b09050" stroke-width="4" opacity="0.8"/>'; s+='<text x="283" y="163" text-anchor="middle" font-size="8" font-weight="700" fill="#8a5a2a">fibrous scar</text>'; }
+    // immune cells for hepatitis
+    if(st==='acute'||st==='chronic'){
+      const n = st==='acute'?6:4;
+      for(let i=0;i<n;i++) s+='<circle class="imm" style="animation-delay:'+(i*0.3)+'s" cx="'+(258+ (i*11)%50)+'" cy="'+(52+ (i%4)*24)+'" r="3.5" fill="#5a6ac0"/>';
+      s+='<circle class="inflame" cx="283" cy="95" r="34" fill="#ff6a4a" opacity="0.2"/>';
+      s+='<text x="283" y="163" text-anchor="middle" font-size="8" font-weight="700" fill="#5a6ac0">immune cells</text>';
+    }
+    if(st==='healthy') s+='<text x="283" y="163" text-anchor="middle" font-size="8" font-weight="700" fill="#3a7a2c">neat hepatocytes</text>';
+    $('liver').innerHTML=s;
+  }
+  function render(){
+    const inf=INFO[cur]; draw();
+    document.querySelectorAll('#seg button').forEach(b=>b.classList.toggle('on',b.dataset.d===cur));
+    $('stage').style.background=inf.color;
+    $('stage').innerHTML=inf.name+'<small>'+inf.revtxt+'</small>';
+    $('chips').innerHTML=inf.causes.map(c=>'<span>'+c+'</span>').join('');
+    const rb = inf.rev==='ok'? '<span class="revbadge rev-ok">↺ '+inf.revtxt+'</span>' : '<span class="revbadge rev-no">✗ '+inf.revtxt+'</span>';
+    $('info').innerHTML='<div class="n">'+inf.name+'</div><div class="plain">'+inf.plain+'</div><div class="story">'+inf.story+'</div>'+rb;
+    const caps={healthy:'Organized, working hepatocytes — the liver does its jobs.',
+      acute:'Inflamed &amp; full of immune cells — but this <b>can still heal</b>.',
+      chronic:'Inflammation <b>&gt; 6 months</b> — slowly laying down scar.',
+      cirrhosis:'Cells replaced by <b>scar</b> — hard, shrunken, and <b>not reversible</b>.'};
+    $('liveCap').innerHTML=caps[cur];
+  }
+  document.querySelectorAll('#seg button').forEach(b=>b.addEventListener('click',()=>{ cur=b.dataset.d; render(); }));
+  render();
+})();
+</script>
+</body>
+</html>

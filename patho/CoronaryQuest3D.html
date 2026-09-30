@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0a0e08">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>CoronaryQuest 3D — Inside the Artery</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=VT323&family=Press+Start+2P&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --gold:#f0c840; --gold-bright:#ffd700; --ox:#e8564b; --ischemic:#c9a13a;
+    --dead:#5a5560; --good:#4fd18a; --rare:#5ec8ff;
+    --bg:#0a0608; --font-read:'VT323',monospace; --font-disp:'Cinzel Decorative',serif;
+    --font-pixel:'Press Start 2P',monospace;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  html,body{height:100%;overflow:hidden;background:var(--bg);font-family:var(--font-read);}
+  #c{display:block;width:100vw;height:100vh;touch-action:none;}
+  body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:20;
+    background:radial-gradient(ellipse at center,transparent 72%,rgba(120,40,44,.12) 100%);}
+
+  /* ===== HUD ===== */
+  #hud{position:fixed;inset:0;z-index:15;pointer-events:none;color:#f3ead9;}
+  .card{background:linear-gradient(180deg,rgba(20,10,14,.82),rgba(12,6,9,.9));
+    border:1px solid rgba(240,200,64,.35);border-radius:12px;backdrop-filter:blur(3px);
+    box-shadow:0 6px 24px rgba(0,0,0,.5);}
+
+  /* top-left stage readout */
+  #stageCard{position:absolute;top:12px;left:12px;padding:12px 14px;max-width:min(340px,72vw);}
+  #stageName{font-family:var(--font-disp);font-weight:900;font-size:24px;line-height:1.05;
+    color:var(--gold-bright);text-shadow:0 0 14px rgba(240,200,64,.4);}
+  #stageBlurb{font-size:18px;line-height:1.15;color:#e6dcc8;margin-top:5px;}
+  .metrics{display:flex;gap:14px;margin-top:9px;flex-wrap:wrap;}
+  .metric{line-height:1;}
+  .metric .k{font-size:13px;letter-spacing:1px;color:#a9927e;text-transform:uppercase;}
+  .metric .v{font-size:26px;color:#fff;}
+  #mStenosis .v{color:var(--ox);} #mFlow .v{color:var(--rare);}
+
+  /* right control panel */
+  #panel{position:absolute;top:12px;right:12px;padding:14px;width:250px;max-width:78vw;
+    pointer-events:auto;display:flex;flex-direction:column;gap:11px;}
+  #panel h3{font-family:var(--font-disp);font-size:16px;color:var(--gold);letter-spacing:.5px;
+    border-bottom:1px solid rgba(240,200,64,.25);padding-bottom:6px;}
+  .lbl{font-size:16px;color:#cdbba4;display:flex;justify-content:space-between;}
+  input[type=range]{width:100%;height:26px;accent-color:var(--ox);cursor:pointer;}
+  .btnrow{display:flex;gap:8px;flex-wrap:wrap;}
+  button{font-family:var(--font-read);font-size:17px;color:#f3ead9;cursor:pointer;
+    background:rgba(240,200,64,.12);border:1px solid rgba(240,200,64,.4);border-radius:8px;
+    padding:8px 11px;transition:.12s;letter-spacing:.5px;}
+  .btnrow button{flex:1;}
+  button:hover{background:rgba(240,200,64,.24);}
+  button:active{transform:translateY(1px);}
+  button.warn{border-color:rgba(232,86,75,.7);color:#ffb0a8;background:rgba(232,86,75,.12);}
+  button.warn:hover{background:rgba(232,86,75,.26);}
+  button.good{border-color:rgba(79,209,138,.7);color:#b6f2d3;background:rgba(79,209,138,.12);}
+  button.good:hover{background:rgba(79,209,138,.26);}
+  button:disabled{opacity:.35;cursor:not-allowed;transform:none;}
+  .toggle{display:flex;border:1px solid rgba(240,200,64,.4);border-radius:8px;overflow:hidden;}
+  .toggle button{border:none;border-radius:0;flex:1;}
+  .toggle button.active{background:var(--ox);color:#2a0806;}
+
+  /* myocardium perfusion monitor (bottom-left) */
+  #myo{position:absolute;left:12px;bottom:12px;padding:11px 13px;width:220px;max-width:74vw;}
+  #myo .t{font-size:15px;color:#a9927e;letter-spacing:1px;text-transform:uppercase;}
+  #myoRow{display:flex;align-items:center;gap:11px;margin-top:6px;}
+  #myoHeart{width:52px;height:52px;flex:none;filter:drop-shadow(0 0 6px rgba(0,0,0,.6));transition:.4s;}
+  #myoState{font-family:var(--font-disp);font-weight:700;font-size:19px;line-height:1.05;}
+  #myoSub{font-size:15px;color:#cdbba4;margin-top:2px;}
+
+  /* diagnosis block (inside the top-left info card) */
+  #dxBlock{margin-top:9px;padding-top:8px;border-top:1px solid rgba(240,200,64,.22);}
+  #dxName{font-family:var(--font-disp);font-weight:900;font-size:21px;color:#ffd0c0;line-height:1.05;}
+  #dxMeta{display:flex;gap:12px;margin:4px 0 3px;font-size:15px;letter-spacing:.5px;}
+  .tneg{color:#8fdc8a;} .tpos{color:#ff6a6a;font-weight:700;}
+  #dxEcgTag{color:#e6c37a;}
+  #dxNote{font-size:15px;color:#d8c6b0;line-height:1.2;}
+  /* ECG (bottom-right) */
+  #ecgCard{position:absolute;right:12px;bottom:12px;padding:7px 9px;}
+  .ecg-t{font-size:13px;letter-spacing:1px;color:#a9927e;text-transform:uppercase;margin-bottom:3px;}
+  #ecg{display:block;width:300px;height:72px;background:#0a0604;border-radius:6px;}
+  /* ACS selector */
+  .acs-lbl{font-size:15px;color:#cdbba4;margin-top:2px;}
+  .acsgrid{display:grid;grid-template-columns:1fr 1fr;gap:6px;}
+  button.acs{font-size:14px;line-height:1.05;padding:8px 6px;}
+  button.acs.on{background:var(--ox);color:#2a0806;border-color:var(--ox);font-weight:700;}
+  /* hint bar */
+  #hintbar{position:absolute;left:50%;bottom:74px;transform:translateX(-50%);
+    background:rgba(26,10,14,.82);border:1px solid rgba(240,200,64,.5);border-radius:20px;
+    padding:7px 16px;font-size:16px;color:#ffe9c0;white-space:nowrap;max-width:92vw;
+    overflow:hidden;text-overflow:ellipsis;box-shadow:0 3px 12px rgba(0,0,0,.3);transition:opacity .5s;}
+  #hintbar b{color:var(--gold-bright);}
+  /* bottom-center cruise controls */
+  #cruise{position:absolute;left:50%;bottom:14px;transform:translateX(-50%);
+    display:flex;gap:8px;pointer-events:auto;}
+  #cruise button{width:52px;flex:none;font-size:19px;color:var(--gold-bright);
+    background:rgba(26,10,14,.82);border:1px solid rgba(240,200,64,.65);
+    box-shadow:0 3px 12px rgba(0,0,0,.3);}
+  #cruise button:hover{background:rgba(46,18,24,.9);}
+
+  /* MI alarm vignette */
+  #alarm{position:fixed;inset:0;z-index:14;pointer-events:none;opacity:0;transition:opacity .3s;
+    box-shadow:inset 0 0 140px 30px rgba(220,20,30,.6);}
+  @keyframes alarmPulse{0%,100%{opacity:.25}50%{opacity:.85}}
+  #alarm.on{animation:alarmPulse 1s ease-in-out infinite;opacity:1;}
+
+  /* ===== overlays ===== */
+  .overlay{position:fixed;inset:0;z-index:30;display:flex;flex-direction:column;align-items:center;
+    justify-content:center;text-align:center;gap:18px;padding:26px;
+    background:radial-gradient(ellipse at center,#2a0b12 0%,#050205 82%);}
+  #title h1{font-family:var(--font-disp);font-weight:900;font-size:clamp(34px,8vw,72px);
+    background:linear-gradient(180deg,#ffd9d2,var(--ox),#7a1c14);-webkit-background-clip:text;
+    background-clip:text;color:transparent;filter:drop-shadow(0 4px 12px rgba(232,86,75,.4));letter-spacing:1px;}
+  #title .sub{font-size:clamp(17px,3.6vw,24px);color:#e6b7ad;letter-spacing:4px;}
+  #title .desc{font-size:clamp(16px,3vw,20px);color:#c9b39d;max-width:520px;line-height:1.4;}
+  .startBtn{font-family:var(--font-read);font-size:22px;color:#2a0806;letter-spacing:1px;
+    background:linear-gradient(180deg,var(--gold-bright),var(--gold));border:none;border-radius:10px;
+    padding:14px 30px;cursor:pointer;box-shadow:0 5px 0 #7a5c10,0 0 24px rgba(240,200,64,.45);
+    animation:pulse 1.5s ease-in-out infinite;pointer-events:auto;}
+  .startBtn:active{transform:translateY(3px);box-shadow:0 2px 0 #7a5c10;}
+  @keyframes pulse{50%{filter:brightness(1.22)}}
+  .credit{font-family:var(--font-pixel);font-size:11px;color:var(--gold-bright);margin-top:4px;}
+  #madeby{position:fixed;left:12px;bottom:9px;z-index:20;font-family:var(--font-pixel);font-size:9px;
+    color:var(--gold-bright);opacity:.5;letter-spacing:1px;pointer-events:none;}
+
+  /* quiz */
+  #quiz{display:none;z-index:32;background:radial-gradient(ellipse at center,rgba(20,8,12,.96),rgba(2,1,2,.98));}
+  #quizBox{max-width:600px;width:100%;}
+  #quizBox .q{font-family:var(--font-disp);font-weight:700;font-size:clamp(20px,4vw,27px);color:#fff;
+    line-height:1.25;margin-bottom:18px;}
+  .ans{display:block;width:100%;text-align:left;font-size:20px;margin:9px 0;padding:13px 15px;
+    background:rgba(240,200,64,.1);border:1px solid rgba(240,200,64,.35);border-radius:9px;
+    color:#f3ead9;cursor:pointer;pointer-events:auto;transition:.12s;}
+  .ans:hover{background:rgba(240,200,64,.22);}
+  .ans.correct{background:rgba(79,209,138,.28);border-color:var(--good);color:#daffe9;}
+  .ans.wrong{background:rgba(232,86,75,.26);border-color:var(--ox);color:#ffd6d0;}
+  #quizTip{font-size:19px;color:#bfe8ad;max-width:600px;line-height:1.3;min-height:26px;margin-top:6px;}
+  #quizNext{display:none;}
+
+  .hidden{display:none!important;}
+  @media (max-width:640px){
+    #panel{width:210px;padding:11px;gap:8px;}
+    #stageCard{max-width:60vw;padding:10px;}
+    #stageName{font-size:20px;} #stageBlurb{font-size:15px;}
+    #myo{width:150px;bottom:150px;left:12px;}
+    #ecgCard{right:12px;bottom:150px;} #ecg{width:210px;height:56px;}
+  }
+</style>
+</head>
+<body>
+<canvas id="c"></canvas>
+<div id="alarm"></div>
+<div id="madeby">— DR. AKASH GARG —</div>
+
+<div id="hud">
+  <div id="stageCard" class="card">
+    <div id="stageName">Healthy Endothelium</div>
+    <div id="stageBlurb">A wide, smooth lumen. Oxygen-rich blood streams to the heart muscle in clean laminar flow.</div>
+    <div class="metrics">
+      <div class="metric" id="mStenosis"><div class="k">Stenosis</div><div class="v"><span id="stenVal">0</span>%</div></div>
+      <div class="metric" id="mFlow"><div class="k">Coronary Flow</div><div class="v"><span id="flowVal">100</span>%</div></div>
+      <div class="metric" id="mLumen"><div class="k">Lumen</div><div class="v"><span id="lumVal">100</span>%</div></div>
+    </div>
+    <div id="dxBlock">
+      <div id="dxName">No acute syndrome</div>
+      <div id="dxMeta"><span id="dxTropo" class="tneg">Troponin –</span><span id="dxEcgTag">ECG normal</span></div>
+      <div id="dxNote">Build a plaque, then pick a syndrome →</div>
+    </div>
+  </div>
+
+  <div id="panel" class="card">
+    <h3>🩺 Disease Console</h3>
+    <div class="toggle" id="modeToggle">
+      <button id="btnNormal" class="active">NORMAL</button>
+      <button id="btnAbnormal">DISEASED</button>
+    </div>
+    <div>
+      <div class="lbl"><span>Plaque burden</span><span id="dialPct">0%</span></div>
+      <input type="range" id="dial" min="0" max="100" value="0">
+    </div>
+    <div>
+      <div class="lbl"><span>Exertion (heart rate)</span><span id="hrVal">70</span></div>
+      <input type="range" id="hr" min="55" max="175" value="70">
+    </div>
+    <div class="acs-lbl">⚕ Acute Coronary Syndrome</div>
+    <div class="acsgrid">
+      <button id="acsStable" class="acs">Stable<br>Angina</button>
+      <button id="acsUnstable" class="acs">Unstable<br>Angina</button>
+      <button id="acsNstemi" class="acs">NSTEMI</button>
+      <button id="acsStemi" class="acs warn">STEMI</button>
+    </div>
+    <div class="btnrow">
+      <button id="btnTreat" class="good">🩹 Treat (PCI)</button>
+      <button id="btnQuiz">📋 Quiz</button>
+    </div>
+  </div>
+
+  <div id="myo" class="card">
+    <div class="t">Downstream Myocardium</div>
+    <div id="myoRow">
+      <svg id="myoHeart" viewBox="0 0 32 32">
+        <path id="myoOuter" d="M16 29 C4 20 2 12 8 8 C12 5 16 9 16 12 C16 9 20 5 24 8 C30 12 28 20 16 29 Z" fill="#4fd18a"/>
+        <path id="myoInner" transform="translate(16 17) scale(0.5) translate(-16 -17)" d="M16 29 C4 20 2 12 8 8 C12 5 16 9 16 12 C16 9 20 5 24 8 C30 12 28 20 16 29 Z" fill="#4fd18a"/>
+      </svg>
+      <div><div id="myoState" style="color:#4fd18a">Well perfused</div><div id="myoSub">Supply meets demand</div></div>
+    </div>
+  </div>
+
+  <div id="ecgCard" class="card">
+    <div class="ecg-t">ECG · Lead II</div>
+    <canvas id="ecg" width="300" height="72"></canvas>
+  </div>
+
+  <div id="hintbar"><b>Drag</b> to rotate the artery • drag <b>Plaque burden</b> to grow the lesion • <b>▶</b> to auto-spin</div>
+  <div id="cruise">
+    <button id="cSlow" title="Slower">«</button>
+    <button id="cPause" title="Play/Pause">▶</button>
+    <button id="cFast" title="Faster">»</button>
+  </div>
+</div>
+
+<!-- Quiz -->
+<div id="quiz" class="overlay">
+  <div id="quizBox" class="card" style="padding:26px;pointer-events:auto;">
+    <div class="q" id="quizQ">—</div>
+    <div id="quizAns"></div>
+    <div id="quizTip"></div>
+    <button class="startBtn" id="quizNext" style="font-size:18px;padding:11px 22px;margin-top:14px;">NEXT ▶</button>
+    <button id="quizClose" style="margin-top:14px;max-width:160px;">Close</button>
+  </div>
+</div>
+
+<script type="importmap">
+{ "imports": {
+  "three": "https://unpkg.com/three@0.161.0/build/three.module.js",
+  "three/addons/": "https://unpkg.com/three@0.161.0/examples/jsm/"
+} }
+</script>
+<script type="module">
+import * as THREE from 'three';
+import { EffectComposer } from 'three/addons/postprocessing/EffectComposer.js';
+import { RenderPass } from 'three/addons/postprocessing/RenderPass.js';
+import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js';
+
+/* =================== audio (procedural) =================== */
+let AC;
+function ac(){ AC = AC || new (window.AudioContext||window.webkitAudioContext)(); return AC; }
+function tone(freq,dur,type='sine',gain=0.18,glideTo){
+  try{const c=ac();const o=c.createOscillator(),g=c.createGain();
+    o.type=type;o.frequency.setValueAtTime(freq,c.currentTime);
+    if(glideTo)o.frequency.exponentialRampToValueAtTime(glideTo,c.currentTime+dur);
+    g.gain.setValueAtTime(gain,c.currentTime);
+    g.gain.exponentialRampToValueAtTime(0.0001,c.currentTime+dur);
+    o.connect(g);g.connect(c.destination);o.start();o.stop(c.currentTime+dur);}catch(e){}
+}
+function lub(){ tone(70,0.16,'sine',0.32,48); }
+function dub(){ tone(58,0.20,'sine',0.26,40); }
+
+/* =================== renderer / scene =================== */
+const canvas=document.getElementById('c');
+const renderer=new THREE.WebGLRenderer({canvas,antialias:true});
+renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+renderer.setSize(innerWidth,innerHeight);
+renderer.toneMapping=THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure=1.0;
+
+const scene=new THREE.Scene();
+scene.background=new THREE.Color(0xf7dede);
+scene.fog=new THREE.FogExp2(0xf7dede,0.02);
+
+const camera=new THREE.PerspectiveCamera(66,innerWidth/innerHeight,0.05,120);
+
+const composer=new EffectComposer(renderer);
+composer.addPass(new RenderPass(scene,camera));
+const bloom=new UnrealBloomPass(new THREE.Vector2(innerWidth,innerHeight),0.2,0.5,0.94);
+composer.addPass(bloom);
+
+/* =================== lights =================== */
+scene.add(new THREE.AmbientLight(0xffe4e4,0.95));
+const hemi=new THREE.HemisphereLight(0xffffff,0xffc0c0,0.6); scene.add(hemi);
+const sun=new THREE.DirectionalLight(0xfff4ee,1.5); sun.position.set(6,11,8); scene.add(sun);
+const headlight=new THREE.PointLight(0xffffff,1.2,70,1.0); scene.add(headlight); // camera fill
+
+/* =================== artery path =================== */
+const R=1.6;                 // healthy lumen radius
+const SEG=420;               // path segments
+const pathPts=[];
+for(let i=0;i<=14;i++){
+  const z=-i*7;
+  const x=Math.sin(i*0.32)*1.25;   // gentle, mostly-straight artery
+  const y=Math.cos(i*0.26)*0.85;
+  pathPts.push(new THREE.Vector3(x,y,z));
+}
+const curve=new THREE.CatmullRomCurve3(pathPts,false,'catmullrom',0.5);
+const pts=curve.getSpacedPoints(SEG);
+const frames=curve.computeFrenetFrames(SEG,false);
+const PLEN=curve.getLength();
+
+/* plaque location (fraction along path) */
+const PLAQUE_T=0.5;
+const PLAQUE_I=Math.round(PLAQUE_T*SEG);
+function bump(i){ // gaussian around plaque, 0..1
+  const d=(i-PLAQUE_I)/(SEG*0.085); return Math.exp(-d*d);
+}
+// angle (in the vessel's cross-section frame) that points toward world-down = the wall the plaque lines
+const _dn=new THREE.Vector3(0,-1,0);
+const centerAngle=Math.atan2(_dn.dot(frames.binormals[PLAQUE_I]),_dn.dot(frames.normals[PLAQUE_I]));
+/* state */
+const S={ disease:0, targetDisease:0, hr:70, clot:0, necrosis:false, stented:false,
+          orbit:0, speed:1, paused:true, beat:0 };  // clot: 0 none · 1 partial · 2 occlusive
+const stentFactor=()=>(S.stented?0.28:1);                      // a stent scaffolds the lumen open
+function stenosisAt(i){ return S.disease*0.9*bump(i)*stentFactor(); }
+function availR(i){ return R*(1-stenosisAt(i)); }
+function peakStenosis(){ return S.disease*0.9*stentFactor(); } // at plaque center
+
+/* =================== vessel wall texture =================== */
+function wallTexture(){
+  const s=512,cv=document.createElement('canvas');cv.width=cv.height=s;const x=cv.getContext('2d');
+  const g=x.createLinearGradient(0,0,0,s);g.addColorStop(0,'#d4605b');g.addColorStop(1,'#e07f7a');
+  x.fillStyle=g;x.fillRect(0,0,s,s);
+  for(let i=0;i<2600;i++){const px=Math.random()*s,py=Math.random()*s,r=Math.random()*3+0.5;
+    x.fillStyle='rgba('+(210+Math.random()*40|0)+',120,124,'+(Math.random()*0.3)+')';
+    x.beginPath();x.arc(px,py,r,0,7);x.fill();}
+  for(let i=0;i<26;i++){ // faint vasa vasorum lines
+    x.strokeStyle='rgba(200,90,96,0.14)';x.lineWidth=Math.random()*2+0.5;x.beginPath();
+    let px=Math.random()*s,py=Math.random()*s;x.moveTo(px,py);
+    for(let k=0;k<6;k++){px+=(Math.random()-0.5)*90;py+=(Math.random()-0.5)*90;x.lineTo(px,py);}x.stroke();}
+  const t=new THREE.CanvasTexture(cv);t.wrapS=t.wrapT=THREE.RepeatWrapping;t.repeat.set(8,3);return t;
+}
+const wallTex=wallTexture();
+
+/* =================== vessel tube (dynamic radius) =================== */
+const RADIAL=40;
+const tubeGeo=new THREE.CylinderGeometry(1,1,1,RADIAL,SEG,true); // we'll rewrite positions
+tubeGeo.rotateX(Math.PI/2);
+const wallMat=new THREE.MeshStandardMaterial({map:wallTex,color:0xe36b64,emissive:0x3a0c10,
+  emissiveIntensity:0.12,roughness:0.7,metalness:0.02,side:THREE.DoubleSide,
+  transparent:true,opacity:0.32,depthWrite:false});
+const tube=new THREE.Mesh(tubeGeo,wallMat); scene.add(tube);
+
+/* build tube vertices along frames so we can vary radius per ring */
+const pos=tubeGeo.attributes.position;
+const ringCount=SEG+1;
+function rebuildTube(){
+  for(let i=0;i<ringCount;i++){
+    const base=pts[i], N=frames.normals[i], B=frames.binormals[i];
+    const st=stenosisAt(i);
+    // ECCENTRIC plaque: bulges mostly from one wall, leaving a crescent channel open
+    for(let j=0;j<=RADIAL;j++){
+      const a=(j/RADIAL)*Math.PI*2;
+      const ecc=Math.pow(Math.max(0,Math.cos(a-centerAngle)),1.4); // plaque side
+      const rr=R*(1 + st*0.12*ecc);   // mild positive (outward) remodeling — plaque crescent does the narrowing
+      const vx=base.x+(N.x*Math.cos(a)+B.x*Math.sin(a))*rr;
+      const vy=base.y+(N.y*Math.cos(a)+B.y*Math.sin(a))*rr;
+      const vz=base.z+(N.z*Math.cos(a)+B.z*Math.sin(a))*rr;
+      const idx=i*(RADIAL+1)+j;
+      pos.setXYZ(idx,vx,vy,vz);
+    }
+  }
+  pos.needsUpdate=true; tubeGeo.computeVertexNormals();
+  // (BackSide material auto-flips normals per-fragment, so inside faces light correctly)
+}
+
+/* =================== plaque: yellow LIPID CORE under a pale FIBROUS CAP, lining the wall ========= */
+// GROWTH RATE: how aggressively the plaque grows vs the dial. Higher exponent = stays subtle
+// early then balloons toward occlusion. Tunable in one place.
+const GROWTH_EXP=1.6;
+const plaqueMat=new THREE.MeshStandardMaterial({color:0xe8c24e,emissive:0x6a5010,emissiveIntensity:0.32,
+  roughness:0.78,side:THREE.DoubleSide});                                   // lipid / necrotic core
+const capMat=new THREE.MeshStandardMaterial({color:0xdcc7a0,emissive:0x3a3220,emissiveIntensity:0.12,
+  roughness:0.85,side:THREE.DoubleSide,transparent:true,opacity:0.92,depthWrite:false}); // fibrous cap
+const PL_HALF=26, PL_ARC=46, PL_ROWS=PL_HALF*2;
+const plaqueGeo=new THREE.PlaneGeometry(1,1,PL_ARC,PL_ROWS);
+const capGeo=new THREE.PlaneGeometry(1,1,PL_ARC,PL_ROWS);
+const plaque=new THREE.Mesh(plaqueGeo,plaqueMat); plaque.frustumCulled=false; scene.add(plaque);
+const cap=new THREE.Mesh(capGeo,capMat); cap.frustumCulled=false; scene.add(cap);
+function rebuildPlaque(){
+  const pc=plaqueGeo.attributes.position, pk=capGeo.attributes.position;
+  const cols=PL_ARC+1, rows=PL_ROWS+1;
+  const dz=Math.pow(S.disease,GROWTH_EXP), comp=(S.stented?0.28:1);   // stent compresses the plaque
+  const arc=1.8+dz*3.2;                                               // wraps further as it grows
+  const maxThick=dz*R*(0.4+dz*1.05)*comp;                            // accelerating toward occlusion
+  const capThk=Math.max(0.02*R,(0.16-dz*0.12)*R);                    // fibrous cap THINS as it grows → vulnerable
+  for(let iy=0;iy<rows;iy++){
+    const vF=iy/(rows-1);
+    const ii=Math.max(1,Math.min(SEG-1,PLAQUE_I-PL_HALF+iy));
+    const base=pts[ii],N=frames.normals[ii],B=frames.binormals[ii];
+    const along=Math.sin(vF*Math.PI);
+    for(let ix=0;ix<cols;ix++){
+      const uF=ix/(cols-1), a=centerAngle+(uF-0.5)*arc;
+      const across=Math.pow(Math.sin(uF*Math.PI),0.6);
+      const lump=0.72+0.28*Math.sin(uF*12+vF*8)*Math.sin(uF*6-vF*10);
+      const thick=maxThick*along*across*lump;
+      const rCore=Math.max(0.14*R, R-0.03-thick);                    // lipid core luminal surface
+      const rCap =Math.max(0.12*R, rCore-capThk*across*along);       // cap sits just luminal to the core
+      const dx=Math.cos(a),dy=Math.sin(a);
+      const nx=N.x*dx+B.x*dy, ny=N.y*dx+B.y*dy, nz=N.z*dx+B.z*dy;
+      const idx=iy*cols+ix;
+      pc.setXYZ(idx, base.x+nx*rCore, base.y+ny*rCore, base.z+nz*rCore);
+      pk.setXYZ(idx, base.x+nx*rCap,  base.y+ny*rCap,  base.z+nz*rCap);
+    }
+  }
+  pc.needsUpdate=true; plaqueGeo.computeVertexNormals();
+  pk.needsUpdate=true; capGeo.computeVertexNormals();
+}
+
+/* =================== thrombus (appears on rupture) =================== */
+const thrombusMat=new THREE.MeshStandardMaterial({color:0x5a0d14,emissive:0x2a0206,roughness:1});
+const thrombus=new THREE.Mesh(new THREE.IcosahedronGeometry(1,2),thrombusMat);
+{ const N=frames.normals[PLAQUE_I],B=frames.binormals[PLAQUE_I];
+  const wallDir=new THREE.Vector3().addScaledVector(N,Math.cos(centerAngle)).addScaledVector(B,Math.sin(centerAngle));
+  thrombus.position.copy(pts[PLAQUE_I]).addScaledVector(wallDir,-0.35*R); } // in the residual lumen
+thrombus.visible=false; scene.add(thrombus);
+
+/* =================== stent (deployed by PCI) =================== */
+const STENT_LEN=(PL_HALF*2/SEG)*PLEN*1.2;
+const stentGeo=new THREE.CylinderGeometry(R*0.95,R*0.95,STENT_LEN,20,11,true);
+const stentMat=new THREE.MeshStandardMaterial({color:0xd7dde6,metalness:0.9,roughness:0.32,
+  wireframe:true,side:THREE.DoubleSide});
+const stent=new THREE.Mesh(stentGeo,stentMat);
+{ const tan=new THREE.Vector3().subVectors(pts[PLAQUE_I+1],pts[PLAQUE_I-1]).normalize();
+  stent.position.copy(pts[PLAQUE_I]);
+  stent.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0),tan); }
+stent.visible=false; scene.add(stent);
+
+/* =================== red blood cells (instanced) =================== */
+const CELLS=150;
+const rbcGeo=new THREE.SphereGeometry(0.2,10,8); rbcGeo.scale(1,1,0.5); // biconcave-ish disc
+const rbcMat=new THREE.MeshStandardMaterial({color:0xd8342c,emissive:0x8a1410,emissiveIntensity:0.35,roughness:0.5});
+const rbc=new THREE.InstancedMesh(rbcGeo,rbcMat,CELLS); rbc.frustumCulled=false; scene.add(rbc);
+const cell=[]; const dummy=new THREE.Object3D();
+for(let i=0;i<CELLS;i++){ cell.push({s:Math.random(),ang:Math.random()*6.28,rad:Math.random(),
+  spin:Math.random()*6.28,vs:0.7+Math.random()*0.6}); }
+
+function updateCells(dt){
+  for(let i=0;i<CELLS;i++){
+    const c=cell[i];
+    const idx=Math.min(SEG,Math.max(0,Math.floor(c.s*SEG)));
+    const aR=availR(idx);
+    // continuity: velocity scales with (R/availR)^2  → faster through stenosis
+    let v=0.03*S.speed*c.vs*(R/aR)*(R/aR);
+    if(S.clot===2 && idx>=PLAQUE_I) v=0;               // occlusive clot halts downstream flow
+    else if(S.clot===2 && idx<PLAQUE_I) v*=0.3;        // upstream stagnates
+    else if(S.clot===1) v*=0.5;                        // partial clot slows flow
+    c.s+=v*dt;
+    if(c.s>=1){ c.s-=1; c.ang=Math.random()*6.28; c.rad=Math.random(); }
+    const i2=Math.min(SEG,Math.floor(c.s*SEG));
+    const base=pts[i2],N=frames.normals[i2],B=frames.binormals[i2];
+    // turbulence past a tight stenosis
+    const turb=(stenosisAt(i2)>0.4 && i2>PLAQUE_I-6)? (S.disease*0.5):0;
+    const ang=c.ang + Math.sin(performance.now()*0.004+i)*turb;
+    const rr=c.rad*availR(i2)*0.8;
+    const px=base.x+(N.x*Math.cos(ang)+B.x*Math.sin(ang))*rr;
+    const py=base.y+(N.y*Math.cos(ang)+B.y*Math.sin(ang))*rr;
+    const pz=base.z+(N.z*Math.cos(ang)+B.z*Math.sin(ang))*rr;
+    dummy.position.set(px,py,pz);
+    c.spin+=0.1; dummy.rotation.set(c.spin,c.spin*0.7,0);
+    dummy.updateMatrix(); rbc.setMatrixAt(i,dummy.matrix);
+  }
+  rbc.instanceMatrix.needsUpdate=true;
+}
+
+/* =================== HUD refs =================== */
+const $=(id)=>document.getElementById(id);
+const stageName=$('stageName'),stageBlurb=$('stageBlurb');
+const stenVal=$('stenVal'),flowVal=$('flowVal'),lumVal=$('lumVal');
+const myoState=$('myoState'),myoSub=$('myoSub');
+
+const STAGES=[
+  {max:0.08,n:'Healthy Endothelium',b:'A wide, smooth lumen. Oxygen-rich blood streams to the heart muscle in clean laminar flow.'},
+  {max:0.25,n:'Fatty Streak',b:'LDL slips under the endothelium; macrophages become foam cells. The earliest lesion — silent and reversible.'},
+  {max:0.45,n:'Fibrous Plaque',b:'A lipid core with a fibrous cap bulges into the lumen. Still not flow-limiting at rest.'},
+  {max:0.68,n:'Moderate Stenosis',b:'The lumen narrows. Coronary flow reserve shrinks — trouble is coming with exertion.'},
+  {max:0.85,n:'Flow-Limiting Stenosis',b:'≥70% narrowing. Demand now outstrips supply on exertion → stable angina.'},
+  {max:1.01,n:'Vulnerable Plaque',b:'Thin cap, big lipid core, inflamed. One rupture away from an acute coronary syndrome.'}
+];
+function stageFor(d){ for(const s of STAGES) if(d<=s.max) return s; return STAGES[STAGES.length-1]; }
+
+// ===== clinical classification: the ACS spectrum =====
+function clinical(){
+  const st=peakStenosis();
+  const demand=Math.max(0,(S.hr-78)/95);            // exertion above baseline
+  let o={st};
+  if(S.clot===2){                                    // occlusive thrombus
+    o.dx='STEMI'; o.tropo=true; o.ecg='elevate'; o.infarct='transmural'; o.flow=0; o.acs=true;
+    o.note='Complete (occlusive) thrombus → full-thickness transmural infarct. ST-ELEVATION, troponin POSITIVE. Emergency reperfusion — PCI / thrombolysis. Time is muscle.';
+  } else if(S.clot===1){                             // non-occlusive thrombus
+    if(S.necrosis){
+      o.dx='NSTEMI'; o.tropo=true; o.ecg='depress'; o.infarct='suben'; o.flow=18; o.acs=true;
+      o.note='Non-occlusive thrombus → subendocardial (inner-wall) infarct. Troponin POSITIVE, ST-DEPRESSION / T-inversion — but NO ST-elevation.';
+    } else {
+      o.dx='Unstable Angina'; o.tropo=false; o.ecg='depress'; o.infarct='none'; o.flow=32; o.acs=true;
+      o.note='Non-occlusive thrombus, chest pain AT REST, but no necrosis yet. Troponin NEGATIVE, dynamic ST-depression / T-inversion. The warning shot before an MI.';
+    }
+  } else {                                           // no thrombus
+    if(st>=0.55 && demand>0.3){
+      o.dx='Stable Angina'; o.tropo=false; o.ecg='depress'; o.infarct='none'; o.acs=false;
+      o.flow=Math.max(15,Math.round(60-st*40));
+      o.note='Fixed '+Math.round(st*100)+'% stenosis: supply is fine at rest but fails ON EXERTION → predictable, reproducible angina relieved by rest / nitroglycerin. Troponin NEGATIVE.';
+    } else if(st>=0.55){
+      o.dx='Stable CAD (at rest)'; o.tropo=false; o.ecg='normal'; o.infarct='none'; o.acs=false;
+      o.flow=Math.round(75-st*20);
+      o.note='Significant fixed stenosis, compensated at rest. Raise Exertion to unmask stable angina.';
+    } else {
+      o.dx=st>0.15?'Non-obstructive CAD':'Healthy coronary'; o.tropo=false; o.ecg='normal'; o.infarct='none'; o.acs=false;
+      o.flow=Math.round(100-st*45);
+      o.note=st>0.15?'Plaque present but not flow-limiting — no ischemia.':'Wide, healthy lumen with brisk laminar flow.';
+    }
+  }
+  return o;
+}
+
+// ===== ECG waveform =====
+const ECGP={ normal:{st:0,t:0.28,color:'#7ef08a'}, depress:{st:-0.17,t:-0.20,color:'#ffcf5a'},
+             elevate:{st:0.27,t:0.36,color:'#ff6a6a'} };
+let ecgType='normal';
+function ecgY(ph,st,t){
+  if(ph<0.08) return 0;
+  if(ph<0.16) return 0.12*Math.sin((ph-0.08)/0.08*Math.PI);        // P
+  if(ph<0.30) return 0;                                            // PR
+  if(ph<0.33) return -0.12*Math.sin((ph-0.30)/0.03*Math.PI);      // Q
+  if(ph<0.37) return 1.0*Math.sin((ph-0.33)/0.04*Math.PI);        // R
+  if(ph<0.40) return -0.28*Math.sin((ph-0.37)/0.03*Math.PI);      // S
+  if(ph<0.54) return st;                                          // ST segment
+  if(ph<0.72) return st*0.6 + t*Math.sin((ph-0.54)/0.18*Math.PI); // T wave
+  return 0;                                                       // TP baseline
+}
+const ecgCv=document.getElementById('ecg'), ecgCx=ecgCv.getContext('2d');
+let ecgScroll=0;
+function drawECG(dt){
+  ecgScroll += dt*(S.hr/60);
+  const w=ecgCv.width,h=ecgCv.height,y0=h*0.60,amp=h*0.34;
+  ecgCx.fillStyle='#0a0604'; ecgCx.fillRect(0,0,w,h);
+  ecgCx.strokeStyle='rgba(210,90,90,0.13)'; ecgCx.lineWidth=1;
+  for(let g=0;g<w;g+=15){ecgCx.beginPath();ecgCx.moveTo(g,0);ecgCx.lineTo(g,h);ecgCx.stroke();}
+  for(let g=0;g<h;g+=15){ecgCx.beginPath();ecgCx.moveTo(0,g);ecgCx.lineTo(w,g);ecgCx.stroke();}
+  const ppb=5400/S.hr, P=ECGP[ecgType]||ECGP.normal;
+  ecgCx.strokeStyle=P.color; ecgCx.lineWidth=2; ecgCx.beginPath();
+  for(let x=0;x<w;x++){ const ph=((x/ppb)+ecgScroll)%1; const y=y0-ecgY(ph,P.st,P.t)*amp;
+    if(x===0)ecgCx.moveTo(x,y); else ecgCx.lineTo(x,y); }
+  ecgCx.stroke();
+}
+
+function updateHUD(){
+  const d=S.disease, st=peakStenosis();
+  const sg=stageFor(d);
+  stageName.textContent=sg.n;
+  stageBlurb.textContent=sg.b;
+  stenVal.textContent=Math.round(st*100);
+  lumVal.textContent=Math.round((1-st)*100);
+
+  const cl=clinical();
+  flowVal.textContent=cl.flow;
+  ecgType=cl.ecg;
+
+  // diagnosis card
+  $('dxName').textContent=cl.dx;
+  const tr=$('dxTropo'); tr.textContent='Troponin '+(cl.tropo?'+':'–'); tr.className=cl.tropo?'tpos':'tneg';
+  $('dxEcgTag').textContent=cl.ecg==='elevate'?'ST ↑ elevation':cl.ecg==='depress'?'ST ↓ depression':'ECG normal';
+  $('dxNote').textContent=cl.note;
+
+  // myocardium: outer (epicardial) + inner (subendocardial)
+  let outer,inner,state,sub;
+  if(cl.infarct==='transmural'){outer='#3b3640';inner='#241f28';state='STEMI · transmural MI';sub='Full-thickness infarct';}
+  else if(cl.infarct==='suben'){outer='#cf9060';inner='#2f2730';state='NSTEMI · subendocardial MI';sub='Inner-wall infarct · troponin +';}
+  else if(cl.dx==='Unstable Angina'){outer='#c9a13a';inner='#a8781f';state='Ischemia at rest';sub='No infarct yet · troponin –';}
+  else if(cl.dx==='Stable Angina'){outer='#c9a13a';inner='#c9a13a';state='Demand ischemia';sub='Reversible · on exertion';}
+  else if(st>0.55){outer='#8fbf7a';inner='#8fbf7a';state='Compensated';sub='Adequate at rest';}
+  else {outer='#4fd18a';inner='#4fd18a';state='Well perfused';sub='Supply meets demand';}
+  $('myoOuter').setAttribute('fill',outer); $('myoInner').setAttribute('fill',inner);
+  myoState.textContent=state; myoState.style.color=outer; myoSub.textContent=sub;
+  $('alarm').classList.toggle('on',cl.infarct==='transmural');
+
+  // wall inflammation tint
+  wallMat.emissiveIntensity=0.15+d*0.35;
+  wallMat.color.setHex(0xd6524d).lerp(new THREE.Color(0xb52f38),d*0.55);
+  // lipid core (yellow) beneath a fibrous cap that THINS & turns translucent as it becomes vulnerable
+  plaqueMat.color.setHex(0xe8c24e).lerp(new THREE.Color(0xd98a2e),d*0.4);
+  plaque.visible=d>0.05;
+  cap.visible=d>0.05 && !S.stented;
+  capMat.opacity=Math.max(0.32,0.92-Math.max(0,d-0.45)*1.2);      // thin cap → lipid core shows through
+  capMat.color.setHex(0xe0cfa8).lerp(new THREE.Color(0xcaa46a),d*0.4);
+  stent.visible=S.stented;
+
+  // thrombus by clot degree, in the residual lumen
+  thrombus.visible=S.clot>0;
+  const tScale=(S.clot===2?1.05:0.5);
+  thrombus.scale.setScalar(tScale*(1+Math.sin(S.beat)*0.06));
+  thrombusMat.color.setHex(S.clot===2?0x4a0a10:0x701320);
+}
+
+/* =================== controls =================== */
+const dial=$('dial'),dialPct=$('dialPct'),hr=$('hr'),hrVal=$('hrVal');
+dial.addEventListener('input',()=>{ S.targetDisease=dial.value/100; dialPct.textContent=dial.value+'%';
+  S.clot=0; S.necrosis=false; S.stented=false; setMode(dial.value>10); setAcs(null); updateHUD(); });
+hr.addEventListener('input',()=>{ S.hr=+hr.value; hrVal.textContent=hr.value; updateHUD(); });
+function setDial(v){ dial.value=v; S.targetDisease=v/100; dialPct.textContent=v+'%'; }
+function setHR(v){ S.hr=v; hr.value=v; hrVal.textContent=v; }
+
+const btnNormal=$('btnNormal'),btnAbnormal=$('btnAbnormal');
+function setMode(diseased){ btnNormal.classList.toggle('active',!diseased); btnAbnormal.classList.toggle('active',diseased); }
+btnNormal.addEventListener('click',()=>{ setDial(0); setMode(false); S.clot=0; S.necrosis=false; S.stented=false;
+  setAcs(null); rebuildPlaque(); updateHUD(); tone(523,0.12,'sine'); });
+btnAbnormal.addEventListener('click',()=>{ setDial(82); setMode(true); tone(196,0.2,'sawtooth'); });
+
+// ===== ACS spectrum scenarios =====
+const acsBtns={stable:$('acsStable'),unstable:$('acsUnstable'),nstemi:$('acsNstemi'),stemi:$('acsStemi')};
+function setAcs(key){ for(const k in acsBtns) acsBtns[k].classList.toggle('on',k===key); }
+function scenario(key,dz,hrv,clot,necro){ setDial(dz); setMode(true); setHR(hrv); S.stented=false;
+  S.disease=dz/100; S.targetDisease=dz/100; rebuildTube(); rebuildPlaque();  // apply instantly
+  S.clot=clot; S.necrosis=necro; setAcs(key); updateHUD(); }
+acsBtns.stable.addEventListener('click',()=>{ scenario('stable',75,145,0,false);
+  flashMsg('Stable angina: exertion drives demand past a fixed stenosis. Rest it and the ECG normalises.'); tone(330,0.14); });
+acsBtns.unstable.addEventListener('click',()=>{ scenario('unstable',88,74,1,false);
+  flashMsg('Unstable angina: rest pain from a non-occlusive clot — troponin still negative.'); tone(262,0.16,'sawtooth'); });
+acsBtns.nstemi.addEventListener('click',()=>{ scenario('nstemi',90,82,1,true);
+  flashMsg('NSTEMI: partial clot causes a subendocardial infarct — troponin turns POSITIVE, ST depression.'); tone(208,0.2,'sawtooth'); });
+acsBtns.stemi.addEventListener('click',()=>{ scenario('stemi',96,84,2,true);
+  flashMsg('STEMI: the artery is fully occluded — transmural infarct, ST ELEVATION. Call the cath lab.');
+  tone(150,0.5,'sawtooth',0.3,70); setTimeout(()=>tone(96,0.7,'square',0.28),160); });
+
+$('btnTreat').addEventListener('click',()=>{
+  S.clot=0; S.necrosis=false; S.stented=true; setHR(70); setAcs(null);
+  rebuildPlaque(); updateHUD();
+  tone(659,0.12,'sine'); setTimeout(()=>tone(988,0.25,'sine'),120);
+  flashMsg('PCI: balloon + stent deployed — plaque compressed against the wall, lumen scaffolded open, flow restored.');
+});
+
+/* cruise */
+$('cSlow').addEventListener('click',()=>{S.speed=Math.max(0.25,S.speed-0.35);});
+$('cFast').addEventListener('click',()=>{S.speed=Math.min(3,S.speed+0.35);});
+$('cPause').addEventListener('click',()=>{S.paused=!S.paused; $('cPause').textContent=S.paused?'▶':'⏸';
+  if(!S.paused){const h=$('hintbar'); if(h)h.style.opacity='0';}});
+
+/* look-around drag */
+let lookYaw=Math.PI/2, lookPitch=0.22, drag=null;   // orbit angles (side-on default)
+canvas.addEventListener('pointerdown',e=>drag={x:e.clientX,y:e.clientY});
+addEventListener('pointerup',()=>drag=null);
+addEventListener('pointermove',e=>{ if(!drag)return;
+  lookYaw  -= (e.clientX-drag.x)*0.006;
+  lookPitch += (e.clientY-drag.y)*0.006;
+  lookPitch = Math.max(-1.0,Math.min(1.25,lookPitch));
+  drag={x:e.clientX,y:e.clientY}; });
+
+function flashMsg(t){ const el=stageBlurb; const old=el.textContent; el.textContent=t;
+  el.style.color='#ffe08a'; setTimeout(()=>{el.style.color='';updateHUD();},2200); }
+
+/* =================== quiz =================== */
+const QUIZ=[
+ {q:'Coronary blood flow to the left ventricle occurs mainly during which phase of the cardiac cycle?',
+  a:['Systole','Diastole','Isovolumetric contraction','It is constant throughout'],c:1,
+  tip:'During systole the contracting myocardium compresses intramural vessels; the LV is perfused chiefly in diastole. Tachycardia shortens diastole and worsens ischemia.'},
+ {q:'At roughly what degree of luminal narrowing does a fixed stenosis typically begin to limit flow during exertion (stable angina)?',
+  a:['~30%','~50%','~70%','~95%'],c:2,
+  tip:'~70% stenosis exhausts coronary flow reserve, so demand outstrips supply on exertion. ~90%+ can limit flow even at rest.'},
+ {q:'Which plaque feature makes it "vulnerable" to rupture and acute coronary syndrome?',
+  a:['Thick fibrous cap, small lipid core','Thin fibrous cap, large lipid core, inflammation','Heavy calcification only','Concentric, stable narrowing'],c:1,
+  tip:'Thin-capped fibroatheromas with a large necrotic lipid core and active inflammation rupture, exposing thrombogenic material → occlusive thrombus.'},
+ {q:'In the ischemic cascade, which of these appears LAST?',
+  a:['Perfusion defect','Diastolic dysfunction','ECG changes','Chest pain (angina)'],c:3,
+  tip:'Perfusion falls first, then diastolic then systolic dysfunction, then ECG changes — angina is the LAST and least sensitive marker. This is why "silent ischemia" exists.'},
+ {q:'A patient\'s stable exertional angina is now occurring at rest and lasting longer. This shift most likely reflects:',
+  a:['Worsening fixed stenosis only','Plaque rupture with thrombus (acute coronary syndrome)','Coronary steal','Normal aging'],c:1,
+  tip:'Crescendo/rest angina signals plaque disruption and thrombus formation — unstable angina/NSTEMI. It is an emergency, not just "more of the same."'},
+ {q:'What is the KEY difference between unstable angina and NSTEMI?',
+  a:['ECG findings','A positive troponin (myocardial necrosis)','Chest pain at rest','The presence of plaque'],c:1,
+  tip:'Both are non-ST-elevation ACS from a non-occlusive thrombus with rest pain and possible ST-depression. NSTEMI has troponin release (actual necrosis); unstable angina does not.'},
+ {q:'Rest chest pain + ST-DEPRESSION + a POSITIVE troponin, with NO ST-elevation. Diagnosis?',
+  a:['Stable angina','Unstable angina','NSTEMI','STEMI'],c:2,
+  tip:'Positive troponin = infarction (rules out unstable angina). No ST-elevation → NSTEMI, a subendocardial infarct. ST-elevation would make it a STEMI.'},
+ {q:'ST-segment ELEVATION in ACS most specifically indicates:',
+  a:['Subendocardial ischemia','Complete transmural coronary occlusion','A non-occlusive clot','Exertional stable angina'],c:1,
+  tip:'ST-elevation = full-thickness transmural injury from complete occlusion = STEMI → emergency reperfusion (PCI or thrombolysis). Time is muscle.'}
+];
+let qi=0;
+function openQuiz(){ qi=0; $('quiz').style.display='flex'; renderQ(); }
+function renderQ(){
+  const it=QUIZ[qi]; $('quizQ').textContent=(qi+1)+'/'+QUIZ.length+'.  '+it.q;
+  const box=$('quizAns'); box.innerHTML=''; $('quizTip').textContent=''; $('quizNext').style.display='none';
+  it.a.forEach((txt,k)=>{ const b=document.createElement('button'); b.className='ans'; b.textContent=txt;
+    b.onclick=()=>{ if(b.dataset.done)return;
+      [...box.children].forEach(c=>c.dataset.done=1);
+      if(k===it.c){ b.classList.add('correct'); tone(880,0.14); }
+      else { b.classList.add('wrong'); box.children[it.c].classList.add('correct'); tone(160,0.2,'square'); }
+      $('quizTip').textContent='💡 '+it.tip;
+      $('quizNext').style.display=qi<QUIZ.length-1?'inline-block':'none'; };
+    box.appendChild(b); });
+}
+$('quizNext').addEventListener('click',()=>{ if(qi<QUIZ.length-1){qi++;renderQ();} });
+$('quizClose').addEventListener('click',()=>$('quiz').style.display='none');
+$('btnQuiz').addEventListener('click',openQuiz);
+
+/* =================== start =================== */
+let started=true;   // launch straight into the sim — no title/landing screen
+// browsers block audio until a user gesture, so start it on the first interaction
+let _audioOn=false;
+window.addEventListener('pointerdown',()=>{ if(_audioOn)return; _audioOn=true; ac(); },{once:true});
+
+/* =================== main loop =================== */
+let last=performance.now(), beatT=0;
+rebuildTube(); rebuildPlaque(); updateHUD();
+function loop(now){
+  requestAnimationFrame(loop);
+  const dt=Math.min(0.05,(now-last)/1000); last=now;
+
+  // ease disease toward target, rebuild geometry when it moves
+  if(Math.abs(S.disease-S.targetDisease)>0.001){
+    S.disease+=(S.targetDisease-S.disease)*Math.min(1,dt*6);
+    rebuildTube(); rebuildPlaque(); updateHUD();
+  }
+
+  // heartbeat (rate from HR slider)
+  const period=60/S.hr;
+  beatT+=dt; S.beat+=dt*6;
+  if(started && beatT>=period){ beatT-=period; lub(); setTimeout(dub,period*180); }
+  const squeeze=1+Math.sin(S.beat)*0.012*(S.hr/70);
+  tube.scale.set(squeeze,squeeze,1);
+
+  // external orbit around the lesion
+  if(started && !S.paused){ S.orbit+=dt*0.3*S.speed; }
+  const center=pts[PLAQUE_I];
+  const az=lookYaw+S.orbit, el=lookPitch, dist=10.5;
+  camera.position.set(
+    center.x+Math.cos(el)*Math.sin(az)*dist,
+    center.y+Math.sin(el)*dist,
+    center.z+Math.cos(el)*Math.cos(az)*dist
+  );
+  camera.up.set(0,1,0);
+  camera.lookAt(center.x,center.y,center.z);
+  headlight.position.copy(camera.position);
+
+  if(started) updateCells(dt);
+  drawECG(dt);
+
+  composer.render();
+}
+requestAnimationFrame(loop);
+
+addEventListener('resize',()=>{
+  camera.aspect=innerWidth/innerHeight; camera.updateProjectionMatrix();
+  renderer.setSize(innerWidth,innerHeight); composer.setSize(innerWidth,innerHeight);
+});
+</script>
+</body>
+</html>

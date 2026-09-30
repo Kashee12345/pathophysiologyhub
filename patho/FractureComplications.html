@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f7f2ea">
+<title>Fracture Complications</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{ --card:#fffdf8; --ink:#2a2420; --muted:#7a6f63; --line:#e3d8c6;
+    --sans:'Inter',system-ui,sans-serif; --disp:'Cinzel Decorative',serif; --accent:#a5442a; }
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  body{background:linear-gradient(160deg,#faf2ee,#ece5e1);color:var(--ink);font-family:var(--sans);min-height:100vh;padding:18px 16px 44px;}
+  header{max-width:1120px;margin:0 auto 16px;text-align:center;}
+  h1{font-family:var(--disp);font-weight:900;font-size:clamp(21px,4vw,34px);color:#933820;line-height:1.05;}
+  header .sub{color:var(--muted);font-size:15px;margin-top:4px;}
+  header .intro{max-width:860px;margin:10px auto 0;font-size:14.5px;line-height:1.5;color:#5c5248;}
+  header .intro b{color:#933820;}
+  .wrap{max-width:1120px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;box-shadow:0 6px 22px rgba(140,60,40,.07);}
+  .card h2{font-family:var(--disp);font-weight:700;font-size:16px;color:#933820;margin-bottom:6px;}
+  .card h2 + .desc{font-size:13px;color:var(--muted);margin-bottom:10px;line-height:1.4;}
+  svg{display:block;width:100%;height:auto;max-height:290px;}
+  #liveCap{margin-top:8px;background:#f6e8e3;border:1px solid #ecc9bf;border-radius:10px;padding:10px 13px;font-size:14px;line-height:1.5;color:#7a3018;text-align:center;} #liveCap b{color:#8a2810;}
+  @keyframes pulse{0%,100%{opacity:.4}50%{opacity:.85}}
+  .pulse{animation:pulse 1.3s ease-in-out infinite;}
+  @keyframes flow{0%{transform:translateY(0);opacity:0}20%{opacity:1}100%{transform:translateY(-60px);opacity:0}}
+  .fat{animation:flow 2s ease-in infinite;}
+  #stage{border-radius:12px;padding:11px 14px;margin-bottom:12px;color:#fff;font-weight:700;font-size:16px;text-align:center;background:#b0563a;}
+  #stage small{display:block;font-weight:500;font-size:13px;opacity:.93;margin-top:2px;}
+  .seg{display:flex;border:1px solid var(--line);border-radius:11px;overflow:hidden;}
+  .seg button{flex:1;border:none;background:#fff;color:var(--ink);font-family:var(--sans);font-weight:700;font-size:12.5px;padding:11px 5px;cursor:pointer;transition:.12s;line-height:1.15;}
+  .seg button small{display:block;font-weight:500;font-size:9.5px;color:var(--muted);margin-top:1px;}
+  .seg button.on{color:#fff;} .seg button.osteo.on{background:#a5442a;} .seg button.comp.on{background:#c0392b;} .seg button.fat.on{background:#b0862a;}
+  #info{border:1px solid var(--line);border-left:5px solid var(--accent);background:#f8efec;border-radius:10px;padding:12px 13px;margin-top:16px;}
+  #info .n{font-family:var(--disp);font-weight:700;font-size:17px;color:#933820;} #info .plain{font-size:14px;line-height:1.5;color:#2a2420;margin-top:8px;font-weight:600;}
+  #info .story{font-size:12.8px;line-height:1.5;color:#3a3630;margin-top:8px;background:#fff;border-radius:8px;padding:9px 11px;border:1px solid #ecd3cd;}
+  #info .ss{margin-top:8px;font-size:12.3px;color:#5c5248;} #info .ss b{color:#8a2810;}
+  @media (max-width:880px){ .wrap{grid-template-columns:1fr;} }
+</style>
+</head>
+<body>
+<header>
+  <h1>Fracture Complications</h1>
+  <div class="sub">When a broken bone turns dangerous · Week 6</div>
+  <div class="intro">A fracture can heal cleanly — or trigger a serious complication: an <b>infection</b> in the bone, dangerous <b>pressure</b> building in a muscle compartment, or globs of <b>fat</b> reaching the lungs. Click each.</div>
+</header>
+<div class="wrap">
+  <div>
+    <div class="card">
+      <h2>What goes wrong</h2>
+      <div class="desc">A simple picture of each complication.</div>
+      <svg id="art" viewBox="0 0 300 260" aria-label="fracture complication"></svg>
+      <div id="liveCap">Pick a complication.</div>
+    </div>
+  </div>
+  <div>
+    <div id="stage">Pick a complication<small>infection · pressure · fat</small></div>
+    <div class="card">
+      <div class="seg" id="seg">
+        <button data-d="osteo" class="osteo on">Osteomyelitis<small>bone infection</small></button>
+        <button data-d="comp" class="comp">Compartment Syndrome<small>pressure</small></button>
+        <button data-d="fat" class="fat">Fat Embolism<small>fat to lungs</small></button>
+      </div>
+    </div>
+    <div class="card" style="margin-top:16px;"><h2>What's happening</h2><div id="info"></div></div>
+  </div>
+</div>
+<script>
+(function(){
+  const $=id=>document.getElementById(id); let cur='osteo';
+  const INFO={
+    osteo:{name:'Osteomyelitis',color:'#a5442a',
+      plain:'An infection inside the bone — often after an open fracture or surgery.',
+      story:'Bacteria (commonly <b>Staph aureus</b>) infect the <b>bone itself</b>, often reaching it through an <b>open (compound) fracture</b>, surgery, or the bloodstream. The infection is hard to clear and can become chronic.',
+      ss:'Bone pain, fever, redness/warmth, drainage; may become chronic.'},
+    comp:{name:'Compartment Syndrome',color:'#c0392b',
+      plain:'Swelling inside a closed muscle compartment builds pressure that chokes off blood flow.',
+      story:'After injury, <b>swelling or bleeding inside a muscle compartment</b> raises the pressure until it <b>compresses the vessels and nerves</b> — cutting off circulation to the muscle. An <b>emergency</b> (fasciotomy) because tissue dies within hours. Watch the <b>5 P\'s</b>, especially <b>pain out of proportion</b> and <b>paresthesia</b>.',
+      ss:'Pain out of proportion, paresthesia, pallor, pulselessness. Emergency!'},
+    fat:{name:'Fat Embolism',color:'#b0862a',
+      plain:'Fat from the bone marrow escapes into the blood and lodges in the lungs (and brain).',
+      story:'A <b>long-bone or pelvic fracture</b> can release <b>fat globules from the marrow</b> into the bloodstream. They travel to the <b>lungs</b> (causing respiratory distress) and sometimes the brain. Classic clues: <b>respiratory distress, confusion, and a petechial rash</b>, usually 1–3 days after the injury.',
+      ss:'Dyspnea, confusion, petechiae; after long-bone fracture (12–72 h).'}
+  };
+  function draw(){ const st=cur,C=INFO[st].color; let s='';
+    if(st==='osteo'){
+      s+='<rect x="120" y="30" width="60" height="200" rx="24" fill="#f2ecdc" stroke="#c9b890" stroke-width="3"/>';
+      s+='<g class="pulse"><ellipse cx="150" cy="130" rx="22" ry="34" fill="'+C+'"/></g>';
+      for(let i=0;i<5;i++)s+='<circle class="pulse" style="animation-delay:'+(i*0.15)+'s" cx="'+(140+(i%2)*20)+'" cy="'+(105+i*12)+'" r="4" fill="#7a1a12"/>';
+      s+='<text x="150" y="250" text-anchor="middle" font-size="10.5" font-weight="700" fill="'+C+'">infection inside the bone</text>';
+    } else if(st==='comp'){
+      s+='<circle cx="150" cy="120" r="70" fill="#f0d0c4" stroke="#c9a090" stroke-width="3"/>';
+      s+='<circle cx="150" cy="120" r="24" fill="#f2ecdc" stroke="#c9b890" stroke-width="2"/>';
+      s+='<g class="pulse"><circle cx="150" cy="120" r="55" fill="'+C+'" opacity="0.3"/></g>';
+      for(let i=0;i<8;i++){const a=i/8*Math.PI*2;s+='<path d="M'+(150+Math.cos(a)*68)+' '+(120+Math.sin(a)*68)+' L'+(150+Math.cos(a)*48)+' '+(120+Math.sin(a)*48)+'" stroke="'+C+'" stroke-width="3"/>';}
+      s+='<text x="150" y="215" text-anchor="middle" font-size="10.5" font-weight="700" fill="'+C+'">pressure crushes vessels &amp; nerves</text>';
+    } else {
+      // bone marrow -> bloodstream -> lungs
+      s+='<rect x="40" y="150" width="50" height="90" rx="16" fill="#f2ecdc" stroke="#c9b890" stroke-width="2.5"/>';
+      s+='<line x1="55" y1="150" x2="55" y2="240" stroke="#e0b050" stroke-width="6"/>';
+      s+='<text x="65" y="250" text-anchor="middle" font-size="8.5" fill="#a08a20">marrow</text>';
+      // lungs
+      s+='<path d="M175 60 C155 62 150 90 152 120 C154 140 168 145 180 138 C186 120 186 80 180 64 Z" fill="#f2b0b0" stroke="#c98a8a" stroke-width="2"/>';
+      s+='<path d="M215 60 C235 62 240 90 238 120 C236 140 222 145 210 138 C204 120 204 80 210 64 Z" fill="#f2b0b0" stroke="#c98a8a" stroke-width="2"/>';
+      s+='<text x="195" y="55" text-anchor="middle" font-size="9" fill="#a5442a">lungs</text>';
+      // fat globs traveling up
+      for(let i=0;i<4;i++)s+='<circle class="fat" style="animation-delay:'+(i*0.5)+'s" cx="'+(90+i*30)+'" cy="200" r="6" fill="'+C+'"/>';
+      s+='<g class="pulse"><circle cx="180" cy="110" r="5" fill="'+C+'"/><circle cx="215" cy="115" r="5" fill="'+C+'"/></g>';
+      s+='<text x="150" y="250" text-anchor="middle" font-size="10" font-weight="700" fill="'+C+'">fat globules → lungs</text>';
+    }
+    $('art').innerHTML=s;
+  }
+  function render(){ const inf=INFO[cur]; draw();
+    document.querySelectorAll('#seg button').forEach(b=>b.classList.toggle('on',b.dataset.d===cur));
+    $('stage').style.background=inf.color; $('stage').innerHTML=inf.name+'<small>'+inf.plain.slice(0,42)+'…</small>';
+    $('info').innerHTML='<div class="n">'+inf.name+'</div><div class="plain">'+inf.plain+'</div><div class="story">'+inf.story+'</div><div class="ss"><b>Signs:</b> '+inf.ss+'</div>';
+    $('liveCap').innerHTML='<b>'+inf.name+'</b> — '+inf.plain;
+  }
+  document.querySelectorAll('#seg button').forEach(b=>b.addEventListener('click',()=>{ cur=b.dataset.d; render(); }));
+  render();
+})();
+</script>
+</body>
+</html>

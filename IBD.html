@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f7f2ea">
+<title>Crohn's vs Ulcerative Colitis</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{ --card:#fffdf8; --ink:#2a2420; --muted:#7a6f63; --line:#e3d8c6;
+    --sans:'Inter',system-ui,sans-serif; --disp:'Cinzel Decorative',serif; --accent:#7a5aa0; }
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  body{background:linear-gradient(160deg,#f6f2f8,#e9e6ee);color:var(--ink);font-family:var(--sans);min-height:100vh;padding:18px 16px 44px;}
+  header{max-width:1120px;margin:0 auto 16px;text-align:center;}
+  h1{font-family:var(--disp);font-weight:900;font-size:clamp(21px,4vw,34px);color:#6a4a9a;line-height:1.05;}
+  header .sub{color:var(--muted);font-size:15px;margin-top:4px;}
+  header .intro{max-width:870px;margin:10px auto 0;font-size:14.5px;line-height:1.5;color:#5c5248;}
+  header .intro b{color:#6a4a9a;} .cr{color:#c0763a;font-weight:700;} .uc{color:#3a86b0;font-weight:700;}
+  .wrap{max-width:1120px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;box-shadow:0 6px 22px rgba(90,60,120,.07);}
+  .card h2{font-family:var(--disp);font-weight:700;font-size:16px;color:#6a4a9a;margin-bottom:6px;}
+  .card h2 + .desc{font-size:13px;color:var(--muted);margin-bottom:10px;line-height:1.4;}
+  svg{display:block;width:100%;height:auto;max-height:390px;}
+  #liveCap{margin-top:8px;background:#efeaf6;border:1px solid #d6cce6;border-radius:10px;padding:10px 13px;font-size:14px;line-height:1.5;color:#4a3570;text-align:center;} #liveCap b{color:#3a2560;}
+
+  @keyframes inflame{0%,100%{opacity:.5}50%{opacity:1}}
+  .hot{animation:inflame 1.4s ease-in-out infinite;}
+
+  #stage{border-radius:12px;padding:11px 14px;margin-bottom:12px;color:#fff;font-weight:700;font-size:16px;text-align:center;background:#8a6ab0;}
+  #stage small{display:block;font-weight:500;font-size:13px;opacity:.93;margin-top:2px;}
+  .seg{display:flex;border:1px solid var(--line);border-radius:11px;overflow:hidden;}
+  .seg button{flex:1;border:none;background:#fff;color:var(--ink);font-family:var(--sans);font-weight:700;font-size:14px;padding:12px 6px;cursor:pointer;transition:.12s;line-height:1.15;}
+  .seg button small{display:block;font-weight:500;font-size:10.5px;color:var(--muted);margin-top:2px;}
+  .seg button.on{color:#fff;} .seg button.on small{color:rgba(255,255,255,.9);}
+  .seg button.crohn.on{background:#c0763a;} .seg button.uc.on{background:#3a86b0;}
+
+  #info{border:1px solid var(--line);border-left:5px solid var(--accent);background:#f3eff8;border-radius:10px;padding:12px 13px;}
+  #info .n{font-family:var(--disp);font-weight:700;font-size:17px;color:#6a4a9a;}
+  #info .plain{font-size:14.5px;line-height:1.5;color:#2a2420;margin-top:8px;font-weight:600;}
+  #info .story{font-size:13px;line-height:1.5;color:#3a3630;margin-top:8px;background:#fff;border-radius:8px;padding:9px 11px;border:1px solid #ddd3ea;}
+  table{width:100%;border-collapse:collapse;margin-top:12px;font-size:12.3px;}
+  th,td{padding:7px 9px;text-align:left;border-bottom:1px solid var(--line);}
+  th{font-size:11px;text-transform:uppercase;letter-spacing:.03em;color:var(--muted);}
+  td.cr{color:#a5652a;font-weight:600;} td.uc{color:#2f6a90;font-weight:600;}
+  .feat{font-weight:700;color:#4a4038;}
+  tr.hl-cr td.cr{background:#fbf0e4;} tr.hl-uc td.uc{background:#e6f0f6;}
+  @media (max-width:880px){ .wrap{grid-template-columns:1fr;} }
+</style>
+</head>
+<body>
+<header>
+  <h1>Crohn's vs Ulcerative Colitis</h1>
+  <div class="sub">The two inflammatory bowel diseases · Week 13</div>
+  <div class="intro">Both are chronic <b>inflammatory bowel disease (IBD)</b>, but they behave differently. <span class="cr">Crohn's</span> can strike <b>anywhere</b> from mouth to anus in <b>patchy "skip" lesions</b> that burrow <b>full-thickness</b>. <span class="uc">Ulcerative colitis</span> stays in the <b>colon only</b>, <b>continuous</b> from the rectum up, and <b>shallow</b>. Click each.</div>
+</header>
+
+<div class="wrap">
+  <div>
+    <div class="card">
+      <h2>Where it hits the gut</h2>
+      <div class="desc">The whole GI tract, mouth to anus. Orange/blue patches show where each disease inflames — watch the <b>pattern</b>.</div>
+      <svg id="gut" viewBox="0 0 300 380" aria-label="GI tract"></svg>
+      <div id="liveCap">Pick a disease to see its pattern.</div>
+    </div>
+  </div>
+  <div>
+    <div id="stage">Pick a disease<small>Crohn's · Ulcerative Colitis</small></div>
+    <div class="card">
+      <div class="seg" id="seg">
+        <button data-d="crohn" class="crohn on">Crohn's Disease<small>mouth → anus, patchy</small></button>
+        <button data-d="uc" class="uc">Ulcerative Colitis<small>colon only, continuous</small></button>
+      </div>
+    </div>
+    <div class="card" style="margin-top:16px;"><h2>What's happening</h2><div id="info"></div></div>
+    <div class="card" style="margin-top:16px;">
+      <h2>Side by side</h2>
+      <table id="tbl">
+        <tr><th>Feature</th><th style="color:#a5652a">Crohn's</th><th style="color:#2f6a90">Ulc. Colitis</th></tr>
+        <tr data-f="location"><td class="feat">Location</td><td class="cr">Anywhere: mouth→anus</td><td class="uc">Colon only</td></tr>
+        <tr data-f="pattern"><td class="feat">Pattern</td><td class="cr">Patchy "skip" lesions</td><td class="uc">Continuous, from rectum up</td></tr>
+        <tr data-f="depth"><td class="feat">Depth</td><td class="cr">Full thickness</td><td class="uc">Mucosa + submucosa</td></tr>
+        <tr data-f="comp"><td class="feat">Complications</td><td class="cr">Fistulae, abscess, perforation</td><td class="uc">↑ colon cancer risk</td></tr>
+        <tr data-f="stool"><td class="feat">Diarrhea</td><td class="cr">Watery + malabsorption</td><td class="uc">Bloody, no malabsorption</td></tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const $=id=>document.getElementById(id);
+  let cur='crohn';
+  const INFO={
+    crohn:{name:"Crohn's Disease",color:'#c0763a',
+      plain:'Patchy inflammation that can appear ANYWHERE from mouth to anus, and burrows through the full wall.',
+      story:'Crohn\'s is (probably) <b>autoimmune</b>. It causes <b>patchy "skip" lesions</b> — inflamed spots with healthy gut in between — <b>anywhere from mouth to anus</b>. The ulcers go <b>full-thickness</b> through the wall, which is why Crohn\'s makes <b>fistulae, abscesses, and perforations</b>. Because it hits the small intestine, it causes <b>malabsorption</b>.',
+      ss:'Severe watery diarrhea, N/V, bloating, abdominal pain &amp; distension, malabsorption.'},
+    uc:{name:'Ulcerative Colitis',color:'#3a86b0',
+      plain:'Continuous shallow inflammation in the colon only, starting at the rectum and moving up.',
+      story:'UC inflames the <b>colon (large intestine) only</b>. It starts at the <b>rectum</b> and spreads <b>continuously upward</b> — no skipping. The ulcers are <b>shallow</b> (mucosa + submucosa only), so no fistulae — but they <b>bleed</b>, giving <b>bloody diarrhea</b>. Long-standing UC raises <b>colon cancer</b> risk. There\'s <b>no malabsorption</b> (small intestine is spared).',
+      ss:'Bloody diarrhea, weight loss, fever, fatigue. No malabsorption.'}
+  };
+
+  function draw(){
+    const cr = cur==='crohn'; let s='';
+    const C = cr? '#e08a3a' : '#3a86b0';
+    // mouth
+    s+='<ellipse cx="150" cy="24" rx="16" ry="9" fill="#f0d9c8" stroke="#c9a888" stroke-width="2"/>';
+    if(cr) s+='<circle class="hot" cx="150" cy="24" r="5" fill="'+C+'"/>';
+    s+='<text x="172" y="27" font-size="9.5" font-weight="700" fill="#a5772a">mouth</text>';
+    // esophagus
+    s+='<path d="M150 33 L150 78" fill="none" stroke="#e6cbb0" stroke-width="12" stroke-linecap="round"/>';
+    if(cr) s+='<circle class="hot" cx="150" cy="58" r="6" fill="'+C+'"/>';
+    // stomach
+    s+='<path d="M128 82 C108 92 108 128 130 145 C158 160 198 150 200 122 C201 102 185 90 165 86 Z" fill="#f2c4a8" stroke="#c98a6a" stroke-width="2"/>';
+    if(cr) s+='<circle class="hot" cx="150" cy="118" r="6" fill="'+C+'"/>';
+    s+='<text x="205" y="120" font-size="9" font-weight="700" fill="#a5772a">stomach</text>';
+    // small intestine (coiled)
+    s+='<path d="M150 152 c-42 4 -42 34 0 34 c42 0 42 32 0 32 c-42 0 -42 30 0 30" fill="none" stroke="#f0b898" stroke-width="14" stroke-linecap="round"/>';
+    if(cr){ [ [120,169],[186,202],[124,234] ].forEach(p=> s+='<circle class="hot" cx="'+p[0]+'" cy="'+p[1]+'" r="7" fill="'+C+'"/>'); }
+    s+='<text x="70" y="205" font-size="9" font-weight="700" fill="#a5772a">small</text><text x="70" y="216" font-size="9" font-weight="700" fill="#a5772a">intestine</text>';
+    // colon frame (ascending right, transverse top-ish, descending left) — draw as a loop around
+    // ascending (right side up)
+    s+='<path d="M214 262 L214 168 C214 158 206 152 196 152" fill="none" stroke="'+(cur==='uc'?'#e0a878':'#e0a878')+'" stroke-width="16" stroke-linecap="round"/>';
+    // sigmoid + descending (left) + rectum
+    s+='<path d="M214 262 C214 285 196 292 172 292 L120 292 C100 292 90 300 90 316 L90 340" fill="none" stroke="#e0a878" stroke-width="16" stroke-linecap="round"/>';
+    s+='<path d="M90 340 C90 352 100 356 112 356 L150 356" fill="none" stroke="#e0a878" stroke-width="16" stroke-linecap="round"/>';
+    // rectum
+    s+='<path d="M150 356 L150 372" fill="none" stroke="#e0a878" stroke-width="16" stroke-linecap="round"/>';
+    // UC: continuous highlight from rectum up the descending colon
+    if(cur==='uc'){
+      s+='<g class="hot">';
+      s+='<path d="M150 372 L150 356 C150 356 112 356 112 356 C100 356 90 352 90 340 L90 316 C90 300 100 292 120 292 L172 292 C196 292 214 285 214 262 L214 210" fill="none" stroke="'+C+'" stroke-width="10" stroke-linecap="round"/>';
+      s+='</g>';
+      s+='<text x="150" y="386" text-anchor="middle" font-size="9.5" font-weight="800" fill="'+C+'">starts at rectum ↑ continuous</text>';
+    } else {
+      // Crohn's: a couple patchy colon spots too
+      s+='<circle class="hot" cx="214" cy="230" r="7" fill="'+C+'"/><circle class="hot" cx="150" cy="356" r="6" fill="'+C+'"/>';
+    }
+    s+='<text x="240" y="210" text-anchor="end" font-size="9" font-weight="700" fill="#a5772a">colon</text>';
+    // depth inset (wall cross-section) top-right
+    s+='<rect x="230" y="20" width="60" height="70" rx="6" fill="#fff" stroke="#d8cbb8"/>';
+    s+='<text x="260" y="33" text-anchor="middle" font-size="8.5" font-weight="700" fill="#7a6a58">wall depth</text>';
+    // wall layers
+    ['#f2d9c2','#e8c2a4','#d8a884','#c08a64'].forEach((cc,i)=> s+='<rect x="236" y="'+(38+i*12)+'" width="48" height="11" fill="'+cc+'"/>');
+    // ulcer depth
+    if(cr) s+='<rect class="hot" x="256" y="38" width="8" height="47" fill="'+C+'"/>', s+='<text x="260" y="98" text-anchor="middle" font-size="7.5" font-weight="700" fill="#a5652a">full-thickness</text>';
+    else s+='<rect class="hot" x="256" y="38" width="8" height="22" fill="'+C+'"/>', s+='<text x="260" y="98" text-anchor="middle" font-size="7.5" font-weight="700" fill="#2f6a90">shallow</text>';
+    $('gut').innerHTML=s;
+  }
+  function render(){
+    const inf=INFO[cur]; draw();
+    document.querySelectorAll('#seg button').forEach(b=>b.classList.toggle('on',b.dataset.d===cur));
+    document.querySelectorAll('#tbl tr[data-f]').forEach(tr=>{ tr.classList.toggle('hl-cr',cur==='crohn'); tr.classList.toggle('hl-uc',cur==='uc'); });
+    $('stage').style.background=inf.color;
+    $('stage').innerHTML=inf.name+'<small>'+(cur==='crohn'?'patchy · full-thickness · mouth→anus':'continuous · shallow · colon only')+'</small>';
+    $('info').innerHTML='<div class="n">'+inf.name+'</div><div class="plain">'+inf.plain+'</div><div class="story">'+inf.story+'</div><div style="margin-top:8px;font-size:12.5px;color:#5c5248"><b style="color:#3a2560">Signs:</b> '+inf.ss+'</div>';
+    $('liveCap').innerHTML = cur==='crohn'
+      ? '<b>Crohn\'s</b> — scattered <b>skip lesions</b> anywhere mouth→anus, burrowing <b>full-thickness</b>.'
+      : '<b>UC</b> — <b>continuous</b> shallow inflammation, colon only, climbing up from the <b>rectum</b>.';
+  }
+  document.querySelectorAll('#seg button').forEach(b=>b.addEventListener('click',()=>{ cur=b.dataset.d; render(); }));
+  render();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f7f2ea">
+<title>Cellular Adaptation</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{ --card:#fffdf8; --ink:#2a2420; --muted:#7a6f63; --line:#e3d8c6;
+    --sans:'Inter',system-ui,sans-serif; --disp:'Cinzel Decorative',serif; --accent:#3a7a86; }
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  body{background:linear-gradient(160deg,#eef6f5,#e6ecec);color:var(--ink);font-family:var(--sans);min-height:100vh;padding:18px 16px 44px;}
+  header{max-width:1120px;margin:0 auto 16px;text-align:center;}
+  h1{font-family:var(--disp);font-weight:900;font-size:clamp(22px,4.2vw,36px);color:#2f636e;line-height:1.05;}
+  header .sub{color:var(--muted);font-size:15px;margin-top:4px;}
+  header .intro{max-width:860px;margin:10px auto 0;font-size:14.5px;line-height:1.5;color:#5c5248;}
+  header .intro b{color:#2f636e;}
+  .wrap{max-width:1120px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;box-shadow:0 6px 22px rgba(40,110,110,.07);}
+  .card h2{font-family:var(--disp);font-weight:700;font-size:16px;color:#2f636e;margin-bottom:6px;}
+  .card h2 + .desc{font-size:13px;color:var(--muted);margin-bottom:10px;line-height:1.4;}
+  svg{display:block;width:100%;height:auto;max-height:300px;}
+  #liveCap{margin-top:8px;background:#e4f0ef;border:1px solid #c3dcda;border-radius:10px;padding:10px 13px;font-size:14px;line-height:1.5;color:#245a58;text-align:center;} #liveCap b{color:#1a4542;}
+  @keyframes pop{0%{transform:scale(.85);opacity:0}100%{transform:scale(1);opacity:1}}
+  .cellpop{animation:pop .4s ease;}
+  #stage{border-radius:12px;padding:11px 14px;margin-bottom:12px;color:#fff;font-weight:700;font-size:16px;text-align:center;background:#4a8a90;}
+  #stage small{display:block;font-weight:500;font-size:13px;opacity:.93;margin-top:2px;}
+  .seg{display:grid;grid-template-columns:1fr 1fr 1fr;border:1px solid var(--line);border-radius:11px;overflow:hidden;gap:1px;background:var(--line);}
+  .seg button{border:none;background:#fff;color:var(--ink);font-family:var(--sans);font-weight:700;font-size:12.5px;padding:11px 5px;cursor:pointer;transition:.12s;line-height:1.15;}
+  .seg button small{display:block;font-weight:500;font-size:9.5px;color:var(--muted);margin-top:1px;}
+  .seg button.on{color:#fff;} .seg button.on small{color:rgba(255,255,255,.9);}
+  .seg button.on{background:#3a7a86;}
+  #info{border:1px solid var(--line);border-left:5px solid var(--accent);background:#eef5f4;border-radius:10px;padding:12px 13px;margin-top:16px;}
+  #info .n{font-family:var(--disp);font-weight:700;font-size:17px;color:#2f636e;}
+  #info .plain{font-size:14.5px;line-height:1.5;color:#2a2420;margin-top:8px;font-weight:600;}
+  #info .story{font-size:13px;line-height:1.5;color:#3a3630;margin-top:8px;background:#fff;border-radius:8px;padding:9px 11px;border:1px solid #cfe2e0;}
+  #info .flag{margin-top:8px;font-size:12px;font-weight:700;border-radius:20px;padding:3px 12px;display:inline-block;}
+  .flag.good{background:#e4f2e8;color:#2f7d50;} .flag.warn{background:#f6e0dc;color:#a5392e;} .flag.rev{background:#fbf0e0;color:#a5651c;}
+  .pearl{background:#eef4fb;border:1px solid #cbdcf0;border-radius:10px;padding:10px 12px;margin-top:12px;font-size:12.5px;line-height:1.5;color:#274d7a;} .pearl b{color:#173b5a;}
+  @media (max-width:880px){ .wrap{grid-template-columns:1fr;} }
+</style>
+</head>
+<body>
+<header>
+  <h1>Cellular Adaptation</h1>
+  <div class="sub">How cells cope with stress · Week 3</div>
+  <div class="intro">When cells are stressed, they <b>adapt</b> to survive — by getting bigger, smaller, more numerous, or by changing type. Some adaptations are harmless; one (<b>dysplasia</b>) is a warning sign for cancer. Click each and watch the cells change.</div>
+</header>
+<div class="wrap">
+  <div>
+    <div class="card">
+      <h2>Normal → adapted tissue</h2>
+      <div class="desc">The left block is normal tissue; watch how the cells change on the right for each adaptation.</div>
+      <svg id="art" viewBox="0 0 320 260" aria-label="cell adaptation"></svg>
+      <div id="liveCap">Pick an adaptation.</div>
+    </div>
+  </div>
+  <div>
+    <div id="stage">Pick an adaptation<small>hypertrophy · atrophy · hyperplasia · metaplasia · dysplasia</small></div>
+    <div class="card">
+      <div class="seg" id="seg">
+        <button data-d="hypertrophy" class="on">Hypertrophy<small>bigger</small></button>
+        <button data-d="atrophy">Atrophy<small>smaller</small></button>
+        <button data-d="hyperplasia">Hyperplasia<small>more</small></button>
+        <button data-d="metaplasia">Metaplasia<small>different type</small></button>
+        <button data-d="dysplasia">Dysplasia<small>deranged</small></button>
+      </div>
+    </div>
+    <div class="card" style="margin-top:16px;"><h2>What's happening</h2><div id="info"></div>
+      <div class="pearl"><b>When adaptation fails → cell injury.</b> The <b>#1 cause of cell injury is hypoxia</b> (from atherosclerosis, anemia, or ischemic stroke). Mild injury is <b>reversible</b>; if the stress continues, it becomes <b>irreversible</b> and the cell dies.</div>
+    </div>
+  </div>
+</div>
+<script>
+(function(){
+  const $=id=>document.getElementById(id); let cur='hypertrophy';
+  const INFO={
+    hypertrophy:{name:'Hypertrophy',color:'#3a7a86',flag:['bigger cells','warn'],
+      plain:'The cells grow LARGER (but stay the same number) to do more work.',
+      story:'Each cell <b>increases in size</b> to become more functional — but that costs <b>more energy and oxygen</b>. Normal example: <b>exercise</b> building muscle. Abnormal: the heart wall thickening from <b>hypertension</b>.'},
+    atrophy:{name:'Atrophy',color:'#3a7a86',flag:['smaller cells','warn'],
+      plain:'The cells SHRINK, needing less energy — usually from disuse or poor supply.',
+      story:'Cells get <b>smaller</b> to save energy. Causes: <b>disuse</b> (a cast on a limb), <b>loss of nerve or hormone stimulation</b>, poor nutrition, or <b>reduced blood flow and oxygen</b>.'},
+    hyperplasia:{name:'Hyperplasia',color:'#3a7a86',flag:['more cells','warn'],
+      plain:'The NUMBER of cells increases — only possible in cells that can still divide.',
+      story:'An <b>increase in the number of cells</b> in a tissue (only in cells capable of <b>mitosis</b>). Causes can be <b>hormonal</b>, <b>compensatory</b> (e.g., liver regrowth), or non-physiologic.'},
+    metaplasia:{name:'Metaplasia',color:'#3a7a86',flag:['reversible','rev'],
+      plain:'One mature cell type is REPLACED by another type — and it can reverse.',
+      story:'The body <b>swaps one cell type for a hardier one</b> in response to <b>chronic irritation or changing conditions</b> (e.g., the airway lining changing in a smoker). Importantly, metaplasia <b>can be reversed</b> if the irritant is removed.'},
+    dysplasia:{name:'Dysplasia',color:'#a5392e',flag:['PRE-CANCEROUS','warn'],
+      plain:'Deranged, disorderly cell growth — the precancerous warning sign.',
+      story:'<b>Disordered cell growth</b> — cells vary in size and shape and lose their normal organization. Caused by <b>chronic irritation, inflammation, or injury</b>. Dysplasia is <b>precancerous</b>: cervical dysplasia, esophageal dysplasia (from GERD), dysplastic moles.'}
+  };
+  function draw(){ const st=cur; let s='';
+    // left = normal reference
+    s+='<text x="80" y="24" text-anchor="middle" font-size="10.5" font-weight="700" fill="#8a7a63">normal</text>';
+    const norm=[[55,60],[85,60],[115,60],[55,100],[85,100],[115,100],[55,140],[85,140],[115,140]];
+    norm.forEach(p=>s+='<circle cx="'+p[0]+'" cy="'+p[1]+'" r="13" fill="#bfe0dc" stroke="#7aa8a2" stroke-width="1.5"/><circle cx="'+p[0]+'" cy="'+p[1]+'" r="4" fill="#5a8a84"/>');
+    // divider
+    s+='<line x1="160" y1="40" x2="160" y2="170" stroke="#d8cbb8" stroke-width="2" stroke-dasharray="4 4"/>';
+    s+='<text x="240" y="24" text-anchor="middle" font-size="10.5" font-weight="700" fill="'+INFO[st].color+'">'+st+'</text>';
+    // right = adapted
+    const C=st==='dysplasia'?'#e0a0a0':'#8fd0c8', SC=st==='dysplasia'?'#a5392e':'#4a9a90';
+    let cells=[];
+    if(st==='hypertrophy'){ cells=[[210,70,22],[262,70,22],[210,130,22],[262,130,22]]; }
+    else if(st==='atrophy'){ cells=[[195,60,7],[220,60,7],[245,60,7],[270,60,7],[195,90,7],[220,90,7],[245,90,7],[270,90,7],[195,120,7],[220,120,7],[245,120,7],[270,120,7]]; }
+    else if(st==='hyperplasia'){ for(let r=0;r<4;r++)for(let c=0;c<4;c++)cells.push([190+c*24,55+r*24,10]); }
+    else if(st==='metaplasia'){ cells=[[210,70,14],[262,70,14],[210,130,14],[262,130,14]]; }
+    else { cells=[[205,62,16],[255,72,10],[210,110,12],[268,120,18],[230,145,9],[195,140,13]]; }
+    cells.forEach((p,i)=>{ const cc=st==='metaplasia'?'#e0c88a':C; const sc=st==='metaplasia'?'#b09850':SC;
+      s+='<circle class="cellpop" style="animation-delay:'+(i*0.03)+'s" cx="'+p[0]+'" cy="'+p[1]+'" r="'+p[2]+'" fill="'+cc+'" stroke="'+sc+'" stroke-width="1.6"/><circle cx="'+p[0]+'" cy="'+p[1]+'" r="'+(p[2]*0.3)+'" fill="'+sc+'"/>'; });
+    const lbl={hypertrophy:'same number, bigger',atrophy:'same number, smaller',hyperplasia:'more cells',metaplasia:'different cell type',dysplasia:'disordered, irregular'}[st];
+    s+='<text x="235" y="200" text-anchor="middle" font-size="11" font-weight="700" fill="'+INFO[st].color+'">'+lbl+'</text>';
+    $('art').innerHTML=s;
+  }
+  function render(){ const inf=INFO[cur]; draw();
+    document.querySelectorAll('#seg button').forEach(b=>b.classList.toggle('on',b.dataset.d===cur));
+    $('stage').style.background=inf.color; $('stage').innerHTML=inf.name+'<small>'+inf.flag[0]+'</small>';
+    $('info').innerHTML='<div class="n">'+inf.name+'</div><div class="plain">'+inf.plain+'</div><div class="story">'+inf.story+'</div><div class="flag '+inf.flag[1]+'">'+inf.flag[0]+'</div>';
+    $('liveCap').innerHTML='<b>'+inf.name+'</b> — '+inf.plain;
+  }
+  document.querySelectorAll('#seg button').forEach(b=>b.addEventListener('click',()=>{ cur=b.dataset.d; render(); }));
+  render();
+})();
+</script>
+</body>
+</html>

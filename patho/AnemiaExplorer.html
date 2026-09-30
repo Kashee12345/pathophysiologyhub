@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f7f2ea">
+<title>Anemia Explorer — Blood Smear &amp; CBC</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=VT323&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{ --bg:#f6f1e8; --card:#fffdf8; --ink:#2a2420; --muted:#7a6f63; --line:#e3d8c6;
+    --bad:#d6443f; --good:#3fa66a; --warn:#d99321; --sans:'Inter',system-ui,sans-serif; --disp:'Cinzel Decorative',serif; --mono:'VT323',monospace; }
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  body{background:linear-gradient(160deg,#faf6ee,#efe7d8);color:var(--ink);font-family:var(--sans);min-height:100vh;padding:18px 16px 44px;}
+  header{max-width:1120px;margin:0 auto 16px;text-align:center;}
+  h1{font-family:var(--disp);font-weight:900;font-size:clamp(22px,4.2vw,36px);color:#a63333;line-height:1.05;}
+  header .sub{color:var(--muted);font-size:15px;margin-top:4px;}
+  header .intro{max-width:830px;margin:10px auto 0;font-size:14.5px;line-height:1.5;color:#5c5248;}
+  header .intro b{color:#a63333;}
+  .wrap{max-width:1120px;margin:0 auto;display:grid;grid-template-columns:1.05fr 1fr;gap:16px;}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;box-shadow:0 6px 22px rgba(140,50,50,.07);}
+  .card h2{font-family:var(--disp);font-weight:700;font-size:17px;color:#a63333;margin-bottom:6px;}
+  .card h2 + .desc{font-size:13px;color:var(--muted);margin-bottom:10px;line-height:1.4;}
+  svg{display:block;width:100%;height:auto;}
+  .lab{font:700 12px var(--sans);fill:#3a3630;} .lab.sm{font-size:10.5px;font-weight:600;fill:#5c5248;}
+  @keyframes cfloat{0%,100%{transform:translate(0,0)}50%{transform:translate(0,-3.5px)}}
+  @keyframes wbcpulse{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
+
+  /* size scale */
+  .sizebar{margin-top:12px;}
+  .sizetrack{display:flex;border-radius:9px;overflow:hidden;border:1px solid var(--line);font-size:11.5px;font-weight:700;text-align:center;}
+  .sizetrack div{flex:1;padding:7px 4px;color:#6a5f52;transition:.2s;}
+  .sizetrack .micro{background:#fdecd6;} .sizetrack .normo{background:#e7f0e4;} .sizetrack .macro{background:#e6ecf7;}
+  .sizetrack div.on{color:#fff;} .sizetrack .micro.on{background:#d99321;} .sizetrack .normo.on{background:#3fa66a;} .sizetrack .macro.on{background:#3f6fd6;}
+  .sizetrack small{display:block;font-weight:500;font-size:9.5px;opacity:.8;}
+
+  /* CBC */
+  .cbc{margin-top:12px;background:#12100e;border-radius:11px;padding:11px;}
+  .cbc .r{display:flex;justify-content:space-between;align-items:baseline;padding:5px 4px;border-bottom:1px solid #241f1a;}
+  .cbc .r:last-child{border-bottom:none;}
+  .cbc .k{font-size:12px;color:#b7ab9c;} .cbc .k small{color:#7a7062;font-size:10.5px;}
+  .cbc .v{font-family:var(--mono);font-size:22px;}
+
+  #stage{border-radius:12px;padding:11px 14px;margin-bottom:12px;color:#fff;font-weight:700;font-size:17px;text-align:center;background:#b1506a;}
+  #stage small{display:block;font-weight:500;font-size:13px;opacity:.93;margin-top:2px;}
+  .defgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+  .defgrid button{border:1px solid var(--line);background:#fff;color:var(--ink);font-family:var(--sans);font-weight:700;font-size:14px;padding:11px 8px;border-radius:11px;cursor:pointer;transition:.12s;text-align:left;line-height:1.15;}
+  .defgrid button small{display:block;font-weight:500;font-size:11px;color:var(--muted);margin-top:2px;}
+  .defgrid button.on{background:#a63333;color:#fff;border-color:transparent;} .defgrid button.on small{color:rgba(255,255,255,.9);}
+
+  #info{border:1px solid var(--line);border-left:5px solid #a63333;background:#fdf3f2;border-radius:10px;padding:12px 13px;}
+  #info .n{font-family:var(--disp);font-weight:700;font-size:18px;color:#a63333;}
+  #info .tag{display:inline-block;font-size:12px;font-weight:700;padding:2px 10px;border-radius:20px;margin:6px 6px 6px 0;}
+  #info .tag.micro{background:#fbe6c9;color:#8a5a15;} #info .tag.normo{background:#dcefe0;color:#245a35;} #info .tag.macro{background:#dde8f8;color:#22467e;}
+  #info .plain{font-size:15px;line-height:1.5;color:#2a2420;margin-top:8px;font-weight:600;}
+  #info .analogy{font-size:13.5px;color:#a63333;font-style:italic;margin-top:6px;}
+  #info .story{font-size:13.5px;line-height:1.5;color:#3a3630;margin-top:9px;background:#fff;border-radius:8px;padding:9px 11px;border:1px solid #eed6d3;}
+  #info .clin{margin-top:9px;border-top:1px dashed #e6cdc9;padding-top:4px;}
+  #info .clin .row{font-size:12.5px;color:#5c5248;line-height:1.4;margin-top:5px;} #info .clin b{color:#7a3330;}
+  .pearl{background:#fdf0ec;border:1px solid #f0cdc4;border-radius:10px;padding:10px 12px;margin-top:12px;font-size:12.8px;line-height:1.5;color:#7a3a2a;} .pearl b{color:#5a2418;}
+  @media (max-width:880px){ .wrap{grid-template-columns:1fr;} }
+</style>
+</head>
+<body>
+<header>
+  <h1>Anemia Explorer</h1>
+  <div class="sub">Blood smear morphology &amp; the CBC · Week 9</div>
+  <div class="intro"><b>Anemia</b> = not enough healthy red cells (or hemoglobin) to carry oxygen. To sort out the cause, look at <b>the size of the red cells (MCV)</b>: <b>small</b> (microcytic), <b>normal</b> (normocytic), or <b>large</b> (macrocytic). Click a type to see its smear and labs.</div>
+</header>
+
+<div class="wrap">
+  <div>
+    <div class="card">
+      <h2>Under the microscope</h2>
+      <div class="desc">A blood smear for each anemia. Watch the red cells change <b>size</b>, <b>colour</b> (pallor = low hemoglobin), and <b>shape</b>.</div>
+      <svg id="smear" viewBox="0 0 340 300" aria-label="blood smear"></svg>
+      <div class="sizebar">
+        <div class="sizetrack" id="sizeTrack">
+          <div class="micro" data-s="micro">Microcytic<small>MCV &lt; 80</small></div>
+          <div class="normo" data-s="normo">Normocytic<small>MCV 80–100</small></div>
+          <div class="macro" data-s="macro">Macrocytic<small>MCV &gt; 100</small></div>
+        </div>
+      </div>
+      <div class="cbc" id="cbc"></div>
+    </div>
+  </div>
+
+  <div>
+    <div id="stage">Pick an anemia<small>Four classic red-cell disorders</small></div>
+    <div class="card">
+      <h2>👆 Pick an anemia</h2>
+      <div class="defgrid" id="defSeg">
+        <button data-d="iron" class="on">Iron Deficiency<small>small &amp; pale</small></button>
+        <button data-d="b12">B12 / Pernicious<small>large cells</small></button>
+        <button data-d="aplastic">Aplastic<small>marrow failure</small></button>
+        <button data-d="sickle">Sickle Cell<small>crescent shape</small></button>
+      </div>
+    </div>
+    <div class="card" style="margin-top:16px;"><h2>This anemia</h2><div id="info"></div></div>
+    <div class="card" style="margin-top:16px;">
+      <h2>General anemia symptoms</h2>
+      <div class="desc">Whatever the cause, less oxygen delivery gives the same core signs:</div>
+      <div class="pearl">😮‍💨 <b>Fatigue &amp; weakness</b> · 🌡️ <b>pallor</b> (pale skin/conjunctiva) · 🫁 <b>shortness of breath</b> on exertion · 💓 <b>tachycardia</b> (the heart speeds up to move what little oxygen there is) · 🥶 cold intolerance, dizziness. Each specific anemia then <i>adds</i> its own tell-tale extras.</div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const $=id=>document.getElementById(id);
+  let cur='iron';
+
+  const INFO={
+    iron:{name:'Iron Deficiency Anemia',size:'micro',mcv:72,hgb:9.5,
+      key:{k:'Ferritin',kd:'iron stores',v:'▼ low',c:'#ff6a5f'},
+      plain:'Not enough iron to build hemoglobin, so the marrow makes small, pale red cells.',
+      analogy:'Like baking bread without enough flour — the loaves come out small and thin.',
+      story:'Hemoglobin needs iron. Run low on iron and each red cell is built <b>small (microcytic)</b> and <b>pale (hypochromic)</b> — you can see the big pale centres on the smear. <b>Ferritin is low</b> (empty iron stores) and transferrin rises to grab more iron.',
+      cause:'Chronic blood loss (heavy periods, GI bleed), low dietary iron, poor absorption, or high demand (pregnancy).',
+      sx:'General anemia symptoms + <b>pica</b> (craving ice/dirt) and <b>restless legs</b>.'},
+    b12:{name:'B12 / Pernicious Anemia',size:'macro',mcv:112,hgb:9.0,
+      key:{k:'Vitamin B12',kd:'& intrinsic factor',v:'▼ low',c:'#ff6a5f'},
+      plain:'Not enough vitamin B12 to finish building red cells, so they come out large and immature.',
+      analogy:'The cell runs out of a key ingredient before it\'s done — so it never shrinks to normal size.',
+      story:'B12 is needed to mature red cells. Without it they stay <b>large (macrocytic)</b>. The classic cause is <b>pernicious anemia</b> — the stomach stops making <b>intrinsic factor</b>, so B12 can\'t be absorbed. Because B12 also maintains nerves, you get <b>neurological</b> problems too.',
+      cause:'Pernicious anemia (no intrinsic factor), poor intake (vegan diet), or malabsorption.',
+      sx:'General anemia symptoms + <b>peripheral neuropathy</b> (numb/tingling feet) and CNS/memory changes.'},
+    aplastic:{name:'Aplastic Anemia',size:'normo',mcv:90,hgb:8.5,
+      key:{k:'Platelets & WBC',kd:'pancytopenia',v:'▼▼ low',c:'#ff6a5f'},
+      plain:'The bone-marrow factory shuts down and stops making ALL blood cells — not just red ones.',
+      analogy:'The whole factory goes dark, so red cells, white cells AND platelets all stop coming off the line.',
+      story:'The marrow fails, so you get <b>pancytopenia</b> — low red cells (anemia), low white cells (<b>infections</b>), and low platelets (<b>bleeding, bruising, petechiae</b>). The red cells that <i>are</i> made look normal-sized (<b>normocytic</b>) — there are just too few of everything.',
+      cause:'Radiation/chemotherapy, toxic chemicals, certain drugs, autoimmune disease, or viral infection.',
+      sx:'General anemia symptoms + <b>infections</b> (low WBC), <b>bleeding, bruising, petechiae</b> (low platelets).'},
+    sickle:{name:'Sickle Cell Anemia',size:'normo',mcv:88,hgb:8.0,
+      key:{k:'Hgb electrophoresis',kd:'HbS',v:'positive',c:'#e6c15a'},
+      plain:'A genetic hemoglobin defect warps red cells into stiff crescents when they\'re stressed.',
+      analogy:'Under low oxygen the smooth discs snap into rigid banana shapes that snag in narrow vessels.',
+      story:'An inherited (<b>autosomal recessive</b>) hemoglobin makes cells <b>sickle</b> when stressed — cold, dehydration, low oxygen, illness. The stiff sickled cells <b>jam small capillaries → blocked blood flow → ischemia → severe pain crises</b>. They can flip back to normal when conditions improve, but keep breaking down.',
+      cause:'Inherited (autosomal recessive) — two copies of the sickle hemoglobin gene.',
+      sx:'Severe <b>pain crises</b>, tissue <b>ischemia</b>, fatigue; triggered by cold, dehydration, infection, low oxygen.'}
+  };
+
+  // fixed cell layout (generated once so it stays stable across clicks)
+  const cells=[]; let seed=12345;
+  function rnd(){ seed=(seed*1103515245+12345)&0x7fffffff; return seed/0x7fffffff; }
+  (function(){ const cx=170,cy=145,R=118; let tries=0;
+    while(cells.length<22 && tries<800){ tries++;
+      const a=rnd()*6.283,r=Math.sqrt(rnd())*R, x=cx+Math.cos(a)*r, y=cy+Math.sin(a)*r;
+      if(cells.every(c=>Math.hypot(c.x-x,c.y-y)>36)) cells.push({x,y,rot:rnd()*360,flag:rnd(),skip:rnd()});
+    }
+  })();
+
+  function normalCell(x,y,r){ return '<circle cx="'+x+'" cy="'+y+'" r="'+r+'" fill="#d0524a"/><ellipse cx="'+x+'" cy="'+y+'" rx="'+(r*0.42)+'" ry="'+(r*0.36)+'" fill="#e79c8f"/>'; }
+
+  function drawSmear(type){
+    let s='<circle cx="170" cy="145" r="140" fill="#f7dfd9"/>';   // plasma field
+    cells.forEach(c=>{
+      if(type==='aplastic' && c.skip>0.5) return;                 // sparse marrow
+      let cs='';
+      if(type==='iron') cs='<circle cx="'+c.x+'" cy="'+c.y+'" r="10" fill="#dd7a6c"/><ellipse cx="'+c.x+'" cy="'+c.y+'" rx="6.5" ry="5.5" fill="#f2cdc2"/>';
+      else if(type==='b12') cs='<ellipse cx="'+c.x+'" cy="'+c.y+'" rx="19" ry="16" transform="rotate('+c.rot+' '+c.x+' '+c.y+')" fill="#c8483f"/><ellipse cx="'+c.x+'" cy="'+c.y+'" rx="3.5" ry="3" fill="#d67e70"/>';
+      else if(type==='sickle'){ if(c.flag<0.5){ cs='<path transform="rotate('+c.rot+' '+c.x+' '+c.y+')" d="M'+(c.x-13)+' '+(c.y-9)+' Q'+(c.x+15)+' '+c.y+' '+(c.x-13)+' '+(c.y+9)+' Q'+(c.x-1)+' '+c.y+' '+(c.x-13)+' '+(c.y-9)+' Z" fill="#b23a30"/>'; } else cs=normalCell(c.x,c.y,14); }
+      else cs=normalCell(c.x,c.y,14);
+      s+='<g style="animation:cfloat '+(2.3+c.flag*1.8).toFixed(2)+'s ease-in-out infinite;animation-delay:'+(c.skip*-2.5).toFixed(2)+'s">'+cs+'</g>';
+    });
+    // a few platelets + one WBC for context (reduced in aplastic)
+    const plts = type==='aplastic'?1:5;
+    for(let i=0;i<plts;i++){ const c=cells[(i*4+2)%cells.length]; s+='<circle cx="'+(c.x+16)+'" cy="'+(c.y+15)+'" r="3" fill="#8a54c0"/>'; }
+    if(type!=='aplastic'){ const w=cells[6]; s+='<circle cx="'+w.x+'" cy="'+w.y+'" r="17" fill="#dfe6f2" stroke="#9fb0d0" stroke-width="1.5"/><path d="M'+(w.x-6)+' '+w.y+' a6 6 0 1 0 12 0 a6 6 0 1 0 -12 0" fill="#7a5fb0"/>'; }
+    $('smear').innerHTML=s;
+  }
+
+  function render(){
+    const inf=INFO[cur];
+    drawSmear(cur);
+    document.querySelectorAll('#defSeg button').forEach(b=>b.classList.toggle('on',b.dataset.d===cur));
+    // size track
+    document.querySelectorAll('#sizeTrack div').forEach(d=>d.classList.toggle('on',d.dataset.s===inf.size));
+    // CBC
+    const arrow = inf.mcv<80?'<span style="color:#ffb44a">▼</span>':inf.mcv>100?'<span style="color:#6fa0ff">▲</span>':'<span style="color:#6fce8f">●</span>';
+    $('cbc').innerHTML=
+      '<div class="r"><span class="k">Hemoglobin <small>(N 12–18)</small></span><span class="v" style="color:#ff6a5f">'+inf.hgb.toFixed(1)+' <span style="font-size:13px">g/dL ▼</span></span></div>'
+     +'<div class="r"><span class="k">MCV — cell size <small>(N 80–100)</small></span><span class="v" style="color:'+(inf.mcv<80?'#ffb44a':inf.mcv>100?'#6fa0ff':'#6fce8f')+'">'+inf.mcv+' '+arrow+'</span></span></div>'
+     +'<div class="r"><span class="k">'+inf.key.k+' <small>'+inf.key.kd+'</small></span><span class="v" style="color:'+inf.key.c+';font-size:19px">'+inf.key.v+'</span></div>';
+    // stage
+    const sizeName={micro:'Microcytic',normo:'Normocytic',macro:'Macrocytic'}[inf.size];
+    $('stage').innerHTML=inf.name+'<small>'+sizeName+' (MCV '+inf.mcv+')</small>';
+    // info
+    let h='<div class="n">'+inf.name+'</div><div class="tag '+inf.size+'">'+sizeName+' · MCV '+inf.mcv+'</div>';
+    h+='<div class="plain">'+inf.plain+'</div>';
+    h+='<div class="analogy">🔬 '+inf.analogy+'</div>';
+    h+='<div class="story"><b>What\'s happening:</b> '+inf.story+'</div>';
+    h+='<div class="clin"><div class="row"><b>Causes:</b> '+inf.cause+'</div><div class="row"><b>Tell-tale symptoms:</b> '+inf.sx+'</div></div>';
+    $('info').innerHTML=h;
+  }
+  document.querySelectorAll('#defSeg button').forEach(b=>b.addEventListener('click',()=>{ cur=b.dataset.d; render(); }));
+  render();
+})();
+</script>
+</body>
+</html>

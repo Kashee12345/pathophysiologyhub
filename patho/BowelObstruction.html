@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f7f2ea">
+<title>Bowel Obstruction — Small vs Large</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{ --card:#fffdf8; --ink:#2a2420; --muted:#7a6f63; --line:#e3d8c6;
+    --sans:'Inter',system-ui,sans-serif; --disp:'Cinzel Decorative',serif; --accent:#a5702a; }
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  body{background:linear-gradient(160deg,#f9f4ea,#ece7dc);color:var(--ink);font-family:var(--sans);min-height:100vh;padding:18px 16px 44px;}
+  header{max-width:1120px;margin:0 auto 16px;text-align:center;}
+  h1{font-family:var(--disp);font-weight:900;font-size:clamp(21px,4vw,34px);color:#96631f;line-height:1.05;}
+  header .sub{color:var(--muted);font-size:15px;margin-top:4px;}
+  header .intro{max-width:870px;margin:10px auto 0;font-size:14.5px;line-height:1.5;color:#5c5248;}
+  header .intro b{color:#96631f;} .sm{color:#c0763a;font-weight:700;} .lg{color:#6a8a3a;font-weight:700;}
+  .wrap{max-width:1120px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;box-shadow:0 6px 22px rgba(120,90,40,.07);}
+  .card h2{font-family:var(--disp);font-weight:700;font-size:16px;color:#96631f;margin-bottom:6px;}
+  .card h2 + .desc{font-size:13px;color:var(--muted);margin-bottom:10px;line-height:1.4;}
+  svg{display:block;width:100%;height:auto;}
+  #gi{max-height:330px;} #mini{max-height:120px;}
+  #liveCap{margin-top:8px;background:#f5ecdb;border:1px solid #e3d3ae;border-radius:10px;padding:10px 13px;font-size:14px;line-height:1.5;color:#6a4e1a;text-align:center;} #liveCap b{color:#7a5410;}
+
+  @keyframes swell{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
+  .swell{animation:swell 2.2s ease-in-out infinite;transform-origin:center;}
+  @keyframes block{0%,100%{opacity:.6}50%{opacity:1}}
+  .block{animation:block 1.2s ease-in-out infinite;}
+  @keyframes churn{0%,100%{transform:translateX(0)}50%{transform:translateX(2px)}}
+  .churn{animation:churn 1.6s ease-in-out infinite;}
+
+  #stage{border-radius:12px;padding:11px 14px;margin-bottom:12px;color:#fff;font-weight:700;font-size:16px;text-align:center;background:#b08a3a;}
+  #stage small{display:block;font-weight:500;font-size:13px;opacity:.93;margin-top:2px;}
+  .seg{display:flex;border:1px solid var(--line);border-radius:11px;overflow:hidden;margin-bottom:4px;}
+  .seg button{flex:1;border:none;background:#fff;color:var(--ink);font-family:var(--sans);font-weight:700;font-size:13.5px;padding:12px 6px;cursor:pointer;transition:.12s;line-height:1.15;}
+  .seg button small{display:block;font-weight:500;font-size:10px;color:var(--muted);margin-top:2px;}
+  .seg button.on{color:#fff;} .seg button.on small{color:rgba(255,255,255,.9);}
+  .seg button.sbo.on{background:#c0763a;} .seg button.lbo.on{background:#6a8a3a;}
+
+  .causes{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px;}
+  .cbtn{border:1px solid var(--line);background:#fff;border-radius:9px;padding:7px 11px;font-size:12px;font-weight:700;color:#5c5248;cursor:pointer;transition:.12s;}
+  .cbtn:hover{transform:translateY(-2px);} .cbtn.on{background:#96631f;color:#fff;border-color:transparent;}
+
+  #info{border:1px solid var(--line);border-left:5px solid var(--accent);background:#f7f1e6;border-radius:10px;padding:12px 13px;margin-top:12px;}
+  #info .n{font-family:var(--disp);font-weight:700;font-size:16px;color:#96631f;}
+  #info .story{font-size:13px;line-height:1.5;color:#3a3630;margin-top:7px;background:#fff;border-radius:8px;padding:9px 11px;border:1px solid #e6dcc6;}
+  table{width:100%;border-collapse:collapse;margin-top:10px;font-size:12.2px;}
+  th,td{padding:6px 8px;text-align:left;border-bottom:1px solid var(--line);}
+  th{font-size:10.5px;text-transform:uppercase;color:var(--muted);}
+  td.s{color:#a5652a;} td.l{color:#5a7a2a;} .feat{font-weight:700;color:#4a4038;}
+  @media (max-width:880px){ .wrap{grid-template-columns:1fr;} }
+</style>
+</head>
+<body>
+<header>
+  <h1>Bowel Obstruction</h1>
+  <div class="sub">When the gut plumbing backs up · Week 13</div>
+  <div class="intro">Block the intestine and everything behind the block <b>backs up and swells</b>. Where it happens changes the whole picture: a <span class="sm">small-bowel</span> obstruction vomits early and distends a little; a <span class="lg">large-bowel</span> obstruction constipates absolutely and blows the belly up over days. Pick a level, then explore what causes it.</div>
+</header>
+
+<div class="wrap">
+  <div>
+    <div class="card">
+      <h2>The blockage</h2>
+      <div class="desc">Bowel loops before the block fill with gas and fluid and swell; nothing gets past to the other side.</div>
+      <svg id="gi" viewBox="0 0 300 300" aria-label="bowel obstruction"></svg>
+      <div id="liveCap">Pick small or large bowel to begin.</div>
+    </div>
+  </div>
+  <div>
+    <div id="stage">Pick the level<small>small bowel · large bowel</small></div>
+    <div class="card">
+      <div class="seg" id="seg">
+        <button data-d="sbo" class="sbo on">Small Bowel<small>SBO</small></button>
+        <button data-d="lbo" class="lbo">Large Bowel<small>LBO</small></button>
+      </div>
+      <table id="tbl">
+        <tr><th>Feature</th><th style="color:#a5652a">SBO</th><th style="color:#5a7a2a">LBO</th></tr>
+        <tr><td class="feat">Pain</td><td class="s">Central, colicky, cramping</td><td class="l">Crampy, lower, long-lasting</td></tr>
+        <tr><td class="feat">Vomiting</td><td class="s">Frequent, severe, food-like</td><td class="l">Minimal / late (feculent)</td></tr>
+        <tr><td class="feat">Stool</td><td class="s">Some, then obstipation</td><td class="l">Absolute constipation</td></tr>
+        <tr><td class="feat">Distension</td><td class="s">Mild, fast</td><td class="l">Massive, slow to build</td></tr>
+        <tr><td class="feat">Metabolic</td><td class="s">Alkalosis (vomiting)</td><td class="l">Less pronounced</td></tr>
+      </table>
+    </div>
+    <div class="card" style="margin-top:16px;">
+      <h2>What causes it? <span style="font-weight:400;font-size:12px;color:var(--muted)">(tap one)</span></h2>
+      <div class="causes" id="causes">
+        <button class="cbtn on" data-c="adhesion">Adhesions</button>
+        <button class="cbtn" data-c="hernia">Strangulated hernia</button>
+        <button class="cbtn" data-c="intuss">Intussusception</button>
+        <button class="cbtn" data-c="volvulus">Volvulus</button>
+        <button class="cbtn" data-c="tumor">Tumor</button>
+        <button class="cbtn" data-c="ischemic">Ischemic</button>
+      </div>
+      <svg id="mini" viewBox="0 0 300 110" aria-label="cause mechanism"></svg>
+      <div id="info"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const $=id=>document.getElementById(id);
+  let level='sbo', cause='adhesion';
+  const CAUSES={
+    adhesion:{name:'Adhesions',lvl:'sbo',
+      story:'Bands of <b>scar tissue</b> from previous surgery kink or tether a loop of bowel shut. The <b>#1 cause of small-bowel obstruction</b>.'},
+    hernia:{name:'Strangulated hernia',lvl:'sbo',
+      story:'A loop of bowel pokes through a weak spot and gets <b>trapped and squeezed</b> — cutting off its blood supply (strangulation). A surgical emergency.'},
+    intuss:{name:'Intussusception',lvl:'sbo',
+      story:'One segment of bowel <b>telescopes into the next</b>, like collapsing a spyglass. Common in <b>kids</b>.'},
+    volvulus:{name:'Volvulus',lvl:'lbo',
+      story:'A loop of bowel <b>twists around itself</b>, pinching off both the passage and the blood supply. A classic <b>large-bowel</b> cause.'},
+    tumor:{name:'Tumor (colon cancer)',lvl:'lbo',
+      story:'A <b>mass grows into the lumen</b> and slowly narrows it until stool can\'t pass. A leading cause of <b>large-bowel</b> obstruction.'},
+    ischemic:{name:'Ischemic',lvl:'lbo',
+      story:'Loss of blood supply <b>stops peristalsis</b> — the bowel goes limp and can\'t push contents along (a functional blockage).'}
+  };
+
+  function drawMain(){
+    const sbo = level==='sbo'; let s='';
+    // draw a run of bowel loops left->right; block somewhere; loops before block are swollen
+    // frame (abdomen)
+    s+='<rect x="16" y="16" width="268" height="268" rx="26" fill="#faf4ea" stroke="#e0d2b8" stroke-width="2"/>';
+    if(sbo){
+      // coiled small bowel, swollen proximal loops, block mid
+      s+='<g class="swell">';
+      s+='<path d="M60 90 c-26 0 -26 26 0 26 c30 0 30 28 0 28 c-26 0 -26 24 0 24" fill="none" stroke="#e8a86a" stroke-width="26" stroke-linecap="round"/>';
+      s+='</g>';
+      s+='<text x="60" y="80" font-size="10" font-weight="700" fill="#a5652a">swollen loops (gas + fluid)</text>';
+      // decompressed distal
+      s+='<path d="M150 168 c34 0 34 22 60 22" fill="none" stroke="#f0cba8" stroke-width="12" stroke-linecap="round"/>';
+      s+='<text x="215" y="205" font-size="9.5" font-weight="700" fill="#b09070">collapsed (empty)</text>';
+      // block point
+      s+='<g class="block"><circle cx="150" cy="168" r="13" fill="#a5392e"/><path d="M143 161 l14 14 M157 161 l-14 14" stroke="#fff" stroke-width="2.5"/></g>';
+      s+='<text x="150" y="235" text-anchor="middle" font-size="10.5" font-weight="800" fill="#a5392e">BLOCK (small bowel)</text>';
+    } else {
+      // colon frame (big loop) swollen, block low-left (sigmoid)
+      s+='<g class="swell"><path d="M80 230 L80 90 C80 78 90 72 104 72 L196 72 C210 72 220 78 220 90 L220 200" fill="none" stroke="#a8c26a" stroke-width="30" stroke-linecap="round"/></g>';
+      s+='<text x="150" y="60" text-anchor="middle" font-size="10" font-weight="700" fill="#5a7a2a">massively distended colon</text>';
+      // descending to block low
+      s+='<path d="M220 200 C220 230 200 244 176 244 L120 244" fill="none" stroke="#c0d890" stroke-width="26" stroke-linecap="round"/>';
+      // block
+      s+='<g class="block"><circle cx="110" cy="244" r="13" fill="#7a5410"/><path d="M103 237 l14 14 M117 237 l-14 14" stroke="#fff" stroke-width="2.5"/></g>';
+      s+='<text x="150" y="272" text-anchor="middle" font-size="10.5" font-weight="800" fill="#5a7a2a">BLOCK (large bowel, low)</text>';
+    }
+    $('gi').innerHTML=s;
+  }
+  function drawMini(){
+    let s=''; const c=cause;
+    // simple mechanism illustration in 300x110
+    if(c==='adhesion'){
+      s+='<path d="M30 55 h240" stroke="#e8a86a" stroke-width="22" stroke-linecap="round"/>';
+      s+='<path d="M120 30 L150 80 M150 30 L120 80" stroke="#8a6a4a" stroke-width="4"/>';
+      s+='<text x="150" y="20" text-anchor="middle" font-size="10" fill="#8a6a4a">scar bands pinch the loop</text>';
+    } else if(c==='hernia'){
+      s+='<rect x="30" y="30" width="240" height="50" rx="12" fill="none" stroke="#d8c3a8" stroke-width="3"/>';
+      s+='<path d="M140 55 h60" stroke="#e8a86a" stroke-width="20" stroke-linecap="round"/>';
+      s+='<circle cx="200" cy="55" r="18" fill="#e88a6a" stroke="#a5392e" stroke-width="3"/>';
+      s+='<text x="150" y="100" text-anchor="middle" font-size="10" fill="#8a4a2a">loop trapped &amp; squeezed through the wall</text>';
+    } else if(c==='intuss'){
+      s+='<path d="M30 55 h130" stroke="#e8a86a" stroke-width="24" stroke-linecap="round"/>';
+      s+='<path d="M150 55 h100" stroke="#c0763a" stroke-width="34" stroke-linecap="round"/>';
+      s+='<path d="M150 55 h60" stroke="#e8a86a" stroke-width="16" stroke-linecap="round"/>';
+      s+='<text x="150" y="100" text-anchor="middle" font-size="10" fill="#8a5a2a">one segment telescopes into the next</text>';
+    } else if(c==='volvulus'){
+      s+='<path d="M60 55 C120 15 180 95 240 55" fill="none" stroke="#a8c26a" stroke-width="22" stroke-linecap="round"/>';
+      s+='<circle cx="150" cy="55" r="14" fill="#7a5410"/>';
+      s+='<text x="150" y="100" text-anchor="middle" font-size="10" fill="#5a7a2a">the loop twists around itself</text>';
+    } else if(c==='tumor'){
+      s+='<path d="M30 55 h240" stroke="#c0d890" stroke-width="26" stroke-linecap="round"/>';
+      s+='<path d="M30 55 h240" stroke="#eef4e0" stroke-width="10" stroke-linecap="round"/>';
+      s+='<circle cx="150" cy="48" r="15" fill="#6a4a6a"/>';
+      s+='<text x="150" y="100" text-anchor="middle" font-size="10" fill="#5a7a2a">a mass grows into the lumen</text>';
+    } else {
+      s+='<path d="M30 55 h240" stroke="#b0b0a0" stroke-width="24" stroke-linecap="round"/>';
+      s+='<path d="M60 40 L90 70 M60 70 L90 40" stroke="#a5392e" stroke-width="3"/>';
+      s+='<text x="180" y="48" text-anchor="middle" font-size="10" fill="#7a5a5a">no blood flow</text>';
+      s+='<text x="150" y="100" text-anchor="middle" font-size="10" fill="#7a6a5a">peristalsis stops — limp bowel</text>';
+    }
+    $('mini').innerHTML=s;
+  }
+  function render(){
+    drawMain(); drawMini();
+    document.querySelectorAll('#seg button').forEach(b=>b.classList.toggle('on',b.dataset.d===level));
+    document.querySelectorAll('#causes .cbtn').forEach(b=>b.classList.toggle('on',b.dataset.c===cause));
+    $('stage').style.background = level==='sbo'? '#c0763a':'#6a8a3a';
+    $('stage').innerHTML=(level==='sbo'?'Small Bowel Obstruction':'Large Bowel Obstruction')+'<small>'+(level==='sbo'?'vomits early · mild fast distension':'absolute constipation · massive distension')+'</small>';
+    const cs=CAUSES[cause];
+    $('info').innerHTML='<div class="n">'+cs.name+' <span style="font-size:11px;color:'+(cs.lvl==='sbo'?'#a5652a':'#5a7a2a')+'">· usually '+(cs.lvl==='sbo'?'small':'large')+' bowel</span></div><div class="story">'+cs.story+'</div>';
+    $('liveCap').innerHTML = level==='sbo'
+      ? 'Loops before the block <b>swell with gas &amp; fluid</b>; the patient <b>vomits early</b> and distends a little.'
+      : 'The colon <b>balloons massively</b> over days; the patient is <b>absolutely constipated</b> with little vomiting.';
+  }
+  document.querySelectorAll('#seg button').forEach(b=>b.addEventListener('click',()=>{ level=b.dataset.d; render(); }));
+  document.querySelectorAll('#causes .cbtn').forEach(b=>b.addEventListener('click',()=>{ cause=b.dataset.c; level=CAUSES[cause].lvl; render(); }));
+  render();
+})();
+</script>
+</body>
+</html>

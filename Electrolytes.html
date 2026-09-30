@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f7f2ea">
+<title>Electrolytes</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{ --card:#fffdf8; --ink:#2a2420; --muted:#7a6f63; --line:#e3d8c6;
+    --sans:'Inter',system-ui,sans-serif; --disp:'Cinzel Decorative',serif; --accent:#5a7a9a; }
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  body{background:linear-gradient(160deg,#f0f3f7,#e8eb ee);background:linear-gradient(160deg,#f0f3f7,#e8ebee);color:var(--ink);font-family:var(--sans);min-height:100vh;padding:18px 16px 44px;}
+  header{max-width:1120px;margin:0 auto 16px;text-align:center;}
+  h1{font-family:var(--disp);font-weight:900;font-size:clamp(22px,4.2vw,36px);color:#456;line-height:1.05;color:#3f5f7f;}
+  header .sub{color:var(--muted);font-size:15px;margin-top:4px;}
+  header .intro{max-width:850px;margin:10px auto 0;font-size:14.5px;line-height:1.5;color:#5c5248;}
+  header .intro b{color:#3f5f7f;}
+  .wrap{max-width:1120px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;box-shadow:0 6px 22px rgba(60,80,120,.07);}
+  .card h2{font-family:var(--disp);font-weight:700;font-size:16px;color:#3f5f7f;margin-bottom:6px;}
+  .card h2 + .desc{font-size:13px;color:var(--muted);margin-bottom:10px;line-height:1.4;}
+
+  .picker{display:grid;grid-template-columns:repeat(5,1fr);gap:7px;margin-bottom:6px;}
+  .eb{border:1px solid var(--line);background:#fff;border-radius:11px;padding:11px 4px;cursor:pointer;text-align:center;transition:.12s;}
+  .eb .sym{font-family:var(--disp);font-weight:800;font-size:17px;color:#3f5f7f;}
+  .eb .nm{font-size:10px;color:var(--muted);margin-top:1px;}
+  .eb:hover{transform:translateY(-2px);}
+  .eb.on{border-color:transparent;color:#fff;} .eb.on .sym,.eb.on .nm{color:#fff;}
+
+  .valbig{text-align:center;margin:6px 0 4px;}
+  .valbig .v{font-family:var(--disp);font-weight:900;font-size:38px;line-height:1;}
+  .valbig .u{font-size:13px;color:var(--muted);}
+  .zone{display:inline-block;margin-top:6px;font-size:13px;font-weight:800;border-radius:20px;padding:4px 16px;}
+  .zone.lowz{background:#e6eefb;color:#2f5aa0;} .zone.norm{background:#e4f2e8;color:#2f7d50;} .zone.highz{background:#f6e0dc;color:#a5392e;}
+
+  .gauge{position:relative;height:34px;border-radius:17px;margin:14px 0 4px;overflow:hidden;
+    background:linear-gradient(90deg,#e79aa0 0%,#e79aa0 var(--lo),#8ed6a6 var(--lo),#8ed6a6 var(--hi),#e79aa0 var(--hi),#e79aa0 100%);}
+  .gauge .band{position:absolute;top:0;height:100%;border-left:2px dashed #4a4038;border-right:2px dashed #4a4038;}
+  .marker{position:absolute;top:-5px;width:6px;height:44px;background:#2a2420;border-radius:3px;transition:left .1s;box-shadow:0 0 0 3px rgba(255,255,255,.6);}
+  .scalelbl{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-bottom:10px;}
+  input[type=range]{width:100%;accent-color:#5a7a9a;height:26px;cursor:pointer;}
+  .rangeref{text-align:center;font-size:12.5px;color:var(--muted);margin-top:2px;} .rangeref b{color:#2f7d50;}
+
+  #panel{border:1px solid var(--line);border-left:5px solid var(--accent);background:#eef2f7;border-radius:10px;padding:12px 13px;margin-top:6px;}
+  #panel .fn{font-size:13.5px;line-height:1.5;color:#2a2420;} #panel .fn b{color:#3f5f7f;}
+  #panel .hint{margin-top:7px;font-size:12.5px;color:#5c5248;background:#fff;border-radius:8px;padding:8px 10px;border:1px solid #d7dfea;} #panel .hint b{color:#a5651c;}
+  .sx{margin-top:10px;} .sx .lbl{font-size:11.5px;font-weight:700;text-transform:uppercase;color:var(--muted);letter-spacing:.03em;margin-bottom:5px;}
+  .sx .list{font-size:13px;line-height:1.5;color:#3a3630;background:#fff;border-radius:8px;padding:9px 11px;border:1px solid #e0d8ea;}
+  @media (max-width:880px){ .wrap{grid-template-columns:1fr;} }
+</style>
+</head>
+<body>
+<header>
+  <h1>Electrolytes</h1>
+  <div class="sub">The big five — ranges, jobs &amp; what goes wrong · Week 1</div>
+  <div class="intro">Each electrolyte lives in a narrow, safe range. Pick one, then <b>drag the level</b> below normal (hypo-) or above normal (hyper-) and watch what happens to the body. Green is the safe zone; red is danger.</div>
+</header>
+
+<div class="wrap">
+  <div>
+    <div class="card">
+      <h2>Pick an electrolyte</h2>
+      <div class="picker" id="picker">
+        <button class="eb on" data-e="na"><div class="sym">Na⁺</div><div class="nm">Sodium</div></button>
+        <button class="eb" data-e="k"><div class="sym">K⁺</div><div class="nm">Potassium</div></button>
+        <button class="eb" data-e="ca"><div class="sym">Ca</div><div class="nm">Calcium</div></button>
+        <button class="eb" data-e="p"><div class="sym">P</div><div class="nm">Phosphate</div></button>
+        <button class="eb" data-e="mg"><div class="sym">Mg</div><div class="nm">Magnesium</div></button>
+      </div>
+      <div class="valbig"><span class="v" id="valV">140</span> <span class="u" id="valU">mEq/L</span><br><span class="zone norm" id="zone">Normal</span></div>
+      <div class="gauge" id="gauge"><div class="band" id="band"></div><div class="marker" id="marker"></div></div>
+      <div class="scalelbl"><span id="scLo">115</span><span id="scHi">165</span></div>
+      <input type="range" id="slider" min="0" max="100" value="50">
+      <div class="rangeref">Normal range: <b id="rangeTxt">135–145 mEq/L</b></div>
+    </div>
+  </div>
+  <div>
+    <div class="card" style="--accent:#5a7a9a;">
+      <h2 id="eName">Sodium (Na⁺)</h2>
+      <div id="panel">
+        <div class="fn" id="fn"></div>
+        <div class="hint" id="hint"></div>
+        <div class="sx"><div class="lbl" id="sxLbl">In range</div><div class="list" id="sxList"></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const $=id=>document.getElementById(id);
+  const E={
+    na:{name:'Sodium (Na⁺)',unit:'mEq/L',lo:135,hi:145,sMin:115,sMax:165,color:'#c0763a',
+      fn:'<b>Fluid balance</b>, controlled by the kidneys.',
+      hint:'<b>Water follows sodium</b> — wherever Na⁺ goes, water shifts too.',
+      hypo:'Hyponatremia: water shifts into cells → <b>confusion, headache, seizures, cerebral edema</b>.',
+      hyper:'Hypernatremia: cells dry out → <b>intense thirst, dry mucous membranes, restlessness, neuro changes</b>.'},
+    k:{name:'Potassium (K⁺)',unit:'mEq/L',lo:3.5,hi:5.0,sMin:2.0,sMax:7.5,color:'#c0392b',
+      fn:'<b>Cardiac contractility</b> and acid/base regulation.',
+      hint:'<b>K⁺ = "Cardiac."</b> Both high and low K⁺ are dangerous to the heart.',
+      hypo:'Hypokalemia: <b>weakness, cramps, arrhythmias, flat T waves + U waves</b> on ECG.',
+      hyper:'Hyperkalemia: <b>peaked T waves, arrhythmias, cardiac arrest</b> — a true emergency.'},
+    ca:{name:'Calcium (Ca)',unit:'mg/dL',lo:9.0,hi:10.5,sMin:6.0,sMax:13.5,color:'#3a86b0',
+      fn:'<b>Muscle contraction</b>, neurotransmitter release, and blood <b>coagulation</b>.',
+      hint:'Ranges are the <b>opposite of phosphate</b> — when Ca is up, phosphate is down.',
+      hypo:'Hypocalcemia: nerves fire too easily → <b>tetany, twitching, Trousseau &amp; Chvostek signs</b>.',
+      hyper:'Hypercalcemia: <b>"stones, bones, groans, and moans"</b> — kidney stones, bone pain, constipation, weakness.'},
+    p:{name:'Phosphate (P)',unit:'mg/dL',lo:2.5,hi:4.5,sMin:1.0,sMax:7.0,color:'#8a5aa0',
+      fn:'<b>Membrane stability</b>, bone &amp; teeth, cell energy (ATP), and DNA/RNA.',
+      hint:'Ranges are the <b>opposite of calcium</b> (they see-saw).',
+      hypo:'Hypophosphatemia: <b>muscle weakness, poor energy (low ATP), bone pain</b>.',
+      hyper:'Hyperphosphatemia: pulls calcium down → <b>the symptoms of low calcium</b> (tetany); common in kidney disease.'},
+    mg:{name:'Magnesium (Mg)',unit:'mEq/L',lo:1.3,hi:2.1,sMin:0.5,sMax:3.5,color:'#3a8a6a',
+      fn:'<b>Muscle relaxant</b> and helps <b>regulate potassium</b>.',
+      hint:'Its function is the <b>opposite of calcium</b> — Mg calms/relaxes, Ca excites.',
+      hypo:'Hypomagnesemia: too little "brake" → <b>hyperreflexia, tetany, tremor, arrhythmias</b> (often with low K⁺).',
+      hyper:'Hypermagnesemia: too much "brake" → <b>hyporeflexia, weakness, bradycardia, low BP</b>.'}
+  };
+  let cur='na';
+
+  function valFromSlider(e,s){ return e.sMin + (e.sMax-e.sMin)*(s/100); }
+  function pct(e,v){ return (v-e.sMin)/(e.sMax-e.sMin)*100; }
+  function render(){
+    const e=E[cur];
+    document.querySelectorAll('.eb').forEach(b=>{ b.classList.toggle('on',b.dataset.e===cur); if(b.dataset.e===cur) b.style.background=e.color; else b.style.background=''; });
+    const s=+$('slider').value;
+    const v=valFromSlider(e,s);
+    const decimals = e.unit==='mg/dL'||e.hi<20? 1:0;
+    $('valV').textContent = v.toFixed(decimals);
+    $('valU').textContent = e.unit;
+    $('scLo').textContent = e.sMin; $('scHi').textContent = e.sMax;
+    $('rangeTxt').textContent = e.lo+'–'+e.hi+' '+e.unit;
+    $('eName').textContent = e.name;
+    // gauge band + marker positions
+    const loP=pct(e,e.lo), hiP=pct(e,e.hi);
+    $('gauge').style.setProperty('--lo',loP+'%');
+    $('gauge').style.setProperty('--hi',hiP+'%');
+    $('band').style.left=loP+'%'; $('band').style.width=(hiP-loP)+'%';
+    $('marker').style.left='calc('+pct(e,v)+'% - 3px)';
+    // zone
+    let zone,zClass;
+    if(v<e.lo){ zone='LOW (hypo-)'; zClass='lowz'; }
+    else if(v>e.hi){ zone='HIGH (hyper-)'; zClass='highz'; }
+    else { zone='Normal'; zClass='norm'; }
+    $('zone').textContent=zone; $('zone').className='zone '+zClass;
+    $('marker').style.background = zClass==='norm'? '#2f7d50' : '#c0392b';
+    // panel
+    $('fn').innerHTML='<b>Function:</b> '+e.fn;
+    $('hint').innerHTML='💡 '+e.hint;
+    if(v<e.lo){ $('sxLbl').textContent='When it drops (hypo-)'; $('sxList').innerHTML=e.hypo; }
+    else if(v>e.hi){ $('sxLbl').textContent='When it climbs (hyper-)'; $('sxList').innerHTML=e.hyper; }
+    else { $('sxLbl').textContent='In range'; $('sxList').innerHTML='This level is <b>within normal limits</b> — the body works normally. Drag below or above the green band to see what goes wrong.'; }
+  }
+  document.querySelectorAll('.eb').forEach(b=>b.addEventListener('click',()=>{ cur=b.dataset.e; $('slider').value=50; render(); }));
+  $('slider').addEventListener('input',render);
+  render();
+})();
+</script>
+</body>
+</html>

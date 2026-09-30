@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#8a2f36">
+<title>Exam Prep HQ · Pathophysiology</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="suite.css">
+<style>
+  /* palette over the shared suite styling */
+  :root{
+    --ink:#241f1b; --muted:#7a6f63; --faint:#9d9184; --line:#e6dccb; --bg:#f6f1e8; --card:#fffdf8;
+    --accent:#8a2f36; --accent-dk:#5e1f24; --accent-lt:#f7e9e9; --gold:#c99a2e; --gold-lt:#f7eeda;
+    --ok:#3f6b46; --ok-lt:#edf4ee; --bad:#a33228; --bad-lt:#fbeceb;
+  }
+  body{font-family:"Inter",system-ui,Arial,sans-serif;}
+  .hero h1{font-family:"Cinzel Decorative",serif;color:var(--accent-dk);}
+  .tile b{font-family:"Cinzel Decorative",serif;color:var(--accent-dk);}
+  .picker{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 4px;}
+  .picker button{border:1.5px solid var(--line);background:var(--card);color:var(--ink);
+    font:inherit;font-size:13.5px;font-weight:700;padding:9px 15px;border-radius:22px;cursor:pointer;}
+  .picker button.on{background:var(--accent);border-color:var(--accent);color:#fff;}
+  .picker button:hover{border-color:var(--accent);}
+  .scope{font-size:13px;color:var(--muted);margin:10px 2px 2px;min-height:20px;}
+  .weakbox{background:var(--gold-lt);border-left:4px solid var(--gold);border-radius:0 10px 10px 0;
+           padding:12px 16px;font-size:14px;margin:12px 0 4px;}
+  .weakbox b{color:#8a6416;}
+  .reslist{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:10px;}
+  .res{display:flex;gap:11px;align-items:center;background:var(--card);border:1px solid var(--line);
+       border-radius:12px;padding:12px 14px;transition:border-color .15s,transform .15s;}
+  .res:hover{border-color:var(--accent);transform:translateY(-2px);}
+  .res .ri{font-size:19px;flex:0 0 auto;}
+  .res .rt{font-size:13.5px;font-weight:600;line-height:1.35;}
+  .res .rs{font-size:11.5px;color:var(--muted);}
+</style>
+</head>
+<body>
+
+<div class="tbar"><div class="ti">
+  <a class="back" href="../index.html">‹ Pathophysiology Hub</a>
+  <span class="tt">Exam Prep HQ</span>
+  <span class="spacer"></span>
+  <span class="meta">6 exams + final</span>
+</div></div>
+
+<div class="wrap">
+
+  <div class="hero">
+    <div class="eyebrow">Pathophysiology</div>
+    <h1>Exam Prep HQ</h1>
+    <p>Pick the exam you're studying for, then work the tools. Everything is drawn from the course question bank &mdash; <b>755 questions</b> across the six unit exams and the cumulative final, including <b>150 select-all-that-apply</b> items scored with partial credit.</p>
+  </div>
+
+  <div class="sect">Where you stand</div>
+  <div class="card">
+    <div id="readiness"></div>
+    <div id="weakbox"></div>
+    <div class="row" style="margin-top:14px;">
+      <span class="note" id="summary"></span>
+      <span style="flex:1 1 auto;"></span>
+      <button class="btn ghost sm" id="resetBtn">Reset progress</button>
+    </div>
+  </div>
+
+  <div class="sect">Choose your exam</div>
+  <div class="card">
+    <div class="picker" id="picker"></div>
+    <div class="scope" id="scope"></div>
+  </div>
+
+  <div class="sect">Practice &amp; drill</div>
+  <div class="tools" id="tools"></div>
+
+  <div class="sect">Read &amp; review</div>
+  <div class="reslist" id="reslist"></div>
+
+  <p class="note" style="margin-top:34px;text-align:center;">
+    Pathophysiology · Dr. Akash Garg<br>
+    <span style="font-size:12px;opacity:.8;">Progress is saved in this browser only — it is not sent anywhere.</span>
+  </p>
+
+</div>
+
+<script src="bank.js"></script>
+<script src="suite.js"></script>
+<script>
+(function(){
+  var S=window.FinalSuite, P=S.Progress;
+  var KEYS=S.ALL_KEYS, sel="1";
+
+  var TOOLS=[
+    ["simulator.html","📝","Exam Simulator","Timed and scored, no answers until you submit. Full breakdown afterwards."],
+    ["abg.html","🫁","ABG Trainer","A fresh blood gas every time — name the disorder, judge the compensation."],
+    ["labs.html","🧪","Lab Signature Drill","Read the arrows, name the disorder."],
+    ["discriminator.html","⚖️","Which Is It?","One clue, two look-alikes. Drills the fact that separates them."],
+    ["redflag.html","🚨","Red-Flag Triage","Act now, or monitor? Trains priority judgement."],
+    ["chains.html","🔗","Mechanism Chains","Put the downstream steps in causal order."],
+    ["cram.html","📄","Cram Sheet","One printable page of signatures, look-alikes and red flags."]
+  ];
+
+  var EXTRA={
+    "1":{sg:"Exam1_Study_Guide"},
+    "2":{sg:"Exam2_Study_Guide"},
+    "3":{sg:"Exam3_Study_Guide"},
+    "4":{sg:"Exam4_Study_Guide"},
+    "5":{sg:"Exam5_Study_Guide"},
+    "6":{sg:"Exam6_Study_Guide"},
+    "7":{sg:"Final_Exam_Study_Guide"}
+  };
+
+  function qCount(k){
+    var b=window.FINAL_BANK&&window.FINAL_BANK[k];
+    return b?b.questions.length:0;
+  }
+
+  function renderPicker(){
+    var html=KEYS.map(function(k){
+      return '<button class="'+(k===sel?'on':'')+'" data-k="'+k+'">'+
+        (k==="7"?"Final":"Exam "+k)+'</button>';
+    }).join('')+'<button class="'+(sel==="all"?"on":"")+'" data-k="all">All exams</button>';
+    document.getElementById('picker').innerHTML=html;
+    var sc=document.getElementById('scope');
+    if(sel==="all"){
+      sc.innerHTML='Drawing from every exam &mdash; <b>'+
+        KEYS.reduce(function(a,k){return a+qCount(k);},0)+' questions</b>. Good for the cumulative final.';
+    } else {
+      sc.innerHTML='<b>'+S.esc(S.weekShort(sel))+'</b> &mdash; '+S.esc(S.weekScope(sel))+
+        ' &middot; '+qCount(sel)+' questions.';
+    }
+    renderTools(); renderRes();
+  }
+
+  function renderTools(){
+    document.getElementById('tools').innerHTML=TOOLS.map(function(t){
+      return '<a class="tool" href="'+t[0]+'?exam='+sel+'">'+
+        '<div class="ico">'+t[1]+'</div>'+
+        '<div><h3>'+t[2]+'</h3><p>'+t[3]+'</p></div></a>';
+    }).join('');
+  }
+
+  function renderRes(){
+    var e=EXTRA[sel]||{}, out=[];
+    if(e.sg) out.push('<a class="res" href="../study-guides/'+e.sg+'.html"><span class="ri">📝</span>'+
+      '<span><span class="rt">Study Guide</span><span class="rs">Full written review</span></span></a>');
+    out.push('<a class="res" href="../games/the-chase.html">'+
+      '<span class="ri">🏃</span><span><span class="rt">The Chase</span><span class="rs">Play this exam as a race</span></span></a>');
+    if(sel==="all") out.unshift('<a class="res" href="../index.html"><span class="ri">🏠</span>'+
+      '<span><span class="rt">All course resources</span><span class="rs">Back to the hub</span></span></a>');
+    document.getElementById('reslist').innerHTML=out.join('');
+  }
+
+  function renderReadiness(){
+    var d=P.all(), any=false, worst=null, totC=0, totN=0;
+    document.getElementById('readiness').innerHTML=KEYS.map(function(k){
+      var wk=d.weeks[k], pct=null;
+      if(wk&&wk.n){ pct=Math.round(wk.c/wk.n*100); any=true; totC+=wk.c; totN+=wk.n;
+        if(worst===null||pct<worst.pct) worst={k:k,pct:pct,n:wk.n}; }
+      var lbl=S.weekShort(k);
+      return '<div class="wrow">'+
+        '<span class="wlab">'+S.esc(lbl.split(' · ')[0])+'</span>'+
+        '<span class="wbar"><span class="pbar'+(pct!==null&&pct<70?' gold':'')+'">'+
+          '<span style="width:'+(pct||0)+'%"></span></span>'+
+          '<span class="sublab">'+S.esc(lbl.split(' · ')[1]||'')+'</span></span>'+
+        '<span class="wpct">'+(pct===null?'not started':pct+'% · '+wk.n)+'</span>'+
+      '</div>';
+    }).join('');
+
+    var wb=document.getElementById('weakbox');
+    if(any&&worst&&worst.n>=5){
+      wb.innerHTML='<div class="weakbox">Your weakest area right now is <b>'+S.esc(S.weekShort(worst.k))+
+        '</b> at '+worst.pct+'%. Start there — work that exam’s study guide, then re-run a drill.</div>';
+    } else if(any){
+      wb.innerHTML='<div class="weakbox">Answer a few more questions and this will tell you which exam to study first.</div>';
+    } else {
+      wb.innerHTML='<div class="weakbox">Nothing recorded yet. Run the <b>Exam Simulator</b> once to find out where you stand.</div>';
+    }
+    /* totC can be fractional: select-all-that-apply items are scored with partial credit */
+    var totShow=Math.round(totC*10)/10;
+    document.getElementById('summary').textContent=
+      totN?(totShow+' of '+totN+' points overall ('+Math.round(totC/totN*100)+'%)'):'No attempts recorded yet.';
+  }
+
+  document.getElementById('picker').addEventListener('click',function(ev){
+    var b=ev.target.closest('[data-k]'); if(!b)return;
+    sel=b.dataset.k; renderPicker();
+  });
+  document.getElementById('resetBtn').addEventListener('click',function(){
+    if(confirm('Clear all saved progress for these exam tools?')){ P.reset(); renderReadiness(); }
+  });
+
+  renderPicker(); renderReadiness();
+})();
+</script>
+</body>
+</html>

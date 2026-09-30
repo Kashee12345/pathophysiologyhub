@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mechanism Chains · Pathophysiology</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="suite.css">
+<style>
+  .start{background:var(--gold-lt);border-left:4px solid var(--gold);border-radius:0 10px 10px 0;
+         padding:13px 16px;font-size:15px;font-weight:600;margin:4px 0 4px;}
+  .start span{display:block;font-size:11px;letter-spacing:.6px;text-transform:uppercase;color:#8a6416;font-weight:800;margin-bottom:3px;}
+  .built{display:flex;flex-direction:column;gap:0;margin:2px 0 14px;}
+  .built .bs{display:flex;gap:11px;align-items:flex-start;background:var(--ok-lt);border:1.5px solid #8ec5ac;
+             border-radius:10px;padding:11px 14px;font-size:14.5px;}
+  .built .bs .n{flex:0 0 auto;width:22px;height:22px;border-radius:6px;background:var(--ok);color:#fff;
+                font-size:11.5px;font-weight:800;display:grid;place-items:center;margin-top:1px;}
+  .arrowdn{text-align:center;color:var(--faint);font-size:15px;line-height:1;padding:4px 0;}
+  .shake{animation:sh .3s;}
+  @keyframes sh{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+</style>
+</head>
+<body>
+<div id="bar"></div>
+<div class="wrap">
+
+  <div class="hero">
+    <div class="eyebrow"><span data-label>Final Exam</span> Suite</div>
+    <h1>Mechanism Chains</h1>
+    <p>Given the starting lesion, put the downstream steps in order. Finals reward students who can follow a mechanism across systems instead of memorising isolated facts.</p>
+  </div>
+
+  <div class="tiles">
+    <div class="tile"><b id="tDone">0</b><span>Chains built</span></div>
+    <div class="tile"><b id="tPerf">0</b><span>First try</span></div>
+    <div class="tile"><b id="tMiss">0</b><span>Missteps</span></div>
+    <div class="tile"><b id="tOf">0</b><span>Total</span></div>
+  </div>
+
+  <div class="card" id="playCard">
+    <div class="row" style="justify-content:space-between;">
+      <span class="chip" id="wkChip"></span>
+      <span class="note" id="counter"></span>
+    </div>
+    <h3 style="margin:12px 0 8px;font-size:17px;" id="title"></h3>
+    <div class="start"><span>Starting point</span><span id="start" style="text-transform:none;letter-spacing:0;color:var(--ink);font-weight:600;font-size:15px;"></span></div>
+    <div class="built" id="built"></div>
+    <div class="note" id="prompt" style="margin-bottom:8px;">What happens next?</div>
+    <div class="opts" id="opts"></div>
+    <div id="after" class="hide">
+      <div class="why" id="why"></div>
+      <div class="row" style="margin-top:14px;">
+        <button class="btn" id="nextBtn">Next chain &rsaquo;</button>
+        <a class="btn ghost sm" href="#" data-hq="1">Back to HQ</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="card hide" id="doneCard">
+    <div class="sect" style="margin-top:0;">All chains complete</div>
+    <p id="doneTxt" class="note"></p>
+    <div class="row"><button class="btn" onclick="location.reload()">Go again</button>
+    <a class="btn ghost" href="#" data-hq="1">Back to HQ</a></div>
+  </div>
+
+</div>
+
+<script src="suite.js"></script>
+<script>
+window.FinalSuite.loadData(function(){
+  var S=window.FinalSuite, P=S.Progress;
+  document.getElementById('bar').innerHTML=S.topbar('Mechanism Chains','<span id="tbS"></span>');
+
+  var items=S.shuffle(window.FINAL_DRILLS.chains), i=0, step=0, missedThis=false;
+  var stats={done:0,perfect:0,miss:0};
+
+  function draw(){
+    if(i>=items.length){ finish(); return; }
+    var it=items[i];
+    step=0; missedThis=false;
+    document.getElementById('wkChip').textContent='Week '+it.week;
+    document.getElementById('counter').textContent=(i+1)+' of '+items.length;
+    document.getElementById('title').textContent=it.title;
+    document.getElementById('start').textContent=it.start;
+    document.getElementById('built').innerHTML='';
+    document.getElementById('after').classList.add('hide');
+    document.getElementById('prompt').classList.remove('hide');
+    renderOpts();
+    document.getElementById('tOf').textContent=items.length;
+  }
+
+  function renderOpts(){
+    var it=items[i];
+    var remaining=it.steps.map(function(s,j){return {s:s,j:j};}).filter(function(x){return x.j>=step;});
+    document.getElementById('opts').innerHTML=S.shuffle(remaining).map(function(x){
+      return '<button class="opt" data-j="'+x.j+'"><span class="k">?</span><span>'+S.esc(x.s)+'</span></button>';
+    }).join('');
+  }
+
+  document.getElementById('opts').addEventListener('click',function(e){
+    var b=e.target.closest('[data-j]'); if(!b)return;
+    var it=items[i];
+    if(+b.dataset.j===step){
+      var el=document.getElementById('built');
+      if(step>0) el.insertAdjacentHTML('beforeend','<div class="arrowdn">▼</div>');
+      el.insertAdjacentHTML('beforeend','<div class="bs"><span class="n">'+(step+1)+'</span><span>'+S.esc(it.steps[step])+'</span></div>');
+      step++;
+      if(step>=it.steps.length){ complete(); } else { renderOpts(); }
+    } else {
+      b.classList.add('wrong','shake');
+      stats.miss++; missedThis=true;
+      setTimeout(function(){ b.classList.remove('wrong','shake'); },400);
+      stat();
+    }
+  });
+
+  function complete(){
+    var it=items[i];
+    stats.done++; if(!missedThis) stats.perfect++;
+    P.hit('chains', it.week, !missedThis);
+    document.getElementById('opts').innerHTML='';
+    document.getElementById('prompt').classList.add('hide');
+    var el=document.getElementById('why');
+    el.className='why'+(missedThis?' miss':'');
+    el.innerHTML='<span class="vd">'+(missedThis?'Chain complete — review the order':'Perfect, first try')+'</span>'+S.esc(it.why);
+    document.getElementById('after').classList.remove('hide');
+    stat();
+  }
+
+  function stat(){
+    document.getElementById('tDone').textContent=stats.done;
+    document.getElementById('tPerf').textContent=stats.perfect;
+    document.getElementById('tMiss').textContent=stats.miss;
+    var tb=document.getElementById('tbS'); if(tb) tb.textContent=stats.done+'/'+items.length;
+  }
+
+  function finish(){
+    var pct=items.length?Math.round(stats.perfect/items.length*100):0;
+    P.run('chains',pct);
+    document.getElementById('playCard').classList.add('hide');
+    document.getElementById('doneCard').classList.remove('hide');
+    document.getElementById('doneTxt').textContent='You built all '+items.length+' chains, '+stats.perfect+
+      ' of them first try, with '+stats.miss+' misstep'+(stats.miss===1?'':'s')+'. '+
+      (pct>=80?'You are following mechanisms across systems well.':'Re-read the cross-system threads in the study guide, then run this again.');
+  }
+
+  document.getElementById('nextBtn').addEventListener('click',function(){ i++; draw(); });
+  draw(); stat();
+});
+</script>
+</body>
+</html>

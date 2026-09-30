@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Exam Simulator · Pathophysiology</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="suite.css">
+<style>
+  .qhead{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px;}
+  .qnum{font-size:12.5px;font-weight:700;color:var(--faint);}
+  .nav{display:flex;gap:9px;align-items:center;margin-top:16px;flex-wrap:wrap;}
+  .nav .spacer{flex:1 1 auto;}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(38px,1fr));gap:6px;margin-top:10px;}
+  .gq{height:34px;border:1.5px solid var(--line);border-radius:8px;background:var(--card);cursor:pointer;
+      font-family:inherit;font-size:12px;font-weight:700;color:var(--muted);}
+  .gq.done{background:var(--accent-lt);border-color:var(--accent);color:var(--accent);}
+  .gq.flag{border-color:var(--gold);background:var(--gold-lt);color:#8a6416;}
+  .gq.cur{outline:2px solid var(--accent);outline-offset:1px;}
+  .rev{border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin:11px 0;background:var(--card);}
+  .rev.bad{border-left:4px solid var(--bad);}
+  .rev.ok{border-left:4px solid var(--ok);}
+  .rev .rq{font-weight:600;font-size:14.5px;margin-bottom:7px;}
+  .rev .ra{font-size:13.5px;margin:3px 0;}
+  .rev .ra.yes{color:var(--ok);font-weight:600;}
+  .rev .ra.no{color:var(--bad);font-weight:600;}
+  .rev .rfb{font-size:13.5px;color:var(--muted);margin-top:8px;line-height:1.6;}
+  .timer{font-variant-numeric:tabular-nums;}
+
+  /* --- select all that apply --- */
+  .sata{display:inline-flex;align-items:center;gap:6px;background:var(--gold-lt);color:#8a6416;
+        border:1px solid var(--gold);border-radius:20px;padding:3px 11px;font-size:11.5px;
+        font-weight:700;letter-spacing:.02em;text-transform:uppercase;}
+  .satahint{font-size:12.5px;color:var(--muted);margin:2px 0 10px;}
+  .opts .opt .box{flex:0 0 auto;width:20px;height:20px;border:2px solid var(--line);border-radius:5px;
+        display:inline-flex;align-items:center;justify-content:center;font-size:13px;line-height:1;
+        color:transparent;background:#fff;transition:background .12s,border-color .12s,color .12s;}
+  .opts .opt.chosen .box{background:var(--accent);border-color:var(--accent);color:#fff;}
+  .opt.multi{align-items:center;}
+  .revpts{font-size:12.5px;font-weight:700;border-radius:20px;padding:2px 10px;margin-left:8px;
+          background:var(--gold-lt);color:#8a6416;border:1px solid var(--gold);white-space:nowrap;}
+  .rev .ra.picked{font-weight:600;}
+  .rev .ra.shouldve{color:var(--bad);}
+  .rev .rhead{display:flex;align-items:flex-start;gap:8px;flex-wrap:wrap;}
+</style>
+</head>
+<body>
+<div id="bar"></div>
+<div class="wrap">
+
+  <!-- SETUP -->
+  <section id="setup">
+    <div class="hero">
+      <div class="eyebrow"><span data-label>Final Exam</span> Suite</div>
+      <h1>Exam Simulator</h1>
+      <p>A timed, scored practice exam drawn from the Weeks 8&ndash;14 question bank. No answers until you submit &mdash; then you get a full breakdown of where you stand.</p>
+    </div>
+    <div class="card">
+      <div class="sect" style="margin-top:0;">How many questions?</div>
+      <div class="row" id="lenRow"></div>
+      <div class="sect">Which weeks?</div>
+      <div class="row" id="wkRow"></div>
+      <div class="row" style="margin-top:18px;">
+        <button class="btn" id="go">Start exam</button>
+        <span class="note" id="poolNote"></span>
+      </div>
+    </div>
+    <p class="note">Questions are pulled at random and the answer order is shuffled, so every attempt is different.</p>
+  </section>
+
+  <!-- EXAM -->
+  <section id="exam" class="hide">
+    <div class="card" style="margin-top:16px;">
+      <div class="pbar"><span id="pb" style="width:0%"></span></div>
+      <div class="qhead" style="margin-top:13px;">
+        <span class="qnum" id="qnum"></span>
+        <span class="chip" id="qwk"></span>
+        <span class="sata hide" id="qsata">Select all that apply</span>
+        <span class="spacer" style="flex:1 1 auto;"></span>
+        <button class="btn ghost sm" id="flagBtn">Flag</button>
+      </div>
+      <div class="qtext" id="qtext"></div>
+      <div class="satahint" id="satahint"></div>
+      <div class="opts" id="opts"></div>
+      <div class="nav">
+        <button class="btn ghost sm" id="prev">‹ Back</button>
+        <button class="btn ghost sm" id="next">Next ›</button>
+        <span class="spacer"></span>
+        <button class="btn gold sm" id="submit">Submit exam</button>
+      </div>
+    </div>
+    <div class="card">
+      <div class="sect" style="margin-top:0;">Question map</div>
+      <div class="grid" id="map"></div>
+      <p class="note" style="margin-top:10px;">Teal = answered · Gold = flagged</p>
+    </div>
+  </section>
+
+  <!-- RESULTS -->
+  <section id="results" class="hide">
+    <div class="hero">
+      <div class="eyebrow">Results</div>
+      <h1 id="scoreBig"></h1>
+      <p id="scoreSub"></p>
+    </div>
+    <div class="tiles" id="tiles"></div>
+    <div class="card">
+      <div class="sect" style="margin-top:0;">By week</div>
+      <div id="byWeek"></div>
+    </div>
+    <div class="card" id="weakCard">
+      <div class="sect" style="margin-top:0;">Restudy these first</div>
+      <div id="weak"></div>
+    </div>
+    <div class="row" style="margin:16px 0;">
+      <button class="btn" onclick="location.reload()">New exam</button>
+      <a class="btn ghost" href="#" data-hq="1">Back to Final Exam HQ</a>
+      <button class="btn ghost sm" id="onlyMissed">Show only missed</button>
+    </div>
+    <div class="sect">Full review</div>
+    <div id="review"></div>
+  </section>
+
+</div>
+
+<script src="suite.js"></script>
+<script>
+window.FinalSuite.loadData(function(){
+  var S=window.FinalSuite, P=S.Progress;
+  document.getElementById('bar').innerHTML=S.topbar('Exam Simulator','<span class="timer" id="clock"></span>');
+
+  var LENGTHS=[30,60,90], len=60, weeks=S.WEEKS.slice(), pool=[], quiz=[], answers=[], flags=[], cur=0, t0=0, tick=null;
+
+  /* ---------- setup ---------- */
+  function renderSetup(){
+    document.getElementById('lenRow').innerHTML=LENGTHS.map(function(n){
+      return '<button class="btn '+(n===len?'':'ghost')+' sm" data-len="'+n+'">'+n+' questions</button>';
+    }).join('');
+    document.getElementById('wkRow').innerHTML=
+      '<button class="btn '+(weeks.length===7?'':'ghost')+' sm" data-wk="all">All weeks</button>'+
+      S.WEEKS.map(function(w){
+        return '<button class="btn '+(weeks.indexOf(w)>=0?'':'ghost')+' sm" data-wk="'+w+'">Wk '+w+'</button>';
+      }).join('');
+    pool=S.bankAll().filter(function(q){return weeks.indexOf(q.week)>=0;});
+    document.getElementById('poolNote').textContent=pool.length+' questions available';
+    document.getElementById('go').disabled=pool.length<5;
+  }
+  document.getElementById('lenRow').addEventListener('click',function(e){
+    var b=e.target.closest('[data-len]'); if(!b)return; len=+b.dataset.len; renderSetup();
+  });
+  document.getElementById('wkRow').addEventListener('click',function(e){
+    var b=e.target.closest('[data-wk]'); if(!b)return;
+    var v=b.dataset.wk;
+    if(v==='all'){ weeks=weeks.length===7?[]:S.WEEKS.slice(); }
+    else { var i=weeks.indexOf(v); if(i>=0) weeks.splice(i,1); else weeks.push(v); }
+    if(!weeks.length) weeks=S.WEEKS.slice();
+    renderSetup();
+  });
+
+  /* ---------- exam ---------- */
+  document.getElementById('go').addEventListener('click',function(){
+    quiz=S.shuffle(pool).slice(0,Math.min(len,pool.length)).map(S.shuffleQ);
+    /* a select-all item holds an array of ticked indices; a single-answer item holds an index */
+    answers=quiz.map(function(q){return S.isMulti(q)?[]:null;});
+    flags=quiz.map(function(){return false;});
+    cur=0; t0=Date.now();
+    document.getElementById('setup').classList.add('hide');
+    document.getElementById('exam').classList.remove('hide');
+    tick=setInterval(clock,1000); clock(); draw();
+  });
+
+  function clock(){
+    var s=Math.floor((Date.now()-t0)/1000);
+    var m=Math.floor(s/60); s=s%60;
+    var el=document.getElementById('clock'); if(el) el.textContent=m+':'+(s<10?'0':'')+s;
+  }
+
+  /* has this question been answered at all? */
+  function answered(i){
+    var a=answers[i];
+    return S.isMulti(quiz[i]) ? (a&&a.length>0) : a!==null;
+  }
+
+  function draw(){
+    var q=quiz[cur], multi=S.isMulti(q);
+    document.getElementById('qnum').textContent='Question '+(cur+1)+' of '+quiz.length;
+    document.getElementById('qwk').textContent='Week '+q.week;
+    document.getElementById('qtext').textContent=q.q;
+    document.getElementById('qsata').classList[multi?'remove':'add']('hide');
+    document.getElementById('satahint').textContent = multi
+      ? 'Tick every option that applies \u2014 more than one is correct. Partial credit: each right tick earns '+
+        'credit and each wrong tick cancels one out, so ticking everything will not help you.'
+      : '';
+    document.getElementById('flagBtn').textContent=flags[cur]?'Unflag':'Flag';
+    document.getElementById('opts').innerHTML=q.a.map(function(a,i){
+      var on = multi ? (answers[cur].indexOf(i)>=0) : (answers[cur]===i);
+      var mark = multi
+        ? '<span class="box" aria-hidden="true">\u2713</span>'
+        : '<span class="k">'+'ABCDE'[i]+'</span>';
+      return '<button type="button" class="opt'+(multi?' multi':'')+(on?' chosen':'')+'" data-i="'+i+'"'+
+        ' role="'+(multi?'checkbox':'radio')+'" aria-checked="'+(on?'true':'false')+'">'+
+        mark+'<span>'+S.esc(a)+'</span></button>';
+    }).join('');
+    var done=0; for(var z=0;z<quiz.length;z++) if(answered(z)) done++;
+    document.getElementById('pb').style.width=(done/quiz.length*100)+'%';
+    document.getElementById('prev').disabled=cur===0;
+    document.getElementById('next').disabled=cur===quiz.length-1;
+    document.getElementById('map').innerHTML=quiz.map(function(_,i){
+      return '<button class="gq'+(answered(i)?' done':'')+(flags[i]?' flag':'')+(i===cur?' cur':'')+'" data-g="'+i+'">'+(i+1)+'</button>';
+    }).join('');
+  }
+
+  document.getElementById('opts').addEventListener('click',function(e){
+    var b=e.target.closest('[data-i]'); if(!b)return;
+    var i=+b.dataset.i;
+    if(S.isMulti(quiz[cur])){
+      /* toggle this box and stay put \u2014 they are still choosing */
+      var sel=answers[cur], at=sel.indexOf(i);
+      if(at>=0) sel.splice(at,1); else sel.push(i);
+      sel.sort(function(x,y){return x-y;});
+      draw();
+      return;
+    }
+    answers[cur]=i;
+    if(cur<quiz.length-1){ cur++; } draw();
+  });
+  document.getElementById('map').addEventListener('click',function(e){
+    var b=e.target.closest('[data-g]'); if(!b)return; cur=+b.dataset.g; draw();
+  });
+  document.getElementById('prev').addEventListener('click',function(){ if(cur>0){cur--;draw();} });
+  document.getElementById('next').addEventListener('click',function(){ if(cur<quiz.length-1){cur++;draw();} });
+  document.getElementById('flagBtn').addEventListener('click',function(){ flags[cur]=!flags[cur]; draw(); });
+
+  /* ---------- submit ---------- */
+  document.getElementById('submit').addEventListener('click',function(){
+    var un=0; for(var z=0;z<quiz.length;z++) if(!answered(z)) un++;
+    if(un && !confirm(un+' question'+(un===1?'':'s')+' still unanswered. Submit anyway?')) return;
+    clearInterval(tick);
+    grade();
+  });
+
+  var marks=[];   /* one grade object per question, reused by the review render */
+
+  function grade(){
+    var pts=0, full=0, byWk={}, byTopic={};
+    marks=quiz.map(function(q,i){
+      var g=S.gradeQ(q, answers[i]);
+      pts+=g.pts; if(g.full) full++;
+      var w=byWk[q.week]||(byWk[q.week]={c:0,n:0}); w.n++; w.c+=g.pts;
+      var key=q.week+'|'+(q.t||'General');
+      var t=byTopic[key]||(byTopic[key]={c:0,n:0}); t.n++; t.c+=g.pts;
+      P.hit('simulator', q.week, g.pts);
+      return g;
+    });
+    var pct=Math.round(pts/quiz.length*100);
+    P.run('simulator', pct);
+    /* points can be fractional; show one decimal only when it actually is */
+    function nice(x){ return (Math.round(x*10)/10).toString(); }
+
+    var mins=Math.max(1,Math.round((Date.now()-t0)/60000));
+    var nMulti=0; for(var z=0;z<quiz.length;z++) if(S.isMulti(quiz[z])) nMulti++;
+    document.getElementById('scoreBig').textContent=pct+'%';
+    document.getElementById('scoreSub').textContent=
+      nice(pts)+' of '+quiz.length+' points · '+full+' question'+(full===1?'':'s')+' fully correct'+
+      (nMulti?' (partial credit on the '+nMulti+' select-all item'+(nMulti===1?'':'s')+')':'')+
+      (pct>=85?' — you are in good shape.':pct>=70?' — solid, but tighten the weak weeks below.':' — focus on the weakest weeks below before anything else.');
+    document.getElementById('tiles').innerHTML=
+      '<div class="tile"><b>'+nice(pts)+'/'+quiz.length+'</b><span>Points</span></div>'+
+      '<div class="tile"><b>'+pct+'%</b><span>Percent</span></div>'+
+      '<div class="tile"><b>'+mins+'</b><span>Minutes</span></div>'+
+      '<div class="tile"><b>'+(quiz.length-full)+'</b><span>To review</span></div>';
+
+    document.getElementById('byWeek').innerHTML=S.WEEKS.filter(function(w){return byWk[w];}).map(function(w){
+      var d=byWk[w], p=Math.round(d.c/d.n*100);
+      return '<div class="wrow"><span class="wlab">Week '+w+'</span>'+
+        '<span class="wbar"><span class="pbar'+(p<70?' gold':'')+'"><span style="width:'+p+'%"></span></span></span>'+
+        '<span class="wpct">'+nice(d.c)+'/'+d.n+' · '+p+'%</span></div>';
+    }).join('');
+
+    var weak=Object.keys(byTopic).map(function(k){
+      var d=byTopic[k]; return {k:k,pct:d.c/d.n,n:d.n,miss:Math.round((d.n-d.c)*10)/10};
+    }).filter(function(x){return x.miss>0.05;}).sort(function(a,b){
+      return (a.pct-b.pct)||(b.miss-a.miss);
+    }).slice(0,6);
+    document.getElementById('weakCard').style.display=weak.length?'':'none';
+    document.getElementById('weak').innerHTML=weak.map(function(x){
+      var p=x.k.split('|');
+      return '<div class="wrow"><span class="wlab">Week '+p[0]+'</span>'+
+        '<span class="wbar" style="font-size:13.5px;">'+S.esc(p[1])+'</span>'+
+        '<span class="wpct">'+nice(x.miss)+' pt'+(x.miss===1?'':'s')+' lost</span></div>';
+    }).join('')||'<p class="note">Nothing missed — well done.</p>';
+
+    document.getElementById('review').innerHTML=quiz.map(function(q,i){
+      var g=marks[i], multi=g.multi, ok=g.full;
+      var sel=multi?(answers[i]||[]):answers[i];
+      var isRight=function(j){ return multi ? q.m.indexOf(j)>=0 : j===q.c; };
+      var isPicked=function(j){ return multi ? sel.indexOf(j)>=0 : j===sel; };
+      var badge = multi
+        ? '<span class="revpts">'+g.hit+' of '+g.need+' right'+(g.miss?' · '+g.miss+' wrong tick'+(g.miss===1?'':'s'):'')+
+          ' · '+nice(g.pts)+' pt</span>'
+        : '';
+      return '<div class="rev '+(ok?'ok':(g.pts>0?'':'bad'))+'" data-ok="'+(ok?1:0)+'">'+
+        '<div class="rhead"><div class="rq">'+(i+1)+'. '+S.esc(q.q)+'</div>'+badge+'</div>'+
+        q.a.map(function(a,j){
+          var right=isRight(j), picked=isPicked(j);
+          /* right+picked = got it · right+missed = should have ticked · wrong+picked = mistake */
+          var cls = right ? 'ra yes' : (picked ? 'ra no' : 'ra');
+          if(right && !picked) cls='ra yes shouldve';
+          var mark = right ? (picked?'✓ ':'✓ (missed) ') : (picked?'✗ ':'');
+          return '<div class="'+cls+(picked?' picked':'')+'">'+mark+S.esc(a)+'</div>';
+        }).join('')+
+        (!g.answered?'<div class="ra no">✗ Not answered</div>':'')+
+        '<div class="rfb"><b>Why:</b> '+S.esc(q.fb)+'</div>'+
+        '<div style="margin-top:7px;"><span class="chip">Week '+q.week+'</span> <span class="chip gold">'+S.esc(q.t||'General')+'</span></div>'+
+      '</div>';
+    }).join('');
+
+    document.getElementById('exam').classList.add('hide');
+    document.getElementById('results').classList.remove('hide');
+    window.scrollTo(0,0);
+  }
+
+  var onlyMissed=false;
+  document.getElementById('onlyMissed').addEventListener('click',function(){
+    onlyMissed=!onlyMissed;
+    this.textContent=onlyMissed?'Show all':'Show only missed';
+    Array.prototype.forEach.call(document.querySelectorAll('.rev'),function(el){
+      el.style.display=(onlyMissed && el.dataset.ok==='1')?'none':'';
+    });
+  });
+
+  renderSetup();
+});
+</script>
+</body>
+</html>

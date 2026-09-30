@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f7f2ea">
+<title>Fluid Regulation Hormones</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{ --card:#fffdf8; --ink:#2a2420; --muted:#7a6f63; --line:#e3d8c6;
+    --sans:'Inter',system-ui,sans-serif; --disp:'Cinzel Decorative',serif; --accent:#3a7a86; }
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  body{background:linear-gradient(160deg,#eef6f5,#e6ecec);color:var(--ink);font-family:var(--sans);min-height:100vh;padding:18px 16px 44px;}
+  header{max-width:1120px;margin:0 auto 16px;text-align:center;}
+  h1{font-family:var(--disp);font-weight:900;font-size:clamp(21px,4vw,34px);color:#2f6670;line-height:1.05;}
+  header .sub{color:var(--muted);font-size:15px;margin-top:4px;}
+  header .intro{max-width:870px;margin:10px auto 0;font-size:14.5px;line-height:1.5;color:#5c5248;}
+  header .intro b{color:#2f6670;} .lo{color:#c0562a;font-weight:700;} .hi{color:#3a7aa8;font-weight:700;}
+  .wrap{max-width:1120px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;box-shadow:0 6px 22px rgba(40,110,110,.07);}
+  .card h2{font-family:var(--disp);font-weight:700;font-size:16px;color:#2f6670;margin-bottom:6px;}
+  .card h2 + .desc{font-size:13px;color:var(--muted);margin-bottom:10px;line-height:1.4;}
+  svg{display:block;width:100%;height:auto;max-height:320px;}
+  #liveCap{margin-top:8px;background:#e4f0ef;border:1px solid #c3dcda;border-radius:10px;padding:10px 13px;font-size:14px;line-height:1.5;color:#245a58;text-align:center;} #liveCap b{color:#1a4542;}
+
+  @keyframes flowdash{to{stroke-dashoffset:-24}}
+  .flow{stroke-dasharray:8 6;animation:flowdash 1s linear infinite;}
+  @keyframes pulse{0%,100%{opacity:.5}50%{opacity:1}}
+  .pulse{animation:pulse 1.3s ease-in-out infinite;}
+
+  .voltog{display:flex;gap:9px;margin-bottom:12px;}
+  .voltog button{flex:1;border:1px solid var(--line);border-radius:12px;padding:13px;font-family:var(--sans);font-weight:800;font-size:14px;cursor:pointer;background:#fff;color:#5c5248;transition:.12s;}
+  .voltog button small{display:block;font-weight:500;font-size:11px;color:var(--muted);margin-top:2px;}
+  .voltog button.on.low{background:#c0562a;color:#fff;border-color:transparent;} .voltog button.on.high{background:#3a7aa8;color:#fff;border-color:transparent;}
+  .voltog button.on small{color:rgba(255,255,255,.9);}
+
+  .hbtns{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;}
+  .hb{border:1px solid var(--line);background:#fff;border-radius:11px;padding:10px 8px;cursor:pointer;text-align:center;transition:.12s;position:relative;}
+  .hb .t{font-weight:800;font-size:13px;color:#2a231e;} .hb .a{font-size:10px;font-weight:700;margin-top:3px;}
+  .hb.act{border-color:#3fa66a;box-shadow:0 0 0 2px #bfe6cd inset;} .hb.act .a{color:#2f7d50;} .hb.quiet .a{color:#b0a596;}
+  .hb.on{background:#3a7a86;color:#fff;border-color:transparent;} .hb.on .t{color:#fff;} .hb.on .a{color:#dff;}
+
+  #info{border:1px solid var(--line);border-left:5px solid var(--accent);background:#eef5f4;border-radius:10px;padding:12px 13px;margin-top:14px;}
+  #info .n{font-family:var(--disp);font-weight:700;font-size:17px;color:#2f6670;}
+  #info .plain{font-size:14.5px;line-height:1.5;color:#2a2420;margin-top:8px;font-weight:600;}
+  #info .story{font-size:13px;line-height:1.5;color:#3a3630;margin-top:8px;background:#fff;border-radius:8px;padding:9px 11px;border:1px solid #cfe2e0;}
+  #info .fx{margin-top:8px;font-size:12.5px;} #info .fx b{color:#1a4542;}
+  .pearl{background:#eef4fb;border:1px solid #cbdcf0;border-radius:10px;padding:10px 12px;margin-top:12px;font-size:12.6px;line-height:1.5;color:#274d7a;} .pearl b{color:#173b5a;}
+  @media (max-width:880px){ .wrap{grid-template-columns:1fr;} }
+</style>
+</head>
+<body>
+<header>
+  <h1>Fluid Regulation Hormones</h1>
+  <div class="sub">RAAS · ADH · ANP/BNP · Week 1</div>
+  <div class="intro">The body watches blood volume like a thermostat. When volume/BP drops <span class="lo">too low</span>, it turns on hormones that <b>retain</b> salt and water (<b>RAAS, ADH</b>). When volume runs <span class="hi">too high</span>, the stretched heart releases hormones that <b>dump</b> salt and water (<b>ANP/BNP</b>). Flip the volume and watch who responds.</div>
+</header>
+
+<div class="wrap">
+  <div>
+    <div class="card">
+      <h2>The volume thermostat</h2>
+      <div class="desc">Kidney and heart with their hormone signals. Active pathways glow; quiet ones fade.</div>
+      <svg id="diag" viewBox="0 0 320 300" aria-label="hormone diagram"></svg>
+      <div id="liveCap">Set the volume state to begin.</div>
+    </div>
+  </div>
+  <div>
+    <div class="card">
+      <h2>① Set blood volume / BP</h2>
+      <div class="voltog" id="voltog">
+        <button data-v="low" class="low on">🩸 LOW volume/BP<small>bleeding, dehydration</small></button>
+        <button data-v="high" class="high">💧 HIGH volume/BP<small>fluid overload</small></button>
+      </div>
+      <h2>② Pick a hormone to learn</h2>
+      <div class="hbtns" id="hbtns">
+        <button class="hb on" data-h="raas"><div class="t">RAAS</div><div class="a">—</div></button>
+        <button class="hb" data-h="adh"><div class="t">ADH</div><div class="a">—</div></button>
+        <button class="hb" data-h="anp"><div class="t">ANP/BNP</div><div class="a">—</div></button>
+      </div>
+    </div>
+    <div class="card" style="margin-top:16px;"><h2>What it does</h2><div id="info"></div>
+      <div class="pearl"><b>Simple rule:</b> <span class="lo">low volume</span> → <b>RAAS + ADH turn ON to retain</b> (aldosterone keeps salt &amp; water, ADH keeps water). <span class="hi">High volume</span> → the stretched heart fires <b>ANP/BNP to dump</b> salt &amp; water. RAAS/ADH and ANP/BNP are opposites.</div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const $=id=>document.getElementById(id);
+  let vol='low', horm='raas';
+  const HORM={
+    raas:{name:'RAAS',color:'#c0562a',activeWhen:'low',
+      plain:'Low BP triggers a cascade that constricts vessels and retains salt & water — the big volume-raiser.',
+      story:'When BP/volume falls, the kidney releases <b>renin</b> → <b>angiotensin I → II</b> (a potent <b>vasoconstrictor</b>) → <b>aldosterone</b>, which tells the kidney to <b>retain sodium and water</b>. Net effect: <b>volume and BP go up</b>.',
+      fx:'Retains Na⁺ &amp; water + constricts vessels → ↑ BP.'},
+    adh:{name:'ADH (vasopressin)',color:'#3a7a86',activeWhen:'low',
+      plain:'Released when you\'re dry/concentrated — it makes the kidney hold on to pure water.',
+      story:'<b>Antidiuretic hormone</b> comes from the posterior pituitary when blood is <b>too concentrated</b> or volume is low. It makes the kidney <b>reabsorb water</b> (anti-<i>diuretic</i> = less urine) → volume rises and blood is diluted back to normal. It retains <b>water</b> specifically.',
+      fx:'Retains water → ↑ volume, more concentrated urine.'},
+    anp:{name:'ANP / BNP',color:'#3a7aa8',activeWhen:'high',
+      plain:'Released by the stretched heart when volume is HIGH — it dumps salt and water to unload it.',
+      story:'When volume is <b>high</b>, the heart chambers <b>stretch</b> and release <b>ANP</b> (atria) and <b>BNP</b> (ventricles). They do the <b>opposite of RAAS</b>: tell the kidney to <b>excrete sodium and water</b> and relax the vessels → <b>volume and BP go down</b>. (BNP is measured to detect heart failure.)',
+      fx:'Dumps Na⁺ &amp; water + dilates vessels → ↓ BP.'}
+  };
+
+  function draw(){
+    const low=vol==='low'; let s='';
+    // heart (top)
+    const anpActive = !low;
+    s+='<path d="M160 30 c-14 -16 -38 2 -22 22 l22 26 22 -26 c16 -20 -8 -38 -22 -22 Z" fill="'+(anpActive?'#3a7aa8':'#c98a8a')+'" stroke="#a5392e" stroke-width="2"/>';
+    s+='<text x="160" y="30" text-anchor="middle" font-size="9" font-weight="700" fill="#fff">heart</text>';
+    if(anpActive){ s+='<circle class="pulse" cx="160" cy="52" r="30" fill="#3a7aa8" opacity="0.25"/>'; s+='<text x="160" y="98" text-anchor="middle" font-size="10" font-weight="800" fill="#3a7aa8">stretched → ANP/BNP ↑</text>'; }
+    else s+='<text x="160" y="98" text-anchor="middle" font-size="9" font-weight="600" fill="#b0a596">heart not stretched</text>';
+    // kidney (bottom left)
+    s+='<path d="M70 190 C50 190 42 210 42 232 C42 254 52 272 72 272 C64 262 60 250 60 232 C60 214 62 202 70 190 Z" fill="#b0603a" stroke="#7a3a2a" stroke-width="2"/>';
+    s+='<text x="60" y="288" text-anchor="middle" font-size="9" font-weight="700" fill="#8a4a2a">kidney</text>';
+    // pituitary (top left) for ADH
+    const adhActive=low;
+    s+='<circle cx="60" cy="120" r="14" fill="'+(adhActive?'#3a7a86':'#c9b8c0')+'" stroke="#7a5a6a" stroke-width="1.5"/>';
+    s+='<text x="60" y="123" text-anchor="middle" font-size="7.5" font-weight="700" fill="#fff">ADH</text>';
+    s+='<text x="60" y="148" text-anchor="middle" font-size="8" font-weight="600" fill="#8a6a7a">pituitary</text>';
+    // RAAS arrow (kidney -> retain) active when low
+    if(low){
+      s+='<path class="flow" d="M72 232 C130 230 180 232 230 232" fill="none" stroke="#c0562a" stroke-width="5"/>';
+      s+='<text x="150" y="222" text-anchor="middle" font-size="10" font-weight="800" fill="#c0562a">RAAS → renin/aldosterone</text>';
+      s+='<text x="245" y="236" font-size="10" font-weight="800" fill="#c0562a">RETAIN</text>';
+      // ADH arrow
+      s+='<path class="flow" d="M74 128 C130 140 180 150 230 160" fill="none" stroke="#3a7a86" stroke-width="4"/>';
+      s+='<text x="150" y="140" text-anchor="middle" font-size="9" font-weight="700" fill="#3a7a86">ADH → keep water</text>';
+      // result meter
+      s+='<rect x="228" y="250" width="70" height="30" rx="6" fill="#fbeee4" stroke="#e0a878"/>';
+      s+='<text x="263" y="269" text-anchor="middle" font-size="10" font-weight="800" fill="#c0562a">↑ volume/BP</text>';
+    } else {
+      // ANP arrow (heart -> kidney -> dump)
+      s+='<path class="flow" d="M160 82 C160 140 120 180 78 210" fill="none" stroke="#3a7aa8" stroke-width="5"/>';
+      s+='<path class="flow" d="M72 240 C130 250 190 250 240 244" fill="none" stroke="#3a7aa8" stroke-width="5"/>';
+      s+='<text x="160" y="240" text-anchor="middle" font-size="10" font-weight="800" fill="#3a7aa8">excrete Na⁺ &amp; water</text>';
+      s+='<text x="255" y="248" font-size="10" font-weight="800" fill="#3a7aa8">DUMP</text>';
+      s+='<rect x="228" y="256" width="72" height="30" rx="6" fill="#e6f0f6" stroke="#8fb0d0"/>';
+      s+='<text x="264" y="275" text-anchor="middle" font-size="10" font-weight="800" fill="#3a7aa8">↓ volume/BP</text>';
+    }
+    $('diag').innerHTML=s;
+  }
+  function render(){
+    draw();
+    document.querySelectorAll('#voltog button').forEach(b=>b.classList.toggle('on',b.dataset.v===vol));
+    // mark hormone active/quiet
+    document.querySelectorAll('.hb').forEach(b=>{
+      const h=b.dataset.h; const active = HORM[h].activeWhen===vol;
+      b.classList.toggle('act',active && !b.classList.contains('on'));
+      b.classList.toggle('quiet',!active && !b.classList.contains('on'));
+      b.classList.toggle('on',h===horm);
+      b.querySelector('.a').textContent = active? 'ACTIVE' : 'quiet';
+      if(b.classList.contains('on')) b.querySelector('.a').textContent = active?'ACTIVE':'quiet';
+    });
+    const inf=HORM[horm];
+    $('info').innerHTML='<div class="n">'+inf.name+'</div><div class="plain">'+inf.plain+'</div><div class="story">'+inf.story+'</div><div class="fx"><b>Net effect:</b> '+inf.fx+'</div>';
+    $('liveCap').innerHTML = vol==='low'
+      ? 'Volume is <b>LOW</b> → <b>RAAS + ADH fire</b> to <b>retain</b> salt &amp; water → volume rises.'
+      : 'Volume is <b>HIGH</b> → the stretched heart fires <b>ANP/BNP</b> to <b>dump</b> salt &amp; water → volume falls.';
+  }
+  document.querySelectorAll('#voltog button').forEach(b=>b.addEventListener('click',()=>{ vol=b.dataset.v; render(); }));
+  document.querySelectorAll('.hb').forEach(b=>b.addEventListener('click',()=>{ horm=b.dataset.h; render(); }));
+  render();
+})();
+</script>
+</body>
+</html>

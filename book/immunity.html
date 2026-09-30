@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0c3a44">
+<title>Immunity, Inflammation &amp; Hypersensitivity &mdash; Pathophysiology &middot; Dr. Akash Garg</title>
+<meta name="description" content="A student-friendly, exact pathophysiology chapter on the endocrine system — feedback loops, adrenal, thyroid, diabetes, growth hormone, and ADH — with the concept explained plainly and an interactive to play with in every section.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#22312f; --soft:#4a5a58; --muted:#7c8a88; --faint:#9aa8a6; --line:#e6e2d6;
+    --paper:#faf8f2; --card:#fffdf7; --accent:#0c7283; --accent-dk:#0c3a44; --gold:#b8862f;
+    --serif:"Source Serif 4",Georgia,"Times New Roman",serif; --disp:"Fraunces",Georgia,serif; --ui:"Inter",system-ui,sans-serif;
+    --shadow:0 1px 3px rgba(20,40,46,.06);
+  }
+  *{box-sizing:border-box;} html{scroll-behavior:smooth;}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--serif);font-size:18px;line-height:1.7;-webkit-font-smoothing:antialiased;}
+  a{color:var(--accent);text-decoration:none;} a:hover{text-decoration:underline;}
+
+  /* top bar + progress */
+  .topbar{position:sticky;top:0;z-index:50;background:rgba(250,248,242,.92);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid var(--line);}
+  .topbar .row{max-width:1120px;margin:0 auto;padding:11px 20px;display:flex;align-items:center;gap:14px;font-family:var(--ui);}
+  .topbar a.home{font-size:13.5px;font-weight:600;color:var(--soft);white-space:nowrap;}
+  .topbar a.home:hover{color:var(--accent);text-decoration:none;}
+  .topbar .ct{font-size:13px;color:var(--faint);font-weight:600;margin-left:auto;white-space:nowrap;}
+  .progress{height:3px;background:transparent;} .progress .bar{height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--gold));transition:width .1s;}
+
+  .layout{max-width:1120px;margin:0 auto;padding:0 20px;display:grid;grid-template-columns:230px 1fr;gap:30px;}
+  /* sidebar TOC */
+  aside{font-family:var(--ui);padding-top:34px;}
+  aside .toc{position:sticky;top:74px;}
+  aside .toc h4{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--faint);margin:0 0 12px;font-weight:700;}
+  aside .toc a{display:block;font-size:13.5px;color:var(--soft);padding:6px 10px;border-left:2px solid var(--line);line-height:1.35;}
+  aside .toc a:hover{color:var(--accent);text-decoration:none;border-left-color:var(--accent);}
+  aside .toc a.on{color:var(--accent-dk);font-weight:700;border-left-color:var(--gold);background:#f3efe3;border-radius:0 8px 8px 0;}
+
+  .reading{max-width:1040px;padding:30px 0 70px;min-width:0;}
+  .reading .col{max-width:718px;}
+  /* opener */
+  .kicker{font-family:var(--ui);font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);font-weight:700;}
+  h1{font-family:var(--disp);font-weight:600;font-size:clamp(32px,5.2vw,46px);line-height:1.08;letter-spacing:-.5px;color:var(--accent-dk);margin:10px 0 6px;max-width:718px;}
+  .lede{font-size:20px;line-height:1.6;color:var(--soft);max-width:718px;margin:14px 0 0;}
+  h2{font-family:var(--disp);font-weight:600;font-size:27px;letter-spacing:-.3px;color:var(--accent-dk);margin:52px 0 4px;scroll-margin-top:70px;max-width:718px;}
+  h2 .num{font-family:var(--ui);font-size:13px;font-weight:700;color:var(--gold);letter-spacing:1px;display:block;margin-bottom:4px;text-transform:uppercase;}
+  h3{font-family:var(--disp);font-weight:600;font-size:20px;color:var(--accent-dk);margin:26px 0 2px;max-width:718px;}
+  p{margin:14px 0;max-width:718px;} p b,li b{color:var(--accent-dk);font-weight:600;}
+  .reading ul,.reading ol{max-width:718px;padding-left:24px;} .reading li{margin:7px 0;}
+
+  .objectives{max-width:718px;background:#f2efe4;border:1px solid #e4ddc8;border-radius:14px;padding:18px 22px;margin:24px 0;font-family:var(--ui);}
+  .objectives h4{margin:0 0 8px;font-size:12px;letter-spacing:1px;text-transform:uppercase;color:var(--gold);font-weight:700;}
+  .objectives ul{margin:0;padding-left:20px;} .objectives li{font-size:14.5px;line-height:1.5;color:var(--soft);margin:6px 0;font-family:var(--serif);}
+
+  .kp{max-width:718px;background:#eef5f6;border:1px solid #d3e5e7;border-left:5px solid var(--accent);border-radius:0 12px 12px 0;padding:14px 20px;margin:22px 0;font-family:var(--ui);}
+  .kp .t{font-size:11.5px;letter-spacing:1px;text-transform:uppercase;color:var(--accent-dk);font-weight:700;margin-bottom:6px;}
+  .kp ul{margin:0;padding-left:18px;} .kp li{font-size:14.5px;line-height:1.55;color:var(--ink);margin:5px 0;font-family:var(--serif);}
+  .pearl{max-width:718px;background:#fbf3e2;border:1px solid #ecd9ac;border-left:5px solid var(--gold);border-radius:0 12px 12px 0;padding:13px 20px;margin:22px 0;font-family:var(--serif);font-size:15px;line-height:1.6;color:#6a5320;}
+  .pearl b{color:#5a4212;}
+
+  /* interactive embed (breaks out wider than prose) */
+  .embed{max-width:1040px;margin:26px 0 30px;}
+  .embed .cap{font-family:var(--ui);font-size:12.5px;font-weight:600;color:var(--muted);margin:0 0 8px;display:flex;align-items:center;gap:8px;}
+  .embed .cap .tag{background:var(--accent);color:#fff;font-size:10.5px;letter-spacing:.5px;text-transform:uppercase;font-weight:700;padding:3px 9px;border-radius:20px;}
+  .embed .frame{border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:0 8px 26px rgba(20,40,46,.09);background:#fff;}
+  .embed iframe{display:block;width:100%;height:640px;border:0;}
+  .embed .cap a{font-family:var(--ui);margin-left:auto;font-size:12.5px;font-weight:600;}
+
+  /* summary + quiz */
+  .summary{max-width:718px;background:var(--accent-dk);color:#eaf3f4;border-radius:16px;padding:24px 26px;margin:50px 0 30px;font-family:var(--serif);}
+  .summary h2{color:#fff;margin:0 0 6px;font-size:24px;}
+  .summary ul{margin:10px 0 0;padding-left:20px;} .summary li{margin:8px 0;font-size:15.5px;line-height:1.55;color:#dcebec;}
+  .summary li b{color:#fff;}
+  .quiz{max-width:718px;margin:36px 0;}
+  .quiz h2{margin-top:0;}
+  .q{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 20px;margin:12px 0;box-shadow:var(--shadow);}
+  .q .qq{font-weight:600;color:var(--accent-dk);font-family:var(--serif);}
+  .q button{margin-top:10px;font-family:var(--ui);font-size:13px;font-weight:700;color:var(--accent);background:#eef5f6;border:1px solid #d3e5e7;border-radius:20px;padding:7px 15px;cursor:pointer;}
+  .q button:hover{background:#e2eff0;}
+  .q .ans{display:none;margin-top:12px;padding-top:12px;border-top:1px dashed var(--line);font-size:15.5px;color:var(--soft);}
+  .q .ans .a{font-weight:700;color:var(--accent-dk);}
+  .q.show .ans{display:block;} .q.show button{display:none;}
+
+  .chapnav{max-width:718px;display:flex;justify-content:space-between;gap:12px;margin:44px 0 0;font-family:var(--ui);}
+  .chapnav a,.chapnav span{flex:1;border:1px solid var(--line);border-radius:12px;padding:14px 16px;font-size:13.5px;background:var(--card);}
+  .chapnav a{color:var(--accent-dk);font-weight:600;} .chapnav a:hover{border-color:var(--accent);text-decoration:none;}
+  .chapnav .k{display:block;font-size:11px;color:var(--faint);text-transform:uppercase;letter-spacing:.5px;margin-bottom:2px;}
+  .chapnav .next{text-align:right;} .chapnav .disabled{color:var(--faint);}
+
+  footer{font-family:var(--ui);text-align:center;color:var(--faint);font-size:12.5px;border-top:1px solid var(--line);padding:26px 20px 50px;margin-top:30px;}
+  footer b{color:var(--soft);}
+
+  @media(max-width:860px){
+    .layout{grid-template-columns:1fr;gap:0;}
+    aside{padding-top:16px;} aside .toc{position:static;}
+    aside .toc{border:1px solid var(--line);border-radius:12px;padding:12px 14px;background:var(--card);}
+    aside .toc a{border-left:none;padding:6px 4px;}
+    aside .toc a.on{background:none;}
+    .reading{padding-top:16px;}
+    .embed iframe{height:660px;}
+  }
+
+  /* comparison tables */
+  .ctwrap{max-width:718px;overflow-x:auto;margin:22px 0;-webkit-overflow-scrolling:touch;}
+  table.ctable{border-collapse:collapse;width:100%;min-width:520px;font-family:var(--ui);font-size:14px;background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden;}
+  table.ctable th,table.ctable td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);vertical-align:top;line-height:1.45;}
+  table.ctable thead th{background:#eef5f6;color:var(--accent-dk);font-weight:700;font-size:12.5px;letter-spacing:.3px;}
+  table.ctable tbody tr:last-child td{border-bottom:none;}
+  table.ctable td:first-child,table.ctable th:first-child{font-weight:600;color:var(--soft);white-space:nowrap;}
+  table.ctable td b{color:var(--accent-dk);font-weight:600;}
+  /* glossary */
+  dl.terms{max-width:718px;margin:18px 0;}
+  dl.terms dt{font-family:var(--ui);font-weight:700;color:var(--accent-dk);font-size:15px;margin-top:15px;}
+  dl.terms dd{margin:3px 0 0;color:var(--soft);}
+  /* flashcard drill widget */
+  .fc{max-width:718px;margin:20px 0;}
+  .fc-card{perspective:1600px;height:236px;cursor:pointer;margin-bottom:14px;}
+  .fc-inner{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform .55s cubic-bezier(.4,.2,.2,1);}
+  .fc-card.flip .fc-inner{transform:rotateY(180deg);}
+  .fc-face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border:1px solid var(--line);border-radius:16px;padding:26px 30px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:12px;box-shadow:0 8px 26px rgba(20,40,46,.09);overflow:auto;}
+  .fc-front{background:linear-gradient(180deg,#fffdf7,#eef5f6);}
+  .fc-back{background:linear-gradient(180deg,#fbf3e2,#f3e6c9);transform:rotateY(180deg);border-color:#e6d3a6;}
+  .fc-side{position:absolute;top:12px;left:16px;font-family:var(--ui);font-size:10px;font-weight:800;letter-spacing:1.3px;text-transform:uppercase;color:var(--faint);}
+  .fc-back .fc-side{color:var(--gold);}
+  .fc-q{font-family:var(--disp);font-weight:600;font-size:19px;line-height:1.35;color:var(--accent-dk);}
+  .fc-a{font-family:var(--serif);font-weight:600;font-size:17px;line-height:1.45;color:var(--ink);}
+  .fc-hint{position:absolute;bottom:11px;left:0;right:0;font-family:var(--ui);font-size:11.5px;color:var(--faint);}
+  .fc-nav{display:flex;gap:9px;align-items:center;}
+  .fc-count{flex:1;text-align:center;font-family:var(--ui);font-size:13px;color:var(--muted);font-weight:600;}
+  .fc-btn{font-family:var(--ui);font-size:13px;font-weight:700;color:var(--accent);background:#eef5f6;border:1px solid #d3e5e7;border-radius:20px;padding:8px 13px;cursor:pointer;}
+  .fc-btn:hover{background:#e2eff0;}
+  .fc-full{display:block;margin-top:14px;text-align:center;font-family:var(--ui);font-size:13.5px;font-weight:700;background:var(--accent-dk);color:#eaf3f4;border-radius:12px;padding:12px;}
+  .fc-full:hover{text-decoration:none;filter:brightness(1.12);}
+</style>
+</head>
+<body>
+
+
+  <div class="topbar">
+    <div class="row">
+      <a class="home" href="index.html">📖 Contents</a>
+      
+      <span class="ct">Week 2 · Immunity</span>
+    </div>
+    <div class="progress"><div class="bar" id="bar"></div></div>
+  </div>
+
+  <div class="layout">
+    <aside>
+      <nav class="toc">
+        <h4>In this chapter</h4>
+        <a href="#w2_pathogens" class="on">1 · Pathogens</a>
+        <a href="#w2_defense">2 · The defenses</a>
+        <a href="#w2_antibodies">3 · Antibodies</a>
+        <a href="#w2_inflammation">4 · Inflammation</a>
+        <a href="#w2_hyper">5 · Hypersensitivity</a>
+        <a href="#w2_autoimmune">6 · Autoimmunity</a>
+        <a href="#summary">The chapter in one breath</a>
+        <a href="#glossary">Words worth knowing</a>
+        <a href="#cards">Flashcards</a>
+        <a href="#quiz">Check yourself</a>
+      </nav>
+    </aside>
+
+    <main class="reading">
+      <div class="kicker">Pathophysiology · Week 2</div>
+      <h1>Immunity, Inflammation &amp; Hypersensitivity</h1>
+      <p class="lede">The immune system is the body&rsquo;s standing army &mdash; mostly invisible, until it wins too slowly, overreacts, or turns on its own side. This chapter follows the whole arc: who the <b>invaders</b> are, how the <b>innate</b> and <b>adaptive</b> defenses answer them, what <b>inflammation</b> costs, and what happens when immunity misfires as <b>allergy, autoimmunity, or immunodeficiency</b>.</p>
+      <div class="objectives">
+        <h4>By the end of this chapter you can</h4>
+        <ul>
+          <li>Name the major classes of <b>pathogens</b> and how each causes disease.</li>
+          <li>Contrast <b>innate</b> with <b>adaptive</b> immunity, and <b>humoral</b> with <b>cell-mediated</b> defense.</li>
+          <li>Match each of the <b>five antibody classes</b> to its signature role.</li>
+          <li>Explain the <b>cardinal signs of inflammation</b> by their mechanisms.</li>
+          <li>Tell the <b>four hypersensitivity types</b> apart with a classic example of each.</li>
+          <li>Describe how <b>autoimmunity</b> and <b>immunodeficiency</b> (including HIV/AIDS) arise.</li>
+        </ul>
+      </div>
+
+      <h2 id="w2_pathogens"><span class="num">Section 1</span>The invaders: types of pathogens</h2>
+<figure class="bref" data-sec="1" style="max-width:1040px;margin:10px 0 24px;padding:0;"><div style="border:1px solid #e6e2d6;border-radius:16px;overflow:hidden;background:#fffdf7;box-shadow:0 8px 26px rgba(20,40,46,.09);"><img src="img/immunity_s1.jpg" alt="Types of pathogens reference figure" loading="lazy" style="display:block;width:100%;height:auto;background:#fff;" onerror="this.closest('figure').style.display='none'"></div><figcaption style="font-family:Inter,system-ui,sans-serif;font-size:12.5px;color:#7c8a88;margin-top:8px;line-height:1.5;"><b style="color:#0c3a44;">Reference.</b> Types of pathogens <span style="color:#9aa8a6;">&mdash; Geka b, CC BY-SA 3.0 (via Wikimedia Commons)</span></figcaption></figure>
+
+
+      <p>Right now, as you read this, you are covered and colonized by trillions of microorganisms, and that is completely normal. We call these resident microbes your <b>normal flora</b> (or <b>microbiota</b>). They live on your skin, in your mouth, and especially in your gut, and they earn their keep: they crowd out troublemakers, help digest food, and even make some vitamins (like vitamin K). Most of the time you and your flora have a peaceful, mutually helpful relationship. A <b>pathogen</b> is different. It is any organism that can <em>cause disease</em>, either by invading tissue, releasing toxins, or triggering an immune response that harms you. Some organisms are <b>opportunistic</b>: harmless in their usual spot, but dangerous when they get somewhere they do not belong (for example, gut bacteria entering the bloodstream after surgery). Understanding <em>what kind</em> of invader you are dealing with is the first step, because the type of organism decides the treatment.</p>
+
+<h3>Bacteria: tiny, but they play dirty</h3>
+<p>Bacteria are single-celled organisms with their own machinery to live and reproduce, which is why many can grow on their own outside our cells. Nurses sort them first by shape (round <em>cocci</em>, rod-shaped <em>bacilli</em>) and, crucially, by the <b>Gram stain</b>. In plain terms, <b>gram-positive</b> bacteria have a thick peptidoglycan cell wall (and no outer membrane) that traps and holds the purple stain, while <b>gram-negative</b> bacteria have a thin wall hidden under an extra outer membrane, so they lose the purple and take a pink counterstain. That difference is not just cosmetic. Gram-negative bacteria carry <b>endotoxin</b> (<em>lipopolysaccharide, LPS</em>) in that outer membrane; when the bacteria die and break apart, LPS floods out and can drive high fever, dangerously low blood pressure, and <b>septic shock</b>. Bacteria harm us in two broad ways: by <b>invasion</b> (physically spreading into and destroying tissue) and by releasing <b>toxins</b>. <b>Exotoxins</b> are proteins some bacteria secrete that damage cells at a distance (think of the toxins behind tetanus or <em>C. difficile</em> colitis), while endotoxin comes from the gram-negative wall itself.</p>
+
+<div class="pearl"><b>Why the Gram stain reaches the chart fast.</b> It usually comes back well before final cultures, and gram-negative results raise the antenna for endotoxin-driven sepsis. That early clue often shapes which antibiotic is started first.</div>
+
+<h3>Viruses: hijackers that cannot live alone</h3>
+<p>Viruses are not really cells at all. They are genetic material (DNA or RNA) wrapped in a protein coat, and they are <b>obligate intracellular parasites</b> meaning they <em>must</em> get inside one of your living cells to do anything. A virus attaches to a host cell, enters it and releases its genes inside, and then hijacks the cell's own ribosomes and enzymes to mass-produce new virus copies. The cell is turned into a factory and is often destroyed in the process. Because viruses hide <em>inside</em> your cells and borrow your machinery, antibiotics do nothing against them, and treatment is harder to target without harming the host.</p>
+
+<h3>Fungi, parasites, and a word on prions</h3>
+<p><b>Fungi</b> (yeasts like <em>Candida</em> and molds) are more complex cells that often turn pathogenic when the immune system is weakened or when normal flora is wiped out by antibiotics. <b>Protozoa</b> are single-celled parasites (for example, the <em>Plasmodium</em> that causes malaria), while <b>helminths</b> are the multicellular parasitic worms. Finally, <b>prions</b> are the strange outliers: misfolded proteins, with no DNA or RNA at all, that cause other proteins to misfold, leading to fatal brain diseases.</p>
+
+<h3>Matching the treatment to the invader</h3>
+<p>Here is the payoff: naming the class of organism guides the whole plan. <b>Antibiotics</b> target features only bacteria have (like the cell wall), so they are useless against viruses. Giving them anyway breeds <em>antibiotic resistance</em> and can trigger a <em>C. difficile</em> infection by wiping out protective flora.</p>
+
+<div class="ctwrap"><table class="ctable"><thead><tr><th>Pathogen</th><th>Key trait</th><th>Treatment class</th></tr></thead><tbody><tr><td>Bacteria</td><td>Own cells; toxins &amp; invasion</td><td>Antibiotics</td></tr><tr><td>Viruses</td><td>Hijack host cells</td><td>Antivirals</td></tr><tr><td>Fungi</td><td>Yeasts &amp; molds</td><td>Antifungals</td></tr><tr><td>Parasites</td><td>Protozoa &amp; worms</td><td>Antiparasitics</td></tr></tbody></table></div>
+
+<p>Explore the major classes of pathogens in the figure below to see how these families line up side by side.</p>
+
+      <div class="embed">
+        <div class="cap"><span class="tag">Interactive</span> Compare bacteria, viruses, fungi, and parasites. <a href="../patho/PathogenTypes.html" target="_blank" rel="noopener">Open full &uarr;</a></div>
+        <div class="frame"><iframe src="../patho/PathogenTypes.html" loading="lazy" title="Pathogen types interactive"></iframe></div>
+      </div>
+      <div class="kp"><div class="t">Key points</div><ul><li>Normal flora usually protect us; a <b>pathogen</b> is any organism that causes disease, and opportunists turn harmful in the wrong place or when defenses drop.</li><li>Bacteria harm us by <b>invasion</b> and <b>toxins</b>; gram-negative <b>endotoxin (LPS)</b> can drive fever and septic shock, while the Gram stain guides early therapy.</li><li>Viruses are <b>obligate intracellular parasites</b> that hijack host cells to replicate, so <em>antibiotics do not work</em> on them.</li><li>Fungi, protozoa, and helminths each need their own drug class; prions are misfolded proteins with no nucleic acid.</li><li>Matching drug to organism (antibiotic vs antiviral vs antifungal) matters, and misusing antibiotics breeds resistance and can cause <em>C. difficile</em>.</li></ul></div>
+
+      <h2 id="w2_defense"><span class="num">Section 2</span>The body&rsquo;s defenses</h2>
+<figure class="bref" data-sec="2" style="max-width:1040px;margin:10px 0 24px;padding:0;"><div style="border:1px solid #e6e2d6;border-radius:16px;overflow:hidden;background:#fffdf7;box-shadow:0 8px 26px rgba(20,40,46,.09);"><img src="img/immunity_s2.jpg" alt="The body's defenses reference figure" loading="lazy" style="display:block;width:100%;height:auto;background:#fff;" onerror="this.closest('figure').style.display='none'"></div><figcaption style="font-family:Inter,system-ui,sans-serif;font-size:12.5px;color:#7c8a88;margin-top:8px;line-height:1.5;"><b style="color:#0c3a44;">Reference.</b> The body's defenses <span style="color:#9aa8a6;">&mdash; OpenStax College, CC BY 3.0 (via Wikimedia Commons)</span></figcaption></figure>
+
+
+      <p>Every second of every day, your body is fending off bacteria, viruses, and other invaders without you ever noticing. It does this with two teams that work together: a fast, general-purpose crew called <b>innate immunity</b>, and a slower but far more precise crew called <b>adaptive immunity</b>. Understanding how these two teams operate is the foundation for everything you will learn about infection, inflammation, and hypersensitivity.</p>
+
+<h3>Innate immunity: fast, but nonspecific</h3>
+<p>Innate immunity is the defense you are born with. It responds within <em>minutes to hours</em>, but it does not care exactly <em>who</em> the invader is: it treats most threats the same way. Think of it as the building's locks, alarms, and security guards.</p>
+<ul>
+<li><b>Physical and chemical barriers</b> come first. Intact <b>skin</b> is a wall invaders cannot easily cross, and <b>mucous membranes</b> lining the airways and gut trap microbes so cilia and secretions can sweep them out. Stomach acid and lysozyme in tears add chemical defense. This is why a break in the skin, like an IV site or a pressure injury, is a real infection risk.</li>
+<li><b>Phagocytes</b> are cells that eat invaders. <b>Neutrophils</b> arrive first and fast (they dominate the early response and are the main cell in pus), while <b>macrophages</b> arrive a bit later, engulf debris, and clean up. This eating process is called <em>phagocytosis</em>.</li>
+<li><b>Complement</b> is a cascade of plasma proteins that punches holes in microbes, tags them for phagocytes (<em>opsonization</em>), and amplifies inflammation.</li>
+<li><b>Natural killer (NK) cells</b> destroy your own cells that have turned dangerous, especially virus-infected and some tumor cells.</li>
+<li><b>Fever</b> is a whole-body innate response. Chemical messengers called <em>pyrogens</em> reset the hypothalamus to a higher temperature, which slows microbial growth and speeds up immune cells. This is <em>why</em> a fever, though uncomfortable, is often a sign the defenses are working.</li>
+</ul>
+
+<h3>Adaptive immunity: specific, with memory</h3>
+<p>Adaptive immunity is slower to start (days on a first exposure) but it is <b>specific</b>: it targets one particular invader, and it <b>remembers</b>. It has two branches.</p>
+<ul>
+<li><b>Humoral immunity</b> is run by <b>B cells</b>. When activated, B cells become plasma cells that pump out <b>antibodies</b> (immunoglobulins) into the blood and fluids. Antibodies neutralize toxins, clump microbes together, and flag them for destruction. This branch is especially good against invaders <em>outside</em> your cells, like bacteria in the bloodstream.</li>
+<li><b>Cell-mediated immunity</b> is run by <b>T cells</b> and handles threats <em>inside</em> cells, such as viruses, and abnormal cells.</li>
+</ul>
+
+<h3>The T-cell coordinators and killers</h3>
+<p>Two T-cell types are worth knowing by name. <b>Helper T cells (CD4)</b> are the coordinators: they release <em>cytokines</em> that activate B cells, cytotoxic T cells, and macrophages. Because HIV attacks CD4 cells, a falling CD4 count leaves the whole system leaderless, which is <em>why</em> HIV is so devastating. <b>Cytotoxic T cells (CD8)</b> are the killers: they directly destroy virus-infected and cancerous cells.</p>
+
+<div class="pearl"><b>CD4 = commander, CD8 = combat.</b> A simple memory hook: helper (CD4) cells give orders, cytotoxic (CD8) cells do the killing. Watch the CD4 count as a marker of immune health in your HIV patients.</div>
+
+<h3>Active vs passive immunity</h3>
+<p>Immunity can be earned or borrowed. In <b>active immunity</b> your own body mounts the response and builds memory, either by getting sick or by <b>vaccination</b> (a safe preview of the invader). It is slow to develop but long-lasting. In <b>passive immunity</b> you receive ready-made antibodies from someone else, so protection is immediate but <em>temporary</em>, because you never made memory cells. Examples include antibodies crossing the <b>placenta</b> to the fetus and antibodies delivered in <b>breast milk</b>.</p>
+
+<div class="ctwrap"><table class="ctable"><thead><tr><th>Feature</th><th>Active immunity</th><th>Passive immunity</th></tr></thead><tbody>
+<tr><td>Source</td><td>Your own immune response</td><td>Borrowed antibodies</td></tr>
+<tr><td>Onset</td><td>Slow (days to weeks)</td><td>Immediate</td></tr>
+<tr><td>Duration</td><td>Long-lasting (memory)</td><td>Short (no memory)</td></tr>
+<tr><td>Examples</td><td>Infection, vaccines</td><td>Placenta, breast milk, antibody injections</td></tr>
+</tbody></table></div>
+
+<h3>Primary vs secondary response</h3>
+<p>The <b>primary response</b> is your body's first meeting with an invader. It is slow, often taking a week or more to build up antibodies, which is why you can feel sick during that first encounter. But the immune system files away <b>memory cells</b>. On a repeat exposure, the <b>secondary (memory) response</b> is <em>faster and stronger</em>, producing far more antibodies far more quickly, so you may never feel sick at all. This is exactly <em>why</em> vaccines and booster doses work: they safely create memory so the real invader triggers a rapid secondary response. Explore the innate-versus-adaptive figure below to see how these teams fit together.</p>
+
+<div class="pearl"><b>Boosters bank on memory.</b> The whole point of a booster shot is to re-trigger the fast, powerful secondary response, keeping antibody levels high and memory cells ready.</div>
+
+      <div class="embed">
+        <div class="cap"><span class="tag">Interactive</span> Watch the innate and adaptive defenses respond to a threat. <a href="../patho/ImmuneDefense.html" target="_blank" rel="noopener">Open full &uarr;</a></div>
+        <div class="frame"><iframe src="../patho/ImmuneDefense.html" loading="lazy" title="Immune defense interactive"></iframe></div>
+      </div>
+      <div class="kp"><div class="t">Key points</div><ul>
+<li><b>Innate immunity</b> (barriers, neutrophils and macrophages, complement, NK cells, fever) is fast but <em>nonspecific</em>; <b>adaptive immunity</b> is slower but <em>specific with memory</em>.</li>
+<li>Adaptive immunity has two branches: <b>humoral</b> (B cells make antibodies, best against extracellular threats) and <b>cell-mediated</b> (T cells, best against intracellular threats).</li>
+<li><b>Helper T cells (CD4)</b> coordinate the response; <b>cytotoxic T cells (CD8)</b> kill infected and abnormal cells.</li>
+<li><b>Active immunity</b> (infection or vaccine) is self-made and long-lasting; <b>passive immunity</b> (placenta, breast milk, antibody injections) is borrowed, immediate, and temporary.</li>
+<li>The <b>secondary (memory) response</b> is faster and stronger than the primary response, which is the basis for vaccines and boosters.</li>
+</ul></div>
+
+      <h2 id="w2_antibodies"><span class="num">Section 3</span>Antibodies (immunoglobulins)</h2>
+<figure class="bref" data-sec="3" style="max-width:1040px;margin:10px 0 24px;padding:0;"><div style="border:1px solid #e6e2d6;border-radius:16px;overflow:hidden;background:#fffdf7;box-shadow:0 8px 26px rgba(20,40,46,.09);"><img src="img/immunity_s3.jpg" alt="Antibody structure reference figure" loading="lazy" style="display:block;width:100%;height:auto;background:#fff;" onerror="this.closest('figure').style.display='none'"></div><figcaption style="font-family:Inter,system-ui,sans-serif;font-size:12.5px;color:#7c8a88;margin-top:8px;line-height:1.5;"><b style="color:#0c3a44;">Reference.</b> Antibody structure <span style="color:#9aa8a6;">&mdash; Tokenzero, CC BY-SA 4.0 (via Wikimedia Commons)</span></figcaption></figure>
+
+
+      <p>Your immune system faces a huge problem: how do you recognize millions of different germs, when each one looks a little different? The answer is <b>antibodies</b>, also called <b>immunoglobulins</b> (Ig). Think of an antibody as a tiny Y-shaped protein tag that your body custom-builds to match one specific target. The tips of the Y are the <b>variable region</b>, shaped to lock onto a particular <b>antigen</b> (a molecular fingerprint on a microbe). The stem of the Y, the <b>constant region</b>, is the handle that the rest of the immune system grabs.</p>
+
+<p>Antibodies are made by <b>plasma cells</b>, which are mature <b>B lymphocytes</b> that have been activated by their antigen. Once released, an antibody does three main jobs. First, it <em>tags</em> the invader so that phagocytes recognize and eat it, a process called <b>opsonization</b>. Second, it can <em>neutralize</em> a threat by physically coating a virus or a toxin so it can no longer attach to your cells. Third, it can <em>activate complement</em>, a cascade of blood proteins that punches holes in bacterial membranes and amplifies inflammation. In short: tag, neutralize, and activate.</p>
+
+<h3>The five classes and their signature jobs</h3>
+<p>All antibodies share that Y shape, but the constant-region handle comes in five flavors, and each flavor sends the antibody to a different job and a different place in the body.</p>
+<ul>
+<li><b>IgG</b> is the <em>most abundant</em> antibody in blood and the workhorse of the <b>secondary (memory) response</b>. It is the only class that <em>crosses the placenta</em>, and it is excellent at opsonization, neutralization, and activating complement.</li>
+<li><b>IgM</b> is the <em>first to appear</em> in a new infection and the <em>largest</em> antibody, because it circulates as a <b>pentamer</b> (five Y units joined together). Those ten binding arms make it a powerful early complement activator.</li>
+<li><b>IgA</b> guards the <em>mucosal surfaces</em>, the wet linings of the gut, lungs, and airways, and it is concentrated in secretions like saliva, tears, and <b>breast milk</b>, giving a nursing newborn ready-made protection.</li>
+<li><b>IgE</b> drives <em>allergy</em> and <b>type I hypersensitivity</b> and defends against <em>parasites</em>. It binds <b>mast cells</b> and basophils; when antigen cross-links it, those cells release histamine.</li>
+<li><b>IgD</b> mostly sits on the surface of naive B cells as part of the <b>B-cell receptor</b>, helping them get activated.</li>
+</ul>
+
+<div class="pearl"><b>A memory hook.</b> The letters spell <b>GAMED</b>: <em>G</em>reatest amount (IgG), <em>A</em>reas that are wet/mucosal (IgA), <em>M</em>assive and first (IgM), <em>E</em>xtra-reactive to allergens &amp; parasites (IgE), and <em>D</em>oorway on B cells (IgD).</p></div>
+
+<h3>Reading antibody levels: recent versus past infection</h3>
+<p>Because IgM and IgG appear on different timelines, a lab panel can tell a story about <em>when</em> an exposure happened. When you meet an antigen for the first time, <b>IgM rises first</b>, usually within days, then fades over a few weeks. <b>IgG rises later</b> and stays elevated for months to years, providing lasting immunity. Nurses use this pattern constantly.</p>
+
+<div class="ctwrap"><table class="ctable"><thead><tr><th>Feature</th><th>IgM elevated</th><th>IgG elevated</th></tr></thead><tbody>
+<tr><td>What it suggests</td><td>Recent or current infection</td><td>Past infection or immunity</td></tr>
+<tr><td>Timing</td><td>Appears first, fades in weeks</td><td>Appears later, persists long-term</td></tr>
+<tr><td>Response type</td><td>Primary response</td><td>Secondary / memory response</td></tr>
+<tr><td>Classic example</td><td>Acute hepatitis or rubella</td><td>Prior vaccination or old exposure</td></tr>
+</tbody></table></div>
+
+<p>So IgM positive with IgG negative usually points to a <em>fresh</em> infection, while IgG positive with IgM negative usually means the person was infected or vaccinated <em>in the past</em> and is now immune.</p>
+
+<h3>Why placenta-crossing IgG protects a newborn</h3>
+<p>A newborn's own immune system is still learning and cannot make strong antibody responses yet. Because <b>IgG crosses the placenta</b> during pregnancy, the mother essentially loans her baby a full library of antibodies. This <b>passive immunity</b> shields the infant for roughly the first several months of life while their own B cells mature. IgA in breast milk adds a second layer of protection right at the gut lining. The trade-off is that this borrowed protection is temporary, which is exactly why the infant vaccination schedule begins before it fully wears off.</p>
+
+<p>The interactive figure below lets you explore the five classes side by side.</p>
+
+      <div class="embed">
+        <div class="cap"><span class="tag">Interactive</span> Meet the five antibody classes and their jobs. <a href="../patho/Immunoglobulins.html" target="_blank" rel="noopener">Open full &uarr;</a></div>
+        <div class="frame"><iframe src="../patho/Immunoglobulins.html" loading="lazy" title="Immunoglobulins interactive"></iframe></div>
+      </div>
+      <div class="kp"><div class="t">Key points</div><ul>
+<li>Antibodies (immunoglobulins) are Y-shaped proteins from plasma cells that tag, neutralize, and activate complement against a specific antigen.</li>
+<li>Five classes, memory hook <b>GAMED</b>: IgG (most abundant, crosses placenta), IgA (mucosa and breast milk), IgM (first and largest, pentamer), IgE (allergy and parasites), IgD (B-cell receptor).</li>
+<li>IgM rises first and fades, signaling a recent infection; IgG rises later and persists, signaling past infection or immunity.</li>
+<li>Maternal IgG crosses the placenta to give the newborn temporary passive immunity for the first months of life.</li>
+</ul></div>
+
+      <h2 id="w2_inflammation"><span class="num">Section 4</span>Inflammation &amp; healing</h2>
+<figure class="bref" data-sec="4" style="max-width:1040px;margin:10px 0 24px;padding:0;"><div style="border:1px solid #e6e2d6;border-radius:16px;overflow:hidden;background:#fffdf7;box-shadow:0 8px 26px rgba(20,40,46,.09);"><img src="img/immunity_s4.jpg" alt="Inflammation & healing reference figure" loading="lazy" style="display:block;width:100%;height:auto;background:#fff;" onerror="this.closest('figure').style.display='none'"></div><figcaption style="font-family:Inter,system-ui,sans-serif;font-size:12.5px;color:#7c8a88;margin-top:8px;line-height:1.5;"><b style="color:#0c3a44;">Reference.</b> Inflammation & healing <span style="color:#9aa8a6;">&mdash; Jenglish18, CC BY-SA 4.0 (via Wikimedia Commons)</span></figcaption></figure>
+
+
+      <p>Think of inflammation as your body's <b>first-responder team</b>. It is not the same as infection. Infection means microbes have invaded; inflammation is the <em>response</em>, and it fires whether the trigger is bacteria, a splinter, a burn, a sprain, or dying tissue. In healthy tissue, capillaries run quietly and white blood cells patrol the bloodstream. The moment cells are injured, that calm is interrupted on purpose: the goal is to <b>contain the threat, clear the debris, and set up repair</b>. Understanding the response means understanding a handful of chemical <b>mediators</b> and what they do to blood vessels.</p>
+
+<h3>The five cardinal signs and why each happens</h3>
+<p>Injured cells and nearby <b>mast cells</b> release <b>histamine</b>, along with <b>prostaglandins</b>, <b>bradykinin</b>, and <b>cytokines</b>. These mediators drive two vascular changes that explain every classic sign.</p>
+<ul>
+<li><b>Redness (rubor)</b> and <b>heat (calor)</b> come from <b>vasodilation</b> - the arterioles widen, so more warm blood floods the area.</li>
+<li><b>Swelling (tumor)</b> comes from <b>increased capillary permeability</b>. The vessel walls loosen and let protein-rich fluid leak into the tissue, forming <b>edema</b>.</li>
+<li><b>Pain (dolor)</b> comes from <b>bradykinin</b> and <b>prostaglandins</b> stimulating nerve endings, plus pressure from the swelling.</li>
+<li><b>Loss of function (functio laesa)</b> is the sum of pain and swelling - a swollen, aching joint simply will not move well.</li>
+</ul>
+<p>Meanwhile, <b>neutrophils</b> are the first white cells to arrive, squeezing out of vessels (<em>diapedesis</em>) to begin <b>phagocytosis</b> of pathogens and debris.</p>
+
+<div class="pearl"><b>Why redness AND swelling travel together.</b> Vasodilation brings the blood in (red, warm) while leaky capillaries let fluid out (swollen). They are two faces of the same mediator storm.</div>
+
+<h3>Acute versus chronic inflammation</h3>
+<p><b>Acute inflammation</b> is fast and self-limiting - hours to a few days - and ideally ends in full healing. <b>Chronic inflammation</b> lingers for weeks, months, or years, usually because the trigger never clears (persistent infection, autoimmune disease, ongoing irritation). The cell cast changes too: neutrophils give way to <b>macrophages</b> and <b>lymphocytes</b>. The cost to the tissue is real - chronic inflammation drives <b>fibrosis</b> (scarring), tissue destruction, and sometimes granuloma formation, so the organ slowly loses working cells and gains stiff, non-functional scar.</p>
+
+<h3>Exudates and the systemic response</h3>
+<p>The fluid that leaks out is called <b>exudate</b>. <b>Serous</b> exudate is thin and watery (think of a blister); <b>purulent</b> exudate is thick pus, full of dead neutrophils and microbes, and signals infection. Inflammation is not only local. Cytokines such as IL-1 and IL-6 travel to the brain and liver, producing <b>systemic signs</b>: <b>fever</b> (a raised hypothalamic set-point), <b>leukocytosis</b> (elevated WBC count), and rising <b>acute-phase reactants</b> - a climbing <b>CRP</b> (a true acute-phase protein), and a rising <b>ESR</b> (an indirect marker driven by fibrinogen), are lab clues that inflammation is active somewhere in the body.</p>
+
+<h3>Healing: resolution versus repair</h3>
+<p>Two outcomes are possible. <b>Resolution</b> is the best case: the tissue was only mildly injured and the cells can regenerate, so it returns to normal. <b>Repair with scar (fibrosis)</b> happens when damage is extensive or the cells cannot regenerate - <b>fibroblasts</b> lay down collagen and <b>granulation tissue</b> fills the gap, leaving a scar that holds but does not fully function.</p>
+<div class="ctwrap"><table class="ctable"><thead><tr><th>Feature</th><th>Primary intention</th><th>Secondary intention</th></tr></thead><tbody>
+<tr><td>Wound edges</td><td>Clean, approximated (sutured)</td><td>Wide, gaping, cannot be closed</td></tr>
+<tr><td>Tissue loss</td><td>Minimal</td><td>Significant</td></tr>
+<tr><td>Healing time</td><td>Fast</td><td>Slower</td></tr>
+<tr><td>Scar</td><td>Small</td><td>Larger, more granulation tissue</td></tr>
+<tr><td>Infection risk</td><td>Lower</td><td>Higher</td></tr>
+</tbody></table></div>
+
+<h3>Why anti-inflammatory drugs work</h3>
+<p><b>NSAIDs</b> (ibuprofen, aspirin) block the <b>COX enzymes</b> that make <b>prostaglandins</b>, so they blunt pain, fever, and swelling but leave much of the immune response intact. <b>Corticosteroids</b> (prednisone) act much higher upstream, suppressing the genes for many mediators at once - they are far more powerful but also more immunosuppressive, which is why they raise infection risk and slow healing. Explore the acute inflammatory response and its cardinal signs in the figure below.</p>
+
+<div class="pearl"><b>Steroids mask the fever.</b> Because corticosteroids suppress the whole cascade, a patient on steroids may not mount a fever or leukocytosis even with a serious infection - watch for subtle signs instead.</div>
+
+      <div class="embed">
+        <div class="cap"><span class="tag">Interactive</span> Trigger the acute inflammatory response and see the cardinal signs. <a href="../patho/Inflammation.html" target="_blank" rel="noopener">Open full &uarr;</a></div>
+        <div class="frame"><iframe src="../patho/Inflammation.html" loading="lazy" title="Inflammation interactive"></iframe></div>
+      </div>
+      <div class="kp"><div class="t">Key points</div><ul>
+<li>The five cardinal signs (redness, heat, swelling, pain, loss of function) all trace back to <b>vasodilation</b> and <b>increased capillary permeability</b> driven by histamine and prostaglandins.</li>
+<li>Acute inflammation is short and usually heals; <b>chronic</b> inflammation persists and costs tissue through <b>fibrosis</b> and destruction.</li>
+<li>Systemic signs of inflammation include <b>fever</b>, <b>leukocytosis</b>, and elevated <b>CRP/ESR</b>; purulent exudate suggests infection.</li>
+<li>Healing is either <b>resolution</b> (back to normal) or <b>repair with scar</b>; clean wounds heal by primary intention, gaping wounds by secondary.</li>
+<li><b>NSAIDs</b> block prostaglandins (COX); <b>corticosteroids</b> suppress mediators broadly and can mask signs of infection.</li>
+</ul></div>
+
+      <h2 id="w2_hyper"><span class="num">Section 5</span>When immunity overreacts: hypersensitivity</h2>
+<figure class="bref" data-sec="5" style="max-width:1040px;margin:10px 0 24px;padding:0;"><div style="border:1px solid #e6e2d6;border-radius:16px;overflow:hidden;background:#fffdf7;box-shadow:0 8px 26px rgba(20,40,46,.09);"><img src="img/immunity_s5.jpg" alt="Hypersensitivity reference figure" loading="lazy" style="display:block;width:100%;height:auto;background:#fff;" onerror="this.closest('figure').style.display='none'"></div><figcaption style="font-family:Inter,system-ui,sans-serif;font-size:12.5px;color:#7c8a88;margin-top:8px;line-height:1.5;"><b style="color:#0c3a44;">Reference.</b> Hypersensitivity <span style="color:#9aa8a6;">&mdash; Wikiuserwheatallergy, CC0 (via Wikimedia Commons)</span></figcaption></figure>
+
+
+      <p>Your immune system is built to protect you, but sometimes it protects too hard. <b>Hypersensitivity</b> means the immune response is exaggerated or misdirected, so the defense itself becomes the source of tissue damage. To understand this, remember how normal immunity works. Your body makes <b>antibodies</b> (immunoglobulins) that tag foreign invaders, and specialized <b>T cells</b> that recognize threats directly. Normally these tools attack germs and leave your own cells alone. In hypersensitivity, that precision breaks down. The immune system reacts to something harmless (pollen, a food, a medication), targets your own cells, or leaves inflammatory debris behind that damages healthy tissue.</p>
+
+<p>Clinicians sort these overreactions into four classic types, and a simple memory device keeps them straight: <b>ACID</b> - <em>A</em>naphylactic, <em>C</em>ytotoxic, <em>I</em>mmune-complex, <em>D</em>elayed. The first three are driven by antibodies; only the fourth is not.</p>
+
+<h3>Type I - Immediate (IgE-mediated): allergy and anaphylaxis</h3>
+<p>This is the classic allergy. On first exposure, the body makes <b>IgE</b> antibodies against an otherwise harmless <b>allergen</b> and parks them on the surface of <b>mast cells</b> and basophils (this silent step is called <em>sensitization</em>). On the <em>next</em> exposure, the allergen bridges those IgE molecules, and the mast cells <b>degranulate</b>, dumping <b>histamine</b> and other mediators within minutes. Histamine causes <em>vasodilation</em> (redness, warmth, low blood pressure), <em>increased capillary permeability</em> (swelling, hives), and <em>bronchoconstriction</em> (wheezing). A local reaction is hay fever or hives; a whole-body reaction is <b>anaphylaxis</b>, where airway swelling and vasodilatory shock can kill quickly. This is why <b>epinephrine</b> is the first-line rescue - it reverses bronchoconstriction and vasodilation fast.</p>
+
+<div class="pearl"><b>You cannot be allergic on the very first exposure.</b> The first contact only sensitizes (builds IgE). The dramatic reaction happens on re-exposure, which is why a patient may tolerate a drug once and react severely the second time.</div>
+
+<h3>Type II - Cytotoxic (antibody against cells)</h3>
+<p>Here antibodies (usually <b>IgG</b> or <b>IgM</b>) bind directly to antigens on the surface of specific cells, marking them for destruction by <em>complement</em> and phagocytes. The classic example is a <b>mismatched blood transfusion</b>: give type A blood to a type B patient and the recipient's preformed antibodies attack the donor red cells, causing rapid <em>hemolysis</em>, fever, flank pain, and dark urine. Another example is <b>hemolytic disease of the newborn</b>, where an Rh-negative mother makes anti-Rh antibodies that cross the placenta and destroy an Rh-positive baby's red cells.</p>
+
+<h3>Type III - Immune-complex mediated</h3>
+<p>In Type III, antibody and antigen clump together into <b>immune complexes</b> that circulate and then <em>deposit</em> in tissues - joints, skin, kidney glomeruli, blood vessel walls. Once lodged, they activate complement and trigger inflammation right where they settle. This is the mechanism behind <b>systemic lupus erythematosus (SLE)</b> and <b>serum sickness</b> (a reaction to foreign proteins, such as certain antivenoms). The key difference from Type II: the antibody is not aimed at a fixed cell, it is floating debris that inflames wherever it lands.</p>
+
+<h3>Type IV - Delayed (T-cell mediated)</h3>
+<p>Type IV is the odd one out - <b>no antibody at all</b>. Instead, sensitized <b>T lymphocytes</b> recognize the antigen and recruit macrophages, and because this cell-driven process takes time, the reaction peaks at <em>48 to 72 hours</em>. Read a <b>TB skin test (PPD)</b> at 48-72 hours for exactly this reason - the firm raised <em>induration</em> is delayed T-cell inflammation. Other examples include <b>contact dermatitis</b> (poison ivy, nickel) and <b>transplant (graft) rejection</b>.</p>
+
+<div class="ctwrap"><table class="ctable"><thead><tr><th>Type</th><th>Mediator</th><th>Timing</th><th>Classic example</th></tr></thead><tbody><tr><td>I - Anaphylactic</td><td>IgE, mast cells, histamine</td><td>Seconds to minutes</td><td>Anaphylaxis, hay fever</td></tr><tr><td>II - Cytotoxic</td><td>IgG/IgM against cell surface</td><td>Minutes to hours</td><td>Transfusion reaction, HDN</td></tr><tr><td>III - Immune-complex</td><td>Circulating antibody-antigen complexes</td><td>Hours</td><td>SLE, serum sickness</td></tr><tr><td>IV - Delayed</td><td>T cells (no antibody)</td><td>48-72 hours</td><td>TB skin test, poison ivy</td></tr></tbody></table></div>
+
+<div class="pearl"><b>Timing tells the type.</b> If a reaction is instant, think Type I. If you have to wait two to three days to see it, think Type IV.</div>
+
+<p>Explore the four types side by side in the interactive figure below.</p>
+
+      <div class="embed">
+        <div class="cap"><span class="tag">Interactive</span> Compare the four types of hypersensitivity side by side. <a href="../patho/Hypersensitivity.html" target="_blank" rel="noopener">Open full &uarr;</a></div>
+        <div class="frame"><iframe src="../patho/Hypersensitivity.html" loading="lazy" title="Hypersensitivity interactive"></iframe></div>
+      </div>
+      <div class="kp"><div class="t">Key points</div><ul><li><b>ACID</b> orders the four types: <b>A</b>naphylactic (I), <b>C</b>ytotoxic (II), <b>I</b>mmune-complex (III), <b>D</b>elayed (IV).</li><li>Types I, II, and III are <b>antibody-driven</b>; Type IV is <b>T-cell driven with no antibody</b>.</li><li><b>Type I</b> needs prior <em>sensitization</em> - the severe reaction hits on re-exposure, and epinephrine is the anaphylaxis rescue.</li><li><b>Type II</b> targets specific cells (transfusion reaction, hemolytic disease of the newborn); <b>Type III</b> deposits floating complexes that inflame tissues (SLE, serum sickness).</li><li><b>Type IV</b> is delayed 48-72 hours - the reason a TB skin test is read days later.</li></ul></div>
+
+      <h2 id="w2_autoimmune"><span class="num">Section 6</span>Autoimmunity &amp; immunodeficiency</h2>
+<figure class="bref" data-sec="6" style="max-width:1040px;margin:10px 0 24px;padding:0;"><div style="border:1px solid #e6e2d6;border-radius:16px;overflow:hidden;background:#fffdf7;box-shadow:0 8px 26px rgba(20,40,46,.09);"><img src="img/immunity_s6.jpg" alt="Autoimmunity reference figure" loading="lazy" style="display:block;width:100%;height:auto;background:#fff;" onerror="this.closest('figure').style.display='none'"></div><figcaption style="font-family:Inter,system-ui,sans-serif;font-size:12.5px;color:#7c8a88;margin-top:8px;line-height:1.5;"><b style="color:#0c3a44;">Reference.</b> Autoimmunity <span style="color:#9aa8a6;">&mdash; Mourad Aribi, CC BY 3.0 (via Wikimedia Commons)</span></figcaption></figure>
+
+
+      <p>Your immune system has an almost impossible job: it must attack anything foreign - bacteria, viruses, cancer cells - while leaving <em>you</em> completely alone. The ability to tell "self" from "non-self" is called <b>self-tolerance</b>, and it is built during immune development. As lymphocytes mature, any that react strongly against your own tissues are normally deleted or switched off (a process of <b>central</b> and <b>peripheral tolerance</b>). When that filtering breaks down, the immune system turns its weapons inward. This section covers what happens when tolerance fails (autoimmunity) and, on the flip side, when the immune system is too weak to defend at all (immunodeficiency).</p>
+
+<h3>When self-tolerance breaks down: autoimmunity</h3>
+<p>In <b>autoimmune disease</b>, the immune system loses self-tolerance and begins producing <b>autoantibodies</b> and self-reactive T cells that treat normal tissue like an invader. The result is chronic <b>inflammation</b> and tissue destruction at whatever the immune system targets. The trigger is usually a mix of <em>genetic susceptibility</em> (often certain HLA types) plus an environmental push such as an infection, hormones, or drugs. A helpful way to learn these diseases is to ask one question: <em>what tissue is being attacked?</em> Explore the interactive figure below to see how tolerance breaks down step by step.</p>
+
+<div class="ctwrap"><table class="ctable"><thead><tr><th>Disease</th><th>Target attacked</th><th>Classic result</th></tr></thead><tbody>
+<tr><td><b>SLE (lupus)</b></td><td>Many tissues (multi-system) - skin, joints, kidneys, blood</td><td>Butterfly rash, joint pain, lupus nephritis; ANA usually positive</td></tr>
+<tr><td><b>Rheumatoid arthritis</b></td><td>Synovial joints (the joint lining)</td><td>Symmetric, warm, swollen joints; morning stiffness</td></tr>
+<tr><td><b>Multiple sclerosis</b></td><td>Myelin around CNS nerves</td><td>Slowed nerve signals - weakness, vision changes, numbness</td></tr>
+<tr><td><b>Type 1 diabetes</b></td><td>Beta cells of the pancreas</td><td>No insulin made - high blood glucose</td></tr>
+<tr><td><b>Hashimoto thyroiditis</b></td><td>Thyroid (destroys it)</td><td><em>Hypo</em>thyroidism - fatigue, cold, weight gain</td></tr>
+<tr><td><b>Graves disease</b></td><td>Thyroid (over-stimulates it)</td><td><em>Hyper</em>thyroidism - heat intolerance, weight loss, exophthalmos</td></tr>
+</tbody></table></div>
+
+<p>Notice that Hashimoto and Graves hit the <em>same organ</em> with opposite outcomes. In Hashimoto, autoantibodies and T cells slowly destroy thyroid tissue, so hormone output falls. In Graves, the autoantibody actually <em>mimics</em> TSH and switches the gland on constantly, flooding the body with thyroid hormone. Same target, opposite mechanism - a favorite exam contrast.</p>
+
+<div class="pearl"><b>Follow the target tissue.</b> You do not have to memorize every antibody. If you know what tissue is attacked, the signs usually follow logically - myelin loss slows nerves, beta-cell loss raises glucose, joint-lining attack causes swollen joints.</div>
+
+<h3>The opposite problem: immunodeficiency</h3>
+<p>Sometimes the danger is not an overactive immune system but an <em>under</em>active one. In <b>immunodeficiency</b>, part of the immune defense is missing or weakened, so ordinary germs become dangerous. There are two broad types:</p>
+<ul>
+<li><b>Primary (congenital)</b> - the person is <em>born with</em> a genetic defect in immune development. These are usually rare and often show up in infancy with repeated, severe, or unusual infections.</li>
+<li><b>Acquired (secondary)</b> - the immune system develops normally but is later damaged by something else: infection (HIV), chemotherapy, long-term steroids or other immunosuppressants, malnutrition, or aging. These are far more common.</li>
+</ul>
+
+<h3>HIV/AIDS and the CD4 count</h3>
+<p>The key example of acquired immunodeficiency is <b>HIV</b> (human immunodeficiency virus). HIV specifically infects and destroys <b>CD4+ T-helper cells</b> - the "quarterback" cells that coordinate nearly the entire immune response. As the virus replicates, the <b>CD4 count</b> steadily falls. A normal CD4 count is usually around <em>500 to 1,500 cells/mm³</em>. When it drops below about <b>200 cells/mm³</b> (or an AIDS-defining opportunistic infection appears), the diagnosis becomes <b>AIDS</b>. At that point the body can no longer fend off <em>opportunistic infections</em> - organisms like <em>Pneumocystis</em> pneumonia that a healthy immune system would easily control. So the CD4 count is essentially a scoreboard of how much immune defense remains.</p>
+
+<div class="pearl"><b>CD4 is the coach.</b> Lose CD4 helper cells and the whole immune team loses its play-caller - which is why a falling CD4 count predicts opportunistic infection so well.</div>
+
+<h3>When inflammation goes body-wide: SIRS and sepsis</h3>
+<p>Inflammation is usually local and protective. But when an infection spills the inflammatory response into the whole bloodstream, the reaction becomes dysregulated and dangerous. <b>SIRS</b> (systemic inflammatory response syndrome) describes this body-wide inflammatory storm - often marked by abnormal temperature, high heart rate, fast breathing, and abnormal white-cell count. When infection triggers this body-wide response, it is called <b>sepsis</b> - and current definitions reserve that word for infection <em>plus</em> new organ dysfunction, not infection alone. Here the same mediators meant to fight germs cause widespread <em>vasodilation</em> and leaky vessels, dropping blood pressure and starving organs of oxygen - which can progress to <b>septic shock</b> and organ failure. It is a sobering reminder that too much immune activity can be as deadly as too little.</p>
+
+<h3>Why immunosuppressed patients are so fragile</h3>
+<p>Whether the cause is HIV, chemotherapy, transplant anti-rejection drugs, or steroids, an <b>immunosuppressed</b> patient has fewer or weaker defenders. Germs that would barely register in a healthy person can cause overwhelming infection, and the usual warning signs may be <em>muted</em> - a patient with a low white-cell count (<b>neutropenia</b>) may not mount a fever or form pus, so infection hides until it is advanced. This is why nursing care emphasizes strict hand hygiene, neutropenic precautions, and treating even a low-grade fever as a possible emergency.</p>
+
+      <div class="embed">
+        <div class="cap"><span class="tag">Interactive</span> See how self-tolerance breaks down in autoimmune disease. <a href="../patho/AutoimmuneInflammatory.html" target="_blank" rel="noopener">Open full &uarr;</a></div>
+        <div class="frame"><iframe src="../patho/AutoimmuneInflammatory.html" loading="lazy" title="Autoimmune interactive"></iframe></div>
+      </div>
+      <div class="kp"><div class="t">Key points</div><ul>
+<li><b>Autoimmunity</b> is a loss of <b>self-tolerance</b> - the immune system attacks the body's own tissue; learn each disease by asking <em>what tissue is targeted</em> (SLE = multi-system, RA = joints, MS = myelin, T1DM = beta cells, Hashimoto/Graves = thyroid).</li>
+<li>Hashimoto <em>destroys</em> the thyroid (hypothyroid) while Graves <em>over-stimulates</em> it (hyperthyroid) - same organ, opposite effect.</li>
+<li><b>Immunodeficiency</b> is either <b>primary</b> (born with it) or <b>acquired</b>; HIV is the key acquired example, destroying <b>CD4+ helper cells</b>, and a CD4 count below ~200 cells/mm³ defines AIDS.</li>
+<li><b>SIRS/sepsis</b> is a dangerous, body-wide inflammatory response to infection that can cause vasodilation, low blood pressure, and septic shock.</li>
+<li><b>Immunosuppressed</b> patients catch infections easily and may show <em>blunted</em> signs (little fever or pus), so any fever is treated urgently.</li>
+</ul></div>
+
+      <div class="summary">
+        <h2 id="summary">The chapter in one breath</h2>
+        <ul><li><b>Pathogens</b> differ by structure and treatment: <b>bacteria</b> (cell wall, antibiotics), <b>viruses</b> (need a host cell, antivirals), <b>fungi</b>, <b>protozoa/parasites</b>, and misfolded-protein <b>prions</b> each demand a different defense and drug.</li><li><b>Innate immunity</b> is the fast, nonspecific first responder you are born with (skin, phagocytes, complement, fever) while <b>adaptive immunity</b> is slower but specific and remembers the invader through <b>B cells</b> (antibodies) and <b>T cells</b>.</li><li>The five <b>immunoglobulin</b> classes split the work: <b>IgG</b> (most abundant, crosses the placenta), <b>IgM</b> (first responder, biggest), <b>IgA</b> (guards mucous membranes and breast milk), <b>IgE</b> (allergy and parasites), and <b>IgD</b> (B-cell surface receptor).</li><li><b>Inflammation</b> is the tissue-level alarm with five cardinal signs: <em>redness</em> (rubor), <em>heat</em> (calor), <em>swelling</em> (tumor), <em>pain</em> (dolor), and <b>loss of function</b>, all driven by vasodilation and increased capillary permeability from <b>histamine</b> and other mediators.</li><li>The four <b>hypersensitivity</b> reactions run <b>I</b> (immediate, IgE-mediated, anaphylaxis), <b>II</b> (cytotoxic, antibody attacks cells, as in transfusion reactions), <b>III</b> (immune-complex deposition, as in lupus), and <b>IV</b> (delayed, T-cell-mediated, as in TB skin test and contact dermatitis).</li><li><b>Autoimmunity</b> is a loss of <em>self-tolerance</em> where the immune system attacks the body's own tissue, producing diseases like rheumatoid arthritis, systemic lupus erythematosus, and type 1 diabetes.</li><li><b>Immunodeficiency</b> is a weakened or missing defense that can be <em>primary</em> (congenital) or <em>secondary</em> (acquired from chemo, steroids, or malnutrition), leaving the patient prone to opportunistic infection.</li><li><b>HIV</b> is a retrovirus that destroys <b>CD4+ helper T cells</b>, crippling adaptive immunity; when CD4 counts fall below <b>200 cells/mm³</b> or opportunistic infections appear, the illness has progressed to <b>AIDS</b>.</li></ul>
+      </div>
+
+      <h2 id="glossary"><span class="num">Reference</span>Words worth knowing</h2>
+      <p>A quick reference for the terms in this chapter &mdash; skim it now, or circle back whenever a word trips you up.</p>
+      <dl class="terms"><dt>Anaphylaxis</dt><dd>A severe, rapid, whole-body <b>type I hypersensitivity</b> reaction in which mass release of histamine causes widespread vasodilation, bronchoconstriction, and dangerously low blood pressure that can kill within minutes if untreated.</dd><dt>Antibody</dt><dd>A Y-shaped protein (also called an <em>immunoglobulin</em>) made by plasma cells that binds one specific antigen to tag it for destruction, neutralize it, or trigger other immune defenses.</dd><dt>Antibody titer</dt><dd>A lab measurement of how much of a specific antibody is in the blood, used to check immunity from vaccination or past infection or to track an active immune response.</dd><dt>Antigen</dt><dd>Any molecule, usually a protein or sugar on a germ or foreign cell, that the immune system recognizes as "not self" and responds to by making antibodies or activating <b>T cells</b>.</dd><dt>Adaptive immunity</dt><dd>The slower, learned arm of defense that targets a specific antigen and builds <em>memory</em>, so the next exposure to that same invader is met faster and harder.</dd><dt>Autoimmunity</dt><dd>A breakdown of self-tolerance in which the immune system mistakes the body's own healthy tissues for a threat and attacks them, as in lupus or rheumatoid arthritis.</dd><dt>Cell-mediated immunity</dt><dd>The arm of adaptive immunity driven by <b>T lymphocytes</b> rather than antibodies, which directly kills virus-infected or cancerous cells and coordinates other immune responses.</dd><dt>Complement</dt><dd>A cascade of blood proteins that, once triggered, punches holes in microbe membranes, coats germs to mark them for eating, and amplifies inflammation.</dd><dt>Cytokine</dt><dd>A small signaling protein (such as an <em>interleukin</em> or <em>interferon</em>) that immune cells release to communicate, calling in reinforcements and directing the strength and type of the response.</dd><dt>Exudate</dt><dd>The protein-rich fluid, cells, and debris that leak from blood vessels into inflamed tissue, ranging from watery (serous) to pus-filled (purulent) depending on the cause.</dd><dt>Humoral immunity</dt><dd>The arm of adaptive immunity carried out by <b>B lymphocytes</b> and the antibodies they secrete, which circulate in body fluids to neutralize pathogens and toxins.</dd><dt>Immunodeficiency</dt><dd>A weakened or missing part of the immune system, whether inherited or acquired (as in HIV or chemotherapy), that leaves a person prone to frequent or unusual infections.</dd><dt>Inflammation</dt><dd>The body's protective response to injury or infection, producing the classic redness, heat, swelling, and pain as blood vessels widen and immune cells rush to the site.</dd><dt>Innate immunity</dt><dd>The fast, nonspecific first line of defense present from birth, including skin barriers, <b>phagocytes</b>, and inflammation, that attacks any invader without needing prior exposure.</dd><dt>Pathogen</dt><dd>Any disease-causing microorganism, such as a bacterium, virus, fungus, or parasite, that can invade the body and trigger an immune response.</dd><dt>Phagocyte</dt><dd>A "cell-eating" white blood cell, such as a <em>neutrophil</em> or <em>macrophage</em>, that engulfs and digests germs, dead cells, and debris to clear infection.</dd></dl>
+
+      <h2 id="cards"><span class="num">Drill</span>Flashcards for this unit</h2>
+      <p>These are the <b>Week 2</b> cards &mdash; the same deck as the hub, pulled in here so you can review the moment you finish reading. Tap the card to flip it; hit <em>Shuffle</em> to mix them up. To grade yourself and track mastery across the whole deck, open the <a href="../flashcards.html">full flashcards page</a>.</p>
+      <div class="fc" id="fc">
+        <div class="fc-card" id="fcCard" onclick="fcFlip()">
+          <div class="fc-inner">
+            <div class="fc-face fc-front"><span class="fc-side">Question</span><div class="fc-q" id="fcQ"></div><div class="fc-hint">Tap to reveal the answer</div></div>
+            <div class="fc-face fc-back"><span class="fc-side">Answer</span><div class="fc-a" id="fcA"></div><div class="fc-hint">Tap to flip back</div></div>
+          </div>
+        </div>
+        <div class="fc-nav">
+          <button class="fc-btn" type="button" onclick="fcPrev(event)">&larr; Prev</button>
+          <span class="fc-count" id="fcCount">&mdash;</span>
+          <button class="fc-btn" type="button" onclick="fcNext(event)">Next &rarr;</button>
+          <button class="fc-btn" type="button" onclick="fcShuffle(event)">&#128256; Shuffle</button>
+        </div>
+        <a class="fc-full" href="../flashcards.html">Open the full Week 2 deck &mdash; grade yourself &amp; track mastery &uarr;</a>
+      </div>
+
+      <div class="quiz">
+        <h2 id="quiz">Check yourself</h2>
+        <div class="q"><div class="qq">1. A nurse is teaching a class about pathogens. Which type of pathogen is an obligate intracellular organism that cannot reproduce without hijacking a host cell's machinery?</div>
+<button onclick="this.parentNode.classList.add('show')">Reveal answer</button>
+<div class="ans"><span class="a">A virus.</span> Viruses lack the ribosomes and metabolic machinery to reproduce on their own, so they must enter a host cell and use its equipment to replicate. Bacteria, fungi, protozoa, and helminths can all carry out their own metabolism outside a host cell.</div></div>
+<div class="q"><div class="qq">2. A patient asks the nurse what the difference is between innate and adaptive immunity. Which statement best describes <b>innate</b> immunity?</div>
+<button onclick="this.parentNode.classList.add('show')">Reveal answer</button>
+<div class="ans"><span class="a">It is the body's fast, nonspecific first line of defense that is present from birth.</span> Innate immunity (skin, mucous membranes, neutrophils, macrophages, natural killer cells, complement, and the inflammatory response) reacts within minutes to hours the same way to any invader and has no memory. Adaptive immunity is slower, highly specific, and forms lasting memory through B and T lymphocytes.</div></div>
+<div class="q"><div class="qq">3. A nurse reviews a patient's lab results and notes the CD4 (helper T) cell count. What is the primary role of the <b>CD4 helper T cell</b> in the immune response?</div>
+<button onclick="this.parentNode.classList.add('show')">Reveal answer</button>
+<div class="ans"><span class="a">It coordinates the immune response by activating B cells, cytotoxic T cells, and macrophages via cytokines.</span> CD4 helper T cells are the "quarterback" of adaptive immunity, releasing cytokines that direct other cells. By contrast, the CD8 cytotoxic T cell directly kills virus-infected and cancerous cells. Remember: CD4 helps, CD8 kills.</div></div>
+<div class="q"><div class="qq">4. A newborn receives protective antibodies across the placenta from the mother and later through breast milk. This is an example of what type of immunity?</div>
+<button onclick="this.parentNode.classList.add('show')">Reveal answer</button>
+<div class="ans"><span class="a">Natural passive immunity.</span> The infant <em>receives</em> ready-made antibodies rather than making its own, so protection is passive; because it happens through a natural biological process (placenta and breast milk) rather than an injection, it is natural. Passive immunity is temporary because the borrowed antibodies are eventually broken down and no memory cells form.</div></div>
+<div class="q"><div class="qq">5. A patient with a severe allergy is receiving education about their immune response. Which antibody class is primarily responsible for <b>type I hypersensitivity (allergic) reactions</b> and binds to mast cells and basophils?</div>
+<button onclick="this.parentNode.classList.add('show')">Reveal answer</button>
+<div class="ans"><span class="a">IgE.</span> IgE coats mast cells and basophils; when the allergen cross-links it, these cells degranulate and release histamine, driving allergy and anaphylaxis. The other classes: IgG (most abundant, crosses the placenta, secondary response), IgM (largest, first responder in acute infection), IgA (mucosal secretions, breast milk), and IgD (B-cell receptor, least understood).</div></div>
+<div class="q"><div class="qq">6. A nurse assesses a patient's sprained ankle and documents the cardinal signs of inflammation. Which set correctly lists all five cardinal signs?</div>
+<button onclick="this.parentNode.classList.add('show')">Reveal answer</button>
+<div class="ans"><span class="a">Redness, heat, swelling, pain, and loss of function.</span> Vasodilation brings more blood, causing redness (rubor) and heat (calor); increased capillary permeability leaks fluid into tissue, causing swelling (tumor); chemical mediators like bradykinin and prostaglandins plus pressure on nerves cause pain (dolor); together these produce loss of function (functio laesa). Each sign is a direct result of the vascular and cellular response designed to contain injury.</div></div>
+<div class="q"><div class="qq">7. A nurse is comparing acute and chronic inflammation. Which cell type predominates in <b>chronic</b> inflammation, and what is a common consequence?</div>
+<button onclick="this.parentNode.classList.add('show')">Reveal answer</button>
+<div class="ans"><span class="a">Macrophages and lymphocytes predominate, often leading to fibrosis and scarring.</span> Acute inflammation is dominated by neutrophils and typically resolves in days. When the trigger persists (chronic infection, autoimmune disease, ongoing irritation), macrophages and lymphocytes take over for weeks to years, causing tissue destruction, granuloma formation, and permanent scarring.</div></div>
+<div class="q"><div class="qq">8. A patient develops a rash and itching several days after starting a new medication, and testing confirms a T-cell-mediated delayed reaction. Which type of hypersensitivity is this, and what is another classic example?</div>
+<button onclick="this.parentNode.classList.add('show')">Reveal answer</button>
+<div class="ans"><span class="a">Type IV (delayed, cell-mediated) hypersensitivity; the positive TB (PPD) skin test and poison ivy contact dermatitis are classic examples.</span> Unlike types I, II, and III, which are antibody-mediated and occur quickly, type IV is driven by sensitized T cells and takes 48 to 72 hours to peak. That delay is exactly why a TB skin test is read two to three days after placement.</div></div>
+<div class="q"><div class="qq">9. A nursing student is asked to match each hypersensitivity type to an example. Which pairing is <em>correct</em>?</div>
+<button onclick="this.parentNode.classList.add('show')">Reveal answer</button>
+<div class="ans"><span class="a">Type II (cytotoxic) hypersensitivity - a hemolytic transfusion reaction from ABO incompatibility.</span> Type II involves IgG or IgM antibodies against antigens on the patient's own cell surfaces (as in transfusion reactions and Rh incompatibility); Graves disease is a receptor-stimulating variant, where the antibody switches the target cell on instead of destroying it. Type I is IgE-mediated anaphylaxis and allergies; type III is immune-complex disease (SLE, serum sickness); type IV is delayed cell-mediated (TB test, contact dermatitis). A memory hook: <em>A</em>llergic, <em>C</em>ytotoxic, <em>I</em>mmune complex, <em>D</em>elayed = ACID.</div></div>
+<div class="q"><div class="qq">10. A patient is diagnosed with an autoimmune disease. Which pairing of an autoimmune disorder with its primary target tissue is correct?</div>
+<button onclick="this.parentNode.classList.add('show')">Reveal answer</button>
+<div class="ans"><span class="a">Type 1 diabetes mellitus targets the insulin-producing beta cells of the pancreas.</span> In autoimmune disease the immune system loses self-tolerance and attacks the body's own tissue. Other key targets: rheumatoid arthritis attacks the synovial joints, multiple sclerosis attacks the myelin sheath of the CNS, myasthenia gravis attacks acetylcholine receptors at the neuromuscular junction, and Hashimoto thyroiditis attacks the thyroid gland.</div></div>
+<div class="q"><div class="qq">11. A patient who is HIV-positive has a CD4 count reported by the lab. At what CD4 threshold, or with what other finding, is the patient formally classified as having <b>AIDS</b>?</div>
+<button onclick="this.parentNode.classList.add('show')">Reveal answer</button>
+<div class="ans"><span class="a">A CD4 count below 200 cells/mm3 (normal is usually about 500 to 1,600), or the presence of an AIDS-defining opportunistic infection.</span> HIV selectively infects and destroys CD4 helper T cells, progressively crippling the immune system's coordinator. Once CD4 counts fall below roughly 200, patients become vulnerable to opportunistic infections such as Pneumocystis jirovecii pneumonia, which define AIDS regardless of the exact count.</div></div>
+<div class="q"><div class="qq">12. A patient with a known bee-sting allergy is stung and rapidly develops hypotension, wheezing, and swelling of the lips and throat. The nurse recognizes anaphylaxis. What is the underlying mechanism, and what is the priority medication?</div>
+<button onclick="this.parentNode.classList.add('show')">Reveal answer</button>
+<div class="ans"><span class="a">Widespread IgE-mediated mast cell degranulation releases massive histamine, causing systemic vasodilation, bronchoconstriction, and capillary leak; epinephrine is the priority.</span> This is a systemic type I hypersensitivity reaction. Epinephrine reverses it by causing vasoconstriction (raising blood pressure), bronchodilation (opening airways), and stabilizing mast cells, which is why it is given first, before antihistamines or corticosteroids.</div></div>
+      </div>
+
+      <div class="chapnav">
+        <a href="index.html"><span class="k">Book</span>&larr; All chapters</a>
+        <a class="next" href="appendix.html"><span class="k">Appendix</span>The Arcade &amp; Lab &rarr;</a>
+      </div>
+    </main>
+  </div>
+
+  <footer>
+    A student-friendly pathophysiology guide · by <b>Dr. Akash Garg</b> <br>
+    The interactive figures open in place; tap “Open full ↗” for a full-screen version.
+  </footer>
+
+<script>
+  // reading progress bar
+  var bar=document.getElementById('bar');
+  function prog(){var h=document.documentElement, max=h.scrollHeight-h.clientHeight; bar.style.width=(max>0?(h.scrollTop/max*100):0)+'%';}
+  addEventListener('scroll',prog,{passive:true}); prog();
+  // scroll-spy TOC
+  var links=[].slice.call(document.querySelectorAll('.toc a'));
+  var ids=links.map(function(a){return a.getAttribute('href').slice(1);});
+  var secs=ids.map(function(id){return document.getElementById(id);});
+  function spy(){var y=scrollY+90,cur=0;
+    for(var i=0;i<secs.length;i++){ if(secs[i] && secs[i].offsetTop<=y) cur=i; }
+    links.forEach(function(a,i){a.classList.toggle('on',i===cur);});}
+  addEventListener('scroll',spy,{passive:true}); spy();
+</script>
+
+
+<script src="../flashcards/w2.js"></script>
+<script>
+(function(){
+  var WK="2";
+  var cards=(window.PATHO_CARDS&&window.PATHO_CARDS[WK])||[];
+  var fc=document.getElementById("fc"); if(!fc) return;
+  if(!cards.length){ fc.style.display="none"; return; }
+  var order=cards.map(function(_,i){return i;}), pos=0;
+  function dec(s){return String(s).replace(/&amp;/g,"&").replace(/&lt;/g,"<").replace(/&gt;/g,">").replace(/&nbsp;/g," ");}
+  var card=document.getElementById("fcCard"), q=document.getElementById("fcQ"), a=document.getElementById("fcA"), cnt=document.getElementById("fcCount");
+  function show(){ card.classList.remove("flip"); var c=cards[order[pos]]; q.textContent=dec(c.q); a.textContent=dec(c.a)+(c.exp?"  \u2014  "+dec(c.exp):""); cnt.textContent=(pos+1)+" / "+cards.length; }
+  window.fcFlip=function(){ card.classList.toggle("flip"); };
+  window.fcNext=function(e){ if(e&&e.stopPropagation)e.stopPropagation(); pos=(pos+1)%cards.length; show(); };
+  window.fcPrev=function(e){ if(e&&e.stopPropagation)e.stopPropagation(); pos=(pos-1+cards.length)%cards.length; show(); };
+  window.fcShuffle=function(e){ if(e&&e.stopPropagation)e.stopPropagation(); for(var i=order.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=order[i];order[i]=order[j];order[j]=t;} pos=0; show(); };
+  show();
+})();
+</script>
+<style id="pdfprint">
+.pdf-btn{position:fixed;right:16px;bottom:16px;z-index:400;font-family:'Inter',system-ui,sans-serif;font-weight:700;font-size:13.5px;color:#fff;background:#0c7283;border:none;border-radius:24px;padding:11px 17px;box-shadow:0 6px 20px rgba(12,58,68,.30);cursor:pointer;display:inline-flex;align-items:center;gap:7px;}
+.pdf-btn:hover{background:#0c3a44;}
+@media print{
+ @page{margin:14mm;}
+ html,body{background:#fff !important;}
+ .topbar,.progress,aside,.chapnav,.pdf-btn{display:none !important;}
+ #pbgate{display:none !important;}
+ .layout{display:block !important;max-width:100% !important;padding:0 !important;grid-template-columns:1fr !important;gap:0 !important;}
+ .reading,.reading .col{max-width:100% !important;padding:0 !important;}
+ .embed iframe,.embed .frame{display:none !important;}
+ .embed{margin:14px 0 !important;}
+ .embed .cap{color:#555 !important;font-style:italic;}
+ .embed .cap .tag{background:#0c7283 !important;color:#fff !important;}
+ .embed .cap a{display:none !important;}
+ .bref,.bref .fr{break-inside:avoid;page-break-inside:avoid;box-shadow:none !important;}
+ .bref img{max-height:150mm;width:auto !important;margin:0 auto;}
+ .ctwrap,table.ctable,.pearl,.kp,.q,.objectives,.summary,dl.terms,figure{break-inside:avoid;page-break-inside:avoid;}
+ h1,h2,h3{break-after:avoid;page-break-after:avoid;}
+ .quiz .ans{display:block !important;}
+ .quiz .q button{display:none !important;}
+ a{color:inherit !important;text-decoration:none !important;}
+ *{-webkit-print-color-adjust:exact !important;print-color-adjust:exact !important;}
+ footer{border-top:1px solid #ccc !important;}
+}
+</style>
+<button class="pdf-btn" onclick="window.print()" title="Save this chapter as a PDF">🖨 Save as PDF</button>
+</body>
+</html>

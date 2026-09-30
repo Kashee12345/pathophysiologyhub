@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f7f2ea">
+<title>Valve Disorders — Stenosis vs Regurgitation</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=VT323&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f6f1e8; --card:#fffdf8; --ink:#2a2420; --muted:#7a6f63; --line:#e3d8c6;
+    --gold:#c99a2e; --good:#3fa66a; --warn:#d99321; --bad:#d6443f; --blue:#3f6fd6; --red:#d0524a;
+    --disp:'Cinzel Decorative',serif; --mono:'VT323',monospace; --sans:'Inter',system-ui,sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  body{background:linear-gradient(160deg,#faf6ee,#efe7d8);color:var(--ink);font-family:var(--sans);
+    min-height:100vh;padding:18px 16px 44px;}
+  header{max-width:1120px;margin:0 auto 16px;text-align:center;}
+  h1{font-family:var(--disp);font-weight:900;font-size:clamp(23px,4.4vw,38px);color:#7a3486;line-height:1.05;}
+  header .sub{color:var(--muted);font-size:15px;margin-top:4px;}
+  header .intro{max-width:820px;margin:10px auto 0;font-size:14.5px;line-height:1.5;color:#5c5248;}
+  header .intro b{color:#7a3486;} .sten{color:#b8791a;font-weight:700;} .reg{color:#2f7dbf;font-weight:700;}
+  .wrap{max-width:1120px;margin:0 auto;display:grid;grid-template-columns:1.05fr 1fr;gap:16px;}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;
+    box-shadow:0 6px 22px rgba(90,60,120,.07);}
+  .card h2{font-family:var(--disp);font-weight:700;font-size:17px;color:#7a3486;margin-bottom:6px;}
+  .card h2 + .desc{font-size:13px;color:var(--muted);margin-bottom:10px;line-height:1.4;}
+  svg{display:block;width:100%;height:auto;}
+  .lab{font:700 12px var(--sans);fill:#3a3630;} .lab.w{fill:#fff;} .lab.sm{font-size:10.5px;font-weight:600;fill:#5c5248;}
+
+  #phase{text-align:center;font-family:var(--disp);font-weight:700;font-size:18px;margin-top:6px;transition:.2s;}
+  #liveCap{margin:8px auto 0;max-width:440px;background:#faf4fd;border:1px solid #e3d3ef;border-radius:10px;
+    padding:10px 13px;font-size:14px;line-height:1.5;color:#3a3040;text-align:center;}
+  #liveCap b{color:#5a3a66;}
+  .legend{display:flex;flex-wrap:wrap;gap:8px 16px;margin-top:6px;font-size:12px;color:#5c5248;justify-content:center;}
+  .legend span{display:flex;align-items:center;gap:6px;} .sw{width:13px;height:13px;border-radius:4px;flex:none;}
+
+  #stage{border-radius:12px;padding:11px 14px;margin-bottom:12px;color:#fff;font-weight:700;
+    font-size:17px;text-align:center;background:#8a54c0;}
+  #stage small{display:block;font-weight:500;font-size:13px;opacity:.93;margin-top:2px;}
+
+  .seg{display:flex;border:1px solid var(--line);border-radius:10px;overflow:hidden;margin-top:4px;}
+  .seg button{flex:1;border:none;background:#fff;color:var(--ink);font-family:var(--sans);font-weight:600;
+    font-size:13.5px;padding:9px 6px;cursor:pointer;transition:.12s;}
+  .seg.valve button.on{background:#7a3486;color:#fff;}
+  .seg.lesion button.on{background:#c65b52;color:#fff;}
+  .seg.lesion button[data-l=stenosis].on{background:#b8791a;}
+  .seg.lesion button[data-l=regurg].on{background:#2f7dbf;}
+  .seg button small{display:block;font-weight:400;font-size:10.5px;opacity:.85;}
+  .flx{display:flex;gap:10px;align-items:center;margin-top:12px;}
+  .lbl{font-size:13px;font-weight:600;} .val{font-family:var(--mono);font-size:19px;color:#7a3486;}
+  input[type=range]{flex:1;height:26px;accent-color:#7a3486;cursor:pointer;}
+  .btn{border:none;border-radius:9px;padding:9px 13px;font-family:var(--sans);font-weight:700;font-size:13.5px;
+    cursor:pointer;color:#fff;background:#7a3486;}
+
+  #info{border:1px solid var(--line);border-left:5px solid #8a54c0;background:#faf4fd;border-radius:10px;padding:12px 13px;}
+  #info .n{font-family:var(--disp);font-weight:700;font-size:18px;color:#7a3486;}
+  #info .when{display:inline-block;font-size:12px;font-weight:700;padding:2px 9px;border-radius:20px;margin:6px 0;}
+  #info .when.sys{background:#fbeee0;color:#8a5a15;} #info .when.dia{background:#e5f0fb;color:#245a86;}
+  #info .row{font-size:13px;line-height:1.4;margin-top:6px;} #info .row b{color:#5a3a66;}
+  #info .plain{font-size:15px;line-height:1.5;color:#2a2420;margin-top:8px;font-weight:600;}
+  #info .analogy{font-size:13.5px;color:#7a3486;font-style:italic;margin-top:6px;}
+  #info .story{font-size:13.5px;line-height:1.5;color:#3a3630;margin-top:9px;background:#fff;border-radius:8px;padding:9px 11px;border:1px solid #ecdff5;}
+  #info .clin{margin-top:9px;border-top:1px dashed #e0d3ec;padding-top:4px;}
+  #info .clin .row{font-size:12.5px;color:#5c5248;}
+
+  .matrix{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:4px;}
+  .mbox{border-radius:10px;padding:10px 12px;font-size:12.5px;line-height:1.4;}
+  .mbox.sys{background:#fbf1e2;border:1px solid #e8cfa4;} .mbox.dia{background:#e9f1fb;border:1px solid #bcd2ec;}
+  .mbox h4{font-size:13px;margin-bottom:4px;} .mbox.sys h4{color:#8a5a15;} .mbox.dia h4{color:#245a86;}
+  .mbox b{font-weight:700;}
+  .pearl{background:#f3eefa;border:1px solid #d9c9ee;border-radius:10px;padding:10px 12px;margin-top:12px;
+    font-size:12.8px;line-height:1.45;color:#4a327a;} .pearl b{color:#3a2263;}
+
+  @media (max-width:880px){ .wrap{grid-template-columns:1fr;} .matrix{grid-template-columns:1fr;} }
+</style>
+</head>
+<body>
+<header>
+  <h1>Heart Valve Disorders</h1>
+  <div class="sub">Stenosis vs Regurgitation · Mitral &amp; Aortic  · Cardiovascular Part 2</div>
+  <div class="intro">Think of each valve as a <b>one-way door</b>: it OPENS to let blood through, then SHUTS so blood can't fall back. Only two things go wrong — the door gets stiff and <span class="sten">won't OPEN (stenosis)</span>, or it won't latch and <span class="reg">leaks backward (regurgitation)</span>. The catch is <b>timing</b>: each door is only used during one part of the heartbeat, so that's when its problem shows up.</div>
+</header>
+
+<div class="wrap">
+  <!-- LEFT: animated heart + cycle timeline -->
+  <div>
+    <div class="card">
+      <h2>Watch the valve through the cardiac cycle</h2>
+      <div class="desc">The <b>mitral</b> valve works in <b>diastole</b> (fills the LV); the <b>aortic</b> valve works in <b>systole</b> (ejects to the body). The lesion you pick shows up during <i>that</i> phase.</div>
+      <svg id="heart" viewBox="0 0 400 400" aria-label="heart valves through the cardiac cycle"></svg>
+      <div id="phase">— </div>
+      <div id="liveCap">Pick a valve and lesion, then press play or scrub the cycle.</div>
+      <div class="legend">
+        <span><span class="sw" style="background:#d0524a"></span>Forward flow</span>
+        <span><span class="sw" style="background:#b8791a"></span>Stenosis (choked)</span>
+        <span><span class="sw" style="background:#2f7dbf"></span>Regurgitant backflow</span>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:16px;">
+      <h2>Cardiac cycle &amp; murmur timing</h2>
+      <div class="desc"><b>S1</b> = valves close to start <b>systole</b>. <b>S2</b> = valves close to start <b>diastole</b>. The shaded band is when this murmur is heard.</div>
+      <svg id="cycle" viewBox="0 0 400 120" aria-label="cardiac cycle timeline"></svg>
+      <div id="murmurLabel" style="text-align:center;font-weight:700;font-size:14px;margin-top:2px;color:#7a3486;">Normal — no murmur</div>
+    </div>
+  </div>
+
+  <!-- RIGHT: controls + info -->
+  <div>
+    <div id="stage">Select a valve &amp; lesion<small>Normal valves open and close on cue</small></div>
+
+    <div class="card">
+      <h2>Controls</h2>
+      <div style="font-size:13px;font-weight:600;margin-bottom:4px;">Which valve?</div>
+      <div class="seg valve" id="valveSeg">
+        <button data-v="mitral" class="on">Mitral<small>LA → LV · works in diastole</small></button>
+        <button data-v="aortic">Aortic<small>LV → aorta · works in systole</small></button>
+      </div>
+      <div style="font-size:13px;font-weight:600;margin:12px 0 4px;">Lesion</div>
+      <div class="seg lesion" id="lesionSeg">
+        <button data-l="normal" class="on">Normal</button>
+        <button data-l="stenosis">Stenosis<small>won't open</small></button>
+        <button data-l="regurg">Regurgitation<small>won't close</small></button>
+      </div>
+      <div class="flx"><span class="lbl">Severity</span><input type="range" id="sev" min="0" max="100" value="65"><span class="val"><span id="sevV">65</span>%</span></div>
+      <div class="flx"><button class="btn" id="playBtn">⏸ Pause</button>
+        <span class="lbl">Speed</span><input type="range" id="spd" min="30" max="130" value="65">
+        <label class="lbl" style="display:flex;align-items:center;gap:6px;"><input type="checkbox" id="sound"> 🔊</label></div>
+      <div class="flx"><span class="lbl">Scrub the cycle</span><input type="range" id="scrub" min="0" max="99" value="0"><span class="lbl" id="scrubPhase" style="min-width:60px;text-align:right;">systole</span></div>
+    </div>
+
+    <div class="card" style="margin-top:16px;">
+      <h2>This lesion</h2>
+      <div id="info">
+        <div class="n" id="iName">Normal valve</div>
+        <div class="row" id="iDir">Blood moves forward only — no obstruction, no leak.</div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:16px;">
+      <h2>Systolic vs diastolic — the whole set</h2>
+      <div class="desc">Every valve lesion is either a systolic or a diastolic murmur. Here's all four:</div>
+      <div class="matrix">
+        <div class="mbox sys"><h4>◾ Systolic murmurs</h4><b>Aortic Stenosis</b> — LV can't eject<br><b>Mitral Regurgitation</b> — LV leaks back to LA</div>
+        <div class="mbox dia"><h4>◾ Diastolic murmurs</h4><b>Aortic Regurgitation</b> — aorta leaks back to LV<br><b>Mitral Stenosis</b> — LV can't fill</div>
+      </div>
+      <div class="pearl"><b>Memory hook:</b> a valve makes a murmur when it's <i>supposed to be shut but isn't</i> (regurg) or <i>supposed to be open but won't</i> (stenosis). Aortic opens in systole, mitral opens in diastole — so <b>AS &amp; MR</b> are systolic; <b>AR &amp; MS</b> are diastolic.</div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const $=id=>document.getElementById(id);
+  const state={ valve:'mitral', lesion:'normal', severity:0.65, playing:true, bpm:65, sound:false };
+  const SYS_END=0.35;                              // systole occupies first 35% of the beat
+
+  const INFO={
+    mitral_normal:{n:'Normal mitral valve',plain:'The door between the left atrium and left ventricle. It opens to let the LV fill, then shuts tight when the LV squeezes.'},
+    aortic_normal:{n:'Normal aortic valve',plain:'The exit door from the left ventricle to the body. It opens when the LV squeezes, then shuts to stop blood falling back in.'},
+    mitral_stenosis:{n:'Mitral Stenosis',when:'dia',murmur:'Diastolic (low rumble) murmur',
+      plain:'The door into the left ventricle is stiff and narrow, so blood struggles to fill the LV.',
+      analogy:'Like pouring water through a clogged funnel — it just trickles.',
+      story:'Blood dams up behind the tight valve → backs into the left atrium → then the lungs, so the patient gets short of breath. The stretched left atrium often flips into <b>atrial fibrillation</b>.',
+      cause:'Rheumatic heart disease (the classic cause).',
+      effect:'↓ Cardiac output, pulmonary congestion, and AFib from LA stretch.',
+      sx:'Shortness of breath on exertion, low exercise tolerance, palpitations/AFib.'},
+    mitral_regurg:{n:'Mitral Regurgitation',when:'sys',murmur:'Systolic (whooshing) murmur',
+      plain:'The door into the atrium won\'t latch, so when the LV squeezes, blood sprays backward into the left atrium.',
+      analogy:'Like a screen door that won\'t click shut — every push lets some slam back through.',
+      story:'Part of each heartbeat is wasted going the wrong way → less blood reaches the body, and the LA and lungs get overloaded.',
+      cause:'Heart attack (papillary-muscle damage) or rheumatic disease.',
+      effect:'↓ Forward output, LA overload, pulmonary edema.',
+      sx:'Often silent at first; later fatigue, breathlessness, palpitations, a new murmur.'},
+    aortic_stenosis:{n:'Aortic Stenosis',when:'sys',murmur:'Systolic (harsh) ejection murmur',
+      plain:'The exit door to the body is stiff and narrow, so the LV has to strain hard to push blood out.',
+      analogy:'Like blowing air through a pinched straw — exhausting, and not much gets through.',
+      story:'The LV muscle bulks up (hypertrophy) to force blood past the tight valve. That thick, hard-working muscle needs more oxygen → chest pain, and it can\'t keep up with exertion → fainting.',
+      cause:'Age-related calcium build-up on the valve (also rheumatic).',
+      effect:'LV hypertrophy, ↓ output, can progress to left-sided heart failure.',
+      sx:'Classic triad — <b>Angina, Syncope (fainting) with exertion, and Dyspnea</b>.'},
+    aortic_regurg:{n:'Aortic Regurgitation',when:'dia',murmur:'Diastolic (blowing) murmur',
+      plain:'The exit door won\'t latch, so between beats blood falls backward from the aorta into the LV.',
+      analogy:'Like a bucket with a leaky bottom valve — it keeps refilling itself the wrong way.',
+      story:'Each beat the LV pumps blood out, then some sloshes right back in. Over time the LV stretches and thickens to cope — and you can feel a big <b>bounding pulse</b>.',
+      cause:'Valve degeneration/deformity; rheumatic.',
+      effect:'LV dilation + hypertrophy, ↓ output, can progress to left-sided HF.',
+      sx:'Breathlessness on exertion, PND, pulmonary edema; a bounding pulse / wide pulse pressure.'}
+  };
+  const key=()=>state.valve+'_'+state.lesion;
+
+  // ---------- audio ----------
+  let AC, noiseBuf;
+  function ac(){ if(!AC){ AC=new (window.AudioContext||window.webkitAudioContext)();
+    noiseBuf=AC.createBuffer(1,AC.sampleRate*0.5,AC.sampleRate); const d=noiseBuf.getChannelData(0);
+    for(let i=0;i<d.length;i++) d[i]=Math.random()*2-1; } return AC; }
+  function click(freq,g){ try{const c=ac();const o=c.createOscillator(),ga=c.createGain();
+    o.type='sine';o.frequency.setValueAtTime(freq,c.currentTime);o.frequency.exponentialRampToValueAtTime(freq*0.6,c.currentTime+0.06);
+    ga.gain.setValueAtTime(g,c.currentTime);ga.gain.exponentialRampToValueAtTime(0.001,c.currentTime+0.09);
+    o.connect(ga);ga.connect(c.destination);o.start();o.stop(c.currentTime+0.1);}catch(e){} }
+  function murmur(dur,g){ try{const c=ac();const s=c.createBufferSource();s.buffer=noiseBuf;
+    const f=c.createBiquadFilter();f.type='bandpass';f.frequency.value=340;f.Q.value=0.9;
+    const ga=c.createGain();ga.gain.setValueAtTime(0.001,c.currentTime);
+    ga.gain.linearRampToValueAtTime(g,c.currentTime+dur*0.3);ga.gain.linearRampToValueAtTime(0.001,c.currentTime+dur);
+    s.connect(f);f.connect(ga);ga.connect(c.destination);s.start();s.stop(c.currentTime+dur);}catch(e){} }
+
+  // ---------- valve geometry / drawing ----------
+  // draws a valve at (cx,cy), half-width hw; orifice 0..1 (open fraction), droop into `dir` (+1 down / -1 up)
+  function valveSVG(cx,cy,hw,orifice,dir,color){
+    const gap=Math.max(1.5, orifice*(hw-4));       // half-gap of the opening
+    const dl=(1-orifice)*14*dir;                    // leaflets droop when closed
+    // left + right leaflet
+    return '<path d="M'+(cx-hw)+' '+cy+' Q'+(cx-hw/2)+' '+(cy+dl)+' '+(cx-gap)+' '+(cy+dl)+'" fill="none" stroke="'+color+'" stroke-width="5" stroke-linecap="round"/>'
+         + '<path d="M'+(cx+hw)+' '+cy+' Q'+(cx+hw/2)+' '+(cy+dl)+' '+(cx+gap)+' '+(cy+dl)+'" fill="none" stroke="'+color+'" stroke-width="5" stroke-linecap="round"/>';
+  }
+  function arrow(x1,y1,x2,y2,color,w){
+    const ang=Math.atan2(y2-y1,x2-x1), hl=10, hw=6.5;         // fixed arrowhead size
+    const bx=x2-Math.cos(ang)*hl, by=y2-Math.sin(ang)*hl;
+    return '<line x1="'+x1+'" y1="'+y1+'" x2="'+bx.toFixed(1)+'" y2="'+by.toFixed(1)+'" stroke="'+color+'" stroke-width="'+w+'" stroke-linecap="round"/>'
+      +'<path d="M'+x2+' '+y2+' L'+(bx-Math.sin(ang)*hw).toFixed(1)+' '+(by+Math.cos(ang)*hw).toFixed(1)
+      +' L'+(bx+Math.sin(ang)*hw).toFixed(1)+' '+(by-Math.cos(ang)*hw).toFixed(1)+' Z" fill="'+color+'"/>';
+  }
+
+  function drawHeart(t){
+    const systole = t<SYS_END;
+    const sysP = t/SYS_END, diaP=(t-SYS_END)/(1-SYS_END);
+    // base valve openness (normal timing)
+    let mOpen = systole?0:Math.sin(Math.min(1,diaP*1.2)*Math.PI)*0.9+0.1;   // mitral open in diastole
+    let aOpen = systole?(Math.sin(Math.min(1,sysP*1.1)*Math.PI)*0.9+0.1):0;  // aortic open in systole
+    let mRegurg=0,aRegurg=0, mSten=false,aSten=false;
+    const sev=state.severity;
+    if(state.lesion==='stenosis'){
+      if(state.valve==='mitral'){ mOpen*= (1-sev*0.8); mSten=mOpen>0.02; }
+      else { aOpen*=(1-sev*0.8); aSten=aOpen>0.02; }
+    } else if(state.lesion==='regurg'){
+      if(state.valve==='mitral' && systole) mRegurg=sev;      // leaks during systole (should be shut)
+      if(state.valve==='aortic' && !systole) aRegurg=sev;     // leaks during diastole (should be shut)
+    }
+    // LV contraction
+    const lvS = systole ? (1-0.16*Math.sin(sysP*Math.PI)) : 1;
+
+    let s='';
+    // aorta
+    s+='<path d="M250 150 C250 90 250 60 262 40" fill="none" stroke="#d0524a" stroke-width="30" stroke-linecap="round" opacity="0.85"/>';
+    s+='<text x="288" y="70" class="lab sm" fill="#a53e37">Aorta</text>';
+    // LA
+    s+='<rect x="120" y="40" width="150" height="70" rx="14" fill="#efb6b0" stroke="#c98089" stroke-width="2"/><text x="195" y="82" text-anchor="middle" class="lab">LA</text>';
+    // LV (contracts) — myocardium + cavity
+    const lvWall = (state.valve==='aortic'&&state.lesion!=='normal')?20:12;   // AS/AR → LV hypertrophy
+    s+='<g transform="translate(190 250) scale(1 '+lvS.toFixed(3)+') translate(-190 -250)">';
+    s+='<path d="M120 150 C110 150 108 300 190 360 C272 300 270 150 260 150 Z" fill="#c96b60" stroke="#9c4139" stroke-width="2"/>';
+    s+='<path d="M'+(120+lvWall)+' 158 C'+(112+lvWall)+' 170 118 296 190 348 C262 296 '+(268-lvWall)+' 170 '+(260-lvWall)+' 158 Z" fill="#d95b52"/>';
+    s+='<text x="190" y="270" text-anchor="middle" class="lab w">LV</text></g>';
+    // valve colors
+    const mColor = mSten?'#b8791a':(mRegurg>0?'#2f7dbf':'#7a3486');
+    const aColor = aSten?'#b8791a':(aRegurg>0?'#2f7dbf':'#7a3486');
+    // mitral valve (LA-LV junction ~ y128, between x150-235)
+    s+=valveSVG(192,128, 42, state.valve==='mitral'? (mRegurg>0? 0.12:mOpen) : mOpen, 1, mColor);
+    s+='<text x="120" y="132" text-anchor="end" class="lab sm" fill="'+mColor+'">Mitral</text>';
+    // aortic valve (LV-aorta junction ~ (250,150))
+    s+=valveSVG(250,150, 24, state.valve==='aortic'? (aRegurg>0?0.12:aOpen) : aOpen, -1, aColor);
+    s+='<text x="284" y="150" class="lab sm" fill="'+aColor+'">Aortic</text>';
+
+    // flow arrows
+    if(mOpen>0.15 && !(state.valve==='mitral'&&mRegurg>0)) s+=arrow(192,96,192,168, mSten?'#b8791a':'#d0524a', mSten?4:9);       // LA->LV forward
+    if(aOpen>0.15 && !(state.valve==='aortic'&&aRegurg>0)) s+=arrow(240,175,255,120, aSten?'#b8791a':'#d0524a', aSten?4:9);     // LV->aorta forward
+    if(mRegurg>0) s+=arrow(192,168,192,100,'#2f7dbf', 4+mRegurg*7);                                                             // LV->LA backflow
+    if(aRegurg>0) s+=arrow(255,120,240,175,'#2f7dbf', 4+aRegurg*7);                                                            // aorta->LV backflow
+
+    $('heart').innerHTML=s;
+    const ph=$('phase');
+    ph.textContent = systole? '◀ SYSTOLE — ventricle squeezing (pushes blood out)' : 'DIASTOLE — ventricle relaxing (filling up) ▶';
+    ph.style.color = systole? '#b04037':'#2f5480';
+    $('liveCap').innerHTML=captionFor(systole);
+  }
+
+  // ---------- cycle timeline ----------
+  function drawCycle(t){
+    const W=400,H=120,x=v=>20+v*(W-40),base=78;
+    const inf=INFO[key()]; const murWin = inf&&inf.when ? inf.when : null;
+    let s='';
+    // murmur band
+    if(murWin==='sys') s+='<rect x="'+x(0)+'" y="24" width="'+(x(SYS_END)-x(0))+'" height="70" fill="#f6dcb4" opacity="0.7"/>';
+    if(murWin==='dia') s+='<rect x="'+x(SYS_END)+'" y="24" width="'+(x(1)-x(SYS_END))+'" height="70" fill="#cfe0f4" opacity="0.7"/>';
+    // systole/diastole labels
+    s+='<text x="'+x(SYS_END/2)+'" y="18" text-anchor="middle" class="lab sm" fill="#b04037">SYSTOLE</text>';
+    s+='<text x="'+x((1+SYS_END)/2)+'" y="18" text-anchor="middle" class="lab sm" fill="#2f5480">DIASTOLE</text>';
+    // baseline + S1/S2 heart-sound spikes
+    s+='<line x1="'+x(0)+'" y1="'+base+'" x2="'+x(1)+'" y2="'+base+'" stroke="#d8ccb8" stroke-width="2"/>';
+    const spike=(xx,lab)=>'<line x1="'+xx+'" y1="'+(base-30)+'" x2="'+xx+'" y2="'+base+'" stroke="#5c5248" stroke-width="3"/><text x="'+xx+'" y="'+(base+16)+'" text-anchor="middle" class="lab sm">'+lab+'</text>';
+    s+=spike(x(0),'S1')+spike(x(SYS_END),'S2')+spike(x(1),'S1');
+    // playhead
+    s+='<line x1="'+x(t)+'" y1="20" x2="'+x(t)+'" y2="98" stroke="#7a3486" stroke-width="2.5"/><circle cx="'+x(t)+'" cy="20" r="4" fill="#7a3486"/>';
+    $('cycle').innerHTML=s;
+  }
+
+  // plain-English live caption tied to the current phase
+  function captionFor(systole){
+    const v=state.valve, l=state.lesion;
+    if(l==='normal') return systole
+      ? 'The ventricle is <b>squeezing</b> (systole): the aortic door is open to push blood out, the mitral door is shut. All normal.'
+      : 'The ventricle is <b>relaxing and filling</b> (diastole): the mitral door is open to let blood in, the aortic door is shut. All normal.';
+    if(v==='aortic'){
+      if(systole) return l==='stenosis'
+        ? 'Systole: the <b>aortic door should be wide OPEN</b> to push blood to the body — but it\'s <b>stuck narrow</b>, so the LV strains and only a trickle gets out.'
+        : 'Systole: the aortic door is open and pushing blood out normally right now. Its <b>leak shows up in diastole</b> → watch the timeline.';
+      return l==='regurg'
+        ? 'Diastole: the <b>aortic door should be SHUT</b> — but it <b>won\'t latch</b>, so blood falls backward from the aorta into the LV.'
+        : 'Diastole: the aortic door is shut, as it should be. Its <b>narrowing shows up in systole</b> → watch the timeline.';
+    } else {
+      if(!systole) return l==='stenosis'
+        ? 'Diastole: the <b>mitral door should be OPEN</b> to fill the LV — but it\'s <b>stuck narrow</b>, so blood struggles in and dams back toward the lungs.'
+        : 'Diastole: the mitral door is open and filling normally right now. Its <b>leak shows up in systole</b> → watch the timeline.';
+      return l==='regurg'
+        ? 'Systole: the <b>mitral door should be SHUT</b> — but it <b>won\'t latch</b>, so the squeezing LV sprays blood backward into the LA.'
+        : 'Systole: the mitral door is shut, as it should be. Its <b>narrowing shows up in diastole</b> → watch the timeline.';
+    }
+  }
+
+  // ---------- info + stage ----------
+  function renderInfo(){
+    const inf=INFO[key()];
+    let html='<div class="n">'+inf.n+'</div>';
+    if(inf.when){ html+='<div class="when '+inf.when+'">Problem happens in '+(inf.when==='sys'?'SYSTOLE':'DIASTOLE')+' · '+inf.murmur+'</div>'; }
+    html+='<div class="plain">'+inf.plain+'</div>';
+    if(inf.analogy) html+='<div class="analogy">🚪 '+inf.analogy+'</div>';
+    if(inf.story) html+='<div class="story"><b>Follow the blood:</b> '+inf.story+'</div>';
+    if(inf.cause||inf.effect||inf.sx){ html+='<div class="clin">';
+      if(inf.cause) html+='<div class="row"><b>Cause:</b> '+inf.cause+'</div>';
+      if(inf.effect) html+='<div class="row"><b>Effect:</b> '+inf.effect+'</div>';
+      if(inf.sx) html+='<div class="row"><b>Signs &amp; symptoms:</b> '+inf.sx+'</div>';
+      html+='</div>'; }
+    $('info').innerHTML=html;
+    // stage banner
+    const sb=$('stage');
+    if(state.lesion==='normal'){ sb.style.background='#8a54c0'; sb.innerHTML=(state.valve==='mitral'?'Mitral':'Aortic')+' valve — normal<small>Opens and closes on cue</small>'; }
+    else{ sb.style.background = state.lesion==='stenosis'?'#b8791a':'#2f7dbf';
+      sb.innerHTML=inf.n+'<small>'+(inf.when==='sys'?'Systolic':'Diastolic')+' murmur · '+(state.lesion==='stenosis'?'valve won\'t OPEN':'valve won\'t CLOSE')+'</small>'; }
+    $('murmurLabel').textContent = inf.when? inf.murmur+' — heard in '+(inf.when==='sys'?'systole':'diastole') : 'Normal — no murmur';
+    $('murmurLabel').style.color = inf.when==='sys'?'#8a5a15':inf.when==='dia'?'#245a86':'#3fa66a';
+  }
+
+  // ---------- loop ----------
+  let t=0, last=performance.now(), prevT=0;
+  function redraw(){ drawHeart(t); drawCycle(t); $('scrubPhase').textContent=t<SYS_END?'systole':'diastole'; }
+  function loop(now){
+    const dt=Math.min(0.05,(now-last)/1000); last=now;
+    if(!state.playing){ return; }                 // paused → stop the loop (page goes idle)
+    t+=dt*(state.bpm/60); if(t>=1){ t-=1; }
+    $('scrub').value=Math.round(t*100);
+    drawHeart(t); drawCycle(t); $('scrubPhase').textContent=t<SYS_END?'systole':'diastole';
+    // heart sounds + murmur
+    if(state.sound){
+      if(prevT>0.9 && t<0.1) click(120,0.3);                 // S1 at start of systole
+      if(prevT<SYS_END && t>=SYS_END) click(150,0.24);       // S2 at start of diastole
+      const inf=INFO[key()];
+      if(inf&&inf.when==='sys' && prevT<0.02 && t>=0.02) murmur(SYS_END*(60/state.bpm),0.12*state.severity+0.03);
+      if(inf&&inf.when==='dia' && prevT<SYS_END+0.02 && t>=SYS_END+0.02) murmur((1-SYS_END)*(60/state.bpm),0.12*state.severity+0.03);
+    }
+    prevT=t;
+    requestAnimationFrame(loop);
+  }
+  function pauseIt(){ state.playing=false; $('playBtn').textContent='▶ Play'; }
+
+  // ---------- controls ----------
+  document.querySelectorAll('#valveSeg button').forEach(b=>b.addEventListener('click',()=>{
+    state.valve=b.dataset.v; document.querySelectorAll('#valveSeg button').forEach(x=>x.classList.toggle('on',x===b)); renderInfo(); if(!state.playing)redraw(); }));
+  document.querySelectorAll('#lesionSeg button').forEach(b=>b.addEventListener('click',()=>{
+    state.lesion=b.dataset.l; document.querySelectorAll('#lesionSeg button').forEach(x=>x.classList.toggle('on',x===b)); renderInfo(); if(!state.playing)redraw(); }));
+  $('sev').addEventListener('input',()=>{ state.severity=+$('sev').value/100; $('sevV').textContent=$('sev').value; if(!state.playing)redraw(); });
+  $('spd').addEventListener('input',()=>{ state.bpm=+$('spd').value; });
+  $('playBtn').addEventListener('click',()=>{ state.playing=!state.playing; $('playBtn').textContent=state.playing?'⏸ Pause':'▶ Play';
+    if(state.playing){ last=performance.now(); requestAnimationFrame(loop); } });
+  $('scrub').addEventListener('input',()=>{ pauseIt(); t=+$('scrub').value/100; redraw(); });
+  $('sound').addEventListener('change',()=>{ state.sound=$('sound').checked; if(state.sound) ac(); });
+
+  renderInfo(); drawHeart(0); drawCycle(0);
+  requestAnimationFrame(loop);
+})();
+</script>
+</body>
+</html>

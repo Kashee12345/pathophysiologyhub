@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f7f2ea">
+<title>Adrenal Disorders</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{ --card:#fffdf8; --ink:#2a2420; --muted:#7a6f63; --line:#e3d8c6;
+    --sans:'Inter',system-ui,sans-serif; --disp:'Cinzel Decorative',serif; --accent:#b0703a; }
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  body{background:linear-gradient(160deg,#faf4ec,#ece6dc);color:var(--ink);font-family:var(--sans);min-height:100vh;padding:18px 16px 44px;}
+  header{max-width:1120px;margin:0 auto 16px;text-align:center;}
+  h1{font-family:var(--disp);font-weight:900;font-size:clamp(21px,4vw,34px);color:#9a5f24;line-height:1.05;}
+  header .sub{color:var(--muted);font-size:15px;margin-top:4px;}
+  header .intro{max-width:860px;margin:10px auto 0;font-size:14.5px;line-height:1.5;color:#5c5248;}
+  header .intro b{color:#9a5f24;}
+  .wrap{max-width:1120px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;box-shadow:0 6px 22px rgba(150,90,40,.07);}
+  .card h2{font-family:var(--disp);font-weight:700;font-size:16px;color:#9a5f24;margin-bottom:6px;}
+  .card h2 + .desc{font-size:13px;color:var(--muted);margin-bottom:10px;line-height:1.4;}
+  svg{display:block;width:100%;height:auto;max-height:300px;}
+  #liveCap{margin-top:8px;background:#f6efe0;border:1px solid #e6d4ac;border-radius:10px;padding:10px 13px;font-size:14px;line-height:1.5;color:#6a4818;text-align:center;} #liveCap b{color:#7a4e10;}
+  @keyframes pulse{0%,100%{opacity:.4}50%{opacity:.85}}
+  .pulse{animation:pulse 1.3s ease-in-out infinite;}
+  #stage{border-radius:12px;padding:11px 14px;margin-bottom:12px;color:#fff;font-weight:700;font-size:16px;text-align:center;background:#b0803a;}
+  #stage small{display:block;font-weight:500;font-size:13px;opacity:.93;margin-top:2px;}
+  .seg{display:grid;grid-template-columns:1fr 1fr 1fr;border:1px solid var(--line);border-radius:11px;overflow:hidden;gap:1px;background:var(--line);}
+  .seg button{border:none;background:#fff;color:var(--ink);font-family:var(--sans);font-weight:700;font-size:12px;padding:10px 5px;cursor:pointer;transition:.12s;line-height:1.15;}
+  .seg button small{display:block;font-weight:500;font-size:9px;color:var(--muted);margin-top:1px;}
+  .seg button.on{color:#fff;} .seg button.cush.on{background:#c0763a;} .seg button.addi.on{background:#8a6a3a;} .seg button.pheo.on{background:#a5392e;}
+  #info{border:1px solid var(--line);border-left:5px solid var(--accent);background:#f7f0e6;border-radius:10px;padding:12px 13px;margin-top:16px;}
+  #info .n{font-family:var(--disp);font-weight:700;font-size:16px;color:#9a5f24;} #info .tag{display:inline-block;margin-top:6px;font-size:11px;font-weight:800;border-radius:20px;padding:3px 11px;}
+  #info .plain{font-size:14px;line-height:1.5;color:#2a2420;margin-top:8px;font-weight:600;}
+  #info .story{font-size:12.8px;line-height:1.5;color:#3a3630;margin-top:8px;background:#fff;border-radius:8px;padding:9px 11px;border:1px solid #e6d8c4;}
+  #info .ss{margin-top:8px;font-size:12.3px;color:#5c5248;} #info .ss b{color:#7a4e10;}
+  .pearl{background:#eef4fb;border:1px solid #cbdcf0;border-radius:10px;padding:10px 12px;margin-top:12px;font-size:12.3px;line-height:1.5;color:#274d7a;} .pearl b{color:#173b5a;}
+  @media (max-width:880px){ .wrap{grid-template-columns:1fr;} }
+</style>
+</head>
+<body>
+<header>
+  <h1>Adrenal Disorders</h1>
+  <div class="sub">Too much vs too little cortisol · Week 8</div>
+  <div class="intro">The adrenal glands sit on the kidneys. The <b>cortex</b> makes <b>corticosteroids</b> (cortisol, aldosterone). Too much = <b>Cushing's</b>; too little = <b>Addison's</b>. The <b>medulla</b> makes adrenaline — a tumor there is a <b>pheochromocytoma</b>. Click each.</div>
+</header>
+<div class="wrap">
+  <div>
+    <div class="card">
+      <h2>The signs on the body</h2>
+      <div class="desc">Watch how too much vs too little cortisol produces opposite signs.</div>
+      <svg id="art" viewBox="0 0 300 300" aria-label="adrenal disorder"></svg>
+      <div id="liveCap">Pick a disorder.</div>
+    </div>
+  </div>
+  <div>
+    <div id="stage">Pick a disorder<small>hyper vs hypo</small></div>
+    <div class="card">
+      <div class="seg" id="seg">
+        <button data-d="cush" class="cush on">Cushing's<small>HYPER cortisol</small></button>
+        <button data-d="addi" class="addi">Addison's<small>HYPO cortisol</small></button>
+        <button data-d="pheo" class="pheo">Pheochromocytoma<small>medulla tumor</small></button>
+      </div>
+    </div>
+    <div class="card" style="margin-top:16px;"><h2>What's happening</h2><div id="info"></div>
+      <div class="pearl"><b>Never stop steroids abruptly!</b> Long-term oral steroids shut off the body's own cortisol production. Stopping suddenly leaves a gap before natural production restarts → an <b>Addisonian crisis</b>. Always <b>taper</b>. (Feedback: an adrenal tumor making its own cortisol drives <b>CRH and ACTH down</b>; a failed adrenal gland drives them <b>up</b>.)</div>
+    </div>
+  </div>
+</div>
+<script>
+(function(){
+  const $=id=>document.getElementById(id); let cur='cush';
+  const INFO={
+    cush:{name:"Cushing's Syndrome",color:'#c0763a',tag:['HYPER — too much','#fbe4d4','#a5651c'],
+      plain:'Too much corticosteroid — from steroid meds or an adrenal/pituitary tumor.',
+      story:'Excess <b>cortisol and aldosterone</b>, usually from <b>taking too much prednisone</b> or an <b>adrenal/pituitary adenoma</b>. High cortisol drives weight gain, high sugar, thin skin, and immune suppression.',
+      ss:'Weight gain (moon face, buffalo hump), hyperglycemia, thin/fragile skin, HTN, ↑ infection risk.'},
+    addi:{name:"Addison's Disease",color:'#8a6a3a',tag:['HYPO — too little','#f0e6d0','#7a5a2a'],
+      plain:'Too little cortisol and aldosterone — usually an autoimmune destruction of the adrenal gland.',
+      story:'An <b>autoimmune</b> destruction of the adrenal gland → <b>too little aldosterone and cortisol</b>. Low aldosterone drops BP; an <b>early classic sign is bronze/hyperpigmented skin</b> (from high ACTH stimulating melanocytes).',
+      ss:'Hypotension, weight loss, fatigue, bronze skin patches, salt craving.'},
+    pheo:{name:'Pheochromocytoma',color:'#a5392e',tag:['medulla tumor','#f6ded9','#8a2a1e'],
+      plain:'A rare tumor of the adrenal medulla that dumps adrenaline — causing BP spikes.',
+      story:'A tumor of the <b>adrenal medulla</b> that oversecretes <b>epinephrine/norepinephrine</b>. It causes <b>sudden episodes</b> of <b>high blood pressure, headache, heart palpitations, and sweating</b>.',
+      ss:'Episodic severe HTN, headache, palpitations, diaphoresis (the "5 P\'s").'}
+  };
+  function draw(){ const st=cur,C=INFO[st].color; let s='';
+    const cush=st==='cush';
+    // body — bigger for cushing, thin for addison
+    const w=cush?1.25:(st==='addi'?0.82:1);
+    s+='<g transform="translate(150,0) scale('+w+',1) translate(-150,0)">';
+    // head (moon face for cushing)
+    s+='<circle cx="150" cy="45" r="'+(cush?30:24)+'" fill="'+(st==='addi'?'#c9986a':'#f2d6b8')+'" stroke="#d8b490" stroke-width="2"/>';
+    // torso
+    s+='<path d="M120 78 L180 78 C192 82 196 100 194 130 L198 220 C198 236 182 244 150 244 C118 244 102 236 102 220 L106 130 C104 100 108 82 120 78 Z" fill="'+(st==='addi'?'#c9986a':'#f2d6b8')+'" stroke="#d8b490" stroke-width="2"/>';
+    s+='</g>';
+    // limbs (thin for cushing - central obesity)
+    s+='<path d="M120 92 L92 160 M180 92 L208 160" stroke="'+(st==='addi'?'#c9986a':'#f2d6b8')+'" stroke-width="'+(cush?9:12)+'" stroke-linecap="round"/>';
+    s+='<path d="M132 244 L124 296 M168 244 L176 296" stroke="'+(st==='addi'?'#c9986a':'#f2d6b8')+'" stroke-width="'+(cush?11:13)+'" stroke-linecap="round"/>';
+    if(cush){ s+='<ellipse class="pulse" cx="150" cy="90" rx="18" ry="12" fill="'+C+'" opacity="0.5"/><text x="215" y="90" font-size="9" font-weight="700" fill="'+C+'">buffalo hump</text>'; s+='<text x="150" y="49" text-anchor="middle" font-size="8" font-weight="700" fill="#a5651c">moon face</text>'; s+='<text x="150" y="175" text-anchor="middle" font-size="9" font-weight="700" fill="'+C+'">central weight gain</text>'; }
+    else if(st==='addi'){ [[130,120],[165,140],[125,180],[170,190]].forEach((p,i)=>s+='<ellipse class="pulse" style="animation-delay:'+(i*0.2)+'s" cx="'+p[0]+'" cy="'+p[1]+'" rx="10" ry="7" fill="#a5722a" opacity="0.6"/>'); s+='<text x="150" y="270" text-anchor="middle" font-size="10" font-weight="700" fill="'+C+'">bronze skin + weight loss</text>'; }
+    else { s+='<path class="pulse" d="M150 78 l0 -18 m-6 6 l6 -6 l6 6" stroke="'+C+'" stroke-width="3" fill="none"/>'; s+='<text x="150" y="52" text-anchor="middle" font-size="18">💥</text>'; s+='<text x="150" y="270" text-anchor="middle" font-size="10" font-weight="700" fill="'+C+'">BP spikes · palpitations · sweating</text>'; }
+    // adrenal glands on kidneys (corner)
+    s+='<g transform="translate(250,210)"><path d="M0 0 q10 -12 20 0 q4 10 -6 12 q-14 2 -14 -12z" fill="'+(st==='pheo'?C:'#e0b070')+'" stroke="#a07a30" stroke-width="1.5"/></g>';
+    $('art').innerHTML=s;
+  }
+  function render(){ const inf=INFO[cur]; draw();
+    document.querySelectorAll('#seg button').forEach(b=>b.classList.toggle('on',b.dataset.d===cur));
+    $('stage').style.background=inf.color; $('stage').innerHTML=inf.name+'<small>'+inf.tag[0]+'</small>';
+    $('info').innerHTML='<div class="n">'+inf.name+'</div> <span class="tag" style="background:'+inf.tag[1]+';color:'+inf.tag[2]+'">'+inf.tag[0]+'</span><div class="plain">'+inf.plain+'</div><div class="story">'+inf.story+'</div><div class="ss"><b>Signs:</b> '+inf.ss+'</div>';
+    $('liveCap').innerHTML='<b>'+inf.name+'</b> — '+inf.plain;
+  }
+  document.querySelectorAll('#seg button').forEach(b=>b.addEventListener('click',()=>{ cur=b.dataset.d; render(); }));
+  render();
+})();
+</script>
+</body>
+</html>

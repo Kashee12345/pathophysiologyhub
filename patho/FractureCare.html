@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f7f2ea">
+<title>Fractures &amp; Neurovascular Check</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{ --card:#fffdf8; --ink:#2a2420; --muted:#7a6f63; --line:#e3d8c6;
+    --sans:'Inter',system-ui,sans-serif; --disp:'Cinzel Decorative',serif; --accent:#7a6a4a; }
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  body{background:linear-gradient(160deg,#f8f5ec,#ece7dc);color:var(--ink);font-family:var(--sans);min-height:100vh;padding:18px 16px 44px;}
+  header{max-width:1120px;margin:0 auto 16px;text-align:center;}
+  h1{font-family:var(--disp);font-weight:900;font-size:clamp(21px,4vw,34px);color:#6a5a34;line-height:1.05;}
+  header .sub{color:var(--muted);font-size:15px;margin-top:4px;}
+  header .intro{max-width:860px;margin:10px auto 0;font-size:14.5px;line-height:1.5;color:#5c5248;}
+  header .intro b{color:#6a5a34;}
+  .wrap{max-width:1120px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;box-shadow:0 6px 22px rgba(110,90,50,.07);}
+  .card h2{font-family:var(--disp);font-weight:700;font-size:16px;color:#6a5a34;margin-bottom:6px;}
+  .card h2 + .desc{font-size:13px;color:var(--muted);margin-bottom:10px;line-height:1.4;}
+  svg{display:block;width:100%;height:auto;max-height:300px;}
+  #liveCap{margin-top:8px;background:#f3ecdb;border:1px solid #e0d1ad;border-radius:10px;padding:10px 13px;font-size:14px;line-height:1.5;color:#5a4a1a;text-align:center;} #liveCap b{color:#4a3c10;}
+  #stage{border-radius:12px;padding:11px 14px;margin-bottom:12px;color:#fff;font-weight:700;font-size:16px;text-align:center;background:#8a7a4a;}
+  #stage small{display:block;font-weight:500;font-size:13px;opacity:.93;margin-top:2px;}
+  .seg{display:grid;grid-template-columns:1fr 1fr 1fr;border:1px solid var(--line);border-radius:11px;overflow:hidden;gap:1px;background:var(--line);margin-bottom:6px;}
+  .seg button{border:none;background:#fff;color:var(--ink);font-family:var(--sans);font-weight:700;font-size:12px;padding:9px 5px;cursor:pointer;transition:.12s;}
+  .seg button.on{color:#fff;background:#7a6a4a;}
+  #info{border:1px solid var(--line);border-left:5px solid var(--accent);background:#f5f0e4;border-radius:10px;padding:11px 13px;margin-top:6px;}
+  #info .n{font-family:var(--disp);font-weight:700;font-size:15px;color:#6a5a34;} #info .story{font-size:12.8px;line-height:1.5;color:#3a3630;margin-top:5px;}
+  .fives{margin-top:12px;} .fives .lbl{font-size:11.5px;font-weight:700;text-transform:uppercase;color:var(--muted);letter-spacing:.03em;margin-bottom:6px;}
+  .fives table{width:100%;border-collapse:collapse;font-size:12.3px;} .fives td{padding:5px 8px;border-bottom:1px solid var(--line);} .fives td:first-child{font-weight:800;color:#a5442a;white-space:nowrap;}
+  .pearl{background:#eef4fb;border:1px solid #cbdcf0;border-radius:10px;padding:10px 12px;margin-top:12px;font-size:12.3px;line-height:1.5;color:#274d7a;} .pearl b{color:#173b5a;}
+  @media (max-width:880px){ .wrap{grid-template-columns:1fr;} }
+</style>
+</head>
+<body>
+<header>
+  <h1>Fractures &amp; the Neurovascular Check</h1>
+  <div class="sub">Break patterns + the 5 P's · Week 6</div>
+  <div class="intro">Bones break in recognizable patterns, and every fracture needs a <b>neurovascular assessment</b> — because the broken bone can damage the <b>nerves, arteries, and veins</b> around it. Click a fracture type, then review the <b>5 P's</b>.</div>
+</header>
+<div class="wrap">
+  <div>
+    <div class="card">
+      <h2>The break pattern</h2>
+      <div class="desc">A long bone with a nerve (yellow), artery (red), and vein (blue) running alongside.</div>
+      <svg id="art" viewBox="0 0 300 280" aria-label="fracture"></svg>
+      <div id="liveCap">Pick a fracture type.</div>
+    </div>
+  </div>
+  <div>
+    <div id="stage">Pick a fracture type<small>6 common patterns</small></div>
+    <div class="card">
+      <div class="seg" id="seg">
+        <button data-d="transverse" class="on">Transverse</button>
+        <button data-d="oblique">Oblique</button>
+        <button data-d="spiral">Spiral</button>
+        <button data-d="comminuted">Comminuted</button>
+        <button data-d="greenstick">Greenstick</button>
+        <button data-d="open">Open</button>
+      </div>
+      <div id="info"></div>
+      <div class="fives"><div class="lbl">Priority assessment — the 5 P's</div>
+        <table>
+          <tr><td>Pain</td><td>Can they detect pain? (uncontrolled pain is a red flag)</td></tr>
+          <tr><td>Pulse</td><td>Is blood circulating past the injury?</td></tr>
+          <tr><td>Pallor</td><td>Pale/cool skin suggests poor perfusion</td></tr>
+          <tr><td>Paresthesia</td><td>Can they feel? (numbness/tingling = nerve)</td></tr>
+          <tr><td>Paralysis</td><td>Can they move it?</td></tr>
+        </table>
+      </div>
+      <div class="pearl"><b>Trauma comes first — ABCDE primary survey:</b> <b>A</b>irway (occluded?), <b>B</b>reathing (distress? breath sounds?), <b>C</b>irculation (heart rate, pallor, cap refill), <b>D</b>isability (can they respond?), <b>E</b>xposure/Environment (e.g. hypothermia). Highest-risk populations for fracture: the <b>elderly (osteoporosis)</b> and children.</div>
+    </div>
+  </div>
+</div>
+<script>
+(function(){
+  const $=id=>document.getElementById(id); let cur='transverse';
+  const INFO={
+    transverse:{name:'Transverse',story:'A <b>straight, horizontal</b> break across the bone — usually from a direct blow.'},
+    oblique:{name:'Oblique',story:'A <b>diagonal / angled</b> break across the shaft.'},
+    spiral:{name:'Spiral',story:'A <b>twisting</b> break that spirals around the bone — from a rotational/twisting force.'},
+    comminuted:{name:'Comminuted',story:'The bone <b>shatters into three or more fragments</b> — high-energy trauma.'},
+    greenstick:{name:'Greenstick',story:'An <b>incomplete</b> break where the bone bends and cracks on one side — classic in <b>children</b> (soft bones).'},
+    open:{name:'Open (compound)',story:'The broken bone <b>breaks through the skin</b> — high <b>infection</b> risk (→ osteomyelitis).'}
+  };
+  function draw(){ const st=cur; let s='';
+    // neurovascular bundle
+    s+='<line x1="90" y1="20" x2="90" y2="260" stroke="#e0c040" stroke-width="6"/><text x="82" y="16" text-anchor="end" font-size="9" fill="#a08a20">nerve</text>';
+    s+='<line x1="205" y1="20" x2="205" y2="260" stroke="#c0392b" stroke-width="6"/><text x="213" y="16" font-size="9" fill="#a5392e">artery</text>';
+    s+='<line x1="222" y1="20" x2="222" y2="260" stroke="#3a6ea5" stroke-width="6"/><text x="230" y="16" font-size="9" fill="#2f5a8a">vein</text>';
+    // bone
+    s+='<rect x="130" y="20" width="40" height="240" rx="16" fill="#f2ecdc" stroke="#c9b890" stroke-width="3"/>';
+    s+='<ellipse cx="150" cy="26" rx="28" ry="14" fill="#f2ecdc" stroke="#c9b890" stroke-width="3"/>';
+    s+='<ellipse cx="150" cy="254" rx="28" ry="14" fill="#f2ecdc" stroke="#c9b890" stroke-width="3"/>';
+    // fracture line
+    const C='#7a5a2a';
+    if(st==='transverse') s+='<line x1="128" y1="140" x2="172" y2="140" stroke="'+C+'" stroke-width="4"/>';
+    else if(st==='oblique') s+='<line x1="128" y1="125" x2="172" y2="155" stroke="'+C+'" stroke-width="4"/>';
+    else if(st==='spiral') s+='<path d="M130 120 Q170 135 132 150 Q168 165 170 175" fill="none" stroke="'+C+'" stroke-width="4"/>';
+    else if(st==='comminuted'){ s+='<path d="M128 130 L172 135 M130 148 L168 142 M132 160 L170 158" stroke="'+C+'" stroke-width="3.5"/>'; }
+    else if(st==='greenstick'){ s+='<path d="M130 140 Q148 145 152 138" fill="none" stroke="'+C+'" stroke-width="4"/>'; s+='<path d="M148 130 L152 150" stroke="'+C+'" stroke-width="3"/>'; }
+    else { s+='<line x1="128" y1="140" x2="172" y2="140" stroke="'+C+'" stroke-width="4"/>'; s+='<path d="M150 140 L110 150 M150 140 L108 130" stroke="#a5201a" stroke-width="3"/><text x="95" y="145" text-anchor="end" font-size="9" font-weight="700" fill="#a5201a">through skin!</text>'; }
+    $('art').innerHTML=s;
+  }
+  function render(){ const inf=INFO[cur]; draw();
+    document.querySelectorAll('#seg button').forEach(b=>b.classList.toggle('on',b.dataset.d===cur));
+    $('stage').innerHTML=inf.name+' Fracture<small>break pattern</small>';
+    $('info').innerHTML='<div class="n">'+inf.name+'</div><div class="story">'+inf.story+'</div>';
+    $('liveCap').innerHTML='<b>'+inf.name+'</b> — '+inf.story.replace(/<[^>]+>/g,'');
+  }
+  document.querySelectorAll('#seg button').forEach(b=>b.addEventListener('click',()=>{ cur=b.dataset.d; render(); }));
+  render();
+})();
+</script>
+</body>
+</html>

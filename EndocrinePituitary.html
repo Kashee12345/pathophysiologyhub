@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f7f2ea">
+<title>The Endocrine Command Center</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{ --card:#fffdf8; --ink:#2a2420; --muted:#7a6f63; --line:#e3d8c6;
+    --sans:'Inter',system-ui,sans-serif; --disp:'Cinzel Decorative',serif; --accent:#7a5a8a; }
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  body{background:linear-gradient(160deg,#f4f0f8,#e9e6ec);color:var(--ink);font-family:var(--sans);min-height:100vh;padding:18px 16px 44px;}
+  header{max-width:1120px;margin:0 auto 16px;text-align:center;}
+  h1{font-family:var(--disp);font-weight:900;font-size:clamp(20px,3.8vw,32px);color:#634a74;line-height:1.05;}
+  header .sub{color:var(--muted);font-size:15px;margin-top:4px;}
+  header .intro{max-width:860px;margin:10px auto 0;font-size:14.5px;line-height:1.5;color:#5c5248;}
+  header .intro b{color:#634a74;}
+  .wrap{max-width:1120px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;box-shadow:0 6px 22px rgba(100,70,120,.07);}
+  .card h2{font-family:var(--disp);font-weight:700;font-size:16px;color:#634a74;margin-bottom:6px;}
+  .card h2 + .desc{font-size:13px;color:var(--muted);margin-bottom:10px;line-height:1.4;}
+  svg{display:block;width:100%;height:auto;max-height:310px;}
+  #liveCap{margin-top:8px;background:#efeaf4;border:1px solid #d8cce4;border-radius:10px;padding:10px 13px;font-size:14px;line-height:1.5;color:#4a3a5a;text-align:center;} #liveCap b{color:#3a2a4a;}
+  @keyframes pulse{0%,100%{opacity:.4}50%{opacity:.85}}
+  .pulse{animation:pulse 1.4s ease-in-out infinite;}
+  #stage{border-radius:12px;padding:11px 14px;margin-bottom:12px;color:#fff;font-weight:700;font-size:16px;text-align:center;background:#7a6a8a;}
+  #stage small{display:block;font-weight:500;font-size:13px;opacity:.93;margin-top:2px;}
+  .seg{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--line);border-radius:11px;overflow:hidden;gap:1px;background:var(--line);}
+  .seg button{border:none;background:#fff;color:var(--ink);font-family:var(--sans);font-weight:700;font-size:12.5px;padding:10px 6px;cursor:pointer;transition:.12s;line-height:1.15;}
+  .seg button small{display:block;font-weight:500;font-size:9.5px;color:var(--muted);margin-top:1px;}
+  .seg button.on{color:#fff;background:#7a5a8a;} .seg button.on small{color:rgba(255,255,255,.9);}
+  #info{border:1px solid var(--line);border-left:5px solid var(--accent);background:#f2eef6;border-radius:10px;padding:12px 13px;margin-top:16px;}
+  #info .n{font-family:var(--disp);font-weight:700;font-size:16px;color:#634a74;} #info .plain{font-size:14px;line-height:1.5;color:#2a2420;margin-top:8px;font-weight:600;}
+  #info .story{font-size:12.8px;line-height:1.5;color:#3a3630;margin-top:8px;background:#fff;border-radius:8px;padding:9px 11px;border:1px solid #ddd0e6;}
+  #info .horm{margin-top:8px;display:flex;flex-wrap:wrap;gap:5px;} #info .horm span{font-size:11px;font-weight:700;border-radius:20px;padding:3px 9px;background:#e8def0;color:#5a3a70;}
+  @media (max-width:880px){ .wrap{grid-template-columns:1fr;} }
+</style>
+</head>
+<body>
+<header>
+  <h1>The Endocrine Command Center</h1>
+  <div class="sub">Hypothalamus → pituitary → glands · Week 8</div>
+  <div class="intro">The endocrine system runs on a chain of command: the <b>hypothalamus</b> gives orders to the <b>pituitary</b>, which sends hormones to the body's glands — all kept in check by <b>feedback loops</b>. Click each piece.</div>
+</header>
+<div class="wrap">
+  <div>
+    <div class="card">
+      <h2>The chain of command</h2>
+      <div class="desc">Hypothalamus at the top, pituitary just below (anterior + posterior lobes).</div>
+      <svg id="art" viewBox="0 0 300 300" aria-label="endocrine axis"></svg>
+      <div id="liveCap">Pick a piece.</div>
+    </div>
+  </div>
+  <div>
+    <div id="stage">Pick a piece<small>the HPA axis</small></div>
+    <div class="card">
+      <div class="seg" id="seg">
+        <button data-d="hypo" class="on">Hypothalamus<small>control center</small></button>
+        <button data-d="ant">Anterior Pituitary<small>makes hormones</small></button>
+        <button data-d="post">Posterior Pituitary<small>stores hormones</small></button>
+        <button data-d="feedback">Feedback Loops<small>the thermostat</small></button>
+      </div>
+    </div>
+    <div class="card" style="margin-top:16px;"><h2>What it does</h2><div id="info"></div></div>
+  </div>
+</div>
+<script>
+(function(){
+  const $=id=>document.getElementById(id); let cur='hypo';
+  const INFO={
+    hypo:{name:'Hypothalamus',color:'#7a5a8a',horm:['releasing hormones','ADH*','oxytocin*'],
+      plain:'The control center — it receives input and decides whether to act.',
+      story:'The hypothalamus is the <b>coordinating center</b>: it takes in signals and decides whether the body needs to respond. It directs the pituitary, and it <b>makes ADH and oxytocin</b> (which are then stored in the posterior pituitary).'},
+    ant:{name:'Anterior Pituitary',color:'#8a5a9a',horm:['GH','PRL','ACTH','TSH','FSH','LH'],
+      plain:'The "master gland" — it MAKES and releases six major hormones on the hypothalamus\'s orders.',
+      story:'The anterior lobe <b>manufactures</b> hormones that steer other glands: <b>GH</b> (growth), <b>PRL</b> (prolactin/milk), <b>ACTH</b> (→ adrenal cortex), <b>TSH</b> (→ thyroid), and <b>FSH &amp; LH</b> (→ gonads).'},
+    post:{name:'Posterior Pituitary',color:'#5a6a9a',horm:['ADH','oxytocin'],
+      plain:'A storage depot — it STORES and releases two hormones made by the hypothalamus.',
+      story:'The posterior lobe doesn\'t make hormones — it <b>stores and releases</b> two made by the hypothalamus: <b>ADH</b> (antidiuretic hormone — holds water) and <b>oxytocin</b> (labor &amp; milk let-down).'},
+    feedback:{name:'Feedback Loops',color:'#3a7a6a',horm:['negative','positive'],
+      plain:'The thermostat that keeps hormone levels in range — usually by shutting off the signal.',
+      story:'<b>Negative feedback</b> (the common one): when a hormone rises enough, it <b>shuts off</b> its own signal — like a thermostat turning off the heat. <b>Positive feedback</b> (rarer): the response <b>amplifies</b> the signal (e.g. oxytocin building during labor).'}
+  };
+  function draw(){ const st=cur; let s='';
+    // brain outline
+    s+='<path d="M150 30 C110 30 85 60 85 90 C85 115 100 128 108 132 L108 150 L192 150 L192 132 C200 128 215 115 215 90 C215 60 190 30 150 30 Z" fill="#f0e2f0" stroke="#b898c0" stroke-width="2.5"/>';
+    // hypothalamus
+    const hy=st==='hypo';
+    s+='<ellipse cx="150" cy="120" rx="26" ry="14" fill="'+(hy?'#7a5a8a':'#d8c0e0')+'" stroke="#8a6a9a" stroke-width="2"/>';
+    if(hy) s+='<ellipse class="pulse" cx="150" cy="120" rx="34" ry="20" fill="#7a5a8a" opacity="0.2"/>';
+    s+='<text x="150" y="124" text-anchor="middle" font-size="8" font-weight="700" fill="'+(hy?'#fff':'#7a5a8a')+'">hypothalamus</text>';
+    // stalk
+    s+='<rect x="145" y="134" width="10" height="18" fill="#c9a8d0"/>';
+    // pituitary (two lobes)
+    const ant=st==='ant', post=st==='post';
+    s+='<ellipse cx="138" cy="165" rx="16" ry="14" fill="'+(ant?'#8a5a9a':'#e0c8e8')+'" stroke="#a888b0" stroke-width="2"/>';
+    s+='<ellipse cx="162" cy="165" rx="12" ry="12" fill="'+(post?'#5a6a9a':'#c8d0e8')+'" stroke="#8898c0" stroke-width="2"/>';
+    if(ant) s+='<ellipse class="pulse" cx="138" cy="165" rx="22" ry="20" fill="#8a5a9a" opacity="0.2"/>';
+    if(post) s+='<ellipse class="pulse" cx="162" cy="165" rx="18" ry="18" fill="#5a6a9a" opacity="0.2"/>';
+    s+='<text x="138" y="192" text-anchor="middle" font-size="8" font-weight="700" fill="#8a5a9a">anterior</text>';
+    s+='<text x="164" y="192" text-anchor="middle" font-size="8" font-weight="700" fill="#5a6a9a">posterior</text>';
+    // target glands / hormones flowing down
+    if(st==='ant'){ ['GH','TSH','ACTH','FSH/LH'].forEach((h,i)=>s+='<text class="pulse" style="animation-delay:'+(i*0.2)+'s" x="'+(60+i*60)+'" y="240" text-anchor="middle" font-size="10" font-weight="700" fill="#8a5a9a">'+h+'</text>'); s+='<path d="M130 178 L80 225 M138 178 L140 225 M146 178 L200 225 M150 178 L245 225" stroke="#c9a8d0" stroke-width="1.5"/>'; }
+    else if(st==='post'){ ['ADH','oxytocin'].forEach((h,i)=>s+='<text class="pulse" style="animation-delay:'+(i*0.2)+'s" x="'+(110+i*90)+'" y="240" text-anchor="middle" font-size="11" font-weight="700" fill="#5a6a9a">'+h+'</text>'); }
+    else if(st==='feedback'){ s+='<path class="pulse" d="M162 155 C210 150 210 110 165 115" fill="none" stroke="#3a7a6a" stroke-width="3" marker-end=""/><text x="225" y="135" text-anchor="middle" font-size="9" font-weight="700" fill="#3a7a6a">⊖ shuts</text><text x="225" y="147" text-anchor="middle" font-size="9" font-weight="700" fill="#3a7a6a">off</text>'; s+='<text x="150" y="240" text-anchor="middle" font-size="10" font-weight="700" fill="#3a7a6a">hormone rises → signal turns off</text>'; }
+    $('art').innerHTML=s;
+  }
+  function render(){ const inf=INFO[cur]; draw();
+    document.querySelectorAll('#seg button').forEach(b=>b.classList.toggle('on',b.dataset.d===cur));
+    $('stage').style.background=inf.color; $('stage').innerHTML=inf.name+'<small>'+inf.plain.slice(0,42)+'…</small>';
+    $('info').innerHTML='<div class="n">'+inf.name+'</div><div class="plain">'+inf.plain+'</div><div class="story">'+inf.story+'</div><div class="horm">'+inf.horm.map(h=>'<span>'+h+'</span>').join('')+'</div>';
+    $('liveCap').innerHTML='<b>'+inf.name+'</b> — '+inf.plain;
+  }
+  document.querySelectorAll('#seg button').forEach(b=>b.addEventListener('click',()=>{ cur=b.dataset.d; render(); }));
+  render();
+})();
+</script>
+</body>
+</html>

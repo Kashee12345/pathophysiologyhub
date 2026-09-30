@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f7f2ea">
+<title>Diabetes Mellitus</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{ --card:#fffdf8; --ink:#2a2420; --muted:#7a6f63; --line:#e3d8c6;
+    --sans:'Inter',system-ui,sans-serif; --disp:'Cinzel Decorative',serif; --accent:#5a7a9a; }
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  body{background:linear-gradient(160deg,#eef3f8,#e7eaee);color:var(--ink);font-family:var(--sans);min-height:100vh;padding:18px 16px 44px;}
+  header{max-width:1120px;margin:0 auto 16px;text-align:center;}
+  h1{font-family:var(--disp);font-weight:900;font-size:clamp(21px,4vw,34px);color:#3f5f7f;line-height:1.05;}
+  header .sub{color:var(--muted);font-size:15px;margin-top:4px;}
+  header .intro{max-width:860px;margin:10px auto 0;font-size:14.5px;line-height:1.5;color:#5c5248;}
+  header .intro b{color:#3f5f7f;}
+  .wrap{max-width:1120px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;box-shadow:0 6px 22px rgba(60,80,120,.07);}
+  .card h2{font-family:var(--disp);font-weight:700;font-size:16px;color:#3f5f7f;margin-bottom:6px;}
+  .card h2 + .desc{font-size:13px;color:var(--muted);margin-bottom:10px;line-height:1.4;}
+  svg{display:block;width:100%;height:auto;max-height:280px;}
+  #liveCap{margin-top:8px;background:#e7eef5;border:1px solid #c6d8e4;border-radius:10px;padding:10px 13px;font-size:14px;line-height:1.5;color:#28516a;text-align:center;} #liveCap b{color:#1c3c56;}
+  @keyframes drift{0%{transform:translateX(0);opacity:0}20%{opacity:1}100%{transform:translateX(60px);opacity:0}}
+  .glu{animation:drift 2s linear infinite;}
+  @keyframes pulse{0%,100%{opacity:.4}50%{opacity:.85}}
+  .pulse{animation:pulse 1.3s ease-in-out infinite;}
+  #stage{border-radius:12px;padding:11px 14px;margin-bottom:12px;color:#fff;font-weight:700;font-size:16px;text-align:center;background:#5a7a9a;}
+  #stage small{display:block;font-weight:500;font-size:13px;opacity:.93;margin-top:2px;}
+  .seg{display:grid;grid-template-columns:1fr 1fr 1fr;border:1px solid var(--line);border-radius:11px;overflow:hidden;gap:1px;background:var(--line);}
+  .seg button{border:none;background:#fff;color:var(--ink);font-family:var(--sans);font-weight:700;font-size:12px;padding:10px 5px;cursor:pointer;transition:.12s;line-height:1.15;}
+  .seg button small{display:block;font-weight:500;font-size:9px;color:var(--muted);margin-top:1px;}
+  .seg button.on{color:#fff;} .seg button.t1.on{background:#c0392b;} .seg button.t2.on{background:#3a86b0;} .seg button.gd.on{background:#a5556a;}
+  #info{border:1px solid var(--line);border-left:5px solid var(--accent);background:#eef3f8;border-radius:10px;padding:12px 13px;margin-top:12px;}
+  #info .n{font-family:var(--disp);font-weight:700;font-size:16px;color:#3f5f7f;} #info .plain{font-size:14px;line-height:1.5;color:#2a2420;margin-top:8px;font-weight:600;}
+  #info .story{font-size:12.8px;line-height:1.5;color:#3a3630;margin-top:8px;background:#fff;border-radius:8px;padding:9px 11px;border:1px solid #cfdce6;}
+  .comp{margin-top:12px;} .comp .lbl{font-size:11.5px;font-weight:700;text-transform:uppercase;color:var(--muted);letter-spacing:.03em;margin-bottom:6px;}
+  .comp table{width:100%;border-collapse:collapse;font-size:12px;} .comp td,.comp th{padding:5px 7px;border-bottom:1px solid var(--line);text-align:left;} .comp th{font-size:10.5px;text-transform:uppercase;color:var(--muted);}
+  td.d{color:#a5392e;} td.h{color:#2f6a90;} .feat{font-weight:700;color:#4a4038;}
+  @media (max-width:880px){ .wrap{grid-template-columns:1fr;} }
+</style>
+</head>
+<body>
+<header>
+  <h1>Diabetes Mellitus</h1>
+  <div class="sub">When glucose can't get into the cells · Week 8</div>
+  <div class="intro">Insulin is the <b>key</b> that lets glucose into cells. In diabetes that fails — either there's <b>no insulin</b> (Type 1) or the cells <b>ignore it</b> (Type 2) — so glucose piles up in the blood. Click each type, then compare the two emergencies.</div>
+</header>
+<div class="wrap">
+  <div>
+    <div class="card">
+      <h2>Insulin &amp; glucose</h2>
+      <div class="desc">Watch whether insulin is present and whether glucose can get into the cell.</div>
+      <svg id="art" viewBox="0 0 300 250" aria-label="diabetes"></svg>
+      <div id="liveCap">Pick a type.</div>
+    </div>
+  </div>
+  <div>
+    <div id="stage">Pick a type<small>Type 1 · Type 2 · gestational</small></div>
+    <div class="card">
+      <div class="seg" id="seg">
+        <button data-d="t1" class="t1 on">Type 1<small>no insulin</small></button>
+        <button data-d="t2" class="t2">Type 2<small>resistance</small></button>
+        <button data-d="gd" class="gd">Gestational<small>pregnancy</small></button>
+      </div>
+    </div>
+    <div class="card" style="margin-top:16px;"><h2>What's happening</h2><div id="info"></div>
+      <div class="comp"><div class="lbl">The two emergencies</div>
+        <table>
+          <tr><th>Feature</th><th style="color:#a5392e">DKA</th><th style="color:#2f6a90">HHS</th></tr>
+          <tr><td class="feat">Seen in</td><td class="d">Type 1</td><td class="h">Type 2</td></tr>
+          <tr><td class="feat">Blood sugar</td><td class="d">&gt; 250 mg/dL</td><td class="h">&gt; 600 mg/dL</td></tr>
+          <tr><td class="feat">Ketones</td><td class="d">Yes (acidosis)</td><td class="h">No</td></tr>
+          <tr><td class="feat">Hallmark</td><td class="d">Kussmaul breathing</td><td class="h">Profound dehydration, thick blood</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+(function(){
+  const $=id=>document.getElementById(id); let cur='t1';
+  const INFO={
+    t1:{name:'Type 1 Diabetes',color:'#c0392b',
+      plain:'An autoimmune attack destroys the insulin-making beta cells — there is NO insulin.',
+      story:'The immune system <b>destroys the pancreatic beta cells</b>, so the body makes <b>no insulin</b>. Glucose can\'t enter cells → high blood sugar with <b>osmotic diuresis (polyuria, polydipsia), polyphagia, weight loss, blurry vision</b>. With no insulin the body burns fat → <b>ketones → DKA</b> (metabolic acidosis, Kussmaul breathing).'},
+    t2:{name:'Type 2 Diabetes',color:'#3a86b0',
+      plain:'The cells become resistant to insulin — there IS insulin, but it stops working well.',
+      story:'Cells become <b>desensitized to insulin (insulin resistance)</b>, so glucose builds up despite insulin being present. Comes on gradually with <b>hyperglycemia, fatigue, blurry vision, polyuria/polydipsia</b>, and can progress to confusion or coma. The emergency here is <b>HHS</b> (very high sugar, profound dehydration, but no ketones).'},
+    gd:{name:'Gestational Diabetes',color:'#a5556a',
+      plain:'Insulin resistance during pregnancy — mom can\'t make enough insulin in late pregnancy.',
+      story:'Pregnancy hormones cause <b>insulin resistance</b>; in late pregnancy some mothers <b>can\'t produce enough</b> insulin to keep up. Often <b>asymptomatic until screening</b>. Risks to baby include a <b>large baby (macrosomia)</b> and <b>excess amniotic fluid (polyhydramnios)</b>.'}
+  };
+  function draw(){ const st=cur,C=INFO[st].color; let s='';
+    const hasInsulin = st!=='t1';
+    const resistant = (st==='t2'||st==='gd');
+    // blood vessel with glucose
+    s+='<rect x="20" y="40" width="260" height="50" rx="12" fill="#f0b8b0" stroke="#c98a82" stroke-width="2"/>';
+    s+='<text x="30" y="34" font-size="10" font-weight="700" fill="#a5392e">bloodstream (glucose piling up)</text>';
+    for(let i=0;i<8;i++)s+='<circle cx="'+(45+i*28)+'" cy="65" r="7" fill="#e0b040"/>';
+    // insulin keys
+    if(hasInsulin){ for(let i=0;i<3;i++)s+='<rect x="'+(70+i*60)+'" y="58" width="14" height="8" rx="3" fill="#5a9ac0"/>'; s+='<text x="150" y="108" text-anchor="middle" font-size="9" font-weight="700" fill="#2f6a90">insulin present ('+(resistant?'but ignored':'ok')+')</text>'; }
+    else { s+='<text x="150" y="108" text-anchor="middle" font-size="9" font-weight="800" fill="#c0392b">NO insulin (beta cells destroyed)</text>'; }
+    // cell below
+    s+='<circle cx="150" cy="175" r="42" fill="#eef4e6" stroke="#a8c088" stroke-width="2.5"/><text x="150" y="179" text-anchor="middle" font-size="10" font-weight="700" fill="#7a8a5a">body cell</text>';
+    // door / receptor
+    if(!hasInsulin || resistant){
+      // glucose stuck outside
+      s+='<g class="pulse"><circle cx="150" cy="115" r="8" fill="#e0b040"/></g>';
+      s+='<path d="M150 133 l0 -1" /><text x="205" y="145" font-size="8.5" font-weight="700" fill="'+C+'">'+(resistant?'door stays shut':'no key')+'</text>';
+      s+='<line x1="140" y1="140" x2="160" y2="140" stroke="'+C+'" stroke-width="3"/>';
+    } else {
+      for(let i=0;i<3;i++)s+='<circle class="glu" style="animation-delay:'+(i*0.4)+'s" cx="120" cy="150" r="6" fill="#e0b040"/>';
+      s+='<text x="205" y="150" font-size="8.5" font-weight="700" fill="#3fa66a">glucose enters ✓</text>';
+    }
+    $('art').innerHTML=s;
+  }
+  function render(){ const inf=INFO[cur]; draw();
+    document.querySelectorAll('#seg button').forEach(b=>b.classList.toggle('on',b.dataset.d===cur));
+    $('stage').style.background=inf.color; $('stage').innerHTML=inf.name+'<small>'+(cur==='t1'?'no insulin → DKA risk':cur==='t2'?'insulin resistance → HHS risk':'pregnancy resistance')+'</small>';
+    $('info').innerHTML='<div class="n">'+inf.name+'</div><div class="plain">'+inf.plain+'</div><div class="story">'+inf.story+'</div>';
+    $('liveCap').innerHTML='<b>'+inf.name+'</b> — '+inf.plain;
+  }
+  document.querySelectorAll('#seg button').forEach(b=>b.addEventListener('click',()=>{ cur=b.dataset.d; render(); }));
+  render();
+})();
+</script>
+</body>
+</html>

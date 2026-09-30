@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0c3a44">
+<title>Pathophysiology — A Student-Friendly Guide · Dr. Akash Garg</title>
+<meta name="description" content="A student-friendly, exact pathophysiology guide by Dr. Akash Garg — every concept explained plainly, with an interactive you can play with in every section.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500&display=swap" rel="stylesheet">
+<style>
+  :root{ --ink:#22312f; --soft:#4a5a58; --muted:#7c8a88; --faint:#9aa8a6; --line:#e6e2d6;
+    --paper:#faf8f2; --card:#fffdf7; --accent:#0c7283; --accent-dk:#0c3a44; --gold:#b8862f;
+    --serif:"Source Serif 4",Georgia,serif; --disp:"Fraunces",Georgia,serif; --ui:"Inter",system-ui,sans-serif;
+    --shadow:0 1px 3px rgba(20,40,46,.06); }
+  *{box-sizing:border-box;} html{scroll-behavior:smooth;}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--serif);line-height:1.7;-webkit-font-smoothing:antialiased;}
+  a{color:var(--accent);text-decoration:none;}
+  .topbar{border-bottom:1px solid var(--line);}
+  .topbar .row{max-width:820px;margin:0 auto;padding:11px 20px;font-family:var(--ui);font-size:13.5px;font-weight:600;}
+  .topbar a{color:var(--soft);} .topbar a:hover{color:var(--accent);}
+
+  .cover{max-width:820px;margin:0 auto;padding:60px 20px 8px;text-align:center;}
+  .cover .kicker{font-family:var(--ui);font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);font-weight:700;}
+  .cover h1{font-family:var(--disp);font-weight:600;font-size:clamp(38px,8vw,66px);line-height:1.02;letter-spacing:-1px;color:var(--accent-dk);margin:14px 0 6px;}
+  .cover .sub{font-family:var(--disp);font-weight:500;font-style:italic;font-size:clamp(18px,3.5vw,24px);color:var(--gold);margin:0;}
+  .cover .lede{max-width:600px;margin:22px auto 0;font-size:18.5px;line-height:1.6;color:var(--soft);}
+  .cover .by{font-family:var(--ui);margin-top:20px;font-size:14px;color:var(--faint);font-weight:600;}
+  .rule{width:70px;height:3px;background:linear-gradient(90deg,var(--accent),var(--gold));margin:26px auto 0;border-radius:3px;}
+
+  .toc{max-width:820px;margin:44px auto 0;padding:0 20px 80px;}
+  .toc h2{font-family:var(--ui);font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--faint);font-weight:700;text-align:center;margin:0 0 20px;}
+  .ch{display:flex;align-items:center;gap:16px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 20px;margin:10px 0;box-shadow:var(--shadow);transition:border-color .15s,transform .15s;}
+  a.ch:hover{border-color:var(--accent);transform:translateY(-2px);}
+  .ch .no{flex:0 0 auto;width:40px;height:40px;border-radius:11px;background:#eef5f6;color:var(--accent);font-family:var(--disp);font-weight:700;font-size:18px;display:grid;place-items:center;}
+  .ch.ready .no{background:var(--accent);color:#fff;}
+  .ch .tx{flex:1 1 auto;min-width:0;}
+  .ch .tx h3{margin:0;font-family:var(--disp);font-weight:600;font-size:19px;color:var(--accent-dk);line-height:1.2;}
+  .ch .tx p{margin:2px 0 0;font-size:13.5px;color:var(--muted);font-family:var(--ui);}
+  .ch .st{flex:0 0 auto;font-family:var(--ui);font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;padding:5px 11px;border-radius:20px;}
+  .ch.ready .st{background:#e6f2ec;color:#2f7d50;} .ch.soon .st{background:#f2efe4;color:var(--faint);}
+  .ch.soon{opacity:.72;}
+  .ch.appendix{background:linear-gradient(135deg,#0c3a44,#0c7283);border-color:transparent;margin-top:18px;}
+  a.ch.appendix:hover{filter:brightness(1.07);border-color:transparent;}
+  .ch.appendix .no{background:var(--gold);color:#3a2a06;}
+  .ch.appendix .tx h3{color:#fff;} .ch.appendix .tx p{color:#cfe3e5;}
+  .ch.appendix .st{background:rgba(255,255,255,.16);color:#fff;}
+
+  .note{max-width:820px;margin:0 auto;padding:0 20px;}
+  .note .box{background:#fbf3e2;border:1px solid #ecd9ac;border-radius:14px;padding:16px 20px;font-size:15px;line-height:1.6;color:#6a5320;}
+  .note .box b{color:#5a4212;}
+  footer{font-family:var(--ui);text-align:center;color:var(--faint);font-size:12.5px;border-top:1px solid var(--line);padding:26px 20px 50px;} footer b{color:var(--soft);}
+</style>
+</head>
+<body>
+
+
+  <div class="topbar"><div class="row"></div></div>
+
+  <header class="cover">
+    <div class="kicker">A student-friendly guide</div>
+    <h1>Pathophysiology</h1>
+    <p class="sub">explained plainly, learned by doing</p>
+    <p class="lede">A pathophysiology book for the way people actually learn: every idea in plain English first, then an <b>interactive</b> you can click, drag, and play with — so the mechanism sticks instead of just the words.</p>
+    <div class="by">by Dr. Akash Garg </div>
+    <div class="rule"></div>
+  </header>
+
+  <div class="note"><div class="box"><b>📖 A note:</b> the book follows the course &mdash; <b>one chapter per week</b> &mdash; and each chapter ends with that unit&rsquo;s <b>flashcard deck</b> and its <b>interactive labs</b>. Chapters marked <b>Ready</b> are live now; the rest are on the way (Week 7 is midterm review). Start with the ready one below to see how it works.</div></div>
+
+    <div style="text-align:center;margin:8px auto 0;"><a href="full-book.html" style="display:inline-flex;align-items:center;gap:8px;font-family:'Inter',system-ui,sans-serif;font-weight:700;font-size:14px;color:#fff;background:#0c7283;padding:11px 20px;border-radius:24px;text-decoration:none;box-shadow:0 6px 18px rgba(12,58,68,.25);">📘 Save the whole book as PDF</a></div>
+
+<main class="toc">
+    <h2>Table of Contents · by course week</h2>
+    <a class="ch ready" href="foundations.html"><div class="no">1</div><div class="tx"><h3>Foundations: The Cell, ABGs &amp; Genetics</h3><p>Cells &amp; injury, fluids &amp; acid-base, DNA &amp; inheritance</p></div><div class="st">Ready</div></a>
+    <a class="ch ready" href="immunity.html"><div class="no">2</div><div class="tx"><h3>Immunity, Inflammation &amp; Hypersensitivity</h3><p>Defenses, antibodies, inflammation, allergy &amp; autoimmunity</p></div><div class="st">Ready</div></a>
+    <a class="ch ready" href="oncology.html"><div class="no">3</div><div class="tx"><h3>Oncology — How Cancer Works</h3><p>Cell injury, benign vs malignant, spread &amp; staging</p></div><div class="st">Ready</div></a>
+    <a class="ch ready" href="pain.html"><div class="no">4</div><div class="tx"><h3>Pain</h3><p>The pain pathway, types of pain, and how it is treated</p></div><div class="st">Ready</div></a>
+    <a class="ch ready" href="neurology.html"><div class="no">5</div><div class="tx"><h3>Neurology</h3><p>Stroke, raised ICP, seizures &amp; neurologic disorders</p></div><div class="st">Ready</div></a>
+    <a class="ch ready" href="endocrine.html">
+      <div class="no">6</div>
+      <div class="tx"><h3>The Endocrine System</h3><p>Feedback · adrenal · thyroid · diabetes · growth hormone · ADH</p></div>
+      <div class="st">Ready</div>
+    </a>
+    <a class="ch ready" href="hematology.html"><div class="no">8</div><div class="tx"><h3>Hematology — The Blood</h3><p>Anemias, clotting, blood types &amp; blood cancers</p></div><div class="st">Ready</div></a>
+    <a class="ch ready" href="cardiovascular.html"><div class="no">9</div><div class="tx"><h3>Cardiovascular</h3><p>Coronary disease, heart failure, valves, EKG &amp; blood pressure</p></div><div class="st">Ready</div></a>
+    <a class="ch ready" href="pulmonary.html"><div class="no">10</div><div class="tx"><h3>Pulmonary</h3><p>V/Q, COPD, asthma, PE &amp; lung sounds</p></div><div class="st">Ready</div></a>
+    <a class="ch ready" href="renal.html"><div class="no">11</div><div class="tx"><h3>Renal &amp; Urinary</h3><p>The nephron, AKI, CKD, stones &amp; UTIs</p></div><div class="st">Ready</div></a>
+    <a class="ch ready" href="reproductive.html"><div class="no">12</div><div class="tx"><h3>Reproductive</h3><p>Male &amp; female reproductive disorders</p></div><div class="st">Ready</div></a>
+    <a class="ch ready" href="digestive.html"><div class="no">13</div><div class="tx"><h3>Digestive — GI, Liver &amp; Pancreas</h3><p>GERD, ulcers, IBD, obstruction, cirrhosis &amp; gallstones</p></div><div class="st">Ready</div></a>
+    <a class="ch ready" href="musculoskeletal.html"><div class="no">14</div><div class="tx"><h3>Musculoskeletal &amp; Integumentary</h3><p>Fractures, MSK disorders, skin conditions &amp; burns</p></div><div class="st">Ready</div></a>
+
+    <a class="ch appendix" href="appendix.html">
+      <div class="no">✦</div>
+      <div class="tx"><h3>Appendix — The Arcade &amp; Lab</h3><p>Games, interactive lessons &amp; all the flashcards</p></div>
+      <div class="st">Open</div>
+    </a>
+  </main>
+
+  <footer>A student-friendly pathophysiology guide · by <b>Dr. Akash Garg</b> </footer>
+<style id="pdfprint">
+.pdf-btn{position:fixed;right:16px;bottom:16px;z-index:400;font-family:'Inter',system-ui,sans-serif;font-weight:700;font-size:13.5px;color:#fff;background:#0c7283;border:none;border-radius:24px;padding:11px 17px;box-shadow:0 6px 20px rgba(12,58,68,.30);cursor:pointer;display:inline-flex;align-items:center;gap:7px;}
+.pdf-btn:hover{background:#0c3a44;}
+@media print{
+ @page{margin:14mm;}
+ html,body{background:#fff !important;}
+ .topbar,.progress,aside,.chapnav,.pdf-btn{display:none !important;}
+ #pbgate{display:none !important;}
+ .layout{display:block !important;max-width:100% !important;padding:0 !important;grid-template-columns:1fr !important;gap:0 !important;}
+ .reading,.reading .col{max-width:100% !important;padding:0 !important;}
+ .embed iframe,.embed .frame{display:none !important;}
+ .embed{margin:14px 0 !important;}
+ .embed .cap{color:#555 !important;font-style:italic;}
+ .embed .cap .tag{background:#0c7283 !important;color:#fff !important;}
+ .embed .cap a{display:none !important;}
+ .bref,.bref .fr{break-inside:avoid;page-break-inside:avoid;box-shadow:none !important;}
+ .bref img{max-height:150mm;width:auto !important;margin:0 auto;}
+ .ctwrap,table.ctable,.pearl,.kp,.q,.objectives,.summary,dl.terms,figure{break-inside:avoid;page-break-inside:avoid;}
+ h1,h2,h3{break-after:avoid;page-break-after:avoid;}
+ .quiz .ans{display:block !important;}
+ .quiz .q button{display:none !important;}
+ a{color:inherit !important;text-decoration:none !important;}
+ *{-webkit-print-color-adjust:exact !important;print-color-adjust:exact !important;}
+ footer{border-top:1px solid #ccc !important;}
+}
+</style>
+<button class="pdf-btn" onclick="window.print()" title="Save this chapter as a PDF">🖨 Save as PDF</button>
+</body>
+</html>

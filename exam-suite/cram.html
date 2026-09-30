@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cram Sheet · Pathophysiology</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="suite.css">
+<style>
+  .sheet{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:22px 24px;margin:14px 0;}
+  .sheet h2{font-family:"Fraunces",Georgia,serif;font-size:17px;font-weight:600;margin:20px 0 7px;
+            color:var(--accent-dk);border-bottom:2px solid var(--accent-lt);padding-bottom:4px;}
+  .sheet h2:first-child{margin-top:0;}
+  table.c{width:100%;border-collapse:collapse;font-size:11.6px;margin:5px 0 9px;}
+  table.c th{background:var(--accent-dk);color:#fff;text-align:left;padding:5px 7px;font-weight:600;font-size:11px;}
+  table.c td{border:1px solid var(--line);padding:4px 7px;vertical-align:top;line-height:1.42;}
+  table.c tr:nth-child(even) td{background:#fafcfc;}
+  .up{color:#b3392f;font-weight:800;} .dn{color:#1f5f8b;font-weight:800;} .nn{color:#5a6573;font-weight:700;}
+  .two{columns:2;column-gap:22px;}
+  .two > div{break-inside:avoid;margin-bottom:6px;font-size:11.8px;line-height:1.45;}
+  .two b{color:var(--accent-dk);}
+  .cols{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+  @media(max-width:700px){ .cols{grid-template-columns:1fr;} .two{columns:1;} }
+  @media print{
+    body{background:#fff;}
+    .tbar,.hero,.noprint{display:none !important;}
+    .wrap{max-width:none;padding:0;}
+    .sheet{border:none;border-radius:0;padding:0;margin:0;}
+    .sheet h2{margin:9px 0 4px;font-size:13px;page-break-after:avoid;}
+    table.c{font-size:8.4px;page-break-inside:auto;}
+    table.c td{padding:2px 4px;}
+    table.c th{padding:3px 4px;font-size:8.4px;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+    .two{columns:2;} .two > div{font-size:8.6px;}
+    .cols{gap:10px;}
+    @page{margin:9mm;}
+  }
+</style>
+</head>
+<body>
+<div id="bar"></div>
+<div class="wrap">
+
+  <div class="hero">
+    <div class="eyebrow"><span data-label>Final Exam</span> Suite</div>
+    <h1>Cram Sheet</h1>
+    <p>Everything that fits on a page: lab signatures, ABG rules, the look-alike pairs, and the findings that mean act now. Built from the same content as the drills.</p>
+    <div class="row noprint" style="justify-content:center;margin-top:16px;">
+      <button class="btn" onclick="window.print()">Print / Save as PDF</button>
+      <a class="btn ghost" href="#" data-hq="1">Back to HQ</a>
+    </div>
+  </div>
+
+  <div class="sheet">
+    <h2>ABG interpretation</h2>
+    <div class="cols">
+      <div>
+        <table class="c">
+          <tr><th>pH</th><th>CO₂</th><th>HCO₃</th><th>Interpretation</th></tr>
+          <tr><td><span class="dn">↓</span></td><td><span class="up">↑</span></td><td><span class="nn">n</span></td><td>Respiratory acidosis, uncompensated (acute)</td></tr>
+          <tr><td><span class="dn">↓</span></td><td><span class="up">↑</span></td><td><span class="up">↑</span></td><td>Respiratory acidosis, partially compensated</td></tr>
+          <tr><td><span class="nn">n</span> &lt;7.40</td><td><span class="up">↑</span></td><td><span class="up">↑</span></td><td>Respiratory acidosis, <b>fully compensated</b> (chronic — COPD)</td></tr>
+          <tr><td><span class="up">↑</span></td><td><span class="dn">↓</span></td><td><span class="nn">n</span></td><td>Respiratory alkalosis (anxiety, pain, fever, early PE)</td></tr>
+          <tr><td><span class="dn">↓</span></td><td><span class="nn">n</span></td><td><span class="dn">↓</span></td><td>Metabolic acidosis (DKA, shock, renal failure, diarrhoea)</td></tr>
+          <tr><td><span class="dn">↓</span></td><td><span class="dn">↓</span></td><td><span class="dn">↓</span></td><td>Metabolic acidosis, compensating (Kussmaul)</td></tr>
+          <tr><td><span class="up">↑</span></td><td><span class="nn">n</span></td><td><span class="up">↑</span></td><td>Metabolic alkalosis (vomiting, NG suction, diuretics)</td></tr>
+        </table>
+      </div>
+      <div>
+        <div class="two">
+          <div><b>ROME</b> — Respiratory Opposite, Metabolic Equal.</div>
+          <div><b>The problem</b> is the value moving the same direction as pH; the other is the compensation.</div>
+          <div><b>Normals</b> pH 7.35–7.45 · CO₂ 35–45 · HCO₃ 22–26 · PaO₂ 80–100 · SaO₂ &gt;95%</div>
+          <div><b>Lungs compensate in minutes; kidneys in hours to days</b> — so full compensation implies a chronic process.</div>
+          <div><b>Vomiting</b> loses acid → alkalosis. <b>Diarrhoea</b> loses bicarbonate → acidosis.</div>
+          <div><b>Hypoxemia</b> = low O₂ in blood. <b>Hypoxia</b> = low O₂ at tissue. Anemia and CO poisoning cause hypoxia with a normal PaO₂.</div>
+        </div>
+      </div>
+    </div>
+
+    <h2>Lab signatures</h2>
+    <table class="c" id="labTable"></table>
+
+    <h2>Look-alikes — the one clue that separates them</h2>
+    <table class="c" id="pairTable"></table>
+
+    <h2>Act now</h2>
+    <table class="c" id="rfTable"></table>
+
+    <h2>Cross-system chains</h2>
+    <div class="two" id="chainList"></div>
+
+    <h2>Numbers worth knowing</h2>
+    <div class="two">
+      <div><b>Anemia MCV</b> &lt;80 microcytic · 80–100 normocytic · &gt;100 macrocytic</div>
+      <div><b>Nephrotic proteinuria</b> &gt;3.5 g/day</div>
+      <div><b>BUN:Cr</b> &gt;20:1 = prerenal</div>
+      <div><b>GFR</b> normal ~90–125 mL/min; stage 5 CKD &lt;15</div>
+      <div><b>Oliguria</b> &lt;400 mL/day</div>
+      <div><b>Ejection fraction</b> reduced &lt;40% = systolic failure</div>
+      <div><b>SA node</b> 60–100 · <b>AV node</b> 40–60 · <b>Purkinje</b> 20–40</div>
+      <div><b>Chronic bronchitis</b> productive cough ≥3 months × 2 years</div>
+      <div><b>Torsion salvage window</b> ~6 hours</div>
+      <div><b>Morning stiffness</b> RA &gt;1 hour · OA &lt;30 min</div>
+      <div><b>Melanoma ABCDE</b> diameter &gt;6 mm</div>
+      <div><b>Burn shock</b> first 24–48 h fluid; after that, infection</div>
+      <div><b>Scar strength</b> never exceeds ~80% of original</div>
+      <div><b>Hirschsprung</b> no meconium in 48 h</div>
+    </div>
+
+    <p class="note" style="margin-top:14px;font-size:10.5px;">Pathophysiology · <span data-label>Final Exam</span> (<span data-span>Weeks 8–14</span>) · Dr. Akash Garg</p>
+  </div>
+
+</div>
+
+<script src="suite.js"></script>
+<script>
+window.FinalSuite.loadData(function(){
+  var S=window.FinalSuite, D=window.FINAL_DRILLS;
+  document.getElementById('bar').innerHTML=S.topbar('Cram Sheet','');
+
+  var AR={up:'<span class="up">↑</span>',down:'<span class="dn">↓</span>',n:'<span class="nn">n</span>',abn:'<span class="nn">!</span>'};
+
+  document.getElementById('labTable').innerHTML=
+    '<tr><th style="width:19%">Disorder</th><th style="width:8%">Wk</th><th>Pattern</th></tr>'+
+    D.labs.map(function(x){
+      return '<tr><td><b>'+S.esc(x.opts[x.c])+'</b></td><td>'+x.week+'</td><td>'+
+        x.labs.map(function(l){return AR[l[1]]+' '+S.esc(l[0]);}).join(' &nbsp;·&nbsp; ')+'</td></tr>';
+    }).join('');
+
+  document.getElementById('pairTable').innerHTML=
+    '<tr><th style="width:8%">Wk</th><th style="width:40%">Clue</th><th style="width:24%">It is</th><th>Not</th></tr>'+
+    D.pairs.map(function(x){
+      return '<tr><td>'+x.week+'</td><td>'+S.esc(x.clue)+'</td><td><b>'+S.esc(x.a)+'</b></td><td>'+S.esc(x.b)+'</td></tr>';
+    }).join('');
+
+  document.getElementById('rfTable').innerHTML=
+    '<tr><th style="width:8%">Wk</th><th style="width:46%">Finding</th><th>Why it cannot wait</th></tr>'+
+    D.redflags.filter(function(x){return x.act;}).map(function(x){
+      return '<tr><td>'+x.week+'</td><td><b>'+S.esc(x.s)+'</b></td><td>'+S.esc(x.why)+'</td></tr>';
+    }).join('');
+
+  document.getElementById('chainList').innerHTML=D.chains.map(function(c){
+    return '<div><b>'+S.esc(c.title)+'</b> (Wk '+c.week+') — '+S.esc(c.start)+' → '+
+      c.steps.map(S.esc).join(' → ')+'</div>';
+  }).join('');
+});
+</script>
+</body>
+</html>

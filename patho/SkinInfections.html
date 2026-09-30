@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f7f2ea">
+<title>Skin Infections</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{ --card:#fffdf8; --ink:#2a2420; --muted:#7a6f63; --line:#e3d8c6;
+    --sans:'Inter',system-ui,sans-serif; --disp:'Cinzel Decorative',serif; --accent:#a5652a; }
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  body{background:linear-gradient(160deg,#faf4ea,#ece6dc);color:var(--ink);font-family:var(--sans);min-height:100vh;padding:18px 16px 44px;}
+  header{max-width:1120px;margin:0 auto 16px;text-align:center;}
+  h1{font-family:var(--disp);font-weight:900;font-size:clamp(21px,4vw,34px);color:#8a531f;line-height:1.05;}
+  header .sub{color:var(--muted);font-size:15px;margin-top:4px;}
+  header .intro{max-width:860px;margin:10px auto 0;font-size:14.5px;line-height:1.5;color:#5c5248;}
+  header .intro b{color:#8a531f;}
+  .wrap{max-width:1120px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;box-shadow:0 6px 22px rgba(140,90,40,.07);}
+  .card h2{font-family:var(--disp);font-weight:700;font-size:16px;color:#8a531f;margin-bottom:6px;}
+  .card h2 + .desc{font-size:13px;color:var(--muted);margin-bottom:10px;line-height:1.4;}
+  svg{display:block;width:100%;height:auto;max-height:280px;}
+  #liveCap{margin-top:8px;background:#f5ecdb;border:1px solid #e3d1ad;border-radius:10px;padding:10px 13px;font-size:14px;line-height:1.5;color:#5a4218;text-align:center;} #liveCap b{color:#4a3410;}
+  @keyframes pulse{0%,100%{opacity:.4}50%{opacity:.85}}
+  .pulse{animation:pulse 1.3s ease-in-out infinite;}
+  #stage{border-radius:12px;padding:11px 14px;margin-bottom:12px;color:#fff;font-weight:700;font-size:16px;text-align:center;background:#a5772a;}
+  #stage small{display:block;font-weight:500;font-size:13px;opacity:.93;margin-top:2px;}
+  .seg{display:grid;grid-template-columns:1fr 1fr 1fr;border:1px solid var(--line);border-radius:11px;overflow:hidden;gap:1px;background:var(--line);margin-bottom:6px;}
+  .seg button{border:none;background:#fff;color:var(--ink);font-family:var(--sans);font-weight:700;font-size:12.5px;padding:10px 5px;cursor:pointer;transition:.12s;line-height:1.15;}
+  .seg button small{display:block;font-weight:500;font-size:9.5px;color:var(--muted);margin-top:1px;}
+  .seg button.on{color:#fff;} .seg button.bact.on{background:#c0392b;} .seg button.vir.on{background:#8a5aa0;} .seg button.fun.on{background:#b0862a;}
+  .sub2{display:flex;flex-wrap:wrap;border:1px solid var(--line);border-radius:10px;overflow:hidden;}
+  .sub2 button{flex:1;border:none;background:#fff;color:var(--ink);font-weight:700;font-size:11.5px;padding:8px 4px;cursor:pointer;border-right:1px solid var(--line);min-width:33%;}
+  .sub2 button:last-child{border-right:none;} .sub2 button.on{background:#d8c090;color:#fff;}
+  #info{border:1px solid var(--line);border-left:5px solid var(--accent);background:#f6f0e4;border-radius:10px;padding:12px 13px;margin-top:12px;}
+  #info .n{font-family:var(--disp);font-weight:700;font-size:16px;color:#8a531f;} #info .plain{font-size:14px;line-height:1.5;color:#2a2420;margin-top:8px;font-weight:600;}
+  #info .story{font-size:12.8px;line-height:1.5;color:#3a3630;margin-top:8px;background:#fff;border-radius:8px;padding:9px 11px;border:1px solid #e6dcc6;}
+  .pearl{background:#eef4fb;border:1px solid #cbdcf0;border-radius:10px;padding:10px 12px;margin-top:12px;font-size:12.3px;line-height:1.5;color:#274d7a;} .pearl b{color:#173b5a;}
+  @media (max-width:880px){ .wrap{grid-template-columns:1fr;} }
+</style>
+</head>
+<body>
+<header>
+  <h1>Skin Infections</h1>
+  <div class="sub">Bacterial · viral · fungal · Week 6</div>
+  <div class="intro">Skin infections split by what causes them — <b>bacteria, viruses,</b> or <b>fungi</b> — and each looks and behaves differently. Pick a cause, then the specific condition.</div>
+</header>
+<div class="wrap">
+  <div>
+    <div class="card">
+      <h2>The lesion</h2>
+      <div class="desc">A simple picture of how each infection shows on the skin.</div>
+      <svg id="art" viewBox="0 0 300 250" aria-label="skin infection"></svg>
+      <div id="liveCap">Pick a cause &amp; condition.</div>
+    </div>
+  </div>
+  <div>
+    <div id="stage">Pick a cause<small>bacterial · viral · fungal</small></div>
+    <div class="card">
+      <div class="seg" id="seg">
+        <button data-d="bact" class="bact on">Bacterial<small>staph/strep</small></button>
+        <button data-d="vir" class="vir">Viral<small>herpes family</small></button>
+        <button data-d="fun" class="fun">Fungal<small>tinea/candida</small></button>
+      </div>
+      <div class="sub2" id="sub2"></div>
+    </div>
+    <div class="card" style="margin-top:16px;"><h2>What it is</h2><div id="info"></div>
+      <div class="pearl"><b>Why we care:</b> skin infections can spread into deeper tissue and the bloodstream (sepsis). The <b>most common cause of skin infections is Staphylococcus</b> (including drug-resistant <b>MRSA</b>).</div>
+    </div>
+  </div>
+</div>
+<script>
+(function(){
+  const $=id=>document.getElementById(id); let cat='bact', sub='impetigo';
+  const SUBS={ bact:[['impetigo','Impetigo'],['cellulitis','Cellulitis'],['mrsa','MRSA']],
+    vir:[['hsimplex','Herpes Simplex'],['zoster','Zoster'],['varicella','Varicella']],
+    fun:[['tinea','Tinea'],['candida','Candida'],['onycho','Onychomycosis']] };
+  const INFO={
+    impetigo:{name:'Impetigo',color:'#c0392b',
+      plain:'A contagious bacterial infection with honey-colored crusts, common in kids.',
+      story:'A superficial <b>bacterial</b> skin infection (staph/strep) with classic <b>honey-colored crusts</b>, often around the nose and mouth. Very <b>contagious</b>, especially in children.'},
+    cellulitis:{name:'Cellulitis',color:'#a5392e',
+      plain:'A deeper bacterial infection of the skin — red, hot, swollen, and spreading.',
+      story:'Infection of the <b>deeper dermis and subcutaneous tissue</b>. The area is <b>red, warm, swollen, and tender</b> with poorly defined borders, and it can <b>spread</b> — a marked border helps track it.'},
+    mrsa:{name:'MRSA',color:'#8a2a2a',
+      plain:'A drug-resistant Staph infection — often a painful, boil-like abscess.',
+      story:'<b>Methicillin-resistant Staph aureus</b> — resistant to many antibiotics. Often presents as a <b>painful, swollen abscess/boil</b> that may look like a "spider bite." Hard to treat and easily spread.'},
+    hsimplex:{name:'Herpes Simplex',color:'#8a5aa0',
+      plain:'Grouped painful blisters — cold sores (HSV-1) or genital (HSV-2).',
+      story:'A <b>viral</b> infection causing <b>grouped, painful vesicles</b> on a red base. HSV-1 = oral (cold sores), HSV-2 = genital. The virus stays latent and reactivates with stress or illness.'},
+    zoster:{name:'Herpes Zoster (Shingles)',color:'#7a4a90',
+      plain:'A painful blistering rash in a stripe along one nerve — reactivated chickenpox virus.',
+      story:'<b>Reactivation of the varicella (chickenpox) virus</b> that lay dormant in a nerve. Produces a <b>painful vesicular rash in a dermatomal stripe</b> on one side of the body.'},
+    varicella:{name:'Varicella (Chickenpox)',color:'#9a5aa0',
+      plain:'The primary chickenpox infection — itchy vesicles in all stages at once.',
+      story:'The <b>primary infection</b> with the varicella-zoster virus: widespread <b>itchy vesicles</b> in <b>different stages</b> (papules, vesicles, crusts) at the same time. Later reactivates as shingles.'},
+    tinea:{name:'Tinea (Ringworm)',color:'#b0862a',
+      plain:'A fungal infection with a red, scaly, ring-shaped patch that clears in the center.',
+      story:'A <b>fungal</b> ("dermatophyte") infection named by site — tinea corporis (body), pedis (foot/athlete\'s foot), cruris (groin/jock itch), capitis (scalp). Classic <b>ring-shaped scaly patch with central clearing</b>.'},
+    candida:{name:'Candida',color:'#c09a2a',
+      plain:'A yeast infection in warm, moist skin folds — bright red with satellite spots.',
+      story:'A <b>yeast (Candida)</b> overgrowth in <b>warm, moist areas</b> — skin folds, diaper area, under breasts, or the mouth (thrush). Bright red with characteristic <b>satellite lesions</b>.'},
+    onycho:{name:'Onychomycosis',color:'#a5772a',
+      plain:'A fungal infection of the nail — thick, yellow, crumbly nails.',
+      story:'A <b>fungal infection of the nail</b>. Nails become <b>thickened, yellow-brown, brittle, and crumbly</b>. Slow to treat because the fungus lives in the nail.'}
+  };
+  function draw(){ let s='';
+    // skin patch background
+    s+='<rect x="30" y="30" width="240" height="190" rx="18" fill="#f2d6bc"/>';
+    const inf=INFO[sub],C=inf.color;
+    if(cat==='bact'){
+      if(sub==='impetigo'){ for(let i=0;i<5;i++)s+='<circle class="pulse" style="animation-delay:'+(i*0.15)+'s" cx="'+(90+ (i*30)%120)+'" cy="'+(100+(i%2)*40)+'" r="12" fill="#e0b040"/>'; s+='<text x="150" y="205" text-anchor="middle" font-size="10.5" font-weight="700" fill="'+C+'">honey-colored crusts</text>'; }
+      else if(sub==='cellulitis'){ s+='<circle class="pulse" cx="150" cy="120" r="70" fill="'+C+'" opacity="0.4"/><circle cx="150" cy="120" r="55" fill="'+C+'" opacity="0.3"/>'; s+='<text x="150" y="205" text-anchor="middle" font-size="10.5" font-weight="700" fill="'+C+'">red, hot, spreading</text>'; }
+      else { s+='<g class="pulse"><circle cx="150" cy="115" r="34" fill="'+C+'"/><circle cx="150" cy="115" r="14" fill="#e8d0b0"/></g>'; s+='<text x="150" y="205" text-anchor="middle" font-size="10.5" font-weight="700" fill="'+C+'">painful abscess (resistant)</text>'; }
+    } else if(cat==='vir'){
+      if(sub==='zoster'){ for(let i=0;i<6;i++)s+='<circle class="pulse" style="animation-delay:'+(i*0.12)+'s" cx="'+(70+i*32)+'" cy="'+(100+i*10)+'" r="8" fill="'+C+'"/>'; s+='<text x="150" y="205" text-anchor="middle" font-size="10.5" font-weight="700" fill="'+C+'">stripe along one nerve</text>'; }
+      else if(sub==='varicella'){ const cols=[C,'#c090c0','#8a6a2a']; for(let i=0;i<9;i++)s+='<circle class="pulse" style="animation-delay:'+(i*0.1)+'s" cx="'+(80+ (i*24)%150)+'" cy="'+(80+Math.floor(i/4)*40)+'" r="8" fill="'+cols[i%3]+'"/>'; s+='<text x="150" y="205" text-anchor="middle" font-size="10.5" font-weight="700" fill="'+C+'">all stages at once</text>'; }
+      else { s+='<g class="pulse">'; [[130,110],[150,105],[170,112],[140,125],[160,122]].forEach(p=>s+='<circle cx="'+p[0]+'" cy="'+p[1]+'" r="9" fill="'+C+'"/>'); s+='</g>'; s+='<text x="150" y="205" text-anchor="middle" font-size="10.5" font-weight="700" fill="'+C+'">grouped painful blisters</text>'; }
+    } else {
+      if(sub==='tinea'){ s+='<circle class="pulse" cx="150" cy="115" r="46" fill="none" stroke="'+C+'" stroke-width="10"/><circle cx="150" cy="115" r="30" fill="#f2d6bc"/>'; s+='<text x="150" y="205" text-anchor="middle" font-size="10.5" font-weight="700" fill="'+C+'">ring with central clearing</text>'; }
+      else if(sub==='candida'){ s+='<circle class="pulse" cx="150" cy="115" r="40" fill="'+C+'" opacity="0.6"/>'; for(let i=0;i<6;i++){const a=i/6*Math.PI*2;s+='<circle cx="'+(150+Math.cos(a)*58)+'" cy="'+(115+Math.sin(a)*58)+'" r="6" fill="'+C+'"/>';} s+='<text x="150" y="205" text-anchor="middle" font-size="10.5" font-weight="700" fill="'+C+'">red + satellite spots</text>'; }
+      else { s+='<rect class="pulse" x="120" y="90" width="60" height="50" rx="8" fill="'+C+'" opacity="0.7"/><text x="150" y="120" text-anchor="middle" font-size="9" fill="#fff">nail</text>'; s+='<text x="150" y="205" text-anchor="middle" font-size="10.5" font-weight="700" fill="'+C+'">thick, yellow, crumbly nail</text>'; }
+    }
+    $('art').innerHTML=s;
+  }
+  function renderSubs(){ $('sub2').innerHTML=SUBS[cat].map(x=>'<button data-s="'+x[0]+'" class="'+(x[0]===sub?'on':'')+'">'+x[1]+'</button>').join('');
+    document.querySelectorAll('#sub2 button').forEach(b=>b.addEventListener('click',()=>{ sub=b.dataset.s; render(); })); }
+  function render(){
+    document.querySelectorAll('#seg button').forEach(b=>b.classList.toggle('on',b.dataset.d===cat));
+    if(!SUBS[cat].some(x=>x[0]===sub)) sub=SUBS[cat][0][0];
+    renderSubs(); draw();
+    const inf=INFO[sub];
+    $('stage').style.background = cat==='bact'?'#c0392b':cat==='vir'?'#8a5aa0':'#b0862a';
+    $('stage').innerHTML=inf.name+'<small>'+(cat==='bact'?'bacterial':cat==='vir'?'viral':'fungal')+' skin infection</small>';
+    $('info').innerHTML='<div class="n">'+inf.name+'</div><div class="plain">'+inf.plain+'</div><div class="story">'+inf.story+'</div>';
+    $('liveCap').innerHTML='<b>'+inf.name+'</b> — '+inf.plain;
+  }
+  document.querySelectorAll('#seg button').forEach(b=>b.addEventListener('click',()=>{ cat=b.dataset.d; sub=SUBS[cat][0][0]; render(); }));
+  render();
+})();
+</script>
+</body>
+</html>

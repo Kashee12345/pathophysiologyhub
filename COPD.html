@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f7f2ea">
+<title>COPD — Chronic Bronchitis vs Emphysema</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{ --bg:#f6f1e8; --card:#fffdf8; --ink:#2a2420; --muted:#7a6f63; --line:#e3d8c6;
+    --sans:'Inter',system-ui,sans-serif; --disp:'Cinzel Decorative',serif; --accent:#6a7f4a; }
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  body{background:linear-gradient(160deg,#f7f6ec,#e9eee2);color:var(--ink);font-family:var(--sans);min-height:100vh;padding:18px 16px 44px;}
+  header{max-width:1120px;margin:0 auto 16px;text-align:center;}
+  h1{font-family:var(--disp);font-weight:900;font-size:clamp(22px,4.2vw,36px);color:#5c7038;line-height:1.05;}
+  header .sub{color:var(--muted);font-size:15px;margin-top:4px;}
+  header .intro{max-width:860px;margin:10px auto 0;font-size:14.5px;line-height:1.5;color:#5c5248;}
+  header .intro b{color:#5c7038;}
+  .wrap{max-width:1120px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;box-shadow:0 6px 22px rgba(70,80,40,.07);}
+  .card h2{font-family:var(--disp);font-weight:700;font-size:17px;color:#5c7038;margin-bottom:6px;}
+  .card h2 + .desc{font-size:13px;color:var(--muted);margin-bottom:10px;line-height:1.4;}
+  svg{display:block;width:100%;height:auto;max-height:350px;}
+  #liveCap{margin-top:8px;background:#eef2e6;border:1px solid #d3ddc0;border-radius:10px;padding:10px 13px;font-size:14px;line-height:1.5;color:#3d4a2a;text-align:center;} #liveCap b{color:#4a5c2c;}
+
+  @keyframes cough{0%,88%,100%{transform:translateX(0)}92%{transform:translateX(-4px)}96%{transform:translateX(4px)}}
+  .cough{animation:cough 2.6s ease-in-out infinite;transform-origin:center;}
+  @keyframes mucusJig{0%,100%{transform:translate(0,0)}50%{transform:translate(1px,1.5px)}}
+  .mucus{animation:mucusJig 1.4s ease-in-out infinite;}
+  @keyframes overinf{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
+  .trap{animation:overinf 3s ease-in-out infinite;transform-origin:center;}
+  @keyframes airflow{0%{transform:translateY(0);opacity:0}20%{opacity:1}100%{transform:translateY(46px);opacity:0}}
+  .air{animation:airflow 1.7s ease-in-out infinite;}
+  @keyframes inflame{0%,100%{opacity:.45}50%{opacity:.85}}
+  .inflame{animation:inflame 1.8s ease-in-out infinite;}
+
+  #stage{border-radius:12px;padding:11px 14px;margin-bottom:12px;color:#fff;font-weight:700;font-size:17px;text-align:center;background:#7a8a55;}
+  #stage small{display:block;font-weight:500;font-size:13px;opacity:.93;margin-top:2px;}
+  .seg{display:flex;border:1px solid var(--line);border-radius:11px;overflow:hidden;}
+  .seg button{flex:1;border:none;background:#fff;color:var(--ink);font-family:var(--sans);font-weight:700;font-size:13.5px;padding:11px 6px;cursor:pointer;transition:.12s;line-height:1.15;}
+  .seg button small{display:block;font-weight:500;font-size:10.5px;color:var(--muted);margin-top:2px;}
+  .seg button.on{color:#fff;border-color:transparent;} .seg button.on small{color:rgba(255,255,255,.9);}
+  .seg button.normal.on{background:#3fa66a;} .seg button.cb.on{background:#3a6ea5;} .seg button.emp.on{background:#c0763a;}
+
+  #info{border:1px solid var(--line);border-left:5px solid var(--accent);background:#f3f5ec;border-radius:10px;padding:12px 13px;}
+  #info .n{font-family:var(--disp);font-weight:700;font-size:18px;color:#5c7038;}
+  #info .plain{font-size:15px;line-height:1.5;color:#2a2420;margin-top:8px;font-weight:600;}
+  #info .story{font-size:13.5px;line-height:1.5;color:#3a3630;margin-top:9px;background:#fff;border-radius:8px;padding:9px 11px;border:1px solid #dbe0cd;}
+  #info .clin{margin-top:9px;border-top:1px dashed #d3dcc2;padding-top:4px;} #info .clin .row{font-size:12.5px;color:#5c5248;line-height:1.4;margin-top:5px;} #info .clin b{color:#4a5c2c;}
+  .pearl{background:#fdf3e8;border:1px solid #eed3b3;border-radius:10px;padding:10px 12px;margin-top:12px;font-size:12.8px;line-height:1.5;color:#8a5a24;} .pearl b{color:#6a4212;}
+  .vs{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:4px;}
+  .vbox{border:1px solid var(--line);border-radius:10px;padding:9px 10px;font-size:12px;line-height:1.4;background:#fff;}
+  .vbox.b{border-top:3px solid #3a6ea5;} .vbox.e{border-top:3px solid #c0763a;}
+  .vbox h4{font-size:12.5px;margin-bottom:3px;} .vbox.b h4{color:#3a6ea5;} .vbox.e h4{color:#c0763a;}
+  @media (max-width:880px){ .wrap{grid-template-columns:1fr;} }
+</style>
+</head>
+<body>
+<header>
+  <h1>COPD — The Two Faces</h1>
+  <div class="sub">Chronic Bronchitis vs Emphysema · Week 12</div>
+  <div class="intro"><b>COPD</b> is caused by an <b>irritant or toxin</b> (smoke, pollution) — <b>not an infection</b> — and it's permanent. It shows up two ways: <b>chronic bronchitis</b> (clogged, mucus-filled airways) and <b>emphysema</b> (destroyed, floppy alveoli). Click each to see what breaks.</div>
+</header>
+
+<div class="wrap">
+  <div>
+    <div class="card">
+      <h2>Inside the airway &amp; alveoli</h2>
+      <div class="desc">A bronchiole (the tube) leading to a cluster of alveoli (the sacs). Watch what goes wrong in each disease.</div>
+      <svg id="lung" viewBox="0 0 340 320" aria-label="airway and alveoli"></svg>
+      <div id="liveCap">Pick a state to see the damage.</div>
+    </div>
+  </div>
+  <div>
+    <div id="stage">Pick a state<small>Normal · Chronic Bronchitis · Emphysema</small></div>
+    <div class="card">
+      <h2>👆 Which face of COPD?</h2>
+      <div class="seg" id="defSeg">
+        <button data-d="normal" class="normal on">Normal<small>healthy lung</small></button>
+        <button data-d="cb" class="cb">Chronic Bronchitis<small>"blue bloater"</small></button>
+        <button data-d="emp" class="emp">Emphysema<small>"pink puffer"</small></button>
+      </div>
+    </div>
+    <div class="card" style="margin-top:16px;"><h2>What's happening</h2><div id="info"></div></div>
+    <div class="card" style="margin-top:16px;">
+      <h2>Side by side</h2>
+      <div class="vs">
+        <div class="vbox b"><h4>Chronic Bronchitis</h4><b>Airway problem.</b> Too much <b>mucus</b> clogs the tubes → chronic productive cough, low O₂, high CO₂ (hypoxemia + hypercapnia).</div>
+        <div class="vbox e"><h4>Emphysema</h4><b>Air-sac problem.</b> Alveoli walls are <b>destroyed</b> + surfactant lost → air gets trapped, can't fully exhale → barrel chest, prolonged expiration.</div>
+      </div>
+      <div class="pearl"><b>Hypoxic drive:</b> in COPD, CO₂ is chronically high, so the body starts using <b>low O₂</b> as its signal to breathe. Give too much oxygen and the drive to breathe drops → respirations slow → CO₂ builds up. Titrate oxygen carefully.</div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const $=id=>document.getElementById(id);
+  let cur='normal';
+  const INFO={
+    normal:{name:'Normal lung',color:'#3fa66a',
+      plain:'Open airways and springy little alveoli — air moves in and out freely and gas exchange works.',
+      story:'The bronchiole is <b>clear</b> and the alveoli are <b>small and elastic</b>. Each breath fills them and they recoil to push the air back out. Plenty of surface area for oxygen to cross into the blood.',
+      cl:'Clear airways + healthy alveoli = normal breathing.'},
+    cb:{name:'Chronic Bronchitis',color:'#3a6ea5',
+      plain:'The airways make way too much mucus and get inflamed, so air has to squeeze past the gunk.',
+      story:'Long-term irritation (usually <b>smoking</b>) causes <b>hypersecretion of mucus</b> and swelling of the bronchial walls. The mucus <b>clogs the airway</b> → a constant <b>productive cough</b> trying to clear it. Air trapped behind mucus can\'t reach the blood well → low oxygen (<b>hypoxemia</b>) and CO₂ buildup (<b>hypercapnia</b>). Nickname: "blue bloater."',
+      cl:'Hypersecretion of mucus → bronchial damage. S/S: chronic cough, dyspnea, hypoxemia, hypercapnia.'},
+    emp:{name:'Emphysema',color:'#c0763a',
+      plain:'The tiny air sacs get destroyed and merge into big floppy balloons that trap air.',
+      story:'The <b>alveolar walls break down</b> and <b>surfactant is lost</b>, so many small sacs collapse into a few large, weak ones. They lose their springiness — air gets <b>trapped</b> and the person <b>can\'t fully exhale</b>. Over time the chest over-inflates → <b>barrel chest</b>, and breathing out takes a long time (<b>prolonged expiration</b>). Nickname: "pink puffer."',
+      cl:'Destruction of alveoli + loss of surfactant → can\'t fully exhale. S/S: barrel chest, dyspnea, prolonged expiration.'}
+  };
+
+  function draw(){
+    let s='';
+    // bronchiole tube from top-left down to the sac cluster
+    const inflamed = cur==='cb';
+    const wall = inflamed? '#c26b6b':'#c9b98f';
+    const wallW = inflamed? 20:14;
+    if(inflamed) s+='<path class="inflame" d="M70 20 C70 90 110 120 150 140" fill="none" stroke="#e08a8a" stroke-width="30" stroke-linecap="round"/>';
+    s+='<path d="M70 20 C70 90 110 120 150 140" fill="none" stroke="'+wall+'" stroke-width="'+wallW+'" stroke-linecap="round"/>';
+    // lumen (open channel)
+    const lumen = inflamed? 3:8;
+    s+='<path d="M70 20 C70 90 110 120 150 140" fill="none" stroke="#f4ece0" stroke-width="'+lumen+'" stroke-linecap="round"/>';
+    // mucus plugging in chronic bronchitis
+    if(cur==='cb'){
+      s+='<g class="mucus"><ellipse cx="88" cy="55" rx="9" ry="7" fill="#a8c24a"/><ellipse cx="105" cy="85" rx="10" ry="8" fill="#94b23c"/><ellipse cx="128" cy="115" rx="9" ry="7" fill="#a8c24a"/></g>';
+      s+='<text x="150" y="45" font-size="11" font-weight="700" fill="#3a6ea5">mucus clogs airway</text>';
+    } else {
+      for(let i=0;i<3;i++) s+='<circle class="air" style="animation-delay:'+(i*0.5)+'s" cx="'+(70+i*2)+'" cy="26" r="3.2" fill="#7fb8c8"/>';
+      s+='<text x="150" y="30" font-size="11" font-weight="700" fill="#5c7038">air flows in</text>';
+    }
+    // alveoli cluster
+    if(cur==='emp'){
+      // few big floppy merged sacs, over-inflating
+      s+='<g class="trap">';
+      s+='<circle cx="205" cy="180" r="58" fill="#f7ede0" stroke="#caa06a" stroke-width="3"/>';
+      s+='<circle cx="265" cy="235" r="42" fill="#f7ede0" stroke="#caa06a" stroke-width="3"/>';
+      s+='<circle cx="150" cy="235" r="38" fill="#f7ede0" stroke="#caa06a" stroke-width="3"/>';
+      s+='</g>';
+      s+='<text x="205" y="184" text-anchor="middle" font-size="11" font-weight="700" fill="#b06a2a">big floppy sacs</text>';
+      s+='<text x="205" y="300" text-anchor="middle" font-size="11" font-weight="700" fill="#c0763a">air trapped — can\'t exhale</text>';
+    } else {
+      // many small healthy sacs (grid)
+      const pts=[[175,150],[210,150],[245,155],[160,185],[195,182],[230,182],[262,190],[178,215],[213,213],[248,214],[200,245],[235,245]];
+      const cls = cur==='cb'?'':'';
+      pts.forEach((p,i)=>{ s+='<circle cx="'+p[0]+'" cy="'+p[1]+'" r="16" fill="'+(cur==='cb'?'#e8e2d0':'#eef4f6')+'" stroke="#b9a98a" stroke-width="2.2"/>'; });
+      s+='<text x="215" y="285" text-anchor="middle" font-size="11" font-weight="700" fill="'+(cur==='cb'?'#3a6ea5':'#5c7038')+'">'+(cur==='cb'?'sacs starved of fresh air':'healthy alveoli (big surface area)')+'</text>';
+    }
+    // cough indicator for CB
+    let g = '<g class="'+(cur==='cb'?'cough':'')+'">'+s+'</g>';
+    $('lung').innerHTML=g;
+  }
+  function render(){
+    const inf=INFO[cur]; draw();
+    document.querySelectorAll('#defSeg button').forEach(b=>b.classList.toggle('on',b.dataset.d===cur));
+    const caps={ normal:'Clear airway + springy alveoli → <b>air moves freely</b> and gas exchange works.',
+      cb:'The airway is <b>clogged with mucus</b> → chronic productive cough, low O₂, high CO₂.',
+      emp:'Alveoli are <b>destroyed and floppy</b> → air gets trapped, you <b>can\'t fully exhale</b>.' };
+    $('liveCap').innerHTML=caps[cur];
+    $('stage').style.background=inf.color;
+    $('stage').innerHTML=inf.name+'<small>'+(cur==='normal'?'reference lung':cur==='cb'?'airway problem — too much mucus':'air-sac problem — destroyed alveoli')+'</small>';
+    $('info').innerHTML='<div class="n">'+inf.name+'</div><div class="plain">'+inf.plain+'</div><div class="story">'+inf.story+'</div><div class="clin"><div class="row"><b>Key point:</b> '+inf.cl+'</div></div>';
+  }
+  document.querySelectorAll('#defSeg button').forEach(b=>b.addEventListener('click',()=>{ cur=b.dataset.d; render(); }));
+  render();
+})();
+</script>
+</body>
+</html>

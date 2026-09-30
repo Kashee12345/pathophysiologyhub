@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0c3a44">
+<title>Oncology: How Cancer Works &mdash; Pathophysiology &middot; Dr. Akash Garg</title>
+<meta name="description" content="A student-friendly, exact pathophysiology chapter on the endocrine system — feedback loops, adrenal, thyroid, diabetes, growth hormone, and ADH — with the concept explained plainly and an interactive to play with in every section.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#22312f; --soft:#4a5a58; --muted:#7c8a88; --faint:#9aa8a6; --line:#e6e2d6;
+    --paper:#faf8f2; --card:#fffdf7; --accent:#0c7283; --accent-dk:#0c3a44; --gold:#b8862f;
+    --serif:"Source Serif 4",Georgia,"Times New Roman",serif; --disp:"Fraunces",Georgia,serif; --ui:"Inter",system-ui,sans-serif;
+    --shadow:0 1px 3px rgba(20,40,46,.06);
+  }
+  *{box-sizing:border-box;} html{scroll-behavior:smooth;}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--serif);font-size:18px;line-height:1.7;-webkit-font-smoothing:antialiased;}
+  a{color:var(--accent);text-decoration:none;} a:hover{text-decoration:underline;}
+
+  /* top bar + progress */
+  .topbar{position:sticky;top:0;z-index:50;background:rgba(250,248,242,.92);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid var(--line);}
+  .topbar .row{max-width:1120px;margin:0 auto;padding:11px 20px;display:flex;align-items:center;gap:14px;font-family:var(--ui);}
+  .topbar a.home{font-size:13.5px;font-weight:600;color:var(--soft);white-space:nowrap;}
+  .topbar a.home:hover{color:var(--accent);text-decoration:none;}
+  .topbar .ct{font-size:13px;color:var(--faint);font-weight:600;margin-left:auto;white-space:nowrap;}
+  .progress{height:3px;background:transparent;} .progress .bar{height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--gold));transition:width .1s;}
+
+  .layout{max-width:1120px;margin:0 auto;padding:0 20px;display:grid;grid-template-columns:230px 1fr;gap:30px;}
+  /* sidebar TOC */
+  aside{font-family:var(--ui);padding-top:34px;}
+  aside .toc{position:sticky;top:74px;}
+  aside .toc h4{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--faint);margin:0 0 12px;font-weight:700;}
+  aside .toc a{display:block;font-size:13.5px;color:var(--soft);padding:6px 10px;border-left:2px solid var(--line);line-height:1.35;}
+  aside .toc a:hover{color:var(--accent);text-decoration:none;border-left-color:var(--accent);}
+  aside .toc a.on{color:var(--accent-dk);font-weight:700;border-left-color:var(--gold);background:#f3efe3;border-radius:0 8px 8px 0;}
+
+  .reading{max-width:1040px;padding:30px 0 70px;min-width:0;}
+  .reading .col{max-width:718px;}
+  /* opener */
+  .kicker{font-family:var(--ui);font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);font-weight:700;}
+  h1{font-family:var(--disp);font-weight:600;font-size:clamp(32px,5.2vw,46px);line-height:1.08;letter-spacing:-.5px;color:var(--accent-dk);margin:10px 0 6px;max-width:718px;}
+  .lede{font-size:20px;line-height:1.6;color:var(--soft);max-width:718px;margin:14px 0 0;}
+  h2{font-family:var(--disp);font-weight:600;font-size:27px;letter-spacing:-.3px;color:var(--accent-dk);margin:52px 0 4px;scroll-margin-top:70px;max-width:718px;}
+  h2 .num{font-family:var(--ui);font-size:13px;font-weight:700;color:var(--gold);letter-spacing:1px;display:block;margin-bottom:4px;text-transform:uppercase;}
+  h3{font-family:var(--disp);font-weight:600;font-size:20px;color:var(--accent-dk);margin:26px 0 2px;max-width:718px;}
+  p{margin:14px 0;max-width:718px;} p b,li b{color:var(--accent-dk);font-weight:600;}
+  .reading ul,.reading ol{max-width:718px;padding-left:24px;} .reading li{margin:7px 0;}
+
+  .objectives{max-width:718px;background:#f2efe4;border:1px solid #e4ddc8;border-radius:14px;padding:18px 22px;margin:24px 0;font-family:var(--ui);}
+  .objectives h4{margin:0 0 8px;font-size:12px;letter-spacing:1px;text-transform:uppercase;color:var(--gold);font-weight:700;}
+  .objectives ul{margin:0;padding-left:20px;} .objectives li{font-size:14.5px;line-height:1.5;color:var(--soft);margin:6px 0;font-family:var(--serif);}
+
+  .kp{max-width:718px;background:#eef5f6;border:1px solid #d3e5e7;border-left:5px solid var(--accent);border-radius:0 12px 12px 0;padding:14px 20px;margin:22px 0;font-family:var(--ui);}
+  .kp .t{font-size:11.5px;letter-spacing:1px;text-transform:uppercase;color:var(--accent-dk);font-weight:700;margin-bottom:6px;}
+  .kp ul{margin:0;padding-left:18px;} .kp li{font-size:14.5px;line-height:1.55;color:var(--ink);margin:5px 0;font-family:var(--serif);}
+  .pearl{max-width:718px;background:#fbf3e2;border:1px solid #ecd9ac;border-left:5px solid var(--gold);border-radius:0 12px 12px 0;padding:13px 20px;margin:22px 0;font-family:var(--serif);font-size:15px;line-height:1.6;color:#6a5320;}
+  .pearl b{color:#5a4212;}
+
+  /* interactive embed (breaks out wider than prose) */
+  .embed{max-width:1040px;margin:26px 0 30px;}
+  .embed .cap{font-family:var(--ui);font-size:12.5px;font-weight:600;color:var(--muted);margin:0 0 8px;display:flex;align-items:center;gap:8px;}
+  .embed .cap .tag{background:var(--accent);color:#fff;font-size:10.5px;letter-spacing:.5px;text-transform:uppercase;font-weight:700;padding:3px 9px;border-radius:20px;}
+  .embed .frame{border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:0 8px 26px rgba(20,40,46,.09);background:#fff;}
+  .embed iframe{display:block;width:100%;height:640px;border:0;}
+  .embed .cap a{font-family:var(--ui);margin-left:auto;font-size:12.5px;font-weight:600;}
+
+  /* summary + quiz */
+  .summary{max-width:718px;background:var(--accent-dk);color:#eaf3f4;border-radius:16px;padding:24px 26px;margin:50px 0 30px;font-family:var(--serif);}
+  .summary h2{color:#fff;margin:0 0 6px;font-size:24px;}
+  .summary ul{margin:10px 0 0;padding-left:20px;} .summary li{margin:8px 0;font-size:15.5px;line-height:1.55;color:#dcebec;}
+  .summary li b{color:#fff;}
+  .quiz{max-width:718px;margin:36px 0;}
+  .quiz h2{margin-top:0;}
+  .q{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 20px;margin:12px 0;box-shadow:var(--shadow);}
+  .q .qq{font-weight:600;color:var(--accent-dk);font-family:var(--serif);}
+  .q button{margin-top:10px;font-family:var(--ui);font-size:13px;font-weight:700;color:var(--accent);background:#eef5f6;border:1px solid #d3e5e7;border-radius:20px;padding:7px 15px;cursor:pointer;}
+  .q button:hover{background:#e2eff0;}
+  .q .ans{display:none;margin-top:12px;padding-top:12px;border-top:1px dashed var(--line);font-size:15.5px;color:var(--soft);}
+  .q .ans .a{font-weight:700;color:var(--accent-dk);}
+  .q.show .ans{display:block;} .q.show button{display:none;}
+
+  .chapnav{max-width:718px;display:flex;justify-content:space-between;gap:12px;margin:44px 0 0;font-family:var(--ui);}
+  .chapnav a,.chapnav span{flex:1;border:1px solid var(--line);border-radius:12px;padding:14px 16px;font-size:13.5px;background:var(--card);}
+  .chapnav a{color:var(--accent-dk);font-weight:600;} .chapnav a:hover{border-color:var(--accent);text-decoration:none;}
+  .chapnav .k{display:block;font-size:11px;color:var(--faint);text-transform:uppercase;letter-spacing:.5px;margin-bottom:2px;}
+  .chapnav .next{text-align:right;} .chapnav .disabled{color:var(--faint);}
+
+  footer{font-family:var(--ui);text-align:center;color:var(--faint);font-size:12.5px;border-top:1px solid var(--line);padding:26px 20px 50px;margin-top:30px;}
+  footer b{color:var(--soft);}
+
+  @media(max-width:860px){
+    .layout{grid-template-columns:1fr;gap:0;}
+    aside{padding-top:16px;} aside .toc{position:static;}
+    aside .toc{border:1px solid var(--line);border-radius:12px;padding:12px 14px;background:var(--card);}
+    aside .toc a{border-left:none;padding:6px 4px;}
+    aside .toc a.on{background:none;}
+    .reading{padding-top:16px;}
+    .embed iframe{height:660px;}
+  }
+
+  /* comparison tables */
+  .ctwrap{max-width:718px;overflow-x:auto;margin:22px 0;-webkit-overflow-scrolling:touch;}
+  table.ctable{border-collapse:collapse;width:100%;min-width:520px;font-family:var(--ui);font-size:14px;background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden;}
+  table.ctable th,table.ctable td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);vertical-align:top;line-height:1.45;}
+  table.ctable thead th{background:#eef5f6;color:var(--accent-dk);font-weight:700;font-size:12.5px;letter-spacing:.3px;}
+  table.ctable tbody tr:last-child td{border-bottom:none;}
+  table.ctable td:first-child,table.ctable th:first-child{font-weight:600;color:var(--soft);white-space:nowrap;}
+  table.ctable td b{color:var(--accent-dk);font-weight:600;}
+  /* glossary */
+  dl.terms{max-width:718px;margin:18px 0;}
+  dl.terms dt{font-family:var(--ui);font-weight:700;color:var(--accent-dk);font-size:15px;margin-top:15px;}
+  dl.terms dd{margin:3px 0 0;color:var(--soft);}
+  /* flashcard drill widget */
+  .fc{max-width:718px;margin:20px 0;}
+  .fc-card{perspective:1600px;height:236px;cursor:pointer;margin-bottom:14px;}
+  .fc-inner{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform .55s cubic-bezier(.4,.2,.2,1);}
+  .fc-card.flip .fc-inner{transform:rotateY(180deg);}
+  .fc-face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border:1px solid var(--line);border-radius:16px;padding:26px 30px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:12px;box-shadow:0 8px 26px rgba(20,40,46,.09);overflow:auto;}
+  .fc-front{background:linear-gradient(180deg,#fffdf7,#eef5f6);}
+  .fc-back{background:linear-gradient(180deg,#fbf3e2,#f3e6c9);transform:rotateY(180deg);border-color:#e6d3a6;}
+  .fc-side{position:absolute;top:12px;left:16px;font-family:var(--ui);font-size:10px;font-weight:800;letter-spacing:1.3px;text-transform:uppercase;color:var(--faint);}
+  .fc-back .fc-side{color:var(--gold);}
+  .fc-q{font-family:var(--disp);font-weight:600;font-size:19px;line-height:1.35;color:var(--accent-dk);}
+  .fc-a{font-family:var(--serif);font-weight:600;font-size:17px;line-height:1.45;color:var(--ink);}
+  .fc-hint{position:absolute;bottom:11px;left:0;right:0;font-family:var(--ui);font-size:11.5px;color:var(--faint);}
+  .fc-nav{display:flex;gap:9px;align-items:center;}
+  .fc-count{flex:1;text-align:center;font-family:var(--ui);font-size:13px;color:var(--muted);font-weight:600;}
+  .fc-btn{font-family:var(--ui);font-size:13px;font-weight:700;color:var(--accent);background:#eef5f6;border:1px solid #d3e5e7;border-radius:20px;padding:8px 13px;cursor:pointer;}
+  .fc-btn:hover{background:#e2eff0;}
+  .fc-full{display:block;margin-top:14px;text-align:center;font-family:var(--ui);font-size:13.5px;font-weight:700;background:var(--accent-dk);color:#eaf3f4;border-radius:12px;padding:12px;}
+  .fc-full:hover{text-decoration:none;filter:brightness(1.12);}
+</style>
+</head>
+<body>
+
+
+  <div class="topbar">
+    <div class="row">
+      <a class="home" href="index.html">📖 Contents</a>
+      
+      <span class="ct">Week 3 · Oncology</span>
+    </div>
+    <div class="progress"><div class="bar" id="bar"></div></div>
+  </div>
+
+  <div class="layout">
+    <aside>
+      <nav class="toc">
+        <h4>In this chapter</h4>
+        <a href="#w3_normal" class="on">1 · Normal cell to cancer</a>
+        <a href="#w3_benmal">2 · Benign vs malignant</a>
+        <a href="#w3_spread">3 · Growth &amp; spread</a>
+        <a href="#w3_causes">4 · What causes cancer</a>
+        <a href="#w3_stage">5 · Grading &amp; staging</a>
+        <a href="#summary">The chapter in one breath</a>
+        <a href="#glossary">Words worth knowing</a>
+        <a href="#cards">Flashcards</a>
+        <a href="#quiz">Check yourself</a>
+      </nav>
+    </aside>
+
+    <main class="reading">
+      <div class="kicker">Pathophysiology · Week 3</div>
+      <h1>Oncology: How Cancer Works</h1>
+      <p class="lede">Cancer is not one disease but a <b>process</b> &mdash; a single cell that stops obeying the body&rsquo;s rules and starts dividing on its own. This chapter follows that process from the first mutation to a spreading tumor: how a normal cell turns malignant, how we tell benign from dangerous, how cancer travels, what sets it off, and how it is graded, staged, and treated.</p>
+      <div class="objectives">
+        <h4>By the end of this chapter you can</h4>
+        <ul>
+          <li>Explain how a normal cell becomes cancer through mutated <b>oncogenes</b> and <b>tumor-suppressor genes</b>.</li>
+          <li>Contrast <b>benign</b> and <b>malignant</b> tumors, and use the -oma / carcinoma / sarcoma naming.</li>
+          <li>Describe how cancer invades, and the routes and common sites of <b>metastasis</b>.</li>
+          <li>Name major carcinogens and the roles of <b>p53</b> and <b>BRCA</b>.</li>
+          <li>Tell <b>grading</b> from <b>staging</b> (TNM), and recognize tumor lysis syndrome.</li>
+        </ul>
+      </div>
+
+      <h2 id="w3_normal"><span class="num">Section 1</span>From a normal cell to cancer</h2>
+<figure class="bref" data-sec="1" style="max-width:1040px;margin:10px 0 24px;padding:0;"><div style="border:1px solid #e6e2d6;border-radius:16px;overflow:hidden;background:#fffdf7;box-shadow:0 8px 26px rgba(20,40,46,.09);"><img src="img/oncology_s1.jpg" alt="Normal cell to cancer reference figure" loading="lazy" style="display:block;width:100%;height:auto;background:#fff;" onerror="this.closest('figure').style.display='none'"></div><figcaption style="font-family:Inter,system-ui,sans-serif;font-size:12.5px;color:#7c8a88;margin-top:8px;line-height:1.5;"><b style="color:#0c3a44;">Reference.</b> Normal cell to cancer <span style="color:#9aa8a6;">&mdash; Jia-Xun Wu, Andy T Y Lau, and Yan-Ming Xu, CC BY 4.0 (via Wikimedia Commons)</span></figcaption></figure>
+
+
+      <p>Every cell in your body lives by a simple rule: <em>divide only when you are told to, and stop when the job is done.</em> A healthy cell reads chemical signals from its neighbors, copies its DNA carefully, checks that copy for errors, and either keeps going or quietly retires. That balance between growing and stopping is controlled by genes. When those control genes get damaged, the balance tips, and a normal cell can slowly turn into a cancer cell. Cancer is not an invader from outside. It is one of your own cells that has lost its instructions.</p>
+
+<h3>The accelerator and the brakes</h3>
+<p>Think of cell division like driving a car. Two sets of genes keep it under control. <b>Proto-oncogenes</b> are the <em>accelerator</em>: they normally tell the cell when it is time to grow and divide. <b>Tumor-suppressor genes</b> are the <em>brakes</em>: they slow division, fix damaged DNA, or order a broken cell to self-destruct. In a normal cell these work together, so growth happens only when it should.</p>
+<p>Mutations break this system in two different ways. When a proto-oncogene mutates, it becomes an <b>oncogene</b> a stuck accelerator that screams "grow!" even with no signal. This is a <em>gain of function</em>, and usually only one copy of the gene needs to change. When a tumor-suppressor gene mutates, the brakes <em>fail</em>. This is a <em>loss of function</em>, and typically <em>both</em> copies must be knocked out before protection is lost. The famous tumor suppressor <b>p53</b> (often called the "guardian of the genome") normally halts a damaged cell and triggers apoptosis; when p53 fails, damaged cells survive and keep dividing.</p>
+
+<div class="pearl"><b>One hit is rarely enough.</b> Cancer usually requires <em>several</em> mutations stacking up over years often a stuck accelerator plus failed brakes together. This is why cancer risk rises with age and with repeated exposures like tobacco or UV light.</div>
+
+<h3>The multistep journey: how tissue changes over time</h3>
+<p>Cancer does not appear overnight. Tissue drifts through recognizable stages as mutations accumulate:</p>
+<ul>
+<li><b>Hyperplasia</b> too many cells, but they still look normal and stay organized.</li>
+<li><b>Dysplasia</b> cells start looking <em>abnormal</em> disordered shapes, sizes, and arrangement. This is pre-cancerous but still reversible.</li>
+<li><b>Carcinoma in situ</b> cells look fully cancerous but stay contained above the <em>basement membrane</em>. Nothing has spread yet, so cure rates are high.</li>
+<li><b>Invasive cancer</b> cells break through the basement membrane into surrounding tissue and can travel to distant sites (<b>metastasis</b>).</li>
+</ul>
+
+<h3>What makes a cancer cell dangerous: the hallmarks</h3>
+<p>Researchers describe cancer through shared "hallmark" behaviors. In plain terms, cancer cells learn to:</p>
+<ul>
+<li><b>Divide without permission</b> the stuck-accelerator, failed-brakes problem, so they multiply even when the body signals stop.</li>
+<li><b>Evade apoptosis</b> normal cells with broken DNA are told to die (programmed cell death). Cancer cells silence that signal often by disabling p53 so damaged cells refuse to die.</li>
+<li><b>Grow their own blood supply</b> a process called <b>angiogenesis</b>. Once a tumor grows past roughly 1 to 2 mm, it starves for oxygen, so it releases signals that recruit new blood vessels to feed itself and, later, to give cancer cells a highway to spread.</li>
+</ul>
+
+<h3>Tumor is not the same as cancer</h3>
+<p>Students mix these up constantly. A <b>tumor</b> (or neoplasm) is simply a lump an abnormal mass of cells. <b>Cancer</b> means the tumor is <em>malignant</em>: it invades and can spread. A <b>benign</b> tumor, like a lipoma, is a lump that stays put.</p>
+<div class="ctwrap"><table class="ctable"><thead><tr><th>Feature</th><th>Benign tumor</th><th>Malignant tumor (cancer)</th></tr></thead><tbody>
+<tr><td>Growth</td><td>Usually slow</td><td>Often rapid</td></tr>
+<tr><td>Border</td><td>Well-defined, often encapsulated</td><td>Irregular, invades nearby tissue</td></tr>
+<tr><td>Cell appearance</td><td>Looks like normal tissue (well-differentiated)</td><td>Abnormal, disorganized (poorly differentiated)</td></tr>
+<tr><td>Spread (metastasis)</td><td>No</td><td>Yes via blood or lymph</td></tr>
+<tr><td>Danger</td><td>Usually harmless unless pressing on something</td><td>Life-threatening if untreated</td></tr>
+</tbody></table></div>
+
+<div class="pearl"><b>Benign can still hurt you.</b> A benign brain tumor is not cancer, but in a closed skull it can press on vital tissue. "Benign" means it will not spread not that it is always safe.</div>
+
+<p>Explore the figure below to watch a cell move from normal, through adaptation, into dysplasia the same stepwise drift described here.</p>
+
+      <div class="embed">
+        <div class="cap"><span class="tag">Interactive</span> See the slide from normal adaptation to dysplasia &mdash; the road toward cancer. <a href="../patho/CellularAdaptation.html" target="_blank" rel="noopener">Open full &uarr;</a></div>
+        <div class="frame"><iframe src="../patho/CellularAdaptation.html" loading="lazy" title="Cellular changes interactive"></iframe></div>
+      </div>
+      <div class="kp"><div class="t">Key points</div><ul>
+<li><b>Proto-oncogenes</b> are the accelerator and <b>tumor-suppressor genes</b> are the brakes; cancer needs a stuck accelerator (oncogene, one hit) <em>and</em> failed brakes (tumor suppressor, usually two hits).</li>
+<li>Cancer develops in steps: <b>hyperplasia to dysplasia to carcinoma in situ to invasive cancer</b>, as mutations pile up over time.</li>
+<li>Hallmark behaviors: <b>uncontrolled division</b>, <b>evading apoptosis</b> (often by disabling p53), and <b>angiogenesis</b> growing its own blood supply.</li>
+<li>A <b>tumor</b> is any lump; only a <b>malignant</b> tumor is <b>cancer</b>, defined by its ability to invade and metastasize.</li>
+<li>Invasion is marked by breaking through the <b>basement membrane</b> the line between contained and spreading disease.</li>
+</ul></div>
+
+      <h2 id="w3_benmal"><span class="num">Section 2</span>Benign vs malignant</h2>
+<figure class="bref" data-sec="2" style="max-width:1040px;margin:10px 0 24px;padding:0;"><div style="border:1px solid #e6e2d6;border-radius:16px;overflow:hidden;background:#fffdf7;box-shadow:0 8px 26px rgba(20,40,46,.09);"><img src="img/oncology_s2.jpg" alt="Benign vs malignant reference figure" loading="lazy" style="display:block;width:100%;height:auto;background:#fff;" onerror="this.closest('figure').style.display='none'"></div><figcaption style="font-family:Inter,system-ui,sans-serif;font-size:12.5px;color:#7c8a88;margin-top:8px;line-height:1.5;"><b style="color:#0c3a44;">Reference.</b> Benign vs malignant <span style="color:#9aa8a6;">&mdash; Yale Rosen from USA, CC BY-SA 2.0 (via Wikimedia Commons)</span></figcaption></figure>
+
+
+      <p>Your body makes new cells constantly. Skin, gut lining, blood cells, and more are always being replaced, and normally this happens under tight control: cells divide only when signaled, mature into a specific job, and stop dividing when the tissue is repaired. This maturing process is called <b>differentiation</b>. A well-differentiated cell looks and acts like the tissue it came from. A <b>neoplasm</b> (literally "new growth") is a lump of cells that has escaped normal growth controls and keeps dividing when it should not. The big clinical question is always the same: is this growth <b>benign</b> or <b>malignant</b>?</p>
+
+<h3>Benign growths: slow, walled-off, and well-behaved</h3>
+<p>A benign tumor grows slowly and stays put. Because it grows gradually, the surrounding tissue often has time to form a <b>fibrous capsule</b> around it, so the mass is <em>encapsulated</em> and can usually be shelled out cleanly by a surgeon. Its cells are <b>well-differentiated</b>, meaning they still closely resemble the normal tissue of origin and often still do that tissue's job. Benign tumors <em>do not invade</em> nearby structures and <em>do not metastasize</em> (spread to distant sites). Under the microscope the cells look orderly, with normal-sized nuclei and few dividing cells (low <b>mitotic rate</b>).</p>
+
+<h3>Malignant growths: fast, invasive, and mobile</h3>
+<p>Malignant tumors (true <b>cancer</b>) behave the opposite way. They grow quickly, so they rarely form a tidy capsule; instead they send finger-like projections that <em>invade</em> and destroy surrounding tissue, which is why the cut surface can look crab-like (the origin of the word "cancer"). Their cells are <b>poorly differentiated</b> or <b>undifferentiated</b>, meaning they no longer look like or act like the parent tissue. Most importantly, malignant cells can break away, travel through blood or lymph, and seed new tumors elsewhere. That spread is <b>metastasis</b>, and it is the feature that makes cancer so dangerous and so hard to cure.</p>
+
+<div class="ctwrap"><table class="ctable"><thead><tr><th>Feature</th><th>Benign</th><th>Malignant</th></tr></thead><tbody><tr><td>Growth rate</td><td>Slow</td><td>Rapid, often erratic</td></tr><tr><td>Border</td><td>Encapsulated, well-defined</td><td>Invasive, poorly defined</td></tr><tr><td>Differentiation</td><td>Well-differentiated</td><td>Poorly differentiated to anaplastic</td></tr><tr><td>Metastasis</td><td>Never</td><td>Common</td></tr><tr><td>Recurrence after removal</td><td>Rare</td><td>Common</td></tr></tbody></table></div>
+
+<h3>How tumors are named</h3>
+<p>Naming follows a pattern worth memorizing. The suffix <b>-oma</b> usually signals a <em>benign</em> tumor named for its tissue of origin: a <b>lipoma</b> is a benign fat tumor, an <b>adenoma</b> a benign glandular tumor, a <b>leiomyoma</b> a benign smooth-muscle tumor (a uterine "fibroid"). Malignant tumors get one of two labels based on their tissue of origin: carcinomas from epithelial tissue, sarcomas from connective (mesenchymal) tissue. A <b>carcinoma</b> arises from <b>epithelial tissue</b> (skin, gland, and organ linings) and is by far the most common category, including adenocarcinoma of the colon or breast. A <b>sarcoma</b> arises from <b>connective tissue</b> such as bone (osteosarcoma), cartilage, muscle, or fat. A few dangerous "-oma" names break the rule, notably <b>melanoma</b> and <b>lymphoma</b>, which are malignant despite the friendly suffix.</p>
+
+<div class="pearl"><b>Read the ending, then confirm.</b> Carcinoma equals epithelial, sarcoma equals connective tissue, but the exceptions (melanoma, lymphoma) are exactly the ones tested on, so never rely on the suffix alone.</div>
+
+<h3>Differentiation and anaplasia</h3>
+<p>Pathologists describe cancers by how far the cells have drifted from normal. <b>Grading</b> measures differentiation. A well-differentiated (low-grade) cancer still resembles its origin and usually behaves less aggressively. <b>Anaplasia</b> is the extreme opposite: cells so primitive and disorganized that they barely resemble any tissue. Anaplastic cells show <b>pleomorphism</b> (variable size and shape), large dark nuclei with a high nucleus-to-cytoplasm ratio, and abundant, sometimes abnormal, mitoses. In general, the less differentiated the cell, the more aggressive the tumor and the worse the prognosis.</p>
+
+<h3>When "benign" still hurts you</h3>
+<p>Benign does not always mean harmless. A tumor that would be trivial elsewhere can be life-threatening because of <em>where</em> it sits. A benign <b>meningioma</b> in the skull has nowhere to expand; as it grows it raises <b>intracranial pressure</b> and compresses brain tissue, causing headaches, seizures, or neurologic deficits. A benign adenoma can secrete hormones (for example, insulin from a pancreatic tumor, causing dangerous hypoglycemia), and a benign mass can obstruct a hollow organ or press on a vital vessel. Location, secretion, and compression, not just the label, drive the risk.</p>
+
+<div class="pearl"><b>Space is the enemy in the skull.</b> The brain sits in a fixed bony box, so even a slow, encapsulated, well-differentiated tumor can kill by occupying space and raising pressure.</div>
+
+      <div class="kp"><div class="t">Key points</div><ul><li>Benign tumors are slow, encapsulated, well-differentiated, and stay put; malignant tumors are fast, invasive, poorly differentiated, and metastasize.</li><li>Metastasis is the defining danger of malignancy and the main reason cancer is hard to cure.</li><li>Naming: -oma usually means benign, carcinoma means malignant epithelial, sarcoma means malignant connective tissue; watch the exceptions melanoma and lymphoma.</li><li>Differentiation drives grade; anaplasia (primitive, pleomorphic, high mitotic cells) signals the most aggressive tumors.</li><li>A benign tumor can still be deadly because of its location, hormone secretion, or compression, classically a meningioma raising intracranial pressure.</li></ul></div>
+
+      <h2 id="w3_spread"><span class="num">Section 3</span>How cancer grows and spreads</h2>
+<figure class="bref" data-sec="3" style="max-width:1040px;margin:10px 0 24px;padding:0;"><div style="border:1px solid #e6e2d6;border-radius:16px;overflow:hidden;background:#fffdf7;box-shadow:0 8px 26px rgba(20,40,46,.09);"><img src="img/oncology_s3.jpg" alt="Growth & metastasis reference figure" loading="lazy" style="display:block;width:100%;height:auto;background:#fff;" onerror="this.closest('figure').style.display='none'"></div><figcaption style="font-family:Inter,system-ui,sans-serif;font-size:12.5px;color:#7c8a88;margin-top:8px;line-height:1.5;"><b style="color:#0c3a44;">Reference.</b> Growth & metastasis <span style="color:#9aa8a6;">&mdash; Jane Hurd (Illustrator), Public domain (via Wikimedia Commons)</span></figcaption></figure>
+
+
+      <p>Normally, your tissues are beautifully organized. Cells stay in their own neighborhood, held in place by a thin, tough sheet called the <b>basement membrane</b> that separates the surface layer (epithelium) from the deeper connective tissue below. Cells also respect their neighbors: they stop dividing when they touch (contact inhibition), they anchor down where they belong, and they call for new blood vessels only when the body genuinely needs them. Cancer is what happens when a cell breaks every one of these rules at once, and understanding how it grows and travels is really a story about a cell that has forgotten how to stay put. Explore it below as we walk through each step.</p>
+
+<h3>Local invasion: breaking through the basement membrane</h3>
+<p>A tumor usually starts as a well-behaved lump that stays on its own side of the basement membrane. As long as it has not crossed that barrier, we call it <b>carcinoma in situ</b> ("in place") - and this is often curable, because it has not gone anywhere yet. The dangerous turning point is <b>local invasion</b>, when cancer cells secrete enzymes called <b>matrix metalloproteinases (MMPs)</b> that literally digest the basement membrane and the surrounding <em>extracellular matrix</em>. Once that fence is dissolved, the cells lose their normal stickiness (they down-regulate <b>E-cadherin</b>, the "glue" protein) and crawl into the deeper tissue. This is the moment a cancer becomes <em>invasive</em>, and it is why pathologists care so much about whether the basement membrane is intact.</p>
+
+<h3>Metastasis: how cancer travels to distant sites</h3>
+<p><b>Metastasis</b> is the spread of cancer from the original (primary) tumor to a distant site. It is the single biggest reason cancer becomes life-threatening. There are three main routes.</p>
+<ul>
+<li><b>Lymphatic spread</b> - cells enter lymphatic vessels and travel to nearby lymph nodes first. This is the classic route for <em>carcinomas</em> (epithelial cancers like breast and colon). It is why nurses palpate lymph nodes and why the <b>sentinel lymph node</b> - the first node draining a tumor - is biopsied to check whether spread has begun.</li>
+<li><b>Hematogenous spread</b> - cells invade blood vessels and ride the bloodstream to far-off organs. This is the favored route for <em>sarcomas</em> (connective-tissue cancers) and explains distant organ metastases.</li>
+<li><b>Seeding of body cavities</b> - cells shed off the tumor surface and scatter across a cavity lining, like peritoneal seeding in ovarian cancer. This can cause <b>malignant ascites</b> (fluid buildup) or pleural effusions.</li>
+</ul>
+
+<div class="ctwrap"><table class="ctable"><thead><tr><th>Feature</th><th>Lymphatic spread</th><th>Hematogenous spread</th></tr></thead><tbody>
+<tr><td>Typical cancer type</td><td>Carcinomas (epithelial)</td><td>Sarcomas (connective tissue)</td></tr>
+<tr><td>First stop</td><td>Regional lymph nodes</td><td>Distant organs</td></tr>
+<tr><td>Clinical clue</td><td>Enlarged, firm nodes</td><td>Masses in lung, liver, bone, brain</td></tr>
+<tr><td>Assessed by</td><td>Sentinel node biopsy</td><td>CT/PET imaging, bone scan</td></tr>
+</tbody></table></div>
+
+<h3>Where cancer tends to land</h3>
+<p>Metastases are not random. Cells often lodge in the first capillary bed they reach, and certain organs also provide fertile "soil" for tumor cells to settle - a concept called the <em>seed-and-soil</em> hypothesis. The four most common landing sites are <b>lung, liver, bone, and brain</b>. The lung and liver catch a large share of circulating cells because they act as biological filters with dense capillary networks (the liver receives portal blood; the lungs filter all venous return). Bone metastases are common in breast and prostate cancer and often cause deep pain, <b>pathologic fractures</b>, and high calcium levels (<em>hypercalcemia</em>). Brain metastases can raise intracranial pressure and cause headaches, seizures, or new neurologic deficits.</p>
+
+<div class="pearl"><b>New back pain in a cancer patient is never ignored.</b> In someone with breast, prostate, or lung cancer, new or worsening bone pain may signal metastasis, and sudden severe pain can mean a pathologic fracture or spinal cord compression - an emergency.</div>
+
+<h3>Angiogenesis: the tumor builds its own supply lines</h3>
+<p>A clump of cancer cells can only grow to about 1-2 mm before the cells in the center start starving - they are too far from any blood vessel to get oxygen and nutrients by diffusion. To keep growing, the tumor pulls off a striking trick called <b>angiogenesis</b>: it releases chemical signals, especially <b>vascular endothelial growth factor (VEGF)</b>, that coax nearby blood vessels to sprout new branches straight into the tumor. This "angiogenic switch" gives the tumor its own supply line for continued growth and, unfortunately, an on-ramp into the bloodstream for metastasis. These new vessels are usually leaky and disorganized, which contributes to swelling and makes drug delivery unpredictable. Because VEGF is so central, several cancer drugs (anti-angiogenic agents like bevacizumab) work by blocking it to try to starve the tumor.</p>
+
+<div class="pearl"><b>Why "getting bigger" and "spreading" are linked.</b> Angiogenesis feeds both - the same new vessels that let a tumor grow past a few millimeters also give escaping cells a highway to travel, which is why fast-growing, vascular tumors tend to metastasize sooner.</div>
+
+      <div class="embed">
+        <div class="cap"><span class="tag">Interactive</span> Watch a tumor grow, invade, and metastasize. <a href="../patho/Cancer.html" target="_blank" rel="noopener">Open full &uarr;</a></div>
+        <div class="frame"><iframe src="../patho/Cancer.html" loading="lazy" title="Cancer interactive"></iframe></div>
+      </div>
+      <div class="kp"><div class="t">Key points</div><ul>
+<li>Cancer becomes <b>invasive</b> when it uses enzymes (MMPs) to break through the <b>basement membrane</b>; before that, carcinoma in situ is often curable.</li>
+<li><b>Metastasis</b> spreads through three routes: <b>lymphatic</b> (typical of carcinomas), <b>hematogenous</b>/bloodstream (typical of sarcomas), and <b>seeding</b> of body cavities.</li>
+<li>The most common landing sites are <b>lung, liver, bone, and brain</b>; new bone pain in a cancer patient is a red flag for metastasis.</li>
+<li><b>Angiogenesis</b>, driven by <b>VEGF</b>, lets a tumor recruit its own blood supply to grow past 1-2 mm and also opens a route for cells to escape and spread.</li>
+</ul></div>
+
+      <h2 id="w3_causes"><span class="num">Section 4</span>What causes cancer</h2>
+<figure class="bref" data-sec="4" style="max-width:1040px;margin:10px 0 24px;padding:0;"><div style="border:1px solid #e6e2d6;border-radius:16px;overflow:hidden;background:#fffdf7;box-shadow:0 8px 26px rgba(20,40,46,.09);"><img src="img/oncology_s4.jpg" alt="Causes of cancer reference figure" loading="lazy" style="display:block;width:100%;height:auto;background:#fff;" onerror="this.closest('figure').style.display='none'"></div><figcaption style="font-family:Inter,system-ui,sans-serif;font-size:12.5px;color:#7c8a88;margin-top:8px;line-height:1.5;"><b style="color:#0c3a44;">Reference.</b> Causes of cancer <span style="color:#9aa8a6;">&mdash; Brian E. Hingerty, Oak Ridge National Laboratory Suse Broyde, New York University Dinshaw J. Patel, , Public domain (via Wikimedia Commons)</span></figcaption></figure>
+
+
+      <p>Every day, your body makes billions of new cells. Old cells wear out, get injured, or reach the end of their lifespan, so a healthy cell divides to make a fresh copy of itself. This is normally a <em>tightly controlled</em> process. Before a cell divides, it copies its entire DNA, then pauses at built-in <b>checkpoints</b> to proofread that copy. If the DNA looks damaged, the cell either fixes it or, if the damage is too severe, deliberately kills itself through a tidy self-destruct program called <b>apoptosis</b>. Cancer begins when this careful system breaks down and a cell starts dividing on its own schedule, ignoring the stop signals, and refusing to die.</p>
+
+<p>So the real question is: what damages the DNA and the control genes badly enough to let a cell go rogue? The answer is usually a slow buildup of <b>mutations</b> (permanent changes in the DNA sequence) hitting the specific genes that run the cell cycle.</p>
+
+<h3>Carcinogens: the things that damage DNA</h3>
+<p>A <b>carcinogen</b> is any agent that causes cancer, usually by damaging DNA directly or by forcing cells to divide so fast that copy errors pile up. They fall into a few broad groups:</p>
+<ul>
+<li><b>Chemical</b> — the classic example is <b>tobacco</b> smoke, which carries dozens of DNA-damaging compounds. Others include asbestos, benzene, and certain dyes. Many act at the point of contact (asbestos in the lungs, dyes in the bladder), but some, like benzene, are absorbed and cause blood cancers such as leukemia.</li>
+<li><b>Radiation</b> — <b>ultraviolet (UV)</b> light from the sun damages skin-cell DNA and drives melanoma and other skin cancers. Ionizing radiation (X-rays, radon) does the same internally.</li>
+<li><b>Viral and microbial</b> — some infections insert their own genes or cause chronic irritation. <b>HPV</b> (cervical and oropharyngeal cancers), <b>EBV</b> (some lymphomas), <b>hepatitis B</b> (liver cancer), and the bacterium <b>H. pylori</b> (stomach cancer) are the ones to know.</li>
+</ul>
+
+<div class="pearl"><b>Carcinogens are often preventable.</b> This is why smoking cessation, sunscreen, and the HPV and hepatitis B vaccines are genuine cancer-prevention tools, not just general health advice.</div>
+
+<h3>Oncogenes and tumor-suppressor genes</h3>
+<p>Two families of genes normally keep cell division in check, and cancer usually involves damage to both. Think of driving a car: you need a working gas pedal <em>and</em> working brakes.</p>
+<p><b>Proto-oncogenes</b> are the gas pedal. They tell a cell when it is time to grow and divide. When a proto-oncogene mutates and gets stuck in the "on" position, it becomes an <b>oncogene</b> that floors the accelerator, driving nonstop division.</p>
+<p><b>Tumor-suppressor genes</b> are the brakes. They slow division, run the DNA proofreading checkpoints, and trigger apoptosis when a cell is too damaged. The most famous is <b>p53</b>, nicknamed the <em>guardian of the genome</em> because it halts the cell cycle to allow repair, and orders apoptosis when repair fails. When p53 is knocked out, damaged cells sail through checkpoints and accumulate even more mutations. The <b>BRCA1</b> and <b>BRCA2</b> genes are also tumor suppressors; they help repair broken DNA, so when they fail, breast and ovarian tissue lose a key safety net.</p>
+
+<div class="ctwrap"><table class="ctable"><thead><tr><th>Feature</th><th>Oncogene</th><th>Tumor-suppressor gene</th></tr></thead><tbody>
+<tr><td>Normal job</td><td>Promotes cell growth (gas pedal)</td><td>Restrains growth, repairs DNA, triggers apoptosis (brakes)</td></tr>
+<tr><td>Effect of mutation</td><td>Gain of function - stuck ON</td><td>Loss of function - brakes fail</td></tr>
+<tr><td>Copies needed to cause trouble</td><td>Usually one mutated copy is enough</td><td>Usually both copies must be lost</td></tr>
+<tr><td>Examples</td><td>Mutated RAS, HER2</td><td>p53, BRCA1/2, RB</td></tr>
+</tbody></table></div>
+
+<h3>Inherited vs acquired mutations, and why some cancers run in families</h3>
+<p>Most cancers come from <b>acquired</b> (somatic) mutations - damage that builds up in one person's cells over a lifetime from carcinogens, random copying errors, and aging. These are not passed to children, which is why the majority of cancers are sporadic.</p>
+<p>A smaller group involves <b>inherited</b> (germline) mutations, present in every cell from birth because they came from a parent's egg or sperm. Someone who inherits one broken copy of a tumor-suppressor gene like BRCA1 only needs to lose the <em>second</em> copy for that safety net to fail - they are already halfway there. That head start is why these cancers appear <em>earlier</em> in life, often in both breasts or in multiple family members. This is the mechanism behind familial patterns and the basis for genetic counseling.</p>
+
+<h3>Chronic inflammation and failed immune surveillance</h3>
+<p>Two background factors quietly raise the odds. First, <b>chronic inflammation</b> (as in long-standing hepatitis, H. pylori gastritis, or inflammatory bowel disease) keeps tissue in a constant cycle of injury and repair. Every extra round of division is another chance for a mutation to slip in. Second, your immune system normally patrols for abnormal cells and destroys them - a process called <b>immune surveillance</b>. Cancer cells that learn to hide from or exhaust these immune patrols escape destruction, which is why immunosuppressed patients often have higher cancer rates.</p>
+
+<div class="pearl"><b>Cancer is usually a multi-hit process.</b> One mutation rarely does it. A cell typically needs several hits - an oncogene switched on, tumor suppressors switched off, plus a favorable inflammatory or immune-weak environment - which is why cancer risk climbs with age and repeated exposure.</div>
+
+      <div class="kp"><div class="t">Key points</div><ul>
+<li>Cancer starts when DNA damage disables the normal controls on cell division, letting a cell divide without limit and dodge apoptosis.</li>
+<li>Carcinogens - chemical (tobacco), radiation (UV), and viral/microbial (HPV, EBV, hepatitis B, H. pylori) - cause cancer largely by damaging DNA; many are preventable through vaccines and lifestyle.</li>
+<li>Oncogenes are a stuck gas pedal (gain of function); tumor suppressors like p53 (guardian of the genome) and BRCA1/2 are failed brakes (loss of function).</li>
+<li>Most mutations are acquired over a lifetime; inherited germline mutations give a head start toward cancer, explaining earlier onset and familial clustering.</li>
+<li>Chronic inflammation and failed immune surveillance are contributors that let mutated cells accumulate and escape destruction.</li>
+</ul></div>
+
+      <h2 id="w3_stage"><span class="num">Section 5</span>Grading, staging &amp; living with cancer</h2>
+<figure class="bref" data-sec="5" style="max-width:1040px;margin:10px 0 24px;padding:0;"><div style="border:1px solid #e6e2d6;border-radius:16px;overflow:hidden;background:#fffdf7;box-shadow:0 8px 26px rgba(20,40,46,.09);"><img src="img/oncology_s5.jpg" alt="Grading & staging reference figure" loading="lazy" style="display:block;width:100%;height:auto;background:#fff;" onerror="this.closest('figure').style.display='none'"></div><figcaption style="font-family:Inter,system-ui,sans-serif;font-size:12.5px;color:#7c8a88;margin-top:8px;line-height:1.5;"><b style="color:#0c3a44;">Reference.</b> Grading & staging <span style="color:#9aa8a6;">&mdash; https://www.scientificanimations.com, CC BY-SA 4.0 (via Wikimedia Commons)</span></figcaption></figure>
+
+
+      <p>Your cells normally follow strict rules. They divide only when told to, they mature into a specific job (a skin cell, a colon cell), and they stay in their own neighborhood. Cancer breaks all three rules: the cells divide without permission, they fail to mature, and they invade and travel. Once a tumor exists, two of the first questions a care team asks are <em>how ugly do these cells look under the microscope?</em> and <em>how far has this spread?</em> Those are two different questions, and mixing them up is one of the most common student errors.</p>
+
+<h3>Grading vs staging</h3>
+<p><b>Grading</b> is about <em>appearance</em>. A pathologist looks at the tumor cells and asks how much they still resemble the normal tissue they came from. Well-differentiated (low-grade) cells still look and behave a lot like the parent tissue and tend to grow slowly. Poorly differentiated or <b>anaplastic</b> (high-grade) cells look wild and disorganized and usually behave more aggressively. Grading is usually reported as G1 through G4.</p>
+<p><b>Staging</b> is about <em>spread</em> - how big the tumor is and how far it has traveled. The most widely used framework is the <b>TNM system</b>: <b>T</b> for the size and extent of the primary tumor, <b>N</b> for how many regional lymph nodes are involved, and <b>M</b> for distant metastasis (spread to far organs). Higher numbers mean more advanced disease, and staging drives treatment decisions and prognosis more powerfully than grade does.</p>
+
+<div class="ctwrap"><table class="ctable"><thead><tr><th>Feature</th><th>Grading</th><th>Staging</th></tr></thead><tbody>
+<tr><td>Question it answers</td><td>How abnormal do the cells look?</td><td>How far has it spread?</td></tr>
+<tr><td>How it is measured</td><td>Differentiation under the microscope</td><td>TNM: Tumor, Nodes, Metastasis</td></tr>
+<tr><td>Typical scale</td><td>G1 (well-differentiated) to G4 (anaplastic)</td><td>Stage I to Stage IV</td></tr>
+<tr><td>Main use</td><td>Predicts aggressiveness</td><td>Guides treatment and overall prognosis</td></tr>
+</tbody></table></div>
+
+<div class="pearl"><b>Grade describes the cells, stage describes the journey.</b> A tumor can be high-grade (nasty-looking) but low-stage (caught early), which is often a very treatable combination.</div>
+
+<h3>The CAUTION warning signs</h3>
+<p>The American Cancer Society mnemonic <b>CAUTION</b> lists classic early clues that should prompt evaluation. They matter because early detection usually means a lower stage and better outcomes:</p>
+<ul>
+<li><b>C</b> - Change in bowel or bladder habits</li>
+<li><b>A</b> - A sore that does not heal</li>
+<li><b>U</b> - Unusual bleeding or discharge</li>
+<li><b>T</b> - Thickening or a lump (breast or elsewhere)</li>
+<li><b>I</b> - Indigestion or difficulty swallowing</li>
+<li><b>O</b> - Obvious change in a wart or mole</li>
+<li><b>N</b> - Nagging cough or hoarseness</li>
+</ul>
+
+<h3>When the tumor causes trouble from a distance</h3>
+<p><b>Paraneoplastic syndromes</b> happen when a tumor secretes hormones or hormone-like substances, causing symptoms far from the tumor itself - classic examples are <b>SIADH</b> (small cell lung cancer making ADH, driving down sodium) and <b>hypercalcemia</b> (from PTH-related peptide or bone breakdown).</p>
+<p><b>Tumor lysis syndrome (TLS)</b> is an oncologic <em>emergency</em>. When large numbers of cancer cells are destroyed quickly - often right after chemotherapy starts - they dump their contents into the blood. The result is high potassium (<b>hyperkalemia</b>), high phosphate, high uric acid, and low calcium, which can trigger fatal arrhythmias and acute kidney injury. Nurses watch labs closely and push hydration.</p>
+
+<h3>The four treatment pillars</h3>
+<p>Most cancer care combines four approaches. <b>Surgery</b> removes the tumor. <b>Radiation</b> damages the DNA of cells in a targeted area. <b>Chemotherapy</b> uses systemic drugs to kill dividing cells throughout the body. <b>Immunotherapy</b> retrains or unleashes the patient's own immune system to recognize and attack cancer.</p>
+<p>Here is the key mechanism behind chemo's side effects: most chemotherapy targets <em>rapidly dividing cells</em>, because that is what cancer does. But some healthy tissues also divide fast, so they take collateral damage. That is exactly why chemo predictably causes <b>hair loss (alopecia)</b> from fast-dividing hair follicles, <b>nausea, vomiting, and mouth sores (mucositis)</b> from the fast-turnover gut lining, and <b>bone marrow suppression (myelosuppression)</b> - dropping white cells, red cells, and platelets. The low white count (<b>neutropenia</b>) is the scary one, because it leaves the patient wide open to infection.</p>
+
+<div class="pearl"><b>Neutropenic fever is an emergency.</b> In a patient on chemo, a fever often means life-threatening infection with too few neutrophils to fight it - it is treated urgently, not watched.</div>
+
+      <div class="kp"><div class="t">Key points</div><ul>
+<li><b>Grade</b> describes how abnormal cells look (differentiation, G1-G4); <b>stage</b> describes how far cancer has spread using <b>TNM</b> (Tumor, Nodes, Metastasis).</li>
+<li>The <b>CAUTION</b> mnemonic flags early warning signs that warrant evaluation and can catch cancer at a lower, more treatable stage.</li>
+<li><b>Paraneoplastic syndromes</b> (like SIADH and hypercalcemia) cause distant hormone-driven symptoms; <b>tumor lysis syndrome</b> is an emergency with hyperkalemia, hyperphosphatemia, hyperuricemia, and hypocalcemia.</li>
+<li>The four pillars are <b>surgery, radiation, chemotherapy, and immunotherapy</b>.</li>
+<li>Chemo harms fast-dividing normal cells too, causing <b>alopecia, mucositis/GI upset, and myelosuppression</b> - watch for neutropenic fever.</li>
+</ul></div>
+
+      <div class="summary">
+        <h2 id="summary">The chapter in one breath</h2>
+        <ul><li><b>Carcinogenesis</b> is a stepwise loss of control: a normal cell mutates until it ignores stop signals, dodges apoptosis, and divides on its own, becoming a clone of rogue cells.</li><li>Cancer arises when <b>proto-oncogenes</b> mutate into oncogenes stuck in the on position (accelerator) and <b>tumor suppressor genes</b> like p53 fail (brakes), so growth and DNA-repair checkpoints stop working.</li><li><b>Benign</b> tumors are usually slow, encapsulated, well-differentiated, and stay put; <b>malignant</b> tumors grow fast, lack a capsule, look abnormal, and spread.</li><li><b>Invasion</b> is local spread as cancer cells release enzymes to chew through basement membrane and infiltrate nearby tissue, which is why margins matter in surgery.</li><li><b>Metastasis</b> is distant spread through blood or lymph to form secondary tumors; common landing sites are lung, liver, bone, and brain, and it signals advanced disease.</li><li>Causes are multifactorial <b>carcinogens</b> and risk factors: tobacco, radiation, UV light, certain chemicals, oncogenic viruses (HPV, hepatitis, EBV), chronic inflammation, and inherited mutations (like BRCA).</li><li><b>Grading</b> describes how abnormal the cells look under the microscope (differentiation), while <b>staging</b> (often TNM: Tumor size, Nodes, Metastasis) describes how far it has spread and drives prognosis.</li><li>Treatment follows a few core principles: <b>surgery</b> removes local disease, <b>radiation</b> targets a region, and <b>chemotherapy</b> works systemically by hitting rapidly dividing cells, often combined for better cure rates.</li><li><b>Chemotherapy</b> is not selective, so it also harms fast-turnover normal cells, explaining the classic toxicities: bone marrow suppression, hair loss, nausea, and mucositis.</li></ul>
+      </div>
+
+      <h2 id="glossary"><span class="num">Reference</span>Words worth knowing</h2>
+      <p>A quick reference for the terms in this chapter &mdash; skim it now, or circle back whenever a word trips you up.</p>
+      <dl class="terms"><dt>Anaplasia</dt><dd><b>Anaplasia</b> is the extreme loss of a cell's normal appearance and organization, where cancer cells look so wild and disorganized (with big, irregular nuclei and chaotic mitoses) that you often can't tell what tissue they came from, marking a highly <em>malignant</em> tumor.</dd><dt>Angiogenesis</dt><dd><b>Angiogenesis</b> is the growing of new blood vessels, which a tumor hijacks by releasing signals (like VEGF) to build its own blood supply so it can keep feeding and expanding beyond a couple of millimeters.</dd><dt>Benign</dt><dd>A <b>benign</b> tumor is a growth that stays put, grows slowly, is usually well-differentiated and encapsulated, and does <em>not</em> invade nearby tissue or spread to distant sites, though it can still cause harm by pressing on nearby structures.</dd><dt>Carcinogen</dt><dd>A <b>carcinogen</b> is any agent that can cause cancer by damaging DNA or promoting abnormal growth, such as tobacco smoke, UV and ionizing radiation, certain chemicals, or oncogenic viruses like HPV.</dd><dt>Carcinoma</dt><dd>A <b>carcinoma</b> is a cancer that arises from <em>epithelial</em> cells, meaning the cells that line and cover body surfaces and glands (skin, breast, lung, colon, prostate), and it is the most common category of cancer.</dd><dt>Carcinoma in situ</dt><dd><b>Carcinoma in situ</b> is an early cancer whose malignant cells are still confined to their original layer and have not yet broken through the basement membrane to invade, so it is often curable if caught and removed at this stage.</dd><dt>Differentiation</dt><dd><b>Differentiation</b> is how closely a cell resembles the mature, specialized tissue it came from; <em>well-differentiated</em> cells look and behave almost normally, while <em>poorly differentiated</em> ones look primitive and tend to be more aggressive.</dd><dt>Dysplasia</dt><dd><b>Dysplasia</b> is disordered but still reversible cell growth where cells vary in size, shape, and organization, a <em>pre-cancerous</em> change that can progress to cancer if the trigger continues.</dd><dt>Malignant</dt><dd>A <b>malignant</b> tumor is a cancerous growth that invades surrounding tissue, tends to be poorly differentiated, and can spread (metastasize) to distant parts of the body, making it life-threatening if untreated.</dd><dt>Metastasis</dt><dd><b>Metastasis</b> is the spread of cancer cells from the original (primary) tumor to distant sites through the blood or lymphatic system, where they seed new (secondary) tumors, and it is the main reason cancer becomes deadly.</dd><dt>Neoplasm</dt><dd>A <b>neoplasm</b>, literally "new growth," is a mass of cells that keep dividing beyond normal limits and serve no useful purpose, and it may be either <em>benign</em> or <em>malignant</em>.</dd><dt>Oncogene</dt><dd>An <b>oncogene</b> is a mutated or overactive version of a normal growth-promoting gene (a proto-oncogene) that, once switched on, pushes a cell to divide relentlessly, acting like a gas pedal stuck to the floor.</dd><dt>Paraneoplastic syndrome</dt><dd>A <b>paraneoplastic syndrome</b> is a set of symptoms caused by substances (like hormones or cytokines) a tumor secretes rather than by the tumor's physical bulk, so a patient might show effects (such as low sodium or high calcium) far from the actual cancer site.</dd><dt>Sarcoma</dt><dd>A <b>sarcoma</b> is a cancer that arises from <em>connective</em> and supportive tissues, such as bone, cartilage, muscle, fat, or blood vessels, and it is far less common than carcinoma.</dd><dt>TNM staging</dt><dd><b>TNM staging</b> is the standard system for describing how far a cancer has progressed by rating three things: <b>T</b> for the size and extent of the primary tumor, <b>N</b> for spread to regional lymph nodes, and <b>M</b> for distant metastasis.</dd><dt>Tumor-suppressor gene</dt><dd>A <b>tumor-suppressor gene</b> (such as <em>p53</em> or <em>BRCA</em>) normally slows cell division, repairs DNA, or triggers a damaged cell to self-destruct, so when it is lost or inactivated the cell's brakes fail and cancer can develop.</dd></dl>
+
+      <h2 id="cards"><span class="num">Drill</span>Flashcards for this unit</h2>
+      <p>These are the <b>Week 3</b> cards &mdash; the same deck as the hub, pulled in here so you can review the moment you finish reading. Tap the card to flip it; hit <em>Shuffle</em> to mix them up. To grade yourself and track mastery across the whole deck, open the <a href="../flashcards.html">full flashcards page</a>.</p>
+      <div class="fc" id="fc">
+        <div class="fc-card" id="fcCard" onclick="fcFlip()">
+          <div class="fc-inner">
+            <div class="fc-face fc-front"><span class="fc-side">Question</span><div class="fc-q" id="fcQ"></div><div class="fc-hint">Tap to reveal the answer</div></div>
+            <div class="fc-face fc-back"><span class="fc-side">Answer</span><div class="fc-a" id="fcA"></div><div class="fc-hint">Tap to flip back</div></div>
+          </div>
+        </div>
+        <div class="fc-nav">
+          <button class="fc-btn" type="button" onclick="fcPrev(event)">&larr; Prev</button>
+          <span class="fc-count" id="fcCount">&mdash;</span>
+          <button class="fc-btn" type="button" onclick="fcNext(event)">Next &rarr;</button>
+          <button class="fc-btn" type="button" onclick="fcShuffle(event)">&#128256; Shuffle</button>
+        </div>
+        <a class="fc-full" href="../flashcards.html">Open the full Week 3 deck &mdash; grade yourself &amp; track mastery &uarr;</a>
+      </div>
+
+      <div class="quiz">
+        <h2 id="quiz">Check yourself</h2>
+        <div class="q"><div class="qq">1. A nursing instructor asks a student to explain the difference between an oncogene and a tumor-suppressor gene. Which statement is correct?</div>
+<button onclick="this.parentNode.classList.add('show')">Reveal answer</button>
+<div class="ans"><span class="a">An oncogene is a mutated gene that pushes the cell to divide (a stuck accelerator), while a tumor-suppressor gene normally puts the brakes on division and, when lost, releases that control.</span> Proto-oncogenes become oncogenes with a single activating (gain-of-function) mutation, so one damaged copy is enough. Tumor suppressors like <b>p53</b> and <b>RB</b> usually require both copies to be knocked out (loss of function) before the brakes fail.</div></div>
+
+<div class="q"><div class="qq">2. A patient's Pap smear returns as cervical dysplasia. The patient asks the nurse, Does this mean I have cancer? What is the nurse's best response?</div>
+<button onclick="this.parentNode.classList.add('show')">Reveal answer</button>
+<div class="ans"><span class="a">No. Dysplasia means the cells look disordered and abnormal but are still contained above the basement membrane; it is a pre-cancerous change, not invasive cancer.</span> The progression usually runs <b>normal to hyperplasia to dysplasia to carcinoma in situ to invasive carcinoma</b>. Cancer becomes <em>invasive</em> only once malignant cells break through the <b>basement membrane</b>, and dysplasia is often reversible if the trigger is removed.</div></div>
+
+<div class="q"><div class="qq">3. A nurse is reviewing two tumors. One is described as encapsulated, slow-growing, and well-differentiated; the other is poorly differentiated with irregular borders. Which finding most strongly suggests malignancy?</div>
+<button onclick="this.parentNode.classList.add('show')">Reveal answer</button>
+<div class="ans"><span class="a">Poor differentiation with irregular, non-encapsulated borders points to malignancy.</span> Benign tumors are usually <b>well-differentiated</b>, encapsulated, slow-growing, and do not spread. Malignant tumors are poorly differentiated (<b>anaplastic</b>), grow rapidly, invade surrounding tissue, and can <b>metastasize</b> because they lack a capsule to contain them.</div></div>
+
+<div class="q"><div class="qq">4. A patient with colon cancer is found to have liver metastases. The nurse understands that the colon spread to the liver most likely traveled by which route?</div>
+<button onclick="this.parentNode.classList.add('show')">Reveal answer</button>
+<div class="ans"><span class="a">Through the bloodstream (hematogenous spread), specifically the portal venous drainage from the colon to the liver.</span> The three main routes of metastasis are the <b>bloodstream</b>, the <b>lymphatic system</b>, and direct <b>seeding</b> of body cavities. The liver, lungs, bone, and brain are the most common metastatic sites because of their rich blood supply.</div></div>
+
+<div class="q"><div class="qq">5. During a health teaching session, a nurse lists factors that increase cancer risk. Which items are correctly identified as carcinogens or cancer-linked viruses? Select the accurate grouping.</div>
+<button onclick="this.parentNode.classList.add('show')">Reveal answer</button>
+<div class="ans"><span class="a">Tobacco smoke, UV radiation, ionizing radiation, and certain chemicals are chemical/physical carcinogens; HPV, hepatitis B and C, and Epstein-Barr virus are oncogenic viruses.</span> Carcinogens damage DNA directly, while oncogenic viruses insert or activate genes that drive division. Key pairings to remember: <b>HPV to cervical cancer</b>, <b>HBV/HCV to hepatocellular carcinoma</b>, and <b>EBV to lymphoma</b>.</div></div>
+
+<div class="q"><div class="qq">6. A 32-year-old woman with a strong family history of breast and ovarian cancer tests positive for a BRCA1 mutation. Which statement best explains what this means?</div>
+<button onclick="this.parentNode.classList.add('show')">Reveal answer</button>
+<div class="ans"><span class="a">BRCA1 is a tumor-suppressor gene that normally repairs damaged DNA; a mutation impairs that repair and raises lifetime risk of breast and ovarian cancer.</span> BRCA mutations are inherited (germline), so they are passed through families. A positive result signals <em>increased risk</em>, not a guarantee of cancer, and warrants enhanced screening and genetic counseling.</div></div>
+
+<div class="q"><div class="qq">7. A nurse is studying the p53 gene. Which description best captures why p53 is called the guardian of the genome?</div>
+<button onclick="this.parentNode.classList.add('show')">Reveal answer</button>
+<div class="ans"><span class="a">p53 is a tumor-suppressor gene that halts the cell cycle to allow DNA repair and triggers apoptosis if the damage is too severe.</span> When p53 is mutated, cells with damaged DNA survive and keep dividing, allowing mutations to accumulate. This is why <b>p53</b> loss is one of the most common findings across many human cancers.</div></div>
+
+<div class="q"><div class="qq">8. A pathology report describes a tumor as Grade 3, Stage T2 N1 M0. The nurse explains to the patient that grade and stage measure different things. Which explanation is correct?</div>
+<button onclick="this.parentNode.classList.add('show')">Reveal answer</button>
+<div class="ans"><span class="a">Grade describes how abnormal the cells look under the microscope (differentiation), while stage describes how far the cancer has spread in the body using the TNM system.</span> A higher <b>grade</b> means less differentiation and usually more aggressive behavior. In <b>TNM</b>, T = tumor size/extent, N = regional lymph node involvement, and M = distant metastasis; here M0 means no distant spread has been found.</div></div>
+
+<div class="q"><div class="qq">9. A community-health nurse teaches the American Cancer Society CAUTION warning signs. A patient reports a sore on the lip that has not healed in 6 weeks. Which action reflects correct understanding?</div>
+<button onclick="this.parentNode.classList.add('show')">Reveal answer</button>
+<div class="ans"><span class="a">Encourage the patient to be evaluated by a provider, because a sore that does not heal is one of the CAUTION warning signs.</span> The mnemonic <b>CAUTION</b> stands for Change in bowel or bladder habits, A sore that does not heal, Unusual bleeding or discharge, Thickening or lump, Indigestion or difficulty swallowing, Obvious change in a wart or mole, and Nagging cough or hoarseness. These signs warrant prompt assessment, not reassurance to wait.</div></div>
+
+<div class="q"><div class="qq">10. A patient with a large, bulky lymphoma is started on chemotherapy. Within 24 to 48 hours the nurse notes a rising potassium, rising phosphate, rising uric acid, and a falling calcium. What complication should the nurse suspect?</div>
+<button onclick="this.parentNode.classList.add('show')">Reveal answer</button>
+<div class="ans"><span class="a">Tumor lysis syndrome (TLS).</span> When many tumor cells die rapidly, they spill intracellular contents into the blood, causing <b>hyperkalemia</b>, <b>hyperphosphatemia</b>, <b>hyperuricemia</b>, and <b>hypocalcemia</b> (calcium binds the released phosphate). It is an oncologic emergency; hydration, allopurinol or rasburicase, and cardiac monitoring for the hyperkalemia are priorities.</div></div>
+
+<div class="q"><div class="qq">11. A nursing student asks how most traditional chemotherapy drugs kill cancer cells. Which explanation is most accurate?</div>
+<button onclick="this.parentNode.classList.add('show')">Reveal answer</button>
+<div class="ans"><span class="a">Chemotherapy targets rapidly dividing cells, disrupting DNA or the cell cycle so those cells cannot replicate and undergo apoptosis.</span> Because the drugs cannot fully distinguish cancer cells from other fast-dividing normal cells, they also harm the <b>bone marrow, GI mucosa, and hair follicles</b>. This explains the classic side effects of <b>myelosuppression</b>, mucositis, nausea, and alopecia.</div></div>
+
+<div class="q"><div class="qq">12. A patient with breast cancer is told the tumor has spread to nearby axillary lymph nodes but nowhere else. The nurse explains this reflects which part of the TNM staging and which route of spread?</div>
+<button onclick="this.parentNode.classList.add('show')">Reveal answer</button>
+<div class="ans"><span class="a">It reflects the N (node) component of TNM, indicating spread through the lymphatic system to regional nodes.</span> Breast cancer characteristically drains first to the <b>axillary lymph nodes</b> via lymphatic vessels, which is why sentinel node assessment guides staging. Regional node involvement raises the stage but is not the same as distant metastasis (M), which would signal spread to organs like bone, lung, liver, or brain.</div></div>
+      </div>
+
+      <div class="chapnav">
+        <a href="index.html"><span class="k">Book</span>&larr; All chapters</a>
+        <a class="next" href="appendix.html"><span class="k">Appendix</span>The Arcade &amp; Lab &rarr;</a>
+      </div>
+    </main>
+  </div>
+
+  <footer>
+    A student-friendly pathophysiology guide · by <b>Dr. Akash Garg</b> <br>
+    The interactive figures open in place; tap “Open full ↗” for a full-screen version.
+  </footer>
+
+<script>
+  // reading progress bar
+  var bar=document.getElementById('bar');
+  function prog(){var h=document.documentElement, max=h.scrollHeight-h.clientHeight; bar.style.width=(max>0?(h.scrollTop/max*100):0)+'%';}
+  addEventListener('scroll',prog,{passive:true}); prog();
+  // scroll-spy TOC
+  var links=[].slice.call(document.querySelectorAll('.toc a'));
+  var ids=links.map(function(a){return a.getAttribute('href').slice(1);});
+  var secs=ids.map(function(id){return document.getElementById(id);});
+  function spy(){var y=scrollY+90,cur=0;
+    for(var i=0;i<secs.length;i++){ if(secs[i] && secs[i].offsetTop<=y) cur=i; }
+    links.forEach(function(a,i){a.classList.toggle('on',i===cur);});}
+  addEventListener('scroll',spy,{passive:true}); spy();
+</script>
+
+
+<script src="../flashcards/w3.js"></script>
+<script>
+(function(){
+  var WK="3";
+  var cards=(window.PATHO_CARDS&&window.PATHO_CARDS[WK])||[];
+  var fc=document.getElementById("fc"); if(!fc) return;
+  if(!cards.length){ fc.style.display="none"; return; }
+  var order=cards.map(function(_,i){return i;}), pos=0;
+  function dec(s){return String(s).replace(/&amp;/g,"&").replace(/&lt;/g,"<").replace(/&gt;/g,">").replace(/&nbsp;/g," ");}
+  var card=document.getElementById("fcCard"), q=document.getElementById("fcQ"), a=document.getElementById("fcA"), cnt=document.getElementById("fcCount");
+  function show(){ card.classList.remove("flip"); var c=cards[order[pos]]; q.textContent=dec(c.q); a.textContent=dec(c.a)+(c.exp?"  \u2014  "+dec(c.exp):""); cnt.textContent=(pos+1)+" / "+cards.length; }
+  window.fcFlip=function(){ card.classList.toggle("flip"); };
+  window.fcNext=function(e){ if(e&&e.stopPropagation)e.stopPropagation(); pos=(pos+1)%cards.length; show(); };
+  window.fcPrev=function(e){ if(e&&e.stopPropagation)e.stopPropagation(); pos=(pos-1+cards.length)%cards.length; show(); };
+  window.fcShuffle=function(e){ if(e&&e.stopPropagation)e.stopPropagation(); for(var i=order.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=order[i];order[i]=order[j];order[j]=t;} pos=0; show(); };
+  show();
+})();
+</script>
+<style id="pdfprint">
+.pdf-btn{position:fixed;right:16px;bottom:16px;z-index:400;font-family:'Inter',system-ui,sans-serif;font-weight:700;font-size:13.5px;color:#fff;background:#0c7283;border:none;border-radius:24px;padding:11px 17px;box-shadow:0 6px 20px rgba(12,58,68,.30);cursor:pointer;display:inline-flex;align-items:center;gap:7px;}
+.pdf-btn:hover{background:#0c3a44;}
+@media print{
+ @page{margin:14mm;}
+ html,body{background:#fff !important;}
+ .topbar,.progress,aside,.chapnav,.pdf-btn{display:none !important;}
+ #pbgate{display:none !important;}
+ .layout{display:block !important;max-width:100% !important;padding:0 !important;grid-template-columns:1fr !important;gap:0 !important;}
+ .reading,.reading .col{max-width:100% !important;padding:0 !important;}
+ .embed iframe,.embed .frame{display:none !important;}
+ .embed{margin:14px 0 !important;}
+ .embed .cap{color:#555 !important;font-style:italic;}
+ .embed .cap .tag{background:#0c7283 !important;color:#fff !important;}
+ .embed .cap a{display:none !important;}
+ .bref,.bref .fr{break-inside:avoid;page-break-inside:avoid;box-shadow:none !important;}
+ .bref img{max-height:150mm;width:auto !important;margin:0 auto;}
+ .ctwrap,table.ctable,.pearl,.kp,.q,.objectives,.summary,dl.terms,figure{break-inside:avoid;page-break-inside:avoid;}
+ h1,h2,h3{break-after:avoid;page-break-after:avoid;}
+ .quiz .ans{display:block !important;}
+ .quiz .q button{display:none !important;}
+ a{color:inherit !important;text-decoration:none !important;}
+ *{-webkit-print-color-adjust:exact !important;print-color-adjust:exact !important;}
+ footer{border-top:1px solid #ccc !important;}
+}
+</style>
+<button class="pdf-btn" onclick="window.print()" title="Save this chapter as a PDF">🖨 Save as PDF</button>
+</body>
+</html>

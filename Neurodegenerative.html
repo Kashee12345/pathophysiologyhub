@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f7f2ea">
+<title>Neurodegenerative Diseases</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{ --card:#fffdf8; --ink:#2a2420; --muted:#7a6f63; --line:#e3d8c6;
+    --sans:'Inter',system-ui,sans-serif; --disp:'Cinzel Decorative',serif; --accent:#4a6a9a; }
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  body{background:linear-gradient(160deg,#eff2fa,#e7eaef);color:var(--ink);font-family:var(--sans);min-height:100vh;padding:18px 16px 44px;}
+  header{max-width:1120px;margin:0 auto 16px;text-align:center;}
+  h1{font-family:var(--disp);font-weight:900;font-size:clamp(20px,3.8vw,32px);color:#3a5885;line-height:1.05;}
+  header .sub{color:var(--muted);font-size:15px;margin-top:4px;}
+  header .intro{max-width:860px;margin:10px auto 0;font-size:14.5px;line-height:1.5;color:#5c5248;}
+  header .intro b{color:#3a5885;}
+  .wrap{max-width:1120px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;box-shadow:0 6px 22px rgba(50,80,140,.07);}
+  .card h2{font-family:var(--disp);font-weight:700;font-size:16px;color:#3a5885;margin-bottom:6px;}
+  .card h2 + .desc{font-size:13px;color:var(--muted);margin-bottom:10px;line-height:1.4;}
+  svg{display:block;width:100%;height:auto;max-height:300px;}
+  #liveCap{margin-top:8px;background:#e8eef8;border:1px solid #c8d6ea;border-radius:10px;padding:10px 13px;font-size:14px;line-height:1.5;color:#294d78;text-align:center;} #liveCap b{color:#1c3a5c;}
+  @keyframes tremor{0%,100%{transform:translate(0,0)}25%{transform:translate(-2px,1px)}75%{transform:translate(2px,-1px)}}
+  .tremor{animation:tremor .25s linear infinite;}
+  @keyframes hot{0%,100%{opacity:.4}50%{opacity:.85}}
+  .hot{animation:hot 1.3s ease-in-out infinite;}
+  #stage{border-radius:12px;padding:11px 14px;margin-bottom:12px;color:#fff;font-weight:700;font-size:16px;text-align:center;background:#5a7aaa;}
+  #stage small{display:block;font-weight:500;font-size:13px;opacity:.93;margin-top:2px;}
+  .btns{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px;}
+  .nb{border:1px solid var(--line);background:#fff;border-radius:10px;padding:9px 6px;cursor:pointer;text-align:center;font-weight:700;font-size:12px;color:#4a4038;transition:.12s;line-height:1.2;}
+  .nb small{display:block;font-weight:500;font-size:9.5px;color:var(--muted);margin-top:1px;}
+  .nb:hover{transform:translateY(-2px);} .nb.on{background:#4a6a9a;color:#fff;border-color:transparent;} .nb.on small{color:rgba(255,255,255,.9);}
+  #info{border:1px solid var(--line);border-left:5px solid var(--accent);background:#eef2fa;border-radius:10px;padding:12px 13px;margin-top:16px;}
+  #info .n{font-family:var(--disp);font-weight:700;font-size:16px;color:#3a5885;}
+  #info .plain{font-size:14px;line-height:1.5;color:#2a2420;margin-top:8px;font-weight:600;}
+  #info .story{font-size:12.8px;line-height:1.5;color:#3a3630;margin-top:8px;background:#fff;border-radius:8px;padding:9px 11px;border:1px solid #cfd d ea;border:1px solid #cfdaea;}
+  #info .ss{margin-top:8px;font-size:12.3px;color:#5c5248;} #info .ss b{color:#1c3a5c;}
+  @media (max-width:880px){ .wrap{grid-template-columns:1fr;} }
+</style>
+</head>
+<body>
+<header>
+  <h1>Neurodegenerative Diseases</h1>
+  <div class="sub">When the nervous system breaks down · Week 4</div>
+  <div class="intro">These diseases each destroy a <b>specific part of the nervous system</b> — a nerve's myelin, a brain region, or the motor neurons. Knowing <b>what</b> is lost explains the symptoms. Click each.</div>
+</header>
+<div class="wrap">
+  <div>
+    <div class="card">
+      <h2>What breaks down</h2>
+      <div class="desc">The highlighted structure is what this disease destroys.</div>
+      <svg id="art" viewBox="0 0 300 280" aria-label="neuro disease"></svg>
+      <div id="liveCap">Pick a disease.</div>
+    </div>
+  </div>
+  <div>
+    <div id="stage">Pick a disease<small>tap to learn</small></div>
+    <div class="card">
+      <div class="btns" id="btns">
+        <button class="nb on" data-d="gbs">Guillain-Barré<small>PNS myelin ↑</small></button>
+        <button class="nb" data-d="hunt">Huntington's<small>chorea</small></button>
+        <button class="nb" data-d="alz">Alzheimer's<small>plaques</small></button>
+        <button class="nb" data-d="park">Parkinson's<small>dopamine</small></button>
+        <button class="nb" data-d="ms">MS<small>CNS myelin</small></button>
+        <button class="nb" data-d="als">ALS<small>motor neurons</small></button>
+      </div>
+    </div>
+    <div class="card" style="margin-top:16px;"><h2>What's happening</h2><div id="info"></div></div>
+  </div>
+</div>
+<script>
+(function(){
+  const $=id=>document.getElementById(id); let cur='gbs';
+  const INFO={
+    gbs:{name:'Guillain-Barré Syndrome',color:'#3a8a6a',art:'nerve',
+      plain:'An ascending attack that strips the myelin off peripheral nerves — often after a viral infection.',
+      story:'<b>Demyelination of the peripheral nervous system</b>, usually triggered <b>after a viral infection</b>. Weakness and tingling start in the feet and <b>climb upward (ascending)</b>. If it reaches the chest, it threatens <b>breathing</b>.',
+      ss:'Ascending tingling &amp; weakness; risk of respiratory failure, slurred speech, paralysis.'},
+    hunt:{name:"Huntington's Disease",color:'#a5442a',art:'brain',
+      plain:'An inherited brain disease causing uncontrollable movements and dementia in mid-life.',
+      story:'An <b>inherited (autosomal dominant)</b> disorder — if a parent has it, there\'s a 50% chance. Brings <b>chorea</b> (involuntary dance-like movements of arms, legs, face), progressive <b>cognitive loss and dementia</b>, and emotional swings. Onset in the <b>30s–40s</b>. <b>No cure.</b>',
+      ss:'Chorea, memory loss, dementia, emotional lability; onset 30s–40s.'},
+    alz:{name:"Alzheimer's Disease",color:'#7a5aa0',art:'brain',
+      plain:'Amyloid plaques build up in the brain, progressively erasing memory and personality.',
+      story:'<b>Amyloid plaques</b> accumulate in the brain, causing <b>progressive, incurable</b> memory loss and personality change. Remember the <b>5 A\'s</b>: <b>A</b>praxia, <b>A</b>nomia, <b>A</b>mnesia, <b>A</b>gnosia, <b>A</b>phasia.',
+      ss:'5 A\'s: Apraxia, Anomia, Amnesia, Agnosia, Aphasia.'},
+    park:{name:"Parkinson's Disease",color:'#4a6a9a',art:'brain',
+      plain:'Loss of dopamine-making cells in the substantia nigra, causing tremor and slow, stiff movement.',
+      story:'Death of <b>dopamine-producing cells in the substantia nigra</b> leads to movement problems: <b>bradykinesia</b> (slow movement), <b>resting tremor</b>, <b>rigid muscles</b>, a <b>shuffling gait</b>, and a <b>stooped posture</b>.',
+      ss:'Bradykinesia, resting tremor, rigidity, shuffling gait, stooped posture.'},
+    ms:{name:'Multiple Sclerosis (MS)',color:'#3a86b0',art:'nerve',
+      plain:'Progressive destruction of myelin in the central nervous system — cause unknown.',
+      story:'<b>Progressive destruction of the myelin sheath in the CNS</b> (brain &amp; spinal cord), of <b>unknown cause</b>. Because myelin can be lost anywhere, symptoms are scattered and variable.',
+      ss:'Fatigue, vision loss, incontinence, balance/gait issues, cognitive loss.'},
+    als:{name:'ALS (Lou Gehrig\'s)',color:'#8a5a3a',art:'body',
+      plain:'Progressive loss of motor neurons — the body wastes away while the mind stays sharp.',
+      story:'<b>Progressive loss of motor neurons</b> and skeletal muscle. Muscles waste and paralysis spreads, eventually affecting breathing and swallowing. Crucially, there\'s <b>no brain impact</b> — <b>cognition and sensation stay intact</b>.',
+      ss:'Muscle wasting, progressive paralysis, respiratory/swallowing decline. Cognition INTACT.'}
+  };
+  function draw(){ const st=cur,inf=INFO[st],C=inf.color; let s='';
+    if(inf.art==='brain'){ s+='<path d="M150 40 c-40 0 -56 40 -34 60 c-14 22 12 44 34 44 c22 0 48 -22 34 -44 c22 -20 6 -60 -34 -60 Z" fill="#e0d4ee" stroke="#8a6aa0" stroke-width="2.5"/>';
+      // gyri
+      s+='<path d="M120 70 q14 10 30 -2 q16 12 30 0 M116 100 q16 12 34 0 q16 12 34 -2 M124 128 q14 10 28 0" fill="none" stroke="#a888c0" stroke-width="2"/>';
+      if(st==='park'){ s+='<circle class="hot" cx="150" cy="120" r="9" fill="'+C+'"/><text x="150" y="165" text-anchor="middle" font-size="9.5" font-weight="700" fill="'+C+'">substantia nigra: ↓ dopamine</text>'; }
+      else if(st==='alz'){ for(let i=0;i<6;i++)s+='<circle class="hot" style="animation-delay:'+(i*0.15)+'s" cx="'+(122+ (i%3)*28)+'" cy="'+(78+Math.floor(i/3)*30)+'" r="5" fill="'+C+'"/>'; s+='<text x="150" y="165" text-anchor="middle" font-size="9.5" font-weight="700" fill="'+C+'">amyloid plaques scattered</text>'; }
+      else { s+='<circle class="hot" cx="150" cy="105" r="26" fill="'+C+'" opacity="0.3"/><text x="150" y="165" text-anchor="middle" font-size="9.5" font-weight="700" fill="'+C+'">brain: chorea + dementia</text>'; }
+    } else if(inf.art==='nerve'){ // a nerve with myelin segments
+      s+='<line x1="40" y1="120" x2="260" y2="120" stroke="#e8d0b8" stroke-width="6"/>';
+      for(let i=0;i<6;i++){ const dmg = (st==='ms' && (i%2===0)) || (st==='gbs');
+        s+='<rect class="'+(dmg?'hot':'')+'" x="'+(48+i*36)+'" y="108" width="26" height="24" rx="8" fill="'+(dmg?C:'#f0e0c8')+'" stroke="#c8a878" stroke-width="1.5"/>'; }
+      s+='<circle cx="40" cy="120" r="12" fill="#f0e0c8" stroke="#c8a878" stroke-width="2"/>';
+      s+='<text x="150" y="170" text-anchor="middle" font-size="9.5" font-weight="700" fill="'+C+'">'+(st==='gbs'?'PNS myelin stripped (ascending)':'CNS myelin destroyed (patchy)')+'</text>';
+    } else { // body / muscle wasting for ALS
+      s+='<circle cx="150" cy="40" r="22" fill="#f2d6c0" stroke="#d8b49a" stroke-width="2"/>';
+      s+='<path d="M128 64 L172 64 C182 68 184 86 182 106 L184 180 C184 194 172 200 150 200 C128 200 116 194 116 180 L118 106 C116 86 118 68 128 64 Z" fill="#e8c4a8" stroke="#d8b49a" stroke-width="2"/>';
+      s+='<path d="M118 92 L100 150 M182 92 L200 150" stroke="#d8b49a" stroke-width="8" stroke-linecap="round"/>';
+      s+='<path d="M136 200 L130 258 M164 200 L170 258" stroke="#d8b49a" stroke-width="10" stroke-linecap="round"/>';
+      s+='<circle class="hot" cx="150" cy="30" r="26" fill="#8fd0c8" opacity="0.5"/><text x="150" y="30" text-anchor="middle" font-size="8" font-weight="700" fill="#2f7d6a">mind OK</text>';
+      s+='<text x="150" y="240" text-anchor="middle" font-size="9.5" font-weight="700" fill="'+C+'">muscles waste, cognition intact</text>';
+    }
+    $('art').innerHTML=s;
+  }
+  function render(){ const inf=INFO[cur]; draw();
+    document.querySelectorAll('.nb').forEach(b=>b.classList.toggle('on',b.dataset.d===cur));
+    $('stage').style.background=inf.color; $('stage').innerHTML=inf.name+'<small>'+(inf.art==='brain'?'brain':inf.art==='nerve'?'myelin / nerve':'motor neurons')+'</small>';
+    $('info').innerHTML='<div class="n">'+inf.name+'</div><div class="plain">'+inf.plain+'</div><div class="story">'+inf.story+'</div><div class="ss"><b>Signs:</b> '+inf.ss+'</div>';
+    $('liveCap').innerHTML='<b>'+inf.name+'</b> — '+inf.plain;
+  }
+  document.querySelectorAll('.nb').forEach(b=>b.addEventListener('click',()=>{ cur=b.dataset.d; render(); }));
+  render();
+})();
+</script>
+</body>
+</html>

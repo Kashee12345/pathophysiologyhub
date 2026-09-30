@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f7f2ea">
+<title>Nephron Explorer — How the Kidney Filters</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{ --bg:#f6f1e8; --card:#fffdf8; --ink:#2a2420; --muted:#7a6f63; --line:#e3d8c6;
+    --sans:'Inter',system-ui,sans-serif; --disp:'Cinzel Decorative',serif; }
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  body{background:linear-gradient(160deg,#faf6ee,#eee7d6);color:var(--ink);font-family:var(--sans);min-height:100vh;padding:18px 16px 44px;}
+  header{max-width:1120px;margin:0 auto 16px;text-align:center;}
+  h1{font-family:var(--disp);font-weight:900;font-size:clamp(22px,4.2vw,36px);color:#3a7a86;line-height:1.05;}
+  header .sub{color:var(--muted);font-size:15px;margin-top:4px;}
+  header .intro{max-width:840px;margin:10px auto 0;font-size:14.5px;line-height:1.5;color:#5c5248;}
+  header .intro b{color:#3a7a86;}
+  .wrap{max-width:1120px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;box-shadow:0 6px 22px rgba(40,110,120,.07);}
+  .card h2{font-family:var(--disp);font-weight:700;font-size:17px;color:#3a7a86;margin-bottom:6px;}
+  .card h2 + .desc{font-size:13px;color:var(--muted);margin-bottom:10px;line-height:1.4;}
+  svg{display:block;width:100%;height:auto;max-height:420px;}
+  .clk{cursor:pointer;}
+  @keyframes flowdash{to{stroke-dashoffset:-30}}
+  .flow{stroke-dasharray:9 9;animation:flowdash 1.3s linear infinite;}
+
+  #stage{border-radius:12px;padding:11px 14px;margin-bottom:12px;color:#fff;font-weight:700;font-size:17px;text-align:center;background:#3f8f9a;}
+  #stage small{display:block;font-weight:500;font-size:13px;opacity:.93;margin-top:2px;}
+  .seglist{display:flex;flex-direction:column;gap:7px;}
+  .segrow{display:flex;align-items:center;gap:10px;padding:9px 11px;border:1px solid var(--line);border-radius:10px;background:#fff;cursor:pointer;transition:.15s;}
+  .segrow:hover{background:#f2f9fa;} .segrow.on{border-color:var(--sc);background:color-mix(in srgb,var(--sc) 13%,#fff);}
+  .segrow .pip{width:14px;height:14px;border-radius:4px;background:var(--sc);flex:none;}
+  .segrow b{font-size:13.5px;} .segrow span{font-size:11.5px;color:var(--muted);}
+
+  #info{border:1px solid var(--line);border-left:5px solid #3a7a86;background:#f1f9fa;border-radius:10px;padding:12px 13px;margin-top:14px;}
+  #info .n{font-family:var(--disp);font-weight:700;font-size:18px;color:#3a7a86;}
+  #info .job{display:inline-block;font-size:12px;font-weight:700;padding:2px 10px;border-radius:20px;margin:6px 0;background:#dcefee;color:#22636a;}
+  #info .plain{font-size:14.5px;line-height:1.55;color:#2a2420;margin-top:8px;}
+
+  .tests{background:#f2f6f7;border:1px solid #cfe0e2;border-radius:11px;padding:12px 13px;font-size:13px;line-height:1.5;}
+  .tests .h{font-family:var(--disp);font-size:15px;color:#22636a;margin-bottom:5px;}
+  .tests b{color:#1c5058;} .tests .row{margin-top:7px;padding-top:7px;border-top:1px solid #dbe8e9;}
+  @media (max-width:880px){ .wrap{grid-template-columns:1fr;} }
+</style>
+</head>
+<body>
+<header>
+  <h1>Nephron Explorer</h1>
+  <div class="sub">How a single nephron cleans the blood · Week 11</div>
+  <div class="intro">Each kidney holds about a million <b>nephrons</b> — tiny filtering units. Blood is <b>filtered</b> at the glomerulus, then the good stuff is <b>reabsorbed</b> and wastes are <b>secreted</b> as the fluid travels down the tubule. Click each segment to follow the filtrate and see its job.</div>
+</header>
+
+<div class="wrap">
+  <div>
+    <div class="card">
+      <h2>Follow the filtrate</h2>
+      <div class="desc">Blood in at the glomerulus (red) → tubule → urine out at the bottom. Click any part.</div>
+      <svg id="nephron" viewBox="0 0 360 360" aria-label="nephron"></svg>
+    </div>
+  </div>
+  <div>
+    <div id="stage">Pick a segment<small>The five parts of a nephron</small></div>
+    <div class="card">
+      <h2>The parts of the nephron</h2>
+      <div class="seglist" id="seglist"></div>
+      <div id="info"></div>
+    </div>
+    <div class="card" style="margin-top:16px;">
+      <h2>Kidney function tests</h2>
+      <div class="desc">How we measure whether the nephrons are working:</div>
+      <div class="tests">
+        <div class="h">GFR — Glomerular Filtration Rate</div>The amount of blood filtered per minute — the <b>best single measure</b> of kidney function. It <b>falls</b> as kidneys fail (end-stage CKD → very low GFR).
+        <div class="row"><b>Creatinine</b> — a waste product from muscle breakdown that the kidney clears. As GFR drops, creatinine <b>rises</b> → it's used to <b>stage</b> kidney disease.</div>
+        <div class="row"><b>BUN (Blood Urea Nitrogen)</b> — urea from protein breakdown; it also <b>rises</b> when the kidneys can't clear it.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const $=id=>document.getElementById(id);
+  let cur='glom';
+  const SEG={
+    glom:{name:'Glomerulus & Bowman\'s capsule',job:'FILTRATION',color:'#d0524a',
+      plain:'Blood is filtered here. Water, salts, glucose, and small wastes are pushed into the tubule, while big proteins and blood cells stay in the blood. The speed of this filtering is the <b>GFR</b>.'},
+    pct:{name:'Proximal Convoluted Tubule',job:'REABSORPTION (the workhorse)',color:'#e0932e',
+      plain:'The busiest segment — about <b>65%</b> of the filtrate is reclaimed here: nearly all the glucose and amino acids, and a huge amount of sodium and water go back into the blood.'},
+    loop:{name:'Loop of Henle',job:'WATER CONSERVATION',color:'#3fa66a',
+      plain:'Sets up the salty gradient that lets the kidney concentrate urine. The <b>descending</b> limb pulls out water; the <b>ascending</b> limb pumps out salt. This is how you make concentrated urine when dehydrated.'},
+    dct:{name:'Distal Convoluted Tubule',job:'FINE-TUNING (hormones)',color:'#8a54c0',
+      plain:'Hormones adjust the final balance here: <b>aldosterone</b> reabsorbs sodium (and dumps potassium), and the tubule secretes <b>H⁺ and K⁺</b> to control acid and electrolytes.'},
+    cd:{name:'Collecting Duct',job:'FINAL WATER CONTROL',color:'#3f6fd6',
+      plain:'The last stop. <b>ADH</b> decides how much water to reclaim — more ADH → more water reabsorbed → more concentrated urine. The finished urine then drains to the bladder.'}
+  };
+  const ORDER=['glom','pct','loop','dct','cd'];
+
+  // segment paths (thick colored tubes) + hit paths
+  const PATHS={
+    pct:'M96 70 q14 -14 28 0 t28 0 t24 6',
+    loop:'M176 76 L182 300 Q198 320 214 300 L220 96',
+    dct:'M220 96 q16 -12 30 0 t28 0 t22 6',
+    cd:'M300 108 L306 320'
+  };
+  function draw(){
+    let s='';
+    // afferent/efferent + glomerulus
+    s+='<path class="flow" d="M14 70 q30 0 46 0" fill="none" stroke="#d0524a" stroke-width="7" stroke-linecap="round"/>';
+    s+='<text x="14" y="58" font-size="10.5" font-weight="700" fill="#a53e37">blood in</text>';
+    // Bowman capsule
+    s+='<circle cx="70" cy="70" r="30" fill="#eef3f6" stroke="#c9d3dd" stroke-width="2"/>';
+    // glomerulus tuft
+    s+='<g class="clk" data-seg="glom"><circle cx="70" cy="70" r="22" fill="'+(cur==='glom'?'#e0453c':'#d0524a')+'" stroke="#9c4139" stroke-width="'+(cur==='glom'?3:2)+'"'+(cur==='glom'?' filter="drop-shadow(0 0 6px #f88)"':'')+'/><path d="M56 66 q8 -8 14 0 t14 0" fill="none" stroke="#fff" stroke-width="1.5" opacity="0.6"/></g>';
+    // tubule segments
+    ORDER.slice(1).forEach(k=>{ const on=cur===k;
+      s+='<path class="seg clk'+(' flow')+'" data-seg="'+k+'" d="'+PATHS[k]+'" fill="none" stroke="'+SEG[k].color+'" stroke-width="'+(on?13:9)+'" stroke-linecap="round" stroke-linejoin="round" opacity="'+(on?1:0.85)+'"'+(on?' filter="drop-shadow(0 0 6px '+SEG[k].color+')"':'')+'/>';
+    });
+    // labels
+    s+='<text x="70" y="112" text-anchor="middle" font-size="10" font-weight="700" fill="#8a4139">Glomerulus</text>';
+    s+='<text x="135" y="52" text-anchor="middle" font-size="10" font-weight="700" fill="#b0741a">PCT</text>';
+    s+='<text x="170" y="200" text-anchor="end" font-size="10" font-weight="700" fill="#2f7d4a">Loop of Henle</text>';
+    s+='<text x="255" y="70" text-anchor="middle" font-size="10" font-weight="700" fill="#6a3f9a">DCT</text>';
+    s+='<text x="322" y="220" font-size="10" font-weight="700" fill="#2f5abf">Collecting</text><text x="322" y="232" font-size="10" font-weight="700" fill="#2f5abf">duct</text>';
+    // urine out
+    s+='<path d="M306 320 l0 20" stroke="#e6b34d" stroke-width="9" stroke-linecap="round"/><text x="306" y="356" text-anchor="middle" font-size="10.5" font-weight="700" fill="#8a6a2a">urine → bladder</text>';
+    $('nephron').innerHTML=s;
+    $('nephron').querySelectorAll('.clk').forEach(el=>el.addEventListener('click',()=>{cur=el.dataset.seg;render();}));
+  }
+  function render(){
+    draw();
+    $('seglist').innerHTML=ORDER.map(k=>{const g=SEG[k];
+      return '<div class="segrow'+(k===cur?' on':'')+'" data-seg="'+k+'" style="--sc:'+g.color+'"><span class="pip"></span><div><b>'+g.name+'</b> <span>— '+g.job.split(' (')[0]+'</span></div></div>';}).join('');
+    $('seglist').querySelectorAll('.segrow').forEach(r=>r.addEventListener('click',()=>{cur=r.dataset.seg;render();}));
+    const g=SEG[cur];
+    $('stage').style.background=g.color; $('stage').innerHTML=g.name+'<small>'+g.job+'</small>';
+    $('info').innerHTML='<div class="n">'+g.name+'</div><div class="job">'+g.job+'</div><div class="plain">'+g.plain+'</div>';
+  }
+  render();
+})();
+</script>
+</body>
+</html>

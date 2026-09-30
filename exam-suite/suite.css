@@ -1,0 +1,111 @@
+/* Final Exam Suite · shared styling (matches the hub) */
+:root{
+  --ink:#1f2d33; --muted:#7c8990; --faint:#9aa6ac; --line:#e8edef; --bg:#f8fafa; --card:#fff;
+  --accent:#0c7283; --accent-dk:#0c3a44; --accent-lt:#eef5f6; --gold:#c79234; --gold-lt:#f6efe0;
+  --ok:#1e7a57; --ok-lt:#eef7f1; --bad:#b3392f; --bad-lt:#fdecea;
+  --shadow:0 1px 3px rgba(20,40,46,.05); --r:14px;
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{margin:0;font-family:"Inter",system-ui,Arial,sans-serif;color:var(--ink);background:var(--bg);
+     line-height:1.55;-webkit-font-smoothing:antialiased;}
+a{color:inherit;text-decoration:none;}
+.wrap{max-width:820px;margin:0 auto;padding:0 18px 80px;}
+
+/* top bar */
+.tbar{background:var(--card);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:50;}
+.tbar .ti{max-width:820px;margin:0 auto;padding:11px 18px;display:flex;align-items:center;gap:12px;}
+.tbar .back{font-size:13px;font-weight:600;color:var(--accent);white-space:nowrap;}
+.tbar .back:hover{text-decoration:underline;}
+.tbar .tt{font-size:13.5px;font-weight:700;margin-left:2px;}
+.tbar .spacer{flex:1 1 auto;}
+.tbar .meta{font-size:12.5px;color:var(--faint);white-space:nowrap;}
+
+/* hero */
+.hero{text-align:center;padding:34px 18px 20px;}
+.hero .eyebrow{font-size:11px;letter-spacing:2.5px;font-weight:700;color:var(--accent);text-transform:uppercase;}
+.hero h1{font-family:"Fraunces",Georgia,serif;font-weight:600;font-size:34px;margin:8px 0 6px;letter-spacing:-.3px;}
+.hero p{margin:0 auto;max-width:620px;font-size:14.5px;color:var(--muted);}
+
+/* cards & buttons */
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);padding:18px 20px;margin:14px 0;}
+.btn{display:inline-block;border:none;cursor:pointer;font-family:inherit;font-weight:700;font-size:14px;
+     padding:11px 22px;border-radius:24px;background:var(--accent);color:#fff;box-shadow:0 4px 12px rgba(12,58,68,.18);}
+.btn:hover{filter:brightness(1.07);}
+.btn[disabled]{opacity:.45;cursor:not-allowed;filter:none;}
+.btn.ghost{background:var(--card);color:var(--accent);border:1.5px solid var(--accent);box-shadow:none;}
+.btn.gold{background:var(--gold);color:#3a2a08;}
+.btn.sm{font-size:12.5px;padding:8px 16px;}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;}
+
+/* question + options */
+.qtext{font-size:16.5px;font-weight:600;line-height:1.5;margin:4px 0 14px;}
+.opts{display:flex;flex-direction:column;gap:9px;}
+.opt{display:flex;gap:11px;align-items:flex-start;text-align:left;width:100%;cursor:pointer;font-family:inherit;
+     font-size:14.5px;line-height:1.5;color:var(--ink);background:var(--card);border:1.5px solid var(--line);
+     border-radius:11px;padding:12px 14px;transition:border-color .12s,background .12s;}
+.opt:hover:not(:disabled){border-color:var(--accent);background:var(--accent-lt);}
+.opt:disabled{cursor:default;}
+.opt .k{flex:0 0 auto;width:23px;height:23px;border-radius:6px;background:var(--accent-lt);color:var(--accent);
+        font-size:12px;font-weight:800;display:grid;place-items:center;margin-top:1px;}
+.opt.correct{border-color:var(--ok);background:var(--ok-lt);}
+.opt.correct .k{background:var(--ok);color:#fff;}
+.opt.wrong{border-color:var(--bad);background:var(--bad-lt);}
+.opt.wrong .k{background:var(--bad);color:#fff;}
+.opt.muted{opacity:.55;}
+.opt.chosen{box-shadow:0 0 0 2px rgba(12,114,131,.18);}
+
+/* rationale */
+.why{margin-top:13px;border-left:4px solid var(--ok);background:var(--ok-lt);border-radius:0 10px 10px 0;
+     padding:12px 15px;font-size:14px;line-height:1.6;}
+.why.miss{border-left-color:var(--bad);background:var(--bad-lt);}
+.why .vd{font-weight:800;font-size:12px;letter-spacing:.5px;text-transform:uppercase;color:var(--ok);display:block;margin-bottom:4px;}
+.why.miss .vd{color:var(--bad);}
+
+/* progress */
+.pbar{display:block;height:7px;border-radius:6px;background:var(--line);overflow:hidden;}
+.pbar > span{display:block;height:100%;background:var(--accent);transition:width .3s;}
+.pbar.gold span{background:var(--gold);}
+
+/* stats */
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:11px;margin:14px 0;}
+.tile{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:13px 15px;text-align:center;}
+.tile b{display:block;font-family:"Fraunces",Georgia,serif;font-size:25px;font-weight:600;color:var(--accent-dk);line-height:1.2;}
+.tile span{font-size:11.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;font-weight:600;}
+
+/* chips */
+.chip{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.4px;padding:3px 9px;border-radius:11px;
+      background:var(--accent-lt);color:var(--accent);}
+.chip.gold{background:var(--gold-lt);color:#8a6416;}
+.chip.ok{background:var(--ok-lt);color:var(--ok);}
+.chip.bad{background:var(--bad-lt);color:var(--bad);}
+.streak{font-size:13px;font-weight:700;color:var(--gold);}
+
+/* readiness rows */
+.wrow{display:flex;align-items:center;gap:12px;padding:9px 0;border-bottom:1px dashed var(--line);}
+.wrow:last-child{border-bottom:none;}
+.wrow .wlab{flex:0 0 auto;width:120px;font-size:13px;font-weight:600;}
+.wrow .wbar{flex:1 1 auto;min-width:0;display:block;}
+.wrow .wbar .sublab{display:block;font-size:11.5px;color:var(--faint);margin-top:3px;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.wrow .wpct{flex:0 0 auto;width:78px;text-align:right;font-size:12.5px;color:var(--muted);font-variant-numeric:tabular-nums;}
+
+/* tool grid */
+.tools{display:grid;grid-template-columns:repeat(auto-fit,minmax(238px,1fr));gap:12px;margin:14px 0;}
+.tool{display:flex;gap:13px;align-items:flex-start;background:var(--card);border:1px solid var(--line);
+      border-radius:var(--r);box-shadow:var(--shadow);padding:15px 16px;transition:transform .15s,border-color .15s;}
+.tool:hover{border-color:var(--accent);transform:translateY(-2px);}
+.tool .ico{flex:0 0 auto;width:44px;height:44px;border-radius:12px;display:grid;place-items:center;font-size:22px;background:var(--accent-lt);}
+.tool h3{margin:0 0 2px;font-size:15px;font-weight:700;}
+.tool p{margin:0;font-size:12.5px;color:var(--muted);line-height:1.45;}
+
+.sect{font-size:11.5px;letter-spacing:2px;text-transform:uppercase;color:var(--faint);font-weight:700;margin:26px 0 8px;}
+.note{font-size:13px;color:var(--muted);}
+.hide{display:none !important;}
+
+@media (max-width:600px){
+  .hero h1{font-size:27px;}
+  .wrow .wlab{width:88px;font-size:12px;}
+  .wrow .wpct{width:64px;}
+  .tbar .tt{display:none;}
+}

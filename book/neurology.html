@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0c3a44">
+<title>Neurology &mdash; Pathophysiology &middot; Dr. Akash Garg</title>
+<meta name="description" content="A student-friendly, exact pathophysiology chapter on the endocrine system — feedback loops, adrenal, thyroid, diabetes, growth hormone, and ADH — with the concept explained plainly and an interactive to play with in every section.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#22312f; --soft:#4a5a58; --muted:#7c8a88; --faint:#9aa8a6; --line:#e6e2d6;
+    --paper:#faf8f2; --card:#fffdf7; --accent:#0c7283; --accent-dk:#0c3a44; --gold:#b8862f;
+    --serif:"Source Serif 4",Georgia,"Times New Roman",serif; --disp:"Fraunces",Georgia,serif; --ui:"Inter",system-ui,sans-serif;
+    --shadow:0 1px 3px rgba(20,40,46,.06);
+  }
+  *{box-sizing:border-box;} html{scroll-behavior:smooth;}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--serif);font-size:18px;line-height:1.7;-webkit-font-smoothing:antialiased;}
+  a{color:var(--accent);text-decoration:none;} a:hover{text-decoration:underline;}
+
+  /* top bar + progress */
+  .topbar{position:sticky;top:0;z-index:50;background:rgba(250,248,242,.92);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid var(--line);}
+  .topbar .row{max-width:1120px;margin:0 auto;padding:11px 20px;display:flex;align-items:center;gap:14px;font-family:var(--ui);}
+  .topbar a.home{font-size:13.5px;font-weight:600;color:var(--soft);white-space:nowrap;}
+  .topbar a.home:hover{color:var(--accent);text-decoration:none;}
+  .topbar .ct{font-size:13px;color:var(--faint);font-weight:600;margin-left:auto;white-space:nowrap;}
+  .progress{height:3px;background:transparent;} .progress .bar{height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--gold));transition:width .1s;}
+
+  .layout{max-width:1120px;margin:0 auto;padding:0 20px;display:grid;grid-template-columns:230px 1fr;gap:30px;}
+  /* sidebar TOC */
+  aside{font-family:var(--ui);padding-top:34px;}
+  aside .toc{position:sticky;top:74px;}
+  aside .toc h4{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--faint);margin:0 0 12px;font-weight:700;}
+  aside .toc a{display:block;font-size:13.5px;color:var(--soft);padding:6px 10px;border-left:2px solid var(--line);line-height:1.35;}
+  aside .toc a:hover{color:var(--accent);text-decoration:none;border-left-color:var(--accent);}
+  aside .toc a.on{color:var(--accent-dk);font-weight:700;border-left-color:var(--gold);background:#f3efe3;border-radius:0 8px 8px 0;}
+
+  .reading{max-width:1040px;padding:30px 0 70px;min-width:0;}
+  .reading .col{max-width:718px;}
+  /* opener */
+  .kicker{font-family:var(--ui);font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);font-weight:700;}
+  h1{font-family:var(--disp);font-weight:600;font-size:clamp(32px,5.2vw,46px);line-height:1.08;letter-spacing:-.5px;color:var(--accent-dk);margin:10px 0 6px;max-width:718px;}
+  .lede{font-size:20px;line-height:1.6;color:var(--soft);max-width:718px;margin:14px 0 0;}
+  h2{font-family:var(--disp);font-weight:600;font-size:27px;letter-spacing:-.3px;color:var(--accent-dk);margin:52px 0 4px;scroll-margin-top:70px;max-width:718px;}
+  h2 .num{font-family:var(--ui);font-size:13px;font-weight:700;color:var(--gold);letter-spacing:1px;display:block;margin-bottom:4px;text-transform:uppercase;}
+  h3{font-family:var(--disp);font-weight:600;font-size:20px;color:var(--accent-dk);margin:26px 0 2px;max-width:718px;}
+  p{margin:14px 0;max-width:718px;} p b,li b{color:var(--accent-dk);font-weight:600;}
+  .reading ul,.reading ol{max-width:718px;padding-left:24px;} .reading li{margin:7px 0;}
+
+  .objectives{max-width:718px;background:#f2efe4;border:1px solid #e4ddc8;border-radius:14px;padding:18px 22px;margin:24px 0;font-family:var(--ui);}
+  .objectives h4{margin:0 0 8px;font-size:12px;letter-spacing:1px;text-transform:uppercase;color:var(--gold);font-weight:700;}
+  .objectives ul{margin:0;padding-left:20px;} .objectives li{font-size:14.5px;line-height:1.5;color:var(--soft);margin:6px 0;font-family:var(--serif);}
+
+  .kp{max-width:718px;background:#eef5f6;border:1px solid #d3e5e7;border-left:5px solid var(--accent);border-radius:0 12px 12px 0;padding:14px 20px;margin:22px 0;font-family:var(--ui);}
+  .kp .t{font-size:11.5px;letter-spacing:1px;text-transform:uppercase;color:var(--accent-dk);font-weight:700;margin-bottom:6px;}
+  .kp ul{margin:0;padding-left:18px;} .kp li{font-size:14.5px;line-height:1.55;color:var(--ink);margin:5px 0;font-family:var(--serif);}
+  .pearl{max-width:718px;background:#fbf3e2;border:1px solid #ecd9ac;border-left:5px solid var(--gold);border-radius:0 12px 12px 0;padding:13px 20px;margin:22px 0;font-family:var(--serif);font-size:15px;line-height:1.6;color:#6a5320;}
+  .pearl b{color:#5a4212;}
+
+  /* interactive embed (breaks out wider than prose) */
+  .embed{max-width:1040px;margin:26px 0 30px;}
+  .embed .cap{font-family:var(--ui);font-size:12.5px;font-weight:600;color:var(--muted);margin:0 0 8px;display:flex;align-items:center;gap:8px;}
+  .embed .cap .tag{background:var(--accent);color:#fff;font-size:10.5px;letter-spacing:.5px;text-transform:uppercase;font-weight:700;padding:3px 9px;border-radius:20px;}
+  .embed .frame{border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:0 8px 26px rgba(20,40,46,.09);background:#fff;}
+  .embed iframe{display:block;width:100%;height:640px;border:0;}
+  .embed .cap a{font-family:var(--ui);margin-left:auto;font-size:12.5px;font-weight:600;}
+
+  /* summary + quiz */
+  .summary{max-width:718px;background:var(--accent-dk);color:#eaf3f4;border-radius:16px;padding:24px 26px;margin:50px 0 30px;font-family:var(--serif);}
+  .summary h2{color:#fff;margin:0 0 6px;font-size:24px;}
+  .summary ul{margin:10px 0 0;padding-left:20px;} .summary li{margin:8px 0;font-size:15.5px;line-height:1.55;color:#dcebec;}
+  .summary li b{color:#fff;}
+  .quiz{max-width:718px;margin:36px 0;}
+  .quiz h2{margin-top:0;}
+  .q{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 20px;margin:12px 0;box-shadow:var(--shadow);}
+  .q .qq{font-weight:600;color:var(--accent-dk);font-family:var(--serif);}
+  .q button{margin-top:10px;font-family:var(--ui);font-size:13px;font-weight:700;color:var(--accent);background:#eef5f6;border:1px solid #d3e5e7;border-radius:20px;padding:7px 15px;cursor:pointer;}
+  .q button:hover{background:#e2eff0;}
+  .q .ans{display:none;margin-top:12px;padding-top:12px;border-top:1px dashed var(--line);font-size:15.5px;color:var(--soft);}
+  .q .ans .a{font-weight:700;color:var(--accent-dk);}
+  .q.show .ans{display:block;} .q.show button{display:none;}
+
+  .chapnav{max-width:718px;display:flex;justify-content:space-between;gap:12px;margin:44px 0 0;font-family:var(--ui);}
+  .chapnav a,.chapnav span{flex:1;border:1px solid var(--line);border-radius:12px;padding:14px 16px;font-size:13.5px;background:var(--card);}
+  .chapnav a{color:var(--accent-dk);font-weight:600;} .chapnav a:hover{border-color:var(--accent);text-decoration:none;}
+  .chapnav .k{display:block;font-size:11px;color:var(--faint);text-transform:uppercase;letter-spacing:.5px;margin-bottom:2px;}
+  .chapnav .next{text-align:right;} .chapnav .disabled{color:var(--faint);}
+
+  footer{font-family:var(--ui);text-align:center;color:var(--faint);font-size:12.5px;border-top:1px solid var(--line);padding:26px 20px 50px;margin-top:30px;}
+  footer b{color:var(--soft);}
+
+  @media(max-width:860px){
+    .layout{grid-template-columns:1fr;gap:0;}
+    aside{padding-top:16px;} aside .toc{position:static;}
+    aside .toc{border:1px solid var(--line);border-radius:12px;padding:12px 14px;background:var(--card);}
+    aside .toc a{border-left:none;padding:6px 4px;}
+    aside .toc a.on{background:none;}
+    .reading{padding-top:16px;}
+    .embed iframe{height:660px;}
+  }
+
+  /* comparison tables */
+  .ctwrap{max-width:718px;overflow-x:auto;margin:22px 0;-webkit-overflow-scrolling:touch;}
+  table.ctable{border-collapse:collapse;width:100%;min-width:520px;font-family:var(--ui);font-size:14px;background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden;}
+  table.ctable th,table.ctable td{text-align:left;padding:10px 13px;border-bottom:1px solid var(--line);vertical-align:top;line-height:1.45;}
+  table.ctable thead th{background:#eef5f6;color:var(--accent-dk);font-weight:700;font-size:12.5px;letter-spacing:.3px;}
+  table.ctable tbody tr:last-child td{border-bottom:none;}
+  table.ctable td:first-child,table.ctable th:first-child{font-weight:600;color:var(--soft);white-space:nowrap;}
+  table.ctable td b{color:var(--accent-dk);font-weight:600;}
+  /* glossary */
+  dl.terms{max-width:718px;margin:18px 0;}
+  dl.terms dt{font-family:var(--ui);font-weight:700;color:var(--accent-dk);font-size:15px;margin-top:15px;}
+  dl.terms dd{margin:3px 0 0;color:var(--soft);}
+  /* flashcard drill widget */
+  .fc{max-width:718px;margin:20px 0;}
+  .fc-card{perspective:1600px;height:236px;cursor:pointer;margin-bottom:14px;}
+  .fc-inner{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform .55s cubic-bezier(.4,.2,.2,1);}
+  .fc-card.flip .fc-inner{transform:rotateY(180deg);}
+  .fc-face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border:1px solid var(--line);border-radius:16px;padding:26px 30px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:12px;box-shadow:0 8px 26px rgba(20,40,46,.09);overflow:auto;}
+  .fc-front{background:linear-gradient(180deg,#fffdf7,#eef5f6);}
+  .fc-back{background:linear-gradient(180deg,#fbf3e2,#f3e6c9);transform:rotateY(180deg);border-color:#e6d3a6;}
+  .fc-side{position:absolute;top:12px;left:16px;font-family:var(--ui);font-size:10px;font-weight:800;letter-spacing:1.3px;text-transform:uppercase;color:var(--faint);}
+  .fc-back .fc-side{color:var(--gold);}
+  .fc-q{font-family:var(--disp);font-weight:600;font-size:19px;line-height:1.35;color:var(--accent-dk);}
+  .fc-a{font-family:var(--serif);font-weight:600;font-size:17px;line-height:1.45;color:var(--ink);}
+  .fc-hint{position:absolute;bottom:11px;left:0;right:0;font-family:var(--ui);font-size:11.5px;color:var(--faint);}
+  .fc-nav{display:flex;gap:9px;align-items:center;}
+  .fc-count{flex:1;text-align:center;font-family:var(--ui);font-size:13px;color:var(--muted);font-weight:600;}
+  .fc-btn{font-family:var(--ui);font-size:13px;font-weight:700;color:var(--accent);background:#eef5f6;border:1px solid #d3e5e7;border-radius:20px;padding:8px 13px;cursor:pointer;}
+  .fc-btn:hover{background:#e2eff0;}
+  .fc-full{display:block;margin-top:14px;text-align:center;font-family:var(--ui);font-size:13.5px;font-weight:700;background:var(--accent-dk);color:#eaf3f4;border-radius:12px;padding:12px;}
+  .fc-full:hover{text-decoration:none;filter:brightness(1.12);}
+</style>
+</head>
+<body>
+
+
+  <div class="topbar">
+    <div class="row">
+      <a class="home" href="index.html">📖 Contents</a>
+      
+      <span class="ct">Week 5 · Neurology</span>
+    </div>
+    <div class="progress"><div class="bar" id="bar"></div></div>
+  </div>
+
+  <div class="layout">
+    <aside>
+      <nav class="toc">
+        <h4>In this chapter</h4>
+        <a href="#w5_stroke" class="on">1 · Stroke</a>
+        <a href="#w5_icp">2 · Raised ICP</a>
+        <a href="#w5_trauma">3 · Brain &amp; cord injury</a>
+        <a href="#w5_seizure">4 · Seizures</a>
+        <a href="#w5_neurodeg">5 · Neurodegenerative</a>
+        <a href="#w5_nmj">6 · Neuromuscular</a>
+        <a href="#summary">The chapter in one breath</a>
+        <a href="#glossary">Words worth knowing</a>
+        <a href="#cards">Flashcards</a>
+        <a href="#quiz">Check yourself</a>
+      </nav>
+    </aside>
+
+    <main class="reading">
+      <div class="kicker">Pathophysiology · Week 5</div>
+      <h1>Neurology</h1>
+      <p class="lede">The nervous system is the body&rsquo;s command center, and when it fails the stakes are immediate &mdash; minutes decide the outcome of a stroke, and a rising pressure inside the skull can be lethal. This chapter walks the major neurologic emergencies and diseases: <b>stroke</b>, <b>raised intracranial pressure</b>, head and spinal trauma, seizures, and the slow diseases that erode the brain and nerves.</p>
+      <div class="objectives">
+        <h4>By the end of this chapter you can</h4>
+        <ul>
+          <li>Distinguish <b>ischemic</b> from <b>hemorrhagic</b> stroke and apply <b>FAST</b>.</li>
+          <li>Explain raised intracranial pressure, the <b>Monro-Kellie</b> doctrine, and <b>Cushing&rsquo;s triad</b>.</li>
+          <li>Compare <b>epidural</b> and <b>subdural</b> hematoma, and locate spinal-cord-injury risks.</li>
+          <li>Describe seizure types and <b>status epilepticus</b>, and seizure safety.</li>
+          <li>Contrast Alzheimer, Parkinson, MS, myasthenia gravis, and Guillain-Barre.</li>
+        </ul>
+      </div>
+
+      <h2 id="w5_stroke"><span class="num">Section 1</span>Stroke</h2>
+<figure class="bref" data-sec="1" style="max-width:1040px;margin:10px 0 24px;padding:0;"><div style="border:1px solid #e6e2d6;border-radius:16px;overflow:hidden;background:#fffdf7;box-shadow:0 8px 26px rgba(20,40,46,.09);"><img src="img/neurology_s1.jpg" alt="Stroke reference figure" loading="lazy" style="display:block;width:100%;height:auto;background:#fff;" onerror="this.closest('figure').style.display='none'"></div><figcaption style="font-family:Inter,system-ui,sans-serif;font-size:12.5px;color:#7c8a88;margin-top:8px;line-height:1.5;"><b style="color:#0c3a44;">Reference.</b> Stroke <span style="color:#9aa8a6;">&mdash; Goleisureintl, CC BY 4.0 (via Wikimedia Commons)</span></figcaption></figure>
+
+
+      <p>Your brain is the hungriest organ you have. It makes up only about 2 percent of your body weight, yet it demands roughly 20 percent of your oxygen and glucose, and it has almost no way to store fuel of its own. That means brain tissue depends on a <em>constant</em>, second-by-second delivery of oxygen-rich blood through the carotid and vertebral arteries. When that delivery stops, neurons cannot switch to a backup plan the way muscle can. Within minutes they begin to fail, and soon after, they begin to die. A <b>stroke</b> (also called a <b>cerebrovascular accident, or CVA</b>) is exactly this: a sudden interruption of blood flow to part of the brain, causing that region to lose function.</p>
+
+<h3>Two ways the flow fails: ischemic vs hemorrhagic</h3>
+<p>There are two fundamentally different problems that can starve brain tissue, and telling them apart drives everything you do next. Explore the interactive figure below to see them side by side.</p>
+<p>An <b>ischemic stroke</b> is a <em>plumbing blockage</em>. A vessel gets clogged and the tissue downstream is cut off. This is by far the most common type, making up about <b>80 percent</b> of strokes. The clog comes in two flavors: a <b>thrombotic</b> stroke, where a clot forms right there on top of atherosclerotic plaque in a cerebral artery, and an <b>embolic</b> stroke, where a clot (often a fragment thrown from the heart during atrial fibrillation) travels through the bloodstream and lodges in a smaller brain vessel.</p>
+<p>A <b>hemorrhagic stroke</b> is the opposite mechanism: a <em>leak</em>. A weakened or overstretched vessel ruptures and bleeds into or around the brain. Now there are two injuries happening at once. The tissue past the rupture is deprived of flow, <em>and</em> the escaping blood forms a mass that raises intracranial pressure and irritates surrounding tissue. Chronic hypertension and ruptured aneurysms are common culprits. Hemorrhagic strokes are less common but often more deadly.</p>
+
+<div class="ctwrap"><table class="ctable"><thead><tr><th>Feature</th><th>Ischemic (~80%)</th><th>Hemorrhagic</th></tr></thead><tbody><tr><td>Core problem</td><td>Blockage (clot cuts off flow)</td><td>Bleed (vessel ruptures)</td></tr><tr><td>Common causes</td><td>Atherosclerosis (thrombotic), A-fib emboli (embolic)</td><td>Hypertension, ruptured aneurysm</td></tr><tr><td>Clot-buster tPA</td><td>Can help if given in time</td><td>Absolutely contraindicated</td></tr><tr><td>Typical headache</td><td>Often mild or absent</td><td>Often sudden, severe ("worst of my life")</td></tr></tbody></table></div>
+
+<h3>The penumbra, and why time is brain</h3>
+<p>When an artery blocks, the tissue in the very center of the blocked zone dies quickly. But surrounding that dead core is a rim of tissue called the <b>ischemic penumbra</b>. These neurons are starving and silent, so they have stopped working, but they are <em>not yet dead</em>. They are being kept barely alive by trickles of blood from neighboring vessels. This penumbra is the whole reason we rush. If we can restore flow fast, penumbra neurons can wake back up and the deficit can shrink. If we wait, that salvageable rim converts into permanent dead tissue.</p>
+<p>Clinicians estimate the brain loses roughly <b>1.9 million neurons every minute</b> an ischemic stroke goes untreated. That staggering rate is the reason for the mantra <b>time is brain</b>. Every minute of delay is literally brain tissue you cannot get back.</p>
+
+<div class="pearl"><b>Sudden and one-sided is the clue.</b> Stroke symptoms appear abruptly, not gradually, and usually affect one side of the body or one function. A deficit that came on over seconds to minutes should make you think stroke until proven otherwise.</div>
+
+<h3>Recognizing it fast: FAST</h3>
+<p>Because minutes matter, nurses and the public are taught a simple screen called <b>FAST</b>:</p>
+<ul>
+<li><b>F - Face:</b> Ask the person to smile. Does one side droop?</li>
+<li><b>A - Arm:</b> Ask them to raise both arms. Does one drift downward?</li>
+<li><b>S - Speech:</b> Is speech slurred, absent, or strange? Can they repeat a simple sentence?</li>
+<li><b>T - Time:</b> If <em>any</em> of these are present, note the time symptoms began and call for emergency help immediately.</li>
+</ul>
+<p>That last letter is easy to gloss over but it may be the most important. Treatment eligibility depends entirely on knowing <em>when the patient was last known well</em>.</p>
+
+<h3>Why the CT scan comes before the clot-buster</h3>
+<p>The main clot-dissolving drug is <b>tPA (tissue plasminogen activator, also called alteplase)</b>. It works beautifully on a clot, but it is a clot-dissolving (thrombolytic) drug. If the stroke were actually a <em>bleed</em>, giving tPA would pour fuel on a fire, dramatically worsening the hemorrhage. Here is the catch: ischemic and hemorrhagic strokes can look identical at the bedside. You cannot tell them apart by symptoms alone.</p>
+<p>That is why an emergency <b>non-contrast CT scan of the head</b> is done first, every time. Its main job is to rule out a bleed. Only once blood is excluded can tPA be considered, and only within a strict window, usually within <b>3 to 4.5 hours</b> of symptom onset for eligible patients. Some patients may also qualify for a mechanical <b>thrombectomy</b>, where the clot is physically pulled out, within a longer window.</p>
+
+<h3>Which side, which deficit</h3>
+<p>Because motor nerve tracts cross over in the lower medulla (the pyramidal decussation), a stroke on one side of the brain produces weakness on the <b>opposite (contralateral)</b> side of the body. A right-brain stroke causes left-sided weakness, and vice versa. Language adds another wrinkle: in most people the language centers live in the <b>left hemisphere</b>. So a <b>left-brain stroke</b> often produces <b>aphasia</b>, difficulty producing or understanding language, along with right-sided weakness. A right-brain stroke more often spares speech but may cause left-sided neglect, where the patient ignores their affected side entirely.</p>
+
+<div class="pearl"><b>Left brain talks.</b> If a patient suddenly cannot find words or cannot understand you, think left hemisphere, and look for right-sided weakness to confirm the pattern.</div>
+
+      <div class="embed">
+        <div class="cap"><span class="tag">Interactive</span> Compare an ischemic clot with a hemorrhagic bleed. <a href="../patho/Stroke.html" target="_blank" rel="noopener">Open full &uarr;</a></div>
+        <div class="frame"><iframe src="../patho/Stroke.html" loading="lazy" title="Stroke interactive"></iframe></div>
+      </div>
+      <div class="kp"><div class="t">Key points</div><ul><li><b>Ischemic strokes (~80%)</b> are blockages, thrombotic or embolic; <b>hemorrhagic strokes</b> are bleeds. The treatment for one would harm the other.</li><li>The <b>ischemic penumbra</b> is salvageable tissue around the dead core. Restoring flow fast can rescue it, which is why <b>time is brain</b>.</li><li>Screen quickly with <b>FAST</b>: Face droop, Arm drift, Speech trouble, Time to call for help and note onset.</li><li>A <b>non-contrast CT must rule out a bleed</b> before tPA, because the clot-buster would worsen a hemorrhage; tPA is usually given within <b>3 to 4.5 hours</b> of onset.</li><li>Deficits are <b>contralateral</b> (opposite side); a <b>left-brain stroke</b> often causes <b>aphasia</b> plus right-sided weakness.</li></ul></div>
+
+      <h2 id="w5_icp"><span class="num">Section 2</span>Raised intracranial pressure</h2>
+<figure class="bref" data-sec="2" style="max-width:1040px;margin:10px 0 24px;padding:0;"><div style="border:1px solid #e6e2d6;border-radius:16px;overflow:hidden;background:#fffdf7;box-shadow:0 8px 26px rgba(20,40,46,.09);"><img src="img/neurology_s2.jpg" alt="Raised ICP reference figure" loading="lazy" style="display:block;width:100%;height:auto;background:#fff;" onerror="this.closest('figure').style.display='none'"></div><figcaption style="font-family:Inter,system-ui,sans-serif;font-size:12.5px;color:#7c8a88;margin-top:8px;line-height:1.5;"><b style="color:#0c3a44;">Reference.</b> Raised ICP <span style="color:#9aa8a6;">&mdash; Manu5, CC BY-SA 4.0 (via Wikimedia Commons)</span></figcaption></figure>
+
+
+      <p>Picture the brain as a delicate organ living inside a hard, sealed box: the <b>skull</b>. In a healthy person that box holds three things, and they share the space in a careful balance. There is the <b>brain tissue</b> itself (about 80% of the volume), the <b>blood</b> flowing through its vessels (about 10%), and the clear <b>cerebrospinal fluid (CSF)</b> that cushions and bathes it (about 10%). Because the skull cannot stretch, the total volume inside is fixed. The gentle pressure these three contents create is called the <b>intracranial pressure (ICP)</b>, and normally it sits around <em>5 to 15 mmHg</em>.</p>
+
+<h3>The Monro-Kellie doctrine: a box that cannot expand</h3>
+<p>The rule that governs all of this is the <b>Monro-Kellie doctrine</b>. It says that because the skull is a rigid, fixed container, the three volumes inside must add up to a constant. If one of them grows, another must shrink to make room, or the pressure will climb. At first the brain is clever about this. It buys time through <b>compensation</b>: it shunts CSF down into the spinal canal and squeezes some venous blood out of the skull. This is why a slowly growing problem can stay silent for a while. But this wiggle room is limited. Once those buffers are used up, even a tiny added volume causes the pressure to shoot up steeply. The patient falls off a <em>compensation cliff</em>, and small changes suddenly produce big, dangerous swings in ICP.</p>
+
+<h3>What raises the pressure</h3>
+<p>Anything that adds volume to that sealed box can raise ICP. The common culprits map neatly onto the three normal contents plus new intruders:</p>
+<ul>
+<li><b>Bleeding (hemorrhage)</b> - an epidural, subdural, subarachnoid, or intracerebral bleed adds a pool of blood that takes up space.</li>
+<li><b>Tumor (mass lesion)</b> - a growing mass literally crowds out brain, blood, and CSF.</li>
+<li><b>Cerebral edema</b> - swelling of the brain tissue itself, often after trauma, stroke, or infection, as fluid leaks into or around cells.</li>
+<li><b>Hydrocephalus</b> - a backup of CSF, either because too much is made, its flow is blocked, or it is not reabsorbed, so fluid accumulates in the ventricles.</li>
+</ul>
+
+<h3>The earliest warning: a change in consciousness</h3>
+<p>Here is the single most important nursing point. The <b>earliest and most sensitive sign of rising ICP is a change in level of consciousness (LOC)</b>. The brain's alertness centers are exquisitely sensitive to pressure and to falling oxygen delivery. So before anything dramatic happens, the patient becomes subtly <em>different</em>: restless, confused, harder to rouse, more drowsy, slower to answer, or newly agitated. Families often notice it first (<em>"she's just not herself"</em>). Trust that. A dropping <b>Glasgow Coma Scale (GCS)</b> score is your red flag long before the classic textbook signs appear. Do not wait for pupils to change.</p>
+
+<div class="pearl"><b>A subtle change beats a dramatic one.</b> A new confusion or a two-point GCS drop is an emergency you can still act on. By the time the late signs arrive, the window is closing.</div>
+
+<h3>Cushing's triad: the late, ominous sign</h3>
+<p>When the pressure inside the skull rises high enough to threaten blood flow to the brainstem, the body launches a last-ditch rescue. To keep pushing blood past the crushing pressure, it drives the <b>systolic blood pressure up</b>. Baroreceptors sense that surging pressure and reflexively slow the heart, producing <b>bradycardia</b>. Meanwhile the pressure squeezes the brainstem's respiratory centers, making breathing <b>irregular</b> (for example, Cheyne-Stokes). Together these three make up <b>Cushing's triad</b>. It is a <em>late</em> and grave finding that signals the brainstem is in trouble.</p>
+
+<div class="ctwrap"><table class="ctable"><thead><tr><th>Feature</th><th>Early rising ICP</th><th>Cushing's triad (late)</th></tr></thead><tbody>
+<tr><td>Consciousness</td><td>Subtle confusion, restlessness, drowsiness, falling GCS</td><td>Deeply obtunded or comatose</td></tr>
+<tr><td>Blood pressure</td><td>Often normal</td><td>Rising systolic with <b>widening pulse pressure</b></td></tr>
+<tr><td>Heart rate</td><td>Often normal</td><td><b>Bradycardia</b></td></tr>
+<tr><td>Breathing</td><td>Usually normal</td><td><b>Irregular</b> (e.g., Cheyne-Stokes)</td></tr>
+<tr><td>Meaning</td><td>Act now, still reversible</td><td>Brainstem compromise, herniation near</td></tr>
+</tbody></table></div>
+
+<div class="pearl"><b>Widening, not just rising.</b> Watch the gap between systolic and diastolic. A widening pulse pressure paired with a slowing heart is the classic ominous combination.</div>
+
+<h3>Herniation: the feared end result</h3>
+<p>If the pressure is not relieved, the brain is forced across its normal partitions - under the falx, across the tentorial notch, or down through the <b>foramen magnum</b> at the skull's base. This shifting of brain tissue across its normal boundaries is called <b>herniation</b>. As tissue is pushed downward it crushes the <b>brainstem</b>, which controls breathing, heart rate, and consciousness. The results are catastrophic: a fixed, dilated pupil on the affected side (from cranial nerve III compression), loss of protective reflexes, respiratory arrest, and death. Herniation is the dreaded destination of untreated intracranial hypertension, and everything above is about catching the problem long before this point. Explore the figure below to see how a growing volume drives the pressure up and pushes the brain toward herniation.</p>
+
+      <div class="embed">
+        <div class="cap"><span class="tag">Interactive</span> Watch pressure climb inside the fixed space of the skull. <a href="../patho/IntracranialPressure.html" target="_blank" rel="noopener">Open full &uarr;</a></div>
+        <div class="frame"><iframe src="../patho/IntracranialPressure.html" loading="lazy" title="Intracranial pressure interactive"></iframe></div>
+      </div>
+      <div class="kp"><div class="t">Key points</div><ul>
+<li>The <b>Monro-Kellie doctrine</b>: the skull is a fixed box holding brain, blood, and CSF. When one volume grows, another must shrink or ICP rises. Compensation buys time, then fails sharply.</li>
+<li>Common causes are a <b>bleed, tumor, cerebral edema, or hydrocephalus</b> - anything that adds volume to the sealed skull.</li>
+<li>The <b>earliest sign is a change in level of consciousness</b> (restlessness, confusion, drowsiness, a falling GCS). Act on it early.</li>
+<li><b>Cushing's triad</b> - rising systolic BP with widening pulse pressure, bradycardia, and irregular breathing - is a <em>late, ominous</em> sign of brainstem compromise.</li>
+<li><b>Herniation</b>, brain tissue forced through the foramen magnum onto the brainstem, is the feared and often fatal end result.</li>
+</ul></div>
+
+      <h2 id="w5_trauma"><span class="num">Section 3</span>Brain &amp; spinal cord injury</h2>
+<figure class="bref" data-sec="3" style="max-width:1040px;margin:10px 0 24px;padding:0;"><div style="border:1px solid #e6e2d6;border-radius:16px;overflow:hidden;background:#fffdf7;box-shadow:0 8px 26px rgba(20,40,46,.09);"><img src="img/neurology_s3.jpg" alt="Brain & cord injury reference figure" loading="lazy" style="display:block;width:100%;height:auto;background:#fff;" onerror="this.closest('figure').style.display='none'"></div><figcaption style="font-family:Inter,system-ui,sans-serif;font-size:12.5px;color:#7c8a88;margin-top:8px;line-height:1.5;"><b style="color:#0c3a44;">Reference.</b> Brain & cord injury <span style="color:#9aa8a6;">&mdash; Servier Medical Art, CC BY 2.0 (via Wikimedia Commons)</span></figcaption></figure>
+
+
+      <p>Your brain is soft, delicate tissue floating inside a hard, unforgiving skull, cushioned by a thin layer of cerebrospinal fluid. That fluid normally acts like a shock absorber. But the skull that protects your brain from the outside world becomes a problem during trauma, because the brain can slam against the bone and there is nowhere for swelling to go. This is why head injuries are so dangerous: the box is sealed, and any extra blood or swelling raises pressure on the brain itself.</p>
+
+<h3>Concussion vs contusion, and the coup-contrecoup pattern</h3>
+<p>A <b>concussion</b> is a <em>functional</em> injury. The brain gets shaken hard enough to disrupt how neurons signal, but there is usually no visible bleeding or bruising on imaging. Patients often have a brief loss of consciousness, confusion, headache, and amnesia around the event. A <b>contusion</b> is a step worse: it is an actual <em>bruise</em> of brain tissue, with capillary bleeding and swelling you can often see on CT. Contusions can enlarge over hours, so serial neuro checks matter.</p>
+<p>Both are frequently caused by a <b>coup-contrecoup</b> injury. Picture a moving head striking a dashboard. The brain first bruises directly under the point of impact (the <em>coup</em>), then rebounds and slams into the opposite side of the skull (the <em>contrecoup</em>). One blow, two injured areas.</p>
+
+<h3>Bleeding between the layers: epidural vs subdural hematoma</h3>
+<p>Three membranes wrap the brain: the tough outer <b>dura mater</b>, the middle arachnoid, and the delicate pia mater against the brain. Where the bleeding collects, and what vessel is torn, changes how fast the patient crashes.</p>
+<p>An <b>epidural hematoma</b> is bleeding <em>above</em> the dura, classically from a torn <b>middle meningeal artery</b> after a temporal skull fracture. Because it is <em>arterial</em>, it fills fast under high pressure. The textbook picture is a <b>lucid interval</b>: the patient is knocked out, wakes up and seems fine, then rapidly deteriorates as the clot expands and compresses the brain. This is a neurosurgical emergency.</p>
+<p>A <b>subdural hematoma</b> is bleeding <em>below</em> the dura, from torn <em>bridging veins</em>. Because it is <em>venous</em>, it oozes slowly, so symptoms can take hours, days, or even weeks to appear. It is especially common in <b>older adults</b> and people with <b>chronic alcohol use</b>, because brain atrophy stretches those bridging veins and makes them fragile.</p>
+
+<div class="ctwrap"><table class="ctable"><thead><tr><th>Feature</th><th>Epidural hematoma</th><th>Subdural hematoma</th></tr></thead><tbody><tr><td>Vessel</td><td>Artery (middle meningeal)</td><td>Bridging veins</td></tr><tr><td>Speed</td><td>Fast, high pressure</td><td>Slow ooze</td></tr><tr><td>Classic clue</td><td>Lucid interval then decline</td><td>Gradual, fluctuating symptoms</td></tr><tr><td>Typical patient</td><td>Temporal skull fracture</td><td>Older adults, chronic alcohol use</td></tr></tbody></table></div>
+
+<div class="pearl"><b>Watch the pupil.</b> A fixed, dilated (blown) pupil on one side, with worsening consciousness, suggests the expanding clot is pushing the brain down and compressing cranial nerve III. That is a sign of herniation and demands immediate action.</div>
+
+<h3>Spinal cord injury by level</h3>
+<p>The spinal cord is the main data cable between brain and body. Where it is damaged determines what is lost <em>below</em> that point, because signals can no longer travel past the injury. As a rule, the <b>higher</b> the injury, the more of the body is affected.</p>
+<ul>
+<li><b>Lumbar/sacral injuries</b> may affect the legs, bladder, and bowel.</li>
+<li><b>Thoracic injuries</b> can cause <b>paraplegia</b>, loss of function in the legs and lower trunk.</li>
+<li><b>Cervical injuries</b> can cause <b>tetraplegia</b> (quadriplegia), affecting all four limbs.</li>
+</ul>
+<p>The scariest zone is the <b>high cervical cord</b>. The phrase students memorize is <em>"C3, C4, C5 keep the diaphragm alive."</em> The <b>phrenic nerve</b>, which drives the diaphragm, arises from these levels. An injury at or above C3-C5 can paralyze the diaphragm, so the patient cannot breathe on their own and needs immediate ventilatory support. This is why airway and breathing come first in any suspected cervical injury.</p>
+
+<div class="pearl"><b>Assume the worst until cleared.</b> Any trauma patient with a possible spine injury is immobilized, because an unstable cervical fracture can turn a survivable injury into permanent paralysis if the neck moves.</div>
+
+<h3>Two shock states to keep straight</h3>
+<p><b>Spinal shock</b> is the temporary loss of <em>all</em> reflexes, movement, and sensation below the injury right after trauma, a kind of neurological stunning that can last days to weeks. <b>Neurogenic shock</b> is a <em>circulatory</em> problem from losing sympathetic tone after a high injury, causing the classic triad of <b>hypotension, bradycardia, and warm dry skin</b>. Later, <b>autonomic dysreflexia</b> is a dangerous, exaggerated reflex in injuries at or above T6, usually triggered by a full bladder or bowel, causing a sudden dangerous spike in blood pressure that is a true emergency.</p>
+
+<p>Explore the interactive figure below to see how these head injuries take shape.</p>
+
+      <div class="embed">
+        <div class="cap"><span class="tag">Interactive</span> Explore concussion, contusion, and the bleeds between the skull and brain. <a href="../patho/HeadTrauma.html" target="_blank" rel="noopener">Open full &uarr;</a></div>
+        <div class="frame"><iframe src="../patho/HeadTrauma.html" loading="lazy" title="Head trauma interactive"></iframe></div>
+      </div>
+      <div class="kp"><div class="t">Key points</div><ul><li>Concussion is functional (no bleeding); contusion is a true bruise; coup-contrecoup injures both the impact site and the opposite side.</li><li>Epidural = arterial, fast, classic lucid interval; subdural = venous, slower, common in older adults and people with chronic alcohol use.</li><li>Higher spinal injuries affect more of the body; C3-C5 injuries threaten the phrenic nerve and diaphragm, so breathing is the priority.</li><li>Spinal shock = temporary loss of reflexes; neurogenic shock = hypotension with bradycardia; autonomic dysreflexia = dangerous BP spike at or above T6.</li></ul></div>
+
+      <h2 id="w5_seizure"><span class="num">Section 4</span>Seizures &amp; epilepsy</h2>
+<figure class="bref" data-sec="4" style="max-width:1040px;margin:10px 0 24px;padding:0;"><div style="border:1px solid #e6e2d6;border-radius:16px;overflow:hidden;background:#fffdf7;box-shadow:0 8px 26px rgba(20,40,46,.09);"><img src="img/neurology_s4.jpg" alt="Seizures & epilepsy reference figure" loading="lazy" style="display:block;width:100%;height:auto;background:#fff;" onerror="this.closest('figure').style.display='none'"></div><figcaption style="font-family:Inter,system-ui,sans-serif;font-size:12.5px;color:#7c8a88;margin-top:8px;line-height:1.5;"><b style="color:#0c3a44;">Reference.</b> Seizures & epilepsy <span style="color:#9aa8a6;">&mdash; Bromfield EB, Cavazos JE, Sirven JI, editors., CC BY-SA 4.0 (via Wikimedia Commons)</span></figcaption></figure>
+
+
+      <p>To understand a seizure, start with the normal brain. Your neurons are constantly talking to each other using tiny electrical signals, and in health that chatter is <em>coordinated</em> but not <em>synchronized</em> - different regions fire at different times for different jobs, like a huge orchestra where each section plays its own part. This balance is kept in check by a tug-of-war between <b>excitatory</b> signals (mostly the neurotransmitter <b>glutamate</b>, which says "fire") and <b>inhibitory</b> signals (mostly <b>GABA</b>, which says "settle down"). As long as that balance holds, the brain hums along smoothly.</p>
+
+<p>A <b>seizure</b> is what happens when that balance breaks and a population of neurons suddenly fires all at once - a burst of <em>abnormal, hypersynchronous electrical activity</em>. Instead of the orchestra playing its parts, every instrument blasts the same note together. Depending on where in the brain this happens and how far it spreads, you get very different outward signs. One important distinction: a <b>seizure</b> is a single event, while <b>epilepsy</b> is a chronic condition defined by a <em>tendency toward recurrent, unprovoked seizures</em> (usually diagnosed after two or more, or one seizure plus a high risk of recurrence).</p>
+
+<h3>Focal vs. generalized: where the storm begins</h3>
+<p>Seizures are grouped by where the abnormal firing starts. A <b>focal seizure</b> (older term: partial) begins in <em>one area</em> of one hemisphere. Because only part of the brain is involved, the signs match that region - a twitching hand, an odd smell, a rising stomach sensation, or a period of staring and confusion. The person may stay aware (<b>focal aware</b>) or have altered awareness (<b>focal impaired awareness</b>). A focal seizure can sometimes spread and become generalized.</p>
+<p>A <b>generalized seizure</b> involves <em>both hemispheres</em> from the start, so consciousness is lost immediately. The two you will see most on exams are tonic-clonic and absence.</p>
+
+<div class="ctwrap"><table class="ctable"><thead><tr><th>Feature</th><th>Tonic-clonic (generalized)</th><th>Absence</th></tr></thead><tbody>
+<tr><td>Classic look</td><td>Stiffening then rhythmic jerking</td><td>Brief blank staring spell</td></tr>
+<tr><td>Phases</td><td><b>Tonic</b> (muscles rigid) then <b>clonic</b> (rhythmic jerks)</td><td>No motor phases; may have eyelid flutter</td></tr>
+<tr><td>Duration</td><td>Usually 1 to 3 minutes</td><td>Often 5 to 10 seconds</td></tr>
+<tr><td>Awareness</td><td>Lost; person falls</td><td>Lost briefly; no fall</td></tr>
+<tr><td>After the event</td><td><b>Postictal</b> confusion, fatigue, sore muscles</td><td>Resumes activity, often unaware it happened</td></tr>
+<tr><td>Typical patient</td><td>Any age</td><td>Often school-age children</td></tr>
+</tbody></table></div>
+
+<p>In a <b>tonic-clonic</b> seizure you may also see cyanosis (breathing pauses during the tonic phase), tongue-biting, and loss of bladder control - all explained by whole-brain firing overriding normal muscle and autonomic control. <b>Absence</b> seizures are so brief they are often mistaken for daydreaming, which is why a child "not paying attention" in class sometimes turns out to be seizing dozens of times a day.</p>
+
+<h3>What sets a seizure off: common triggers</h3>
+<p>Anything that pushes the brain toward excitation - or removes something that was calming it - can lower the <b>seizure threshold</b>:</p>
+<ul>
+<li><b>Fever in young children</b> - rapid temperature spikes cause <b>febrile seizures</b>, usually between 6 months and 5 years.</li>
+<li><b>Low sodium (hyponatremia) or low glucose (hypoglycemia)</b> - neurons depend on stable electrolytes and fuel to control firing; when either drops, membranes become unstable.</li>
+<li><b>Missed antiseizure medication</b> - the most common reason a person with epilepsy breaks through; the calming drug level falls too low.</li>
+<li><b>Alcohol withdrawal</b> - alcohol suppresses the brain, so stopping abruptly leaves it in a rebound hyperexcitable state.</li>
+<li>Others: sleep deprivation, flashing lights, and infections such as meningitis.</li>
+</ul>
+
+<div class="pearl"><b>Fix the reversible cause.</b> A seizure from low sodium or low glucose will keep recurring until you correct the underlying value - the treatment is the electrolyte or dextrose, not just a sedative.</div>
+
+<h3>Status epilepticus: the emergency</h3>
+<p><b>Status epilepticus</b> is a seizure that lasts <em>5 minutes or longer</em>, or repeated seizures without full recovery of consciousness in between. This is a true neurologic emergency. Prolonged firing burns through oxygen and glucose faster than the brain can supply them, and the sustained muscle activity drives up temperature and can injure neurons - leading to hypoxia, acidosis, and permanent damage. It requires rapid IV benzodiazepines (such as lorazepam) and airway support.</p>
+
+<h3>Nursing priorities during a seizure</h3>
+<p>Your job is <em>protection, not intervention in the seizure itself</em> - you cannot stop the electrical activity by hand, so focus on preventing injury:</p>
+<ul>
+<li><b>Protect the airway and head</b> - turn the person to their side (recovery position) to let secretions drain and reduce aspiration risk; cushion the head and remove nearby hazards.</li>
+<li><b>Do not restrain</b> - holding limbs down can cause fractures or dislocations; let the movements run their course.</li>
+<li><b>Nothing in the mouth</b> - never insert objects or fingers; it risks broken teeth, bites, and airway blockage.</li>
+<li><b>Time it</b> - note the start; if it reaches 5 minutes, treat as status epilepticus and get help.</li>
+<li><b>Stay and observe</b> - loosen tight clothing, provide privacy, and document what you saw (movements, duration, incontinence) for the provider.</li>
+</ul>
+
+<div class="pearl"><b>Side-lying, timed, hands off.</b> The three things that matter most in the moment: turn them on their side, watch the clock, and keep your hands off restraining them.</div>
+
+      <div class="kp"><div class="t">Key points</div><ul>
+<li>A <b>seizure</b> is a burst of abnormal, hypersynchronous electrical firing; <b>epilepsy</b> is a tendency toward recurrent, unprovoked seizures.</li>
+<li><b>Focal</b> seizures start in one area (signs match that region); <b>generalized</b> seizures involve both hemispheres - tonic-clonic (stiffen then jerk, postictal confusion) and absence (brief staring, common in children).</li>
+<li>Common triggers lower the seizure threshold: fever in children, low sodium or glucose, missed medication, and alcohol withdrawal - correct the reversible cause.</li>
+<li><b>Status epilepticus</b> (a seizure 5 minutes or longer, or back-to-back seizures without recovery) is an emergency requiring IV benzodiazepines and airway support.</li>
+<li>During a seizure: turn side-lying to protect the airway, cushion the head, do NOT restrain or put anything in the mouth, and time it.</li>
+</ul></div>
+
+      <h2 id="w5_neurodeg"><span class="num">Section 5</span>Neurodegenerative disease</h2>
+<figure class="bref" data-sec="5" style="max-width:1040px;margin:10px 0 24px;padding:0;"><div style="border:1px solid #e6e2d6;border-radius:16px;overflow:hidden;background:#fffdf7;box-shadow:0 8px 26px rgba(20,40,46,.09);"><img src="img/neurology_s5.jpg" alt="Neurodegeneration reference figure" loading="lazy" style="display:block;width:100%;height:auto;background:#fff;" onerror="this.closest('figure').style.display='none'"></div><figcaption style="font-family:Inter,system-ui,sans-serif;font-size:12.5px;color:#7c8a88;margin-top:8px;line-height:1.5;"><b style="color:#0c3a44;">Reference.</b> Neurodegeneration <span style="color:#9aa8a6;">&mdash; BruceBlaus (Blausen), CC BY 3.0 (via Wikimedia Commons)</span></figcaption></figure>
+
+
+      <p>Your brain runs on about <b>86 billion neurons</b>, and here's the humbling part: for the most part, you were born with nearly all of them, and adult brains make very few new ones. Neurons are not like skin or blood cells that constantly replace themselves. They are meant to <em>last a lifetime</em>. That is exactly why the diseases in this section are so devastating. When these specialized cells die, the body usually cannot grow replacements, so the losses stack up and the damage is <b>progressive and irreversible</b>. Think of it like a city slowly losing its power lines one by one, with no crew coming to repair them.</p>
+
+<p>Normally, healthy neurons keep themselves tidy. They fold their proteins correctly, clear out cellular garbage, and pass chemical messages (<b>neurotransmitters</b>) across tiny gaps called synapses. The neurodegenerative diseases each represent a different way this housekeeping and signaling breaks down, in a different neighborhood of the nervous system.</p>
+
+<h3>Alzheimer disease: the memory system clogs first</h3>
+<p>Alzheimer disease is the most common cause of dementia. The trouble is <em>misfolded protein</em>. Two abnormal proteins build up: <b>beta-amyloid plaques</b> collect in the spaces <em>between</em> neurons, and <b>tau tangles</b> (neurofibrillary tangles) twist up <em>inside</em> them. These deposits are toxic and jam the machinery that neurons use to talk and stay alive, so the cells wither and die. Because the damage often begins in the <b>hippocampus</b>, the brain's memory-forming hub, the first and loudest symptom is usually <b>short-term memory loss</b>, the person forgets recent conversations while old memories stay intact longer. As it spreads across the cortex, it steals language, judgment, and eventually the ability to recognize loved ones and perform basic self-care.</p>
+
+<div class="pearl"><b>Why the fresh memories go first.</b> The hippocampus writes new memories to storage. Alzheimer pathology hits it early, so patients often repeat questions or misplace items while vividly recalling decades-old events.</div>
+
+<h3>Parkinson disease: a dopamine shortage in the movement circuit</h3>
+<p>Parkinson disease targets a specific spot deep in the brain called the <b>substantia nigra</b>, a cluster of neurons that make <b>dopamine</b>. Dopamine is the chemical that smooths and starts your movements. As these neurons die off, dopamine drops, and the movement circuit (the basal ganglia) loses its balance. The classic picture is often summarized as <b>TRAP</b>:</p>
+<ul>
+<li><b>Tremor</b> at rest, often a "pill-rolling" motion of the fingers that eases with purposeful movement</li>
+<li><b>Rigidity</b>, stiff, cogwheel-like resistance in the limbs</li>
+<li><b>Akinesia/Bradykinesia</b>, slowed and shrinking movements (small handwriting, a masked face, a shuffling gait)</li>
+<li><b>Postural instability</b>, poor balance and a tendency to fall, usually a later sign</li>
+</ul>
+
+<h3>ALS: the motor neurons fail, but the mind stays sharp</h3>
+<p><b>Amyotrophic lateral sclerosis (ALS)</b>, also called Lou Gehrig disease, attacks the <b>motor neurons</b>, the wiring that carries "move" commands from the brain and spinal cord to the muscles. Both upper and lower motor neurons degenerate, so patients develop progressive <b>muscle weakness, atrophy, and fasciculations</b> (muscle twitches), often starting in one hand or foot and spreading. The cruel twist is that in most patients <b>cognition, senses, and awareness stay largely intact</b>, the person remains fully alert inside a body that is losing its ability to move, swallow, and eventually breathe. Respiratory muscle failure is typically the life-limiting concern.</p>
+
+<div class="ctwrap"><table class="ctable"><thead><tr><th>Feature</th><th>Alzheimer</th><th>Parkinson</th><th>ALS</th></tr></thead><tbody>
+<tr><td>Cells lost</td><td>Cortical/hippocampal neurons</td><td>Dopamine neurons (substantia nigra)</td><td>Upper &amp; lower motor neurons</td></tr>
+<tr><td>Hallmark pathology</td><td>Amyloid plaques + tau tangles</td><td>Dopamine loss (Lewy bodies)</td><td>Motor neuron degeneration</td></tr>
+<tr><td>First symptom</td><td>Short-term memory loss</td><td>Resting tremor, slowness</td><td>Focal muscle weakness</td></tr>
+<tr><td>Cognition</td><td>Progressively lost</td><td>Often preserved early</td><td>Usually preserved</td></tr>
+</tbody></table></div>
+
+<p>The <em>common thread</em> tying all three together is the one worth memorizing: a specific population of neurons is slowly and permanently lost, so symptoms only worsen over time. Current treatments <b>slow progression or ease symptoms</b>, they do not regrow the lost cells or cure the disease. That is why nursing care centers on safety, function, dignity, and family support. Explore the figure below to see where each disease strikes in the nervous system.</p>
+
+      <div class="embed">
+        <div class="cap"><span class="tag">Interactive</span> Compare Alzheimer, Parkinson, and ALS. <a href="../patho/Neurodegenerative.html" target="_blank" rel="noopener">Open full &uarr;</a></div>
+        <div class="frame"><iframe src="../patho/Neurodegenerative.html" loading="lazy" title="Neurodegenerative disease interactive"></iframe></div>
+      </div>
+      <div class="kp"><div class="t">Key points</div><ul>
+<li>Neurodegenerative diseases share one theme: <b>progressive, irreversible loss</b> of specific neurons that the body cannot replace.</li>
+<li><b>Alzheimer</b> = beta-amyloid plaques + tau tangles, starting in the hippocampus, so <b>short-term memory loss</b> comes first.</li>
+<li><b>Parkinson</b> = dopamine-neuron loss in the <b>substantia nigra</b>, causing resting tremor, rigidity, bradykinesia, and postural instability (TRAP).</li>
+<li><b>ALS</b> = upper and lower <b>motor-neuron</b> death causing spreading weakness and atrophy, while cognition and senses usually stay intact.</li>
+<li>Treatments <em>slow or ease</em> symptoms but do not reverse the neuron loss, so care emphasizes safety, function, and support.</li>
+</ul></div>
+
+      <h2 id="w5_nmj"><span class="num">Section 6</span>Demyelinating &amp; neuromuscular disorders</h2>
+<figure class="bref" data-sec="6" style="max-width:1040px;margin:10px 0 24px;padding:0;"><div style="border:1px solid #e6e2d6;border-radius:16px;overflow:hidden;background:#fffdf7;box-shadow:0 8px 26px rgba(20,40,46,.09);"><img src="img/neurology_s6.jpg" alt="Demyelinating disease reference figure" loading="lazy" style="display:block;width:100%;height:auto;background:#fff;" onerror="this.closest('figure').style.display='none'"></div><figcaption style="font-family:Inter,system-ui,sans-serif;font-size:12.5px;color:#7c8a88;margin-top:8px;line-height:1.5;"><b style="color:#0c3a44;">Reference.</b> Demyelinating disease <span style="color:#9aa8a6;">&mdash; Zong B, Yu F, Zhang X, Zhao W, Li S and Li L, CC BY 4.0 (via Wikimedia Commons)</span></figcaption></figure>
+
+
+      <p>Every time you lift a coffee cup, wiggle your toes, or take a breath, a tiny chemical conversation happens between a nerve and a muscle. That conversation takes place at the <b>neuromuscular junction (NMJ)</b>, the specialized synapse where a motor nerve meets a muscle fiber. Understanding this handshake is the key to understanding why the disorders in this section cause weakness in such different patterns.</p>
+
+<h3>The neuromuscular junction: how the signal crosses</h3>
+<p>When an electrical impulse (an <b>action potential</b>) races down a motor neuron and reaches the nerve ending, it triggers the release of a neurotransmitter called <b>acetylcholine (ACh)</b>. The ACh floats across the tiny gap (the synaptic cleft) and binds to <b>nicotinic ACh receptors</b> on the muscle membrane. That binding opens ion channels, the muscle membrane depolarizes, and the muscle contracts. An enzyme called <b>acetylcholinesterase</b> then chews up the ACh so the signal switches off cleanly and the muscle can relax. Three ingredients matter: enough ACh released, enough working receptors to catch it, and a healthy nerve to carry the impulse in the first place. Break any one link and you get weakness, but <em>the pattern</em> of that weakness tells you which link failed.</p>
+
+<h3>Multiple sclerosis: the insulation frays</h3>
+<p>Nerve fibers in the central nervous system are wrapped in <b>myelin</b>, a fatty insulation that lets impulses jump quickly from gap to gap. In <b>multiple sclerosis (MS)</b>, the body's own immune cells attack and strip that myelin off CNS neurons (the brain, spinal cord, and optic nerves). This is <b>autoimmune demyelination</b>. Where myelin is lost, a <b>plaque</b> or sclerosis forms, and signals slow, scatter, or stop entirely. Because myelin can be damaged almost anywhere in the CNS, symptoms are famously scattered: blurred or double vision from optic neuritis, numbness and tingling, weakness, spasticity, fatigue, and bladder problems. The classic course is <b>relapsing-remitting</b>: flares appear, then partly fade as inflammation settles and some remyelination occurs, though scarring accumulates over time. A helpful teaching phrase is lesions <em>separated in space and time</em>.</p>
+
+<div class="pearl"><b>Heat is the enemy.</b> Many MS patients report worsening when overheated (hot showers, fever, exercise). This is <b>Uhthoff phenomenon</b>: warmth further slows conduction across already-demyelinated fibers. Keeping cool often improves symptoms.</div>
+
+<h3>Myasthenia gravis: the receptors get blocked</h3>
+<p>In <b>myasthenia gravis (MG)</b>, the nerve and its ACh are fine, but the muscle's receptors are under attack. The immune system makes <b>anti-ACh receptor antibodies</b> that block and destroy nicotinic receptors at the NMJ. With fewer receptors to catch ACh, each signal lands weakly. The hallmark is <b>fatigable weakness</b>: muscles work at first but tire quickly with repeated use and recover with rest. This is why symptoms are typically worse at the end of the day. It classically strikes muscles that work constantly, causing <b>ptosis</b> (drooping eyelids), <b>diplopia</b> (double vision), and trouble chewing, swallowing, or holding the head up. The feared complication is <b>myasthenic crisis</b>, when respiratory muscles weaken and breathing fails.</p>
+
+<h3>Guillain-Barre syndrome: the nerves lose their coating from the outside in</h3>
+<p>In <b>Guillain-Barre syndrome (GBS)</b>, the immune system attacks the myelin of <em>peripheral</em> nerves, often a week or two after an infection (frequently a GI or respiratory illness). This is molecular mimicry: antibodies aimed at the bug cross-react with nerve myelin. The signature is <b>ascending paralysis</b>, weakness and diminished reflexes that begin in the feet and climb upward, sometimes reaching the diaphragm and requiring ventilator support. Unlike MG, weakness is usually symmetric and progressive rather than fatigable, and it typically peaks then slowly recovers.</p>
+
+<div class="ctwrap"><table class="ctable"><thead><tr><th>Feature</th><th>Myasthenia gravis</th><th>Guillain-Barre</th></tr></thead><tbody><tr><td>Target</td><td>ACh receptors at NMJ</td><td>Peripheral nerve myelin</td></tr><tr><td>Pattern</td><td>Fatigable, often eyes first</td><td>Ascending, feet upward</td></tr><tr><td>Reflexes</td><td>Usually preserved</td><td>Diminished or absent</td></tr><tr><td>Trigger</td><td>Autoimmune, thymus-linked</td><td>Often post-infection</td></tr><tr><td>Feared crisis</td><td>Myasthenic crisis (breathing)</td><td>Respiratory failure</td></tr></tbody></table></div>
+
+<div class="pearl"><b>Watch the diaphragm.</b> Both MG and GBS can climb to the muscles of breathing. Monitor respiratory status, vital capacity, and swallowing closely, and never dismiss a patient who says it is getting harder to breathe.</div>
+
+<p>Explore the neuromuscular junction in the figure below to see where ACh crosses and where these diseases strike.</p>
+
+      <div class="embed">
+        <div class="cap"><span class="tag">Interactive</span> See how the signal crosses the neuromuscular junction &mdash; and where it fails. <a href="../patho/NeuromuscularJunction.html" target="_blank" rel="noopener">Open full &uarr;</a></div>
+        <div class="frame"><iframe src="../patho/NeuromuscularJunction.html" loading="lazy" title="Neuromuscular junction interactive"></iframe></div>
+      </div>
+      <div class="kp"><div class="t">Key points</div><ul><li>At the <b>neuromuscular junction</b>, acetylcholine crosses from nerve to muscle and binds receptors to trigger contraction, then acetylcholinesterase clears it.</li><li><b>Multiple sclerosis</b> is autoimmune demyelination of the <em>CNS</em>, often relapsing-remitting, with scattered symptoms separated in space and time.</li><li><b>Myasthenia gravis</b> is caused by antibodies against ACh receptors, producing fatigable weakness that worsens with use and improves with rest.</li><li><b>Guillain-Barre syndrome</b> is peripheral demyelination causing ascending paralysis, often after an infection, with lost reflexes.</li><li>MG and GBS can both weaken the diaphragm, so respiratory monitoring is a nursing priority.</li></ul></div>
+
+      <div class="summary">
+        <h2 id="summary">The chapter in one breath</h2>
+        <ul>
+<li><b>Ischemic stroke</b> (about 87%) is a clot blocking flow; <b>hemorrhagic stroke</b> is a burst vessel, and the FAST screen (Face droop, Arm drift, Speech slurred, Time to call 911) catches both fast because <em>time is brain</em>.</li>
+<li>Only ischemic strokes get <b>tPA</b> within roughly 3 to 4.5 hours, so a stat CT must rule out bleeding first, since giving a clot-buster into a hemorrhage is deadly.</li>
+<li><b>Raised intracranial pressure</b> shows late as <b>Cushing's triad</b> (rising BP with widening pulse pressure, bradycardia, irregular breathing) plus a sluggish, blown pupil, all warning the brain is being squeezed toward <em>herniation</em>.</li>
+<li><b>Traumatic brain injury</b> is tracked with the <b>Glasgow Coma Scale</b> (eyes, verbal, motor); a score of 8 or less usually means secure the airway, and watch for the lucid-interval pattern of an <b>epidural hematoma</b>.</li>
+<li><b>Spinal cord injury</b> above T6 risks <b>neurogenic shock</b> (warm, dry skin with hypotension and bradycardia) early, and <b>autonomic dysreflexia</b> (a pounding headache with dangerously high BP, often from a full bladder) later.</li>
+<li><b>Seizures</b> require protecting the patient (side-lying, nothing in the mouth, never restrain) and timing them, because a seizure lasting over 5 minutes is <b>status epilepticus</b>, a true emergency.</li>
+<li><b>Neurodegenerative diseases</b> differ by mechanism: <b>Parkinson's</b> from dopamine loss (resting tremor, rigidity, bradykinesia), <b>Alzheimer's</b> from plaques and tangles (progressive memory loss), and <b>multiple sclerosis</b> from demyelination (relapsing-remitting deficits).</li>
+<li><b>Myasthenia gravis</b> causes fatigable weakness that <em>worsens with use</em> (ptosis, diplopia) from antibodies against acetylcholine receptors, while <b>Guillain-Barre syndrome</b> is an <em>ascending</em> paralysis that threatens the diaphragm, so monitor respiratory function closely.</li>
+</ul>
+      </div>
+
+      <h2 id="glossary"><span class="num">Reference</span>Words worth knowing</h2>
+      <p>A quick reference for the terms in this chapter &mdash; skim it now, or circle back whenever a word trips you up.</p>
+      <dl class="terms"><dt>Bradykinesia</dt><dd>Slowness in starting and carrying out movement, a core motor sign of <b>Parkinson disease</b> that arises when degeneration of dopamine-producing neurons in the substantia nigra leaves the basal ganglia unable to smoothly initiate voluntary movement.</dd><dt>Cushing's triad</dt><dd>A late and ominous set of three vital-sign changes, <em>hypertension with a widening pulse pressure, bradycardia, and irregular (often slow) respirations</em>, signaling dangerously high intracranial pressure and impending brainstem herniation.</dd><dt>Demyelination</dt><dd>The loss or breakdown of the fatty <b>myelin sheath</b> that insulates axons, which slows or blocks nerve signal conduction and produces the neurologic deficits seen in diseases like multiple sclerosis.</dd><dt>Epidural hematoma</dt><dd>A collection of blood between the skull and the outer dura mater, usually from a torn <b>middle meningeal artery</b> after temporal trauma, classically causing a brief lucid interval before rapid deterioration.</dd><dt>Hemorrhagic stroke</dt><dd>A stroke caused by a <em>ruptured</em> blood vessel bleeding into or around the brain, which both deprives tissue of blood and raises intracranial pressure as the expanding blood compresses surrounding neurons.</dd><dt>Herniation</dt><dd>The life-threatening displacement of brain tissue across or through rigid intracranial structures (such as under the falx or through the tentorium or foramen magnum) when pressure builds, often compressing the brainstem and its vital centers.</dd><dt>Intracranial pressure</dt><dd>The pressure exerted inside the skull by the brain, blood, and cerebrospinal fluid together, normally about <b>5&ndash;15 mmHg</b>, which becomes dangerous when a mass, bleed, or swelling pushes it higher.</dd><dt>Ischemic stroke</dt><dd>The most common type of stroke, caused by a <b>clot or narrowing</b> that blocks an artery and cuts off blood flow, starving a region of brain tissue of the oxygen and glucose it needs to survive.</dd><dt>Monro-Kellie doctrine</dt><dd>The principle that the skull is a fixed, rigid box, so an increase in any one of its three contents (brain, blood, or cerebrospinal fluid) must be offset by a decrease in another or intracranial pressure will rise.</dd><dt>Multiple sclerosis</dt><dd>A chronic <b>autoimmune</b> disease in which the body attacks central nervous system myelin, producing scattered plaques and a relapsing-remitting pattern of symptoms such as vision changes, weakness, and numbness.</dd><dt>Myasthenia gravis</dt><dd>An autoimmune disorder in which antibodies block or destroy <b>acetylcholine receptors</b> at the neuromuscular junction, causing fluctuating muscle weakness that worsens with use and improves with rest.</dd><dt>Penumbra</dt><dd>The ring of <em>at-risk but still salvageable</em> brain tissue surrounding the dead core of an ischemic stroke, which can be rescued if blood flow is restored quickly, which is why "time is brain."</dd><dt>Seizure</dt><dd>A sudden burst of <b>abnormal, excessive electrical activity</b> in the brain's neurons that can cause changes in movement, sensation, behavior, or consciousness.</dd><dt>Status epilepticus</dt><dd>A neurologic emergency defined as a seizure lasting <b>5 minutes or longer</b>, or repeated seizures without full recovery in between, which risks permanent brain injury and requires immediate treatment.</dd><dt>Subdural hematoma</dt><dd>A collection of blood between the dura and the arachnoid, usually from torn <b>bridging veins</b>, which often bleeds slowly and may present days to weeks later, especially in older adults and those on anticoagulants.</dd><dt>tPA</dt><dd>Tissue plasminogen activator, a <b>clot-dissolving (thrombolytic)</b> drug given within a strict time window for ischemic stroke to break down the blocking clot and restore blood flow, but never used in hemorrhagic stroke.</dd></dl>
+
+      <h2 id="cards"><span class="num">Drill</span>Flashcards for this unit</h2>
+      <p>These are the <b>Week 5</b> cards &mdash; the same deck as the hub, pulled in here so you can review the moment you finish reading. Tap the card to flip it; hit <em>Shuffle</em> to mix them up. To grade yourself and track mastery across the whole deck, open the <a href="../flashcards.html">full flashcards page</a>.</p>
+      <div class="fc" id="fc">
+        <div class="fc-card" id="fcCard" onclick="fcFlip()">
+          <div class="fc-inner">
+            <div class="fc-face fc-front"><span class="fc-side">Question</span><div class="fc-q" id="fcQ"></div><div class="fc-hint">Tap to reveal the answer</div></div>
+            <div class="fc-face fc-back"><span class="fc-side">Answer</span><div class="fc-a" id="fcA"></div><div class="fc-hint">Tap to flip back</div></div>
+          </div>
+        </div>
+        <div class="fc-nav">
+          <button class="fc-btn" type="button" onclick="fcPrev(event)">&larr; Prev</button>
+          <span class="fc-count" id="fcCount">&mdash;</span>
+          <button class="fc-btn" type="button" onclick="fcNext(event)">Next &rarr;</button>
+          <button class="fc-btn" type="button" onclick="fcShuffle(event)">&#128256; Shuffle</button>
+        </div>
+        <a class="fc-full" href="../flashcards.html">Open the full Week 5 deck &mdash; grade yourself &amp; track mastery &uarr;</a>
+      </div>
+
+      <div class="quiz">
+        <h2 id="quiz">Check yourself</h2>
+        <div class="q"><div class="qq">1. A patient arrives with sudden right-sided facial droop, slurred speech, and right arm weakness that started 90 minutes ago. Using FAST, which finding most directly signals a possible stroke and what does the "T" remind the nurse to do?</div>
+<button onclick="this.parentNode.classList.add('show')">Reveal answer</button>
+<div class="ans"><span class="a">Face droop, Arm drift, and Speech changes are all positive FAST signs; "T" means Time to call 911 and note the last-known-well time.</span> FAST stands for <b>F</b>ace, <b>A</b>rms, <b>S</b>peech, <b>T</b>ime. Because treatment eligibility depends on when symptoms began, documenting the exact last-known-well time is what unlocks options like tPA.</div></div>
+
+<div class="q"><div class="qq">2. Before giving a stroke patient anything by mouth or starting any drug, which diagnostic test must be done first, and why is it the non-negotiable first step?</div>
+<button onclick="this.parentNode.classList.add('show')">Reveal answer</button>
+<div class="ans"><span class="a">A non-contrast head CT to distinguish ischemic from hemorrhagic stroke.</span> The two types look identical at the bedside but have opposite treatments. Giving a clot-buster to a patient who is actually bleeding would be catastrophic, so CT rules out hemorrhage before any thrombolytic is even considered.</div></div>
+
+<div class="q"><div class="qq">3. A patient has an confirmed ischemic stroke with last-known-well 2.5 hours ago and no bleeding on CT. The provider is considering IV alteplase (tPA). What is the standard time window, and name one key contraindication the nurse must screen for.</div>
+<button onclick="this.parentNode.classList.add('show')">Reveal answer</button>
+<div class="ans"><span class="a">IV tPA is usually given within 3 hours (extended to 4.5 hours in selected patients) of symptom onset; a major contraindication is any active or recent bleeding, including hemorrhagic stroke on CT.</span> Because tPA dissolves clots by boosting fibrinolysis, it dramatically raises bleeding risk. Other screening flags include recent surgery, recent GI bleed, and uncontrolled hypertension (usually above 185/110).</div></div>
+
+<div class="q"><div class="qq">4. The Monro-Kellie doctrine explains why raised intracranial pressure is so dangerous. In plain terms, what does it say, and why does a growing brain bleed quickly become life-threatening?</div>
+<button onclick="this.parentNode.classList.add('show')">Reveal answer</button>
+<div class="ans"><span class="a">The skull is a fixed, rigid box holding three things in a fixed total volume: brain tissue, blood, and cerebrospinal fluid (CSF).</span> If one component grows (like a bleed or swelling), the body first buys time by shunting out CSF and venous blood. Once that compensation is exhausted, pressure climbs sharply and the brain can herniate, which is why <b>ICP</b> can spike suddenly after a period of apparent stability.</div></div>
+
+<div class="q"><div class="qq">5. A head-injured patient's vital signs shift to a systolic BP of 190, heart rate of 48, and irregular breathing. What is this triad called, what does it signal, and is it an early or late finding?</div>
+<button onclick="this.parentNode.classList.add('show')">Reveal answer</button>
+<div class="ans"><span class="a">This is Cushing's triad: widening pulse pressure (rising systolic BP), bradycardia, and irregular respirations, and it is a late, ominous sign of dangerously high intracranial pressure.</span> As ICP crushes the brainstem, the body raises BP to keep perfusing the brain; baroreceptors then reflexively slow the heart. Because it appears late, the nurse should already be watching for earlier ICP clues like a declining level of consciousness.</div></div>
+
+<div class="q"><div class="qq">6. A patient struck in the temporal head had a brief loss of consciousness, then a "lucid interval" where he felt fine, and is now rapidly deteriorating. Which type of hematoma does this classically describe, and how does it differ from a subdural?</div>
+<button onclick="this.parentNode.classList.add('show')">Reveal answer</button>
+<div class="ans"><span class="a">An epidural hematoma, classically an arterial bleed (often the middle meningeal artery) with a lucid interval followed by rapid decline.</span> See the comparison below.<div class="ctwrap"><table class="ctable"><thead><tr><th>Feature</th><th>Epidural</th><th>Subdural</th></tr></thead><tbody><tr><td>Bleed source</td><td>Artery (fast)</td><td>Vein / bridging veins (slower)</td></tr><tr><td>Location</td><td>Above the dura</td><td>Below the dura</td></tr><tr><td>Onset</td><td>Rapid, often with lucid interval</td><td>Minutes to weeks; chronic in elderly</td></tr><tr><td>CT shape</td><td>Lens / convex (lemon)</td><td>Crescent (banana)</td></tr></tbody></table></div></div></div>
+
+<div class="q"><div class="qq">7. A patient sustains a complete spinal cord injury at the C4 level. Why is this injury immediately life-threatening, and what is the nurse's top priority?</div>
+<button onclick="this.parentNode.classList.add('show')">Reveal answer</button>
+<div class="ans"><span class="a">C4 is at or above the level that drives the diaphragm ("C3, 4, 5 keep the diaphragm alive"), so the patient may lose the ability to breathe; airway and ventilation are the top priority.</span> The higher the cord injury, the more function is lost below it. Because the phrenic nerve arises from C3-C5, injuries at or above C4 often require immediate ventilatory support, while lower injuries (like thoracic or lumbar) spare breathing.</div></div>
+
+<div class="q"><div class="qq">8. A nurse observes a patient staring blankly with lip-smacking and no response for about 45 seconds, followed by confusion. Is this focal or generalized seizure activity, and how does it differ from a generalized tonic-clonic seizure?</div>
+<button onclick="this.parentNode.classList.add('show')">Reveal answer</button>
+<div class="ans"><span class="a">This is a focal seizure (with impaired awareness), because it starts in one brain region and often includes automatisms like lip-smacking and a period of confusion afterward.</span> A focal seizure begins in a limited area, so signs are localized and consciousness may be only partly affected. A generalized tonic-clonic seizure involves both hemispheres from the start, causing full loss of consciousness, whole-body stiffening (tonic) then jerking (clonic).</div></div>
+
+<div class="q"><div class="qq">9. A patient has had continuous seizure activity for more than 5 minutes without regaining consciousness. What is this emergency called, and why can it cause permanent brain injury?</div>
+<button onclick="this.parentNode.classList.add('show')">Reveal answer</button>
+<div class="ans"><span class="a">Status epilepticus, defined as a seizure lasting 5 minutes or more, or repeated seizures without recovery of consciousness between them.</span> Prolonged seizing drives the brain's metabolic demand far above what oxygen and glucose delivery can meet, and it also compromises breathing. The resulting hypoxia and neuronal exhaustion can cause irreversible damage, so first-line treatment is usually a benzodiazepine (like IV lorazepam) plus airway support.</div></div>
+
+<div class="q"><div class="qq">10. A student nurse is comparing Alzheimer disease and Parkinson disease. What is the core problem in each, and what is the hallmark presentation of each?</div>
+<button onclick="this.parentNode.classList.add('show')">Reveal answer</button>
+<div class="ans"><span class="a">Alzheimer is primarily a progressive loss of memory and cognition; Parkinson is primarily a movement disorder from loss of dopamine-producing neurons.</span> See the contrast below.<div class="ctwrap"><table class="ctable"><thead><tr><th>Feature</th><th>Alzheimer</th><th>Parkinson</th></tr></thead><tbody><tr><td>Core deficit</td><td>Memory / cognition</td><td>Movement</td></tr><tr><td>Pathology</td><td>Amyloid plaques &amp; tau tangles</td><td>Dopamine loss in substantia nigra</td></tr><tr><td>Hallmark signs</td><td>Short-term memory loss, disorientation</td><td>Resting tremor, rigidity, bradykinesia, shuffling gait</td></tr></tbody></table></div><div class="pearl"><b>Memory hook.</b> Alzheimer robs the mind first; Parkinson robs the movement first, though both can eventually affect the other domain.</div></div></div>
+
+<div class="q"><div class="qq">11. A young adult reports episodes of blurred vision, numbness, and fatigue that come and go over months, and an MRI shows scattered lesions. This picture fits multiple sclerosis. What is the underlying mechanism, and why do symptoms often relapse and remit?</div>
+<button onclick="this.parentNode.classList.add('show')">Reveal answer</button>
+<div class="ans"><span class="a">Multiple sclerosis is an autoimmune disease that destroys the myelin sheath around central nervous system nerves, slowing or blocking nerve signals.</span> Because different areas of the brain and spinal cord are attacked at different times, symptoms vary and can flare then partially recover as inflammation subsides and some remyelination occurs. Heat often worsens symptoms temporarily (Uhthoff phenomenon).</div></div>
+
+<div class="q"><div class="qq">12. A nurse cares for two patients: one with myasthenia gravis and one with Guillain-Barre syndrome. Both risk respiratory failure, but the weakness patterns differ. How does each present, and what is the shared top nursing concern?</div>
+<button onclick="this.parentNode.classList.add('show')">Reveal answer</button>
+<div class="ans"><span class="a">Myasthenia gravis causes fluctuating weakness that worsens with activity and improves with rest (often ptosis and diplopia first); Guillain-Barre causes ascending weakness that starts in the legs and climbs upward. The shared top concern is respiratory failure.</span> In myasthenia gravis, antibodies block acetylcholine receptors at the neuromuscular junction, so muscles fatigue as the day goes on. In Guillain-Barre, the immune system attacks peripheral nerve myelin after an infection, producing symmetric ascending paralysis. For both, the nurse closely monitors respiratory status (like vital capacity) because diaphragm involvement can be fatal.</div></div>
+      </div>
+
+      <div class="chapnav">
+        <a href="index.html"><span class="k">Book</span>&larr; All chapters</a>
+        <a class="next" href="appendix.html"><span class="k">Appendix</span>The Arcade &amp; Lab &rarr;</a>
+      </div>
+    </main>
+  </div>
+
+  <footer>
+    A student-friendly pathophysiology guide · by <b>Dr. Akash Garg</b> <br>
+    The interactive figures open in place; tap “Open full ↗” for a full-screen version.
+  </footer>
+
+<script>
+  // reading progress bar
+  var bar=document.getElementById('bar');
+  function prog(){var h=document.documentElement, max=h.scrollHeight-h.clientHeight; bar.style.width=(max>0?(h.scrollTop/max*100):0)+'%';}
+  addEventListener('scroll',prog,{passive:true}); prog();
+  // scroll-spy TOC
+  var links=[].slice.call(document.querySelectorAll('.toc a'));
+  var ids=links.map(function(a){return a.getAttribute('href').slice(1);});
+  var secs=ids.map(function(id){return document.getElementById(id);});
+  function spy(){var y=scrollY+90,cur=0;
+    for(var i=0;i<secs.length;i++){ if(secs[i] && secs[i].offsetTop<=y) cur=i; }
+    links.forEach(function(a,i){a.classList.toggle('on',i===cur);});}
+  addEventListener('scroll',spy,{passive:true}); spy();
+</script>
+
+
+<script src="../flashcards/w5.js"></script>
+<script>
+(function(){
+  var WK="5";
+  var cards=(window.PATHO_CARDS&&window.PATHO_CARDS[WK])||[];
+  var fc=document.getElementById("fc"); if(!fc) return;
+  if(!cards.length){ fc.style.display="none"; return; }
+  var order=cards.map(function(_,i){return i;}), pos=0;
+  function dec(s){return String(s).replace(/&amp;/g,"&").replace(/&lt;/g,"<").replace(/&gt;/g,">").replace(/&nbsp;/g," ");}
+  var card=document.getElementById("fcCard"), q=document.getElementById("fcQ"), a=document.getElementById("fcA"), cnt=document.getElementById("fcCount");
+  function show(){ card.classList.remove("flip"); var c=cards[order[pos]]; q.textContent=dec(c.q); a.textContent=dec(c.a)+(c.exp?"  \u2014  "+dec(c.exp):""); cnt.textContent=(pos+1)+" / "+cards.length; }
+  window.fcFlip=function(){ card.classList.toggle("flip"); };
+  window.fcNext=function(e){ if(e&&e.stopPropagation)e.stopPropagation(); pos=(pos+1)%cards.length; show(); };
+  window.fcPrev=function(e){ if(e&&e.stopPropagation)e.stopPropagation(); pos=(pos-1+cards.length)%cards.length; show(); };
+  window.fcShuffle=function(e){ if(e&&e.stopPropagation)e.stopPropagation(); for(var i=order.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=order[i];order[i]=order[j];order[j]=t;} pos=0; show(); };
+  show();
+})();
+</script>
+<style id="pdfprint">
+.pdf-btn{position:fixed;right:16px;bottom:16px;z-index:400;font-family:'Inter',system-ui,sans-serif;font-weight:700;font-size:13.5px;color:#fff;background:#0c7283;border:none;border-radius:24px;padding:11px 17px;box-shadow:0 6px 20px rgba(12,58,68,.30);cursor:pointer;display:inline-flex;align-items:center;gap:7px;}
+.pdf-btn:hover{background:#0c3a44;}
+@media print{
+ @page{margin:14mm;}
+ html,body{background:#fff !important;}
+ .topbar,.progress,aside,.chapnav,.pdf-btn{display:none !important;}
+ #pbgate{display:none !important;}
+ .layout{display:block !important;max-width:100% !important;padding:0 !important;grid-template-columns:1fr !important;gap:0 !important;}
+ .reading,.reading .col{max-width:100% !important;padding:0 !important;}
+ .embed iframe,.embed .frame{display:none !important;}
+ .embed{margin:14px 0 !important;}
+ .embed .cap{color:#555 !important;font-style:italic;}
+ .embed .cap .tag{background:#0c7283 !important;color:#fff !important;}
+ .embed .cap a{display:none !important;}
+ .bref,.bref .fr{break-inside:avoid;page-break-inside:avoid;box-shadow:none !important;}
+ .bref img{max-height:150mm;width:auto !important;margin:0 auto;}
+ .ctwrap,table.ctable,.pearl,.kp,.q,.objectives,.summary,dl.terms,figure{break-inside:avoid;page-break-inside:avoid;}
+ h1,h2,h3{break-after:avoid;page-break-after:avoid;}
+ .quiz .ans{display:block !important;}
+ .quiz .q button{display:none !important;}
+ a{color:inherit !important;text-decoration:none !important;}
+ *{-webkit-print-color-adjust:exact !important;print-color-adjust:exact !important;}
+ footer{border-top:1px solid #ccc !important;}
+}
+</style>
+<button class="pdf-btn" onclick="window.print()" title="Save this chapter as a PDF">🖨 Save as PDF</button>
+</body>
+</html>

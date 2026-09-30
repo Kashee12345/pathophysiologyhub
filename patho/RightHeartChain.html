@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f7f2ea">
+<title>The Road to Right Heart Failure — Cor Pulmonale</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{ --card:#fffdf8; --ink:#2a2420; --muted:#7a6f63; --line:#e3d8c6;
+    --sans:'Inter',system-ui,sans-serif; --disp:'Cinzel Decorative',serif; --accent:#b0603a; }
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  body{background:linear-gradient(160deg,#faf3ee,#ece6ea);color:var(--ink);font-family:var(--sans);min-height:100vh;padding:18px 16px 44px;}
+  header{max-width:1120px;margin:0 auto 16px;text-align:center;}
+  h1{font-family:var(--disp);font-weight:900;font-size:clamp(21px,4vw,34px);color:#a5502a;line-height:1.05;}
+  header .sub{color:var(--muted);font-size:15px;margin-top:4px;}
+  header .intro{max-width:880px;margin:10px auto 0;font-size:14.5px;line-height:1.5;color:#5c5248;}
+  header .intro b{color:#a5502a;}
+  .wrap{max-width:1120px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;box-shadow:0 6px 22px rgba(120,70,40,.07);}
+  .card h2{font-family:var(--disp);font-weight:700;font-size:17px;color:#a5502a;margin-bottom:6px;}
+  .card h2 + .desc{font-size:13px;color:var(--muted);margin-bottom:10px;line-height:1.4;}
+  svg{display:block;width:100%;height:auto;max-height:330px;}
+  #liveCap{margin-top:8px;background:#f6ebe4;border:1px solid #e8cdba;border-radius:10px;padding:10px 13px;font-size:14px;line-height:1.5;color:#7a4626;text-align:center;} #liveCap b{color:#8a3a1a;}
+
+  @keyframes beat{0%,100%{transform:scale(1)}45%{transform:scale(1.05)}}
+  .beat{animation:beat 1s ease-in-out infinite;transform-origin:center;}
+  @keyframes hbeat{0%,100%{transform:scale(1)}45%{transform:scale(1.09)}}
+  .hbeat{animation:hbeat 0.75s ease-in-out infinite;transform-origin:center;}
+  @keyframes pulseNode{0%,100%{box-shadow:0 0 0 0 rgba(192,57,43,.4)}50%{box-shadow:0 0 0 7px rgba(192,57,43,0)}}
+  @keyframes drip{0%{transform:translateY(0);opacity:0}30%{opacity:1}100%{transform:translateY(14px);opacity:0}}
+  .drip{animation:drip 1.6s ease-in infinite;}
+
+  .causes{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px;}
+  .cb{border:1px solid var(--line);background:#fff;border-radius:10px;padding:9px 7px;cursor:pointer;text-align:center;font-weight:700;font-size:12px;transition:.12s;line-height:1.2;}
+  .cb small{display:block;font-weight:500;font-size:9.5px;color:var(--muted);margin-top:2px;}
+  .cb:hover{transform:translateY(-2px);box-shadow:0 5px 13px rgba(120,70,40,.12);}
+  .cb.on{background:#7a5a9a;color:#fff;border-color:transparent;} .cb.on small{color:rgba(255,255,255,.9);}
+
+  .chain{margin-top:4px;}
+  .node{display:flex;align-items:center;gap:11px;padding:10px 12px;border-radius:11px;border:1px solid var(--line);background:#faf6f0;margin-bottom:7px;opacity:.38;transition:.3s;}
+  .node.lit{opacity:1;border-color:#e0b8a0;background:#fff;}
+  .node.cur{border-color:#c0392b;border-left:5px solid #c0392b;animation:pulseNode 1.6s infinite;}
+  .node .num{width:26px;height:26px;flex:none;border-radius:50%;background:#ece2d6;color:#8a7a63;font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center;}
+  .node.lit .num{background:#c0763a;color:#fff;} .node.cur .num{background:#c0392b;}
+  .node .tx{font-size:13px;line-height:1.3;} .node .tx b{font-size:13.5px;}
+  .node .tx small{display:block;color:var(--muted);font-size:11.5px;margin-top:1px;}
+
+  .ctrl{display:flex;gap:9px;margin-top:12px;}
+  .ctrl button{flex:1;border:none;border-radius:11px;padding:13px;font-family:var(--sans);font-weight:800;font-size:14px;color:#fff;cursor:pointer;}
+  .adv{background:#b0603a;} .adv:disabled{background:#d8c3b3;cursor:default;}
+  .rst{background:#8a8078;flex:0 0 40%;}
+
+  #info{border:1px solid var(--line);border-left:5px solid var(--accent);background:#f8efe8;border-radius:10px;padding:12px 13px;margin-top:14px;}
+  #info .n{font-family:var(--disp);font-weight:700;font-size:17px;color:#a5502a;}
+  #info .plain{font-size:14.5px;line-height:1.5;color:#2a2420;margin-top:7px;font-weight:600;}
+  #info .story{font-size:13px;line-height:1.5;color:#3a3630;margin-top:8px;background:#fff;border-radius:8px;padding:9px 11px;border:1px solid #e8d3c5;}
+  .pearl{background:#eef4fb;border:1px solid #cbdcf0;border-radius:10px;padding:10px 12px;margin-top:12px;font-size:12.6px;line-height:1.5;color:#274d7a;} .pearl b{color:#173b5a;}
+  @media (max-width:880px){ .wrap{grid-template-columns:1fr;} .causes{grid-template-columns:1fr 1fr;} }
+</style>
+</head>
+<body>
+<header>
+  <h1>The Road to Right Heart Failure</h1>
+  <div class="sub">How a lung problem sinks the right heart — cor pulmonale · Week 12</div>
+  <div class="intro">Chronic lung disease makes the lungs a <b>high-pressure place to pump into</b>. The <b>right ventricle</b> is only built for low pressure, so over time it strains, thickens, and fails — that's <b>cor pulmonale</b>. Pick a starting cause and walk the chain one step at a time.</div>
+</header>
+
+<div class="wrap">
+  <div>
+    <div class="card">
+      <h2>The right heart under strain</h2>
+      <div class="desc">Watch the right ventricle (screen-left chamber) thicken as pressure climbs, then fail — and the body back up.</div>
+      <svg id="heart" viewBox="0 0 320 300" aria-label="heart and body congestion"></svg>
+      <div id="liveCap">Pick a cause, then press Advance.</div>
+    </div>
+  </div>
+  <div>
+    <div class="card">
+      <h2>1 · Pick the starting cause</h2>
+      <div class="causes" id="causes">
+        <button class="cb on" data-c="copd">COPD<small>most common</small></button>
+        <button class="cb" data-c="osa">OSA<small>sleep apnea</small></button>
+        <button class="cb" data-c="cf">Cystic Fibrosis<small>thick mucus</small></button>
+        <button class="cb" data-c="pe">Pulmonary Embolism<small>clots</small></button>
+        <button class="cb" data-c="fibrosis">Fibrosis<small>e.g. black lung</small></button>
+        <button class="cb" data-c="primary">Primary PH<small>unknown cause</small></button>
+      </div>
+      <div class="ctrl">
+        <button class="adv" id="adv">► Advance the chain</button>
+        <button class="rst" id="rst">↺ Reset</button>
+      </div>
+    </div>
+    <div class="card" style="margin-top:16px;">
+      <h2>2 · Follow the cascade</h2>
+      <div class="chain" id="chain"></div>
+      <div id="info"></div>
+      <div class="pearl"><b>Two flavors of pulmonary HTN:</b> <b>Primary</b> = no known cause (the vessels are abnormal from the start). <b>Secondary</b> = driven by a lung problem — <b>COPD, PE, OSA, or pulmonary fibrosis</b>. Either way, the endpoint is the same: right heart failure.</div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const $=id=>document.getElementById(id);
+  let cause='copd', step=0;
+  const CAUSES={
+    copd:{label:'COPD damages the lungs',sub:'destroyed / obstructed airways'},
+    osa:{label:'Obstructive sleep apnea',sub:'airway blocks repeatedly in sleep'},
+    cf:{label:'Cystic fibrosis',sub:'thick mucus + recurrent infections'},
+    pe:{label:'Recurrent pulmonary emboli',sub:'clots block lung vessels'},
+    fibrosis:{label:'Pulmonary fibrosis',sub:'scarring (e.g. pneumoconiosis / black lung)'},
+    primary:{label:'Primary pulmonary HTN',sub:'no known cause — vessels abnormal from the start'}
+  };
+  // chain nodes; primary skips the "low oxygen" link
+  function nodes(){
+    const c=CAUSES[cause];
+    const list=[
+      {b:c.label, s:c.sub},
+      {b:'Chronically low oxygen in the lungs', s:'damaged / blocked lung → hypoxia', skipPrimary:true},
+      {b:'Lung blood vessels constrict &amp; stiffen', s:'low O₂ tightens pulmonary arteries; walls remodel'},
+      {b:'⬆ Pulmonary artery pressure = PULMONARY HYPERTENSION', s:'the lungs become a high-pressure circuit'},
+      {b:'Right ventricle strains &amp; thickens', s:'it must pump against the high pressure → hypertrophy'},
+      {b:'RIGHT HEART FAILURE (cor pulmonale)', s:'the overworked RV finally can\'t keep up'},
+      {b:'Blood backs up into the body', s:'JVD, liver congestion, ascites, leg edema'}
+    ];
+    if(cause==='primary') return list.filter(n=>!n.skipPrimary);
+    return list;
+  }
+  const STORY={
+    0:{n:'Start: the trigger',p:'A chronic lung condition (or, for primary PH, the vessels themselves) sets the whole chain in motion.'},
+    1:{n:'Chronic hypoxia',p:'A damaged or blocked lung can\'t oxygenate well, so oxygen in the lung stays low for long stretches — day after day.'},
+    2:{n:'Vessels tighten',p:'Low oxygen makes the lung\'s arteries <b>constrict</b> (the opposite of body vessels), and chronic strain thickens their walls. Both squeeze the lung circulation.'},
+    3:{n:'Pulmonary hypertension',p:'With the vessels narrowed, pressure in the <b>pulmonary artery rises</b>. The lungs are now a high-pressure place to pump blood into.'},
+    4:{n:'Right ventricle hypertrophies',p:'The <b>right ventricle</b> is a thin, low-pressure pump. Facing high pressure, it bulks up (hypertrophy) to keep pushing — but that\'s a losing battle.'},
+    5:{n:'Cor pulmonale',p:'Eventually the overworked right ventricle <b>fails</b> — right heart failure caused by a lung problem is called <b>cor pulmonale</b>.'},
+    6:{n:'The body backs up',p:'With the right heart failing, blood dams back into the body: <b>distended neck veins (JVD), a congested liver, ascites, and swollen legs</b>.'}
+  };
+
+  function draw(){
+    const N=nodes(); const maxStep=N.length-1;
+    // map step -> severity of RV
+    const phFrom = cause==='primary'?2:3; // index where PH label sits
+    // compute RV wall thickness by step
+    let rvWall=6, failing=false, congested=false;
+    const phIdx = N.findIndex(n=>n.b.indexOf('PULMONARY HYPERTENSION')>=0);
+    const hyperIdx = N.findIndex(n=>n.b.indexOf('thickens')>=0);
+    const failIdx = N.findIndex(n=>n.b.indexOf('RIGHT HEART FAILURE')>=0);
+    const backIdx = N.findIndex(n=>n.b.indexOf('backs up')>=0);
+    if(step>=phIdx && phIdx>=0) rvWall=10;
+    if(step>=hyperIdx && hyperIdx>=0) rvWall=20;
+    if(step>=failIdx && failIdx>=0){ rvWall=22; failing=true; }
+    if(step>=backIdx && backIdx>=0){ congested=true; }
+    let s='';
+    // simple heart: two ventricles. RV = screen-left, thick wall grows inward
+    const hb = failing? '' : 'hbeat';
+    s+='<g class="'+hb+'">';
+    // outer heart shape
+    s+='<path d="M160 40 C120 20 70 40 70 100 C70 170 140 220 160 250 C180 220 250 170 250 100 C250 40 200 20 160 40 Z" fill="'+(failing?'#e8b7ad':'#f2c0b8')+'" stroke="#c98a8a" stroke-width="2"/>';
+    // septum
+    s+='<line x1="160" y1="55" x2="160" y2="235" stroke="#c98a8a" stroke-width="3"/>';
+    // RV cavity (screen-left) with growing wall
+    s+='<path d="M'+(150-0)+' 80 C'+(120)+' 90 '+(100+rvWall)+' 120 '+(120)+' 175 C130 200 150 210 155 220 L155 80 Z" fill="#d0524a" opacity="0.5"/>';
+    // RV wall thickness overlay
+    s+='<path d="M95 100 C85 140 95 180 130 205" fill="none" stroke="#b83a30" stroke-width="'+rvWall+'" stroke-linecap="round" opacity="0.85"/>';
+    // LV cavity (screen-right)
+    s+='<path d="M170 80 C200 90 220 120 210 175 C200 205 175 212 168 220 L168 80 Z" fill="#c0392b" opacity="0.35"/>';
+    s+='</g>';
+    // labels
+    s+='<text x="110" y="70" text-anchor="middle" font-size="11" font-weight="800" fill="#a5392e">RIGHT</text>';
+    s+='<text x="110" y="250" text-anchor="middle" font-size="9.5" fill="#8a3a2a">'+(rvWall>=20?'thick / failing':(rvWall>=10?'straining':'normal'))+'</text>';
+    s+='<text x="212" y="70" text-anchor="middle" font-size="11" font-weight="700" fill="#8a5a5a">LEFT</text>';
+    // pulmonary artery pressure gauge (top)
+    if(phIdx>=0 && step>=phIdx){ s+='<text x="160" y="30" text-anchor="middle" font-size="11" font-weight="800" fill="#c0392b">⬆ pulmonary artery pressure</text>'; }
+    // congestion signs
+    if(congested){
+      // JVD (neck vein) — a bulging line top-left
+      s+='<rect x="40" y="35" width="9" height="55" rx="4" fill="#3a6ea5"/><text x="30" y="60" text-anchor="end" font-size="9.5" font-weight="700" fill="#2f4f9a">JVD</text>';
+      // liver + ascites belly
+      s+='<ellipse cx="275" cy="235" rx="30" ry="22" fill="#7a5a3a" opacity="0.8"/><text x="275" y="238" text-anchor="middle" font-size="9" font-weight="700" fill="#fff">liver</text>';
+      // leg edema drips
+      for(let i=0;i<3;i++) s+='<circle class="drip" style="animation-delay:'+(i*0.5)+'s" cx="'+(150+i*18)+'" cy="270" r="5" fill="#7fb0d8"/>';
+      s+='<text x="205" y="292" text-anchor="middle" font-size="9.5" font-weight="700" fill="#3a86b0">leg edema</text>';
+    }
+    $('heart').innerHTML=s;
+  }
+  function renderChain(){
+    const N=nodes();
+    $('chain').innerHTML=N.map((n,i)=>{
+      const lit=i<=step?'lit':''; const cu=i===step?'cur':'';
+      return '<div class="node '+lit+' '+cu+'"><div class="num">'+(i+1)+'</div><div class="tx"><b>'+n.b+'</b><small>'+n.s+'</small></div></div>';
+    }).join('');
+  }
+  function render(){
+    const N=nodes(); const maxStep=N.length-1;
+    draw(); renderChain();
+    document.querySelectorAll('.cb').forEach(b=>b.classList.toggle('on',b.dataset.c===cause));
+    // info uses generic STORY keyed to node meaning; find which story by node text
+    const nodeText=N[step].b;
+    let key=0;
+    if(nodeText.indexOf('low oxygen')>=0) key=1;
+    else if(nodeText.indexOf('constrict')>=0) key=2;
+    else if(nodeText.indexOf('PULMONARY HYPERTENSION')>=0) key=3;
+    else if(nodeText.indexOf('thickens')>=0) key=4;
+    else if(nodeText.indexOf('RIGHT HEART FAILURE')>=0) key=5;
+    else if(nodeText.indexOf('backs up')>=0) key=6;
+    else key=0;
+    const st=STORY[key];
+    $('info').innerHTML='<div class="n">Step '+(step+1)+' · '+st.n+'</div><div class="story">'+st.p+'</div>';
+    const caps=['A starting cause kicks off the road to cor pulmonale.',
+      'Chronic <b>low oxygen</b> in the damaged lung.',
+      'Low O₂ makes the lung vessels <b>constrict &amp; stiffen</b>.',
+      'Pressure rises → <b>pulmonary hypertension</b>.',
+      'The <b>right ventricle thickens</b> to fight the pressure.',
+      '<b>Right heart failure</b> — cor pulmonale.',
+      'Blood <b>backs up into the body</b>: JVD, liver, leg edema.'];
+    $('liveCap').innerHTML=caps[key];
+    $('adv').disabled = step>=maxStep;
+    $('adv').textContent = step>=maxStep? '✓ Full cascade shown' : '► Advance the chain';
+  }
+  document.querySelectorAll('.cb').forEach(b=>b.addEventListener('click',()=>{ cause=b.dataset.c; step=0; render(); }));
+  $('adv').addEventListener('click',()=>{ const N=nodes(); if(step<N.length-1){ step++; render(); } });
+  $('rst').addEventListener('click',()=>{ step=0; render(); });
+  render();
+})();
+</script>
+</body>
+</html>

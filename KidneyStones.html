@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f7f2ea">
+<title>Kidney Stones &amp; Obstruction</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{ --bg:#f6f1e8; --card:#fffdf8; --ink:#2a2420; --muted:#7a6f63; --line:#e3d8c6;
+    --bad:#d6443f; --sans:'Inter',system-ui,sans-serif; --disp:'Cinzel Decorative',serif; }
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  body{background:linear-gradient(160deg,#faf6ee,#eee7d6);color:var(--ink);font-family:var(--sans);min-height:100vh;padding:18px 16px 44px;}
+  header{max-width:1120px;margin:0 auto 16px;text-align:center;}
+  h1{font-family:var(--disp);font-weight:900;font-size:clamp(22px,4.2vw,36px);color:#7a6030;line-height:1.05;}
+  header .sub{color:var(--muted);font-size:15px;margin-top:4px;}
+  header .intro{max-width:840px;margin:10px auto 0;font-size:14.5px;line-height:1.5;color:#5c5248;}
+  header .intro b{color:#7a6030;}
+  .wrap{max-width:1120px;margin:0 auto;display:grid;grid-template-columns:1fr 1.05fr;gap:16px;}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;box-shadow:0 6px 22px rgba(110,90,40,.07);}
+  .card h2{font-family:var(--disp);font-weight:700;font-size:17px;color:#7a6030;margin-bottom:6px;}
+  .card h2 + .desc{font-size:13px;color:var(--muted);margin-bottom:10px;line-height:1.4;}
+  svg{display:block;width:100%;height:auto;max-height:400px;}
+  #liveCap{margin-top:8px;background:#f6f0e6;border:1px solid #e6d8bf;border-radius:10px;padding:10px 13px;font-size:14px;line-height:1.5;color:#403622;text-align:center;} #liveCap b{color:#6a5020;}
+  @keyframes jitter{0%,100%{transform:translate(0,0)}25%{transform:translate(-1.5px,1px)}75%{transform:translate(1.5px,-1px)}}
+  .colic{animation:jitter .28s ease-in-out infinite;}
+  @keyframes swell{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
+  .swell{animation:swell 1.3s ease-in-out infinite;transform-origin:center;}
+
+  .painbar{margin-top:10px;} .painbar .l{font-size:12px;font-weight:700;color:#7a6030;display:flex;justify-content:space-between;}
+  .paintrack{height:12px;border-radius:8px;background:#eadfc9;overflow:hidden;margin-top:4px;}
+  .painfill{height:100%;background:linear-gradient(90deg,#e6c15a,#e0741f,#c0392b);transition:width .3s;border-radius:8px;}
+
+  #stage{border-radius:12px;padding:11px 14px;margin-bottom:12px;color:#fff;font-weight:700;font-size:17px;text-align:center;background:#9a7a3a;}
+  #stage small{display:block;font-weight:500;font-size:13px;opacity:.93;margin-top:2px;}
+  .seg{display:flex;border:1px solid var(--line);border-radius:11px;overflow:hidden;}
+  .seg button{flex:1;border:none;background:#fff;color:var(--ink);font-family:var(--sans);font-weight:700;font-size:13px;padding:11px 6px;cursor:pointer;transition:.12s;line-height:1.15;}
+  .seg button small{display:block;font-weight:500;font-size:10.5px;color:var(--muted);margin-top:2px;}
+  .seg button.on{background:#7a6030;color:#fff;border-color:transparent;} .seg button.on small{color:rgba(255,255,255,.9);}
+
+  #info{border:1px solid var(--line);border-left:5px solid #7a6030;background:#f8f4ec;border-radius:10px;padding:12px 13px;}
+  #info .n{font-family:var(--disp);font-weight:700;font-size:18px;color:#7a6030;}
+  #info .plain{font-size:15px;line-height:1.5;color:#2a2420;margin-top:8px;font-weight:600;}
+  #info .story{font-size:13.5px;line-height:1.5;color:#3a3630;margin-top:9px;background:#fff;border-radius:8px;padding:9px 11px;border:1px solid #e6dcc6;}
+  #info .note{font-size:12.5px;color:#5c5248;margin-top:8px;border-top:1px dashed #e0d3b8;padding-top:6px;} #info .note b{color:#6a5020;}
+  .pearl{background:#eef6f4;border:1px solid #cfe6df;border-radius:10px;padding:10px 12px;margin-top:12px;font-size:13px;line-height:1.5;color:#245043;} .pearl b{color:#173b30;}
+  @media (max-width:880px){ .wrap{grid-template-columns:1fr;} }
+</style>
+</head>
+<body>
+<header>
+  <h1>Kidney Stones &amp; Obstruction</h1>
+  <div class="sub">Nephrolithiasis · hydroureter → hydronephrosis · Week 11</div>
+  <div class="intro">A <b>kidney stone</b> forms when urine gets too concentrated. Here's the twist students miss: a stone sitting in the kidney often causes <b>no pain</b> — the agony only starts when it drops into the narrow <b>ureter</b>. And if it gets stuck, urine backs up and swells the kidney (<b>hydronephrosis</b>). Click each stage.</div>
+</header>
+
+<div class="wrap">
+  <div>
+    <div class="card">
+      <h2>Where's the stone?</h2>
+      <svg id="tract" viewBox="0 0 260 400" aria-label="kidney stone location"></svg>
+      <div class="painbar"><div class="l"><span>Pain level</span><span id="painLbl">—</span></div><div class="paintrack"><div class="painfill" id="painFill" style="width:0%"></div></div></div>
+      <div id="liveCap">Pick a stage to see what happens.</div>
+    </div>
+  </div>
+  <div>
+    <div id="stage">Pick a stage<small>Follow the stone</small></div>
+    <div class="card">
+      <h2>👆 Where is it?</h2>
+      <div class="seg" id="defSeg">
+        <button data-d="kidney" class="on">In the kidney<small>quiet</small></button>
+        <button data-d="ureter">Passing (ureter)<small>severe pain</small></button>
+        <button data-d="stuck">Lodged<small>obstruction</small></button>
+      </div>
+    </div>
+    <div class="card" style="margin-top:16px;"><h2>What's happening</h2><div id="info"></div></div>
+    <div class="card" style="margin-top:16px;">
+      <h2>Risk &amp; prevention</h2>
+      <div class="pearl"><b>Risk factors:</b> <b>hypercalcemia</b> (hyperparathyroidism / parathyroid tumor), high uric acid, and dehydration. &nbsp;<b>Prevention is simple:</b> drink plenty of water — dilute urine keeps crystals from clumping into stones and helps flush small ones out.</div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const $=id=>document.getElementById(id);
+  let cur='kidney';
+  const INFO={
+    kidney:{name:'Stone in the kidney',pain:5,painTxt:'usually painless',
+      plain:'A stone sits quietly up in the kidney (renal pelvis) — and often causes NO pain at all.',
+      story:'Stones form when urine is too concentrated and minerals crystallise. While the stone stays in the kidney it usually doesn\'t hurt — which is why some are found by accident. <b>Pain only begins once the stone starts to move.</b>',
+      note:'Often silent; may cause vague ache or be found incidentally.'},
+    ureter:{name:'Stone passing down the ureter',pain:95,painTxt:'severe (renal colic)',
+      plain:'The stone drops into the narrow ureter — and now it is excruciating. This is renal colic.',
+      story:'The moment the stone passes from <b>KIDNEY to URETER</b>, it stretches and spasms the narrow tube → <b>abrupt, severe flank pain that radiates down to the groin</b>, often with vomiting and sometimes blood in the urine. The pain comes in <b>waves</b> as the stone inches downward.',
+      note:'Classic: sudden severe flank → groin pain, vomiting, ± hematuria.'},
+    stuck:{name:'Lodged → obstruction → hydronephrosis',pain:60,painTxt:'aching + pressure',
+      plain:'If the stone jams and blocks the ureter, urine can\'t drain — so it backs up into the kidney.',
+      story:'A stuck stone occludes the ureter → urine accumulates and the ureter balloons (<b>hydroureter</b>) → then the renal pelvis balloons (<b>hydronephrosis</b>) → pressure rises, blood flow &amp; GFR fall, and if it isn\'t relieved, nephrons are permanently lost.',
+      note:'Backup: occlusion → dilated ureter → dilated pelvis → ↓GFR → nephron loss.'}
+  };
+
+  function draw(){
+    const inf=INFO[cur];
+    const swell = cur==='stuck';
+    let s='';
+    // kidney (swollen if obstructed)
+    s+='<g class="'+(swell?'swell':'')+'">';
+    s+='<path d="M120 40 C170 35 195 75 193 105 C191 148 162 175 120 172 C138 132 138 78 120 40 Z" fill="#c96b60" stroke="#8a5a48" stroke-width="2.5"/>';
+    // renal pelvis (dilates if obstructed)
+    const pw = swell?1.5:1;
+    s+='<ellipse cx="132" cy="106" rx="'+(20*pw)+'" ry="'+(24*pw)+'" fill="'+(swell?'#e6c15a':'#e79c8f')+'" opacity="0.85"/>';
+    s+='</g>';
+    s+='<text x="120" y="28" text-anchor="middle" font-size="11" font-weight="700" fill="#8a5a48">KIDNEY</text>';
+    if(swell) s+='<text x="120" y="16" text-anchor="middle" font-size="11" font-weight="800" fill="#c0392b">urine backs up → hydronephrosis ▲</text>';
+    // ureter (dilated above a stuck stone)
+    if(swell){ s+='<path d="M138 172 C134 210 132 240 148 258" fill="none" stroke="#e6b34d" stroke-width="20" stroke-linecap="round"/><text x="176" y="220" font-size="10" font-weight="700" fill="#8a6a2a">dilated ureter</text>'; }
+    else { s+='<path d="M138 172 C134 220 148 270 150 300" fill="none" stroke="#e6b34d" stroke-width="9" stroke-linecap="round"/><text x="164" y="240" font-size="10" font-weight="700" fill="#8a6a2a">ureter</text>'; }
+    // bladder
+    s+='<ellipse cx="150" cy="342" rx="42" ry="30" fill="#f0e6c8" stroke="#c9b98f" stroke-width="2"/><text x="150" y="346" text-anchor="middle" font-size="11" font-weight="700" fill="#8a7a45">bladder</text>';
+    s+='<path d="M150 372 l0 20" stroke="#e6b34d" stroke-width="8" stroke-linecap="round"/>';
+    // the stone
+    const pos = cur==='kidney'?[132,106]: cur==='ureter'?[140,215]:[144,262];
+    s+='<g class="'+(cur==='ureter'?'colic':'')+'"><path d="M'+pos[0]+' '+(pos[1]-8)+' l7 4 l3 8 l-6 6 l-8 -2 l-2 -8 z" fill="#5a4a2a" stroke="#2a2010" stroke-width="1.5"/></g>';
+    // pain radiation for ureter
+    if(cur==='ureter'){ s+='<path d="M150 220 q40 20 55 70" fill="none" stroke="#c0392b" stroke-width="2" stroke-dasharray="4 4"/><text x="210" y="298" text-anchor="middle" font-size="10" font-weight="700" fill="#c0392b">pain → groin</text>'; }
+    $('tract').innerHTML=s;
+  }
+  function render(){
+    const inf=INFO[cur];
+    draw();
+    document.querySelectorAll('#defSeg button').forEach(b=>b.classList.toggle('on',b.dataset.d===cur));
+    $('painFill').style.width=inf.pain+'%'; $('painLbl').textContent=inf.painTxt;
+    const caps={ kidney:'The stone is up in the kidney — <b>often no pain</b>. It forms because the urine is too concentrated.',
+      ureter:'The stone is squeezing down the <b>narrow ureter</b> → <b>severe colicky flank pain radiating to the groin</b>.',
+      stuck:'The stone is <b>blocking the ureter</b> → urine backs up → the ureter and kidney swell (<b>hydronephrosis</b>).' };
+    $('liveCap').innerHTML=caps[cur];
+    $('stage').innerHTML=inf.name+'<small>pain: '+inf.painTxt+'</small>';
+    $('info').innerHTML='<div class="n">'+inf.name+'</div><div class="plain">'+inf.plain+'</div><div class="story">'+inf.story+'</div><div class="note"><b>Note:</b> '+inf.note+'</div>';
+  }
+  document.querySelectorAll('#defSeg button').forEach(b=>b.addEventListener('click',()=>{ cur=b.dataset.d; render(); }));
+  render();
+})();
+</script>
+</body>
+</html>
